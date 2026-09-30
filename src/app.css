@@ -16,6 +16,28 @@
 	--espaco: 16px;
 	--sombra: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 6%);
 	--fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	/* Feed de estudo (WP04). Pares conferidos em contraste >= 4,5:1 (texto) e >= 3:1 (anel/ícone). */
+	--fonte-texto: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+	--cor-acerto: #0f6b3f; /* 5,76 sobre --cor-acerto-fundo; 6,57 sobre superfície */
+	--cor-acerto-fundo: #e3f4ea;
+	--cor-erro: #a3261d; /* 6,19 sobre --cor-erro-fundo; 7,36 sobre superfície */
+	--cor-erro-fundo: #fbe7e4;
+	--cor-aviso: #7a4a00; /* 6,68 sobre --cor-aviso-fundo */
+	--cor-aviso-fundo: #fdf1d8;
+	--cor-curtida: #c0265a; /* 5,73 sobre superfície */
+	--cor-lei: #1e3a8a; /* número do artigo: 10,36 sobre superfície */
+	--cor-visto: #7c8595; /* anel de story visto: 3,47 sobre fundo */
+	/* Cor por matéria (índice derivado do id): texto --cor-materia-texto sobre cada uma >= 4,99:1. */
+	--cor-materia-texto: #ffffff;
+	--materia-0: #1b4dd8;
+	--materia-1: #047857;
+	--materia-2: #6d28d9;
+	--materia-3: #b45309;
+	--materia-4: #b91c1c;
+	--materia-5: #0e7490;
+	--materia-6: #be185d;
+	--materia-7: #4d7c0f;
+	--altura-abas: 60px;
 	color-scheme: light;
 }
 
@@ -33,6 +55,24 @@
 		--cor-roxo: #c4b5fd;
 		--cor-laranja: #fbbf24;
 		--cor-vermelho: #fca5a5;
+		--cor-acerto: #6ee7a8; /* 9,96 sobre --cor-acerto-fundo */
+		--cor-acerto-fundo: #0f2a1f;
+		--cor-erro: #fca5a5; /* 8,56 sobre --cor-erro-fundo */
+		--cor-erro-fundo: #3a1417;
+		--cor-aviso: #fcd34d; /* 10,24 sobre --cor-aviso-fundo */
+		--cor-aviso-fundo: #33260a;
+		--cor-curtida: #f472b6; /* 6,55 sobre superfície */
+		--cor-lei: #bfd0ff; /* 11,30 sobre superfície */
+		--cor-visto: #6b7489; /* 4,00 sobre fundo */
+		--cor-materia-texto: #0b1220; /* >= 7,52:1 sobre cada --materia-N */
+		--materia-0: #7aa2ff;
+		--materia-1: #34d399;
+		--materia-2: #c4b5fd;
+		--materia-3: #fbbf24;
+		--materia-4: #fca5a5;
+		--materia-5: #67e8f9;
+		--materia-6: #f9a8d4;
+		--materia-7: #bef264;
 		color-scheme: dark;
 	}
 }
@@ -66,6 +106,19 @@ select {
 :focus-visible {
 	outline: 3px solid var(--cor-primaria);
 	outline-offset: 2px;
+}
+
+/* Texto só para leitor de tela. */
+.so-leitor {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,15 +1,11 @@
 <script lang="ts">
 	import Icone from '$lib/componentes/Icone.svelte';
 	import type { NomeIcone } from '$lib/dados';
-	import { carregar, preferencias } from '$lib/preferencias.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 
-	carregar();
-
 	const ferramenta = $derived(data.ferramenta);
-	const temConcurso = $derived(preferencias.concursoId !== null);
 </script>
 
 <svelte:head>
@@ -21,17 +17,10 @@
 	<h1>{ferramenta.titulo}</h1>
 	<p class="destaque">Em breve por aqui.</p>
 	<p class="suave">Esta ferramenta ainda está em construção.</p>
-	{#if temConcurso}
-		<a class="voltar" href="/painel">
-			<Icone nome="voltar" tamanho={20} />
-			Voltar ao painel
-		</a>
-	{:else}
-		<a class="voltar" href="/escolher">
-			<Icone nome="voltar" tamanho={20} />
-			Escolher concurso
-		</a>
-	{/if}
+	<a class="voltar" href="/painel">
+		<Icone nome="voltar" tamanho={20} />
+		Voltar ao painel
+	</a>
 </article>
 
 <style>

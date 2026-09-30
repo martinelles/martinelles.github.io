@@ -1,48 +1,42 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
-const CHAVE = 'painel-concurso:preferencias:v1';
-
-// Cenário 3 / SC-003: depois da primeira visita, o app abre e navega sem conexão.
-test('SC-003: depois da primeira visita, abre e navega offline', async ({ page, context }) => {
-	await page.goto('/escolher');
+async function esperarServiceWorker(page: Page) {
 	await page.evaluate(async () => {
 		await navigator.serviceWorker.ready;
 	});
 	// O SW só controla a página depois de uma recarga (ou do clients.claim).
 	await page.reload();
-	await expect
-		.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller))
-		.toBe(true);
+	await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+}
+
+// SC-005 (parte do app): depois da primeira visita, as rotas abrem sem conexão.
+// A garantia de todo o conteúdo do feed offline é do WP06.
+test('depois da primeira visita, feed, salvos, painel e ferramenta abrem offline', async ({ page, context }) => {
+	await page.clock.setFixedTime(new Date('2026-09-30T12:00:00-03:00'));
+	await page.goto('/');
+	await esperarServiceWorker(page);
+	await expect(page.locator('[data-post-id]').first()).toBeVisible();
 
 	await context.setOffline(true);
 
-	await page.goto('/escolher');
-	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Qual o concurso dos seus sonhos?');
-
-	// Raiz sem preferência vai à escolha.
 	await page.goto('/');
-	await expect(page).toHaveURL(/\/escolher$/);
-	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Qual o concurso dos seus sonhos?');
+	await expect(page.getByRole('heading', { level: 1, name: 'Feed de estudo' })).toBeAttached();
+	await expect(page.getByRole('navigation', { name: 'Matérias' })).toBeVisible();
+	await expect(page.locator('[data-post-id]').first()).toBeVisible();
 
-	// Navegação interna offline: escolher um cartão leva ao painel.
-	await page.getByRole('listitem').getByRole('button').first().click();
-	await expect(page).toHaveURL('/painel');
-	await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
-	const salvo = await page.evaluate((k) => localStorage.getItem(k), CHAVE);
-	expect(salvo).not.toBeNull();
+	await page.goto('/salvos');
+	await expect(page.getByRole('heading', { level: 1, name: 'Salvos' })).toBeVisible();
 
-	// E uma ferramenta a partir do painel.
-	await page.locator('a[href="/ferramenta/flashcards"]').click();
-	await expect(page).toHaveURL('/ferramenta/flashcards');
-	await expect(page.getByRole('heading', { level: 1, name: 'Flashcards' })).toBeVisible();
-
-	// Por URL, com a preferência gravada.
 	await page.goto('/painel');
 	await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
-	await page.goto('/ferramenta/flashcards');
-	await expect(page.getByRole('heading', { level: 1, name: 'Flashcards' })).toBeVisible();
-	await page.goto('/');
-	await expect(page).toHaveURL('/painel');
+
+	// Navegação interna offline, a partir do painel.
+	await page.locator('a[href="/ferramenta/pdfs"]').click();
+	await expect(page).toHaveURL('/ferramenta/pdfs');
+	await expect(page.getByRole('heading', { level: 1, name: 'PDFs' })).toBeVisible();
+
+	await page.goto('/ferramenta/pdfs');
+	await expect(page.getByRole('heading', { level: 1, name: 'PDFs' })).toBeVisible();
 
 	await context.setOffline(false);
 });
@@ -66,19 +60,13 @@ test('SC-004: manifest instalável com ícones 192 e 512', async ({ page }) => {
 	}
 
 	// A página aponta para o manifest.
-	await page.goto('/escolher');
+	await page.goto('/');
 	await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', /manifest\.webmanifest$/);
 });
 
 test('o SW não intercepta outra origem', async ({ page }) => {
-	await page.goto('/escolher');
-	await page.evaluate(async () => {
-		await navigator.serviceWorker.ready;
-	});
-	await page.reload();
-	await expect
-		.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller))
-		.toBe(true);
+	await page.goto('/');
+	await esperarServiceWorker(page);
 
 	// Controle: um ativo da mesma origem passa pelo SW...
 	const [interno] = await Promise.all([

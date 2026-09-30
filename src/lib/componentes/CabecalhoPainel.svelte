@@ -1,34 +1,32 @@
 <script lang="ts">
+	// Cabeçalho do painel: o app atende só à CGU (FR-001, FR-014), então não há "trocar concurso".
 	import Icone from './Icone.svelte';
 	import type { Concurso } from '$lib/dados';
 	import { formatarData, type Prazo } from '$lib/datas';
 
-	let { concurso, prazo, ontrocar }: { concurso: Concurso; prazo: Prazo; ontrocar: () => void } = $props();
+	let { concurso, prazo }: { concurso: Concurso; prazo: Prazo } = $props();
 
+	const cargo = $derived(concurso.cargos[0]?.nome);
 	const vagas = $derived(
 		concurso.vagas === undefined
-			? 'Vagas a definir'
+			? null
 			: `${concurso.vagas.toLocaleString('pt-BR')} ${concurso.vagas === 1 ? 'vaga' : 'vagas'}`
 	);
 </script>
 
 <header class="cabecalho">
-	<div class="topo">
-		<h1>Seu Painel de Estudos</h1>
-		<button type="button" class="trocar" onclick={() => ontrocar()}>
-			<Icone nome="trocar" tamanho={18} />
-			Trocar concurso
-		</button>
-	</div>
+	<h1>Seu Painel de Estudos</h1>
 
-	<p class="concurso">{concurso.nome}</p>
+	<p class="concurso">{concurso.nome}{#if cargo}{' · '}<span class="cargo">{cargo}</span>{/if}</p>
 	<p class="banca">banca {concurso.banca} · {concurso.orgao}</p>
 
 	<ul class="indicadores">
-		<li>
-			<Icone nome="pessoas" tamanho={20} />
-			<span>{vagas}</span>
-		</li>
+		{#if vagas}
+			<li>
+				<Icone nome="pessoas" tamanho={20} />
+				<span>{vagas}</span>
+			</li>
+		{/if}
 		<li>
 			<Icone nome="relogio" tamanho={20} />
 			<span class="prazo">
@@ -59,14 +57,6 @@
 		overflow-wrap: anywhere;
 	}
 
-	.topo {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-	}
-
 	h1 {
 		margin: 0;
 		font-size: 0.8125rem;
@@ -75,7 +65,6 @@
 		text-transform: uppercase;
 	}
 
-	.trocar,
 	.edital {
 		display: inline-flex;
 		align-items: center;
@@ -91,7 +80,6 @@
 		cursor: pointer;
 	}
 
-	.trocar:focus-visible,
 	.edital:focus-visible {
 		outline-color: var(--cor-primaria-texto);
 	}
@@ -101,6 +89,10 @@
 		font-size: 1.375rem;
 		font-weight: 800;
 		line-height: 1.25;
+	}
+
+	.cargo {
+		font-weight: 600;
 	}
 
 	.banca {

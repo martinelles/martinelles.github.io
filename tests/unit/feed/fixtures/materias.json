@@ -1,0 +1,5 @@
+[
+	{ "id": "ti-ciencia-de-dados", "nome": "TI: Ciência de Dados", "abrev": "Dados", "ordem": 1, "total": 4 },
+	{ "id": "outros-ramos-do-direito", "nome": "Outros Ramos do Direito", "abrev": "Outros", "ordem": 5, "total": 1 },
+	{ "id": "direito-penal", "nome": "Direito Penal", "abrev": "Penal", "ordem": 9, "total": 0 }
+]

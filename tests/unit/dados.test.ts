@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dados, buscarConcurso, buscarFerramenta, validarDados, type Dados } from '$lib/dados';
-
-const HOJE = '2026-09-30';
+import { dados, buscarFerramenta, concursoCgu, rotaDaFerramenta, validarDados, type Dados } from '$lib/dados';
 
 /** Cópia profunda dos dados reais, válida, para quebrar uma regra de cada vez. */
 const base = (): Dados => structuredClone(dados);
@@ -22,48 +20,25 @@ function falhaCom(mutar: (d: Mutavel) => void, ...trechos: string[]) {
 }
 
 describe('dados reais', () => {
-	it('passam na validação e têm 12+ concursos e exatamente 12 ferramentas', () => {
+	it('passam na validação: um concurso e exatamente 12 ferramentas', () => {
 		expect(() => validarDados(base())).not.toThrow();
-		expect(dados.concursos.length).toBeGreaterThanOrEqual(12);
+		expect(dados.concursos).toHaveLength(1);
 		expect(dados.ferramentas).toHaveLength(12);
 		expect(dados.config).toEqual({ whatsapp: null, limiteEmAlta: 5 });
 	});
 
-	it('cobrem todas as seções da tela de escolha', () => {
-		const passada = (c: { dataProva?: string }) => c.dataProva !== undefined && c.dataProva < HOJE;
-		const abertosFuturos = dados.concursos.filter((c) => c.situacao === 'aberto' && !passada(c));
-		const previstos = dados.concursos.filter((c) => c.situacao === 'previsto' && !passada(c));
-		const encerrados = dados.concursos.filter((c) => c.situacao === 'encerrado' || passada(c));
-		const abertoVencido = dados.concursos.filter((c) => c.situacao === 'aberto' && passada(c));
-
-		expect(abertosFuturos.length).toBeGreaterThanOrEqual(6);
-		expect(abertosFuturos.filter((c) => c.emAlta).length).toBeGreaterThanOrEqual(1);
-		expect(abertosFuturos.length).toBeGreaterThan(dados.config.limiteEmAlta); // força "Ver mais"
-		expect(previstos.length).toBeGreaterThanOrEqual(1);
-		expect(encerrados.length).toBeGreaterThanOrEqual(1);
-		expect(abertoVencido.length).toBeGreaterThanOrEqual(1);
-
-		expect(dados.concursos.some((c) => c.cargos.length === 1)).toBe(true);
-		expect(dados.concursos.some((c) => c.edital === undefined)).toBe(true);
-		expect(dados.concursos.some((c) => c.vagas === undefined)).toBe(true);
-		const areas = new Set(dados.concursos.map((c) => c.area));
-		for (const a of ['Controle', 'Fiscal', 'Tribunais', 'Policial', 'Bancária']) expect(areas).toContain(a);
+	it('o concurso é o da CGU, sem data nem edital (FR-001, FR-014)', () => {
+		expect(concursoCgu).toBe(dados.concursos[0]);
+		expect(concursoCgu.id).toBe('cgu-affc-ti-cd');
+		expect(concursoCgu.nome).toBe('CGU — Auditor Federal de Finanças e Controle');
+		expect(concursoCgu.banca).toBe('Cebraspe');
+		expect(concursoCgu.situacao).toBe('previsto');
+		expect(concursoCgu.dataProva).toBeUndefined();
+		expect(concursoCgu.edital).toBeUndefined();
+		expect(concursoCgu.cargos.map((c) => c.nome)).toEqual(['TI — Ciência de Dados']);
 	});
 
-	it('trazem os concursos obrigatórios', () => {
-		const cgu = buscarConcurso('cgu-affc-ti');
-		expect(cgu?.situacao).toBe('aberto');
-		expect(cgu?.emAlta).toBe(true);
-		expect(cgu?.cargos.map((c) => c.id)).toEqual(['auditor-ti', 'auditor-geral']);
-		expect(cgu?.cargos[0].disciplinas).toHaveLength(9);
-		const tcu = buscarConcurso('tcu-auditor');
-		expect(tcu?.situacao).toBe('previsto');
-		expect(tcu?.dataProva).toBeUndefined();
-		expect(buscarConcurso(null)).toBeNull();
-		expect(buscarConcurso('nao-existe')).toBeNull();
-	});
-
-	it('trazem as 12 ferramentas na ordem da spec', () => {
+	it('trazem as 12 ferramentas na ordem da spec, com "Lei seca" no lugar de Jurisprudência', () => {
 		expect(dados.ferramentas.map((f) => f.id)).toEqual([
 			'aulas',
 			'resumos',
@@ -79,7 +54,19 @@ describe('dados reais', () => {
 			'plano-de-estudos'
 		]);
 		expect(buscarFerramenta('simulados')?.titulo).toBe('Simulados');
+		expect(buscarFerramenta('jurisprudencia')?.titulo).toBe('Lei seca');
 		expect(buscarFerramenta('nada')).toBeNull();
+	});
+
+	it('quatro atalhos abrem o feed filtrado por tipo; os demais vão para "em breve" (FR-015)', () => {
+		const rotas = Object.fromEntries(dados.ferramentas.map((f) => [f.id, rotaDaFerramenta(f)]));
+		expect(rotas['questoes-objetivas']).toBe('/?tipo=questao');
+		expect(rotas.resumos).toBe('/?tipo=resumo');
+		expect(rotas.flashcards).toBe('/?tipo=flashcard');
+		expect(rotas.jurisprudencia).toBe('/?tipo=lei');
+		const emBreve = dados.ferramentas.filter((f) => rotas[f.id].startsWith('/ferramenta/'));
+		expect(emBreve).toHaveLength(8);
+		for (const f of emBreve) expect(rotas[f.id]).toBe(`/ferramenta/${f.id}`);
 	});
 });
 
@@ -89,7 +76,7 @@ describe('validarDados recusa dado malformado', () => {
 	});
 
 	it('campo obrigatório ausente', () => {
-		falhaCom((d) => delete d.concursos[2].banca, 'concursos[2].banca: campo obrigatório ausente');
+		falhaCom((d) => delete d.concursos[0].banca, 'concursos[0].banca: campo obrigatório ausente');
 	});
 
 	it('tipo errado', () => {
@@ -102,29 +89,29 @@ describe('validarDados recusa dado malformado', () => {
 	});
 
 	it('enum inválido', () => {
-		falhaCom((d) => (d.concursos[1].situacao = 'suspenso'), 'concursos[1].situacao');
-		falhaCom((d) => (d.concursos[1].cor = 'rosa'), 'concursos[1].cor');
+		falhaCom((d) => (d.concursos[0].situacao = 'suspenso'), 'concursos[0].situacao');
+		falhaCom((d) => (d.concursos[0].cor = 'rosa'), 'concursos[0].cor');
 		falhaCom((d) => (d.ferramentas[4].grupo = 'extra'), 'ferramentas[4].grupo');
 	});
 
 	it('id fora de kebab-case', () => {
 		falhaCom((d) => (d.concursos[0].id = 'CGU_TI'), 'concursos[0].id');
-		falhaCom((d) => (d.concursos[0].cargos[1].id = 'Auditor Geral'), 'concursos[0].cargos[1].id');
+		falhaCom((d) => (d.concursos[0].cargos[0].id = 'Auditor Geral'), 'concursos[0].cargos[0].id');
 		falhaCom((d) => (d.ferramentas[0].id = 'aulas!'), 'ferramentas[0].id');
 	});
 
 	it('id de concurso repetido', () => {
-		falhaCom((d) => (d.concursos[5].id = d.concursos[0].id), 'concursos[5].id: id "cgu-affc-ti" repetido');
+		falhaCom(
+			(d) => d.concursos.push({ ...d.concursos[0] }),
+			'concursos[1].id: id "cgu-affc-ti-cd" repetido'
+		);
 	});
 
-	it('id de cargo repetido dentro do concurso (mas igual entre concursos é permitido)', () => {
+	it('id de cargo repetido dentro do concurso', () => {
 		falhaCom(
-			(d) => (d.concursos[0].cargos[1].id = d.concursos[0].cargos[0].id),
-			'concursos[0].cargos[1].id: id "auditor-ti" repetido'
+			(d) => d.concursos[0].cargos.push({ ...d.concursos[0].cargos[0] }),
+			'concursos[0].cargos[1].id: id "ti-ciencia-de-dados" repetido'
 		);
-		const d: Mutavel = base();
-		d.concursos[1].cargos[0].id = 'auditor-ti';
-		expect(() => validarDados(d)).not.toThrow();
 	});
 
 	it('id de ferramenta repetido', () => {
@@ -132,12 +119,12 @@ describe('validarDados recusa dado malformado', () => {
 	});
 
 	it('cargos vazio', () => {
-		falhaCom((d) => (d.concursos[3].cargos = []), 'concursos[3].cargos: lista vazia');
+		falhaCom((d) => (d.concursos[0].cargos = []), 'concursos[0].cargos: lista vazia');
 	});
 
 	it('disciplinas vazia', () => {
-		falhaCom((d) => (d.concursos[3].cargos[0].disciplinas = []), 'concursos[3].cargos[0].disciplinas: lista vazia');
-		falhaCom((d) => (d.concursos[3].cargos[0].disciplinas[1] = ''), 'concursos[3].cargos[0].disciplinas[1]');
+		falhaCom((d) => (d.concursos[0].cargos[0].disciplinas = []), 'concursos[0].cargos[0].disciplinas: lista vazia');
+		falhaCom((d) => (d.concursos[0].cargos[0].disciplinas[1] = ''), 'concursos[0].cargos[0].disciplinas[1]');
 	});
 
 	it('dataProva fora do formato ou data inexistente', () => {
@@ -169,13 +156,17 @@ describe('validarDados recusa dado malformado', () => {
 		);
 	});
 
-	it('menos de 12 concursos', () => {
-		falhaCom((d) => (d.concursos = d.concursos.slice(0, 11)), 'concursos: são 11; o mínimo é 12');
+	it('concursos diferente de 1 (FR-001)', () => {
+		falhaCom((d) => (d.concursos = []), 'concursos: lista vazia');
+		falhaCom(
+			(d) => d.concursos.push({ ...d.concursos[0], id: 'outro' }),
+			'concursos: são 2; deveria ser exatamente 1'
+		);
 	});
 
 	it('campo desconhecido (erro de digitação)', () => {
-		falhaCom((d) => (d.concursos[4].dataprova = '2026-12-01'), 'concursos[4].dataprova: campo desconhecido');
-		falhaCom((d) => (d.concursos[4].cargos[0].disciplina = []), 'concursos[4].cargos[0].disciplina: campo desconhecido');
+		falhaCom((d) => (d.concursos[0].dataprova = '2026-12-01'), 'concursos[0].dataprova: campo desconhecido');
+		falhaCom((d) => (d.concursos[0].cargos[0].disciplina = []), 'concursos[0].cargos[0].disciplina: campo desconhecido');
 		falhaCom((d) => (d.ferramentas[0].cor = 'azul'), 'ferramentas[0].cor: campo desconhecido');
 		falhaCom((d) => (d.config.tema = 'escuro'), 'config.tema: campo desconhecido');
 		falhaCom((d) => (d.extra = true), 'dados.extra: campo desconhecido');
@@ -186,12 +177,12 @@ describe('várias falhas juntas', () => {
 	it('a mensagem lista todas, uma por linha', () => {
 		const msg = falhaCom(
 			(d) => {
-				d.concursos[3].cargos[0].disciplinas = [];
+				d.concursos[0].cargos[0].disciplinas = [];
 				d.concursos[0].dataProva = '2026-02-30';
 				d.ferramentas[1].icone = 'foguete';
 				d.config.whatsapp = 'http://x';
 			},
-			'concursos[3].cargos[0].disciplinas: lista vazia',
+			'concursos[0].cargos[0].disciplinas: lista vazia',
 			'concursos[0].dataProva',
 			'ferramentas[1].icone',
 			'config.whatsapp'

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icone from './Icone.svelte';
-	import type { Ferramenta, NomeIcone } from '$lib/dados';
+	import { rotaDaFerramenta, type Ferramenta, type NomeIcone } from '$lib/dados';
 
 	let { ferramentas }: { ferramentas: Ferramenta[] } = $props();
 
@@ -13,7 +13,7 @@
 
 {#snippet cartao(f: Ferramenta, largo: boolean)}
 	<li>
-		<a class="cartao" class:largo href="/ferramenta/{f.id}">
+		<a class="cartao" class:largo href={rotaDaFerramenta(f)}>
 			<span class="icone"><Icone nome={f.icone as NomeIcone} tamanho={largo ? 26 : 24} /></span>
 			<span class="textos">
 				<span class="titulo">{f.titulo}</span>

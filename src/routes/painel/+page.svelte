@@ -1,47 +1,50 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	// Painel da CGU (FR-014, FR-015): concurso fixo, foco, progresso calculado e atalhos.
+	import { getContext } from 'svelte';
 	import CabecalhoPainel from '$lib/componentes/CabecalhoPainel.svelte';
 	import FocoEstudo from '$lib/componentes/FocoEstudo.svelte';
 	import GradeFerramentas from '$lib/componentes/GradeFerramentas.svelte';
-	import { buscarConcurso, dados } from '$lib/dados';
+	import ProgressoEstudo from '$lib/componentes/ProgressoEstudo.svelte';
+	import { concursoCgu, dados } from '$lib/dados';
 	import { diasParaProva, hojeLocal } from '$lib/datas';
-	import { carregar, preferencias } from '$lib/preferencias.svelte';
+	import type { Repositorio } from '$lib/feed/conteudo';
+	import { estatisticas } from '$lib/feed/estatisticas';
+	import { foco } from '$lib/feed/foco.svelte';
+	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
+	import type { Indice, Materia } from '$lib/feed/tipos';
 
-	carregar();
+	/** Cargo fixo (D6): não há seletor. */
+	const CARGO = 'AFFC — TI — Ciência de Dados';
 
-	const concurso = $derived(buscarConcurso(preferencias.concursoId));
-	const prazo = $derived(concurso ? diasParaProva(concurso.dataProva, hojeLocal()) : null);
+	const repo = getContext<Repositorio>('repositorio');
+	const prazo = diasParaProva(concursoCgu.dataProva, hojeLocal());
 
-	// Borda "concurso que sumiu" e acesso direto sem escolha: vai para a escolha, sem deixar /painel no histórico.
-	let redirecionando = false;
-	$effect(() => {
-		if (!concurso && !redirecionando) {
-			redirecionando = true;
-			goto('/escolher', { replaceState: true });
-		}
-	});
+	let materias = $state.raw<Materia[] | null>(null);
+	let indice = $state.raw<Indice | null>(null);
+	// Sem conteúdo (rede), os totais ainda aparecem; só "por matéria" depende do índice.
+	repo.materias().then((m) => (materias = m), () => {});
+	repo.indice().then((i) => (indice = i), () => {});
+
+	const numeros = $derived(estatisticas(dadosInteracoes(), indice ?? undefined));
 </script>
 
 <svelte:head>
-	<title>{concurso ? `${concurso.nome} · Painel de Concurso` : 'Painel de Concurso'}</title>
+	<title>Painel · Painel de Concurso</title>
 </svelte:head>
 
-{#if concurso && prazo}
-	<div class="painel">
-		<!-- Trocar concurso não apaga a preferência (data-model, transição "trocar concurso"). -->
-		<CabecalhoPainel {concurso} {prazo} ontrocar={() => goto('/escolher')} />
-		<FocoEstudo
-			{concurso}
-			cargoId={preferencias.cargoId}
-			disciplina={preferencias.disciplina}
-			onescolherCargo={(id) => preferencias.escolherCargo(id)}
-			onescolherDisciplina={(nome) => preferencias.escolherDisciplina(nome)}
-		/>
-		<div>
-			<GradeFerramentas ferramentas={dados.ferramentas} />
-		</div>
+<div class="painel">
+	<CabecalhoPainel concurso={concursoCgu} {prazo} />
+	<FocoEstudo
+		cargo={CARGO}
+		{materias}
+		disciplina={foco.disciplina}
+		onescolherDisciplina={(id) => foco.escolherDisciplina(id)}
+	/>
+	<ProgressoEstudo estatisticas={numeros} {materias} />
+	<div>
+		<GradeFerramentas ferramentas={dados.ferramentas} />
 	</div>
-{/if}
+</div>
 
 <style>
 	.painel {

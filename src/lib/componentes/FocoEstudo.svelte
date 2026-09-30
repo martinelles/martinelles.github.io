@@ -1,31 +1,28 @@
 <script lang="ts">
-	import type { Concurso } from '$lib/dados';
+	// Foco de estudo (FR-014, D6): cargo fixo; só a disciplina de foco se escolhe, entre as
+	// matérias do conteúdo. A disciplina de foco vem logo depois de "Tudo" nos stories.
+	import type { Materia } from '$lib/feed/tipos';
 
 	let {
-		concurso,
-		cargoId,
+		cargo,
+		materias,
 		disciplina,
-		onescolherCargo,
 		onescolherDisciplina
 	}: {
-		concurso: Concurso;
-		cargoId: string | null;
-		disciplina: string | null;
-		onescolherCargo: (id: string) => void;
-		onescolherDisciplina: (nome: string) => void;
+		/** Texto fixo do cargo (ex.: "AFFC — TI — Ciência de Dados"). */
+		cargo: string;
+		/** Matérias do conteúdo; `null` enquanto carregam. */
+		materias: readonly Materia[] | null;
+		/** Id da matéria de foco. */
+		disciplina: string;
+		onescolherDisciplina: (id: string) => void;
 	} = $props();
 
-	const cargoUnico = $derived(concurso.cargos.length === 1);
-	const cargo = $derived(concurso.cargos.find((c) => c.id === cargoId) ?? null);
-
-	function aoMudarCargo(e: Event) {
-		const valor = (e.currentTarget as HTMLSelectElement).value;
-		if (valor) onescolherCargo(valor);
-	}
+	const opcoes = $derived([...(materias ?? [])].sort((a, b) => a.ordem - b.ordem));
 
 	function aoMudarDisciplina(e: Event) {
 		const valor = (e.currentTarget as HTMLSelectElement).value;
-		if (valor && cargo?.disciplinas.includes(valor)) onescolherDisciplina(valor);
+		if (opcoes.some((m) => m.id === valor)) onescolherDisciplina(valor);
 	}
 </script>
 
@@ -34,33 +31,20 @@
 
 	<div class="campos">
 		<div class="campo">
-			<label for="foco-cargo">Cargo</label>
-			<select id="foco-cargo" value={cargoId ?? ''} disabled={cargoUnico} onchange={aoMudarCargo}>
-				{#if cargoId === null}
-					<option value="" disabled>Selecione um cargo</option>
-				{/if}
-				{#each concurso.cargos as c (c.id)}
-					<option value={c.id}>{c.nome}</option>
-				{/each}
-			</select>
+			<span class="rotulo">Cargo</span>
+			<p class="fixo">{cargo}</p>
 		</div>
 
 		<div class="campo">
 			<label for="foco-disciplina">Disciplina</label>
-			<!-- {#key}: ao trocar de cargo o select é refeito e volta ao placeholder. -->
-			{#key cargo?.id}
-				<select
-					id="foco-disciplina"
-					value={disciplina ?? ''}
-					disabled={cargo === null}
-					onchange={aoMudarDisciplina}
-				>
-					<option value="" disabled>Selecione uma disciplina</option>
-					{#each cargo?.disciplinas ?? [] as d (d)}
-						<option value={d}>{d}</option>
-					{/each}
-				</select>
-			{/key}
+			<select id="foco-disciplina" value={disciplina} disabled={materias === null} onchange={aoMudarDisciplina}>
+				{#if materias === null}
+					<option value={disciplina}>Carregando matérias…</option>
+				{/if}
+				{#each opcoes as m (m.id)}
+					<option value={m.id}>{m.nome}</option>
+				{/each}
+			</select>
 		</div>
 	</div>
 </section>
@@ -97,9 +81,22 @@
 		min-width: 0;
 	}
 
-	label {
+	label,
+	.rotulo {
 		font-weight: 600;
 		font-size: 0.9375rem;
+	}
+
+	.fixo {
+		display: flex;
+		align-items: center;
+		min-height: 44px;
+		margin: 0;
+		padding: 8px 12px;
+		border: 1px dashed var(--cor-borda);
+		border-radius: 10px;
+		font-weight: 700;
+		overflow-wrap: anywhere;
 	}
 
 	select {

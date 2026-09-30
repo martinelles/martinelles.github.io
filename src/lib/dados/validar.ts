@@ -158,7 +158,8 @@ export function validarDados(bruto: unknown): Dados {
 	if (c.objeto(bruto, 'dados', ['concursos', 'ferramentas', 'config'])) {
 		const concursos = c.lista(bruto, 'concursos', 'concursos');
 		if (concursos) {
-			if (concursos.length > 0 && concursos.length < 12) c.add('concursos', `são ${concursos.length}; o mínimo é 12`);
+			// O app atende só à CGU (FR-001): exatamente um concurso.
+			if (concursos.length > 1) c.add('concursos', `são ${concursos.length}; deveria ser exatamente 1`);
 			const ids = concursos.map((x, i) => validarConcurso(c, x, `concursos[${i}]`));
 			c.unico(ids, (i) => `concursos[${i}].id`);
 		}

@@ -1,0 +1,15 @@
+{
+	"versao": 1,
+	"geradoEm": "2026-09-30T12:00:00.000Z",
+	"posts": [
+		{ "id": "q:CGU2022-AFFC-TI-47", "t": "q", "m": "ti-ciencia-de-dados", "l": "dados-1" },
+		{ "id": "q:TCU2026-AUFC-TI-12", "t": "q", "m": "ti-ciencia-de-dados", "l": "dados-1" },
+		{ "id": "r:ti-ciencia-de-dados--supervisionado", "t": "r", "m": "ti-ciencia-de-dados", "l": "dados-1" },
+		{ "id": "f:ti-ciencia-de-dados--supervisionado:1", "t": "f", "m": "ti-ciencia-de-dados", "l": "dados-1" },
+		{ "id": "l:06-Lei-12527-2011-LAI:art-7", "t": "l", "m": "outros-ramos-do-direito", "l": "outros-1" }
+	],
+	"lotes": {
+		"dados-1": "lote-ti-ciencia-de-dados-1.json",
+		"outros-1": "lote-outros-ramos-do-direito-1.json"
+	}
+}

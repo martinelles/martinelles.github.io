@@ -1,0 +1,105 @@
+﻿id,id_prova,numero,materia,subtopico,topico_estudo,enunciado,alternativas,gabarito,situacao,pagina,data_conferido,obs
+TCU2026-AUFC-TI-1,TCU2026-AUFC-TI,1,Língua Portuguesa,Sintaxe: funções sintáticas e orações,POR-08,"[Em relação às ideias e aos aspectos linguísticos do texto apresentado, julgue os seguintes itens.]
+
+De acordo com o humanismo, as experiências ocorrem dentro de nós e devemos encontrar em nosso interior o sentido de tudo o que acontece, impregnando desse modo o universo de significado. Os dataístas acreditam que experiências não têm valor se não forem compartilhadas e que não precisamos — na verdade não podemos — encontrar significado em nosso interior. Só precisamos gravar e conectar nossa experiência ao grande fluxo de dados, e os algoritmos vão descobrir seu significado e nos dizer o que fazer.
+
+À pergunta “o que faz os humanos serem superiores aos outros animais?” o dataísmo apresenta uma resposta inédita e simples. Em si mesmas, as experiências humanas não são superiores às dos lobos ou elefantes. Cada bit de dados é tão bom num caso como no outro. Contudo, um humano pode escrever um poema sobre sua experiência e postá-lo online, enriquecendo com isso o sistema global de processamento de dados. Isso confere valor aos seus bits. Um lobo não é capaz de fazer isso. Daí que todas as experiências do lobo — por mais profundas e complexas que possam ser — resultam inúteis. Não é de admirar que nos ocupemos tanto em converter nossas experiências em dados. Não é uma questão de tendência ou moda. É uma questão de sobrevivência. Temos de provar a nós mesmos e ao sistema que ainda temos valor. E o valor reside não em ter tido experiências, e sim em fazer delas um fluxo livre de dados.
+
+Yuval Noah Harari. Homo Deus: uma breve história do amanhã. Paulo Geiger (Trad.). 1.ª ed. São Paulo: Companhia das Letras, 2016, p. 389 (com adaptações).
+
+Pela organização das ideias expressas no primeiro período do texto, entende-se que o segmento “de significado” exerce a função sintática de complemento do termo nominal “universo”.",,,valida,1,2026-09-30,Sem gabarito: o gabarito dos conhecimentos básicos (itens 1–100) não está em fontes-escopo/.
+TCU2026-AUFC-TI-101,TCU2026-AUFC-TI,101,"TI: Infraestrutura, Redes e Sistemas Operacionais","Redes: protocolos, OSI e wi-fi",,"[Julgue os próximos itens, relativos a infraestrutura de TI.] ARP é um protocolo stateless que realiza mapeamento dinâmico de um endereço IP para o endereço MAC correspondente, atuando dentro no mesmo domínio de broadcast.",,,anulada,7,2026-09-30,
+TCU2026-AUFC-TI-113,TCU2026-AUFC-TI,113,TI: Ciência de Dados,Integração com fontes de dados: CSV e APIs REST,CDA-11,"[A respeito de bancos de dados e integração com fontes de dados, julgue os próximos itens.] Arquivos do tipo CSV podem ser utilizados para representar informações de tabelas, incluindo os rótulos de suas colunas.",,C,valida,7,2026-09-30,
+TCU2026-AUFC-TI-114,TCU2026-AUFC-TI,114,TI: Ciência de Dados,Integração com fontes de dados: CSV e APIs REST,DES-18,"[A respeito de bancos de dados e integração com fontes de dados, julgue os próximos itens.] No serviço REST, para que o servidor responda adequadamente, ele precisa armazenar o estado da sessão do cliente entre suas requisições.",,E,valida,7,2026-09-30,Classificação de fronteira: também toca TI: Desenvolvimento (REST).
+TCU2015-TI-101,TCU2015-TI,101,"Adm. Pública, Políticas Públicas e Adm. Geral","Planejamento, decisão e controle",APP-04,"[Acerca da gestão e do planejamento estratégico, julgue os itens subsequentes.] Se comparada à matriz SWOT, a matriz GUT apresenta maior aplicabilidade ao planejamento estratégico por considerar os fatores gravidade, urgência e tendência no apoio à análise e na gestão de problemas e, consequentemente, possibilitar mais riqueza no suporte à produção de cenários de curto, médio e longo prazos.",,E,valida,1,2026-09-30,"Classificação de fronteira: cobrado na prova de TI, no bloco de gestão e planejamento estratégico."
+TCU2015-BAS-91,TCU2015-BAS,91,Estatística,Regressão linear e correlação,CDA-02,"[Com base nessas informações, e sabendo que X'y = [20; 10; 10] (vetor coluna), julgue o próximo item.]
+
+Com o objetivo de modelar a arrecadação anual do ICMS em municípios brasileiros (y), o modelo de regressão linear múltipla foi representado, na forma matricial, como y = Xβ + ε, em que y representa o vetor de respostas, X denota a matriz de delineamento, β é o vetor de parâmetros e ε é o vetor de erros aleatórios independentes e identicamente distribuídos. Considerando-se que X' representa a transposta da matriz de delineamento, apresenta-se a seguir a matriz inversa do produto matricial X'X produzida no modelo.
+
+```
+          |  0,50  −0,25  −0,40 |
+(X'X)⁻¹ = | −0,25   0,40   0,10 |
+          | −0,40   0,10   0,50 |
+```
+
+A estimativa do vetor de parâmetros produzida pelo método de mínimos quadrados ordinários é [3,5; 0; −2] (vetor coluna).",,C,valida,7,2026-09-30,"Fórmula/matriz em imagem no PDF; transcrita em texto, conferir no PDF."
+CGU2012-P3-TI-DES-12,CGU2012-P3-TI-DES,12,TI: Desenvolvimento e Engenharia de Software,Java: linguagem e orientação a objetos,DES-20,Em linguagem Java,(A) == significa atribuição. & significa “E” lógico. || significa “OU” lógico. | (B) == significa igualdade. && significa atribuição lógica. || significa “+” lógico. | (C) == significa igualdade. && significa “E” lógico. || significa “OU” lógico. | (D) <> significa igualdade. &+ significa “E” lógico. | significa “OU” lógico. | (E) =+ significa igualdade superior. && significa “E” lógico. |=| significa “OU” lógico.,C,valida,3,2026-09-30,
+CGU2022-AFFC-TI-61,CGU2022-AFFC-TI,61,TI: Ciência de Dados,SQL: junções e subconsultas,BDD-03,"ATENÇÃO! Para resolver as duas próximas questões, considere as tabelas cliente e visita, conforme as instâncias exibidas a seguir.
+
+```
+cliente
+codigo
+310
+312
+314
+316
+
+visita
+codigo  data
+310     2022/03/01
+312     2022/03/01
+312     2022/03/10
+310     2022/03/11
+314     2022/03/11
+312     2022/03/11
+312     2022/03/11
+314     2022/04/05
+312     2022/04/07
+```
+
+João deve produzir um relatório que mostra o número de visitas ao site da empresa de cada cliente a cada mês. Mesmo os clientes que não visitaram o site devem ser contabilizados. O conteúdo do relatório, de acordo com as instâncias das tabelas cliente e visita, descritas anteriormente, é exibido a seguir.
+
+```
+codigo  mês  visitas
+310     3    2
+310     4    0
+312     3    3
+312     4    1
+314     3    1
+314     4    1
+316     3    0
+316     4    0
+```
+
+João considerou três scripts SQL para produzir esse relatório.
+
+```
+I.
+select c.codigo cliente, month(v.data) mês,
+       count(distinct v.data) frequencia
+from cliente c LEFT JOIN visita v
+     on c.codigo = v.codigo
+group by c.codigo, month(data)
+order by 1,2
+
+II.
+select c.codigo cliente, month(v.data) mês,
+       count(distinct v.data) frequencia
+from cliente c INNER JOIN visita v
+     on c.codigo = v.codigo
+group by c.codigo, month(data)
+UNION
+select distinct c.codigo cliente,
+       month(v.data) mês, 0 frequencia
+from cliente c, visita v
+where not exists
+  (select * from visita v2
+   where v2.codigo=c.codigo
+     and month(v2.data)=month(v.data))
+order by 1,2
+
+III.
+select c.codigo, m.mês,
+       (select count(distinct v.data)
+        from visita v
+        where month(v.data) = m.mês
+          and v.codigo = c.codigo) frequencia
+from
+(select distinct month(data) mês from visita) m,
+(select distinct codigo from cliente) c
+order by 1, 2
+```
+
+Produz(em) o resultado corretamente somente o(s) script(s):",(A) I | (B) II | (C) III | (D) I e II | (E) II e III.,E,valida,19,2026-09-30,"Tabelas cliente, visita e relatório em quadro no PDF; reconstituídas a partir do PDF."
+CGU2022-AFFC-TI-29,CGU2022-AFFC-TI,29,Adm. Financeira e Orçamentária,Receita pública: estágios e reconhecimento,AFO-05,"O reconhecimento da receita pública se dá em estágios, que, para fins de controle orçamentário, tem regras próprias e gera desafios quando se considera a lógica do regime de competência, o qual é orientado para fornecer informações de natureza patrimonial. Suponha que um órgão da estrutura de controle do Poder Executivo Federal tenha recebido a consulta de um jurisdicionado acerca dos procedimentos e estágios de reconhecimento de uma receita não prevista no orçamento, decorrente de uma doação. Uma das orientações que deveria ser dada pelo órgão em resposta à consulta é que:","(A) o lançamento dessa receita tem efeitos restritos à situação patrimonial do ente | (B) o recurso deve ser reconhecido sob a condição de isenção de contrapartida por parte do ente | (C) o recurso pode ser lançado como uma receita corrente, na origem transferências correntes | (D) por ser de natureza não tributária, essa receita não passará pelo estágio do lançamento | (E) por ser de natureza extraorçamentária, o recurso não passará pelos estágios da receita.",D,alterada,11,2026-09-30,Gabarito em vermelho no definitivo (alterado após recursos); o preliminar não está em fontes-escopo/.
+CGU2022-AFFC-BAS-24,CGU2022-AFFC-BAS,24,"Adm. Pública, Políticas Públicas e Adm. Geral",Governo aberto e governo digital,APP-03,"A Estratégia de Governo Digital (EGD), estabelecida em 2020 no contexto do Poder Executivo Federal, busca formalizar o esforço de modernização do governo brasileiro, tendo como elementos fundamentais a integração e o acesso a dados entre os órgãos públicos. Para tanto, a EGD:","(A) aprimora e expande os mecanismos de interoperabilidade vigentes desde 2019 | (B) barra e sobrepõe os mecanismos de interoperabilidade vigentes desde 2019 | (C) limita e flexibiliza os mecanismos de interoperabilidade vigentes desde 2019 | (D) expande, porém, desobriga os mecanismos de interoperabilidade vigentes desde 2019 | (E) expande e complementa os mecanismos de interoperabilidade vigentes desde 2019.",A,alterada,10,2026-09-30,Gabarito em vermelho no definitivo (alterado após recursos); o preliminar não está em fontes-escopo/.

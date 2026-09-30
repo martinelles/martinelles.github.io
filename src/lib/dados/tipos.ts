@@ -31,7 +31,22 @@ export const ICONES = [
 	'edital',
 	'pessoas',
 	'relogio',
-	'trocar'
+	'trocar',
+	// Feed de estudo
+	'coracao',
+	'coracao-cheio',
+	'marcador',
+	'marcador-cheio',
+	'casa',
+	'grade',
+	'seta-esquerda',
+	'seta-direita',
+	'virar',
+	'check',
+	'x',
+	'lei',
+	'lampada',
+	'interrogacao'
 ] as const;
 export type NomeIcone = (typeof ICONES)[number];
 

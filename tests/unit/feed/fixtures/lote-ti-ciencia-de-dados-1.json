@@ -1,0 +1,46 @@
+[
+	{
+		"id": "q:CGU2022-AFFC-TI-47",
+		"tipo": "questao",
+		"materia": "ti-ciencia-de-dados",
+		"prova": { "orgao": "CGU", "ano": 2022, "cargo": "AFFC TI", "banca": "FGV" },
+		"numero": 47,
+		"enunciado": "Em aprendizado supervisionado, os dados de treino trazem o rótulo esperado.",
+		"formato": "ce",
+		"gabarito": "C",
+		"situacao": "valida"
+	},
+	{
+		"id": "q:TCU2026-AUFC-TI-12",
+		"tipo": "questao",
+		"materia": "ti-ciencia-de-dados",
+		"prova": { "orgao": "TCU", "ano": 2026, "cargo": "AUFC TI" },
+		"numero": 12,
+		"enunciado": "Assinale a alternativa correta.",
+		"formato": "me",
+		"alternativas": [
+			{ "letra": "A", "texto": "Um" },
+			{ "letra": "B", "texto": "Dois" }
+		],
+		"gabarito": "B",
+		"situacao": "alterada"
+	},
+	{
+		"id": "r:ti-ciencia-de-dados--supervisionado",
+		"tipo": "resumo",
+		"materia": "ti-ciencia-de-dados",
+		"titulo": "Aprendizado supervisionado",
+		"telas": [{ "titulo": "O que é", "texto": "a" }, { "texto": "b" }, { "texto": "c" }],
+		"conferido": false,
+		"fonte": { "rotulo": "Edital CGU 2026, item 3.1" }
+	},
+	{
+		"id": "f:ti-ciencia-de-dados--supervisionado:1",
+		"tipo": "flashcard",
+		"materia": "ti-ciencia-de-dados",
+		"pergunta": "O que é rótulo?",
+		"resposta": "A resposta esperada.",
+		"conferido": false,
+		"fonte": { "rotulo": "Edital CGU 2026, item 3.1" }
+	}
+]
