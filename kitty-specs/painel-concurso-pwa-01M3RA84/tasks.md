@@ -13,11 +13,11 @@
 | T003 | `app.html` com manifest/theme-color e `app.css` com tokens claro/escuro | WP01 | [D] |
 | T004 | Layout raiz (`+layout.ts`, `+layout.svelte`) | WP01 | | [D] |
 | T005 | Vitest e Playwright configurados com testes de fumaça | WP01 | | [D] |
-| T006 | Tipos do domínio em `src/lib/dados/tipos.ts` | WP02 | |
-| T007 | `concursos.json` com ≥ 12 concursos nas 4 seções | WP02 | [P] |
-| T008 | `ferramentas.json` (12) e `config.json` | WP02 | [P] |
-| T009 | `validar.ts` e `index.ts` (carga validada) | WP02 | |
-| T010 | `tests/unit/dados.test.ts` | WP02 | |
+| T006 | Tipos do domínio em `src/lib/dados/tipos.ts` | WP02 | | [D] |
+| T007 | `concursos.json` com ≥ 12 concursos nas 4 seções | WP02 | [D] |
+| T008 | `ferramentas.json` (12) e `config.json` | WP02 | [D] |
+| T009 | `validar.ts` e `index.ts` (carga validada) | WP02 | | [D] |
+| T010 | `tests/unit/dados.test.ts` | WP02 | | [D] |
 | T011 | `busca.ts` (normalizar, índice, filtrar) | WP03 | [P] |
 | T012 | `secoes.ts` (situação efetiva, agrupamento) | WP03 | [P] |
 | T013 | `datas.ts` (dias para a prova) | WP03 | [P] |
@@ -67,11 +67,11 @@ Riscos: versões novas (Svelte 5.57, Kit 2.70, Vite 8) — seguir `npx sv create
 Objetivo: `src/lib/dados/` com tipos, JSONs e validador; acrescentar concurso exige mexer só no JSON (SC-005).
 Teste independente: `npm test -- dados`.
 
-- [ ] T006 Tipos do domínio em `src/lib/dados/tipos.ts` (WP02)
-- [ ] T007 `concursos.json` com ≥ 12 concursos nas 4 seções (WP02)
-- [ ] T008 `ferramentas.json` (12) e `config.json` (WP02)
-- [ ] T009 `validar.ts` e `index.ts` (carga validada) (WP02)
-- [ ] T010 `tests/unit/dados.test.ts` (WP02)
+- [x] T006 Tipos do domínio em `src/lib/dados/tipos.ts` (WP02)
+- [x] T007 `concursos.json` com ≥ 12 concursos nas 4 seções (WP02)
+- [x] T008 `ferramentas.json` (12) e `config.json` (WP02)
+- [x] T009 `validar.ts` e `index.ts` (carga validada) (WP02)
+- [x] T010 `tests/unit/dados.test.ts` (WP02)
 
 Riscos: dado inventado apresentado como oficial — marcar no JSON que são exemplos; nenhum dado copiado do Acertei (C-002).
 
