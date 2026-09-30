@@ -26,8 +26,8 @@ subtasks:
 - T025
 phase: Fase 3 - Telas
 assignee: ''
-agent: ''
-shell_pid: '11160'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "11160"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -147,3 +147,7 @@ Enquanto o WP06 não estiver na mesma base, `/painel` pode não renderizar nada 
 ## Guia do revisor
 
 Percorrer os aceites da spec no preview em 360 px; conferir que o limite de 5 não se aplica durante a busca e que o estado manual das seções volta depois de limpar a busca.
+
+## Activity Log
+
+- 2026-09-30T05:48:09Z – claude:opus:implementer:implementer – shell_pid=11160 – Assigned agent via action command
