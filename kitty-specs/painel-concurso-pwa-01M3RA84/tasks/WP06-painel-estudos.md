@@ -25,8 +25,8 @@ subtasks:
 - T031
 phase: Fase 3 - Telas
 assignee: ''
-agent: ''
-shell_pid: '25884'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "25884"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -136,3 +136,7 @@ Setup comum: `addInitScript` grava `{"concursoId":"cgu-affc-ti","cargoId":null,"
 ## Guia do revisor
 
 Percorrer o Cenário 2 no preview, em 360 px e em 1440 px; recarregar no meio para ver a persistência; conferir que "Trocar concurso" não apaga a preferência.
+
+## Activity Log
+
+- 2026-09-30T05:48:17Z – claude:opus:implementer:implementer – shell_pid=25884 – Assigned agent via action command
