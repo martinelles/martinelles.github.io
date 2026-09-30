@@ -25,8 +25,8 @@ subtasks:
 - T006
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "24184"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "21564"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -132,3 +132,4 @@ Rodar `npm run importar -- --saida /tmp/x` contra o vault, conferir relatório, 
 - 2026-09-30T13:43:09Z – claude:opus:implementer:implementer – shell_pid=24184 – Assigned agent via action command
 - 2026-09-30T14:02:34Z – claude:opus:implementer:implementer – shell_pid=24184 – Importação real (vault 2026-09-30, saída em temp, não commitada): 4111 posts = 1928 questões + 2043 artigos/itens de lei + 0 resumos + 140 flashcards de baralho. Descartes: 69 anuladas, 100 sem gabarito (TCU2026 itens 1-100), 154 artigos com caput revogado/vetado. Recusados 0, pulados 0. MOT 2017 importado por itens (165); IN SFC 3/2017 só com os 4 Art. (anexo-referencial avisado, 81.914 caracteres). 24 lotes, maior 140,0 KB gzip (zlib nível 6; GNU gzip -6 dá 144.124 B). Duas execuções: diff -r vazio. Desvios: alvo de empacotamento 140 KB (margem para outros compressores, teto 150 KB mantido); rótulo 'Anexo N Art. X' para artigos de anexo (além do 'ADCT' pedido); linhas de PDF emendadas em parágrafo nos arquivos marcados 'PDF oficial'; tests/unit/importar/node-minimo.d.ts declara as APIs do Node usadas em vez de adicionar @types/node (projeto não tem).
 - 2026-09-30T14:02:43Z – claude:opus:implementer:implementer – shell_pid=24184 – Ready for review: importador + 71 testes do WP (124 no total); check/test/build/e2e verdes
+- 2026-09-30T14:03:18Z – claude:opus:reviewer:reviewer – shell_pid=21564 – Started review via action command
