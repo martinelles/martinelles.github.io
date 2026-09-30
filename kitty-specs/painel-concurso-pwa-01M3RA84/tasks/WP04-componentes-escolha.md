@@ -22,8 +22,8 @@ subtasks:
 - T020
 phase: Fase 2 - Lógica e componentes
 assignee: ''
-agent: ''
-shell_pid: '10452'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "10452"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -127,3 +127,7 @@ avisos `a11y_*` do compilador) e `npm run build`.
 ## Guia do revisor
 
 Ler cada componente procurando regra de negócio escondida (não pode haver); conferir `aria-expanded`, `aria-label` do cartão, alvo de toque ≥ 44 px, e que o WhatsApp some com `null`.
+
+## Activity Log
+
+- 2026-09-30T05:40:40Z – claude:opus:implementer:implementer – shell_pid=10452 – Assigned agent via action command
