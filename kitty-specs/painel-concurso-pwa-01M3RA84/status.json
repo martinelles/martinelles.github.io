@@ -1,7 +1,7 @@
 {
-  "event_count": 27,
-  "last_event_id": "01M3RDND7163SWCMV80CFKQCG8",
-  "materialized_at": "2026-09-30T05:47:40.129404+00:00",
+  "event_count": 29,
+  "last_event_id": "01M3RDP74WQKM1W4B8DDP053QN",
+  "materialized_at": "2026-09-30T05:48:06.684294+00:00",
   "mission_number": "",
   "mission_slug": "painel-concurso-pwa-01M3RA84",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 3
+    "planned": 2
   },
   "work_packages": {
     "WP01": {
@@ -46,11 +46,11 @@
       "last_transition_at": "2026-09-30T05:46:35.640958+00:00"
     },
     "WP05": {
-      "actor": "finalize-tasks",
+      "actor": "implement-command",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01M3RCA1P9JJ5E8N74V2A6VMJW",
-      "last_transition_at": "2026-09-30T05:23:59.305687+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01M3RDP74WQKM1W4B8DDP053QN",
+      "last_transition_at": "2026-09-30T05:48:06.684294+00:00"
     },
     "WP06": {
       "actor": "finalize-tasks",
