@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-09-30T04:47:59.773945+00:00",
+  "friendly_name": "painel concurso pwa",
+  "mission_id": "01M3RA84JBEZEZYJMJ6FS1W2D7",
+  "mission_number": null,
+  "mission_slug": "painel-concurso-pwa-01M3RA84",
+  "mission_type": "software-dev",
+  "slug": "painel-concurso-pwa-01M3RA84",
+  "target_branch": "main"
+}
