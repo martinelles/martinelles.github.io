@@ -24,8 +24,8 @@ subtasks:
 - T015
 phase: Fase 2 - Lógica e componentes
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "10100"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "27168"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -200,3 +200,4 @@ Conferir os casos de borda da spec um a um contra os testes; rodar `npm test` e 
 
 - 2026-09-30T05:40:27Z – claude:opus:implementer:implementer – shell_pid=10100 – Assigned agent via action command
 - 2026-09-30T05:45:19Z – claude:opus:implementer:implementer – shell_pid=10100 – Ready for review: busca/secoes/datas/preferencias + 31 testes; busca 500 itens 0,23 ms
+- 2026-09-30T05:45:47Z – claude:opus:reviewer:reviewer – shell_pid=27168 – Started review via action command
