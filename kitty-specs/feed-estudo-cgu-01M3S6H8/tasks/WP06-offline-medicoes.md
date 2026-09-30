@@ -89,3 +89,4 @@ Refazer a medição de peso; rodar o offline-conteudo duas vezes; conferir que o
 ## Activity Log
 
 - 2026-09-30T15:22:10Z – claude:opus:implementer:implementer – shell_pid=14180 – Assigned agent via action command
+- 2026-09-30T16:02:41Z – claude:opus:implementer:implementer – shell_pid=14180 – Ready for review. --force: guard flagged kitty-specs/feed-estudo-cgu-01M3S6H8/medicoes.md (owned file of WP06, deliverable of T035) and conteudo-gerado.md (WP02's approved deliverable, present via merge in lane history); both are legit. NFR-001 first visit not met (LCP 5.0-6.0 s vs 2.5 s; cause is first-page lot fan-out, see medicoes.md obs. 1).
