@@ -1,10 +1,12 @@
 {
   "created_at": "2026-09-30T13:02:20.657686+00:00",
-  "friendly_name": "feed estudo cgu",
+  "friendly_name": "Feed de Estudo CGU",
   "mission_id": "01M3S6H89ZJRQYMHA6TTA7ZK26",
   "mission_number": null,
   "mission_slug": "feed-estudo-cgu-01M3S6H8",
   "mission_type": "software-dev",
   "slug": "feed-estudo-cgu-01M3S6H8",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "source_description": "Refaz o app para focar só no concurso da CGU (sem escolha de concurso) e cria a área de estudo por feed estilo Instagram com questões CGU+TCU, lei seca, resumos e flashcards gerados por IA marcados para revisão; interações: responder no post, curtir/salvar, carrossel, stories por matéria."
 }
