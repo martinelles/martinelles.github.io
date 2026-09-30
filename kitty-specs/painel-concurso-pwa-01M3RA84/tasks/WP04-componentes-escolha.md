@@ -133,3 +133,4 @@ Ler cada componente procurando regra de negócio escondida (não pode haver); co
 - 2026-09-30T05:40:40Z – claude:opus:implementer:implementer – shell_pid=10452 – Assigned agent via action command
 - 2026-09-30T05:44:45Z – claude:opus:implementer:implementer – shell_pid=10452 – Ready for review
 - 2026-09-30T05:45:16Z – claude:opus:reviewer:reviewer – shell_pid=2056 – Started review via action command
+- 2026-09-30T05:46:35Z – claude:opus:reviewer:reviewer – shell_pid=2056 – Review passed: 5 components match T016-T020 APIs; 24 icons type-enforced via Record, Lucide credited; tokens only, no nowrap, targets >=44px, aria-expanded/controls, card aria-label, role=status, WhatsApp hidden on null; check 0/0, test 22/22, build ok, e2e 1/1; only owned files
