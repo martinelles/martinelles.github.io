@@ -21,8 +21,8 @@ subtasks:
 - T035
 phase: Fase 4
 assignee: ''
-agent: ''
-shell_pid: '14180'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "14180"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -85,3 +85,7 @@ Com data, comando e versão:
 ## Guia do revisor
 
 Refazer a medição de peso; rodar o offline-conteudo duas vezes; conferir que o SW ainda não intercepta outras origens.
+
+## Activity Log
+
+- 2026-09-30T15:22:10Z – claude:opus:implementer:implementer – shell_pid=14180 – Assigned agent via action command
