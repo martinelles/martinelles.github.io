@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-09-30T13:02:20.657686+00:00",
+  "friendly_name": "feed estudo cgu",
+  "mission_id": "01M3S6H89ZJRQYMHA6TTA7ZK26",
+  "mission_number": null,
+  "mission_slug": "feed-estudo-cgu-01M3S6H8",
+  "mission_type": "software-dev",
+  "slug": "feed-estudo-cgu-01M3S6H8",
+  "target_branch": "main"
+}
