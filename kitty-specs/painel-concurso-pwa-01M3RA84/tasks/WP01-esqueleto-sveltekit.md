@@ -21,8 +21,8 @@ subtasks:
 - T005
 phase: Fase 1 - Fundação
 assignee: ''
-agent: ''
-shell_pid: '18920'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "18920"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -244,3 +244,7 @@ Cada par texto/fundo deve ter contraste ≥ 4,5:1 nos dois temas (NFR-005). Conf
 ## Guia do revisor
 
 Conferir: modo SPA (`fallback: 'index.html'`, `ssr = false`), ausência de fonte externa/analytics, `lang="pt-BR"`, sem `user-scalable=no`, tokens com tema escuro, as quatro portas rodando de verdade (peça a saída).
+
+## Activity Log
+
+- 2026-09-30T05:25:30Z – claude:opus:implementer:implementer – shell_pid=18920 – Assigned agent via action command
