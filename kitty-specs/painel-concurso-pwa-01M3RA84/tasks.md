@@ -18,11 +18,11 @@
 | T008 | `ferramentas.json` (12) e `config.json` | WP02 | [D] |
 | T009 | `validar.ts` e `index.ts` (carga validada) | WP02 | | [D] |
 | T010 | `tests/unit/dados.test.ts` | WP02 | | [D] |
-| T011 | `busca.ts` (normalizar, índice, filtrar) | WP03 | [P] |
-| T012 | `secoes.ts` (situação efetiva, agrupamento) | WP03 | [P] |
-| T013 | `datas.ts` (dias para a prova) | WP03 | [P] |
-| T014 | `preferencias.svelte.ts` (estado persistido) | WP03 | |
-| T015 | Testes de unidade de busca, seções, datas e preferências | WP03 | |
+| T011 | `busca.ts` (normalizar, índice, filtrar) | WP03 | [D] |
+| T012 | `secoes.ts` (situação efetiva, agrupamento) | WP03 | [D] |
+| T013 | `datas.ts` (dias para a prova) | WP03 | [D] |
+| T014 | `preferencias.svelte.ts` (estado persistido) | WP03 | | [D] |
+| T015 | Testes de unidade de busca, seções, datas e preferências | WP03 | | [D] |
 | T016 | `Icone.svelte` com SVGs próprios | WP04 | | [D] |
 | T017 | `CampoBusca.svelte` | WP04 | [D] |
 | T018 | `CartaoConcurso.svelte` | WP04 | [D] |
@@ -83,11 +83,11 @@ Riscos: dado inventado apresentado como oficial — marcar no JSON que são exem
 Objetivo: funções puras de busca, seções e datas, e o estado de preferências persistido.
 Teste independente: `npm test` (inclui busca em 500 itens ≤ 100 ms).
 
-- [ ] T011 `busca.ts` (normalizar, índice, filtrar) (WP03)
-- [ ] T012 `secoes.ts` (situação efetiva, agrupamento) (WP03)
-- [ ] T013 `datas.ts` (dias para a prova) (WP03)
-- [ ] T014 `preferencias.svelte.ts` (estado persistido) (WP03)
-- [ ] T015 Testes de unidade de busca, seções, datas e preferências (WP03)
+- [x] T011 `busca.ts` (normalizar, índice, filtrar) (WP03)
+- [x] T012 `secoes.ts` (situação efetiva, agrupamento) (WP03)
+- [x] T013 `datas.ts` (dias para a prova) (WP03)
+- [x] T014 `preferencias.svelte.ts` (estado persistido) (WP03)
+- [x] T015 Testes de unidade de busca, seções, datas e preferências (WP03)
 
 Paralelo: T011, T012, T013 são arquivos independentes.
 
