@@ -11,13 +11,13 @@
 
 | ID | Descrição | WP | Parallel |
 |---|---|---|---|
-| T001 | Script de corte de fontes e os `.woff2` em `static/fontes/` | WP01 | |
-| T002 | `@font-face` e tokens comuns (fontes, medida de leitura) | WP01 | |
-| T003 | Blocos de tokens por `[data-tema]`; saem o `@media dark` e os tokens mortos | WP01 | |
-| T004 | Textura de papel (`--textura` e `body::before`) e `@media print` | WP01 | [P] |
-| T005 | Regra de movimento dos temas Kindle | WP01 | [P] |
-| T006 | Script inline de tema, `theme-color`, preload e manifesto | WP01 | |
-| T007 | `contraste.test.ts` lendo `app.css` | WP01 | |
+| T001 | Script de corte de fontes e os `.woff2` em `static/fontes/` | WP01 | | [D] |
+| T002 | `@font-face` e tokens comuns (fontes, medida de leitura) | WP01 | | [D] |
+| T003 | Blocos de tokens por `[data-tema]`; saem o `@media dark` e os tokens mortos | WP01 | | [D] |
+| T004 | Textura de papel (`--textura` e `body::before`) e `@media print` | WP01 | [D] |
+| T005 | Regra de movimento dos temas Kindle | WP01 | [D] |
+| T006 | Script inline de tema, `theme-color`, preload e manifesto | WP01 | | [D] |
+| T007 | `contraste.test.ts` lendo `app.css` | WP01 | | [D] |
 | T008 | Store `tema.svelte.ts` | WP02 | |
 | T009 | `tema.test.ts` | WP02 | |
 | T010 | `carregarTema()` no layout raiz | WP02 | |
@@ -49,13 +49,13 @@
 
 Objetivo: `app.css` com os 3 temas completos do contrato, fontes empacotadas, textura de papel, regra de movimento, e `app.html` aplicando o tema antes da primeira pintura. Teste independente: `document.documentElement.dataset.tema = 'kindle'` no console repinta o app todo; `contraste.test.ts` passa.
 
-- [ ] T001 Script de corte de fontes e os `.woff2` em `static/fontes/` (WP01)
-- [ ] T002 `@font-face` e tokens comuns (fontes, medida de leitura) (WP01)
-- [ ] T003 Blocos de tokens por `[data-tema]`; saem o `@media dark` e os tokens mortos (WP01)
-- [ ] T004 Textura de papel (`--textura` e `body::before`) e `@media print` (WP01)
-- [ ] T005 Regra de movimento dos temas Kindle (WP01)
-- [ ] T006 Script inline de tema, `theme-color`, preload e manifesto (WP01)
-- [ ] T007 `contraste.test.ts` lendo `app.css` (WP01)
+- [x] T001 Script de corte de fontes e os `.woff2` em `static/fontes/` (WP01)
+- [x] T002 `@font-face` e tokens comuns (fontes, medida de leitura) (WP01)
+- [x] T003 Blocos de tokens por `[data-tema]`; saem o `@media dark` e os tokens mortos (WP01)
+- [x] T004 Textura de papel (`--textura` e `body::before`) e `@media print` (WP01)
+- [x] T005 Regra de movimento dos temas Kindle (WP01)
+- [x] T006 Script inline de tema, `theme-color`, preload e manifesto (WP01)
+- [x] T007 `contraste.test.ts` lendo `app.css` (WP01)
 
 Sequência: T001, T002, T003, então T004 e T005 em paralelo, e depois T006 e T007. Riscos: textura pesando na rolagem (research D4); variável de fonte mal instanciada. Paralelo: nenhum WP roda antes deste.
 
