@@ -22,8 +22,8 @@ subtasks:
 - T020
 phase: Fase 2 - Lógica e componentes
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "10452"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "2056"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -132,3 +132,4 @@ Ler cada componente procurando regra de negócio escondida (não pode haver); co
 
 - 2026-09-30T05:40:40Z – claude:opus:implementer:implementer – shell_pid=10452 – Assigned agent via action command
 - 2026-09-30T05:44:45Z – claude:opus:implementer:implementer – shell_pid=10452 – Ready for review
+- 2026-09-30T05:45:16Z – claude:opus:reviewer:reviewer – shell_pid=2056 – Started review via action command
