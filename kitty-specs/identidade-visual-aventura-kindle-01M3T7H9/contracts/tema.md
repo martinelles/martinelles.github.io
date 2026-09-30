@@ -7,6 +7,7 @@ Qualquer mudança aqui exige atualizar `tests/unit/contraste.test.ts` e `tests/e
 
 - Elemento: `<html>`. Atributo: `data-tema`. Valores: `aventura`, `kindle` e `kindle-escuro`.
 - Sempre presente depois do script inline. Sem JS, fica ausente, e o `:root` sem atributo vale Aventura.
+- Os blocos de token usam `:root[data-tema='X'], [data-tema='X']`: o mesmo atributo num elemento interno aplica o tema só naquele trecho. A prévia do seletor usa isso.
 - `<meta name="theme-color">` único, com o `content` igual a `--cor-fundo` do tema ativo, atualizado junto com o atributo.
 
 ## 2. Preferência gravada
@@ -33,7 +34,13 @@ export type Tema = 'aventura' | 'kindle' | 'kindle-escuro';
 export type PreferenciaTema = 'sistema' | Tema;
 export const CHAVE_TEMA = 'painel-concurso:tema:v1';
 export const TEMAS: readonly { id: Tema; nome: string }[];   // ordem do seletor
-export function carregarTema(arm?: Storage | null, mq?: MediaQueryList | null): void; // idempotente
+/** Onde o tema é aplicado; injetável para teste em ambiente node. */
+export interface AlvoTema { definir(t: Tema): void }
+export function carregarTema(
+  arm?: Storage | null,          // padrão: localStorage em try/catch
+  mq?: MediaQueryList | null,    // padrão: matchMedia('(prefers-color-scheme: dark)')
+  alvo?: AlvoTema | null         // padrão: <html data-tema> + <meta name="theme-color">
+): void; // idempotente; chamar de novo troca os ouvintes, sem duplicar
 export const tema: {
   readonly preferencia: PreferenciaTema;
   readonly ativo: Tema;
@@ -75,5 +82,5 @@ O `contraste.test.ts` mede exatamente esta lista, nos três temas. Os valores pr
 
 ## 7. Movimento
 
-Com `[data-tema="kindle"]` ou `[data-tema="kindle-escuro"]`, e com `prefers-reduced-motion: reduce`,
+Dentro de qualquer elemento com `data-tema` começando por `kindle`, e com `prefers-reduced-motion: reduce`,
 todo elemento fica com `transition: none` e `animation: none`. No Aventura, animação só como resposta a ação (nenhuma com `infinite`).
