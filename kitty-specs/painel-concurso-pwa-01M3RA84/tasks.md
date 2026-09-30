@@ -39,11 +39,11 @@
 | T029 | Tela `/painel` | WP06 | | [D] |
 | T030 | Tela `/ferramenta/[id]` ("em breve") | WP06 | | [D] |
 | T031 | `tests/e2e/painel.spec.ts` | WP06 | | [D] |
-| T032 | Ícones do app e `manifest.webmanifest` | WP07 | [P] |
-| T033 | `src/service-worker.ts` | WP07 | |
-| T034 | `tests/e2e/offline.spec.ts` | WP07 | |
-| T035 | `tests/e2e/responsivo.spec.ts` | WP07 | [P] |
-| T036 | Medição de peso e Lighthouse registrada em `kitty-specs/.../medicoes.md` | WP07 | |
+| T032 | Ícones do app e `manifest.webmanifest` | WP07 | [D] |
+| T033 | `src/service-worker.ts` | WP07 | | [D] |
+| T034 | `tests/e2e/offline.spec.ts` | WP07 | | [D] |
+| T035 | `tests/e2e/responsivo.spec.ts` | WP07 | [D] |
+| T036 | Medição de peso e Lighthouse registrada em `kitty-specs/.../medicoes.md` | WP07 | | [D] |
 
 ## Fase 1 — Fundação
 
@@ -142,11 +142,11 @@ Paralelo com WP05.
 Objetivo: Cenário 3 da spec, NFR de layout e medições de peso/Lighthouse registradas.
 Teste independente: `npm run test:e2e` inteiro, com `offline.spec.ts` e `responsivo.spec.ts`.
 
-- [ ] T032 Ícones do app e `manifest.webmanifest` (WP07)
-- [ ] T033 `src/service-worker.ts` (WP07)
-- [ ] T034 `tests/e2e/offline.spec.ts` (WP07)
-- [ ] T035 `tests/e2e/responsivo.spec.ts` (WP07)
-- [ ] T036 Medição de peso e Lighthouse registrada em `kitty-specs/.../medicoes.md` (WP07)
+- [x] T032 Ícones do app e `manifest.webmanifest` (WP07)
+- [x] T033 `src/service-worker.ts` (WP07)
+- [x] T034 `tests/e2e/offline.spec.ts` (WP07)
+- [x] T035 `tests/e2e/responsivo.spec.ts` (WP07)
+- [x] T036 Medição de peso e Lighthouse registrada em `kitty-specs/.../medicoes.md` (WP07)
 
 ## Dependências
 
