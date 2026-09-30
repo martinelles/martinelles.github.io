@@ -1,0 +1,76 @@
+/* Tokens de tema. Pares texto/fundo com contraste >= 4,5:1 nos dois temas (NFR-005). */
+:root {
+	--cor-fundo: #f6f7fb;
+	--cor-superficie: #ffffff;
+	--cor-texto: #111827;
+	--cor-texto-suave: #4b5563;
+	--cor-borda: #e5e7eb;
+	--cor-primaria: #1b4dd8;
+	--cor-primaria-texto: #ffffff;
+	--cor-azul: #1b4dd8;
+	--cor-verde: #047857;
+	--cor-roxo: #6d28d9;
+	--cor-laranja: #b45309;
+	--cor-vermelho: #b91c1c;
+	--raio: 14px;
+	--espaco: 16px;
+	--sombra: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 6%);
+	--fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--cor-fundo: #0b1220;
+		--cor-superficie: #111a2e;
+		--cor-texto: #e5e7eb;
+		--cor-texto-suave: #a3adbf;
+		--cor-borda: #24304a;
+		--cor-primaria: #7aa2ff;
+		--cor-primaria-texto: #0b1220;
+		--cor-azul: #7aa2ff;
+		--cor-verde: #34d399;
+		--cor-roxo: #c4b5fd;
+		--cor-laranja: #fbbf24;
+		--cor-vermelho: #fca5a5;
+		color-scheme: dark;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+}
+
+body {
+	background: var(--cor-fundo);
+	color: var(--cor-texto);
+	font-family: var(--fonte);
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+:focus-visible {
+	outline: 3px solid var(--cor-primaria);
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		transition: none !important;
+		animation: none !important;
+	}
+}

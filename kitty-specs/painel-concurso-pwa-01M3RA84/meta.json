@@ -2,11 +2,11 @@
   "created_at": "2026-09-30T04:47:59.773945+00:00",
   "friendly_name": "Painel de Concurso PWA",
   "mission_id": "01M3RA84JBEZEZYJMJ6FS1W2D7",
-  "mission_number": null,
+  "mission_number": 1,
   "mission_slug": "painel-concurso-pwa-01M3RA84",
   "mission_type": "software-dev",
   "slug": "painel-concurso-pwa-01M3RA84",
+  "source_description": "PWA que replica visualmente o fluxo de https://acertei.web.app/start-new (onboarding de concurso + Seu Painel de Estudos); escopo: só a casca visual, ferramentas como placeholder, dados de exemplo locais.",
   "target_branch": "main",
-  "vcs": "git",
-  "source_description": "PWA que replica visualmente o fluxo de https://acertei.web.app/start-new (onboarding de concurso + Seu Painel de Estudos); escopo: só a casca visual, ferramentas como placeholder, dados de exemplo locais."
+  "vcs": "git"
 }

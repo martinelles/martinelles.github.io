@@ -1,0 +1,14 @@
+[
+	{ "id": "aulas", "titulo": "Aulas Digitais", "subtitulo": "Teoria em vídeo, tópico por tópico", "icone": "livro", "grupo": "teorico" },
+	{ "id": "resumos", "titulo": "Resumos", "subtitulo": "O essencial de cada assunto", "icone": "documento", "grupo": "teorico" },
+	{ "id": "mapas-mentais", "titulo": "Mapas Mentais", "subtitulo": "A matéria num só desenho", "icone": "mapa", "grupo": "teorico" },
+	{ "id": "pdfs", "titulo": "PDFs", "subtitulo": "Material para ler e anotar", "icone": "caderno", "grupo": "teorico" },
+	{ "id": "questoes-objetivas", "titulo": "Questões Objetivas", "subtitulo": "Treino no estilo da banca", "icone": "lista", "grupo": "pratica" },
+	{ "id": "questoes-discursivas", "titulo": "Questões Discursivas", "subtitulo": "Escreva e compare com o padrão", "icone": "documento", "grupo": "pratica" },
+	{ "id": "desafios-diarios", "titulo": "Desafios Diários", "subtitulo": "Poucas questões, todo dia", "icone": "raio", "grupo": "pratica" },
+	{ "id": "flashcards", "titulo": "Flashcards", "subtitulo": "Revisão rápida por repetição", "icone": "cartas", "grupo": "pratica" },
+	{ "id": "simulados", "titulo": "Simulados", "subtitulo": "Prova completa contra o relógio", "icone": "cronometro", "grupo": "pratica" },
+	{ "id": "jurisprudencia", "titulo": "Jurisprudência", "subtitulo": "Decisões que caem em prova", "icone": "balanca", "grupo": "pratica" },
+	{ "id": "estudo-por-disciplina", "titulo": "Estudo por Disciplina", "subtitulo": "Escolha a matéria e comece", "icone": "busca", "grupo": "atalho" },
+	{ "id": "plano-de-estudos", "titulo": "Meu Plano de Estudos", "subtitulo": "Sua semana organizada", "icone": "calendario", "grupo": "atalho" }
+]

@@ -26,3 +26,10 @@
 .kittify/missions/__pycache__/
 .kittify/runtime/
 .kittify/workspaces/
+
+# Projeto (WP01)
+node_modules/
+.svelte-kit/
+build/
+test-results/
+playwright-report/

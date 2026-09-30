@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Painel de Concurso">
+	<!-- Versão "maskable": fundo cheio até a borda e desenho dentro da zona segura (80% central, raio 204). -->
+	<rect width="512" height="512" fill="#1b4dd8"/>
+	<circle cx="256" cy="256" r="120" fill="none" stroke="#ffffff" stroke-width="29"/>
+	<circle cx="256" cy="256" r="62" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="19"/>
+	<path d="M208 261l35 35 70-80" fill="none" stroke="#ffffff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

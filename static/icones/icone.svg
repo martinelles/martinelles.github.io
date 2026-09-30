@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Painel de Concurso">
+	<!-- Ícone próprio do Painel de Concurso: alvo em anel com marca de conferido. -->
+	<rect width="512" height="512" rx="112" fill="#1b4dd8"/>
+	<circle cx="256" cy="256" r="150" fill="none" stroke="#ffffff" stroke-width="36"/>
+	<circle cx="256" cy="256" r="78" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="24"/>
+	<path d="M196 262l44 44 88-100" fill="none" stroke="#ffffff" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
