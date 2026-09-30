@@ -1,0 +1,11 @@
+vcs:
+  type: git
+agents:
+  available:
+  - claude
+  auto_commit: true
+project:
+  uuid: f213bfc4-65e6-4b4c-904e-a9a6773a3433
+  slug: painel-concurso
+  node_id: 39ad4a6b48db
+  build_id: e0011b03-e0a1-4e18-a026-71ddb2fdfe18
