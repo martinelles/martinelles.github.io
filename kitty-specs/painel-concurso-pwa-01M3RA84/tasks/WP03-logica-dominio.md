@@ -24,8 +24,8 @@ subtasks:
 - T015
 phase: Fase 2 - Lógica e componentes
 assignee: ''
-agent: ''
-shell_pid: '10100'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "10100"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -195,3 +195,7 @@ Se o Vitest precisar compilar runes em `.svelte.ts`, o plugin `sveltekit()` já 
 ## Guia do revisor
 
 Conferir os casos de borda da spec um a um contra os testes; rodar `npm test` e ver o tempo do teste de desempenho.
+
+## Activity Log
+
+- 2026-09-30T05:40:27Z – claude:opus:implementer:implementer – shell_pid=10100 – Assigned agent via action command
