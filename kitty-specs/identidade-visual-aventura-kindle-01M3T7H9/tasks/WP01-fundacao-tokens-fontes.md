@@ -17,6 +17,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-identidade-visual-aventura-kindle-01M3T7H9
+base_commit: 206a7c080882d9e44c9b93486f9ac21b7a875a28
+created_at: '2026-09-30T23:06:53.557951+00:00'
 subtasks:
 - T001
 - T002
@@ -28,6 +31,7 @@ subtasks:
 phase: Fase 1 - Fundação
 assignee: ''
 agent: ''
+shell_pid: '23724'
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
