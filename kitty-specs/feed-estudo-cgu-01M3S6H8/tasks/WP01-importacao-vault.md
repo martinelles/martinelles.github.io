@@ -25,8 +25,8 @@ subtasks:
 - T006
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: ''
-shell_pid: '24184'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "24184"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -126,3 +126,7 @@ Seguir R6 à risca:
 ## Guia do revisor
 
 Rodar `npm run importar -- --saida /tmp/x` contra o vault, conferir relatório, abrir um lote e comparar 5 questões e 3 artigos com a fonte; conferir determinismo com `diff -r` entre duas execuções.
+
+## Activity Log
+
+- 2026-09-30T13:43:09Z – claude:opus:implementer:implementer – shell_pid=24184 – Assigned agent via action command
