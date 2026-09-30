@@ -25,8 +25,8 @@ subtasks:
 - T006
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "29516"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "23132"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -140,3 +140,4 @@ Rodar `npm run importar -- --saida /tmp/x` contra o vault, conferir relatório, 
 - 2026-09-30T14:27:11Z – claude:opus:reviewer:reviewer – shell_pid=1176 – Moved to planned
 - 2026-09-30T14:27:49Z – claude:opus:implementer:implementer – shell_pid=29516 – Started implementation via action command
 - 2026-09-30T14:33:15Z – claude:opus:implementer:implementer – shell_pid=29516 – Fix for review cycle 2: subtitles
+- 2026-09-30T14:33:48Z – claude:opus:reviewer:reviewer – shell_pid=23132 – Started review via action command
