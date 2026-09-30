@@ -8,11 +8,11 @@
 
 | ID | Descrição | WP | Parallel |
 |---|---|---|---|
-| T001 | Criar `package.json`, dependências e scripts | WP01 | |
-| T002 | Configurar SvelteKit estático SPA, Vite e TypeScript | WP01 | |
-| T003 | `app.html` com manifest/theme-color e `app.css` com tokens claro/escuro | WP01 | [P] |
-| T004 | Layout raiz (`+layout.ts`, `+layout.svelte`) | WP01 | |
-| T005 | Vitest e Playwright configurados com testes de fumaça | WP01 | |
+| T001 | Criar `package.json`, dependências e scripts | WP01 | | [D] |
+| T002 | Configurar SvelteKit estático SPA, Vite e TypeScript | WP01 | | [D] |
+| T003 | `app.html` com manifest/theme-color e `app.css` com tokens claro/escuro | WP01 | [D] |
+| T004 | Layout raiz (`+layout.ts`, `+layout.svelte`) | WP01 | | [D] |
+| T005 | Vitest e Playwright configurados com testes de fumaça | WP01 | | [D] |
 | T006 | Tipos do domínio em `src/lib/dados/tipos.ts` | WP02 | |
 | T007 | `concursos.json` com ≥ 12 concursos nas 4 seções | WP02 | [P] |
 | T008 | `ferramentas.json` (12) e `config.json` | WP02 | [P] |
@@ -53,11 +53,11 @@
 Objetivo: projeto instalável com `npm install`, as quatro portas do charter rodando e o visual base (tokens, tema escuro) pronto.
 Teste independente: `npm run check && npm test && npm run build && npm run test:e2e` passam com os testes de fumaça.
 
-- [ ] T001 Criar `package.json`, dependências e scripts (WP01)
-- [ ] T002 Configurar SvelteKit estático SPA, Vite e TypeScript (WP01)
-- [ ] T003 `app.html` com manifest/theme-color e `app.css` com tokens claro/escuro (WP01)
-- [ ] T004 Layout raiz (`+layout.ts`, `+layout.svelte`) (WP01)
-- [ ] T005 Vitest e Playwright configurados com testes de fumaça (WP01)
+- [x] T001 Criar `package.json`, dependências e scripts (WP01)
+- [x] T002 Configurar SvelteKit estático SPA, Vite e TypeScript (WP01)
+- [x] T003 `app.html` com manifest/theme-color e `app.css` com tokens claro/escuro (WP01)
+- [x] T004 Layout raiz (`+layout.ts`, `+layout.svelte`) (WP01)
+- [x] T005 Vitest e Playwright configurados com testes de fumaça (WP01)
 
 Riscos: versões novas (Svelte 5.57, Kit 2.70, Vite 8) — seguir `npx sv create` como referência. Nenhuma fonte ou CDN externa (charter).
 
