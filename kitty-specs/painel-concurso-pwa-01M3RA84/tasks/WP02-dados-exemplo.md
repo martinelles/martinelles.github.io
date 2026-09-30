@@ -20,8 +20,8 @@ subtasks:
 - T010
 phase: Fase 1 - Fundação
 assignee: ''
-agent: ''
-shell_pid: '10012'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "10012"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -169,3 +169,7 @@ Se `$lib` não resolver no Vitest, o plugin `sveltekit()` no `vite.config.ts` (W
 ## Guia do revisor
 
 Rodar `npm test -- dados`; abrir `concursos.json` e conferir a distribuição; tentar remover uma disciplina de um cargo e ver o teste falhar com caminho legível.
+
+## Activity Log
+
+- 2026-09-30T05:33:41Z – claude:opus:implementer:implementer – shell_pid=10012 – Assigned agent via action command
