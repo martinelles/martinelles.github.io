@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "painel-concurso/dados-exemplo",
+  "title": "Dados de exemplo do Painel de Concurso",
+  "$defs": {
+    "cargo": {
+      "type": "object",
+      "required": ["id", "nome", "disciplinas"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "nome": { "type": "string", "minLength": 1 },
+        "disciplinas": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "concurso": {
+      "type": "object",
+      "required": ["id", "nome", "orgao", "banca", "area", "situacao", "icone", "cor", "cargos"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "nome": { "type": "string", "minLength": 1 },
+        "orgao": { "type": "string", "minLength": 1 },
+        "banca": { "type": "string", "minLength": 1 },
+        "area": { "type": "string", "minLength": 1 },
+        "situacao": { "enum": ["aberto", "previsto", "encerrado"] },
+        "emAlta": { "type": "boolean" },
+        "vagas": { "type": "integer", "minimum": 0 },
+        "salario": { "type": "string" },
+        "dataProva": { "type": "string", "format": "date" },
+        "edital": { "type": "string", "pattern": "^https://" },
+        "icone": { "type": "string" },
+        "cor": { "enum": ["azul", "verde", "roxo", "laranja", "vermelho"] },
+        "cargos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/cargo" } }
+      }
+    },
+    "ferramenta": {
+      "type": "object",
+      "required": ["id", "titulo", "subtitulo", "icone", "grupo"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "titulo": { "type": "string", "minLength": 1 },
+        "subtitulo": { "type": "string" },
+        "icone": { "type": "string" },
+        "grupo": { "enum": ["teorico", "pratica", "atalho"] }
+      }
+    },
+    "config": {
+      "type": "object",
+      "required": ["whatsapp", "limiteEmAlta"],
+      "additionalProperties": false,
+      "properties": {
+        "whatsapp": { "type": ["string", "null"], "pattern": "^https://" },
+        "limiteEmAlta": { "type": "integer", "minimum": 1 }
+      }
+    }
+  },
+  "type": "object",
+  "description": "Forma lógica do conjunto concursos.json + ferramentas.json + config.json, como validar.ts o monta.",
+  "required": ["concursos", "ferramentas", "config"],
+  "properties": {
+    "concursos": { "type": "array", "minItems": 12, "items": { "$ref": "#/$defs/concurso" } },
+    "ferramentas": { "type": "array", "minItems": 12, "maxItems": 12, "items": { "$ref": "#/$defs/ferramenta" } },
+    "config": { "$ref": "#/$defs/config" }
+  }
+}
