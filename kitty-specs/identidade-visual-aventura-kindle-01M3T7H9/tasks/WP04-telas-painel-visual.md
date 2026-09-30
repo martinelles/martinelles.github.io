@@ -25,8 +25,8 @@ subtasks:
 - T024
 phase: Fase 2 - Aplicação
 assignee: ''
-agent: ''
-shell_pid: '2184'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "2184"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -186,3 +186,7 @@ Confira também: `grep -rnE "#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\(" <arquivos do W
 - Com a sombra do Aventura, olhe as bordas direita e inferior dos cartões a 360 px: nada cortado.
 - Kindle: o cabeçalho do painel não pode ser um bloco escuro cheio.
 - Confira que só o cabeçalho do painel tem cor forte no Aventura, e que o resto usa superfície e contorno.
+
+## Activity Log
+
+- 2026-09-30T23:38:02Z – claude:opus:implementer:implementer – shell_pid=2184 – Assigned agent via action command
