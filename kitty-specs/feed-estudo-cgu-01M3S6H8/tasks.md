@@ -42,9 +42,9 @@
 | T030 | Painel CGU com estatísticas e atalhos para o feed | WP05 | | [D] |
 | T031 | e2e do feed e dos salvos | WP05 | | [D] |
 | T032 | e2e do painel e atualização de smoke/offline/responsivo | WP05 | | [D] |
-| T033 | Service worker com pré-cache em duas fases | WP06 | |
-| T034 | e2e de conteúdo offline | WP06 | |
-| T035 | Medições (peso, Lighthouse, fps) em `medicoes.md` | WP06 | |
+| T033 | Service worker com pré-cache em duas fases | WP06 | | [D] |
+| T034 | e2e de conteúdo offline | WP06 | | [D] |
+| T035 | Medições (peso, Lighthouse, fps) em `medicoes.md` | WP06 | | [D] |
 
 ## Fase 1 — Conteúdo e motor (paralelos)
 
@@ -115,9 +115,9 @@ WP02 ∥ WP04.
 ### WP06 — Conteúdo offline e medições
 **Prompt**: [tasks/WP06-offline-medicoes.md](tasks/WP06-offline-medicoes.md) · **Prioridade**: P2 · **Dependências**: WP05 · ~250 linhas
 
-- [ ] T033 Service worker com pré-cache em duas fases (WP06)
-- [ ] T034 e2e de conteúdo offline (WP06)
-- [ ] T035 Medições (peso, Lighthouse, fps) em `medicoes.md` (WP06)
+- [x] T033 Service worker com pré-cache em duas fases (WP06)
+- [x] T034 e2e de conteúdo offline (WP06)
+- [x] T035 Medições (peso, Lighthouse, fps) em `medicoes.md` (WP06)
 
 ## Dependências
 
