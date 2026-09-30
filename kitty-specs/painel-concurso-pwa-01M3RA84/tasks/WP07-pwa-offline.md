@@ -24,8 +24,8 @@ subtasks:
 - T036
 phase: Fase 4 - PWA e conferência
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "29392"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "27384"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -176,3 +176,4 @@ Rodar `npm run build && npm run preview`, abrir, ficar offline no DevTools e nav
 
 - 2026-09-30T06:29:41Z – claude:opus:implementer:implementer – shell_pid=29392 – Assigned agent via action command
 - 2026-09-30T07:09:10Z – claude:opus:implementer:implementer – shell_pid=29392 – Ready for review. --force: o único arquivo em kitty-specs/ no diff é medicoes.md, listado em owned_files do WP07 (T036). E2E: 46/46 com --workers 3; com 5 workers (padrão) falha o 1º teste de cada worker por problema ambiental pré-existente — ver medicoes.md, observação 3.
+- 2026-09-30T07:09:48Z – claude:opus:reviewer:reviewer – shell_pid=27384 – Started review via action command
