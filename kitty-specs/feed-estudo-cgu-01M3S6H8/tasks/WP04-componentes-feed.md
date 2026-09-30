@@ -32,8 +32,8 @@ subtasks:
 - T024
 phase: Fase 2
 assignee: ''
-agent: ''
-shell_pid: '10720'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "10720"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -121,3 +121,7 @@ Carregar a skill `frontend-design` e definir, **antes** de estilizar, uma direç
 ## Guia do revisor
 
 Operar cada componente só com teclado e com leitor de tela (nomes e estados), em 360 px; conferir contraste dos tokens novos.
+
+## Activity Log
+
+- 2026-09-30T13:55:28Z – claude:opus:implementer:implementer – shell_pid=10720 – Assigned agent via action command
