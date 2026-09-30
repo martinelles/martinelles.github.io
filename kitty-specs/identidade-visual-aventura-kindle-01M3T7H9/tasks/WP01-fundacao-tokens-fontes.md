@@ -30,8 +30,8 @@ subtasks:
 - T007
 phase: Fase 1 - Fundação
 assignee: ''
-agent: ''
-shell_pid: '23724'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "23724"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -303,3 +303,7 @@ cortados para o latim, servidos pelo próprio app (C-001, C-002 e NFR-002 com te
 - Rode o `cortar.py` duas vezes e compare os hashes.
 - Bloqueie o JS do app e confira que o tema continua certo (FR-011).
 - Não aceite `@media (prefers-color-scheme` sobrando em nenhum lugar de `app.css`.
+
+## Activity Log
+
+- 2026-09-30T23:06:57Z – claude:opus:implementer:implementer – shell_pid=23724 – Assigned agent via action command
