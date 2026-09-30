@@ -10,12 +10,12 @@
 
 | ID | Descrição | WP | Parallel |
 |---|---|---|---|
-| T001 | Parser CSV e frontmatter, com testes | WP01 | |
-| T002 | Tabela de matérias e mapa lei → matéria | WP01 | [P] |
-| T003 | Importador de questões | WP01 | [P] |
-| T004 | Importador de lei seca (Art., carrossel, revogados, normas sem Art.) | WP01 | [P] |
-| T005 | Importador de feed-conteudo e baralhos CSV | WP01 | [P] |
-| T006 | Fatiamento, índice, relatório e CLI `npm run importar` | WP01 | |
+| T001 | Parser CSV e frontmatter, com testes | WP01 | | [D] |
+| T002 | Tabela de matérias e mapa lei → matéria | WP01 | [D] |
+| T003 | Importador de questões | WP01 | [D] |
+| T004 | Importador de lei seca (Art., carrossel, revogados, normas sem Art.) | WP01 | [D] |
+| T005 | Importador de feed-conteudo e baralhos CSV | WP01 | [D] |
+| T006 | Fatiamento, índice, relatório e CLI `npm run importar` | WP01 | | [D] |
 | T007 | Pasta `feed-conteudo/` com LEIA-ME | WP02 | |
 | T008 | Resumos e flashcards de TI: Ciência de Dados | WP02 | |
 | T009 | Resumos e flashcards de Segurança e Governança/Contratações de TI | WP02 | [P] |
@@ -51,12 +51,12 @@
 ### WP01 — Importação do vault
 **Prompt**: [tasks/WP01-importacao-vault.md](tasks/WP01-importacao-vault.md) · **Prioridade**: P1 · **Dependências**: nenhuma · ~420 linhas
 
-- [ ] T001 Parser CSV e frontmatter, com testes (WP01)
-- [ ] T002 Tabela de matérias e mapa lei → matéria (WP01)
-- [ ] T003 Importador de questões (WP01)
-- [ ] T004 Importador de lei seca (Art., carrossel, revogados, normas sem Art.) (WP01)
-- [ ] T005 Importador de feed-conteudo e baralhos CSV (WP01)
-- [ ] T006 Fatiamento, índice, relatório e CLI `npm run importar` (WP01)
+- [x] T001 Parser CSV e frontmatter, com testes (WP01)
+- [x] T002 Tabela de matérias e mapa lei → matéria (WP01)
+- [x] T003 Importador de questões (WP01)
+- [x] T004 Importador de lei seca (Art., carrossel, revogados, normas sem Art.) (WP01)
+- [x] T005 Importador de feed-conteudo e baralhos CSV (WP01)
+- [x] T006 Fatiamento, índice, relatório e CLI `npm run importar` (WP01)
 
 Teste independente: `npm test -- importar` com fixtures; rodar contra o vault real sem commitar a saída.
 
