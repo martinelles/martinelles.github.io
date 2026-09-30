@@ -33,8 +33,8 @@ subtasks:
 - T032
 phase: Fase 3
 assignee: ''
-agent: ''
-shell_pid: '15092'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "15092"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -163,3 +163,7 @@ Relógio fixo (`page.clock.setFixedTime('2026-09-30T12:00:00-03:00')`) e storage
 ## Guia do revisor
 
 Percorrer os cinco cenários da spec no preview em 360 px; conferir remoção do código morto; conferir que estatísticas não têm número fixo.
+
+## Activity Log
+
+- 2026-09-30T14:59:14Z – claude:opus:implementer:implementer – shell_pid=15092 – Assigned agent via action command
