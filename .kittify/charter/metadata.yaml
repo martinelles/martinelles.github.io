@@ -2,8 +2,8 @@
 # Run 'spec-kitty charter sync' to regenerate.
 
 schema_version: 1.0.0
-extracted_at: '2026-09-30T05:16:05.110022+00:00'
-charter_hash: sha256:c58f7b253dbb4b046443ffb0d447d60a025fc132455ec70d3c12e693758901d1
+extracted_at: '2026-09-30T13:04:37.157451+00:00'
+charter_hash: sha256:84461b317f4c2efcd766911dc5d3b404f89a2c8b8e54f52b133733c38ab94e2b
 source_path: .kittify/charter/charter.md
 extraction_mode: hybrid
 sections_parsed:

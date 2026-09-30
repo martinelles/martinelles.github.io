@@ -20,7 +20,7 @@ directives:
   severity: warn
 - id: DIR-005
   title: 'Respect risk boundaries: Proibido copiar marca, lo'
-  description: 'Respect risk boundaries: Proibido copiar marca, logotipo, cores, fontes licenciadas, imagens, textos longos ou dados do Acertei; só fluxo e rótulos curtos de interface. Proibido gravar dado pessoal fora do localStorage do aparelho. Acesso ao localStorage sempre em try/catch.'
+  description: 'Respect risk boundaries: Proibido copiar marca, logotipo, cores, fontes licenciadas, imagens, textos longos ou dados do Acertei ou do Instagram; formato de feed é inspiração, não cópia. Conteúdo gerado por IA sempre com fonte e selo de revisão. Fontes do vault são só leitura. Proibido gravar dado pessoal fora do localStorage do aparelho. Acesso ao localStorage sempre em try/catch.'
   severity: warn
 - id: DIR-006
   title: 'Keep documentation synchronized with workflow and '

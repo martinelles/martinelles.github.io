@@ -2,7 +2,7 @@ schema_version: 1.0.0
 mission: software-dev
 profile: minimal
 answers:
-  project_intent: "Painel de Concurso: PWA pessoal de estudo para concursos, que replica o fluxo de escolha de concurso e o Painel de Estudos do Acertei (acertei.web.app/start-new) sem a marca, os ativos nem os dados dele. Começa como casca visual; missões seguintes ligam ferramentas reais ao catálogo próprio de questões (CGU)."
+  project_intent: "Painel de Concurso: PWA pessoal de estudo focado só no concurso da CGU (AFFC/TFFC, Cebraspe, certame 2026). Área principal é um feed de estudo em formato de rede social (stories, curtir, salvar, carrossel) com questões de provas, lei seca, resumos e flashcards importados do vault da dona. A primeira versão replicou o fluxo do Acertei (acertei.web.app/start-new); desde 2026-09-30 o foco é CGU e o feed."
   languages_frameworks: "TypeScript 5 e Svelte 5 (runes) sobre SvelteKit 2 com adapter-static em modo SPA; CSS puro com tokens em :root e tema escuro por prefers-color-scheme; service worker nativo do SvelteKit. Nenhuma dependência de runtime além do Svelte sem justificativa escrita no plan.md da missão."
   testing_requirements: "Lógica em src/lib/*.ts coberta por Vitest; fluxos de aceite da spec cobertos por Playwright contra o build (vite preview), incluindo offline e viewport de 360 px. Test-first não é obrigatório."
   quality_gates: "Um WP só vai para revisão com npm run check (tipos), npm test e npm run build passando sem erro; WPs que tocam telas também rodam npm run test:e2e. Porta falhando bloqueia a revisão."
@@ -10,7 +10,7 @@ answers:
   performance_targets: "Carga inicial até 300 KB sem ícones; tela utilizável em até 2,5 s na primeira visita em 4G e 1 s nas seguintes; busca atualizada em até 100 ms por tecla com 500 itens; Lighthouse mobile de acessibilidade e boas práticas >= 90."
   deployment_constraints: "Site estático, sem servidor próprio nem conta de usuário. Tudo roda no aparelho; offline depois da primeira visita. Sem analytics, pixel ou qualquer rastreamento de terceiros. Sem fontes ou CDNs externos em runtime."
   documentation_policy: "Estado e requisitos vivem nos artefatos da missão em kitty-specs/. Decisão de arquitetura entra em research.md da missão no formato Decision/Rationale/Alternatives, com data. Interface em português do Brasil; identificadores de código em português quando nomeiam conceito de domínio."
-  risk_boundaries: "Proibido copiar marca, logotipo, cores, fontes licenciadas, imagens, textos longos ou dados do Acertei; só fluxo e rótulos curtos de interface. Proibido gravar dado pessoal fora do localStorage do aparelho. Acesso ao localStorage sempre em try/catch."
+  risk_boundaries: "Proibido copiar marca, logotipo, cores, fontes licenciadas, imagens, textos longos ou dados do Acertei ou do Instagram; formato de feed é inspiração, não cópia. Conteúdo gerado por IA sempre com fonte e selo de revisão. Fontes do vault são só leitura. Proibido gravar dado pessoal fora do localStorage do aparelho. Acesso ao localStorage sempre em try/catch."
   amendment_process: "Mudança no charter: editar .kittify/charter/interview/answers.yaml, rodar spec-kitty charter generate --from-interview --force e commitar num commit próprio com o motivo na mensagem."
   exception_policy: "Exceção a uma regra do charter só com registro no plan.md da missão (seção Complexity Tracking): regra, motivo, alternativa rejeitada e data. Sem registro, o revisor rejeita."
 selected_paradigms: []
