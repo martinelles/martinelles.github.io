@@ -28,11 +28,11 @@
 | T018 | `CartaoConcurso.svelte` | WP04 | [D] |
 | T019 | `SecaoRecolhivel.svelte` | WP04 | [D] |
 | T020 | `EstadoVazio.svelte` | WP04 | [D] |
-| T021 | Rota raiz `/` com redirecionamento | WP05 | |
-| T022 | Tela `/escolher`: cabeçalho, busca e seções | WP05 | |
-| T023 | "Ver mais/Ver menos", abrir/fechar e abertura automática na busca | WP05 | |
-| T024 | Seleção do concurso e estado vazio ligados | WP05 | |
-| T025 | `tests/e2e/escolher.spec.ts` | WP05 | |
+| T021 | Rota raiz `/` com redirecionamento | WP05 | | [D] |
+| T022 | Tela `/escolher`: cabeçalho, busca e seções | WP05 | | [D] |
+| T023 | "Ver mais/Ver menos", abrir/fechar e abertura automática na busca | WP05 | | [D] |
+| T024 | Seleção do concurso e estado vazio ligados | WP05 | | [D] |
+| T025 | `tests/e2e/escolher.spec.ts` | WP05 | | [D] |
 | T026 | `CabecalhoPainel.svelte` | WP06 | [D] |
 | T027 | `FocoEstudo.svelte` | WP06 | [D] |
 | T028 | `GradeFerramentas.svelte` | WP06 | [D] |
@@ -113,11 +113,11 @@ Paralelo com WP03 inteiro.
 Objetivo: Cenário 1 da spec completo e rota raiz decidindo entre escolher e painel.
 Teste independente: `npm run test:e2e -- escolher`.
 
-- [ ] T021 Rota raiz `/` com redirecionamento (WP05)
-- [ ] T022 Tela `/escolher`: cabeçalho, busca e seções (WP05)
-- [ ] T023 "Ver mais/Ver menos", abrir/fechar e abertura automática na busca (WP05)
-- [ ] T024 Seleção do concurso e estado vazio ligados (WP05)
-- [ ] T025 `tests/e2e/escolher.spec.ts` (WP05)
+- [x] T021 Rota raiz `/` com redirecionamento (WP05)
+- [x] T022 Tela `/escolher`: cabeçalho, busca e seções (WP05)
+- [x] T023 "Ver mais/Ver menos", abrir/fechar e abertura automática na busca (WP05)
+- [x] T024 Seleção do concurso e estado vazio ligados (WP05)
+- [x] T025 `tests/e2e/escolher.spec.ts` (WP05)
 
 ### WP06 — Painel de Estudos e tela "em breve"
 **Prompt**: [tasks/WP06-painel-estudos.md](tasks/WP06-painel-estudos.md) · **Prioridade**: P1 · **Dependências**: WP03, WP04 · **Tamanho estimado**: ~420 linhas
