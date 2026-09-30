@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "mission_slug": "painel-concurso-pwa-01M3RA84",
+  "mission_id": "01M3RA84JBEZEZYJMJ6FS1W2D7",
+  "mission_branch": "kitty/mission-painel-concurso-pwa-01M3RA84",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        ".gitignore",
+        ".npmrc",
+        "package-lock.json",
+        "package.json",
+        "playwright.config.ts",
+        "src/app.css",
+        "src/app.d.ts",
+        "src/app.html",
+        "src/routes/+layout.svelte",
+        "src/routes/+layout.ts",
+        "svelte.config.js",
+        "tests/e2e/smoke.spec.ts",
+        "tests/unit/smoke.test.ts",
+        "tsconfig.json",
+        "vite.config.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/lib/dados/**",
+        "tests/unit/dados.test.ts"
+      ],
+      "predicted_surfaces": [
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03"
+      ],
+      "write_scope": [
+        "src/lib/busca.ts",
+        "src/lib/datas.ts",
+        "src/lib/preferencias.svelte.ts",
+        "src/lib/secoes.ts",
+        "tests/unit/busca.test.ts",
+        "tests/unit/datas.test.ts",
+        "tests/unit/preferencias.test.ts",
+        "tests/unit/secoes.test.ts"
+      ],
+      "predicted_surfaces": [
+        "app-shell",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-d",
+      "wp_ids": [
+        "WP04"
+      ],
+      "write_scope": [
+        "src/lib/componentes/CampoBusca.svelte",
+        "src/lib/componentes/CartaoConcurso.svelte",
+        "src/lib/componentes/EstadoVazio.svelte",
+        "src/lib/componentes/Icone.svelte",
+        "src/lib/componentes/SecaoRecolhivel.svelte"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-e",
+      "wp_ids": [
+        "WP05"
+      ],
+      "write_scope": [
+        "src/routes/+page.svelte",
+        "src/routes/escolher/**",
+        "tests/e2e/escolher.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-f",
+      "wp_ids": [
+        "WP06"
+      ],
+      "write_scope": [
+        "src/lib/componentes/CabecalhoPainel.svelte",
+        "src/lib/componentes/FocoEstudo.svelte",
+        "src/lib/componentes/GradeFerramentas.svelte",
+        "src/routes/ferramenta/**",
+        "src/routes/painel/**",
+        "tests/e2e/painel.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-g",
+      "wp_ids": [
+        "WP07"
+      ],
+      "write_scope": [
+        "kitty-specs/painel-concurso-pwa-01M3RA84/medicoes.md",
+        "scripts/gerar-icones.mjs",
+        "src/service-worker.ts",
+        "static/**",
+        "tests/e2e/offline.spec.ts",
+        "tests/e2e/responsivo.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-09-30T05:23:59.349256+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}
