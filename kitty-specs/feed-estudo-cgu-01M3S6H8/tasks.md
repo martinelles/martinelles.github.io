@@ -21,12 +21,12 @@
 | T009 | Resumos e flashcards de Segurança e Governança/Contratações de TI | WP02 | [P] |
 | T010 | Resumos e flashcards de LGPD, LAI e Auditoria (a partir da lei seca) | WP02 | [P] |
 | T011 | Rodar a importação, conferir relatório e commitar `static/conteudo/` | WP02 | |
-| T012 | Carga do conteúdo (índice + lotes sob demanda) | WP03 | |
-| T013 | Ordem do dia (semente por data, intercalação por tipo) | WP03 | [P] |
-| T014 | Sessão do feed (páginas, sem repetição, fim) | WP03 | |
-| T015 | Interações persistidas | WP03 | [P] |
-| T016 | Foco (disciplina) v2 e estatísticas | WP03 | [P] |
-| T017 | Testes de unidade do motor | WP03 | |
+| T012 | Carga do conteúdo (índice + lotes sob demanda) | WP03 | | [D] |
+| T013 | Ordem do dia (semente por data, intercalação por tipo) | WP03 | [D] |
+| T014 | Sessão do feed (páginas, sem repetição, fim) | WP03 | | [D] |
+| T015 | Interações persistidas | WP03 | [D] |
+| T016 | Foco (disciplina) v2 e estatísticas | WP03 | [D] |
+| T017 | Testes de unidade do motor | WP03 | | [D] |
 | T018 | Ícones novos no `Icone` | WP04 | |
 | T019 | `Post` e `AcoesPost` (curtir, duplo toque, salvar) | WP04 | |
 | T020 | `CorpoQuestao` (C/E e múltipla escolha) | WP04 | [P] |
@@ -63,12 +63,12 @@ Teste independente: `npm test -- importar` com fixtures; rodar contra o vault re
 ### WP03 — Motor do feed
 **Prompt**: [tasks/WP03-motor-feed.md](tasks/WP03-motor-feed.md) · **Prioridade**: P1 · **Dependências**: nenhuma · ~400 linhas
 
-- [ ] T012 Carga do conteúdo (índice + lotes sob demanda) (WP03)
-- [ ] T013 Ordem do dia (semente por data, intercalação por tipo) (WP03)
-- [ ] T014 Sessão do feed (páginas, sem repetição, fim) (WP03)
-- [ ] T015 Interações persistidas (WP03)
-- [ ] T016 Foco (disciplina) v2 e estatísticas (WP03)
-- [ ] T017 Testes de unidade do motor (WP03)
+- [x] T012 Carga do conteúdo (índice + lotes sob demanda) (WP03)
+- [x] T013 Ordem do dia (semente por data, intercalação por tipo) (WP03)
+- [x] T014 Sessão do feed (páginas, sem repetição, fim) (WP03)
+- [x] T015 Interações persistidas (WP03)
+- [x] T016 Foco (disciplina) v2 e estatísticas (WP03)
+- [x] T017 Testes de unidade do motor (WP03)
 
 Paralelo a WP01.
 
