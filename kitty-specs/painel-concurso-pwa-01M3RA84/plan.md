@@ -34,7 +34,20 @@ exemplo em JSON empacotados no build. Estado do usuário (concurso, cargo, disci
 
 ## Charter Check
 
-Pulado: `.kittify/charter/charter.md` não existe (`spec-kitty charter context --action plan` retornou `mode: missing`). Os gates usados no lugar são as restrições C-001..C-005 da spec, todas atendidas pelo desenho abaixo. Reavaliado após a Fase 1: sem conflito novo.
+Charter gerado em 2026-09-30, depois da primeira versão deste plano (`.kittify/charter/charter.md`; diretivas 010, 024, 030, 033). Conferência:
+
+| Regra do charter | Situação no plano |
+|---|---|
+| Stack SvelteKit 2 / Svelte 5 / CSS puro / SW nativo; sem dependência de runtime além do Svelte | Atende (Technical Context, R2, R5) |
+| Porta: `npm run check`, `npm test`, `npm run build`; telas também `npm run test:e2e` | Atende: os quatro scripts estão no `quickstart.md` e o WP de esqueleto deve criá-los |
+| Vitest em `src/lib`, Playwright contra o build com offline e 360 px | Atende (R6, Rastreabilidade) |
+| Metas de desempenho (300 KB, 2,5 s / 1 s, 100 ms, Lighthouse ≥ 90) | Atende: iguais a NFR-001..NFR-003 e NFR-006 |
+| Sem servidor, sem rastreamento, sem fonte/CDN externa | Atende (C-001, C-003, fonte do sistema) |
+| Sem marca, cores, fontes, imagens ou dados do Acertei | Atende (C-002, cor primária própria, R0) |
+| `localStorage` sempre em `try/catch` | Atende (R4, `contracts/preferencias.md`) |
+| DIRECTIVE_010 fidelidade à spec | Cada WP declara os FR/NFR/C que cobre (tabela Rastreabilidade) |
+
+Sem violação; nada em Complexity Tracking.
 
 ## Design
 

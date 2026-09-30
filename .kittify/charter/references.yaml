@@ -1,0 +1,120 @@
+schema_version: 1.0.0
+generated_at: '2026-09-30T05:16:05Z'
+mission: software-dev
+template_set: software-dev-default
+references:
+- id: USER:PROJECT_PROFILE
+  kind: user_profile
+  title: User Project Profile
+  summary: Project-specific interview answers captured for charter compilation.
+  source_path: .kittify/charter/interview/answers.yaml
+  local_path: _LIBRARY/user-project-profile.md
+- id: DIRECTIVE:DIRECTIVE_010
+  kind: directive
+  title: Specification Fidelity Requirement
+  summary: "Implemented behavior and produced artifacts must remain faithful to approved
+    specifications, with any necessary deviations explicitly documented and reviewed
+    before acceptance.\n"
+  source_path: ''
+  local_path: _LIBRARY/directive-directive-010.md
+- id: DIRECTIVE:DIRECTIVE_024
+  kind: directive
+  title: Locality of Change
+  summary: "Changes should stay close to the problem being solved to reduce blast
+    radius, simplify review, and lower regression risk.\n"
+  source_path: ''
+  local_path: _LIBRARY/directive-directive-024.md
+- id: DIRECTIVE:DIRECTIVE_030
+  kind: directive
+  title: Test and Typecheck Quality Gate
+  summary: "Code changes must pass the relevant automated tests and static validation
+    gates before handoff so regressions and interface drift are caught early.\n"
+  source_path: ''
+  local_path: _LIBRARY/directive-directive-030.md
+- id: DIRECTIVE:DIRECTIVE_033
+  kind: directive
+  title: Targeted Staging Policy
+  summary: "Agent-authored commits must stage only the expected deliverables for the
+    current work package. Blanket staging commands that could inadvertently include
+    unrelated changes, secrets, or build artefacts are prohibited.\n"
+  source_path: ''
+  local_path: _LIBRARY/directive-directive-033.md
+- id: TACTIC:acceptance-test-first
+  kind: tactic
+  title: Acceptance Test Driven Development (ATDD)
+  summary: Anchor implementation work in externally observable behavior before 
+    internal coding begins.
+  source_path: ''
+  local_path: _LIBRARY/tactic-acceptance-test-first.md
+- id: TACTIC:change-apply-smallest-viable-diff
+  kind: tactic
+  title: Change Apply Smallest Viable Diff
+  summary: Introduce changes using the smallest possible modification that 
+    achieves the stated goal, minimising unintended side effects.
+  source_path: ''
+  local_path: _LIBRARY/tactic-change-apply-smallest-viable-diff.md
+- id: TACTIC:code-review-incremental
+  kind: tactic
+  title: Incremental Code Review
+  summary: Review a change set to identify correctness, structural, and 
+    architectural risks without rewriting or expanding scope. Formulate feedback
+    as observations and questions, not instructions.
+  source_path: ''
+  local_path: _LIBRARY/tactic-code-review-incremental.md
+- id: TACTIC:quality-gate-verification
+  kind: tactic
+  title: Quality Gate Verification
+  summary: Verify the relevant test and static validation gates for a change 
+    before review handoff and distinguish introduced failures from pre-existing 
+    debt.
+  source_path: ''
+  local_path: _LIBRARY/tactic-quality-gate-verification.md
+- id: TACTIC:review-intent-and-risk-first
+  kind: tactic
+  title: Review Intent and Risk First
+  summary: Review work by first understanding intent and surfacing risks before 
+    suggesting changes or solutions.
+  source_path: ''
+  local_path: _LIBRARY/tactic-review-intent-and-risk-first.md
+- id: TACTIC:tdd-red-green-refactor
+  kind: tactic
+  title: Test Driven Development (TDD)
+  summary: Enforce short, verifiable coding loops that improve design while 
+    keeping behavior safe.
+  source_path: ''
+  local_path: _LIBRARY/tactic-tdd-red-green-refactor.md
+- id: TACTIC:test-boundaries-by-responsibility
+  kind: tactic
+  title: Test Boundaries by Functional Responsibility
+  summary: Determine test scope by identifying which components are directly 
+    responsible for the behavior under test, rather than following structural 
+    layer boundaries. Reduces brittle tests while ensuring meaningful 
+    validation.
+  source_path: ''
+  local_path: _LIBRARY/tactic-test-boundaries-by-responsibility.md
+- id: TACTIC:test-pyramid-progression
+  kind: tactic
+  title: Test Pyramid Progression
+  summary: "Run tests bottom-up through pyramid layers to get fast feedback and avoid
+    wasting time on slow tests when fast tests fail. The execution order mirrors the
+    ROI order: the cheapest, fastest tests run first because they catch the most bugs
+    per second of CI time.\n"
+  source_path: ''
+  local_path: _LIBRARY/tactic-test-pyramid-progression.md
+- id: TACTIC:testing-select-appropriate-level
+  kind: tactic
+  title: Select Appropriate Test Level
+  summary: "Choose the right test level (unit, integration, system) for a change based
+    on scope of impact, risk of failure, and feedback cost. Avoids both over-testing
+    low-risk changes and under-testing high-risk ones. Grounded in the test pyramid
+    model where ROI decreases as test scope widens.\n"
+  source_path: ''
+  local_path: _LIBRARY/tactic-testing-select-appropriate-level.md
+- id: TEMPLATE_SET:software-dev-default
+  kind: template_set
+  title: software-dev-default
+  summary: Build high-quality software with structured workflows and test-driven
+    development
+  source_path: 
+    C:\Users\martinelle.santos\AppData\Local\Programs\Python\Python312\Lib\site-packages\doctrine\missions\software-dev\mission.yaml
+  local_path: _LIBRARY/template-set-software-dev-default.md
