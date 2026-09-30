@@ -1,7 +1,7 @@
 {
-  "event_count": 36,
-  "last_event_id": "01M3SD688SQC8KPG2XK6M227EW",
-  "materialized_at": "2026-09-30T14:58:37.977794+00:00",
+  "event_count": 38,
+  "last_event_id": "01M3SD79JN8W7PA4CNMXK9QVJ4",
+  "materialized_at": "2026-09-30T14:59:12.085132+00:00",
   "mission_number": "",
   "mission_slug": "feed-estudo-cgu-01M3S6H8",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 2
+    "planned": 1
   },
   "work_packages": {
     "WP01": {
@@ -46,11 +46,11 @@
       "last_transition_at": "2026-09-30T14:15:50.899561+00:00"
     },
     "WP05": {
-      "actor": "finalize-tasks",
+      "actor": "implement-command",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01M3S8MHHM32GSH352J68ZYEBG",
-      "last_transition_at": "2026-09-30T13:39:03.348258+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01M3SD79JN8W7PA4CNMXK9QVJ4",
+      "last_transition_at": "2026-09-30T14:59:12.085132+00:00"
     },
     "WP06": {
       "actor": "finalize-tasks",
