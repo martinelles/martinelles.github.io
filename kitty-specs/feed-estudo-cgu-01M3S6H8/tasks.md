@@ -27,13 +27,13 @@
 | T015 | Interações persistidas | WP03 | [D] |
 | T016 | Foco (disciplina) v2 e estatísticas | WP03 | [D] |
 | T017 | Testes de unidade do motor | WP03 | | [D] |
-| T018 | Ícones novos no `Icone` | WP04 | |
-| T019 | `Post` e `AcoesPost` (curtir, duplo toque, salvar) | WP04 | |
-| T020 | `CorpoQuestao` (C/E e múltipla escolha) | WP04 | [P] |
-| T021 | `Carrossel` | WP04 | [P] |
-| T022 | `CorpoLei`, `CorpoResumo`, `CorpoFlashcard` | WP04 | |
-| T023 | `BarraStories`, `BarraAbas`, `FimDoFeed` | WP04 | [P] |
-| T024 | Direção visual do feed (skill frontend-design) aplicada aos componentes | WP04 | |
+| T018 | Ícones novos no `Icone` | WP04 | | [D] |
+| T019 | `Post` e `AcoesPost` (curtir, duplo toque, salvar) | WP04 | | [D] |
+| T020 | `CorpoQuestao` (C/E e múltipla escolha) | WP04 | [D] |
+| T021 | `Carrossel` | WP04 | [D] |
+| T022 | `CorpoLei`, `CorpoResumo`, `CorpoFlashcard` | WP04 | | [D] |
+| T023 | `BarraStories`, `BarraAbas`, `FimDoFeed` | WP04 | [D] |
+| T024 | Direção visual do feed (skill frontend-design) aplicada aos componentes | WP04 | | [D] |
 | T025 | Layout com barra de abas | WP05 | |
 | T026 | Tela do feed em `/` (stories, filtros `?materia`/`?tipo`, rolagem infinita, vistos) | WP05 | |
 | T027 | Tela `/salvos` | WP05 | [P] |
@@ -86,13 +86,13 @@ Paralelo a WP01.
 ### WP04 — Componentes do feed
 **Prompt**: [tasks/WP04-componentes-feed.md](tasks/WP04-componentes-feed.md) · **Prioridade**: P1 · **Dependências**: WP03 · ~450 linhas
 
-- [ ] T018 Ícones novos no `Icone` (WP04)
-- [ ] T019 `Post` e `AcoesPost` (curtir, duplo toque, salvar) (WP04)
-- [ ] T020 `CorpoQuestao` (C/E e múltipla escolha) (WP04)
-- [ ] T021 `Carrossel` (WP04)
-- [ ] T022 `CorpoLei`, `CorpoResumo`, `CorpoFlashcard` (WP04)
-- [ ] T023 `BarraStories`, `BarraAbas`, `FimDoFeed` (WP04)
-- [ ] T024 Direção visual do feed (skill frontend-design) aplicada aos componentes (WP04)
+- [x] T018 Ícones novos no `Icone` (WP04)
+- [x] T019 `Post` e `AcoesPost` (curtir, duplo toque, salvar) (WP04)
+- [x] T020 `CorpoQuestao` (C/E e múltipla escolha) (WP04)
+- [x] T021 `Carrossel` (WP04)
+- [x] T022 `CorpoLei`, `CorpoResumo`, `CorpoFlashcard` (WP04)
+- [x] T023 `BarraStories`, `BarraAbas`, `FimDoFeed` (WP04)
+- [x] T024 Direção visual do feed (skill frontend-design) aplicada aos componentes (WP04)
 
 WP02 ∥ WP04.
 
