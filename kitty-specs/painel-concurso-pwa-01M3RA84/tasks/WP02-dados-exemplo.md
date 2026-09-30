@@ -173,3 +173,4 @@ Rodar `npm test -- dados`; abrir `concursos.json` e conferir a distribuição; t
 ## Activity Log
 
 - 2026-09-30T05:33:41Z – claude:opus:implementer:implementer – shell_pid=10012 – Assigned agent via action command
+- 2026-09-30T05:37:56Z – claude:opus:implementer:implementer – shell_pid=10012 – Ready for review: tipos, 13 concursos ilustrativos, 12 ferramentas, config, validador manual com caminho por falha, 22 testes; check/test/build/e2e verdes
