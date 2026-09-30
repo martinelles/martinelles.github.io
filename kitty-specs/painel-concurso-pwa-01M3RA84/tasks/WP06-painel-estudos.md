@@ -142,3 +142,4 @@ Percorrer o Cenário 2 no preview, em 360 px e em 1440 px; recarregar no meio pa
 - 2026-09-30T05:48:17Z – claude:opus:implementer:implementer – shell_pid=25884 – Assigned agent via action command
 - 2026-09-30T05:55:41Z – claude:opus:implementer:implementer – shell_pid=25884 – Ready for review: painel, foco persistido, grade 12 ferramentas (atalhos no topo), tela em breve e +error local; 15 e2e verdes
 - 2026-09-30T05:57:59Z – claude:opus:reviewer:reviewer – shell_pid=29292 – Started review via action command
+- 2026-09-30T06:06:38Z – claude:opus:reviewer:reviewer – shell_pid=29292 – Review passed: FR-008..FR-012 and SC-002 met; 12 tools grouped (atalhos on top, logged); check 0/0, vitest 53/53, build ok, e2e 15/15 on port 4175; only owned files changed
