@@ -16,11 +16,11 @@
 | T004 | Importador de lei seca (Art., carrossel, revogados, normas sem Art.) | WP01 | [D] |
 | T005 | Importador de feed-conteudo e baralhos CSV | WP01 | [D] |
 | T006 | Fatiamento, índice, relatório e CLI `npm run importar` | WP01 | | [D] |
-| T007 | Pasta `feed-conteudo/` com LEIA-ME | WP02 | |
-| T008 | Resumos e flashcards de TI: Ciência de Dados | WP02 | |
-| T009 | Resumos e flashcards de Segurança e Governança/Contratações de TI | WP02 | [P] |
-| T010 | Resumos e flashcards de LGPD, LAI e Auditoria (a partir da lei seca) | WP02 | [P] |
-| T011 | Rodar a importação, conferir relatório e commitar `static/conteudo/` | WP02 | |
+| T007 | Pasta `feed-conteudo/` com LEIA-ME | WP02 | | [D] |
+| T008 | Resumos e flashcards de TI: Ciência de Dados | WP02 | | [D] |
+| T009 | Resumos e flashcards de Segurança e Governança/Contratações de TI | WP02 | [D] |
+| T010 | Resumos e flashcards de LGPD, LAI e Auditoria (a partir da lei seca) | WP02 | [D] |
+| T011 | Rodar a importação, conferir relatório e commitar `static/conteudo/` | WP02 | | [D] |
 | T012 | Carga do conteúdo (índice + lotes sob demanda) | WP03 | | [D] |
 | T013 | Ordem do dia (semente por data, intercalação por tipo) | WP03 | [D] |
 | T014 | Sessão do feed (páginas, sem repetição, fim) | WP03 | | [D] |
@@ -77,11 +77,11 @@ Paralelo a WP01.
 ### WP02 — Conteúdo gerado e primeira importação
 **Prompt**: [tasks/WP02-conteudo-gerado.md](tasks/WP02-conteudo-gerado.md) · **Prioridade**: P1 · **Dependências**: WP01 · ~330 linhas
 
-- [ ] T007 Pasta `feed-conteudo/` com LEIA-ME (WP02)
-- [ ] T008 Resumos e flashcards de TI: Ciência de Dados (WP02)
-- [ ] T009 Resumos e flashcards de Segurança e Governança/Contratações de TI (WP02)
-- [ ] T010 Resumos e flashcards de LGPD, LAI e Auditoria (a partir da lei seca) (WP02)
-- [ ] T011 Rodar a importação, conferir relatório e commitar `static/conteudo/` (WP02)
+- [x] T007 Pasta `feed-conteudo/` com LEIA-ME (WP02)
+- [x] T008 Resumos e flashcards de TI: Ciência de Dados (WP02)
+- [x] T009 Resumos e flashcards de Segurança e Governança/Contratações de TI (WP02)
+- [x] T010 Resumos e flashcards de LGPD, LAI e Auditoria (a partir da lei seca) (WP02)
+- [x] T011 Rodar a importação, conferir relatório e commitar `static/conteudo/` (WP02)
 
 ### WP04 — Componentes do feed
 **Prompt**: [tasks/WP04-componentes-feed.md](tasks/WP04-componentes-feed.md) · **Prioridade**: P1 · **Dependências**: WP03 · ~450 linhas
