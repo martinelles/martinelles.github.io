@@ -13,6 +13,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-painel-concurso-pwa-01M3RA84
+base_commit: 3637d60c73e8fb1b8e5329d7868bd89cc7f313c8
+created_at: '2026-09-30T05:48:14.885541+00:00'
 subtasks:
 - T026
 - T027
@@ -23,6 +26,7 @@ subtasks:
 phase: Fase 3 - Telas
 assignee: ''
 agent: ''
+shell_pid: '25884'
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
