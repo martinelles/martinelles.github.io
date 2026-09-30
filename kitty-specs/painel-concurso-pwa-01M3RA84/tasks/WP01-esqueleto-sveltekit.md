@@ -248,3 +248,5 @@ Conferir: modo SPA (`fallback: 'index.html'`, `ssr = false`), ausência de fonte
 ## Activity Log
 
 - 2026-09-30T05:25:30Z – claude:opus:implementer:implementer – shell_pid=18920 – Assigned agent via action command
+- 2026-09-30T05:31:27Z – claude:opus:implementer:implementer – shell_pid=18920 – Contraste NFR-005 (WCAG, calculado): claro texto/fundo 16.57, texto/superficie 17.74, suave/fundo 7.06, suave/superficie 7.56, primaria-texto/primaria 6.77, primaria/superficie 6.77, verde 5.48, roxo 7.10, laranja 5.02, vermelho 6.47; escuro texto/fundo 15.12, texto/superficie 14.01, suave/fundo 8.28, suave/superficie 7.67, primaria-texto/primaria 7.52, primaria/superficie 6.97, verde 9.02, roxo 9.39, laranja 10.39, vermelho 9.14. Versoes: as do prompt resolveram; svelte-check 4.7.6, typescript 5.9.3, sharp 0.35.5 (instalou por prebuild). Preview loga 404 em / porque +page.svelte nao e deste WP; titulo vem do fallback index.html.
+- 2026-09-30T05:31:40Z – claude:opus:implementer:implementer – shell_pid=18920 – Ready for review
