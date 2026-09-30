@@ -1,10 +1,12 @@
 {
   "created_at": "2026-09-30T22:39:05.116967+00:00",
-  "friendly_name": "identidade visual aventura kindle",
+  "friendly_name": "Identidade Visual Aventura e Kindle",
   "mission_id": "01M3T7H9DNMG05JS6E893W6VZM",
   "mission_number": null,
   "mission_slug": "identidade-visual-aventura-kindle-01M3T7H9",
   "mission_type": "software-dev",
   "slug": "identidade-visual-aventura-kindle-01M3T7H9",
-  "target_branch": "main"
+  "target_branch": "main",
+  "source_description": "Aplicar ao app inteiro (inclusive o feed) os temas Aventura (paleta pastel Hora de Aventura), Kindle (P&B e-ink) e Kindle escuro, com fundo de papel e base tipográfica minimalista. Ref.: vault Recursos/Design/Paleta — Doodles (Hora de Aventura).md",
+  "vcs": "git"
 }
