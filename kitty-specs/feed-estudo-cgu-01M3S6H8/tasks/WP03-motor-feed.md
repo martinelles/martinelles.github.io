@@ -24,8 +24,8 @@ subtasks:
 - T017
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: ''
-shell_pid: '14016'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "14016"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -99,3 +99,7 @@ Planejamento em `main`; merge em `main`; paralelo ao WP01.
 ## Guia do revisor
 
 Conferir o contrato de interações campo a campo; tentar produzir repetição na sessão (troca de filtro, erro de rede, páginas concorrentes).
+
+## Activity Log
+
+- 2026-09-30T13:43:20Z – claude:opus:implementer:implementer – shell_pid=14016 – Assigned agent via action command
