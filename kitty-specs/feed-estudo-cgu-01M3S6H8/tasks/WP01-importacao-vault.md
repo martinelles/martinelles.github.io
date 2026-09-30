@@ -25,8 +25,8 @@ subtasks:
 - T006
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "2316"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "1176"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -136,3 +136,4 @@ Rodar `npm run importar -- --saida /tmp/x` contra o vault, conferir relatório, 
 - 2026-09-30T14:08:33Z – claude:opus:reviewer:reviewer – shell_pid=21564 – Moved to planned
 - 2026-09-30T14:09:19Z – claude:opus:implementer:implementer – shell_pid=2316 – Started implementation via action command
 - 2026-09-30T14:20:57Z – claude:opus:implementer:implementer – shell_pid=2316 – Fixes for review cycle 1: B1 última redação por escopo (276 redações anteriores descartadas, revogados na última redação saem, 0 ids -N, 'Art. 5 7.' ignorado com aviso, atos após 'Este texto não substitui' ignorados); B2 cabeçalho de página de PDF removido antes da emenda (0 ocorrências no MOT); B3 Referencial Técnico da IN SFC 3 importado (180 posts 'Referencial item N'); opcional: Código de Ética do Decreto 1.171 (19 incisos). Lei 2043->1978 posts. Gates verdes (134 unit, 46 e2e). Commit f3b190d.
+- 2026-09-30T14:21:34Z – claude:opus:reviewer:reviewer – shell_pid=1176 – Started review via action command
