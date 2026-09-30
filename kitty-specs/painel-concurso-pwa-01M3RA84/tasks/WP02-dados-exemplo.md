@@ -20,8 +20,8 @@ subtasks:
 - T010
 phase: Fase 1 - Fundação
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "10012"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "15560"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -174,3 +174,4 @@ Rodar `npm test -- dados`; abrir `concursos.json` e conferir a distribuição; t
 
 - 2026-09-30T05:33:41Z – claude:opus:implementer:implementer – shell_pid=10012 – Assigned agent via action command
 - 2026-09-30T05:37:56Z – claude:opus:implementer:implementer – shell_pid=10012 – Ready for review: tipos, 13 concursos ilustrativos, 12 ferramentas, config, validador manual com caminho por falha, 22 testes; check/test/build/e2e verdes
+- 2026-09-30T05:38:24Z – claude:opus:reviewer:reviewer – shell_pid=15560 – Started review via action command
