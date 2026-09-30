@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "mission_slug": "identidade-visual-aventura-kindle-01M3T7H9",
+  "mission_id": "01M3T7H9DNMG05JS6E893W6VZM",
+  "mission_branch": "kitty/mission-identidade-visual-aventura-kindle-01M3T7H9",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        ".gitignore",
+        "scripts/fontes/**",
+        "src/app.css",
+        "src/app.html",
+        "static/fontes/**",
+        "static/manifest.webmanifest",
+        "static/papel/**",
+        "tests/unit/contraste.test.ts"
+      ],
+      "predicted_surfaces": [
+        "app-shell",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/lib/componentes/SeletorTema.svelte",
+        "src/lib/tema.svelte.ts",
+        "src/routes/+layout.svelte",
+        "src/routes/painel/+page.svelte",
+        "tests/unit/tema.test.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03"
+      ],
+      "write_scope": [
+        "src/lib/componentes/feed/**"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "artifact-rendering",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-d",
+      "wp_ids": [
+        "WP04"
+      ],
+      "write_scope": [
+        "src/lib/componentes/CabecalhoPainel.svelte",
+        "src/lib/componentes/FocoEstudo.svelte",
+        "src/lib/componentes/GradeFerramentas.svelte",
+        "src/lib/componentes/ProgressoEstudo.svelte",
+        "src/routes/+page.svelte",
+        "src/routes/ferramenta/**",
+        "src/routes/salvos/**"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-e",
+      "wp_ids": [
+        "WP05"
+      ],
+      "write_scope": [
+        ".kittify/charter/**",
+        "kitty-specs/identidade-visual-aventura-kindle-01M3T7H9/medicoes.md",
+        "tests/e2e/offline-conteudo.spec.ts",
+        "tests/e2e/responsivo.spec.ts",
+        "tests/e2e/tema.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-09-30T23:04:51.822662+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}
