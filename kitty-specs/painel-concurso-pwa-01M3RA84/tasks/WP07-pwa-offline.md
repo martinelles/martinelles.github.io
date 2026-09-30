@@ -24,8 +24,8 @@ subtasks:
 - T036
 phase: Fase 4 - PWA e conferência
 assignee: ''
-agent: ''
-shell_pid: '29392'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "29392"
 history:
 - timestamp: '2026-09-30T05:18:22Z'
   agent: system
@@ -171,3 +171,7 @@ Registrar, com data e versão do commit:
 ## Guia do revisor
 
 Rodar `npm run build && npm run preview`, abrir, ficar offline no DevTools e navegar; conferir `medicoes.md` contra uma execução própria do Lighthouse; ver que o SW não intercepta domínios externos.
+
+## Activity Log
+
+- 2026-09-30T06:29:41Z – claude:opus:implementer:implementer – shell_pid=29392 – Assigned agent via action command
