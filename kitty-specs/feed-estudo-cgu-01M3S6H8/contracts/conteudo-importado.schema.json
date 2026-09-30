@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "painel-concurso/conteudo-importado",
+  "title": "Saída da importação em static/conteudo/",
+  "$defs": {
+    "fonte": {
+      "type": "object",
+      "required": ["rotulo"],
+      "additionalProperties": false,
+      "properties": { "rotulo": { "type": "string", "minLength": 1 }, "arquivo": { "type": "string" }, "url": { "type": "string", "pattern": "^https://" } }
+    },
+    "base": {
+      "type": "object",
+      "required": ["id", "tipo", "materia"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[qlrf]:" },
+        "tipo": { "enum": ["questao", "lei", "resumo", "flashcard"] },
+        "materia": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "subtopico": { "type": "string" },
+        "fonte": { "$ref": "#/$defs/fonte" }
+      }
+    },
+    "questao": {
+      "allOf": [{ "$ref": "#/$defs/base" }],
+      "required": ["prova", "numero", "enunciado", "formato", "gabarito", "situacao"],
+      "properties": {
+        "tipo": { "const": "questao" },
+        "prova": {
+          "type": "object", "required": ["orgao", "ano", "cargo"],
+          "properties": { "orgao": { "enum": ["CGU", "TCU"] }, "ano": { "type": "integer" }, "cargo": { "type": "string" }, "banca": { "type": "string" } }
+        },
+        "numero": { "type": "integer" },
+        "textoBase": { "type": "string" },
+        "enunciado": { "type": "string", "minLength": 1 },
+        "formato": { "enum": ["ce", "me"] },
+        "alternativas": { "type": "array", "items": { "type": "object", "required": ["letra", "texto"], "properties": { "letra": { "enum": ["A", "B", "C", "D", "E"] }, "texto": { "type": "string" } } } },
+        "gabarito": { "enum": ["C", "E", "A", "B", "D"] },
+        "situacao": { "enum": ["valida", "alterada"] }
+      }
+    },
+    "lei": {
+      "allOf": [{ "$ref": "#/$defs/base" }],
+      "required": ["norma", "artigo", "telas"],
+      "properties": {
+        "tipo": { "const": "lei" },
+        "norma": { "type": "object", "required": ["arquivo", "titulo"], "properties": { "arquivo": { "type": "string" }, "titulo": { "type": "string" }, "numero": { "type": "string" } } },
+        "artigo": { "type": "string" },
+        "telas": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "revogados": { "type": "array", "items": { "type": "integer" } }
+      }
+    },
+    "resumo": {
+      "allOf": [{ "$ref": "#/$defs/base" }],
+      "required": ["titulo", "telas", "conferido", "fonte"],
+      "properties": {
+        "tipo": { "const": "resumo" },
+        "titulo": { "type": "string" },
+        "telas": { "type": "array", "minItems": 3, "maxItems": 8, "items": { "type": "object", "required": ["texto"], "properties": { "titulo": { "type": "string" }, "texto": { "type": "string", "maxLength": 600 } } } },
+        "conferido": { "type": "boolean" }
+      }
+    },
+    "flashcard": {
+      "allOf": [{ "$ref": "#/$defs/base" }],
+      "required": ["pergunta", "resposta", "conferido", "fonte"],
+      "properties": {
+        "tipo": { "const": "flashcard" },
+        "pergunta": { "type": "string", "minLength": 1 },
+        "resposta": { "type": "string", "minLength": 1 },
+        "conferido": { "type": "boolean" }
+      }
+    }
+  },
+  "description": "indice.json: { versao, geradoEm, posts:[{id,t,m,l}], lotes:{[l]:arquivo} }. materias.json: [{id,nome,abrev,ordem,total}]. lote-*.json: array de posts (questao|lei|resumo|flashcard).",
+  "type": "array",
+  "items": { "oneOf": [{ "$ref": "#/$defs/questao" }, { "$ref": "#/$defs/lei" }, { "$ref": "#/$defs/resumo" }, { "$ref": "#/$defs/flashcard" }] }
+}

@@ -30,6 +30,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 | D4 | Quais questões | CGU **e** TCU, válidas e com gabarito, cada post com a etiqueta da prova |
 | D5 | Autoria de resumos e flashcards | Gerados por IA a partir do edital e da lei seca, com fonte e selo "gerado — a revisar" até a dona marcar como conferido |
 | D6 | Foco de estudo | Fixo: **AFFC — TI — Ciência de Dados**. Não há seleção de cargo |
+| D7 | Onde ficam resumos e flashcards gerados | No vault, em `Estudo/cgu/feed-conteudo/`, um arquivo por tópico com `conferido: false`; a dona revisa no Obsidian |
 
 ## Cenários de uso e testes
 
@@ -132,7 +133,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 | C-002 | Sem rastreamento de terceiros, fontes ou CDNs externos (charter). | Aceita |
 | C-003 | Nada da marca, ícones ou layout proprietário do Instagram nem do Acertei: o formato de feed é inspiração, não cópia (sem logotipo, nome ou ícones deles). | Aceita |
 | C-004 | Conteúdo gerado por IA nunca aparece sem a fonte e sem o selo de revisão; nenhum resumo inventa dispositivo legal que não esteja na lei seca da dona. | Aceita |
-| C-005 | As fontes de conteúdo moram no vault da dona e não são alteradas pelo app nem pela importação (só leitura). | Aceita |
+| C-005 | As fontes de conteúdo moram no vault da dona. Catálogo de questões, leis secas e baralhos existentes são só leitura para o app e a importação. A única escrita no vault é a geração de resumos e flashcards, em pasta própria (`Estudo/cgu/feed-conteudo/`), onde a dona marca "conferido" (D7). | Aceita |
 | C-006 | Interface em português do Brasil. | Aceita |
 | C-007 | Revisão espaçada (agendamento tipo FSRS) dos salvos fica fora desta missão. | Aceita |
 
