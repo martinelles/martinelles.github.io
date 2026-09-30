@@ -29,6 +29,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 | D3 | Interações | Responder no post, curtir e salvar, carrossel, stories por matéria |
 | D4 | Quais questões | CGU **e** TCU, válidas e com gabarito, cada post com a etiqueta da prova |
 | D5 | Autoria de resumos e flashcards | Gerados por IA a partir do edital e da lei seca, com fonte e selo "gerado — a revisar" até a dona marcar como conferido |
+| D6 | Foco de estudo | Fixo: **AFFC — TI — Ciência de Dados**. Não há seleção de cargo |
 
 ## Cenários de uso e testes
 
@@ -46,7 +47,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 **Aceite**
 1. **Dado** o topo do feed, **então** há um círculo por matéria que tem conteúdo, com o nome abreviado, e um primeiro círculo "Tudo".
 2. **Dado** um story tocado, **então** o feed passa a mostrar só posts daquela matéria e o círculo fica marcado; tocar "Tudo" volta ao feed completo.
-3. **Dado** o foco de estudo com uma disciplina escolhida no painel, **então** o story dessa disciplina aparece logo depois de "Tudo".
+3. **Dado** a disciplina de foco (por padrão "TI: Ciência de Dados"), **então** o story dela aparece logo depois de "Tudo".
 4. **Dado** uma matéria em que todos os posts já foram vistos, **então** o anel do círculo fica cinza (visto), como no Instagram.
 
 ### Cenário 3 — Lei seca, resumo em carrossel e flashcard (P1)
@@ -69,9 +70,9 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 ### Cenário 5 — Painel focado na CGU (P2)
 
 **Aceite**
-1. **Dado** o painel, **então** ele mostra "CGU — Auditor Federal de Finanças e Controle", banca Cebraspe, e a data da prova ou "Data a definir" enquanto não houver edital.
+1. **Dado** o painel, **então** ele mostra "CGU — Auditor Federal de Finanças e Controle · TI — Ciência de Dados", banca Cebraspe, e a data da prova ou "Data a definir" enquanto não houver edital.
 2. **Dado** o painel, **então** mostra números **calculados** do uso: questões respondidas, taxa de acerto e itens salvos (nada escrito fixo).
-3. **Dado** o foco de estudo, **então** os cargos oferecidos são só os da CGU.
+3. **Dado** o foco de estudo, **então** o cargo aparece fixo como "AFFC — TI — Ciência de Dados", sem seletor; a pessoa só pode escolher uma disciplina de foco, que começa em "TI: Ciência de Dados".
 4. **Dado** os atalhos do painel "Questões Objetivas", "Resumos", "Flashcards" e "Lei seca", **quando** tocados, **então** abrem o feed filtrado por aquele tipo de post; os demais atalhos continuam na tela "em breve".
 5. **Dado** a navegação inferior, **então** há três abas — Feed, Salvos, Painel — sempre visíveis.
 
@@ -105,7 +106,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 | FR-011 | A ordem do feed intercala os tipos de post e muda a cada dia, sendo estável dentro do mesmo dia. | Proposto |
 | FR-012 | Curtir (coração ou dois toques) e salvar (marcador) em qualquer post; aba "Salvos" lista os salvos. | Proposto |
 | FR-013 | Respostas, curtidas, salvos e posts vistos persistem no aparelho entre sessões. | Proposto |
-| FR-014 | O painel mostra o concurso CGU, banca, prazo da prova, foco de estudo com cargos da CGU e números calculados de uso (respondidas, taxa de acerto, salvos). | Proposto |
+| FR-014 | O painel mostra o concurso CGU, banca, prazo da prova, o foco fixo AFFC — TI — Ciência de Dados (sem seletor de cargo), a disciplina de foco (padrão "TI: Ciência de Dados") e números calculados de uso (respondidas, taxa de acerto, salvos). | Proposto |
 | FR-015 | Os atalhos Questões Objetivas, Resumos, Flashcards e Lei seca do painel abrem o feed filtrado por tipo; os demais seguem "em breve". | Proposto |
 | FR-016 | O conteúdo do feed é gerado a partir das fontes da dona (catálogo de questões, leis secas, resumos/flashcards) por um passo de importação repetível, sem edição manual do resultado. | Proposto |
 | FR-017 | O feed funciona sem conexão depois da primeira visita, com todo o conteúdo já importado. | Proposto |
@@ -144,7 +145,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 - **Flashcard**: pergunta, resposta, fonte.
 - **Matéria**: nome, abreviação do story, ordem.
 - **Interação** (no aparelho): resposta dada por questão, curtidas, salvos com data, posts vistos por dia.
-- **Foco de estudo** (no aparelho): cargo CGU e disciplina.
+- **Foco de estudo** (no aparelho): disciplina de foco; o cargo é fixo (AFFC — TI — Ciência de Dados).
 
 ## Critérios de sucesso
 
@@ -162,7 +163,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 - As leis secas estão em `Estudo/cgu/leis-secas/*.md` (26 arquivos, texto do Planalto e normas da CGU).
 - Resumos e flashcards da primeira leva cobrem primeiro as matérias de TI e as de maior incidência no catálogo; a quantidade por matéria é decidida no plano. Os dois baralhos já existentes da dona (LGPD e Auditoria Governamental, `Estudo/cgu/flashcards/`) entram como flashcards, com a mesma marcação de revisão.
 - A data da prova CGU 2026 não existe enquanto o edital não sai (TR 64/2026): o painel mostra "Data a definir".
-- Cargos da CGU oferecidos no foco de estudo: AFFC — TI (e as áreas de TI do TR 64/2026 quando conhecidas), AFFC — Auditoria e Fiscalização, AFFC — Correição, AFFC — Contabilidade, TFFC.
+- O foco é fixo em AFFC — TI — Ciência de Dados (D6). O feed continua trazendo todas as matérias do catálogo, porque o conteúdo programático oficial só sai no edital (TR 64/2026, item 5.5.3.1.1); a prioridade vai para "TI: Ciência de Dados" e as demais matérias de TI na ordem dos stories e na primeira leva de resumos e flashcards.
 - A marcação "conferido" é feita pela dona na fonte do conteúdo (arquivo de resumos/flashcards), não dentro do app, e a importação carrega essa marca.
 - A meta "auditoria PWA ≥ 90" da missão anterior não tem mais como ser medida (Lighthouse 12+); esta missão adota a checagem de instalabilidade do navegador sem erros como critério equivalente, e a meta volta se a ferramenta voltar a medir.
 
