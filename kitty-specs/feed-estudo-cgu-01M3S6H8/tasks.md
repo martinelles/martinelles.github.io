@@ -34,14 +34,14 @@
 | T022 | `CorpoLei`, `CorpoResumo`, `CorpoFlashcard` | WP04 | | [D] |
 | T023 | `BarraStories`, `BarraAbas`, `FimDoFeed` | WP04 | [D] |
 | T024 | Direção visual do feed (skill frontend-design) aplicada aos componentes | WP04 | | [D] |
-| T025 | Layout com barra de abas | WP05 | |
-| T026 | Tela do feed em `/` (stories, filtros `?materia`/`?tipo`, rolagem infinita, vistos) | WP05 | |
-| T027 | Tela `/salvos` | WP05 | [P] |
-| T028 | `/escolher` → `/` e remoção do código de escolha de concurso | WP05 | |
-| T029 | Dados só CGU e foco fixo | WP05 | |
-| T030 | Painel CGU com estatísticas e atalhos para o feed | WP05 | |
-| T031 | e2e do feed e dos salvos | WP05 | |
-| T032 | e2e do painel e atualização de smoke/offline/responsivo | WP05 | |
+| T025 | Layout com barra de abas | WP05 | | [D] |
+| T026 | Tela do feed em `/` (stories, filtros `?materia`/`?tipo`, rolagem infinita, vistos) | WP05 | | [D] |
+| T027 | Tela `/salvos` | WP05 | [D] |
+| T028 | `/escolher` → `/` e remoção do código de escolha de concurso | WP05 | | [D] |
+| T029 | Dados só CGU e foco fixo | WP05 | | [D] |
+| T030 | Painel CGU com estatísticas e atalhos para o feed | WP05 | | [D] |
+| T031 | e2e do feed e dos salvos | WP05 | | [D] |
+| T032 | e2e do painel e atualização de smoke/offline/responsivo | WP05 | | [D] |
 | T033 | Service worker com pré-cache em duas fases | WP06 | |
 | T034 | e2e de conteúdo offline | WP06 | |
 | T035 | Medições (peso, Lighthouse, fps) em `medicoes.md` | WP06 | |
@@ -101,14 +101,14 @@ WP02 ∥ WP04.
 ### WP05 — Rotas, navegação e painel CGU
 **Prompt**: [tasks/WP05-rotas-painel-cgu.md](tasks/WP05-rotas-painel-cgu.md) · **Prioridade**: P1 · **Dependências**: WP02, WP03, WP04 · ~520 linhas
 
-- [ ] T025 Layout com barra de abas (WP05)
-- [ ] T026 Tela do feed em `/` (WP05)
-- [ ] T027 Tela `/salvos` (WP05)
-- [ ] T028 `/escolher` → `/` e remoção do código de escolha de concurso (WP05)
-- [ ] T029 Dados só CGU e foco fixo (WP05)
-- [ ] T030 Painel CGU com estatísticas e atalhos para o feed (WP05)
-- [ ] T031 e2e do feed e dos salvos (WP05)
-- [ ] T032 e2e do painel e atualização de smoke/offline/responsivo (WP05)
+- [x] T025 Layout com barra de abas (WP05)
+- [x] T026 Tela do feed em `/` (WP05)
+- [x] T027 Tela `/salvos` (WP05)
+- [x] T028 `/escolher` → `/` e remoção do código de escolha de concurso (WP05)
+- [x] T029 Dados só CGU e foco fixo (WP05)
+- [x] T030 Painel CGU com estatísticas e atalhos para o feed (WP05)
+- [x] T031 e2e do feed e dos salvos (WP05)
+- [x] T032 e2e do painel e atualização de smoke/offline/responsivo (WP05)
 
 ## Fase 4
 
