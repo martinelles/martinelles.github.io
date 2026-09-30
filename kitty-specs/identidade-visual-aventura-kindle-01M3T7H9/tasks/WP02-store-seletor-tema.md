@@ -25,8 +25,8 @@ subtasks:
 - T012
 phase: Fase 2 - Aplicação
 assignee: ''
-agent: ''
-shell_pid: '32328'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "32328"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -190,3 +190,7 @@ a mesma preferência e chega ao mesmo valor. Confira com um `MutationObserver` n
 - Rode o caso 13 alterando temporariamente a regra no store, que deve falhar, e desfaça depois.
 - Confira que não há hex nem `rgb(` em `SeletorTema.svelte`.
 - Teste com o aparelho emulado em escuro e a preferência em "Seguir o aparelho": alternar a emulação troca o tema ao vivo.
+
+## Activity Log
+
+- 2026-09-30T23:37:41Z – claude:opus:implementer:implementer – shell_pid=32328 – Assigned agent via action command
