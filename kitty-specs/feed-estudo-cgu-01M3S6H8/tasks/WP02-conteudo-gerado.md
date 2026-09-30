@@ -22,8 +22,8 @@ subtasks:
 - T011
 phase: Fase 2
 assignee: ''
-agent: ''
-shell_pid: '2672'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "2672"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -96,3 +96,7 @@ Criar `feed-conteudo/`, `feed-conteudo/resumos/`, `feed-conteudo/flashcards/` e 
 ## Guia do revisor
 
 Ler por amostragem 5 resumos e 20 flashcards contra as fontes citadas; tentar achar artigo citado que não exista; conferir `conteudo-gerado.md` contra os arquivos no vault e contra o índice.
+
+## Activity Log
+
+- 2026-09-30T14:38:07Z – claude:opus:implementer:implementer – shell_pid=2672 – Assigned agent via action command
