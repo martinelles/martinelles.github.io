@@ -32,8 +32,8 @@ subtasks:
 - T024
 phase: Fase 2
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "10720"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "11108"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -127,3 +127,4 @@ Operar cada componente só com teclado e com leitor de tela (nomes e estados), e
 - 2026-09-30T13:55:28Z – claude:opus:implementer:implementer – shell_pid=10720 – Assigned agent via action command
 - 2026-09-30T14:09:22Z – claude:opus:implementer:implementer – shell_pid=10720 – T024 direção visual: post como 'ficha de estudo' encostada na coluna, sem cartão com sombra nem gradiente; lombada de 4px à esquerda na cor da matéria (a mesma do avatar e do anel do story) é o único gesto forte. Duas famílias do sistema: sans (system-ui) para interface e metadados; serifada do sistema (--fonte-texto: Iowan/Palatino/Georgia) para o que se lê — enunciado, lei, resumo, flashcard — com cara de prova e de diário oficial. Momento de destaque: número do artigo em serifada 2rem na cor --cor-lei. Acerto/erro: fundo tingido + borda + ícone check/x + frase, nunca só cor. Curtida em magenta (#c0265a/#f472b6), não o vermelho do Instagram; anel de story sólido (sem gradiente), visto = anel cinza fino. Cor por matéria: 8 tokens --materia-0..7 por hash do id. Tema escuro: mesmas funções, matérias em tons claros com texto #0b1220. Pares (claro/escuro): acerto/acerto-fundo 5,76/9,96; erro/erro-fundo 6,19/8,56; aviso/aviso-fundo 6,68/10,24; curtida/superfície 5,73/6,55; lei/superfície 10,36/11,30; texto sobre --materia-N >= 4,99/>= 7,52; visto/fundo (não texto, >=3:1) 3,47/4,00.
 - 2026-09-30T14:09:32Z – claude:opus:implementer:implementer – shell_pid=10720 – Ready for review
+- 2026-09-30T14:10:22Z – claude:opus:reviewer:reviewer – shell_pid=11108 – Started review via action command
