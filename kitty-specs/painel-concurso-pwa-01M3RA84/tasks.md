@@ -33,12 +33,12 @@
 | T023 | "Ver mais/Ver menos", abrir/fechar e abertura automática na busca | WP05 | |
 | T024 | Seleção do concurso e estado vazio ligados | WP05 | |
 | T025 | `tests/e2e/escolher.spec.ts` | WP05 | |
-| T026 | `CabecalhoPainel.svelte` | WP06 | [P] |
-| T027 | `FocoEstudo.svelte` | WP06 | [P] |
-| T028 | `GradeFerramentas.svelte` | WP06 | [P] |
-| T029 | Tela `/painel` | WP06 | |
-| T030 | Tela `/ferramenta/[id]` ("em breve") | WP06 | |
-| T031 | `tests/e2e/painel.spec.ts` | WP06 | |
+| T026 | `CabecalhoPainel.svelte` | WP06 | [D] |
+| T027 | `FocoEstudo.svelte` | WP06 | [D] |
+| T028 | `GradeFerramentas.svelte` | WP06 | [D] |
+| T029 | Tela `/painel` | WP06 | | [D] |
+| T030 | Tela `/ferramenta/[id]` ("em breve") | WP06 | | [D] |
+| T031 | `tests/e2e/painel.spec.ts` | WP06 | | [D] |
 | T032 | Ícones do app e `manifest.webmanifest` | WP07 | [P] |
 | T033 | `src/service-worker.ts` | WP07 | |
 | T034 | `tests/e2e/offline.spec.ts` | WP07 | |
@@ -125,12 +125,12 @@ Teste independente: `npm run test:e2e -- escolher`.
 Objetivo: Cenário 2 da spec completo.
 Teste independente: `npm run test:e2e -- painel` (percorre as 12 ferramentas — SC-002).
 
-- [ ] T026 `CabecalhoPainel.svelte` (WP06)
-- [ ] T027 `FocoEstudo.svelte` (WP06)
-- [ ] T028 `GradeFerramentas.svelte` (WP06)
-- [ ] T029 Tela `/painel` (WP06)
-- [ ] T030 Tela `/ferramenta/[id]` ("em breve") (WP06)
-- [ ] T031 `tests/e2e/painel.spec.ts` (WP06)
+- [x] T026 `CabecalhoPainel.svelte` (WP06)
+- [x] T027 `FocoEstudo.svelte` (WP06)
+- [x] T028 `GradeFerramentas.svelte` (WP06)
+- [x] T029 Tela `/painel` (WP06)
+- [x] T030 Tela `/ferramenta/[id]` ("em breve") (WP06)
+- [x] T031 `tests/e2e/painel.spec.ts` (WP06)
 
 Paralelo com WP05.
 
