@@ -27,8 +27,8 @@ subtasks:
 - T018
 phase: Fase 2 - Aplicação
 assignee: ''
-agent: ''
-shell_pid: '23776'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "23776"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -215,3 +215,7 @@ Anote no handoff o resultado de cada linha.
 - Rode a regra 7 (grep) e a varredura do T018.
 - Compare as capturas dos 3 temas: no Kindle não pode ter cor nenhuma nem sombra; no Aventura, o post tem contorno e sombra dura, sem borrão.
 - Emule `prefers-reduced-motion` no Aventura: o coração não anima e o flashcard vira sem 3D.
+
+## Activity Log
+
+- 2026-09-30T23:37:52Z – claude:opus:implementer:implementer – shell_pid=23776 – Assigned agent via action command
