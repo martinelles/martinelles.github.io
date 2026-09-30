@@ -25,8 +25,8 @@ subtasks:
 - T006
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: "claude:opus:reviewer:reviewer"
-shell_pid: "21564"
+agent: "claude:opus:implementer:implementer"
+shell_pid: "2316"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -134,3 +134,4 @@ Rodar `npm run importar -- --saida /tmp/x` contra o vault, conferir relatório, 
 - 2026-09-30T14:02:43Z – claude:opus:implementer:implementer – shell_pid=24184 – Ready for review: importador + 71 testes do WP (124 no total); check/test/build/e2e verdes
 - 2026-09-30T14:03:18Z – claude:opus:reviewer:reviewer – shell_pid=21564 – Started review via action command
 - 2026-09-30T14:08:33Z – claude:opus:reviewer:reviewer – shell_pid=21564 – Moved to planned
+- 2026-09-30T14:09:19Z – claude:opus:implementer:implementer – shell_pid=2316 – Started implementation via action command
