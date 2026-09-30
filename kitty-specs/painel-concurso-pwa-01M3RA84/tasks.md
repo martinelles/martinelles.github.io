@@ -23,11 +23,11 @@
 | T013 | `datas.ts` (dias para a prova) | WP03 | [P] |
 | T014 | `preferencias.svelte.ts` (estado persistido) | WP03 | |
 | T015 | Testes de unidade de busca, seções, datas e preferências | WP03 | |
-| T016 | `Icone.svelte` com SVGs próprios | WP04 | |
-| T017 | `CampoBusca.svelte` | WP04 | [P] |
-| T018 | `CartaoConcurso.svelte` | WP04 | [P] |
-| T019 | `SecaoRecolhivel.svelte` | WP04 | [P] |
-| T020 | `EstadoVazio.svelte` | WP04 | [P] |
+| T016 | `Icone.svelte` com SVGs próprios | WP04 | | [D] |
+| T017 | `CampoBusca.svelte` | WP04 | [D] |
+| T018 | `CartaoConcurso.svelte` | WP04 | [D] |
+| T019 | `SecaoRecolhivel.svelte` | WP04 | [D] |
+| T020 | `EstadoVazio.svelte` | WP04 | [D] |
 | T021 | Rota raiz `/` com redirecionamento | WP05 | |
 | T022 | Tela `/escolher`: cabeçalho, busca e seções | WP05 | |
 | T023 | "Ver mais/Ver menos", abrir/fechar e abertura automática na busca | WP05 | |
@@ -97,11 +97,11 @@ Paralelo: T011, T012, T013 são arquivos independentes.
 Objetivo: `Icone`, `CampoBusca`, `CartaoConcurso`, `SecaoRecolhivel`, `EstadoVazio` prontos, sem lógica de negócio (recebem props).
 Teste independente: `npm run check` e `npm run build` sem aviso de acessibilidade do Svelte.
 
-- [ ] T016 `Icone.svelte` com SVGs próprios (WP04)
-- [ ] T017 `CampoBusca.svelte` (WP04)
-- [ ] T018 `CartaoConcurso.svelte` (WP04)
-- [ ] T019 `SecaoRecolhivel.svelte` (WP04)
-- [ ] T020 `EstadoVazio.svelte` (WP04)
+- [x] T016 `Icone.svelte` com SVGs próprios (WP04)
+- [x] T017 `CampoBusca.svelte` (WP04)
+- [x] T018 `CartaoConcurso.svelte` (WP04)
+- [x] T019 `SecaoRecolhivel.svelte` (WP04)
+- [x] T020 `EstadoVazio.svelte` (WP04)
 
 Paralelo com WP03 inteiro.
 
