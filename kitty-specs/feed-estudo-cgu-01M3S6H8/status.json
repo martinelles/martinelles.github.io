@@ -1,16 +1,16 @@
 {
-  "event_count": 48,
-  "last_event_id": "01M3T7YE6JFVBDA4ZYP6ZZBPTN",
-  "materialized_at": "2026-09-30T22:46:13.458941+00:00",
+  "event_count": 49,
+  "last_event_id": "01M3T7YN2NH0RQ6CYSQCXJ56V8",
+  "materialized_at": "2026-09-30T22:46:20.501186+00:00",
   "mission_number": "2",
   "mission_slug": "feed-estudo-cgu-01M3S6H8",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 4,
+    "approved": 3,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 2,
+    "done": 3,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
@@ -33,10 +33,10 @@
     },
     "WP03": {
       "actor": "user",
-      "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "01M3S9HHV149M0G8AWC48W5H61",
-      "last_transition_at": "2026-09-30T13:54:53.921024+00:00"
+      "force_count": 2,
+      "lane": "done",
+      "last_event_id": "01M3T7YN2NH0RQ6CYSQCXJ56V8",
+      "last_transition_at": "2026-09-30T22:46:20.501186+00:00"
     },
     "WP04": {
       "actor": "user",
