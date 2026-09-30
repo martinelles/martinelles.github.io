@@ -24,8 +24,8 @@ subtasks:
 - T017
 phase: Fase 1 - Conteúdo e motor
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "14016"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "27020"
 history:
 - timestamp: '2026-09-30T13:35:11Z'
   agent: system
@@ -104,3 +104,4 @@ Conferir o contrato de interações campo a campo; tentar produzir repetição n
 
 - 2026-09-30T13:43:20Z – claude:opus:implementer:implementer – shell_pid=14016 – Assigned agent via action command
 - 2026-09-30T13:50:48Z – claude:opus:implementer:implementer – shell_pid=14016 – Ready for review
+- 2026-09-30T13:51:39Z – claude:opus:reviewer:reviewer – shell_pid=27020 – Started review via action command
