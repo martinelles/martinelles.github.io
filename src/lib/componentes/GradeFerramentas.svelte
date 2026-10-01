@@ -81,7 +81,13 @@
 
 	h2 {
 		margin: 0 0 12px;
+		font-family: var(--fonte-titulo);
 		font-size: 1.125rem;
+	}
+
+	/* Kindle: o emoji do bloco sai colorido; em cinza, a tela continua só tinta (SC-004). */
+	:global([data-tema^='kindle']) h2 span {
+		filter: grayscale(1);
 	}
 
 	li {
@@ -95,18 +101,24 @@
 		height: 100%;
 		min-height: 44px;
 		padding: 14px;
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 		border-radius: var(--raio);
 		background: var(--cor-superficie);
 		box-shadow: var(--sombra);
 		color: var(--cor-texto);
 		text-decoration: none;
 		overflow-wrap: anywhere;
-		transition: border-color 0.15s ease;
 	}
 
-	.cartao:hover {
-		border-color: var(--cor-primaria);
+	/* Aventura: o atalho "levanta" sem transição, casando com a sombra dura. */
+	:global([data-tema='aventura']) .cartao:hover {
+		transform: translate(-2px, -2px);
+		box-shadow: 6px 6px 0 var(--cor-texto);
+	}
+
+	/* Kindle: sem sombra nem deslocamento; o hover só sublinha o título. */
+	:global([data-tema^='kindle']) .cartao:hover .titulo {
+		text-decoration: underline;
 	}
 
 	.cartao.largo {

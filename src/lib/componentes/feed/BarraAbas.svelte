@@ -35,7 +35,8 @@
 		inset: auto 0 0 0;
 		z-index: 10;
 		background: var(--cor-superficie);
-		border-top: 1px solid var(--cor-borda);
+		/* Chão da tela: contorno de peso cheio, sem sombra (a barra é fixa sobre o conteúdo que rola). */
+		border-top: var(--linha-peso) solid var(--cor-borda);
 		padding-bottom: env(safe-area-inset-bottom);
 	}
 

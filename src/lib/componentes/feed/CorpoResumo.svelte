@@ -33,14 +33,14 @@
 		flex-direction: column;
 		gap: 10px;
 		padding: 20px 18px;
-		border-radius: 10px;
+		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-fundo);
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 	}
 
 	.titulo {
 		margin: 0 0 4px;
-		font-family: var(--fonte-texto);
+		font-family: var(--fonte-titulo);
 		font-size: 1.5rem;
 		line-height: 1.2;
 		text-wrap: balance;
@@ -59,12 +59,13 @@
 		line-height: 1.6;
 		white-space: pre-line;
 		overflow-wrap: anywhere;
+		max-width: var(--medida);
 	}
 
 	.fonte {
 		margin: auto 0 0;
 		padding-top: 10px;
-		border-top: 1px solid var(--cor-borda);
+		border-top: 1px solid var(--cor-divisor);
 		font-size: 0.8125rem;
 		color: var(--cor-texto-suave);
 	}

@@ -94,6 +94,17 @@
 		border-color: var(--cor-visto);
 	}
 
+	/* Kindle: matérias têm o mesmo cinza; o anel usa a tinta para continuar visível. */
+	:global([data-tema^='kindle']) .anel {
+		border-color: var(--cor-texto);
+	}
+
+	/* Kindle: vista tracejada, porque a diferença não pode vir só da cor (FR-009). */
+	:global([data-tema^='kindle']) .story.vista .anel {
+		border-color: var(--cor-visto);
+		border-style: dashed;
+	}
+
 	.miolo {
 		width: 52px;
 		height: 52px;
@@ -109,7 +120,7 @@
 	.tudo .miolo {
 		background: var(--cor-superficie);
 		color: var(--cor-texto);
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 	}
 
 	.nome {

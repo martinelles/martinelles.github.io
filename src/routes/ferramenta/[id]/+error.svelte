@@ -24,7 +24,7 @@
 		gap: 8px;
 		margin-top: calc(var(--espaco) * 3);
 		padding: calc(var(--espaco) * 2) var(--espaco);
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 		border-radius: var(--raio);
 		background: var(--cor-superficie);
 		text-align: center;
@@ -33,6 +33,7 @@
 
 	h1 {
 		margin: 0;
+		font-family: var(--fonte-titulo);
 		font-size: 1.375rem;
 	}
 
@@ -41,6 +42,7 @@
 		color: var(--cor-texto-suave);
 	}
 
+	/* Botão primário do sistema (igual em todo o app). */
 	.voltar {
 		display: inline-flex;
 		align-items: center;
@@ -48,9 +50,11 @@
 		min-height: 44px;
 		margin-top: var(--espaco);
 		padding: 10px 18px;
-		border-radius: 999px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
+		box-shadow: var(--sombra);
 		font-weight: 700;
 		text-decoration: none;
 	}

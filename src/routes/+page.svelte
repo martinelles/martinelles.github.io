@@ -191,21 +191,13 @@
 		margin: calc(-1 * var(--espaco)) auto 0;
 	}
 
-	/* Posts de ponta a ponta no celular: o post já tem o próprio recuo. */
+	/* Pilha de cartões espaçados: o post já é cartão. Nada de recorte no contêiner, que cortaria a sombra dura. */
 	.posts {
 		display: grid;
-		margin: 0 calc(-1 * var(--espaco));
-		border-top: 1px solid var(--cor-borda);
-	}
-
-	@media (min-width: 592px) {
-		.posts {
-			margin: 0;
-			border: 1px solid var(--cor-borda);
-			border-bottom: 0;
-			border-radius: var(--raio) var(--raio) 0 0;
-			overflow: hidden;
-		}
+		gap: calc(var(--espaco) * 1.25);
+		margin: 0;
+		/* Espaço para a sombra dura (4px) não encostar na borda da tela nem ser cortada. */
+		padding: 0 4px 4px 0;
 	}
 
 	.item {
@@ -242,26 +234,23 @@
 		width: 64px;
 		height: 64px;
 		border-radius: 50%;
-		background: var(--cor-borda);
+		background: var(--cor-divisor);
 	}
 
+	/* Esqueleto estático (FR-008): imita o cartão, sem sombra, porque ainda não é conteúdo. */
 	.esqueleto {
 		display: grid;
 		gap: 14px;
 		padding: 18px 16px;
+		border: var(--linha-peso) solid var(--cor-divisor);
+		border-radius: var(--raio);
 		background: var(--cor-superficie);
-		border-bottom: 1px solid var(--cor-borda);
-	}
-
-	.esqueleto span,
-	.bolinha {
-		animation: pulso 1.2s ease-in-out infinite alternate;
 	}
 
 	.linha {
 		height: 14px;
-		border-radius: 7px;
-		background: var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-divisor);
 	}
 
 	.linha.curta {
@@ -270,14 +259,8 @@
 
 	.bloco {
 		height: 220px;
-		border-radius: 10px;
-		background: var(--cor-borda);
-	}
-
-	@keyframes pulso {
-		to {
-			opacity: 0.45;
-		}
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-divisor);
 	}
 
 	.erro {
@@ -293,13 +276,15 @@
 		color: var(--cor-texto-suave);
 	}
 
+	/* Botão primário do sistema (igual em todo o app). */
 	.erro button {
 		min-height: 44px;
 		padding: 0 20px;
-		border: 0;
-		border-radius: 999px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
+		box-shadow: var(--sombra);
 		font-weight: 700;
 		cursor: pointer;
 	}

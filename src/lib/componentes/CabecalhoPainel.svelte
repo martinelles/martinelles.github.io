@@ -48,21 +48,29 @@
 </header>
 
 <style>
+	/* Aventura: o único bloco de cor forte do painel. */
 	.cabecalho {
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
+		border: var(--linha-peso) solid var(--cor-borda);
 		border-radius: var(--raio);
 		padding: calc(var(--espaco) * 1.25) var(--espaco);
 		box-shadow: var(--sombra);
 		overflow-wrap: anywhere;
 	}
 
+	/* Kindle: o cabeçalho é página, não bloco de cor. */
+	:global([data-tema^='kindle']) .cabecalho {
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+	}
+
 	h1 {
 		margin: 0;
-		font-size: 0.8125rem;
-		font-weight: 600;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
+		font-family: var(--fonte-titulo);
+		font-size: 1.75rem;
+		font-weight: 700;
+		line-height: 1.15;
 	}
 
 	.edital {
@@ -71,8 +79,8 @@
 		gap: 6px;
 		min-height: 44px;
 		padding: 6px 12px;
-		border: 1px solid currentColor;
-		border-radius: 999px;
+		border: var(--linha-peso) solid currentColor;
+		border-radius: calc(var(--raio) / 2);
 		background: transparent;
 		color: inherit;
 		font-weight: 600;
@@ -84,10 +92,15 @@
 		outline-color: var(--cor-primaria-texto);
 	}
 
+	/* Kindle: sobre a superfície, a cor do texto da primária some; o foco volta à primária. */
+	:global([data-tema^='kindle']) .edital:focus-visible {
+		outline-color: var(--cor-primaria);
+	}
+
 	.concurso {
-		margin: 12px 0 2px;
-		font-size: 1.375rem;
-		font-weight: 800;
+		margin: 8px 0 2px;
+		font-size: 1.0625rem;
+		font-weight: 700;
 		line-height: 1.25;
 	}
 

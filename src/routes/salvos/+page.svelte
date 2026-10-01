@@ -93,23 +93,17 @@
 
 	h1 {
 		margin: 0 0 12px;
+		font-family: var(--fonte-titulo);
 		font-size: 1.375rem;
 	}
 
+	/* Pilha de cartões espaçados: o post já é cartão. Nada de recorte no contêiner, que cortaria a sombra dura. */
 	.posts {
 		display: grid;
-		margin: 0 calc(-1 * var(--espaco));
-		border-top: 1px solid var(--cor-borda);
-	}
-
-	@media (min-width: 592px) {
-		.posts {
-			margin: 0;
-			border: 1px solid var(--cor-borda);
-			border-bottom: 0;
-			border-radius: var(--raio) var(--raio) 0 0;
-			overflow: hidden;
-		}
+		gap: calc(var(--espaco) * 1.25);
+		margin: 0;
+		/* Espaço para a sombra dura (4px) não encostar na borda da tela nem ser cortada. */
+		padding: 0 4px 4px 0;
 	}
 
 	.item {
@@ -134,6 +128,7 @@
 		color: var(--cor-texto-suave);
 	}
 
+	/* Botão primário do sistema (igual em todo o app). */
 	.vazio a,
 	.erro button {
 		display: inline-flex;
@@ -141,10 +136,11 @@
 		min-height: 44px;
 		margin-top: 8px;
 		padding: 0 20px;
-		border: 0;
-		border-radius: 999px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
+		box-shadow: var(--sombra);
 		font-weight: 700;
 		text-decoration: none;
 		cursor: pointer;

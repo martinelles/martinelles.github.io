@@ -33,7 +33,7 @@
 		text-align: left;
 		cursor: pointer;
 		perspective: 1200px;
-		border-radius: 14px;
+		border-radius: calc(var(--raio) / 2);
 	}
 
 	.giro {
@@ -53,8 +53,8 @@
 		gap: 12px;
 		min-height: 240px;
 		padding: 20px 18px 16px;
-		border-radius: 14px;
-		border: 1.5px solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		border: var(--linha-peso) solid var(--cor-borda);
 		background: var(--cor-fundo);
 		backface-visibility: hidden;
 	}
@@ -78,6 +78,7 @@
 		line-height: 1.5;
 		white-space: pre-line;
 		overflow-wrap: anywhere;
+		max-width: var(--medida);
 	}
 
 	.dica {
@@ -107,5 +108,24 @@
 		.virado .frente {
 			visibility: hidden;
 		}
+	}
+
+	/* Kindle: troca de lado direta, sem 3D (tinta eletrônica). Mesmo tratamento de reduzir movimento. */
+	:global([data-tema^='kindle']) .giro,
+	:global([data-tema^='kindle']) .virado .giro {
+		transform: none;
+	}
+
+	:global([data-tema^='kindle']) .verso {
+		transform: none;
+		visibility: hidden;
+	}
+
+	:global([data-tema^='kindle']) .virado .verso {
+		visibility: visible;
+	}
+
+	:global([data-tema^='kindle']) .virado .frente {
+		visibility: hidden;
 	}
 </style>

@@ -117,11 +117,13 @@
 		line-height: 1.6;
 		white-space: pre-line;
 		overflow-wrap: anywhere;
+		max-width: var(--medida);
 	}
 
+	/* Marca de citação, não contorno: tinta leve. */
 	.texto-base {
 		padding: 10px 12px;
-		border-left: 3px solid var(--cor-borda);
+		border-left: var(--linha-peso) solid var(--cor-divisor);
 		color: var(--cor-texto-suave);
 		font-size: 0.9375rem;
 	}
@@ -160,12 +162,11 @@
 		gap: 10px;
 		min-height: 48px;
 		padding: 10px 12px;
-		border: 1.5px solid var(--cor-borda);
-		border-radius: 12px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
 		text-align: left;
 		cursor: pointer;
-		transition: border-color 0.1s ease, background-color 0.1s ease;
 	}
 
 	.ce .opcao {
@@ -175,8 +176,14 @@
 		font-size: 1.0625rem;
 	}
 
+	/* Levanta a opção: sombra dura no Aventura; nos Kindle --sombra é none. */
 	.opcao:not(:disabled):hover {
-		border-color: var(--cor-texto-suave);
+		box-shadow: var(--sombra);
+	}
+
+	/* Só o Aventura desloca: nos Kindle a opção fica parada (sem sombra, o deslocamento não diz nada). */
+	:global([data-tema='aventura']) .opcao:not(:disabled):hover {
+		transform: translate(-1px, -1px);
 	}
 
 	.opcao:not(:disabled):active {
@@ -194,7 +201,7 @@
 		display: grid;
 		place-items: center;
 		border-radius: 50%;
-		border: 1.5px solid currentColor;
+		border: var(--linha-peso) solid currentColor;
 		font-weight: 700;
 		font-size: 0.875rem;
 	}
@@ -222,6 +229,11 @@
 		border-color: var(--cor-erro);
 		background: var(--cor-erro-fundo);
 		color: var(--cor-erro);
+	}
+
+	/* Kindle: erro e acerto têm a mesma tinta; o tracejado diferencia pela forma (FR-009). */
+	:global([data-tema^='kindle']) .opcao.errada {
+		border-style: dashed;
 	}
 
 	.opcao.apagada {

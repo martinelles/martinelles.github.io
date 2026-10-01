@@ -5,6 +5,7 @@
 	import FocoEstudo from '$lib/componentes/FocoEstudo.svelte';
 	import GradeFerramentas from '$lib/componentes/GradeFerramentas.svelte';
 	import ProgressoEstudo from '$lib/componentes/ProgressoEstudo.svelte';
+	import SeletorTema from '$lib/componentes/SeletorTema.svelte';
 	import { concursoCgu, dados } from '$lib/dados';
 	import { diasParaProva, hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
@@ -41,6 +42,7 @@
 		onescolherDisciplina={(id) => foco.escolherDisciplina(id)}
 	/>
 	<ProgressoEstudo estatisticas={numeros} {materias} />
+	<SeletorTema />
 	<div>
 		<GradeFerramentas ferramentas={dados.ferramentas} />
 	</div>

@@ -52,13 +52,14 @@
 <style>
 	.foco {
 		background: var(--cor-superficie);
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 		border-radius: var(--raio);
 		padding: var(--espaco);
 	}
 
 	h2 {
 		margin: 0 0 12px;
+		font-family: var(--fonte-titulo);
 		font-size: 1.125rem;
 	}
 
@@ -94,7 +95,7 @@
 		margin: 0;
 		padding: 8px 12px;
 		border: 1px dashed var(--cor-borda);
-		border-radius: 10px;
+		border-radius: calc(var(--raio) / 2);
 		font-weight: 700;
 		overflow-wrap: anywhere;
 	}
@@ -103,9 +104,9 @@
 		width: 100%;
 		min-height: 44px;
 		padding: 8px 12px;
-		border: 1px solid var(--cor-borda);
-		border-radius: 10px;
-		background: var(--cor-fundo);
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
 	}
 
 	select:disabled {

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 
 // FR-017 / SC-005: depois da primeira visita, todo o conteúdo do feed está no Cache Storage e o
 // feed abre, rola, salva e responde sem conexão. E um lote que falha na instalação não impede o
@@ -111,4 +111,80 @@ test('lote que falha na instalação não impede o SW; é obtido depois', async 
 	await context.unroute(`**${falho}`);
 	await page.reload();
 	await expect.poll(() => conteudoNoCache(page), { timeout: 30_000 }).toContain(falho);
+});
+
+// Missão identidade-visual (Cenário 5, SC-006): offline, os três temas trazem as fontes e a textura
+// iguais às da versão online. A textura é um SVG em data URI no token --textura (WP01 não usou PNG
+// em static/papel/), então não há URL de textura a conferir no cache: basta ser a mesma string.
+const CHAVE_TEMA = 'painel-concurso:tema:v1';
+const TEMAS = ['aventura', 'kindle', 'kindle-escuro'] as const;
+const FONTES = readdirSync('static/fontes')
+	.filter((f) => f.endsWith('.woff2'))
+	.map((f) => `/fontes/${f}`);
+
+/** Caminhos de /fontes/ gravados no cache do SW. */
+function fontesNoCache(page: Page): Promise<string[]> {
+	return page.evaluate(async () => {
+		const nomes = (await caches.keys()).filter((n) => n.startsWith('painel-concurso-'));
+		const caminhos: string[] = [];
+		for (const nome of nomes) {
+			for (const req of await (await caches.open(nome)).keys()) {
+				const { pathname } = new URL(req.url);
+				if (pathname.startsWith('/fontes/')) caminhos.push(pathname);
+			}
+		}
+		return caminhos;
+	});
+}
+
+async function usarTema(page: Page, tema: string) {
+	await page.evaluate(([k, t]) => localStorage.setItem(k, JSON.stringify({ tema: t })), [CHAVE_TEMA, tema] as const);
+	await page.reload();
+	await expect(page.locator('html')).toHaveAttribute('data-tema', tema);
+	await expect(itens(page).first()).toBeVisible();
+}
+
+const textura = (page: Page) => page.evaluate(() => getComputedStyle(document.body, '::before').backgroundImage);
+
+test('SC-006: offline, os três temas têm as fontes e a textura da versão online', async ({ page, context }) => {
+	test.setTimeout(120_000);
+	expect(FONTES).toHaveLength(4);
+	await page.goto('/');
+	await esperarControle(page);
+	await expect.poll(() => fontesNoCache(page), { timeout: 30_000 }).toEqual(expect.arrayContaining(FONTES));
+
+	const online: Record<string, string> = {};
+	for (const tema of TEMAS) {
+		await usarTema(page, tema);
+		online[tema] = await textura(page);
+		expect(online[tema], tema).toMatch(/^url\(/);
+	}
+
+	await context.setOffline(true);
+	await page.reload();
+	await expect(itens(page).first()).toBeVisible();
+
+	for (const tema of TEMAS) {
+		await usarTema(page, tema);
+		await page.evaluate(() => document.fonts.ready);
+		// load() pede a face ao SW se a tela ainda não a usou; offline, só o cache responde.
+		const fontes = await page.evaluate(async () => {
+			const pedir = async (f: string) => {
+				await document.fonts.load(f).catch(() => []);
+				return document.fonts.check(f);
+			};
+			return {
+				literata: await pedir('16px Literata'),
+				grandstander: await pedir('700 16px Grandstander'),
+				comErro: [...document.fonts].filter((f) => f.status === 'error').map((f) => `${f.family} ${f.weight} ${f.style}`)
+			};
+		});
+		expect(fontes.literata, `${tema}: Literata`).toBe(true);
+		if (tema === 'aventura') expect(fontes.grandstander, `${tema}: Grandstander`).toBe(true);
+		expect(fontes.comErro, tema).toEqual([]);
+		expect(await textura(page), `${tema}: textura`).toBe(online[tema]);
+	}
+
+	expect(await fontesNoCache(page)).toEqual(expect.arrayContaining(FONTES));
+	await context.setOffline(false);
 });

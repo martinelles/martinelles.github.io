@@ -153,14 +153,28 @@
 
 <style>
 	.post {
+		/* Cartão de primeiro nível: contorno, raio e a única sombra do feed (fora o botão primário). */
+		position: relative;
 		display: grid;
 		gap: 14px;
-		padding: 14px 16px 6px;
+		padding: 20px 16px 6px; /* 14px + a faixa da matéria */
 		background: var(--cor-superficie);
-		border-left: 4px solid var(--cor-materia);
-		border-bottom: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: var(--raio);
+		box-shadow: var(--sombra);
+		/* clip, não hidden: arredonda a faixa sem virar contêiner de rolagem; a sombra fica de fora. */
+		overflow: clip;
 		content-visibility: auto;
 		contain-intrinsic-size: auto 480px;
+	}
+
+	/* Faixa da matéria no topo: uma borda esquerda colorida brigaria com o contorno grosso. */
+	.post::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto;
+		height: 6px;
+		background: var(--cor-materia);
 	}
 
 	.cabecalho {
@@ -181,7 +195,6 @@
 		color: var(--cor-materia-texto);
 		font-size: 0.875rem;
 		font-weight: 800;
-		letter-spacing: 0.02em;
 	}
 
 	.identificacao {
@@ -191,7 +204,8 @@
 
 	.materia {
 		margin: 0;
-		font-size: 0.9375rem;
+		font-family: var(--fonte-titulo);
+		font-size: 1rem;
 		font-weight: 700;
 		line-height: 1.3;
 		overflow-wrap: anywhere;
@@ -209,7 +223,8 @@
 		flex-shrink: 0;
 		max-width: 8.5em;
 		padding: 3px 8px;
-		border-radius: 6px;
+		border-radius: calc(var(--raio) / 2);
+		border: 1px solid var(--cor-aviso);
 		background: var(--cor-aviso-fundo);
 		color: var(--cor-aviso);
 		font-size: 0.75rem;
@@ -236,7 +251,7 @@
 	}
 
 	.coracao-grande :global(svg) {
-		filter: drop-shadow(0 2px 8px rgb(0 0 0 / 25%));
+		filter: drop-shadow(2px 2px 0 var(--cor-texto));
 	}
 
 	@keyframes coracao {

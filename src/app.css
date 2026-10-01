@@ -1,80 +1,171 @@
-/* Tokens de tema. Pares texto/fundo com contraste >= 4,5:1 nos dois temas (NFR-005). */
-:root {
-	--cor-fundo: #f6f7fb;
-	--cor-superficie: #ffffff;
-	--cor-texto: #111827;
-	--cor-texto-suave: #4b5563;
-	--cor-borda: #e5e7eb;
-	--cor-primaria: #1b4dd8;
-	--cor-primaria-texto: #ffffff;
-	--cor-azul: #1b4dd8;
-	--cor-verde: #047857;
-	--cor-roxo: #6d28d9;
-	--cor-laranja: #b45309;
-	--cor-vermelho: #b91c1c;
-	--raio: 14px;
-	--espaco: 16px;
-	--sombra: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 6%);
-	--fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-	/* Feed de estudo (WP04). Pares conferidos em contraste >= 4,5:1 (texto) e >= 3:1 (anel/ícone). */
-	--fonte-texto: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
-	--cor-acerto: #0f6b3f; /* 5,76 sobre --cor-acerto-fundo; 6,57 sobre superfície */
-	--cor-acerto-fundo: #e3f4ea;
-	--cor-erro: #a3261d; /* 6,19 sobre --cor-erro-fundo; 7,36 sobre superfície */
-	--cor-erro-fundo: #fbe7e4;
-	--cor-aviso: #7a4a00; /* 6,68 sobre --cor-aviso-fundo */
-	--cor-aviso-fundo: #fdf1d8;
-	--cor-curtida: #c0265a; /* 5,73 sobre superfície */
-	--cor-lei: #1e3a8a; /* número do artigo: 10,36 sobre superfície */
-	--cor-visto: #7c8595; /* anel de story visto: 3,47 sobre fundo */
-	/* Cor por matéria (índice derivado do id): texto --cor-materia-texto sobre cada uma >= 4,99:1. */
-	--cor-materia-texto: #ffffff;
-	--materia-0: #1b4dd8;
-	--materia-1: #047857;
-	--materia-2: #6d28d9;
-	--materia-3: #b45309;
-	--materia-4: #b91c1c;
-	--materia-5: #0e7490;
-	--materia-6: #be185d;
-	--materia-7: #4d7c0f;
-	--altura-abas: 60px;
-	color-scheme: light;
+/* Fontes empacotadas no app (C-001): cortadas para o latim por scripts/fontes/cortar.py. Licença em /fontes/OFL.txt. */
+@font-face {
+	font-family: 'Literata';
+	src: url('/fontes/literata-400.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Literata';
+	src: url('/fontes/literata-400i.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Literata';
+	src: url('/fontes/literata-700.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Grandstander';
+	src: url('/fontes/grandstander-700.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+/* Fallback métrico: Georgia ajustada à Literata 400 (opsz 12) para a troca não mudar a quebra de linha.
+   size-adjust = largura média da Literata / Georgia num parágrafo de lei em pt-BR (1,063);
+   os overrides são as métricas hhea da Literata divididas pelo size-adjust. */
+@font-face {
+	font-family: 'Literata Fallback';
+	src: local('Georgia');
+	size-adjust: 106.3%;
+	ascent-override: 110.7%;
+	descent-override: 29%;
+	line-gap-override: 0%;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--cor-fundo: #0b1220;
-		--cor-superficie: #111a2e;
-		--cor-texto: #e5e7eb;
-		--cor-texto-suave: #a3adbf;
-		--cor-borda: #24304a;
-		--cor-primaria: #7aa2ff;
-		--cor-primaria-texto: #0b1220;
-		--cor-azul: #7aa2ff;
-		--cor-verde: #34d399;
-		--cor-roxo: #c4b5fd;
-		--cor-laranja: #fbbf24;
-		--cor-vermelho: #fca5a5;
-		--cor-acerto: #6ee7a8; /* 9,96 sobre --cor-acerto-fundo */
-		--cor-acerto-fundo: #0f2a1f;
-		--cor-erro: #fca5a5; /* 8,56 sobre --cor-erro-fundo */
-		--cor-erro-fundo: #3a1417;
-		--cor-aviso: #fcd34d; /* 10,24 sobre --cor-aviso-fundo */
-		--cor-aviso-fundo: #33260a;
-		--cor-curtida: #f472b6; /* 6,55 sobre superfície */
-		--cor-lei: #bfd0ff; /* 11,30 sobre superfície */
-		--cor-visto: #6b7489; /* 4,00 sobre fundo */
-		--cor-materia-texto: #0b1220; /* >= 7,52:1 sobre cada --materia-N */
-		--materia-0: #7aa2ff;
-		--materia-1: #34d399;
-		--materia-2: #c4b5fd;
-		--materia-3: #fbbf24;
-		--materia-4: #fca5a5;
-		--materia-5: #67e8f9;
-		--materia-6: #f9a8d4;
-		--materia-7: #bef264;
-		color-scheme: dark;
-	}
+/* Tokens comuns aos três temas. */
+:root {
+	--fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--fonte-texto: 'Literata', 'Literata Fallback', Georgia, serif;
+	--medida: 64ch; /* coluna de leitura (FR-007) */
+	--espaco: 16px;
+	--altura-abas: 60px;
+}
+
+/* Tokens por tema (contrato tema.md §5). O tema vem de data-tema no <html>, posto pelo script
+   inline de app.html; o mesmo atributo num elemento interno aplica o tema só naquele trecho.
+   Contraste WCAG 2.x ao lado de cada par (§6), conferido por tests/unit/contraste.test.ts. */
+:root,
+[data-tema='aventura'] {
+	/* Aventura: paleta pastel (vault: Paleta — Doodles). Fallback sem JS. */
+	color-scheme: light;
+	--cor-fundo: #fefbe4;
+	--cor-superficie: #fffef6;
+	--cor-divisor: #e4dceb;
+	--cor-texto: #1a0c0c; /* 18,27 sobre fundo; 18,84 sobre superfície */
+	--cor-texto-suave: #5c4b6e; /* 7,49 sobre fundo; 7,73 sobre superfície */
+	--cor-lei: #6c50c3; /* 5,81 sobre superfície */
+	--cor-primaria: #6c50c3; /* 5,63 sobre fundo (também o anel de foco) */
+	--cor-primaria-texto: #fffef6; /* 5,81 sobre primária */
+	--cor-curtida: #c2257f; /* 5,37 sobre superfície */
+	--cor-acerto: #0b5e4e; /* 6,62 sobre --cor-acerto-fundo */
+	--cor-acerto-fundo: #d2f5ee;
+	--cor-erro: #9e1f5c; /* 6,10 sobre --cor-erro-fundo */
+	--cor-erro-fundo: #fce1ec;
+	--cor-aviso: #1a0c0c; /* 15,45 sobre --cor-aviso-fundo */
+	--cor-aviso-fundo: #fde792;
+	--cor-visto: #8c8296; /* anel de story visto: 3,50 sobre fundo */
+	/* Cor por matéria: texto --cor-materia-texto sobre cada uma >= 5,12:1 (pior: materia-0). */
+	--cor-materia-texto: #1a0c0c;
+	--materia-0: #b265ce;
+	--materia-1: #f082ca;
+	--materia-2: #fcc2aa;
+	--materia-3: #fde792;
+	--materia-4: #63e0ca;
+	--materia-5: #7bb0ff;
+	--materia-6: #8174ed;
+	--materia-7: #ef99be;
+	--cor-borda: #1a0c0c; /* 18,27 sobre fundo; 18,84 sobre superfície */
+	--linha-peso: 2.5px;
+	--sombra: 4px 4px 0 var(--cor-texto);
+	--raio: 18px;
+	/* Grão de papel: ruído escuro, opacidade 0,18. */
+	--textura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04 0.9' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.18'/%3E%3C/svg%3E");
+	--fonte-titulo: 'Grandstander', var(--fonte);
+}
+
+:root[data-tema='kindle'],
+[data-tema='kindle'] {
+	/* Kindle: tinta sobre papel, sem cor. Acerto e erro se distinguem por ícone, texto e fundo. */
+	color-scheme: light;
+	--cor-fundo: #edebe6;
+	--cor-superficie: #f6f5f1;
+	--cor-divisor: #d6d3cc;
+	--cor-texto: #1c1c1c; /* 14,30 sobre fundo; 15,62 sobre superfície */
+	--cor-texto-suave: #5a5a5a; /* 5,79 sobre fundo; 6,32 sobre superfície */
+	--cor-lei: #1c1c1c; /* 15,62 sobre superfície */
+	--cor-primaria: #1c1c1c; /* 14,30 sobre fundo (também o anel de foco) */
+	--cor-primaria-texto: #f6f5f1; /* 15,62 sobre primária */
+	--cor-curtida: #1c1c1c; /* 15,62 sobre superfície */
+	--cor-acerto: #1c1c1c; /* 11,40 sobre --cor-acerto-fundo */
+	--cor-acerto-fundo: #d6d3cc;
+	--cor-erro: #1c1c1c; /* 15,62 sobre --cor-erro-fundo */
+	--cor-erro-fundo: #f6f5f1;
+	--cor-aviso: #1c1c1c; /* 11,40 sobre --cor-aviso-fundo */
+	--cor-aviso-fundo: #d6d3cc;
+	--cor-visto: #83817c; /* anel de story visto: 3,27 sobre fundo */
+	/* Matérias sem cor no Kindle: texto sobre cada uma 11,40:1. */
+	--cor-materia-texto: #1c1c1c;
+	--materia-0: #d6d3cc;
+	--materia-1: #d6d3cc;
+	--materia-2: #d6d3cc;
+	--materia-3: #d6d3cc;
+	--materia-4: #d6d3cc;
+	--materia-5: #d6d3cc;
+	--materia-6: #d6d3cc;
+	--materia-7: #d6d3cc;
+	--cor-borda: #7a7872; /* 3,71 sobre fundo; 4,05 sobre superfície */
+	--linha-peso: 1px;
+	--sombra: none;
+	--raio: 4px;
+	/* Grão de papel: ruído escuro, opacidade 0,06. */
+	--textura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04 0.9' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.06'/%3E%3C/svg%3E");
+	--fonte-titulo: var(--fonte-texto);
+}
+
+:root[data-tema='kindle-escuro'],
+[data-tema='kindle-escuro'] {
+	/* Kindle escuro: tinta clara sobre papel escuro, sem cor. */
+	color-scheme: dark;
+	--cor-fundo: #161615;
+	--cor-superficie: #1f1f1d;
+	--cor-divisor: #3a3935;
+	--cor-texto: #d9d6cf; /* 12,48 sobre fundo; 11,38 sobre superfície */
+	--cor-texto-suave: #a3a09a; /* 6,94 sobre fundo; 6,33 sobre superfície */
+	--cor-lei: #d9d6cf; /* 11,38 sobre superfície */
+	--cor-primaria: #d9d6cf; /* 12,48 sobre fundo (também o anel de foco) */
+	--cor-primaria-texto: #161615; /* 12,48 sobre primária */
+	--cor-curtida: #d9d6cf; /* 11,38 sobre superfície */
+	--cor-acerto: #d9d6cf; /* 7,97 sobre --cor-acerto-fundo */
+	--cor-acerto-fundo: #3a3935;
+	--cor-erro: #d9d6cf; /* 11,38 sobre --cor-erro-fundo */
+	--cor-erro-fundo: #1f1f1d;
+	--cor-aviso: #d9d6cf; /* 7,97 sobre --cor-aviso-fundo */
+	--cor-aviso-fundo: #3a3935;
+	--cor-visto: #6e6c67; /* anel de story visto: 3,45 sobre fundo */
+	/* Matérias sem cor no Kindle escuro: texto sobre cada uma 7,97:1. */
+	--cor-materia-texto: #d9d6cf;
+	--materia-0: #3a3935;
+	--materia-1: #3a3935;
+	--materia-2: #3a3935;
+	--materia-3: #3a3935;
+	--materia-4: #3a3935;
+	--materia-5: #3a3935;
+	--materia-6: #3a3935;
+	--materia-7: #3a3935;
+	--cor-borda: #77746e; /* 3,89 sobre fundo; 3,54 sobre superfície */
+	--linha-peso: 1px;
+	--sombra: none;
+	--raio: 4px;
+	/* Grão de papel: ruído claro, opacidade 0,04. */
+	--textura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04 0.9' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -1.4 1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.04'/%3E%3C/svg%3E");
+	--fonte-titulo: var(--fonte-texto);
 }
 
 *,
@@ -89,11 +180,25 @@ body {
 }
 
 body {
+	/* position e isolation: a textura em z-index -1 fica acima do fundo e abaixo do conteúdo. */
+	position: relative;
+	isolation: isolate;
 	background: var(--cor-fundo);
 	color: var(--cor-texto);
 	font-family: var(--fonte);
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
+}
+
+/* Papel (FR-005): uma camada fixa, que não repinta ao rolar. */
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background-image: var(--textura);
+	background-repeat: repeat;
 }
 
 button,
@@ -121,9 +226,36 @@ select {
 	border: 0;
 }
 
+/* FR-008: temas Kindle não animam (tinta eletrônica); reduzir movimento vale em qualquer tema. */
+[data-tema^='kindle'],
+[data-tema^='kindle'] *,
+[data-tema^='kindle'] *::before,
+[data-tema^='kindle'] *::after {
+	transition: none !important;
+	animation: none !important;
+}
 @media (prefers-reduced-motion: reduce) {
-	* {
+	*,
+	*::before,
+	*::after {
 		transition: none !important;
 		animation: none !important;
+	}
+}
+
+/* Impressão: papel branco e tinta preta em qualquer tema. :root[data-tema] empata em
+   especificidade com os blocos de tema e vence por vir depois. */
+@media print {
+	body::before {
+		display: none;
+	}
+	:root,
+	:root[data-tema],
+	[data-tema] {
+		color-scheme: light;
+		--cor-fundo: #fff;
+		--cor-superficie: #fff;
+		--cor-texto: #000;
+		--sombra: none;
 	}
 }

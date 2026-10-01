@@ -3,10 +3,36 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-		<meta name="color-scheme" content="light dark" />
-		<meta name="theme-color" content="#1b4dd8" media="(prefers-color-scheme: light)" />
-		<meta name="theme-color" content="#0f1729" media="(prefers-color-scheme: dark)" />
-		<meta name="description" content="Escolha seu concurso e organize seus estudos." />
+		<meta name="color-scheme" content="light" />
+		<meta name="theme-color" content="#fefbe4" />
+		<script>
+			// Tema antes da primeira pintura (contrato tema.md §3). Mesma regra de src/lib/tema.svelte.ts.
+			(function () {
+				var temas = ['aventura', 'kindle', 'kindle-escuro'];
+				var fundo = { aventura: '#fefbe4', kindle: '#edebe6', 'kindle-escuro': '#161615' };
+				var p = 'sistema';
+				try {
+					var v = JSON.parse(localStorage.getItem('painel-concurso:tema:v1') || 'null');
+					if (v && temas.indexOf(v.tema) >= 0) p = v.tema;
+				} catch (e) {}
+				var escuro = false;
+				try {
+					escuro = matchMedia('(prefers-color-scheme: dark)').matches;
+				} catch (e) {}
+				var t = p !== 'sistema' ? p : escuro ? 'kindle-escuro' : 'aventura';
+				document.documentElement.dataset.tema = t;
+				var m = document.querySelector('meta[name="theme-color"]');
+				if (m) m.setAttribute('content', fundo[t]);
+			})();
+		</script>
+		<meta name="description" content="Feed de estudo para o concurso da CGU." />
+		<link
+			rel="preload"
+			href="%sveltekit.assets%/fontes/literata-400.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
 		<link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest" />
 		<link rel="icon" href="%sveltekit.assets%/icones/icone.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="%sveltekit.assets%/icones/icone-192.png" />

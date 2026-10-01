@@ -71,18 +71,20 @@
 <style>
 	.progresso {
 		background: var(--cor-superficie);
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 		border-radius: var(--raio);
 		padding: var(--espaco);
 	}
 
 	h2 {
 		margin: 0 0 12px;
+		font-family: var(--fonte-titulo);
 		font-size: 1.125rem;
 	}
 
 	h3 {
 		margin: var(--espaco) 0 8px;
+		font-family: var(--fonte-titulo);
 		font-size: 1rem;
 	}
 
@@ -104,7 +106,8 @@
 		flex-direction: column-reverse;
 		gap: 2px;
 		padding: 10px 12px;
-		border-radius: 10px;
+		border: 1px solid var(--cor-divisor);
+		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-fundo);
 		min-width: 0;
 	}
@@ -136,7 +139,7 @@
 		justify-content: space-between;
 		gap: 0 12px;
 		padding: 6px 0;
-		border-bottom: 1px solid var(--cor-borda);
+		border-bottom: 1px solid var(--cor-divisor);
 	}
 
 	.nome {

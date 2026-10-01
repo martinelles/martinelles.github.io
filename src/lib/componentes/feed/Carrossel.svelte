@@ -131,7 +131,7 @@
 		overscroll-behavior-x: contain;
 		touch-action: pan-x pan-y;
 		scrollbar-width: none;
-		border-radius: 10px;
+		border-radius: calc(var(--raio) / 2);
 	}
 
 	.faixa::-webkit-scrollbar {
@@ -158,7 +158,7 @@
 		display: grid;
 		place-items: center;
 		padding: 0;
-		border: 1px solid var(--cor-borda);
+		border: var(--linha-peso) solid var(--cor-borda);
 		border-radius: 50%;
 		background: var(--cor-superficie);
 		cursor: pointer;
@@ -189,7 +189,7 @@
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: var(--cor-borda);
+		background: var(--cor-divisor);
 		transition: width 0.2s ease, background-color 0.2s ease;
 	}
 

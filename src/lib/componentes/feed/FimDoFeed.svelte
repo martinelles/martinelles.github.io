@@ -38,12 +38,13 @@
 		display: grid;
 		place-items: center;
 		border-radius: 50%;
-		border: 2px solid var(--cor-acerto);
+		border: var(--linha-peso) solid var(--cor-acerto);
 		color: var(--cor-acerto);
 	}
 
 	h2 {
 		margin: 8px 0 0;
+		font-family: var(--fonte-titulo);
 		font-size: 1.125rem;
 	}
 
@@ -59,7 +60,10 @@
 		min-height: 44px;
 		margin-top: 8px;
 		padding: 0 20px;
-		border-radius: 999px;
+		/* Botão primário do sistema: contorno, raio de peça interna e sombra dura. */
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		box-shadow: var(--sombra);
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
 		font-weight: 700;
