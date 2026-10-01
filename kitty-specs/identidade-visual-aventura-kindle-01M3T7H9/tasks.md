@@ -35,12 +35,12 @@
 | T022 | `FocoEstudo`, `ProgressoEstudo`, `GradeFerramentas` | WP04 | [D] |
 | T023 | `/ferramenta/[id]` e página de erro | WP04 | [D] |
 | T024 | Varredura C-004 nas telas | WP04 | | [D] |
-| T025 | e2e: tema padrão, troca, persistência, posição de rolagem, sem clarão | WP05 | |
-| T026 | e2e: sem cor fora dos tokens; Kindle sem movimento e em escala de cinza | WP05 | |
-| T027 | e2e: responsivo nos 3 temas, a 360 px e com zoom de 200% | WP05 | [P] |
-| T028 | e2e: offline com fontes e textura | WP05 | [P] |
-| T029 | Medições (NFR-002 a NFR-005) e capturas para SC-005 em `medicoes.md` | WP05 | |
-| T030 | Emenda do charter (tema escuro) | WP05 | |
+| T025 | e2e: tema padrão, troca, persistência, posição de rolagem, sem clarão | WP05 | | [D] |
+| T026 | e2e: sem cor fora dos tokens; Kindle sem movimento e em escala de cinza | WP05 | | [D] |
+| T027 | e2e: responsivo nos 3 temas, a 360 px e com zoom de 200% | WP05 | [D] |
+| T028 | e2e: offline com fontes e textura | WP05 | [D] |
+| T029 | Medições (NFR-002 a NFR-005) e capturas para SC-005 em `medicoes.md` | WP05 | | [D] |
+| T030 | Emenda do charter (tema escuro) | WP05 | | [D] |
 
 ## Fase 1 — Fundação
 
@@ -103,12 +103,12 @@ Objetivo: as rotas e os componentes do painel seguem o mesmo sistema (cartões e
 
 Objetivo: os cenários 1 a 5 da spec automatizados, as NFR medidas e registradas, as capturas para a dona aprovar (SC-005) e a emenda do charter pronta.
 
-- [ ] T025 e2e: tema padrão, troca, persistência, posição de rolagem, sem clarão (WP05)
-- [ ] T026 e2e: sem cor fora dos tokens; Kindle sem movimento e em escala de cinza (WP05)
-- [ ] T027 e2e: responsivo nos 3 temas, a 360 px e com zoom de 200% (WP05)
-- [ ] T028 e2e: offline com fontes e textura (WP05)
-- [ ] T029 Medições (NFR-002 a NFR-005) e capturas para SC-005 em `medicoes.md` (WP05)
-- [ ] T030 Emenda do charter (tema escuro) (WP05)
+- [x] T025 e2e: tema padrão, troca, persistência, posição de rolagem, sem clarão (WP05)
+- [x] T026 e2e: sem cor fora dos tokens; Kindle sem movimento e em escala de cinza (WP05)
+- [x] T027 e2e: responsivo nos 3 temas, a 360 px e com zoom de 200% (WP05)
+- [x] T028 e2e: offline com fontes e textura (WP05)
+- [x] T029 Medições (NFR-002 a NFR-005) e capturas para SC-005 em `medicoes.md` (WP05)
+- [x] T030 Emenda do charter (tema escuro) (WP05)
 
 ## Dependências e paralelismo
 
