@@ -9,11 +9,11 @@
 
 | ID | Descrição | WP | Parallel |
 |---|---|---|---|
-| T001 | `plano.mjs`: ler `ESTUDO.csv`, filtrar, ordenar, mapear disciplina → matéria | WP01 | |
-| T002 | Parâmetros de `feed-conteudo/plano.md` com padrão D2 | WP01 | [P] |
-| T003 | Ligar no `index.mjs`, relatório e determinismo | WP01 | |
-| T004 | Testes do importador do plano | WP01 | |
-| T005 | Gerar e commitar `static/conteudo/plano.json`; criar `feed-conteudo/plano.md` | WP01 | |
+| T001 | `plano.mjs`: ler `ESTUDO.csv`, filtrar, ordenar, mapear disciplina → matéria | WP01 | | [D] |
+| T002 | Parâmetros de `feed-conteudo/plano.md` com padrão D2 | WP01 | [D] |
+| T003 | Ligar no `index.mjs`, relatório e determinismo | WP01 | | [D] |
+| T004 | Testes do importador do plano | WP01 | | [D] |
+| T005 | Gerar e commitar `static/conteudo/plano.json`; criar `feed-conteudo/plano.md` | WP01 | | [D] |
 | T006 | Tipos e carga do plano | WP02 | | [D] |
 | T007 | `missao.ts`, `dias.ts`, `horas.ts` | WP02 | [D] |
 | T008 | `registro.svelte.ts` com cronômetro por timestamps e fotos | WP02 | | [D] |
@@ -28,11 +28,11 @@
 ## WP01 — Importação do plano
 **Prompt**: [tasks/WP01-importacao-plano.md](tasks/WP01-importacao-plano.md) · P1 · Dependências: nenhuma
 
-- [ ] T001 `plano.mjs`: ler `ESTUDO.csv`, filtrar, ordenar, mapear disciplina → matéria (WP01)
-- [ ] T002 Parâmetros de `feed-conteudo/plano.md` com padrão D2 (WP01)
-- [ ] T003 Ligar no `index.mjs`, relatório e determinismo (WP01)
-- [ ] T004 Testes do importador do plano (WP01)
-- [ ] T005 Gerar e commitar `static/conteudo/plano.json`; criar `feed-conteudo/plano.md` (WP01)
+- [x] T001 `plano.mjs`: ler `ESTUDO.csv`, filtrar, ordenar, mapear disciplina → matéria (WP01)
+- [x] T002 Parâmetros de `feed-conteudo/plano.md` com padrão D2 (WP01)
+- [x] T003 Ligar no `index.mjs`, relatório e determinismo (WP01)
+- [x] T004 Testes do importador do plano (WP01)
+- [x] T005 Gerar e commitar `static/conteudo/plano.json`; criar `feed-conteudo/plano.md` (WP01)
 
 ## WP02 — Motor do plano
 **Prompt**: [tasks/WP02-motor-plano.md](tasks/WP02-motor-plano.md) · P1 · Dependências: nenhuma
