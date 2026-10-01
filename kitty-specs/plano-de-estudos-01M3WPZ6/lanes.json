@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "mission_slug": "plano-de-estudos-01M3WPZ6",
+  "mission_id": "01M3WPZ6CYBK6QXEX40VYD69ES",
+  "mission_branch": "kitty/mission-plano-de-estudos-01M3WPZ6",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "scripts/importar/index.mjs",
+        "scripts/importar/plano.mjs",
+        "static/conteudo/**",
+        "tests/unit/importar/fixtures/plano/**",
+        "tests/unit/importar/plano.test.ts"
+      ],
+      "predicted_surfaces": [],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/lib/plano/**",
+        "tests/unit/plano/**"
+      ],
+      "predicted_surfaces": [],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03"
+      ],
+      "write_scope": [
+        "kitty-specs/plano-de-estudos-01M3WPZ6/medicoes.md",
+        "src/lib/componentes/plano/**",
+        "src/routes/+page.svelte",
+        "src/routes/painel/+page.svelte",
+        "src/routes/tarefa/**",
+        "tests/e2e/feed.spec.ts",
+        "tests/e2e/painel.spec.ts",
+        "tests/e2e/plano.spec.ts",
+        "tests/e2e/responsivo.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-10-01T21:51:33.773972+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}
