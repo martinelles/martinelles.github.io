@@ -18,11 +18,11 @@
 | T005 | Regra de movimento dos temas Kindle | WP01 | [D] |
 | T006 | Script inline de tema, `theme-color`, preload e manifesto | WP01 | | [D] |
 | T007 | `contraste.test.ts` lendo `app.css` | WP01 | | [D] |
-| T008 | Store `tema.svelte.ts` | WP02 | |
-| T009 | `tema.test.ts` | WP02 | |
-| T010 | `carregarTema()` no layout raiz | WP02 | |
-| T011 | `SeletorTema.svelte` com prévia | WP02 | |
-| T012 | Seletor no painel | WP02 | |
+| T008 | Store `tema.svelte.ts` | WP02 | | [D] |
+| T009 | `tema.test.ts` | WP02 | | [D] |
+| T010 | `carregarTema()` no layout raiz | WP02 | | [D] |
+| T011 | `SeletorTema.svelte` com prévia | WP02 | | [D] |
+| T012 | Seletor no painel | WP02 | | [D] |
 | T013 | `Post` e `AcoesPost`: cartão com contorno e sombra dura | WP03 | |
 | T014 | `CorpoQuestao`: opções e estados de acerto e erro nos 3 temas | WP03 | [P] |
 | T015 | `CorpoLei`, `CorpoResumo`, `CorpoFlashcard`: coluna de leitura e contorno | WP03 | [P] |
@@ -66,11 +66,11 @@ Sequência: T001, T002, T003, então T004 e T005 em paralelo, e depois T006 e T0
 
 Objetivo: a pessoa escolhe entre Aventura, Kindle, Kindle escuro e Seguir o aparelho no painel; a escolha persiste e o modo "sistema" acompanha o aparelho ao vivo. Teste independente: `tema.test.ts` e a troca manual no `/painel`.
 
-- [ ] T008 Store `tema.svelte.ts` (WP02)
-- [ ] T009 `tema.test.ts` (WP02)
-- [ ] T010 `carregarTema()` no layout raiz (WP02)
-- [ ] T011 `SeletorTema.svelte` com prévia (WP02)
-- [ ] T012 Seletor no painel (WP02)
+- [x] T008 Store `tema.svelte.ts` (WP02)
+- [x] T009 `tema.test.ts` (WP02)
+- [x] T010 `carregarTema()` no layout raiz (WP02)
+- [x] T011 `SeletorTema.svelte` com prévia (WP02)
+- [x] T012 Seletor no painel (WP02)
 
 ### WP03 — Componentes do feed no novo visual
 **Prompt**: [tasks/WP03-componentes-feed-visual.md](tasks/WP03-componentes-feed-visual.md) · **Prioridade**: P1 · **Dependências**: WP01 · ~460 linhas
