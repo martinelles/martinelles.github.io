@@ -1,10 +1,12 @@
 {
   "created_at": "2026-10-01T21:47:17.974377+00:00",
-  "friendly_name": "plano de estudos",
+  "friendly_name": "Plano de Estudos",
   "mission_id": "01M3WPZ6CYBK6QXEX40VYD69ES",
   "mission_number": null,
   "mission_slug": "plano-de-estudos-01M3WPZ6",
   "mission_type": "software-dev",
   "slug": "plano-de-estudos-01M3WPZ6",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "source_description": "Painel do plano de estudos: horas totais e estudadas, % concluída com barra, dias no plano/em aberto/concluídos/restantes, missão do dia com botão iniciar, nº de tarefas, tempo estimado e % feita. Plano 01/10–20/12/2026, 3 h/dia; progresso no app, exportável."
 }
