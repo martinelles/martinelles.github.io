@@ -21,8 +21,8 @@ subtasks:
 - T005
 phase: Fase 1
 assignee: ''
-agent: "claude:opus:reviewer:reviewer"
-shell_pid: "32256"
+agent: "claude:opus:implementer:implementer"
+shell_pid: "12508"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -86,3 +86,4 @@ Conferir 10 tarefas contra o `ESTUDO.csv` (ordem, filtro, matéria); ver que INF
 - 2026-10-01T22:28:43Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Started review via action command
 - 2026-10-01T22:32:07Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Review passed: 236 tarefas conferidas 1:1 contra ESTUDO.csv (ordem prioridade desc + id asc, INF-14..19 fora, 13 disciplinas mapeadas, topico/status literais); schema ok; 8.6 KB gzip; 2 execucoes byte-identicas e iguais aos blobs commitados (indice.json/lotes inalterados); plano.md no vault com D2 e unica escrita; check/test 207/build/e2e 131 ok
 - 2026-10-01T23:38:25Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Moved to planned
+- 2026-10-01T23:38:54Z – claude:opus:implementer:implementer – shell_pid=12508 – Started implementation via action command
