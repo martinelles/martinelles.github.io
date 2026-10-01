@@ -29,8 +29,8 @@ subtasks:
 - T030
 phase: Fase 3 - Aceite
 assignee: ''
-agent: ''
-shell_pid: '35040'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "35040"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -181,3 +181,7 @@ verdade (plan, Complexity Tracking, linha 1).
 - Quebre de propósito um token no `app.css` local (por exemplo, um hex fixo num componente) e confira que o T026 item 1 falha com uma mensagem legível. Desfaça depois.
 - Confira que o `medicoes.md` tem a meta da spec **igual** ao texto da spec.
 - Confira que o commit do charter tem só os arquivos do charter.
+
+## Activity Log
+
+- 2026-10-01T00:30:24Z – claude:opus:implementer:implementer – shell_pid=35040 – Assigned agent via action command
