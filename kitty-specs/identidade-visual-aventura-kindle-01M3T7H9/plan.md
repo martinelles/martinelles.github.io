@@ -114,7 +114,7 @@ tests/
 | FR-011, NFR-007 | e2e: `data-tema` já presente no `DOMContentLoaded`, antes de o app hidratar, em 10 cargas por tema |
 | FR-004, SC-001 | e2e: em cada rota e tema, nenhum elemento visível tem cor calculada fora do conjunto de tokens do tema (tolerância de arredondamento) |
 | FR-008, SC-004 | e2e: nos temas Kindle, todo elemento tem `transition-duration` e `animation-duration` iguais a 0 s depois de curtir, virar e deslizar |
-| Cenário 4.3 | e2e: no Kindle, todas as cores calculadas com saturação HSL ≤ 8% |
+| Cenário 4.3 | e2e: no Kindle, todas as cores calculadas pertencem aos tokens do tema Kindle (D5 da spec, 2026-09-30, substitui "saturação HSL ≤ 8%", que contradizia o data-model) |
 | NFR-001, SC-003 | `contraste.test.ts`: a lista de pares vem do contrato e a saída é anexada à revisão |
 | NFR-002 | e2e ou script: soma dos `.woff2` comprimidos ≤ 120 KB |
 | NFR-006 | `responsivo.spec.ts` estendido aos 3 temas, a 360 px e com zoom de 200% |

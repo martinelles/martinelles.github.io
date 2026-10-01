@@ -29,6 +29,9 @@ um visual que não pareça "gerado por IA", e o tema Kindle é para ler sem cans
 | D2 | Temas | Aventura (cor) e Kindle (preto e branco), à escolha da pessoa |
 | D3 | Estilo-base | Typographic e Minimal; fundo com textura de papel |
 | D4 | Modo escuro atual | Substituído por uma variante escura no estilo Kindle |
+| D5 | Kindle neutro ou quente (2026-09-30, após as capturas) | **Papel quente**: o Kindle usa só as cores do próprio tema, cinzas levemente quentes (saturação medida de 10,9% a 21,7%). Aceito: não é cinza neutro. Reabrir se a dona preferir cinza puro |
+| D6 | NFR-003 no pior caso (2026-09-30) | **Aceito com registro**: mediana de 44 a 84 ms, pior caso de 192 ms (7 de 90 trocas acima de 100 ms, CPU 4× e máquina carregada). Reabrir se a mediana passar de 100 ms ou a demora aparecer no aparelho dela |
+| D7 | SC-005 (2026-09-30) | **Aprovado**: a dona viu as capturas dos 3 temas ao lado do app antigo |
 
 ## Cenários de uso e testes
 
@@ -62,7 +65,7 @@ A pessoa troca de tema para ler com menos cor.
 **Aceite**
 1. **Dado** o tema Kindle ou Kindle escuro, **quando** a pessoa abre um post de lei seca ou de resumo, **então** o texto vem em serifa de livro, numa coluna de 60 a 66 caracteres por linha.
 2. **Dado** o tema Kindle ou Kindle escuro, **quando** a pessoa interage (curtir, virar o flashcard, deslizar o carrossel, trocar de story), **então** a mudança é instantânea, sem transição animada.
-3. **Dado** o tema Kindle, **quando** a pessoa olha qualquer tela, **então** não há cor nenhuma além da escala de cinza.
+3. **Dado** o tema Kindle, **quando** a pessoa olha qualquer tela, **então** não há cor nenhuma além das cores do tema Kindle, que são cinzas levemente quentes (D5).
 
 ### Cenário 5 — Usar sem conexão (P2)
 
@@ -130,7 +133,7 @@ A pessoa troca de tema para ler com menos cor.
 - SC-001: Em 100% das telas do app, trocar de tema muda todas as cores, sem sobrar nenhum elemento com a cor do tema anterior ou do visual antigo.
 - SC-002: Depois de fechar e reabrir o app, o tema escolhido continua em 100% das tentativas.
 - SC-003: Todos os pares de cor de texto dos três temas passam de 4,5:1, com a lista dos pares medidos anexada à revisão.
-- SC-004: Uma sessão de 20 minutos lendo lei seca no tema Kindle não tem nenhuma animação nem nenhuma cor fora da escala de cinza.
+- SC-004: Uma sessão de 20 minutos lendo lei seca no tema Kindle não tem nenhuma animação nem nenhuma cor fora das cores do tema Kindle (D5).
 - SC-005: Posta ao lado da tela do app antigo, a dona reconhece o app novo como "não genérico" e aprova o visual nos três temas.
 - SC-006: Offline, os três temas aparecem idênticos à versão online.
 
