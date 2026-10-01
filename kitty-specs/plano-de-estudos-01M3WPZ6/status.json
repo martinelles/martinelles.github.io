@@ -1,12 +1,12 @@
 {
-  "event_count": 19,
-  "last_event_id": "01M3WXAR0RYCHVED5NFE3YVC45",
-  "materialized_at": "2026-10-01T23:38:25.689086+00:00",
+  "event_count": 20,
+  "last_event_id": "01M3WXAYS2R0DAJDX3HDZMRJ0W",
+  "materialized_at": "2026-10-01T23:38:32.610679+00:00",
   "mission_number": "",
   "mission_slug": "plano-de-estudos-01M3WPZ6",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 2,
+    "approved": 1,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
@@ -14,7 +14,7 @@
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
-    "planned": 1
+    "planned": 2
   },
   "work_packages": {
     "WP01": {
@@ -26,10 +26,10 @@
     },
     "WP02": {
       "actor": "user",
-      "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "01M3WS6JF78VEJ9GDD235GDA6Z",
-      "last_transition_at": "2026-10-01T22:26:14.632793+00:00"
+      "force_count": 2,
+      "lane": "planned",
+      "last_event_id": "01M3WXAYS2R0DAJDX3HDZMRJ0W",
+      "last_transition_at": "2026-10-01T23:38:32.610679+00:00"
     },
     "WP03": {
       "actor": "user",
