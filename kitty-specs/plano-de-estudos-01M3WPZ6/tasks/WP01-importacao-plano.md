@@ -82,3 +82,4 @@ Conferir 10 tarefas contra o `ESTUDO.csv` (ordem, filtro, matéria); ver que INF
 ## Activity Log
 
 - 2026-10-01T21:51:49Z – claude:opus:implementer:implementer – shell_pid=31316 – Assigned agent via action command
+- 2026-10-01T22:28:02Z – claude:opus:implementer:implementer – shell_pid=31316 – Ready for review: plano.json 236 tarefas (6 cortadas, 0 dominadas, 0 sem matéria), 8,3 KB gzip; check/test(207)/build/e2e(131) ok
