@@ -116,7 +116,7 @@ conteúdo que some ao recarregar (ACH-03) e números fixos no perfil (ACH-01).
 
 | ID | Requisito | Limite mensurável | Status |
 |---|---|---|---|
-| NFR-001 | Primeira tela do feed utilizável em celular médio com 4G | ≤ 2,5 s na primeira visita; ≤ 1 s nas seguintes | Proposto |
+| NFR-001 | Primeira tela do feed utilizável em celular médio com 4G | ≤ 2,5 s na primeira visita; ≤ 1 s nas seguintes | Aceito com limitação (2026-10-01): 1ª visita medida em 5–6 s (medicoes.md), seguintes ≤ 1 s. Aceito pela dona; reabrir se usar aparelho novo com frequência ou o catálogo crescer muito |
 | NFR-002 | Rolagem do feed | sem travadas perceptíveis: ≥ 55 quadros/s ao rolar 50 posts em celular médio | Proposto |
 | NFR-003 | Resposta ao toque (responder, curtir, salvar, virar flashcard, trocar story) | retorno visual em ≤ 100 ms | Proposto |
 | NFR-004 | Carga inicial, sem o conteúdo do feed | ≤ 300 KB transferidos (comprimido) | Proposto |
