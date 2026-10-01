@@ -21,8 +21,8 @@ subtasks:
 - T005
 phase: Fase 1
 assignee: ''
-agent: ''
-shell_pid: '31316'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "31316"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -78,3 +78,7 @@ Filtro (dominado, cortado), ordenação e empate, mapa de disciplinas (todas as 
 
 ## Guia do revisor
 Conferir 10 tarefas contra o `ESTUDO.csv` (ordem, filtro, matéria); ver que INF-14..19 estão fora.
+
+## Activity Log
+
+- 2026-10-01T21:51:49Z – claude:opus:implementer:implementer – shell_pid=31316 – Assigned agent via action command
