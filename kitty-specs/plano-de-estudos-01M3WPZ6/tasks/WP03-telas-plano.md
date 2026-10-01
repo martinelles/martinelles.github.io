@@ -32,8 +32,8 @@ subtasks:
 - T015
 phase: Fase 2
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "21864"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "4916"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -98,3 +98,4 @@ Fazer um "dia" inteiro com relógio fixo: iniciar, pausar, fechar, reabrir, conc
 
 - 2026-10-01T22:32:37Z – claude:opus:implementer:implementer – shell_pid=21864 – Assigned agent via action command
 - 2026-10-01T22:59:12Z – claude:opus:implementer:implementer – shell_pid=21864 – Ready for review (--force: guard flagged medicoes.md, which is in WP03 owned_files)
+- 2026-10-01T23:00:25Z – claude:opus:reviewer:reviewer – shell_pid=4916 – Started review via action command
