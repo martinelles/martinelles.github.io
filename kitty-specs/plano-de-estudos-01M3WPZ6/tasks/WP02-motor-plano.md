@@ -28,8 +28,8 @@ subtasks:
 - T010
 phase: Fase 1
 assignee: ''
-agent: ''
-shell_pid: '7312'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "7312"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -81,3 +81,7 @@ Missão com rolagem de pendência (dia 1 incompleto ⇒ dia 2 começa pela pende
 
 ## Guia do revisor
 Tentar quebrar a identidade dos dias e o cronômetro (virada de dia, duas tarefas, storage falhando).
+
+## Activity Log
+
+- 2026-10-01T21:51:58Z – claude:opus:implementer:implementer – shell_pid=7312 – Assigned agent via action command
