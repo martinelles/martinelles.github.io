@@ -197,3 +197,4 @@ a mesma preferência e chega ao mesmo valor. Confira com um `MutationObserver` n
 - 2026-10-01T00:26:18Z – claude:opus:implementer:implementer – shell_pid=32328 – Ready for review; e2e 63/63 run by orchestrator (CI=1, clean port) on 670b1b2
 - 2026-10-01T00:26:26Z – claude:opus:reviewer:reviewer – shell_pid=21036 – Started review via action command
 - 2026-10-01T00:29:49Z – claude:opus:reviewer:reviewer – shell_pid=21036 – Review passed: owned files only; store matches contract §2-§4; check 0 errors, unit 186/186 (tema 27), build ok; mutation checks fail 9 and 2 tests incl. case 13 parity; Playwright on 4195: arrows switch theme, 3px focus ring, sistema follows emulated scheme live, 0 store mutations of data-tema on load, theme switch does not change feed scroll vs baseline
+- 2026-10-01T03:07:22Z – claude:opus:reviewer:reviewer – shell_pid=21036 – merged in 559b8d0 | Done override: Squash merge 559b8d0 em main; registro pós-merge não moveu para done
