@@ -14,11 +14,11 @@
 | T003 | Ligar no `index.mjs`, relatório e determinismo | WP01 | |
 | T004 | Testes do importador do plano | WP01 | |
 | T005 | Gerar e commitar `static/conteudo/plano.json`; criar `feed-conteudo/plano.md` | WP01 | |
-| T006 | Tipos e carga do plano | WP02 | |
-| T007 | `missao.ts`, `dias.ts`, `horas.ts` | WP02 | [P] |
-| T008 | `registro.svelte.ts` com cronômetro por timestamps e fotos | WP02 | |
-| T009 | `exportar.ts` | WP02 | [P] |
-| T010 | Testes do motor | WP02 | |
+| T006 | Tipos e carga do plano | WP02 | | [D] |
+| T007 | `missao.ts`, `dias.ts`, `horas.ts` | WP02 | [D] |
+| T008 | `registro.svelte.ts` com cronômetro por timestamps e fotos | WP02 | | [D] |
+| T009 | `exportar.ts` | WP02 | [D] |
+| T010 | Testes do motor | WP02 | | [D] |
 | T011 | `ResumoPlano` e `MissaoDoDia` no painel + exportar | WP03 | |
 | T012 | Tela `/tarefa/[id]` com `Cronometro` e conclusão | WP03 | |
 | T013 | `ChamadaMissao` no feed | WP03 | [P] |
@@ -37,11 +37,11 @@
 ## WP02 — Motor do plano
 **Prompt**: [tasks/WP02-motor-plano.md](tasks/WP02-motor-plano.md) · P1 · Dependências: nenhuma
 
-- [ ] T006 Tipos e carga do plano (WP02)
-- [ ] T007 `missao.ts`, `dias.ts`, `horas.ts` (WP02)
-- [ ] T008 `registro.svelte.ts` com cronômetro por timestamps e fotos (WP02)
-- [ ] T009 `exportar.ts` (WP02)
-- [ ] T010 Testes do motor (WP02)
+- [x] T006 Tipos e carga do plano (WP02)
+- [x] T007 `missao.ts`, `dias.ts`, `horas.ts` (WP02)
+- [x] T008 `registro.svelte.ts` com cronômetro por timestamps e fotos (WP02)
+- [x] T009 `exportar.ts` (WP02)
+- [x] T010 Testes do motor (WP02)
 
 ## WP03 — Telas do plano e da missão
 **Prompt**: [tasks/WP03-telas-plano.md](tasks/WP03-telas-plano.md) · P1 · Dependências: WP01, WP02
