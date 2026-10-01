@@ -23,12 +23,12 @@
 | T010 | `carregarTema()` no layout raiz | WP02 | | [D] |
 | T011 | `SeletorTema.svelte` com prévia | WP02 | | [D] |
 | T012 | Seletor no painel | WP02 | | [D] |
-| T013 | `Post` e `AcoesPost`: cartão com contorno e sombra dura | WP03 | |
-| T014 | `CorpoQuestao`: opções e estados de acerto e erro nos 3 temas | WP03 | [P] |
-| T015 | `CorpoLei`, `CorpoResumo`, `CorpoFlashcard`: coluna de leitura e contorno | WP03 | [P] |
-| T016 | `Carrossel`, `BarraStories`, `FimDoFeed` | WP03 | [P] |
-| T017 | `BarraAbas` | WP03 | [P] |
-| T018 | Varredura C-004 nos componentes do feed | WP03 | |
+| T013 | `Post` e `AcoesPost`: cartão com contorno e sombra dura | WP03 | | [D] |
+| T014 | `CorpoQuestao`: opções e estados de acerto e erro nos 3 temas | WP03 | [D] |
+| T015 | `CorpoLei`, `CorpoResumo`, `CorpoFlashcard`: coluna de leitura e contorno | WP03 | [D] |
+| T016 | `Carrossel`, `BarraStories`, `FimDoFeed` | WP03 | [D] |
+| T017 | `BarraAbas` | WP03 | [D] |
+| T018 | Varredura C-004 nos componentes do feed | WP03 | | [D] |
 | T019 | Tela do feed (`/`): lista de cartões e esqueleto sem loop | WP04 | |
 | T020 | Tela `/salvos` | WP04 | [P] |
 | T021 | `CabecalhoPainel` sem rótulo em caixa-alta, com título na fonte do tema | WP04 | [P] |
@@ -77,12 +77,12 @@ Objetivo: a pessoa escolhe entre Aventura, Kindle, Kindle escuro e Seguir o apar
 
 Objetivo: os componentes em `src/lib/componentes/feed/` usam contorno por `--linha-peso`, sombra dura, divisor fino, coluna de leitura e fonte de título, sem nenhuma cor fixa. Teste independente: o feed em `/` nos 3 temas (trocando `data-tema` no console) fica igual às capturas de referência do quickstart.
 
-- [ ] T013 `Post` e `AcoesPost`: cartão com contorno e sombra dura (WP03)
-- [ ] T014 `CorpoQuestao`: opções e estados de acerto e erro nos 3 temas (WP03)
-- [ ] T015 `CorpoLei`, `CorpoResumo`, `CorpoFlashcard`: coluna de leitura e contorno (WP03)
-- [ ] T016 `Carrossel`, `BarraStories`, `FimDoFeed` (WP03)
-- [ ] T017 `BarraAbas` (WP03)
-- [ ] T018 Varredura C-004 nos componentes do feed (WP03)
+- [x] T013 `Post` e `AcoesPost`: cartão com contorno e sombra dura (WP03)
+- [x] T014 `CorpoQuestao`: opções e estados de acerto e erro nos 3 temas (WP03)
+- [x] T015 `CorpoLei`, `CorpoResumo`, `CorpoFlashcard`: coluna de leitura e contorno (WP03)
+- [x] T016 `Carrossel`, `BarraStories`, `FimDoFeed` (WP03)
+- [x] T017 `BarraAbas` (WP03)
+- [x] T018 Varredura C-004 nos componentes do feed (WP03)
 
 ### WP04 — Telas e painel no novo visual
 **Prompt**: [tasks/WP04-telas-painel-visual.md](tasks/WP04-telas-painel-visual.md) · **Prioridade**: P2 · **Dependências**: WP01 · ~400 linhas
