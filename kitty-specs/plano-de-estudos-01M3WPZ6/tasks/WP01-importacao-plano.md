@@ -85,3 +85,4 @@ Conferir 10 tarefas contra o `ESTUDO.csv` (ordem, filtro, matéria); ver que INF
 - 2026-10-01T22:28:02Z – claude:opus:implementer:implementer – shell_pid=31316 – Ready for review: plano.json 236 tarefas (6 cortadas, 0 dominadas, 0 sem matéria), 8,3 KB gzip; check/test(207)/build/e2e(131) ok
 - 2026-10-01T22:28:43Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Started review via action command
 - 2026-10-01T22:32:07Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Review passed: 236 tarefas conferidas 1:1 contra ESTUDO.csv (ordem prioridade desc + id asc, INF-14..19 fora, 13 disciplinas mapeadas, topico/status literais); schema ok; 8.6 KB gzip; 2 execucoes byte-identicas e iguais aos blobs commitados (indice.json/lotes inalterados); plano.md no vault com D2 e unica escrita; check/test 207/build/e2e 131 ok
+- 2026-10-01T23:38:25Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Moved to planned
