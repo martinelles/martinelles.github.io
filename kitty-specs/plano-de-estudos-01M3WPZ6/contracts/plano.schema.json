@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "painel-concurso/plano",
+  "title": "static/conteudo/plano.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["versao", "geradoEm", "inicio", "fim", "horasPorDia", "minutosPorTarefa", "tarefas"],
+  "properties": {
+    "versao": { "const": 1 },
+    "geradoEm": { "type": "string" },
+    "inicio": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "fim": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "horasPorDia": { "type": "number", "exclusiveMinimum": 0 },
+    "minutosPorTarefa": { "type": "integer", "minimum": 1 },
+    "tarefas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "disciplina", "materia", "topico", "minutos", "prioridade", "status"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Z]+-\\d+$" },
+          "disciplina": { "type": "string" },
+          "materia": { "type": ["string", "null"] },
+          "topico": { "type": "string", "minLength": 1 },
+          "minutos": { "type": "integer", "minimum": 1 },
+          "prioridade": { "type": "number" },
+          "status": { "enum": ["nao_iniciado", "estudado", "revisado", "travado"] }
+        }
+      }
+    }
+  }
+}
