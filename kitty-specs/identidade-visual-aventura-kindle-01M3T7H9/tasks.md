@@ -29,12 +29,12 @@
 | T016 | `Carrossel`, `BarraStories`, `FimDoFeed` | WP03 | [D] |
 | T017 | `BarraAbas` | WP03 | [D] |
 | T018 | Varredura C-004 nos componentes do feed | WP03 | | [D] |
-| T019 | Tela do feed (`/`): lista de cartões e esqueleto sem loop | WP04 | |
-| T020 | Tela `/salvos` | WP04 | [P] |
-| T021 | `CabecalhoPainel` sem rótulo em caixa-alta, com título na fonte do tema | WP04 | [P] |
-| T022 | `FocoEstudo`, `ProgressoEstudo`, `GradeFerramentas` | WP04 | [P] |
-| T023 | `/ferramenta/[id]` e página de erro | WP04 | [P] |
-| T024 | Varredura C-004 nas telas | WP04 | |
+| T019 | Tela do feed (`/`): lista de cartões e esqueleto sem loop | WP04 | | [D] |
+| T020 | Tela `/salvos` | WP04 | [D] |
+| T021 | `CabecalhoPainel` sem rótulo em caixa-alta, com título na fonte do tema | WP04 | [D] |
+| T022 | `FocoEstudo`, `ProgressoEstudo`, `GradeFerramentas` | WP04 | [D] |
+| T023 | `/ferramenta/[id]` e página de erro | WP04 | [D] |
+| T024 | Varredura C-004 nas telas | WP04 | | [D] |
 | T025 | e2e: tema padrão, troca, persistência, posição de rolagem, sem clarão | WP05 | |
 | T026 | e2e: sem cor fora dos tokens; Kindle sem movimento e em escala de cinza | WP05 | |
 | T027 | e2e: responsivo nos 3 temas, a 360 px e com zoom de 200% | WP05 | [P] |
@@ -89,12 +89,12 @@ Objetivo: os componentes em `src/lib/componentes/feed/` usam contorno por `--lin
 
 Objetivo: as rotas e os componentes do painel seguem o mesmo sistema (cartões espaçados no feed, nenhum `overflow: hidden` cortando sombra, e sem animação infinita). Teste independente: `/`, `/salvos`, `/painel` e `/ferramenta/x` nos 3 temas.
 
-- [ ] T019 Tela do feed (`/`): lista de cartões e esqueleto sem loop (WP04)
-- [ ] T020 Tela `/salvos` (WP04)
-- [ ] T021 `CabecalhoPainel` sem rótulo em caixa-alta, com título na fonte do tema (WP04)
-- [ ] T022 `FocoEstudo`, `ProgressoEstudo`, `GradeFerramentas` (WP04)
-- [ ] T023 `/ferramenta/[id]` e página de erro (WP04)
-- [ ] T024 Varredura C-004 nas telas (WP04)
+- [x] T019 Tela do feed (`/`): lista de cartões e esqueleto sem loop (WP04)
+- [x] T020 Tela `/salvos` (WP04)
+- [x] T021 `CabecalhoPainel` sem rótulo em caixa-alta, com título na fonte do tema (WP04)
+- [x] T022 `FocoEstudo`, `ProgressoEstudo`, `GradeFerramentas` (WP04)
+- [x] T023 `/ferramenta/[id]` e página de erro (WP04)
+- [x] T024 Varredura C-004 nas telas (WP04)
 
 ## Fase 3 — Aceite
 
