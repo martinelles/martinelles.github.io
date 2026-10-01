@@ -19,11 +19,11 @@
 | T008 | `registro.svelte.ts` com cronômetro por timestamps e fotos | WP02 | | [D] |
 | T009 | `exportar.ts` | WP02 | [D] |
 | T010 | Testes do motor | WP02 | | [D] |
-| T011 | `ResumoPlano` e `MissaoDoDia` no painel + exportar | WP03 | |
-| T012 | Tela `/tarefa/[id]` com `Cronometro` e conclusão | WP03 | |
-| T013 | `ChamadaMissao` no feed | WP03 | [P] |
-| T014 | e2e `plano.spec.ts` (cenários 1–4) e ajustes de painel/feed/responsivo | WP03 | |
-| T015 | Medições curtas em `medicoes.md` | WP03 | |
+| T011 | `ResumoPlano` e `MissaoDoDia` no painel + exportar | WP03 | | [D] |
+| T012 | Tela `/tarefa/[id]` com `Cronometro` e conclusão | WP03 | | [D] |
+| T013 | `ChamadaMissao` no feed | WP03 | [D] |
+| T014 | e2e `plano.spec.ts` (cenários 1–4) e ajustes de painel/feed/responsivo | WP03 | | [D] |
+| T015 | Medições curtas em `medicoes.md` | WP03 | | [D] |
 
 ## WP01 — Importação do plano
 **Prompt**: [tasks/WP01-importacao-plano.md](tasks/WP01-importacao-plano.md) · P1 · Dependências: nenhuma
@@ -46,11 +46,11 @@
 ## WP03 — Telas do plano e da missão
 **Prompt**: [tasks/WP03-telas-plano.md](tasks/WP03-telas-plano.md) · P1 · Dependências: WP01, WP02
 
-- [ ] T011 `ResumoPlano` e `MissaoDoDia` no painel + exportar (WP03)
-- [ ] T012 Tela `/tarefa/[id]` com `Cronometro` e conclusão (WP03)
-- [ ] T013 `ChamadaMissao` no feed (WP03)
-- [ ] T014 e2e `plano.spec.ts` (cenários 1–4) e ajustes de painel/feed/responsivo (WP03)
-- [ ] T015 Medições curtas em `medicoes.md` (WP03)
+- [x] T011 `ResumoPlano` e `MissaoDoDia` no painel + exportar (WP03)
+- [x] T012 Tela `/tarefa/[id]` com `Cronometro` e conclusão (WP03)
+- [x] T013 `ChamadaMissao` no feed (WP03)
+- [x] T014 e2e `plano.spec.ts` (cenários 1–4) e ajustes de painel/feed/responsivo (WP03)
+- [x] T015 Medições curtas em `medicoes.md` (WP03)
 
 ## Dependências
 
