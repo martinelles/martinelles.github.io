@@ -185,3 +185,4 @@ verdade (plan, Complexity Tracking, linha 1).
 ## Activity Log
 
 - 2026-10-01T00:30:24Z – claude:opus:implementer:implementer – shell_pid=35040 – Assigned agent via action command
+- 2026-10-01T01:38:54Z – claude:opus:implementer:implementer – shell_pid=35040 – Blocked: e2e 127/131; os 4 testes 'Kindle saturação HSL <= 8% (Cenário 4.3)' falham porque a paleta do data-model (#f6f5f1 21,7%, #edebe6 16,3%, #d6d3cc 10,9%) contradiz o critério do plan. Charter bloqueia revisão com porta falhando; decisão do orquestrador/dona. Também NFR-003 pior caso 192 ms > 100 ms (medicoes.md).
