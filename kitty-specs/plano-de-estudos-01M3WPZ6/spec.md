@@ -19,11 +19,12 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 |---|---|---|
 | D1 | Onde mora o progresso (horas estudadas, tarefas feitas) | **No app**, com exportação para ela lançar no `ESTUDO.csv`; o plano (tarefas previstas) vem do `ESTUDO.csv` pela importação |
 | D2 | Janela do plano | **01/10/2026 a 20/12/2026, 3 h por dia** (data-alvo estimada na planilha dela: prova em D+60 do edital) |
+| D4 | Emenda (2026-10-02): estrutura de tarefa da planilha `material/plano-estudos-gerado.xlsx` | Cada tópico vira **duas tarefas concretas** — **Leitura** e **Questões** — com **bloco** (Básicos, Específicos, Especializados); a planilha não volta a ser fonte, o `ESTUDO.csv` continua a única |
 | D3 | Pedido literal | horas totais e já estudadas; porcentagem concluída e barra de progresso; dias no plano, em aberto, concluídos e restantes; missão do dia com botão para iniciar estudos, quantidade de tarefas, tempo estimado e porcentagem da tarefa do dia realizada |
 
 ## Definições
 
-- **Tarefa**: um bloco de estudo de um tópico do edital (`ESTUDO.csv`), com tempo estimado (padrão 45 min), que termina em questões do próprio tópico — o mesmo formato dos blocos do `HOJE.md`.
+- **Tarefa** (emenda D4): uma ação concreta sobre um tópico do edital (`ESTUDO.csv`), em um de dois **modos**: **Leitura** (estudar o tópico; padrão 25 min) ou **Questões** (itens C/E do tópico; padrão 20 min). Cada tópico gera as duas, com a de Questões logo depois da de Leitura na fila. Toda tarefa traz o **bloco** do tópico (Básicos, Específicos ou Especializados), estimado por disciplina até o edital sair.
 - **Fila do plano**: os tópicos ainda não dominados e não cortados, na ordem de prioridade do `ESTUDO.csv`. Tópico com `obs` iniciada por `CORTADO` fica fora.
 - **Missão do dia**: as próximas tarefas pendentes da fila que cabem nas 3 h do dia. Tarefa não feita **não se perde**: amanhã a missão começa por ela (ciclo por horas, não por dia da semana).
 - **Dia concluído**: dia do plano em que a missão foi cumprida (todas as tarefas da missão marcadas como feitas).
@@ -90,6 +91,9 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 | FR-010 | Todo o progresso (tarefas feitas, tempos, questões) persiste no aparelho e sobrevive a fechar o app, inclusive com cronômetro correndo. | Proposto |
 | FR-011 | O progresso pode ser exportado num arquivo compatível com as colunas do `ESTUDO.csv`. | Proposto |
 | FR-012 | A tela inicial (feed) mostra um acesso curto à missão do dia (quantas tarefas faltam e o botão de iniciar). | Proposto |
+| FR-013 | (D4) Cada tópico da fila gera duas tarefas — Leitura e Questões — nessa ordem, com minutos próprios configuráveis no arquivo de parâmetros. | Proposto |
+| FR-014 | (D4) Toda tarefa mostra o modo e o bloco; a tarefa de Questões leva ao feed filtrado em questões da matéria, a de Leitura ao feed filtrado em lei seca/resumos da matéria; só a tarefa de Questões pede questões feitas/certas ao concluir. | Proposto |
+| FR-015 | (D4) A exportação agrega por tópico (uma linha por `id` do `ESTUDO.csv`), somando minutos das duas tarefas e trazendo questões da tarefa de Questões; `status_sugerido` = `estudado` só quando as duas estiverem concluídas. | Proposto |
 
 ### Não funcionais
 
@@ -113,7 +117,7 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 ## Entidades
 
 - **Plano**: início, fim, horas por dia, minutos por tarefa, fila de tarefas (gerado na importação).
-- **Tarefa**: id do tópico, disciplina, matéria do feed, texto do tópico, minutos estimados, prioridade.
+- **Tarefa**: id (`<id do tópico>:L` ou `:Q`), id do tópico, modo, bloco, disciplina, matéria do feed, texto do tópico, minutos estimados, prioridade.
 - **Registro de estudo** (aparelho): tarefa, dia, intervalos cronometrados, concluída em, questões feitas/certas.
 
 ## Critérios de sucesso
@@ -127,7 +131,8 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 ## Premissas
 
 - A fila sai do `ESTUDO.csv` atual: 242 tópicos, 6 cortados (INF-14 a INF-19, decisão de 2026-09-30).
-- 45 min por tarefa e 3 h por dia dão 4 tarefas por missão, como no `HOJE.md`.
+- 25 + 20 min por tópico e 3 h por dia dão 4 tópicos (8 tarefas) por missão, o mesmo ritmo do `HOJE.md`.
+- Blocos por disciplina (estimativa até o edital): **Básicos** — Língua Portuguesa, Língua Inglesa, Administração Pública e Políticas Públicas, Administração Financeira e Orçamentária, Controladoria-Geral da União; **Específicos** — Direito Constitucional, Direito Administrativo, Fundamentos de Auditoria Governamental, Desenvolvimento de Sistemas, Infraestrutura Tecnológica, Segurança da Informação; **Especializados** — Ciência de Dados, Bancos de Dados.
 - O plano inclui o tempo de questões dentro da tarefa; revisões espaçadas continuam no `REVISOES.md` do vault (fora desta missão).
 - A data da prova continua "Data a definir" no cabeçalho; a data-fim do plano é a estimativa de 20/12/2026.
 

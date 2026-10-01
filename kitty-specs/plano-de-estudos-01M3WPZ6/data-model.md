@@ -8,18 +8,22 @@
 | `geradoEm` | ISO date | data de modificação do `ESTUDO.csv` (determinístico) |
 | `inicio`, `fim` | `AAAA-MM-DD` | `inicio ≤ fim` |
 | `horasPorDia` | número > 0 | padrão 3 |
-| `minutosPorTarefa` | inteiro > 0 | padrão 45 |
+| `minutosLeitura` | inteiro > 0 | padrão 25 (D4) |
+| `minutosQuestoes` | inteiro > 0 | padrão 20 (D4) |
 | `tarefas` | Tarefa[] | ordem = fila |
 
 ### Tarefa
 
 | Campo | Regra |
 |---|---|
-| `id` | `id` do `ESTUDO.csv` (ex.: `CDA-01`), único |
+| `id` | `<topico>:L` ou `<topico>:Q` (ex.: `CDA-01:L`), único |
+| `topicoId` | `id` do `ESTUDO.csv` |
+| `modo` | `leitura` \| `questoes` |
+| `bloco` | `basicos` \| `especificos` \| `especializados` |
 | `disciplina` | como no `ESTUDO.csv` |
 | `materia` | id de matéria do feed ou `null` |
 | `topico` | texto literal do edital |
-| `minutos` | `minutosPorTarefa` |
+| `minutos` | `minutosLeitura` ou `minutosQuestoes` conforme o modo |
 | `prioridade` | número do `ESTUDO.csv` |
 | `status` | status no `ESTUDO.csv` no momento da importação (`nao_iniciado`, `estudado`, `revisado`, `travado`) |
 
@@ -53,3 +57,7 @@
 pendente ──iniciar──▶ rodando ──pausar──▶ pausada ──retomar──▶ rodando
 rodando|pausada ──concluir(questoes?, certas?)──▶ concluída
 ```
+
+## Emenda D4 (2026-10-02)
+
+Cada tópico gera `:L` e `:Q`, nessa ordem, consecutivas na fila. Registros continuam por `id` de tarefa; `questoes`/`certas` só em `:Q`. Exportação agrega por `topicoId`.

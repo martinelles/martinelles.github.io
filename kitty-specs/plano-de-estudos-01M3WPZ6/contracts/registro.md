@@ -26,6 +26,5 @@ export const registro: {
 ## Exportação (`exportar.ts`)
 
 `exportarCsv(plano, dados): string` — cabeçalho
-`id,ultima_sessao,minutos,questoes_feitas,questoes_certas,status_sugerido`, uma linha por tarefa
-concluída, ordem por `concluidaEm`; `ultima_sessao` = data de `concluidaEm`; `minutos` inteiro;
+`id,ultima_sessao,minutos,questoes_feitas,questoes_certas,status_sugerido`, **uma linha por tópico** (`topicoId`) com ao menos uma tarefa concluída (emenda D4), ordem pela primeira conclusão; `minutos` = soma das tarefas `:L` e `:Q`; questões da `:Q`; `status_sugerido` = `estudado` só com as duas concluídas, senão vazio; `ultima_sessao` = data de `concluidaEm`; `minutos` inteiro;
 campos vazios quando questões não lançadas. Nome do arquivo: `progresso-plano-AAAA-MM-DD.csv`.
