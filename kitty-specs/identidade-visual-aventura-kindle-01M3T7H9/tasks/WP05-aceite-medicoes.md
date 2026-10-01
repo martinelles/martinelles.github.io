@@ -29,8 +29,8 @@ subtasks:
 - T030
 phase: Fase 3 - Aceite
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "35040"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "13964"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -187,3 +187,4 @@ verdade (plan, Complexity Tracking, linha 1).
 - 2026-10-01T00:30:24Z – claude:opus:implementer:implementer – shell_pid=35040 – Assigned agent via action command
 - 2026-10-01T01:38:54Z – claude:opus:implementer:implementer – shell_pid=35040 – Blocked: e2e 127/131; os 4 testes 'Kindle saturação HSL <= 8% (Cenário 4.3)' falham porque a paleta do data-model (#f6f5f1 21,7%, #edebe6 16,3%, #d6d3cc 10,9%) contradiz o critério do plan. Charter bloqueia revisão com porta falhando; decisão do orquestrador/dona. Também NFR-003 pior caso 192 ms > 100 ms (medicoes.md).
 - 2026-10-01T02:56:50Z – claude:opus:implementer:implementer – shell_pid=35040 – Ready for review; D5–D7 applied; e2e 131/131 (CI=1) on 3ebb567; medicoes.md on main 09c93cd
+- 2026-10-01T02:57:00Z – claude:opus:reviewer:reviewer – shell_pid=13964 – Started review via action command
