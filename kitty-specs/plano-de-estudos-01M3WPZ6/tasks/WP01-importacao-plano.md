@@ -21,8 +21,8 @@ subtasks:
 - T005
 phase: Fase 1
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "12508"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "14512"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -88,3 +88,4 @@ Conferir 10 tarefas contra o `ESTUDO.csv` (ordem, filtro, matéria); ver que INF
 - 2026-10-01T23:38:25Z – claude:opus:reviewer:reviewer – shell_pid=32256 – Moved to planned
 - 2026-10-01T23:38:54Z – claude:opus:implementer:implementer – shell_pid=12508 – Started implementation via action command
 - 2026-10-01T23:45:43Z – claude:opus:implementer:implementer – shell_pid=12508 – Emenda D4 implementada
+- 2026-10-01T23:46:15Z – claude:opus:reviewer:reviewer – shell_pid=14512 – Started review via action command
