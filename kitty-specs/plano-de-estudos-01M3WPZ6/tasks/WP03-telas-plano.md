@@ -32,8 +32,8 @@ subtasks:
 - T015
 phase: Fase 2
 assignee: ''
-agent: ''
-shell_pid: '21864'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "21864"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -93,3 +93,7 @@ Painel em visita repetida (≤ 1 s, mesmo método da missão do feed), tamanho d
 
 ## Guia do revisor
 Fazer um "dia" inteiro com relógio fixo: iniciar, pausar, fechar, reabrir, concluir, virar o dia; conferir os números à mão.
+
+## Activity Log
+
+- 2026-10-01T22:32:37Z – claude:opus:implementer:implementer – shell_pid=21864 – Assigned agent via action command
