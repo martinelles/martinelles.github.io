@@ -1,7 +1,7 @@
 {
-  "event_count": 19,
-  "last_event_id": "01M3TDNP0AYPN8ME9Y19P6PPA4",
-  "materialized_at": "2026-10-01T00:26:17.994330+00:00",
+  "event_count": 20,
+  "last_event_id": "01M3TDNYG9ZXKS9P7HWXH5DX8F",
+  "materialized_at": "2026-10-01T00:26:26.697525+00:00",
   "mission_number": "",
   "mission_slug": "identidade-visual-aventura-kindle-01M3T7H9",
   "mission_type": "software-dev",
@@ -11,9 +11,9 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 1,
+    "for_review": 0,
     "in_progress": 1,
-    "in_review": 1,
+    "in_review": 2,
     "planned": 1
   },
   "work_packages": {
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-09-30T23:37:07.022626+00:00"
     },
     "WP02": {
-      "actor": "user",
+      "actor": "claude:opus:reviewer:reviewer",
       "force_count": 1,
-      "lane": "for_review",
-      "last_event_id": "01M3TDNP0AYPN8ME9Y19P6PPA4",
-      "last_transition_at": "2026-10-01T00:26:17.994330+00:00"
+      "lane": "in_review",
+      "last_event_id": "01M3TDNYG9ZXKS9P7HWXH5DX8F",
+      "last_transition_at": "2026-10-01T00:26:26.697525+00:00"
     },
     "WP03": {
       "actor": "claude:opus:reviewer:reviewer",

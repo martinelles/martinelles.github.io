@@ -25,8 +25,8 @@ subtasks:
 - T012
 phase: Fase 2 - Aplicação
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "32328"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "21036"
 history:
 - timestamp: '2026-09-30T22:57:03Z'
   agent: system
@@ -195,3 +195,4 @@ a mesma preferência e chega ao mesmo valor. Confira com um `MutationObserver` n
 
 - 2026-09-30T23:37:41Z – claude:opus:implementer:implementer – shell_pid=32328 – Assigned agent via action command
 - 2026-10-01T00:26:18Z – claude:opus:implementer:implementer – shell_pid=32328 – Ready for review; e2e 63/63 run by orchestrator (CI=1, clean port) on 670b1b2
+- 2026-10-01T00:26:26Z – claude:opus:reviewer:reviewer – shell_pid=21036 – Started review via action command
