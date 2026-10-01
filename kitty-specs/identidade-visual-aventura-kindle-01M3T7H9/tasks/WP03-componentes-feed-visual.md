@@ -222,3 +222,4 @@ Anote no handoff o resultado de cada linha.
 - 2026-10-01T00:24:47Z – claude:opus:implementer:implementer – shell_pid=23776 – Ready for review; e2e 63/63 run by orchestrator (CI=1, clean port) on e11396c
 - 2026-10-01T00:24:55Z – claude:opus:reviewer:reviewer – shell_pid=35484 – Started review via action command
 - 2026-10-01T00:26:51Z – claude:opus:reviewer:reviewer – shell_pid=35484 – Review passed: CSS-only diff in 9 feed files (no markup/props/events/text/ARIA change, C-005); rule-7 grep empty; T018 sweep clean (only arrows in comments); check 0 errors, test 159/159, build ok, e2e 63/63 per orchestrator; Kindle captures colorless/no shadow, Aventura thick outline + hard 4px 4px 0 shadow; deviations (selo raio/2, .materia 1rem, padding-top 20px, 64ch ~69 chars) acceptable.
+- 2026-10-01T03:07:28Z – claude:opus:reviewer:reviewer – shell_pid=35484 – merged in 559b8d0 | Done override: Squash merge 559b8d0 em main; registro pós-merge não moveu para done
