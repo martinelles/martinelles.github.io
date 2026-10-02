@@ -1,4 +1,4 @@
-# Specification Quality Checklist: Aparência em Tela Própria
+# Specification Quality Checklist: Ajustes em Tela Própria
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-10-02
@@ -35,4 +35,4 @@
 
 ## Notes
 
-- O endereço `/painel/aparencia` aparece só como exemplo nas Premissas; a decisão fica para o plano.
+- O endereço `/painel/ajustes` aparece só como exemplo nas Premissas; a decisão fica para o plano.
