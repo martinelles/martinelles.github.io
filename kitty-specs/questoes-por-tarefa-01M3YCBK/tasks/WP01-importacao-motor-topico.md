@@ -21,7 +21,8 @@ subtasks:
 - T003
 - T004
 phase: Fase 1
-shell_pid: '19832'
+shell_pid: "19832"
+agent: "claude:opus:implementer:implementer"
 history:
 - timestamp: '2026-10-02T12:00:00Z'
   agent: system
@@ -54,3 +55,7 @@ Siga `spec.md` e `plan.md` desta missão. Catálogo e `ESTUDO.csv` no vault (`�
 - **T004** Testes (importador: id válido, vazio, `sem-topico`, `tp` no índice; motor: filtro por tópico, combinação com tipo, sem repetição, tópico inexistente ⇒ vazio). Rodar `npm run importar` no vault real, conferir NFR-001 (aumento do `indice.json` ≤ 10 KB gzip) e NFR-002 (para 5 tópicos: contagem no índice = linhas válidas com gabarito no catálogo), colar números no histórico, commitar `static/conteudo/`.
 
 DoD: portas do charter verdes; só arquivos do WP.
+
+## Activity Log
+
+- 2026-10-02T13:21:53Z – claude:opus:implementer:implementer – shell_pid=19832 – Assigned agent via action command
