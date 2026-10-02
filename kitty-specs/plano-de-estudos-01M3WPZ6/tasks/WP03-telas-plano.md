@@ -32,8 +32,8 @@ subtasks:
 - T015
 phase: Fase 2
 assignee: ''
-agent: "claude:opus:implementer:implementer"
-shell_pid: "11988"
+agent: "claude:opus:reviewer:reviewer"
+shell_pid: "5992"
 history:
 - timestamp: '2026-10-01T21:50:11Z'
   agent: system
@@ -103,3 +103,4 @@ Fazer um "dia" inteiro com relógio fixo: iniciar, pausar, fechar, reabrir, conc
 - 2026-10-01T23:38:39Z – claude:opus:reviewer:reviewer – shell_pid=4916 – Moved to planned
 - 2026-10-01T23:58:57Z – claude:opus:implementer:implementer – shell_pid=11988 – Started implementation via action command
 - 2026-10-02T00:10:58Z – claude:opus:implementer:implementer – shell_pid=11988 – Emenda D4 implementada (--force: guarda de kitty-specs sobre medicoes.md, owned pelo WP03)
+- 2026-10-02T00:11:31Z – claude:opus:reviewer:reviewer – shell_pid=5992 – Started review via action command
