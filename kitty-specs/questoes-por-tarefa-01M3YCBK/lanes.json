@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "mission_slug": "questoes-por-tarefa-01M3YCBK",
+  "mission_id": "01M3YCBK74ZDNBX9ESNRKMQBXF",
+  "mission_branch": "kitty/mission-questoes-por-tarefa-01M3YCBK",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "scripts/importar/index.mjs",
+        "scripts/importar/questoes.mjs",
+        "src/lib/feed/ordem.ts",
+        "src/lib/feed/sessao.svelte.ts",
+        "src/lib/feed/tipos.ts",
+        "static/conteudo/**",
+        "tests/unit/feed/fixtures/**",
+        "tests/unit/feed/ordem.test.ts",
+        "tests/unit/feed/sessao.test.ts",
+        "tests/unit/importar/fixtures/vault/**",
+        "tests/unit/importar/ponta-a-ponta.test.ts",
+        "tests/unit/importar/questoes.test.ts"
+      ],
+      "predicted_surfaces": [],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/routes/+page.svelte",
+        "src/routes/tarefa/**",
+        "tests/e2e/feed-topico.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-10-02T13:21:37.672249+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}
