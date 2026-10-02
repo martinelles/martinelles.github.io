@@ -440,3 +440,9 @@ test('/tarefa/<id inexistente> mostra "não encontrada" com volta ao painel', as
 	await expect(page.getByRole('heading', { level: 1, name: 'Tarefa não encontrada' })).toBeVisible();
 	await expect(page.getByRole('link', { name: 'Voltar ao painel' })).toHaveAttribute('href', '/painel');
 });
+
+test('na tela da tarefa, a aba inferior destacada é Painel', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-10-01T09:00:00-03:00'));
+	await page.goto(rota(fila[0]));
+	await expect(page.locator('a.aba[aria-current="page"]')).toHaveAttribute('href', '/painel');
+});

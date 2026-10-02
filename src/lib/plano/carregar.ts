@@ -45,17 +45,44 @@ export function validarPlano(bruto: unknown): Plano {
 	return p as Plano;
 }
 
-/** Plano importado. Erro claro se a busca falhar ou o arquivo vier inválido. */
-export function carregarPlano(buscar: Buscar = fetchJson): Promise<Plano> {
+/** Busca ignorando cópias guardadas: o service worker troca a dele pela do servidor. */
+export async function fetchJsonRecarregando(url: string): Promise<unknown> {
+	const resposta = await fetch(url, { cache: 'reload' });
+	if (!resposta.ok) throw new Error(`HTTP ${resposta.status} em ${url}`);
+	return resposta.json();
+}
+
+/**
+ * Plano importado. Erro claro se a busca falhar ou o arquivo vier inválido.
+ * Se vier inválido, tenta uma vez de novo sem cache: depois de uma importação nova, um service
+ * worker antigo pode servir o `plano.json` anterior a um app que já espera o formato novo.
+ */
+export function carregarPlano(
+	buscar: Buscar = fetchJson,
+	recarregar: Buscar = fetchJsonRecarregando
+): Promise<Plano> {
 	if (cache) return cache;
 	const nova = (async () => {
+		const falhaDeBusca = (e: unknown) =>
+			new Error(
+				`Não foi possível carregar o plano de estudos (${URL_PLANO}): ${e instanceof Error ? e.message : String(e)}`
+			);
 		let bruto: unknown;
 		try {
 			bruto = await buscar(URL_PLANO);
 		} catch (e) {
-			throw new Error(`Não foi possível carregar o plano de estudos (${URL_PLANO}): ${e instanceof Error ? e.message : String(e)}`);
+			throw falhaDeBusca(e);
 		}
-		return validarPlano(bruto);
+		try {
+			return validarPlano(bruto);
+		} catch {
+			try {
+				bruto = await recarregar(URL_PLANO);
+			} catch (e) {
+				throw falhaDeBusca(e);
+			}
+			return validarPlano(bruto);
+		}
 	})();
 	cache = nova;
 	nova.catch(() => {

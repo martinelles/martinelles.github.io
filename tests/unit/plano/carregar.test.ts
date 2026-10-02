@@ -30,12 +30,24 @@ describe('carregarPlano', () => {
 		await expect(carregarPlano(buscar)).resolves.toMatchObject({ versao: 1 });
 	});
 
-	it('arquivo inválido: erro claro', async () => {
-		await expect(carregarPlano(async () => ({ versao: 2 }))).rejects.toThrow(/Plano de estudos inválido: versão 2/);
+	it('arquivo inválido: tenta de novo sem cache e só então dá erro claro', async () => {
+		const velho = async () => ({ versao: 2 });
+		await expect(carregarPlano(velho, velho)).rejects.toThrow(/Plano de estudos inválido: versão 2/);
 		expect(() => validarPlano(null)).toThrow(/não é um objeto/);
 		expect(() => validarPlano({ ...planoTeste(1), inicio: '2026-12-21' })).toThrow(/depois de fim/);
 		expect(() => validarPlano({ ...planoTeste(1), horasPorDia: 0 })).toThrow(/horasPorDia/);
 		expect(() => validarPlano({ ...planoTeste(1), tarefas: [{ id: 'X-1' }] })).toThrow(/tarefa malformada/);
+	});
+
+	it('cópia velha do service worker (anterior à D4): a recarga sem cache resolve', async () => {
+		const { minutosLeitura: _l, minutosQuestoes: _q, ...anteriorD4 } = planoTeste(2);
+		const pedidos: string[] = [];
+		const plano = await carregarPlano(
+			async (url) => (pedidos.push(`cache ${url}`), { ...anteriorD4, minutosPorTarefa: 45 }),
+			async (url) => (pedidos.push(`reload ${url}`), planoTeste(2))
+		);
+		expect(plano.minutosLeitura).toBe(25);
+		expect(pedidos).toEqual(['cache /conteudo/plano.json', 'reload /conteudo/plano.json']);
 	});
 
 	it('emenda D4: minutosLeitura/minutosQuestoes, id `<topicoId>:L|Q` coerente com o modo, bloco e id único', () => {

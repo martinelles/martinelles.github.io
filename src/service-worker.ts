@@ -60,13 +60,14 @@ async function guardarCasca(cache: Cache) {
  * Baixa um arquivo de conteúdo para o cache desta versão. Pedidos simultâneos do mesmo arquivo
  * (a fase 2 e a página pedindo o mesmo lote) dividem um único download.
  *
- * A fase 2 pede com `no-cache` (revalida no servidor em vez de gravar no cache da versão nova uma
- * cópia velha do cache HTTP). O pedido da página vai como a página o fez, com o cache HTTP
- * valendo como valeria sem SW: exigir revalidação ali atrasaria a visita seguinte, que pede os
- * mesmos lotes da primeira enquanto a fase 2 ainda desce.
+ * Todo download para o cache pede `no-cache`: revalida no servidor (um 304 quando nada mudou)
+ * em vez de gravar no cache da versão nova uma cópia velha do cache HTTP. Até 2026-10-02 o
+ * pedido da página ia com o cache HTTP valendo, e um `plano.json` anterior à emenda D4 ficou
+ * gravado como se fosse o novo ("Plano de estudos inválido: minutosLeitura").
  */
 const emVoo = new Map<string, Promise<void>>();
-function baixar(arquivo: string, pedido: Request = new Request(arquivo, { cache: 'no-cache' })): Promise<void> {
+function baixar(arquivo: string): Promise<void> {
+	const pedido = new Request(arquivo, { cache: 'no-cache' });
 	let p = emVoo.get(arquivo);
 	if (!p) {
 		p = (async () => {
@@ -147,13 +148,16 @@ sw.addEventListener('fetch', (e) => {
 	if (url.pathname.startsWith(PREFIXO_CONTEUDO)) {
 		// Conteúdo: cache-first; se faltar, baixa (dividindo o download com a fase 2, se ela já
 		// estiver nele), grava e serve do cache. Se a gravação falhar, a página recebe a resposta da rede.
+		// Pedido de recarga (`cache: 'reload'` ou `'no-cache'`, que o app usa quando um arquivo vem
+		// inválido): ignora a cópia guardada, baixa de novo, troca e serve a nova.
+		const recarga = req.cache === 'reload' || req.cache === 'no-cache';
 		e.respondWith(
 			(async () => {
 				const cache = await caches.open(CACHE);
-				const guardada = await cache.match(url.pathname);
+				const guardada = recarga ? undefined : await cache.match(url.pathname);
 				if (guardada) return guardada;
 				try {
-					await baixar(url.pathname, req);
+					await baixar(url.pathname);
 					const baixada = await cache.match(url.pathname);
 					if (baixada) return baixada;
 				} catch {

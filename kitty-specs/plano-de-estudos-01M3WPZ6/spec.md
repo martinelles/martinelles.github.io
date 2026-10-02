@@ -21,6 +21,7 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 | D2 | Janela do plano | **01/10/2026 a 20/12/2026, 3 h por dia** (data-alvo estimada na planilha dela: prova em D+60 do edital) |
 | D4 | Emenda (2026-10-02): estrutura de tarefa da planilha `material/plano-estudos-gerado.xlsx` | Cada tópico vira **duas tarefas concretas** — **Leitura** e **Questões** — com **bloco** (Básicos, Específicos, Especializados); a planilha não volta a ser fonte, o `ESTUDO.csv` continua a única |
 | D5 | Emenda (2026-10-02): depois da missão cumprida | Deve ser possível **continuar estudando**: a próxima tarefa pendente da fila, além da missão do dia |
+| D6 | Fila esgotada (2026-10-02, no merge) | Dia cuja missão fica vazia porque a fila acabou conta como **concluído** ("Plano cumprido — revise"); dias seguintes sem abrir o app continuam "em aberto" |
 | D3 | Pedido literal | horas totais e já estudadas; porcentagem concluída e barra de progresso; dias no plano, em aberto, concluídos e restantes; missão do dia com botão para iniciar estudos, quantidade de tarefas, tempo estimado e porcentagem da tarefa do dia realizada |
 
 ## Definições
