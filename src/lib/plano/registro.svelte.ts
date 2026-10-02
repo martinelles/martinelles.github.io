@@ -199,6 +199,15 @@ export const registro = {
 		estado.fotos[dia] = [...new Set(ids)];
 		gravar();
 	},
+	/**
+	 * Substitui a foto do dia. Só para foto obsoleta (`fotoObsoleta`): ids de um formato de plano
+	 * que não existe mais. Fora disso, a foto do dia não muda (`gravarFoto` é idempotente).
+	 */
+	trocarFoto(dia: string, ids: string[]): void {
+		if (!DIA_RE.test(dia)) return;
+		estado.fotos[dia] = [...new Set(ids)];
+		gravar();
+	},
 	/** Cópia simples do estado para as funções puras. Lida dentro de `$derived`, é reativa. */
 	dados(): DadosPlano {
 		return $state.snapshot(estado);

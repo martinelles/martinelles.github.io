@@ -10,7 +10,15 @@ import { carregarPlano } from '$lib/plano/carregar';
 import { fasePlano, type FasePlano } from '$lib/plano/dias';
 import { exportarCsv, nomeArquivoExportacao } from '$lib/plano/exportar';
 import { carregarRegistro, registro } from '$lib/plano/registro.svelte';
-import { concluidasNaMissao, minutosEstimados, missaoDoDia, percentualMissao, primeiraPendente } from '$lib/plano/missao';
+import {
+	concluidasNaMissao,
+	filaEsgotada,
+	fotoObsoleta,
+	minutosEstimados,
+	missaoDoDia,
+	percentualMissao,
+	primeiraPendente
+} from '$lib/plano/missao';
 import type { DadosPlano, Plano, Tarefa } from '$lib/plano/tipos';
 import { extrasDoDia, proximaDaFila } from './continuar';
 
@@ -129,7 +137,12 @@ export function usarMissao(fonte: { readonly plano: Plano | null }, relogio: { r
 		if (!fonte.plano || fase !== 'durante') return;
 		const dia = relogio.hoje;
 		const ids = tarefas.map((t) => t.id);
-		untrack(() => registro.gravarFoto(dia, ids));
+		const plano = fonte.plano;
+		untrack(() => {
+			// Foto com ids de um formato antigo do plano (ex.: antes da emenda D4) é refeita.
+			if (fotoObsoleta(plano, registro.dados(), dia)) registro.trocarFoto(dia, ids);
+			else registro.gravarFoto(dia, ids);
+		});
 	});
 
 	return {
@@ -158,7 +171,8 @@ export function usarMissao(fonte: { readonly plano: Plano | null }, relogio: { r
 			return tarefas.length > 0 && concluidasNaMissao(tarefas, dados) === tarefas.length;
 		},
 		get esgotada() {
-			return fase === 'durante' && tarefas.length === 0;
+			// Pela fila inteira, não pela missão: missão vazia por outro motivo não é "Plano cumprido".
+			return fase === 'durante' && !!fonte.plano && filaEsgotada(fonte.plano, dados);
 		},
 		get proxima() {
 			const cumprida = tarefas.length > 0 && concluidasNaMissao(tarefas, dados) === tarefas.length;

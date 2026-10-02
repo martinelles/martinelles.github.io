@@ -25,7 +25,7 @@ export function pendente(dados: DadosPlano, id: string): boolean {
  */
 export function missaoDoDia(plano: Plano, dados: DadosPlano, dia: string): Tarefa[] {
 	const foto = dados.fotos[dia];
-	if (foto) {
+	if (foto && !fotoObsoleta(plano, dados, dia)) {
 		const porId = new Map(plano.tarefas.map((t) => [t.id, t]));
 		return foto.flatMap((id) => porId.get(id) ?? []);
 	}
@@ -39,6 +39,25 @@ export function missaoDoDia(plano: Plano, dados: DadosPlano, dia: string): Taref
 		soma += t.minutos;
 	}
 	return missao;
+}
+
+/**
+ * Foto de `dia` gravada com ids que não existem mais no plano — nenhum deles. Acontece quando o
+ * formato dos ids muda numa importação (emenda D4: `BDD-01` virou `BDD-01:L`/`BDD-01:Q`): a foto
+ * antiga filtrada daria uma missão vazia, que se confundia com "fila esgotada". Foto obsoleta é
+ * tratada como ausente (a missão é recalculada e a tela regrava a foto). Foto vazia gravada de
+ * propósito (fila esgotada) não é obsoleta.
+ */
+export function fotoObsoleta(plano: Plano, dados: DadosPlano, dia: string): boolean {
+	const foto = dados.fotos[dia];
+	if (!foto || foto.length === 0) return false;
+	const ids = new Set(plano.tarefas.map((t) => t.id));
+	return !foto.some((id) => ids.has(id));
+}
+
+/** A fila inteira do plano não tem mais tarefa pendente ("Plano cumprido — revise"). */
+export function filaEsgotada(plano: Plano, dados: DadosPlano): boolean {
+	return plano.tarefas.every((t) => !pendente(dados, t.id));
 }
 
 /** Tempo estimado total da missão, em minutos. */

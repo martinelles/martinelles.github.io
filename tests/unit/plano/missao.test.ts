@@ -121,3 +121,26 @@ describe('percentualPlano', () => {
 		expect(percentualPlano(planoTeste(0), dados)).toBe(0);
 	});
 });
+
+describe('foto obsoleta (ids de antes da emenda D4)', () => {
+	it('foto só com ids que sumiram do plano é ignorada: a missão é recalculada', async () => {
+		const { missaoDoDia, fotoObsoleta, filaEsgotada } = await import('$lib/plano/missao');
+		const { planoTeste } = await import('./apoio');
+		const plano = planoTeste(6);
+		const dados = { registros: {}, fotos: { '2026-10-02': ['TST-01', 'TST-02', 'TST-03'] } };
+		expect(fotoObsoleta(plano, dados, '2026-10-02')).toBe(true);
+		const missao = missaoDoDia(plano, dados, '2026-10-02');
+		expect(missao.length).toBeGreaterThan(0);
+		expect(missao[0].id).toBe(plano.tarefas[0].id);
+		expect(filaEsgotada(plano, dados)).toBe(false);
+	});
+
+	it('foto vazia de propósito (fila esgotada) não é obsoleta; foto com algum id válido é mantida', async () => {
+		const { fotoObsoleta } = await import('$lib/plano/missao');
+		const { planoTeste } = await import('./apoio');
+		const plano = planoTeste(2);
+		expect(fotoObsoleta(plano, { registros: {}, fotos: { d: [] } }, 'd')).toBe(false);
+		expect(fotoObsoleta(plano, { registros: {}, fotos: { d: ['TST-01', plano.tarefas[0].id] } }, 'd')).toBe(false);
+		expect(fotoObsoleta(plano, { registros: {}, fotos: {} }, 'd')).toBe(false);
+	});
+});

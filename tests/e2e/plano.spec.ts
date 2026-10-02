@@ -446,3 +446,19 @@ test('na tela da tarefa, a aba inferior destacada é Painel', async ({ page }) =
 	await page.goto(rota(fila[0]));
 	await expect(page.locator('a.aba[aria-current="page"]')).toHaveAttribute('href', '/painel');
 });
+
+test('foto do dia gravada antes da emenda D4 (ids sem :L/:Q) não vira "Plano cumprido"', async ({ page }) => {
+	await page.addInitScript(
+		([k]) => {
+			if (localStorage.getItem(k)) return;
+			localStorage.setItem(k, JSON.stringify({ registros: {}, fotos: { '2026-10-02': ['BDD-01', 'BDD-02', 'BDD-03', 'BDD-04'] } }));
+		},
+		[CHAVE_PLANO] as const
+	);
+	await page.clock.setFixedTime(em('2026-10-02'));
+	await abrirPainel(page);
+	await expect(missao(page).getByText('Plano cumprido — revise')).toHaveCount(0);
+	await expect(missao(page).getByText('8 tarefas, 3 h estimadas.')).toBeVisible();
+	const foto = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}').fotos['2026-10-02'], CHAVE_PLANO);
+	expect(foto).toEqual(fila.slice(0, 8).map((t) => t.id));
+});
