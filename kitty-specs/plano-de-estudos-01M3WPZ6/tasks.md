@@ -69,4 +69,4 @@ Os três WPs voltam para `planned` com pedido de mudança (não é defeito: é m
 
 ## Emenda D5 (2026-10-02) — continuar depois da missão cumprida
 
-- [ ] T019 WP03: "Continuar estudando" no painel, na chamada do feed e após concluir tarefa quando a missão está cumprida; abre a próxima pendente da fila com cronômetro; e2e (WP03)
+- [x] T019 WP03: "Continuar estudando" no painel, na chamada do feed e após concluir tarefa quando a missão está cumprida; abre a próxima pendente da fila com cronômetro; e2e (WP03)
