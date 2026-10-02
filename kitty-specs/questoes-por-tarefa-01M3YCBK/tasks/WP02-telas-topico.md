@@ -10,11 +10,15 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-questoes-por-tarefa-01M3YCBK
+base_commit: 53c31a762ff8c30712dd0e534b407ebd18ee8f17
+created_at: '2026-10-02T13:38:33.918693+00:00'
 subtasks:
 - T005
 - T006
 - T007
 phase: Fase 2
+shell_pid: '21072'
 history:
 - timestamp: '2026-10-02T12:00:00Z'
   agent: system
