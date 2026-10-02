@@ -19,8 +19,8 @@ subtasks:
 - T008
 phase: Fase 2 - Aceite
 assignee: ''
-agent: ''
-shell_pid: '35756'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "35756"
 history:
 - timestamp: '2026-10-02T14:59:07Z'
   agent: system
@@ -108,3 +108,7 @@ Não altere as asserções existentes do arquivo; só acrescente.
 
 - Quebre de propósito: troque o `href` do link para `/painel` no código local e confirme que T006 falha com mensagem legível. Desfaça depois.
 - Confira que nenhuma asserção do `offline.spec.ts` antigo mudou.
+
+## Activity Log
+
+- 2026-10-02T15:16:37Z – claude:opus:implementer:implementer – shell_pid=35756 – Assigned agent via action command
