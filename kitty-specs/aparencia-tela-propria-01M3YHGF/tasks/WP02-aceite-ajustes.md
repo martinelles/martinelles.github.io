@@ -114,3 +114,4 @@ Não altere as asserções existentes do arquivo; só acrescente.
 - 2026-10-02T15:16:37Z – claude:opus:implementer:implementer – shell_pid=35756 – Assigned agent via action command
 - 2026-10-02T15:24:21Z – claude:opus:implementer:implementer – shell_pid=35756 – Ready for review
 - 2026-10-02T15:24:45Z – claude:opus:reviewer:reviewer – shell_pid=8848 – Started review via action command
+- 2026-10-02T15:30:53Z – claude:opus:reviewer:reviewer – shell_pid=8848 – Review passed: only tests/e2e/ajustes.spec.ts (new, 13 tests) + additions in offline.spec.ts (0 lines removed); every T006/T007 row covered with requirement in name; T008 offline covered; no src change. check 0 errors, vitest 279/279, build ok, CI=1 e2e 221/221. Mutation (Ajustes href->/painel) fails 9 tests with legible messages; restored. Held-route deviation in 'carregando' keeps the 1.5s minimum and adds sync — accepted.
