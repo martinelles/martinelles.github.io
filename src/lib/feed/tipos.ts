@@ -42,6 +42,8 @@ export interface PostQuestao extends PostBase {
 	alternativas?: Alternativa[];
 	gabarito: 'C' | 'E' | 'A' | 'B' | 'D';
 	situacao: 'valida' | 'alterada';
+	/** Id do tópico do `ESTUDO.csv` (ex.: `FAG-02`); ausente quando a questão não tem tópico. */
+	topicoEstudo?: string;
 }
 
 export interface PostLei extends PostBase {
@@ -84,12 +86,16 @@ export interface Materia {
 	total: number;
 }
 
-/** Entrada curta do índice: `t` inicial do tipo, `m` id da matéria, `l` chave do lote em `Indice.lotes`. */
+/**
+ * Entrada curta do índice: `t` inicial do tipo, `m` id da matéria, `l` chave do lote em `Indice.lotes`,
+ * `tp` id do tópico de estudo (só em questão com tópico).
+ */
 export interface EntradaIndice {
 	id: string;
 	t: InicialTipo;
 	m: string;
 	l: string;
+	tp?: string;
 }
 
 /** `indice.json`. */
@@ -104,4 +110,6 @@ export interface Indice {
 export interface Filtro {
 	materia?: string;
 	tipo?: TipoPost;
+	/** Id do tópico de estudo: só passam entradas com `tp` igual. */
+	topico?: string;
 }

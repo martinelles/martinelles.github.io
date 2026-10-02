@@ -1,11 +1,25 @@
 import { describe, expect, it } from 'vitest';
 import { embaralhar, hashTexto, mulberry32, ordemDoDia } from '$lib/feed/ordem';
-import { TIPO_POR_INICIAL } from '$lib/feed/tipos';
+import { TIPO_POR_INICIAL, type Indice } from '$lib/feed/tipos';
 import { indiceSintetico } from './apoio';
 
 const indice = indiceSintetico(400);
 const tipoDe = new Map(indice.posts.map((e) => [e.id, e.t]));
 const materiaDe = new Map(indice.posts.map((e) => [e.id, e.m]));
+
+/** Índice com tópico: questões em rodízio entre FAG-01, FAG-02 e sem tópico; outros tipos nunca têm `tp`. */
+function indiceComTopico(n: number): Indice {
+	const base = indiceSintetico(n);
+	let k = 0;
+	return {
+		...base,
+		posts: base.posts.map((e) => {
+			if (e.t !== 'q') return e;
+			const tp = ['FAG-01', 'FAG-02', undefined][k++ % 3];
+			return tp === undefined ? e : { ...e, tp };
+		})
+	};
+}
 
 describe('mulberry32, hashTexto, embaralhar', () => {
 	it('mulberry32 é determinístico e fica em [0, 1)', () => {
@@ -76,5 +90,38 @@ describe('ordemDoDia', () => {
 		expect(ambos.every((id) => materiaDe.get(id) === 'auditoria' && tipoDe.get(id) === 'q')).toBe(true);
 
 		expect(ordemDoDia(indice, { materia: 'nao-existe' }, '2026-09-30')).toEqual([]);
+	});
+
+	it('filtra por tópico: só entradas com tp igual, sem repetição', () => {
+		const ind = indiceComTopico(400);
+		const esperado = ind.posts.filter((e) => e.tp === 'FAG-02').map((e) => e.id);
+		expect(esperado.length).toBeGreaterThan(0);
+		const ordem = ordemDoDia(ind, { topico: 'FAG-02' }, '2026-09-30');
+		expect(new Set(ordem).size).toBe(ordem.length);
+		expect([...ordem].sort()).toEqual([...esperado].sort());
+	});
+
+	it('tópico combina com tipo e matéria', () => {
+		const ind = indiceComTopico(400);
+		const qTopico = ordemDoDia(ind, { topico: 'FAG-01', tipo: 'questao' }, '2026-09-30');
+		expect(qTopico.length).toBe(ind.posts.filter((e) => e.tp === 'FAG-01').length);
+		expect(ordemDoDia(ind, { topico: 'FAG-01', tipo: 'lei' }, '2026-09-30')).toEqual([]);
+		const comMateria = ordemDoDia(ind, { topico: 'FAG-01', materia: 'auditoria' }, '2026-09-30');
+		expect(comMateria.length).toBe(ind.posts.filter((e) => e.tp === 'FAG-01' && e.m === 'auditoria').length);
+	});
+
+	it('tópico inexistente ⇒ vazio', () => {
+		expect(ordemDoDia(indiceComTopico(400), { topico: 'XYZ-99' }, '2026-09-30')).toEqual([]);
+	});
+
+	it('tópico entra na semente; sem tópico a ordem é a de antes', () => {
+		const ind = indiceComTopico(400);
+		const a = ordemDoDia(ind, { topico: 'FAG-01' }, '2026-09-30');
+		expect(ordemDoDia(ind, { topico: 'FAG-01' }, '2026-09-30')).toEqual(a);
+		// Semente sem tópico: mesmo resultado de um índice sem `tp` (filtros antigos não mudam).
+		expect(ordemDoDia(ind, { tipo: 'questao' }, '2026-09-30')).toEqual(ordemDoDia(indice, { tipo: 'questao' }, '2026-09-30'));
+		// Mesmo conjunto embaralhado com e sem tópico na semente dá ordens diferentes.
+		const so = { posts: ind.posts.filter((e) => e.tp === 'FAG-01') };
+		expect(ordemDoDia(so, { topico: 'FAG-01' }, '2026-09-30')).not.toEqual(ordemDoDia(so, {}, '2026-09-30'));
 	});
 });

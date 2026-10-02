@@ -1,5 +1,5 @@
 /**
- * Ordem do feed (research R5): Fisher–Yates com `mulberry32` semeado por dia + filtro + tipo,
+ * Ordem do feed (research R5): Fisher–Yates com `mulberry32` semeado por dia + filtro (matéria, tópico) + tipo,
  * depois intercalação por tipo na proporção questão 3 : lei 2 : resumo 1 : flashcard 2.
  * Tudo puro: o dia chega por parâmetro.
  */
@@ -45,6 +45,12 @@ export const PROPORCAO: ReadonlyArray<readonly [TipoPost, number]> = [
 	['flashcard', 2]
 ];
 
+/** Texto da semente de uma fila; sem tópico fica igual ao de antes do filtro por tópico. */
+function semente(dia: string, filtro: Filtro, tipo: TipoPost): string {
+	const base = `${dia}|${filtro.materia ?? ''}|${tipo}`;
+	return filtro.topico === undefined ? base : `${base}|${filtro.topico}`;
+}
+
 /** Ids do índice que passam no filtro, em ordem do dia. É sempre uma permutação dos ids filtrados. */
 export function ordemDoDia(indice: Pick<Indice, 'posts'>, filtro: Filtro, dia: string): string[] {
 	const filas = new Map<TipoPost, string[]>(PROPORCAO.map(([tipo]) => [tipo, []]));
@@ -53,12 +59,13 @@ export function ordemDoDia(indice: Pick<Indice, 'posts'>, filtro: Filtro, dia: s
 		if (!tipo) continue;
 		if (filtro.materia !== undefined && e.m !== filtro.materia) continue;
 		if (filtro.tipo !== undefined && tipo !== filtro.tipo) continue;
+		if (filtro.topico !== undefined && e.tp !== filtro.topico) continue;
 		filas.get(tipo)!.push(e.id);
 	}
 
 	const embaralhadas = PROPORCAO.map(([tipo, cota]) => ({
 		cota,
-		ids: embaralhar(filas.get(tipo)!, mulberry32(hashTexto(`${dia}|${filtro.materia ?? ''}|${tipo}`))),
+		ids: embaralhar(filas.get(tipo)!, mulberry32(hashTexto(semente(dia, filtro, tipo)))),
 		pos: 0
 	}));
 

@@ -15,7 +15,8 @@ export const AVISO_FALHA_CARGA = 'Não foi possível carregar alguns posts. Tent
 const mostradosPorFiltro = new Map<string, Set<string>>();
 
 export function chaveFiltro(filtro: Filtro): string {
-	return `${filtro.materia ?? '*'}|${filtro.tipo ?? '*'}`;
+	const base = `${filtro.materia ?? '*'}|${filtro.tipo ?? '*'}`;
+	return filtro.topico === undefined ? base : `${base}|${filtro.topico}`;
 }
 
 /** Esquece o que já foi mostrado em todos os filtros (testes; não usado pelas telas). */

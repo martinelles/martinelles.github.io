@@ -14,6 +14,7 @@
 	import { getContext } from 'svelte';
 	import { page } from '$app/state';
 	import BarraStories from '$lib/componentes/feed/BarraStories.svelte';
+	import Icone from '$lib/componentes/Icone.svelte';
 	import FimDoFeed from '$lib/componentes/feed/FimDoFeed.svelte';
 	import Post from '$lib/componentes/feed/Post.svelte';
 	import ChamadaMissao from '$lib/componentes/plano/ChamadaMissao.svelte';
@@ -24,7 +25,7 @@
 	import { foco } from '$lib/feed/foco.svelte';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
 	import { chaveFiltro, criarSessao } from '$lib/feed/sessao.svelte';
-	import type { Filtro, Indice, Materia, Post as PostFeed, TipoPost as Tipo } from '$lib/feed/tipos';
+	import { TIPO_POR_INICIAL, type Filtro, type Indice, type Materia, type Post as PostFeed, type TipoPost as Tipo } from '$lib/feed/tipos';
 
 	const repo = getContext<Repositorio>('repositorio');
 	const dia = hojeLocal();
@@ -66,8 +67,20 @@
 		const p = page.url.searchParams;
 		const materia = p.get('materia') || undefined;
 		const tipo = p.get('tipo');
-		return { materia, tipo: ehTipo(tipo) ? tipo : undefined };
+		// Tópico de estudo (FR-002): só passam as questões ligadas a ele; id inexistente dá fim imediato.
+		const topico = p.get('topico') || undefined;
+		return { materia, tipo: ehTipo(tipo) ? tipo : undefined, topico };
 	});
+
+	/** Quantos posts o filtro de tópico tem, contados no índice (FR-004); null enquanto o índice carrega. */
+	const qtdTopico = $derived.by(() => {
+		const { topico, materia, tipo } = filtro;
+		if (topico === undefined || !indice) return null;
+		return indice.posts.filter(
+			(e) => e.tp === topico && (materia === undefined || e.m === materia) && (tipo === undefined || TIPO_POR_INICIAL[e.t] === tipo)
+		).length;
+	});
+	const rotuloQtd = (n: number) => (n === 1 ? '1 questão' : `${n.toLocaleString('pt-BR')} questões`);
 
 	const sessao = $derived.by(() => {
 		const chave = `${dia}|${chaveFiltro(filtro)}`;
@@ -88,7 +101,12 @@
 
 	const materiaFiltrada = $derived(filtro.materia ? (porId.get(filtro.materia) ?? null) : null);
 	const titulo = $derived(
-		[materiaFiltrada?.abrev, filtro.tipo && ROTULO_TIPO[filtro.tipo], 'Feed', 'Painel de Concurso']
+		[
+			filtro.topico === undefined ? materiaFiltrada?.abrev : `Questões de ${filtro.topico}`,
+			filtro.topico === undefined && filtro.tipo && ROTULO_TIPO[filtro.tipo],
+			'Feed',
+			'Painel de Concurso'
+		]
 			.filter(Boolean)
 			.join(' · ')
 	);
@@ -145,7 +163,15 @@
 		</div>
 	{/if}
 
-	{#if filtro.tipo}
+	{#if filtro.topico !== undefined}
+		<div class="filtro-topico">
+			<h2>Questões de {filtro.topico}</h2>
+			<p>
+				{#if qtdTopico !== null}<span class="qtd">{rotuloQtd(qtdTopico)}</span>{/if}
+				<a href="/">Ver tudo</a>
+			</p>
+		</div>
+	{:else if filtro.tipo}
 		<p class="filtro-tipo">
 			Só {ROTULO_TIPO[filtro.tipo].toLocaleLowerCase('pt-BR')}
 			<a href={filtro.materia ? `/?materia=${encodeURIComponent(filtro.materia)}` : '/'}>Mostrar todos os tipos</a>
@@ -186,6 +212,19 @@
 			<p>{sessao.erro}</p>
 			<button type="button" onclick={tentarDeNovo} disabled={sessao.carregando}>Tentar de novo</button>
 		</div>
+	{:else if sessao.fim && filtro.topico !== undefined}
+		<!-- Fim do filtro de tópico: o FimDoFeed só conhece matéria e "Tudo"; aqui sempre há volta a "Tudo". -->
+		<section class="fim-topico" aria-live="polite">
+			<span class="marca" aria-hidden="true"><Icone nome="check" tamanho={28} /></span>
+			{#if sessao.posts.length > 0}
+				<h2>Você viu tudo deste tópico</h2>
+				<p>As questões de {filtro.topico} voltam amanhã, em outra ordem.</p>
+			{:else}
+				<h2>Nenhuma questão deste tópico</h2>
+				<p>Não há questão do catálogo ligada a {filtro.topico}.</p>
+			{/if}
+			<a class="acao" href="/">Ver tudo</a>
+		</section>
 	{:else if sessao.fim}
 		<FimDoFeed materia={materiaFiltrada} />
 	{:else if sessao.carregando && sessao.posts.length > 0}
@@ -230,6 +269,90 @@
 		min-height: 44px;
 		color: var(--cor-primaria);
 		font-weight: 600;
+	}
+
+	/* Cabeçalho do filtro de tópico: id do tópico e quantidade (FR-004). */
+	.filtro-topico {
+		margin: 0 0 8px;
+		overflow-wrap: anywhere;
+	}
+
+	.filtro-topico h2 {
+		margin: 0;
+		font-family: var(--fonte-titulo);
+		font-size: 1.25rem;
+	}
+
+	.filtro-topico p {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0 12px;
+		margin: 0;
+	}
+
+	.qtd {
+		color: var(--cor-texto-suave);
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.filtro-topico a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		margin-left: auto;
+		color: var(--cor-primaria);
+		font-weight: 600;
+	}
+
+	/* Igual ao FimDoFeed, para o fim do filtro de tópico. */
+	.fim-topico {
+		display: grid;
+		justify-items: center;
+		gap: 8px;
+		padding: 40px var(--espaco) 48px;
+		text-align: center;
+		overflow-wrap: anywhere;
+	}
+
+	.fim-topico .marca {
+		width: 56px;
+		height: 56px;
+		display: grid;
+		place-items: center;
+		border-radius: 50%;
+		border: var(--linha-peso) solid var(--cor-acerto);
+		color: var(--cor-acerto);
+	}
+
+	.fim-topico h2 {
+		margin: 8px 0 0;
+		font-family: var(--fonte-titulo);
+		font-size: 1.125rem;
+	}
+
+	.fim-topico p {
+		margin: 0;
+		color: var(--cor-texto-suave);
+		max-width: 32ch;
+	}
+
+	/* Botão primário do sistema (igual em todo o app). */
+	.fim-topico .acao {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		margin-top: 8px;
+		padding: 0 20px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		box-shadow: var(--sombra);
+		background: var(--cor-primaria);
+		color: var(--cor-primaria-texto);
+		font-weight: 700;
+		text-decoration: none;
 	}
 
 	.stories-esqueleto {

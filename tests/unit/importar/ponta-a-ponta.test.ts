@@ -53,6 +53,20 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 		}
 	});
 
+	it('entrada de questão com tópico ganha tp; as demais seguem com id, t, m, l', () => {
+		const comTp = indice.posts.filter((e: { tp?: string }) => e.tp !== undefined);
+		expect(comTp).toHaveLength(8);
+		expect(rel.topicos).toEqual({ questoes: 8, distintos: 8 });
+		for (const e of indice.posts) {
+			const p = posts.find((x) => x.id === e.id);
+			if (e.t === 'q') expect(e.tp).toBe(p.topicoEstudo);
+			const chaves = e.tp === undefined ? ['id', 't', 'm', 'l'] : ['id', 't', 'm', 'l', 'tp'];
+			expect(Object.keys(e)).toEqual(chaves);
+		}
+		expect(indice.posts.find((e: { id: string }) => e.id === 'q:TCU2026-AUFC-TI-113').tp).toBe('CDA-11');
+		expect(formatarRelatorio(rel)).toContain('questões com tópico de estudo: 8 (8 tópicos distintos)');
+	});
+
 	it('índice e matérias no formato do contrato', () => {
 		expect(indice.versao).toBe(1);
 		expect(indice.geradoEm).toMatch(/^\d{4}-\d{2}-\d{2}T/);

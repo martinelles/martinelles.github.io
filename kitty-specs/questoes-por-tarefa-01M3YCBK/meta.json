@@ -2,11 +2,11 @@
   "created_at": "2026-10-02T13:20:18.866271+00:00",
   "friendly_name": "Questões por tarefa",
   "mission_id": "01M3YCBK74ZDNBX9ESNRKMQBXF",
-  "mission_number": null,
+  "mission_number": 5,
   "mission_slug": "questoes-por-tarefa-01M3YCBK",
   "mission_type": "software-dev",
   "slug": "questoes-por-tarefa-01M3YCBK",
+  "source_description": "A tarefa de Questões do plano abre exatamente as questões do catálogo ligadas ao tópico dela (coluna topico_estudo), com fallback para a matéria.",
   "target_branch": "main",
-  "vcs": "git",
-  "source_description": "A tarefa de Questões do plano abre exatamente as questões do catálogo ligadas ao tópico dela (coluna topico_estudo), com fallback para a matéria."
+  "vcs": "git"
 }

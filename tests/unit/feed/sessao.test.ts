@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { AVISO_FALHA_CARGA, criarSessao, esquecerMostrados, TAMANHO_PAGINA } from '$lib/feed/sessao.svelte';
+import { AVISO_FALHA_CARGA, chaveFiltro, criarSessao, esquecerMostrados, TAMANHO_PAGINA } from '$lib/feed/sessao.svelte';
 import { criarRepositorio } from '$lib/feed/conteudo';
 import { buscarSintetico, indiceSintetico, repoFalso } from './apoio';
 
@@ -124,6 +124,37 @@ describe('criarSessao', () => {
 		falhando.clear();
 		await rolarAteOFim(sessao);
 		expect(sessao.posts).toHaveLength(12);
+		expect(sessao.erro).toBeNull();
+	});
+
+	it('chaveFiltro: sem tópico igual à de antes; com tópico, chave própria', () => {
+		expect(chaveFiltro({})).toBe('*|*');
+		expect(chaveFiltro({ materia: 'auditoria', tipo: 'questao' })).toBe('auditoria|questao');
+		expect(chaveFiltro({ topico: 'FAG-02', tipo: 'questao' })).toBe('*|questao|FAG-02');
+		expect(chaveFiltro({ topico: 'FAG-02' })).not.toBe(chaveFiltro({ topico: 'FAG-01' }));
+	});
+
+	it('filtro por tópico: rola até o fim sem repetir, e tem conjunto de mostrados próprio', async () => {
+		const base = indiceSintetico(95);
+		const indice = { ...base, posts: base.posts.map((e, i) => (e.t === 'q' && i % 8 === 0 ? { ...e, tp: 'FAG-02' } : e)) };
+		const comTopico = indice.posts.filter((e) => e.tp === 'FAG-02').map((e) => e.id);
+		expect(comTopico.length).toBeGreaterThan(TAMANHO_PAGINA);
+		const repo = repoFalso(indice);
+		const geral = criarSessao(repo, { tipo: 'questao' }, DIA);
+		await rolarAteOFim(geral);
+		const sessao = criarSessao(repo, { topico: 'FAG-02', tipo: 'questao' }, DIA);
+		await rolarAteOFim(sessao);
+		const ids = sessao.posts.map((p) => p.id);
+		expect(new Set(ids).size).toBe(ids.length);
+		expect([...ids].sort()).toEqual([...comTopico].sort());
+		expect(sessao.fim).toBe(true);
+	});
+
+	it('tópico inexistente: fim na primeira página, sem erro', async () => {
+		const sessao = criarSessao(repoFalso(indiceSintetico(10)), { topico: 'XYZ-99' }, DIA);
+		await sessao.proximaPagina();
+		expect(sessao.fim).toBe(true);
+		expect(sessao.posts).toEqual([]);
 		expect(sessao.erro).toBeNull();
 	});
 

@@ -1,9 +1,11 @@
 <script lang="ts">
 	// Tela da tarefa (FR-007, FR-008, FR-009, FR-014; Cenário 3): modo e bloco, tópico do edital,
 	// o que fazer (por modo), cronômetro, atalho para o feed da matéria (questões na tarefa de
-	// Questões; lei seca e resumos na de Leitura) e "Concluir tarefa" — questões feitas/certas só
+	// Questões — e, antes, as do próprio tópico, se houver (FR-003 de questoes-por-tarefa); lei seca
+	// e resumos na de Leitura) e "Concluir tarefa" — questões feitas/certas só
 	// na tarefa de Questões (emenda D4). Emenda D5 (FR-016): se a missão de hoje fica cumprida com
 	// esta tarefa, a tela fica aberta com "Continuar estudando" (a próxima da fila, com o cronômetro).
+	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Icone from '$lib/componentes/Icone.svelte';
 	import AvisoRegistro from '$lib/componentes/plano/AvisoRegistro.svelte';
@@ -12,6 +14,7 @@
 	import { garantirRegistro, iniciarEstudos, usarAgora } from '$lib/componentes/plano/estado.svelte';
 	import { duracao, ITENS_QUESTOES, partesTopico, ROTULO_BLOCO, ROTULO_MODO } from '$lib/componentes/plano/formato';
 	import { formatarData } from '$lib/datas';
+	import type { Repositorio } from '$lib/feed/conteudo';
 	import { diaLocalDe } from '$lib/plano/dias';
 	import { minutosEstudados } from '$lib/plano/horas';
 	import { missaoDoDia, pendente } from '$lib/plano/missao';
@@ -39,6 +42,30 @@
 			: comQuestoes
 				? { href: `/?materia=${encodeURIComponent(tarefa.materia)}&tipo=questao`, rotulo: 'Questões desta matéria' }
 				: { href: `/?materia=${encodeURIComponent(tarefa.materia)}`, rotulo: 'Lei seca e resumos desta matéria' }
+	);
+
+	/**
+	 * Questões do catálogo ligadas ao tópico (FR-003), contadas no índice do feed. `null` enquanto o
+	 * índice carrega ou se ele falhar (sem rede): aí fica só o atalho da matéria, como antes.
+	 */
+	const repo = getContext<Repositorio>('repositorio');
+	let qtdTopico = $state<{ topico: string; n: number } | null>(null);
+	$effect(() => {
+		if (!comQuestoes) return;
+		const topicoId = tarefa.topicoId;
+		let vivo = true;
+		repo.indice().then(
+			(i) => {
+				if (vivo) qtdTopico = { topico: topicoId, n: i.posts.filter((e) => e.t === 'q' && e.tp === topicoId).length };
+			},
+			() => {}
+		);
+		return () => (vivo = false);
+	});
+	/** Contagem do tópico desta tarefa (a página é reaproveitada ao trocar de tarefa). */
+	const questoesDoTopico = $derived(comQuestoes && qtdTopico?.topico === tarefa.topicoId ? qtdTopico.n : null);
+	const atalhoTopico = $derived(
+		questoesDoTopico ? `/?topico=${encodeURIComponent(tarefa.topicoId)}&tipo=questao` : null
 	);
 
 	let feitas = $state<number | null>(null);
@@ -150,11 +177,27 @@
 				<li>Anote as dúvidas; as questões do tópico vêm na tarefa seguinte, de Questões.</li>
 			{/if}
 		</ol>
-		{#if atalho}
-			<a class="atalho" href={atalho.href}>
-				<Icone nome="lista" tamanho={20} /> {atalho.rotulo}
-			</a>
+		{#if questoesDoTopico !== null}
+			<p class="ligadas" role="status">
+				{#if questoesDoTopico === 0}
+					Nenhuma questão do catálogo ligada a este tópico ainda.
+				{:else}
+					{questoesDoTopico === 1 ? '1 questão deste tópico' : `${questoesDoTopico} questões deste tópico`}.
+				{/if}
+			</p>
 		{/if}
+		<div class="atalhos">
+			{#if atalhoTopico}
+				<a class="atalho" href={atalhoTopico}>
+					<Icone nome="lista" tamanho={20} /> Questões deste tópico
+				</a>
+			{/if}
+			{#if atalho}
+				<a class={atalhoTopico ? 'atalho secundario' : 'atalho'} href={atalho.href}>
+					<Icone nome="lista" tamanho={20} /> {atalho.rotulo}
+				</a>
+			{/if}
+		</div>
 	</section>
 
 	<section class="concluir" aria-labelledby="titulo-concluir">
@@ -289,6 +332,18 @@
 		line-height: 1.6;
 	}
 
+	.ligadas {
+		margin: 8px 0 0;
+		color: var(--cor-texto-suave);
+		font-weight: 600;
+	}
+
+	.atalhos {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 20px;
+	}
+
 	.atalho {
 		display: inline-flex;
 		align-items: center;
@@ -297,6 +352,12 @@
 		margin-top: 8px;
 		color: var(--cor-primaria);
 		font-weight: 700;
+	}
+
+	/* Com questões do tópico, a matéria inteira fica como saída de segunda ordem. */
+	.atalho.secundario {
+		color: var(--cor-texto);
+		font-weight: 600;
 	}
 
 	form {

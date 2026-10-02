@@ -97,9 +97,25 @@ export function lerAlternativas(celula) {
 	});
 }
 
+/** Id de tópico do `ESTUDO.csv` (ex.: `FAG-02`). */
+export const ID_TOPICO = /^[A-Z]+-\d+$/;
+
+/** Valor de `topico_estudo` que marca questão de matéria sem tópico no edital. */
+export const SEM_TOPICO = 'sem-topico';
+
+/**
+ * `topico_estudo` → id do tópico, ou `undefined` (vazio, `sem-topico` ou fora do padrão).
+ * @param {string | undefined} celula
+ * @returns {string | undefined}
+ */
+export function lerTopicoEstudo(celula) {
+	const v = (celula ?? '').trim();
+	return ID_TOPICO.test(v) ? v : undefined;
+}
+
 /**
  * @param {Record<string, string>[]} linhas linhas do CSV (com cabeçalho)
- * @returns {{ posts: any[], descartes: Record<string, number>, avisos: string[] }}
+ * @returns {{ posts: any[], descartes: Record<string, number>, avisos: string[], topicos: { questoes: number, distintos: number } }}
  */
 export function importarQuestoes(linhas) {
 	/** @type {any[]} */
@@ -109,6 +125,11 @@ export function importarQuestoes(linhas) {
 	/** @type {string[]} */
 	const avisos = [];
 	const avisosProva = new Set();
+	/** @type {Set<string>} */
+	const avisosTopico = new Set();
+	/** @type {Set<string>} */
+	const topicosVistos = new Set();
+	let comTopico = 0;
 	for (const l of linhas) {
 		if (l.situacao === 'anulada') {
 			descartes.anulada++;
@@ -136,6 +157,15 @@ export function importarQuestoes(linhas) {
 			materia
 		};
 		if (l.subtopico?.trim()) post.subtopico = l.subtopico.trim();
+		const topico = lerTopicoEstudo(l.topico_estudo);
+		if (topico) {
+			post.topicoEstudo = topico;
+			comTopico++;
+			topicosVistos.add(topico);
+		} else {
+			const cru = (l.topico_estudo ?? '').trim();
+			if (cru && cru !== SEM_TOPICO) avisosTopico.add(`questão ${l.id}: topico_estudo fora do padrão ("${cru}") — ficou sem tópico`);
+		}
 		post.prova = prova;
 		post.numero = Number(l.numero);
 		if (textoBase !== undefined) post.textoBase = textoBase;
@@ -152,6 +182,6 @@ export function importarQuestoes(linhas) {
 		post.situacao = l.situacao === 'alterada' ? 'alterada' : 'valida';
 		posts.push(post);
 	}
-	avisos.push(...[...avisosProva].sort());
-	return { posts, descartes, avisos };
+	avisos.push(...[...avisosProva].sort(), ...[...avisosTopico].sort());
+	return { posts, descartes, avisos, topicos: { questoes: comTopico, distintos: topicosVistos.size } };
 }

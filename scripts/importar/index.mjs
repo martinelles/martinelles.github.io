@@ -44,6 +44,7 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   avisos: string[],
  *   lotes: { arquivo: string, posts: number, gzip: number }[],
  *   entradasIndice: number,
+ *   topicos: { questoes: number, distintos: number },
  *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null
  * }} Relatorio
  */
@@ -98,6 +99,7 @@ export function importar({ vault, saida }) {
 	descartes['questão anulada'] = q.descartes.anulada;
 	descartes['questão sem gabarito'] = q.descartes['sem gabarito'];
 	avisos.push(...q.avisos);
+	const topicos = q.topicos;
 
 	// Lei seca
 	/** @type {Map<string, Set<string>>} */
@@ -183,7 +185,7 @@ export function importar({ vault, saida }) {
 	const materias = ordenarMaterias(totaisMateria);
 
 	const geradoEm = new Date(Math.floor(maisRecente / 1000) * 1000).toISOString();
-	/** @type {{ id: string, t: string, m: string, l: string }[]} */
+	/** @type {{ id: string, t: string, m: string, l: string, tp?: string }[]} */
 	const entradas = [];
 	/** @type {Record<string, string>} */
 	const mapaLotes = {};
@@ -201,7 +203,12 @@ export function importar({ vault, saida }) {
 			mapaLotes[lote.chave] = lote.arquivo;
 			arquivos.push({ arquivo: lote.arquivo, conteudo: lote.conteudo });
 			lotesRel.push({ arquivo: lote.arquivo, posts: lote.posts.length, gzip: lote.gzip });
-			for (const p of lote.posts) entradas.push({ id: p.id, t: p.tipo[0], m: m.id, l: lote.chave });
+			for (const p of lote.posts) {
+				/** @type {{ id: string, t: string, m: string, l: string, tp?: string }} */
+				const e = { id: p.id, t: p.tipo[0], m: m.id, l: lote.chave };
+				if (p.tipo === 'questao' && p.topicoEstudo) e.tp = p.topicoEstudo;
+				entradas.push(e);
+			}
 		}
 		materiasRel.push({ id: m.id, nome: m.nome, total: m.total, lotes: lotes.length });
 	}
@@ -266,6 +273,7 @@ export function importar({ vault, saida }) {
 		avisos,
 		lotes: lotesRel,
 		entradasIndice: entradas.length,
+		topicos,
 		plano: planoRel
 	};
 }
@@ -284,6 +292,7 @@ export function formatarRelatorio(r) {
 		'',
 		`Posts: ${total} (índice: ${r.entradasIndice})`,
 		...Object.entries(r.totais).map(([t, n]) => `  ${t}: ${n}`),
+		`  questões com tópico de estudo: ${r.topicos.questoes} (${r.topicos.distintos} tópicos distintos)`,
 		'',
 		'Por matéria:',
 		...r.porMateria.map((m) => `  ${m.nome}: ${m.total} (${m.lotes} lote${m.lotes > 1 ? 's' : ''})`),

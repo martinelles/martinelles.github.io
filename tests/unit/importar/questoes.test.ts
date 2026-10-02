@@ -6,6 +6,7 @@ import {
 	lerAlternativas,
 	lerProva,
 	importarQuestoes,
+	lerTopicoEstudo,
 	separarTextoBase
 } from '../../../scripts/importar/questoes.mjs';
 
@@ -44,6 +45,18 @@ describe('separarTextoBase', () => {
 		expect(separarTextoBase('Enunciado [com colchete no meio].')).toEqual({
 			enunciado: 'Enunciado [com colchete no meio].'
 		});
+	});
+});
+
+describe('lerTopicoEstudo', () => {
+	it('só id de tópico do ESTUDO.csv', () => {
+		expect(lerTopicoEstudo('FAG-02')).toBe('FAG-02');
+		expect(lerTopicoEstudo('CDA-41')).toBe('CDA-41');
+		expect(lerTopicoEstudo('')).toBeUndefined();
+		expect(lerTopicoEstudo(undefined)).toBeUndefined();
+		expect(lerTopicoEstudo('sem-topico')).toBeUndefined();
+		expect(lerTopicoEstudo('FAG-02a')).toBeUndefined();
+		expect(lerTopicoEstudo('FAG')).toBeUndefined();
 	});
 });
 
@@ -96,6 +109,37 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 		expect(q.numero).toBe(113);
 		expect(porId.get('q:TCU2015-BAS-91').textoBase).toContain('[20; 10; 10]');
 		expect(porId.get('q:CGU2022-AFFC-TI-29').situacao).toBe('alterada');
+	});
+
+	it('topicoEstudo vem de topico_estudo; relatório conta questões e tópicos distintos', () => {
+		expect(porId.get('q:TCU2026-AUFC-TI-113').topicoEstudo).toBe('CDA-11');
+		expect(porId.get('q:CGU2022-AFFC-TI-29').topicoEstudo).toBe('AFO-05');
+		expect(r.topicos).toEqual({ questoes: 8, distintos: 8 });
+	});
+
+	it('topico_estudo vazio, sem-topico ou fora do padrão ⇒ sem o campo; fora do padrão avisa', () => {
+		const base = linhas().find((l) => l.id === 'TCU2026-AUFC-TI-113')!;
+		const rr = importarQuestoes([
+			{ ...base, id: 'X-1', topico_estudo: '' },
+			{ ...base, id: 'X-2', topico_estudo: 'sem-topico' },
+			{ ...base, id: 'X-3', topico_estudo: 'fag-2' },
+			{ ...base, id: 'X-4', topico_estudo: ' FAG-02 ' },
+			{ ...base, id: 'X-5', topico_estudo: 'FAG-02' }
+		]);
+		const [vazio, sem, fora, comEspaco, ok] = rr.posts;
+		expect('topicoEstudo' in vazio).toBe(false);
+		expect('topicoEstudo' in sem).toBe(false);
+		expect('topicoEstudo' in fora).toBe(false);
+		expect(comEspaco.topicoEstudo).toBe('FAG-02');
+		expect(ok.topicoEstudo).toBe('FAG-02');
+		expect(rr.topicos).toEqual({ questoes: 2, distintos: 1 });
+		expect(rr.avisos).toEqual(['questão X-3: topico_estudo fora do padrão ("fag-2") — ficou sem tópico']);
+	});
+
+	it('questão descartada não conta tópico', () => {
+		const anulada = linhas().find((l) => l.situacao === 'anulada')!;
+		const rr = importarQuestoes([{ ...anulada, topico_estudo: 'INF-01' }]);
+		expect(rr.topicos).toEqual({ questoes: 0, distintos: 0 });
 	});
 
 	it('matéria desconhecida é erro claro', () => {
