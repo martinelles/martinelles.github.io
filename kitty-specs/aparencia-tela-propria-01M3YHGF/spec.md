@@ -29,7 +29,7 @@ configurações continuam a um toque de distância.
 
 **Aceite**
 1. **Dado** o painel aberto, **quando** a pessoa olha a tela, **então** os blocos "Foco de Estudo" e "Aparência" não aparecem.
-2. **Dado** o painel aberto, **quando** a pessoa olha o cabeçalho, **então** continua vendo o cargo e a disciplina de foco atual em texto, sem seletor (o painel segue mostrando o foco, como pede o FR-014 da missão do feed).
+2. **Dado** o painel aberto, **quando** a pessoa olha o cabeçalho, **então** continua vendo o cargo e a disciplina de foco atual em texto, sem seletor (o painel segue mostrando o foco, como pede a spec da missão do feed (o painel mostra a disciplina de foco)).
 
 ### Cenário 2 — Abrir os Ajustes pelo painel (P1)
 

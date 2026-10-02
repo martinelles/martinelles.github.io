@@ -29,7 +29,7 @@ Levantado em `main` `5e16a61` (2026-10-02).
 ### R3. Foco atual no cabeçalho
 
 - **Decisão**: uma linha de texto "Foco: <nome da matéria>" no `CabecalhoPainel`.
-- **Motivo**: mantém o FR-014 da missão do feed (o painel mostra o foco), sem seletor, e é o lugar onde a pessoa olha primeiro.
+- **Motivo**: mantém a regra da missão do feed (o painel mostra o foco), sem seletor, e é o lugar onde a pessoa olha primeiro.
 - **Alternativa**: um cartão próprio no painel com o foco (devolve o bloco que a missão quer tirar).
 
 ### R4. Ícone
