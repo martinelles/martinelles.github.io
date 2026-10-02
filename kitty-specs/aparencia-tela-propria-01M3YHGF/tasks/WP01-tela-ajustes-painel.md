@@ -30,8 +30,8 @@ subtasks:
 - T005
 phase: Fase 1 - Tela e cabeçalho
 assignee: ''
-agent: ''
-shell_pid: '24608'
+agent: "claude:opus:implementer:implementer"
+shell_pid: "24608"
 history:
 - timestamp: '2026-10-02T14:59:07Z'
   agent: system
@@ -192,3 +192,7 @@ Os testes que dependiam dos blocos no painel passam a abrir a tela nova. **Não 
 - Confira o diff dos e2e: só mudaram os destinos e as esperas, e nenhum caso sumiu.
 - Abra `/painel` a 360 px no Kindle escuro: o link "Ajustes" fica visível, com foco de teclado visível.
 - Confira que `FocoEstudo`, `SeletorTema`, `foco.svelte.ts` e `tema.svelte.ts` não aparecem no diff (C-001).
+
+## Activity Log
+
+- 2026-10-02T15:02:23Z – claude:opus:implementer:implementer – shell_pid=24608 – Assigned agent via action command
