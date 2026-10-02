@@ -198,3 +198,4 @@ Os testes que dependiam dos blocos no painel passam a abrir a tela nova. **Não 
 - 2026-10-02T15:02:23Z – claude:opus:implementer:implementer – shell_pid=24608 – Assigned agent via action command
 - 2026-10-02T15:09:20Z – claude:opus:implementer:implementer – shell_pid=24608 – Ready for review; e2e 208 (191 antes) on 072aefc
 - 2026-10-02T15:09:35Z – claude:opus:reviewer:reviewer – shell_pid=4092 – Started review via action command
+- 2026-10-02T15:16:09Z – claude:opus:reviewer:reviewer – shell_pid=4092 – Review passed: scope limited to owned files (C-001/C-003 ok); check 0 errors, 279 unit, build ok, e2e 208/208 (191 before, no test( removed, only destinations/waits changed); contract DOM order and 44x44 Ajustes link ok; no fixed colors/transition. Non-blocking: stale comment in tema.spec 'O seletor fica no painel'; feed.spec 3/3b flaked once under load (Carregando posts timeout), passed on rerun.
