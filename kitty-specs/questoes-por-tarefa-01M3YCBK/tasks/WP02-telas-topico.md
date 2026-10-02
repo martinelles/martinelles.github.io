@@ -18,7 +18,8 @@ subtasks:
 - T006
 - T007
 phase: Fase 2
-shell_pid: '21072'
+shell_pid: "21072"
+agent: "claude:opus:implementer:implementer"
 history:
 - timestamp: '2026-10-02T12:00:00Z'
   agent: system
@@ -41,3 +42,7 @@ Siga `spec.md` e `plan.md`. Leia a API real de `src/lib/feed/*` (WP01 mesclado).
 - **T007** `tests/e2e/feed-topico.spec.ts`: tópico com questões (contagem = do índice; rolar até o fim sem repetir, todos os posts são questões com `topicoEstudo` igual); tópico sem questões (aviso + atalho da matéria); id inexistente na URL; 360 px sem rolagem horizontal; nos três temas.
 
 DoD: portas do charter verdes; só arquivos do WP.
+
+## Activity Log
+
+- 2026-10-02T13:38:36Z – claude:opus:implementer:implementer – shell_pid=21072 – Assigned agent via action command
