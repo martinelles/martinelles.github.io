@@ -10,11 +10,11 @@
 
 | ID | Descrição | WP | Parallel |
 |---|---|---|---|
-| T001 | Ícone `ajustes` em `ICONES` e no `Icone` | WP01 | [P] |
-| T002 | Rota `/painel/ajustes` com título, Voltar, FocoEstudo e SeletorTema | WP01 | |
-| T003 | `CabecalhoPainel`: link "Ajustes" no canto e linha "Foco: …" | WP01 | |
-| T004 | `/painel` sem FocoEstudo e SeletorTema, passando o foco ao cabeçalho | WP01 | |
-| T005 | Migrar e2e existentes (`tema`, `painel`, `responsivo`) para a tela nova | WP01 | |
+| T001 | Ícone `ajustes` em `ICONES` e no `Icone` | WP01 | [P] | [D] |
+| T002 | Rota `/painel/ajustes` com título, Voltar, FocoEstudo e SeletorTema | WP01 | | [D] |
+| T003 | `CabecalhoPainel`: link "Ajustes" no canto e linha "Foco: …" | WP01 | | [D] |
+| T004 | `/painel` sem FocoEstudo e SeletorTema, passando o foco ao cabeçalho | WP01 | | [D] |
+| T005 | Migrar e2e existentes (`tema`, `painel`, `responsivo`) para a tela nova | WP01 | | [D] |
 | T006 | `ajustes.spec.ts`: painel sem os blocos, link, volta, aba atual, 2 interações | WP02 | |
 | T007 | `ajustes.spec.ts`: foco muda o texto do painel e a ordem dos stories | WP02 | |
 | T008 | `offline.spec.ts`: `/painel/ajustes` por link direto e offline | WP02 | [P] |
@@ -26,11 +26,11 @@
 
 Objetivo: o painel deixa de mostrar Foco de Estudo e Aparência, ganha o link "Ajustes" e a linha do foco atual, e a tela `/painel/ajustes` reúne os dois blocos. Os e2e existentes passam apontando para a tela nova. Teste independente: abrir `/painel`, tocar em "Ajustes", trocar o tema e voltar.
 
-- [ ] T001 Ícone `ajustes` em `ICONES` e no `Icone` (WP01)
-- [ ] T002 Rota `/painel/ajustes` com título, Voltar, FocoEstudo e SeletorTema (WP01)
-- [ ] T003 `CabecalhoPainel`: link "Ajustes" no canto e linha "Foco: …" (WP01)
-- [ ] T004 `/painel` sem FocoEstudo e SeletorTema, passando o foco ao cabeçalho (WP01)
-- [ ] T005 Migrar e2e existentes (`tema`, `painel`, `responsivo`) para a tela nova (WP01)
+- [x] T001 Ícone `ajustes` em `ICONES` e no `Icone` (WP01)
+- [x] T002 Rota `/painel/ajustes` com título, Voltar, FocoEstudo e SeletorTema (WP01)
+- [x] T003 `CabecalhoPainel`: link "Ajustes" no canto e linha "Foco: …" (WP01)
+- [x] T004 `/painel` sem FocoEstudo e SeletorTema, passando o foco ao cabeçalho (WP01)
+- [x] T005 Migrar e2e existentes (`tema`, `painel`, `responsivo`) para a tela nova (WP01)
 
 Riscos: conflito com a missão do plano no `painel/+page.svelte` (o diff é só de remoções, com merge da `main` antes da revisão); texto do cargo duplicado no painel quebrando `getByText(..., { exact: true })`.
 
