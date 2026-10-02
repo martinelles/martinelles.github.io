@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "mission_slug": "aparencia-tela-propria-01M3YHGF",
+  "mission_id": "01M3YHGFRE3F3T1D5JWNAYTPG9",
+  "mission_branch": "kitty/mission-aparencia-tela-propria-01M3YHGF",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/lib/componentes/CabecalhoPainel.svelte",
+        "src/lib/componentes/Icone.svelte",
+        "src/lib/dados/tipos.ts",
+        "src/routes/painel/+page.svelte",
+        "src/routes/painel/ajustes/**",
+        "tests/e2e/painel.spec.ts",
+        "tests/e2e/responsivo.spec.ts",
+        "tests/e2e/tema.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "tests/e2e/ajustes.spec.ts",
+        "tests/e2e/offline.spec.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-10-02T15:01:26.683845+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}
