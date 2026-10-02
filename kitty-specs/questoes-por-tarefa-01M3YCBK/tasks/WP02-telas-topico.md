@@ -48,3 +48,4 @@ DoD: portas do charter verdes; só arquivos do WP.
 - 2026-10-02T13:38:36Z – claude:opus:implementer:implementer – shell_pid=21072 – Assigned agent via action command
 - 2026-10-02T13:44:56Z – claude:opus:implementer:implementer – shell_pid=21072 – Ready for review
 - 2026-10-02T13:45:19Z – claude:opus:reviewer:reviewer – shell_pid=17064 – Started review via action command
+- 2026-10-02T13:49:16Z – claude:opus:reviewer:reviewer – shell_pid=17064 – Review passed: check/test(277)/build/e2e(190) green; ad hoc 360px in plan window (2026-10-15), 3 themes: FAG-02:Q shows '38 questões deste tópico.' + 1-tap link to /?topico=FAG-02&tipo=questao; feed title+count, answer/like/save work, mission strip/stories intact, 44px targets, no overflow; zero-topic notice + matter link; unknown id -> immediate end with Ver tudo; Leitura unchanged; index failure falls back to matter link. Secondary matter link with questions is additive and acceptable.
