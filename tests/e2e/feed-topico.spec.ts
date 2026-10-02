@@ -28,7 +28,7 @@ for (const arquivo of Object.values(indice.lotes)) {
 }
 const ligadas = (topico: string) => indice.posts.filter((e) => e.t === 'q' && e.tp === topico).length;
 
-/** Tarefa de Questões com questões ligadas (FAG-02: 38) e uma sem nenhuma. */
+/** Tarefa de Questões com questões ligadas (FAG-02: 33 desde 2026-10-02, quando 5 questões de norma do TCU saíram para FAG-04/05/06) e uma sem nenhuma. */
 const comQuestoes = plano.tarefas.find((t) => t.id === 'FAG-02:Q')!;
 const semQuestoes = plano.tarefas.find((t) => t.modo === 'questoes' && t.materia !== null && ligadas(t.topicoId) === 0)!;
 const N = ligadas(comQuestoes.topicoId);
@@ -44,7 +44,7 @@ test.beforeEach(async ({ page, context }) => {
 
 test('as amostras existem no conteúdo real', () => {
 	expect(comQuestoes).toBeDefined();
-	expect(N).toBe(38);
+	expect(N).toBe(33);
 	expect(semQuestoes).toBeDefined();
 });
 
