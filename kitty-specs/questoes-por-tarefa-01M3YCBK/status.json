@@ -1,7 +1,7 @@
 {
-  "event_count": 10,
-  "last_event_id": "01M3YDRR74XPJ8WQBV7Y387VN1",
-  "materialized_at": "2026-10-02T13:44:56.292483+00:00",
+  "event_count": 11,
+  "last_event_id": "01M3YDSERX06E9394D6JNM2RKV",
+  "materialized_at": "2026-10-02T13:45:19.389123+00:00",
   "mission_number": "",
   "mission_slug": "questoes-por-tarefa-01M3YCBK",
   "mission_type": "software-dev",
@@ -11,9 +11,9 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 1,
+    "for_review": 0,
     "in_progress": 0,
-    "in_review": 0,
+    "in_review": 1,
     "planned": 0
   },
   "work_packages": {
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-10-02T13:38:11.039530+00:00"
     },
     "WP02": {
-      "actor": "user",
+      "actor": "claude:opus:reviewer:reviewer",
       "force_count": 1,
-      "lane": "for_review",
-      "last_event_id": "01M3YDRR74XPJ8WQBV7Y387VN1",
-      "last_transition_at": "2026-10-02T13:44:56.292483+00:00"
+      "lane": "in_review",
+      "last_event_id": "01M3YDSERX06E9394D6JNM2RKV",
+      "last_transition_at": "2026-10-02T13:45:19.389123+00:00"
     }
   }
 }
