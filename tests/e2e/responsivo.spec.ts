@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import materias from '../../static/conteudo/materias.json' with { type: 'json' };
+import plano from '../../static/conteudo/plano.json' with { type: 'json' };
 
 // NFR-007: sem rolagem horizontal de 360 a 1440 px e alvos de toque de 44 px no celular.
 // Missão identidade-visual (NFR-006): os 3 temas a 360 e 1440 px; nas larguras intermediárias, só
@@ -11,6 +12,11 @@ const TEMAS = ['aventura', 'kindle', 'kindle-escuro'] as const;
 type Tema = (typeof TEMAS)[number];
 const LARGURAS_TODOS_OS_TEMAS = [360, 1440];
 const menor = [...materias].sort((a, b) => a.total - b.total)[0];
+/** Plano de estudos: a 1ª tarefa da fila (Leitura), aberta no 1º dia do plano com o cronômetro correndo. */
+const primeiraTarefa = plano.tarefas[0];
+/** A 1ª tarefa de Questões (emenda D4): a única com os campos de questões feitas/certas. */
+const primeiraQuestoes = plano.tarefas.find((t) => t.modo === 'questoes')!;
+const DIA_DO_PLANO = new Date('2026-10-01T09:00:00-03:00');
 
 async function preparar(page: Page, tema: Tema = 'aventura') {
 	await page.clock.setFixedTime(new Date('2026-09-30T12:00:00-03:00'));
@@ -63,6 +69,34 @@ const TELAS: { nome: string; abrir: (page: Page) => Promise<void> }[] = [
 			await page.goto('/painel');
 			await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
 			await expect(page.getByLabel('Disciplina')).toBeEnabled();
+		}
+	},
+	{
+		nome: '/painel (missão do dia)',
+		abrir: async (page) => {
+			await page.clock.setFixedTime(DIA_DO_PLANO);
+			await page.goto('/painel');
+			await expect(page.getByRole('button', { name: 'Iniciar estudos' })).toBeVisible();
+			await expect(page.getByRole('button', { name: 'Exportar progresso' })).toBeVisible();
+		}
+	},
+	{
+		nome: `/tarefa/${primeiraTarefa.id}`,
+		abrir: async (page) => {
+			await page.clock.setFixedTime(DIA_DO_PLANO);
+			await page.goto('/painel');
+			await page.getByRole('button', { name: 'Iniciar estudos' }).click();
+			await expect(page.getByRole('timer')).toBeVisible();
+			await expect(page.getByRole('button', { name: 'Concluir tarefa' })).toBeVisible();
+		}
+	},
+	{
+		nome: `/tarefa/${primeiraQuestoes.id}`,
+		abrir: async (page) => {
+			await page.clock.setFixedTime(DIA_DO_PLANO);
+			await page.goto(`/tarefa/${primeiraQuestoes.id}`);
+			await expect(page.getByRole('button', { name: 'Iniciar' })).toBeVisible();
+			await expect(page.getByLabel('Questões feitas')).toBeVisible();
 		}
 	},
 	{

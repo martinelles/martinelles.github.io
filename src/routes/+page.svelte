@@ -16,6 +16,8 @@
 	import BarraStories from '$lib/componentes/feed/BarraStories.svelte';
 	import FimDoFeed from '$lib/componentes/feed/FimDoFeed.svelte';
 	import Post from '$lib/componentes/feed/Post.svelte';
+	import ChamadaMissao from '$lib/componentes/plano/ChamadaMissao.svelte';
+	import { garantirRegistro, iniciarEstudos, usarAgora, usarMissao, usarPlano } from '$lib/componentes/plano/estado.svelte';
 	import { hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
 	import { materiaVistaHoje, ordenarStories } from '$lib/feed/estatisticas';
@@ -26,6 +28,12 @@
 
 	const repo = getContext<Repositorio>('repositorio');
 	const dia = hojeLocal();
+
+	// Chamada da missão do dia (FR-012). Sem plano (rede), a chamada só não aparece.
+	garantirRegistro();
+	const plano = usarPlano();
+	const relogio = usarAgora();
+	const missao = usarMissao(plano, relogio);
 
 	const ROTULO_TIPO: Record<Tipo, string> = {
 		questao: 'Questões',
@@ -125,6 +133,8 @@
 <h1 class="so-leitor">Feed de estudo</h1>
 
 <div class="feed">
+	<ChamadaMissao {missao} oniniciar={(t) => iniciarEstudos(t, relogio.hoje)} />
+
 	{#if materias}
 		<BarraStories materias={stories} selecionada={filtro.materia ?? null} {vistas} />
 	{:else}

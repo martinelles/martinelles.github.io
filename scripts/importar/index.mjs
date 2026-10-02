@@ -8,16 +8,21 @@
  * Escreve em diretório temporário e troca pelo destino só no fim; com erro fatal a saída
  * anterior fica intacta. Saída determinística: `geradoEm` é a data do arquivo-fonte mais
  * recente, não a hora da execução.
+ *
+ * Plano de estudos: `ESTUDO.csv` (+ `feed-conteudo/plano.md`) → `plano.json`, com `geradoEm`
+ * = mtime do `ESTUDO.csv`. Essas duas fontes não entram no `geradoEm` do índice, que segue
+ * sendo só o do conteúdo do feed. Sem `ESTUDO.csv`: aviso e nenhum `plano.json`.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { importarBaralho } from './baralhos.mjs';
 import { lerCsv } from './csv.mjs';
-import { fatiarMateria } from './fatiar.mjs';
+import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
 import { importarLei } from './lei-seca.mjs';
 import { LEI_PARA_MATERIA, LEIS_IGNORADAS, ordenarMaterias } from './materias.mjs';
+import { importarPlano, serializarPlano } from './plano.mjs';
 import { importarQuestoes } from './questoes.mjs';
 import { comparar } from './texto.mjs';
 
@@ -38,7 +43,8 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   pulados: string[],
  *   avisos: string[],
  *   lotes: { arquivo: string, posts: number, gzip: number }[],
- *   entradasIndice: number
+ *   entradasIndice: number,
+ *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null
  * }} Relatorio
  */
 
@@ -209,6 +215,25 @@ export function importar({ vault, saida }) {
 		conteudo: `[\n${materias.map((m) => JSON.stringify(m)).join(',\n')}\n]\n`
 	});
 
+	// Plano de estudos (lido fora de `ler`: não mexe no geradoEm do índice)
+	/** @type {Relatorio['plano']} */
+	let planoRel = null;
+	const csvEstudo = join(vault, 'ESTUDO.csv');
+	const mdParametros = join(dirFeed, 'plano.md');
+	if (!existsSync(csvEstudo)) {
+		avisos.push('ESTUDO.csv ausente: plano.json não gerado');
+	} else {
+		const r = importarPlano({
+			csvTexto: readFileSync(csvEstudo, 'utf8'),
+			parametros: existsSync(mdParametros) ? readFileSync(mdParametros, 'utf8') : null,
+			mtime: statSync(csvEstudo).mtimeMs
+		});
+		const conteudo = serializarPlano(r.plano);
+		arquivos.push({ arquivo: 'plano.json', conteudo });
+		avisos.push(...r.relatorio.avisos);
+		planoRel = { ...r.relatorio, gzip: tamanhoGzip(conteudo) };
+	}
+
 	// Escrita: temporário ao lado do destino, depois troca
 	const tmp = `${saida}.tmp-${process.pid}`;
 	const velho = `${saida}.old-${process.pid}`;
@@ -240,7 +265,8 @@ export function importar({ vault, saida }) {
 		pulados,
 		avisos,
 		lotes: lotesRel,
-		entradasIndice: entradas.length
+		entradasIndice: entradas.length,
+		plano: planoRel
 	};
 }
 
@@ -267,6 +293,8 @@ export function formatarRelatorio(r) {
 		'',
 		`Lotes: ${r.lotes.length}; maior: ${maior.arquivo} com ${kb(maior.gzip)} gzip`,
 		'',
+		...formatarPlano(r.plano, kb),
+		'',
 		`Arquivos recusados: ${r.recusados.length}`,
 		...r.recusados.map((x) => `  ${x.arquivo}: ${x.motivo}`),
 		`Arquivos pulados: ${r.pulados.length}`,
@@ -275,6 +303,24 @@ export function formatarRelatorio(r) {
 		...r.avisos.map((x) => `  ${x}`)
 	];
 	return linhas.join('\n');
+}
+
+/**
+ * @param {Relatorio['plano']} p
+ * @param {(b: number) => string} kb
+ * @returns {string[]}
+ */
+function formatarPlano(p, kb) {
+	if (!p) return ['Plano: não gerado (sem ESTUDO.csv)'];
+	const o = p.origemParametros;
+	return [
+		`Plano: ${p.tarefas} tarefas (leitura + questões) de ${p.topicos} tópicos na fila, ${p.linhas} no ESTUDO.csv (plano.json com ${kb(p.gzip)} gzip)`,
+		`  por bloco: básicos ${p.porBloco.basicos}, específicos ${p.porBloco.especificos}, especializados ${p.porBloco.especializados}`,
+		`  excluídas: dominado ${p.excluidas.dominado}, cortado ${p.excluidas.cortado}`,
+		`  sem matéria: ${p.semMateria.length}${p.semMateria.length ? ` (${p.semMateria.join(', ')})` : ''}`,
+		`  parâmetros: ${p.parametros.inicio} a ${p.parametros.fim}, ${p.parametros.horasPorDia} h/dia, leitura ${p.parametros.minutosLeitura} min, questões ${p.parametros.minutosQuestoes} min` +
+			` (inicio ${o.inicio}, fim ${o.fim}, horas_por_dia ${o.horasPorDia}, minutos_leitura ${o.minutosLeitura}, minutos_questoes ${o.minutosQuestoes})`
+	];
 }
 
 /** @param {string[]} args */
