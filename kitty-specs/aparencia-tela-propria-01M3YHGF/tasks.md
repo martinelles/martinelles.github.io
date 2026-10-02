@@ -15,9 +15,9 @@
 | T003 | `CabecalhoPainel`: link "Ajustes" no canto e linha "Foco: …" | WP01 | | [D] |
 | T004 | `/painel` sem FocoEstudo e SeletorTema, passando o foco ao cabeçalho | WP01 | | [D] |
 | T005 | Migrar e2e existentes (`tema`, `painel`, `responsivo`) para a tela nova | WP01 | | [D] |
-| T006 | `ajustes.spec.ts`: painel sem os blocos, link, volta, aba atual, 2 interações | WP02 | |
-| T007 | `ajustes.spec.ts`: foco muda o texto do painel e a ordem dos stories | WP02 | |
-| T008 | `offline.spec.ts`: `/painel/ajustes` por link direto e offline | WP02 | [P] |
+| T006 | `ajustes.spec.ts`: painel sem os blocos, link, volta, aba atual, 2 interações | WP02 | | [D] |
+| T007 | `ajustes.spec.ts`: foco muda o texto do painel e a ordem dos stories | WP02 | | [D] |
+| T008 | `offline.spec.ts`: `/painel/ajustes` por link direto e offline | WP02 | [D] |
 
 ## Fase 1 — Tela e cabeçalho
 
@@ -41,9 +41,9 @@ Riscos: conflito com a missão do plano no `painel/+page.svelte` (o diff é só 
 
 Objetivo: os cenários 1 a 4 da spec automatizados, incluindo o link direto e o offline.
 
-- [ ] T006 `ajustes.spec.ts`: painel sem os blocos, link, volta, aba atual, 2 interações (WP02)
-- [ ] T007 `ajustes.spec.ts`: foco muda o texto do painel e a ordem dos stories (WP02)
-- [ ] T008 `offline.spec.ts`: `/painel/ajustes` por link direto e offline (WP02)
+- [x] T006 `ajustes.spec.ts`: painel sem os blocos, link, volta, aba atual, 2 interações (WP02)
+- [x] T007 `ajustes.spec.ts`: foco muda o texto do painel e a ordem dos stories (WP02)
+- [x] T008 `offline.spec.ts`: `/painel/ajustes` por link direto e offline (WP02)
 
 ## Dependências
 
