@@ -10,6 +10,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-aparencia-tela-propria-01M3YHGF
+base_commit: 9cc244288a5b3e5f4e5fb679e72361b8de2baa2a
+created_at: '2026-10-02T15:16:34.858802+00:00'
 subtasks:
 - T006
 - T007
@@ -17,6 +20,7 @@ subtasks:
 phase: Fase 2 - Aceite
 assignee: ''
 agent: ''
+shell_pid: '35756'
 history:
 - timestamp: '2026-10-02T14:59:07Z'
   agent: system
