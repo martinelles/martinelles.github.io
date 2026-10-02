@@ -36,7 +36,7 @@
         "alternativas": { "type": "array", "items": { "type": "object", "required": ["letra", "texto"], "properties": { "letra": { "enum": ["A", "B", "C", "D", "E"] }, "texto": { "type": "string" } } } },
         "gabarito": { "enum": ["C", "E", "A", "B", "D"] },
         "situacao": { "enum": ["valida", "alterada"] },
-        "topicoEstudo": { "type": "string", "pattern": "^[A-Z]+-\d+$" }
+        "topicoEstudo": { "type": "string", "pattern": "^[A-Z]+-\\d+$" }
       }
     },
     "lei": {
