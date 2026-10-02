@@ -59,3 +59,5 @@ DoD: portas do charter verdes; só arquivos do WP.
 ## Activity Log
 
 - 2026-10-02T13:21:53Z – claude:opus:implementer:implementer – shell_pid=19832 – Assigned agent via action command
+- 2026-10-02T13:31:18Z – claude:opus:implementer:implementer – shell_pid=19832 – Medições (vault real, 2026-10-02): 1155 questões com tópico, 151 tópicos distintos. NFR-001: indice.json gzip 19497 B (código antigo, mesmo vault) -> 21420 B = +1923 B (<= 10 KB) OK. NFR-002: FAG-02 38=38, ING-01 48=48, SEG-10 29=29, DAD-45 40=40, CDA-41 1=1 (catálogo válido+gabarito = entradas com tp no índice) OK; conferidos também os 151 tópicos, 0 divergências. Lotes/índice só diferem do código antigo por topicoEstudo/tp.
+- 2026-10-02T13:31:26Z – claude:opus:implementer:implementer – shell_pid=19832 – Ready for review
