@@ -66,3 +66,7 @@ Os três WPs voltam para `planned` com pedido de mudança (não é defeito: é m
 - [x] T016 WP01: gerar `:L`/`:Q` por tópico, `topicoId`, `modo`, `bloco` (tabela por disciplina), `minutos_leitura`/`minutos_questoes` em `feed-conteudo/plano.md` (padrão 25/20); reimportar (WP01)
 - [x] T017 WP02: tipos, missão (4 tópicos = 8 tarefas em 3 h), registro só aceita questões em `:Q`, exportação agregada por tópico (FR-015) (WP02)
 - [x] T018 WP03: mostrar modo e bloco, atalho por modo (FR-014), conclusão com questões só em `:Q`, e2e atualizados (WP03)
+
+## Emenda D5 (2026-10-02) — continuar depois da missão cumprida
+
+- [ ] T019 WP03: "Continuar estudando" no painel, na chamada do feed e após concluir tarefa quando a missão está cumprida; abre a próxima pendente da fila com cronômetro; e2e (WP03)

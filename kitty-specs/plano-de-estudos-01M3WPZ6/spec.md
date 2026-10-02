@@ -20,6 +20,7 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 | D1 | Onde mora o progresso (horas estudadas, tarefas feitas) | **No app**, com exportação para ela lançar no `ESTUDO.csv`; o plano (tarefas previstas) vem do `ESTUDO.csv` pela importação |
 | D2 | Janela do plano | **01/10/2026 a 20/12/2026, 3 h por dia** (data-alvo estimada na planilha dela: prova em D+60 do edital) |
 | D4 | Emenda (2026-10-02): estrutura de tarefa da planilha `material/plano-estudos-gerado.xlsx` | Cada tópico vira **duas tarefas concretas** — **Leitura** e **Questões** — com **bloco** (Básicos, Específicos, Especializados); a planilha não volta a ser fonte, o `ESTUDO.csv` continua a única |
+| D5 | Emenda (2026-10-02): depois da missão cumprida | Deve ser possível **continuar estudando**: a próxima tarefa pendente da fila, além da missão do dia |
 | D3 | Pedido literal | horas totais e já estudadas; porcentagem concluída e barra de progresso; dias no plano, em aberto, concluídos e restantes; missão do dia com botão para iniciar estudos, quantidade de tarefas, tempo estimado e porcentagem da tarefa do dia realizada |
 
 ## Definições
@@ -94,6 +95,7 @@ ritmo dá conta de chegar à prova com o edital coberto, e ter uma única ação
 | FR-013 | (D4) Cada tópico da fila gera duas tarefas — Leitura e Questões — nessa ordem, com minutos próprios configuráveis no arquivo de parâmetros. | Proposto |
 | FR-014 | (D4) Toda tarefa mostra o modo e o bloco; a tarefa de Questões leva ao feed filtrado em questões da matéria, a de Leitura ao feed filtrado em lei seca/resumos da matéria; só a tarefa de Questões pede questões feitas/certas ao concluir. | Proposto |
 | FR-015 | (D4) A exportação agrega por tópico (uma linha por `id` do `ESTUDO.csv`), somando minutos das duas tarefas e trazendo questões da tarefa de Questões; `status_sugerido` = `estudado` só quando as duas estiverem concluídas. | Proposto |
+| FR-016 | (D5) Com a missão do dia cumprida, o painel, a chamada no feed e a tela da tarefa concluída oferecem "Continuar estudando", que abre a próxima tarefa pendente da fila (fora da missão) com o cronômetro; tarefas extras contam em horas e % do plano, não mudam a foto do dia, e a missão do dia seguinte começa depois delas. | Proposto |
 
 ### Não funcionais
 
