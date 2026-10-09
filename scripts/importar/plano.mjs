@@ -18,24 +18,26 @@ import { comparar } from './texto.mjs';
 
 /**
  * As 13 disciplinas do `ESTUDO.csv` (nome exato) → id de matéria do feed (`materias.mjs`).
+ * Desde 2026-10-09 o `ESTUDO.csv` segue o item 15 do Edital CGU nº 1/2026 (Cargo 2, Ciência
+ * de Dados): a disciplina leva a prova na frente (`P1 · `, `P2 · `, `P3 · `). As matérias do
+ * feed continuam as do catálogo de questões; cada bloco do edital aponta para a mais próxima.
  * Disciplina fora daqui vira `materia: null` com aviso no relatório.
  * @type {Record<string, string>}
  */
 export const DISCIPLINA_PARA_MATERIA = {
-	'Ciência de Dados': 'ti-ciencia-de-dados',
-	'Bancos de Dados': 'ti-ciencia-de-dados',
-	'Desenvolvimento de Sistemas': 'ti-desenvolvimento-e-engenharia-de-software',
-	'Infraestrutura Tecnológica': 'ti-infraestrutura-redes-e-sistemas-operacionais',
-	'Segurança da Informação': 'ti-seguranca-da-informacao',
-	'Língua Portuguesa': 'lingua-portuguesa',
-	'Língua Inglesa': 'lingua-inglesa',
-	'Direito Constitucional': 'direito-constitucional',
-	'Direito Administrativo': 'direito-administrativo',
-	'Administração Pública e Políticas Públicas': 'adm-publica-politicas-publicas-e-adm-geral',
-	'Fundamentos de Auditoria Governamental': 'fundamentos-de-auditoria-governamental',
-	'Administração Financeira e Orçamentária': 'adm-financeira-e-orcamentaria',
-	'Controladoria-Geral da União: organização, competências e sistemas estruturantes':
-		'cgu-correicao-integridade-e-leniencia'
+	'P1 · Estado, Democracia, Direitos e Ciência Política': 'direito-constitucional',
+	'P1 · Sociedade Brasileira, Desigualdades, Diversidade e Desenvolvimento': 'adm-publica-politicas-publicas-e-adm-geral',
+	'P1 · Ética Pública e Responsabilidade Profissional': 'outros-ramos-do-direito',
+	'P1 · Administração Pública e Fundamentos de Políticas Públicas': 'adm-publica-politicas-publicas-e-adm-geral',
+	'P2 · Fundamentos de Governança, Riscos e Integridade Pública e Privada': 'cgu-correicao-integridade-e-leniencia',
+	'P2 · Fundamentos de Transparência, Ouvidoria e Participação Social': 'ouvidoria-e-comunicacao-social',
+	'P2 · Fundamentos de Direito Público Aplicado, Controle e Responsabilização': 'direito-administrativo',
+	'P2 · Fundamentos de Evidências, Dados e Inteligência Artificial': 'raciocinio-critico-e-argumentacao',
+	'P2 · Fundamentos de Auditoria Governamental e Atuação Integrada da CGU': 'fundamentos-de-auditoria-governamental',
+	'P3 · Estatística, Programação e Análise de Dados': 'estatistica',
+	'P3 · Engenharia, Arquitetura e Governança de Dados': 'ti-ciencia-de-dados',
+	'P3 · Aprendizado de Máquina e Inteligência Artificial': 'ti-ciencia-de-dados',
+	'P3 · Operação, Governança e Gestão de Soluções de Dados e IA': 'ti-governanca-gestao-e-contratacoes-de-ti'
 };
 
 for (const [disciplina, id] of Object.entries(DISCIPLINA_PARA_MATERIA)) {
@@ -43,30 +45,27 @@ for (const [disciplina, id] of Object.entries(DISCIPLINA_PARA_MATERIA)) {
 }
 
 /**
- * Emenda D4 (spec › Premissas, estimativa até o edital): disciplina do `ESTUDO.csv` (nome
- * exato) → bloco da prova. Disciplina fora daqui é erro fatal: tarefa sem bloco não vai ao app.
- * @type {Record<string, 'basicos' | 'especificos' | 'especializados'>}
+ * Disciplina do `ESTUDO.csv` (nome exato) → prova objetiva do edital (item 7.1): P1
+ * conhecimentos básicos, P2 complementares, P3 específicos. Disciplina fora daqui é erro
+ * fatal: tarefa sem bloco não vai ao app.
+ * @type {Record<string, 'basicos' | 'complementares' | 'especificos'>}
  */
-export const DISCIPLINA_PARA_BLOCO = {
-	'Língua Portuguesa': 'basicos',
-	'Língua Inglesa': 'basicos',
-	'Administração Pública e Políticas Públicas': 'basicos',
-	'Administração Financeira e Orçamentária': 'basicos',
-	'Controladoria-Geral da União: organização, competências e sistemas estruturantes': 'basicos',
-	'Direito Constitucional': 'especificos',
-	'Direito Administrativo': 'especificos',
-	'Fundamentos de Auditoria Governamental': 'especificos',
-	'Desenvolvimento de Sistemas': 'especificos',
-	'Infraestrutura Tecnológica': 'especificos',
-	'Segurança da Informação': 'especificos',
-	'Ciência de Dados': 'especializados',
-	'Bancos de Dados': 'especializados'
-};
+export const DISCIPLINA_PARA_BLOCO = Object.fromEntries(
+	Object.keys(DISCIPLINA_PARA_MATERIA).map((d) => [
+		d,
+		/** @type {const} */ ({ P1: 'basicos', P2: 'complementares', P3: 'especificos' })[
+			/** @type {'P1' | 'P2' | 'P3'} */ (d.slice(0, 2))
+		]
+	])
+);
 
-/** Padrão de D2 (janela e horas, 2026-10-01) e D4 (minutos por modo, 2026-10-02). */
+/**
+ * Padrão de D2 (horas, 2026-10-01) e D4 (minutos por modo, 2026-10-02). Janela desde
+ * 2026-10-09: do dia do edital à véspera da prova (13/12/2026, Anexo I do Edital CGU 1/2026).
+ */
 export const PARAMETROS_PADRAO = Object.freeze({
-	inicio: '2026-10-01',
-	fim: '2026-12-20',
+	inicio: '2026-10-09',
+	fim: '2026-12-12',
 	horasPorDia: 3,
 	minutosLeitura: 25,
 	minutosQuestoes: 20
@@ -91,7 +90,7 @@ const COLUNAS = ['id', 'disciplina', 'topico', 'status', 'obs', 'prioridade'];
 
 /**
  * @typedef {{ inicio: string, fim: string, horasPorDia: number, minutosLeitura: number, minutosQuestoes: number }} Parametros
- * @typedef {'basicos' | 'especificos' | 'especializados'} Bloco
+ * @typedef {'basicos' | 'complementares' | 'especificos'} Bloco
  * @typedef {{ id: string, topicoId: string, modo: 'leitura' | 'questoes', bloco: Bloco, disciplina: string,
  *   materia: string | null, topico: string, minutos: number, prioridade: number, status: string }} Tarefa
  * @typedef {Parametros & { versao: 1, geradoEm: string, tarefas: Tarefa[] }} Plano
@@ -216,7 +215,7 @@ export function importarPlano({ csvTexto, parametros: textoParametros, mtime }) 
 	});
 	topicos.sort((a, b) => b.prioridade - a.prioridade || comparar(a.id, b.id));
 	/** @type {Record<Bloco, number>} */
-	const porBloco = { basicos: 0, especificos: 0, especializados: 0 };
+	const porBloco = { basicos: 0, complementares: 0, especificos: 0 };
 	/** @type {Tarefa[]} */
 	const tarefas = [];
 	for (const { id, bloco, disciplina, materia, topico, prioridade, status } of topicos) {

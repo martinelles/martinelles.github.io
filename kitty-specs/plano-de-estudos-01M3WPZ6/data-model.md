@@ -19,7 +19,7 @@
 | `id` | `<topico>:L` ou `<topico>:Q` (ex.: `CDA-01:L`), único |
 | `topicoId` | `id` do `ESTUDO.csv` |
 | `modo` | `leitura` \| `questoes` |
-| `bloco` | `basicos` \| `especificos` \| `especializados` |
+| `bloco` | `basicos` \| `complementares` \| `especificos` |
 | `disciplina` | como no `ESTUDO.csv` |
 | `materia` | id de matéria do feed ou `null` |
 | `topico` | texto literal do edital |

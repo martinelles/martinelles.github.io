@@ -52,7 +52,7 @@ function violacoesPlano(p: unknown): string[] {
 		if (typeof t.id !== 'string' || !/^[A-Z]+-\d+:[LQ]$/.test(t.id)) erros.push(`${id}: id inválido`);
 		if (typeof t.topicoId !== 'string' || !/^[A-Z]+-\d+$/.test(t.topicoId)) erros.push(`${id}: topicoId inválido`);
 		if (!['leitura', 'questoes'].includes(t.modo as string)) erros.push(`${id}: modo inválido`);
-		if (!['basicos', 'especificos', 'especializados'].includes(t.bloco as string)) erros.push(`${id}: bloco inválido`);
+		if (!['basicos', 'complementares', 'especificos'].includes(t.bloco as string)) erros.push(`${id}: bloco inválido`);
 		if (typeof t.disciplina !== 'string') erros.push(`${id}: disciplina não é texto`);
 		if (!(t.materia === null || typeof t.materia === 'string')) erros.push(`${id}: materia inválida`);
 		if (typeof t.topico !== 'string' || t.topico.length < 1) erros.push(`${id}: topico vazio`);
@@ -70,8 +70,8 @@ describe('plano: fila', () => {
 
 	it('exclui dominado e cortado (obs iniciada por CORTADO) e conta cada um', () => {
 		expect(relatorio).toMatchObject({ linhas: 16, topicos: 14, tarefas: 28, excluidas: { dominado: 1, cortado: 1 } });
-		expect(topicos).not.toContain('CDA-02');
-		expect(topicos).not.toContain('INF-14');
+		expect(topicos).not.toContain('EPA-02');
+		expect(topicos).not.toContain('OGS-22');
 	});
 
 	it('cada tópico gera :L e :Q consecutivas, nessa ordem (D4, FR-013)', () => {
@@ -87,50 +87,36 @@ describe('plano: fila', () => {
 
 	it('ordena tópicos por prioridade desc e, no empate, por id asc', () => {
 		expect(topicos).toEqual([
-			'BDD-01', 'CDA-01', 'DES-01',
-			'DAD-01', 'DCO-01', 'INF-01', 'POR-01', 'POR-02', 'SEG-01',
-			'FAG-01',
-			'APP-01', 'CGU-01', 'ING-01',
-			'AFO-01'
+			'AMI-01', 'EAG-01', 'EPA-01', 'OGS-01',
+			'AGI-01', 'DPC-01', 'EDI-01', 'GRI-01', 'TOP-01',
+			'ADP-01', 'EDC-01', 'EDC-02', 'EPR-01', 'SBD-01'
 		]);
 	});
 
 	it('tarefa leva disciplina e tópico literais, bloco, status do CSV, prioridade numérica e minutos do modo', () => {
 		const comum = {
-			topicoId: 'POR-01',
+			topicoId: 'EDC-02',
 			bloco: 'basicos',
-			disciplina: 'Língua Portuguesa',
-			materia: 'lingua-portuguesa',
-			topico: 'Interpretação de texto: decodificação dos diversos tipos de mensagem.',
-			prioridade: 4,
+			disciplina: 'P1 · Estado, Democracia, Direitos e Ciência Política',
+			materia: 'direito-constitucional',
+			topico:
+				'2 Democracia e representação. › 2.1 Representação e participação; responsabilização democrática; relações entre Executivo, Legislativo e Judiciário; governabilidade e controles recíprocos.',
+			prioridade: 1,
 			status: 'estudado'
 		};
-		const i = ids.indexOf('POR-01:L');
-		expect(plano.tarefas[i]).toEqual({ id: 'POR-01:L', modo: 'leitura', ...comum, minutos: 25 });
-		expect(plano.tarefas[i + 1]).toEqual({ id: 'POR-01:Q', modo: 'questoes', ...comum, minutos: 20 });
+		const i = ids.indexOf('EDC-02:L');
+		expect(plano.tarefas[i]).toEqual({ id: 'EDC-02:L', modo: 'leitura', ...comum, minutos: 25 });
+		expect(plano.tarefas[i + 1]).toEqual({ id: 'EDC-02:Q', modo: 'questoes', ...comum, minutos: 20 });
 		expect(Object.keys(plano.tarefas[i])).toEqual([
 			'id', 'topicoId', 'modo', 'bloco', 'disciplina', 'materia', 'topico', 'minutos', 'prioridade', 'status'
 		]);
 	});
 
-	it('bloco por disciplina conforme a Premissa da spec (D4)', () => {
-		expect(DISCIPLINA_PARA_BLOCO).toEqual({
-			'Língua Portuguesa': 'basicos',
-			'Língua Inglesa': 'basicos',
-			'Administração Pública e Políticas Públicas': 'basicos',
-			'Administração Financeira e Orçamentária': 'basicos',
-			'Controladoria-Geral da União: organização, competências e sistemas estruturantes': 'basicos',
-			'Direito Constitucional': 'especificos',
-			'Direito Administrativo': 'especificos',
-			'Fundamentos de Auditoria Governamental': 'especificos',
-			'Desenvolvimento de Sistemas': 'especificos',
-			'Infraestrutura Tecnológica': 'especificos',
-			'Segurança da Informação': 'especificos',
-			'Ciência de Dados': 'especializados',
-			'Bancos de Dados': 'especializados'
-		});
+	it('bloco por disciplina = prova objetiva do edital (P1 básicos, P2 complementares, P3 específicos)', () => {
+		for (const [d, b] of Object.entries(DISCIPLINA_PARA_BLOCO))
+			expect(b, d).toBe({ P1: 'basicos', P2: 'complementares', P3: 'especificos' }[d.slice(0, 2)]);
 		for (const t of plano.tarefas) expect(t.bloco, t.id).toBe(DISCIPLINA_PARA_BLOCO[t.disciplina]);
-		expect(relatorio.porBloco).toEqual({ basicos: 12, especificos: 12, especializados: 4 });
+		expect(relatorio.porBloco).toEqual({ basicos: 10, complementares: 10, especificos: 8 });
 	});
 
 	it('as 13 disciplinas reais (fixture copiada do ESTUDO.csv) têm matéria existente no feed', () => {
@@ -139,10 +125,10 @@ describe('plano: fila', () => {
 		expect(Object.keys(DISCIPLINA_PARA_MATERIA).sort()).toEqual([...reais].sort());
 		expect(Object.keys(DISCIPLINA_PARA_BLOCO).sort()).toEqual([...reais].sort());
 		for (const d of reais) expect(materiaPorId(DISCIPLINA_PARA_MATERIA[d]), d).toBeDefined();
-		expect(DISCIPLINA_PARA_MATERIA['Bancos de Dados']).toBe('ti-ciencia-de-dados');
-		expect(
-			DISCIPLINA_PARA_MATERIA['Controladoria-Geral da União: organização, competências e sistemas estruturantes']
-		).toBe('cgu-correicao-integridade-e-leniencia');
+		expect(DISCIPLINA_PARA_MATERIA['P3 · Aprendizado de Máquina e Inteligência Artificial']).toBe('ti-ciencia-de-dados');
+		expect(DISCIPLINA_PARA_MATERIA['P2 · Fundamentos de Auditoria Governamental e Atuação Integrada da CGU']).toBe(
+			'fundamentos-de-auditoria-governamental'
+		);
 		expect(relatorio.semMateria).toEqual([]);
 		expect(relatorio.avisos).toEqual([]);
 	});
@@ -156,9 +142,9 @@ describe('plano: fila', () => {
 
 	it('linha ruim é erro claro (status desconhecido, prioridade vazia, id repetido)', () => {
 		const base = CSV.replace(/\n$/, '');
-		expect(() => importarPlano({ csvTexto: `${base}\nXYZ-01,Língua Portuguesa,T,1,lendo,0,0,,,,,,,1,\n`, mtime: 0 })).toThrow(/status desconhecido "lendo"/);
-		expect(() => importarPlano({ csvTexto: `${base}\nXYZ-01,Língua Portuguesa,T,1,nao_iniciado,0,0,,,,,,,,\n`, mtime: 0 })).toThrow(/prioridade não numérica/);
-		expect(() => importarPlano({ csvTexto: `${base}\nPOR-01,D,T,1,nao_iniciado,0,0,,,,,,,1,\n`, mtime: 0 })).toThrow(/id repetido POR-01/);
+		expect(() => importarPlano({ csvTexto: `${base}\nXYZ-01,P1 · Ética Pública e Responsabilidade Profissional,T,1,lendo,0,0,,,,,,,1,\n`, mtime: 0 })).toThrow(/status desconhecido "lendo"/);
+		expect(() => importarPlano({ csvTexto: `${base}\nXYZ-01,P1 · Ética Pública e Responsabilidade Profissional,T,1,nao_iniciado,0,0,,,,,,,,\n`, mtime: 0 })).toThrow(/prioridade não numérica/);
+		expect(() => importarPlano({ csvTexto: `${base}\nEDC-01,D,T,1,nao_iniciado,0,0,,,,,,,1,\n`, mtime: 0 })).toThrow(/id repetido EDC-01/);
 	});
 
 	it('saída casa com contracts/plano.schema.json e geradoEm = mtime truncado ao segundo', () => {
@@ -179,8 +165,8 @@ describe('plano: parâmetros', () => {
 	it('sem arquivo: padrão de D2', () => {
 		const r = lerParametros(null);
 		expect(r.parametros).toEqual({
-			inicio: '2026-10-01',
-			fim: '2026-12-20',
+			inicio: '2026-10-09',
+			fim: '2026-12-12',
 			horasPorDia: 3,
 			minutosLeitura: 25,
 			minutosQuestoes: 20
@@ -225,7 +211,7 @@ describe('plano: parâmetros', () => {
 	it.each([
 		['inicio: 2026-02-30', /inicio deve ser uma data real/],
 		['fim: 20/12/2026', /fim deve ser uma data real/],
-		['inicio: 2026-12-21', /inicio \(2026-12-21\) depois de fim \(2026-12-20\)/],
+		['inicio: 2026-12-13', /inicio \(2026-12-13\) depois de fim \(2026-12-12\)/],
 		['horas_por_dia: 0', /horas_por_dia deve ser um número maior que zero/],
 		['horas_por_dia: "3"', /horas_por_dia deve ser um número maior que zero/],
 		['minutos_leitura: 25.5', /minutos_leitura deve ser um inteiro maior que zero/],
@@ -261,7 +247,7 @@ describe('plano: importação completa (index.mjs)', () => {
 		expect(rel.plano).toMatchObject({ tarefas: 28, topicos: 14, excluidas: { dominado: 1, cortado: 1 }, semMateria: [] });
 		const texto = formatarRelatorio(rel);
 		expect(texto).toContain('Plano: 28 tarefas (leitura + questões) de 14 tópicos na fila, 16 no ESTUDO.csv');
-		expect(texto).toContain('por bloco: básicos 12, específicos 12, especializados 4');
+		expect(texto).toContain('por bloco: básicos 10, complementares 10, específicos 8');
 		expect(texto).toContain('excluídas: dominado 1, cortado 1');
 		expect(texto).toContain('sem matéria: 0');
 		expect(texto).toContain('parâmetros: 2026-11-02 a 2027-01-31, 2.5 h/dia, leitura 30 min, questões 15 min');

@@ -324,7 +324,7 @@ function formatarPlano(p, kb) {
 	const o = p.origemParametros;
 	return [
 		`Plano: ${p.tarefas} tarefas (leitura + questões) de ${p.topicos} tópicos na fila, ${p.linhas} no ESTUDO.csv (plano.json com ${kb(p.gzip)} gzip)`,
-		`  por bloco: básicos ${p.porBloco.basicos}, específicos ${p.porBloco.especificos}, especializados ${p.porBloco.especializados}`,
+		`  por bloco: básicos ${p.porBloco.basicos}, complementares ${p.porBloco.complementares}, específicos ${p.porBloco.especificos}`,
 		`  excluídas: dominado ${p.excluidas.dominado}, cortado ${p.excluidas.cortado}`,
 		`  sem matéria: ${p.semMateria.length}${p.semMateria.length ? ` (${p.semMateria.join(', ')})` : ''}`,
 		`  parâmetros: ${p.parametros.inicio} a ${p.parametros.fim}, ${p.parametros.horasPorDia} h/dia, leitura ${p.parametros.minutosLeitura} min, questões ${p.parametros.minutosQuestoes} min` +

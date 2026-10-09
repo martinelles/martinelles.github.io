@@ -23,7 +23,7 @@
           "id": { "type": "string", "pattern": "^[A-Z]+-\\d+:[LQ]$" },
           "topicoId": { "type": "string", "pattern": "^[A-Z]+-\\d+$" },
           "modo": { "enum": ["leitura", "questoes"] },
-          "bloco": { "enum": ["basicos", "especificos", "especializados"] },
+          "bloco": { "enum": ["basicos", "complementares", "especificos"] },
           "disciplina": { "type": "string" },
           "materia": { "type": ["string", "null"] },
           "topico": { "type": "string", "minLength": 1 },

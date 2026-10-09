@@ -71,7 +71,7 @@ export function tarefas(n: number): string {
 export const ROTULO_MODO = { leitura: 'Leitura', questoes: 'Questões' } as const;
 
 /** Bloco do edital por extenso (emenda D4). */
-export const ROTULO_BLOCO = { basicos: 'Básicos', especificos: 'Específicos', especializados: 'Especializados' } as const;
+export const ROTULO_BLOCO = { basicos: 'Básicos', complementares: 'Complementares', especificos: 'Específicos' } as const;
 
 /** Itens C/E que fecham a tarefa de Questões (o mesmo bloco do HOJE.md). */
 export const ITENS_QUESTOES = 10;

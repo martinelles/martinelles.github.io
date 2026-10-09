@@ -23,7 +23,7 @@ export function tarefa(n: number, modo: ModoTarefa = 'leitura', minutos = modo =
 		id: modo === 'leitura' ? L(n) : Q(n),
 		topicoId: topicoId(n),
 		modo,
-		bloco: 'especializados',
+		bloco: 'especificos',
 		disciplina: 'Teste',
 		materia: 'ti-ciencia-de-dados',
 		topico: `Tópico ${n}`,

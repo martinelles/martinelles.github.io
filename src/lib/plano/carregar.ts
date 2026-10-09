@@ -9,7 +9,7 @@ import type { BlocoTarefa, Plano } from './tipos';
 export const URL_PLANO = `${BASE_CONTEUDO}plano.json`;
 
 const DIA_RE = /^\d{4}-\d{2}-\d{2}$/;
-const BLOCOS: readonly BlocoTarefa[] = ['basicos', 'especificos', 'especializados'];
+const BLOCOS: readonly BlocoTarefa[] = ['basicos', 'complementares', 'especificos'];
 
 let cache: Promise<Plano> | null = null;
 

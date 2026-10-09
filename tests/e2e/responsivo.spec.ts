@@ -16,7 +16,7 @@ const menor = [...materias].sort((a, b) => a.total - b.total)[0];
 const primeiraTarefa = plano.tarefas[0];
 /** A 1ª tarefa de Questões (emenda D4): a única com os campos de questões feitas/certas. */
 const primeiraQuestoes = plano.tarefas.find((t) => t.modo === 'questoes')!;
-const DIA_DO_PLANO = new Date('2026-10-01T09:00:00-03:00');
+const DIA_DO_PLANO = new Date('2026-10-09T09:00:00-03:00');
 
 async function preparar(page: Page, tema: Tema = 'aventura') {
 	await page.clock.setFixedTime(new Date('2026-09-30T12:00:00-03:00'));

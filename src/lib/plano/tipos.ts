@@ -9,7 +9,7 @@ export type StatusTopico = 'nao_iniciado' | 'estudado' | 'revisado' | 'travado';
 export type ModoTarefa = 'leitura' | 'questoes';
 
 /** Bloco do edital (estimado por disciplina até o edital sair). */
-export type BlocoTarefa = 'basicos' | 'especificos' | 'especializados';
+export type BlocoTarefa = 'basicos' | 'complementares' | 'especificos';
 
 export interface Tarefa {
 	/** `<topicoId>:L` ou `<topicoId>:Q` (ex.: `CDA-01:L`), único. */

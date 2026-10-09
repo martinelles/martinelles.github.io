@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import plano from '../../static/conteudo/plano.json' with { type: 'json' };
 
 // Plano de estudos, Cenários 1–4 da spec, contra o plano.json real e com relógio fixo.
-// Janela 01/10–20/12/2026 (81 dias, 3 h/dia, 243 h). Emenda D4: cada tópico gera Leitura (25 min)
+// Janela 09/10–12/12/2026 (65 dias, 3 h/dia, 195 h; Edital CGU 1/2026). Emenda D4: cada tópico gera Leitura (25 min)
 // e, logo depois, Questões (20 min) ⇒ a missão limpa de 3 h tem 8 tarefas (4 tópicos inteiros).
 
 const CHAVE_PLANO = 'painel-concurso:plano:v1';
@@ -11,7 +11,7 @@ const fila = plano.tarefas;
 const [t1, t2] = fila;
 const folha = (topico: string) => topico.split('›').pop()!.trim();
 const MODO = { leitura: 'Leitura', questoes: 'Questões' } as const;
-const BLOCO = { basicos: 'Básicos', especificos: 'Específicos', especializados: 'Especializados' } as const;
+const BLOCO = { basicos: 'Básicos', complementares: 'Complementares', especificos: 'Específicos' } as const;
 const FAZER = {
 	leitura: 'Leitura, 25 min: estudar o tópico e anotar dúvidas',
 	questoes: 'Questões, 20 min: 10 itens C/E do tópico'
@@ -38,7 +38,7 @@ async function dias(page: Page) {
 /** Os quatro números fecham (Definições): concluídos + em aberto + restantes = no plano. */
 async function conferirIdentidade(page: Page) {
 	const d = await dias(page);
-	expect(d.noPlano).toBe(81);
+	expect(d.noPlano).toBe(65);
 	expect(d.concluidos + d.emAberto + d.restantes).toBe(d.noPlano);
 	return d;
 }
@@ -75,16 +75,16 @@ test.beforeEach(async ({ context }) => {
 });
 
 test('Cenário 1: sem estudo, os números saem zerados e a missão tem 8 tarefas com modo e bloco', async ({ page }) => {
-	await page.clock.setFixedTime(em('2026-10-01'));
+	await page.clock.setFixedTime(em('2026-10-09'));
 	await abrirPainel(page);
 
 	await expect(resumo(page).getByText('0 h', { exact: true })).toBeVisible();
-	await expect(resumo(page).getByText('de 243 h estudadas')).toBeVisible();
+	await expect(resumo(page).getByText('de 195 h estudadas')).toBeVisible();
 	await expect(resumo(page).getByText(`0% do plano concluído, 0 de ${fila.length} tarefas.`)).toBeVisible();
 	const barra = resumo(page).getByRole('progressbar');
 	await expect(barra).toHaveAttribute('aria-label', 'Plano concluído: 0%');
 	await expect(barra).toHaveJSProperty('value', 0);
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 0, emAberto: 0, restantes: 81 });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 0, emAberto: 0, restantes: 65 });
 
 	// Cenário 2.1 e 2.2: quantidade, tempo, % feita; disciplina, bloco, tópico, modo, tempo e o que fazer.
 	const hoje = fila.slice(0, 8);
@@ -103,12 +103,12 @@ test('Cenário 1: sem estudo, os números saem zerados e a missão tem 8 tarefas
 
 	// A foto do dia foi gravada na primeira exibição.
 	const gravado = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_PLANO);
-	expect(gravado.fotos).toEqual({ '2026-10-01': hoje.map((t) => t.id) });
+	expect(gravado.fotos).toEqual({ '2026-10-09': hoje.map((t) => t.id) });
 });
 
 test('Cenário 3: Leitura 30 min, pausa ⇒ 0,5 h; conclui sem questões; Questões 10/7 ⇒ missão e plano sobem', async ({ page }) => {
 	expect([t1.modo, t2.modo, t2.topicoId]).toEqual(['leitura', 'questoes', t1.topicoId]);
-	await page.clock.setFixedTime(em('2026-10-01', '10:00'));
+	await page.clock.setFixedTime(em('2026-10-09', '10:00'));
 	await abrirPainel(page);
 
 	// Um toque em "Iniciar estudos" abre a primeira pendente com o cronômetro correndo (SC-002).
@@ -132,14 +132,14 @@ test('Cenário 3: Leitura 30 min, pausa ⇒ 0,5 h; conclui sem questões; Quest�
 	await expect(page.getByLabel('Questões feitas')).toHaveCount(0);
 	await expect(page.getByLabel('Questões certas')).toHaveCount(0);
 
-	await page.clock.setFixedTime(em('2026-10-01', '10:30'));
+	await page.clock.setFixedTime(em('2026-10-09', '10:30'));
 	await expect(timer(page)).toContainText('30:00');
 	await page.getByRole('button', { name: 'Pausar' }).click();
 	await expect(page.locator('#cronometro-estado')).toContainText('Pausado');
 	await expect(page.getByRole('status').filter({ hasText: 'Cronômetro pausado em 30 minutos' })).toBeAttached();
 
 	// Pausado, o tempo não corre.
-	await page.clock.setFixedTime(em('2026-10-01', '11:00'));
+	await page.clock.setFixedTime(em('2026-10-09', '11:00'));
 	await page.getByRole('link', { name: 'Voltar à missão' }).click();
 	await expect(resumo(page).getByText('0,5 h', { exact: true })).toBeVisible();
 	await expect(missao(page).getByRole('button', { name: 'Continuar estudos' })).toBeVisible();
@@ -148,7 +148,7 @@ test('Cenário 3: Leitura 30 min, pausa ⇒ 0,5 h; conclui sem questões; Quest�
 	await itens(page).first().getByRole('link').click();
 	await page.getByRole('button', { name: 'Retomar' }).click();
 	await expect(page.locator('#cronometro-estado')).toContainText('Correndo');
-	await page.clock.setFixedTime(em('2026-10-01', '11:15'));
+	await page.clock.setFixedTime(em('2026-10-09', '11:15'));
 	await concluir(page);
 
 	await expect(missao(page).getByText(`1 de 8 feitas (${pctMissao(1, 8)}).`)).toBeVisible();
@@ -178,12 +178,12 @@ test('Cenário 3: Leitura 30 min, pausa ⇒ 0,5 h; conclui sem questões; Quest�
 	await page.getByLabel('Questões certas').fill('');
 	await page.getByRole('button', { name: 'Concluir tarefa' }).click();
 	await expect(page.getByRole('alert')).toHaveText('Preencha as duas quantidades ou deixe as duas em branco.');
-	await page.clock.setFixedTime(em('2026-10-01', '11:30'));
+	await page.clock.setFixedTime(em('2026-10-09', '11:30'));
 	await concluir(page, { feitas: 10, certas: 7 });
 
 	await expect(missao(page).getByText(`2 de 8 feitas (${pctMissao(2, 8)}).`)).toBeVisible();
 	await expect(resumo(page).getByText('1 h', { exact: true })).toBeVisible(); // 30 + 15 + 15 min
-	await expect(resumo(page).getByText(`0,4% do plano concluído, 2 de ${fila.length} tarefas.`)).toBeVisible();
+	await expect(resumo(page).getByText(`${new Intl.NumberFormat('pt-BR', { style: 'percent', maximumFractionDigits: 1 }).format(2 / fila.length)} do plano concluído, 2 de ${fila.length} tarefas.`)).toBeVisible();
 	await expect(resumo(page).getByRole('progressbar')).toHaveJSProperty('value', 2 / fila.length);
 
 	// O atalho da Questões leva ao feed filtrado em questões da matéria.
@@ -194,21 +194,21 @@ test('Cenário 3: Leitura 30 min, pausa ⇒ 0,5 h; conclui sem questões; Quest�
 
 	// As tarefas concluídas mostram o resumo, sem cronômetro nem formulário.
 	await page.goto(rota(t1));
-	await expect(page.getByText('Concluída em 01/10/2026, 45 min cronometrados.')).toBeVisible();
+	await expect(page.getByText('Concluída em 09/10/2026, 45 min cronometrados.')).toBeVisible();
 	await expect(page.getByRole('button', { name: 'Concluir tarefa' })).toHaveCount(0);
 	await page.goto(rota(t2));
-	await expect(page.getByText('Concluída em 01/10/2026, 15 min cronometrados, 7 de 10 questões certas.')).toBeVisible();
+	await expect(page.getByText('Concluída em 09/10/2026, 15 min cronometrados, 7 de 10 questões certas.')).toBeVisible();
 });
 
 test('fechar e reabrir no meio do cronômetro não perde tempo (SC-004)', async ({ page, context }) => {
-	await page.clock.setFixedTime(em('2026-10-01', '14:00'));
+	await page.clock.setFixedTime(em('2026-10-09', '14:00'));
 	await abrirPainel(page);
 	await missao(page).getByRole('button', { name: 'Iniciar estudos' }).click();
 	await expect(timer(page)).toContainText('00:00');
 	await page.close();
 
 	const outra = await context.newPage();
-	await outra.clock.setFixedTime(em('2026-10-01', '14:20'));
+	await outra.clock.setFixedTime(em('2026-10-09', '14:20'));
 	await outra.goto(rota(t1));
 	await expect(timer(outra)).toContainText('20:00');
 	await expect(outra.locator('#cronometro-estado')).toContainText('Correndo');
@@ -218,7 +218,7 @@ test('fechar e reabrir no meio do cronômetro não perde tempo (SC-004)', async 
 });
 
 test('virada do dia: pendente de ontem abre a missão; dia passado incompleto fica em aberto', async ({ page }) => {
-	await page.clock.setFixedTime(em('2026-10-01'));
+	await page.clock.setFixedTime(em('2026-10-09'));
 	await abrirPainel(page);
 	await page.goto(rota(t1));
 	await concluir(page);
@@ -226,7 +226,7 @@ test('virada do dia: pendente de ontem abre a missão; dia passado incompleto fi
 
 	// Hoje começa pela Questões que ficou de ontem: 20 + 3×(25 + 20) + 25 = 180 min ⇒ 8 tarefas, e a
 	// missão termina numa Leitura cuja Questões abre a de amanhã (borda da emenda D4).
-	await page.clock.setFixedTime(em('2026-10-02'));
+	await page.clock.setFixedTime(em('2026-10-10'));
 	await abrirPainel(page);
 	const hoje = fila.slice(1, 9);
 	expect([hoje[0].modo, hoje[7].modo]).toEqual(['questoes', 'leitura']);
@@ -237,7 +237,7 @@ test('virada do dia: pendente de ontem abre a missão; dia passado incompleto fi
 	}
 	await expect(missao(page).getByText('8 tarefas, 3 h estimadas.')).toBeVisible();
 	await expect(missao(page).getByText('0 de 8 feitas (0%).')).toBeVisible();
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 0, emAberto: 1, restantes: 80 });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 0, emAberto: 1, restantes: 64 });
 
 	// Cumprir a missão de hoje: o dia conta como concluído e sai dos restantes.
 	for (const t of hoje.slice(0, -1)) {
@@ -250,18 +250,18 @@ test('virada do dia: pendente de ontem abre a missão; dia passado incompleto fi
 	await expect(missao(page).getByText('Missão cumprida')).toBeVisible();
 	await expect(missao(page).getByRole('button', { name: /estudos$/ })).toHaveCount(0);
 	await expect(missao(page).getByRole('button', { name: 'Continuar estudando' })).toBeVisible();
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 1, emAberto: 1, restantes: 79 });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 1, emAberto: 1, restantes: 63 });
 
 	// No dia seguinte, os dois dias ficam para trás: um concluído, um em aberto.
-	await page.clock.setFixedTime(em('2026-10-03'));
+	await page.clock.setFixedTime(em('2026-10-11'));
 	await abrirPainel(page);
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 1, emAberto: 1, restantes: 79 });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 1, emAberto: 1, restantes: 63 });
 	await expect(itens(page).first()).toContainText(folha(fila[9].topico));
 	await expect(itens(page).first()).toContainText(FAZER.questoes);
 });
 
 test('Cenário 4: "Exportar progresso" baixa o CSV com uma linha por tópico', async ({ page }) => {
-	await page.clock.setFixedTime(em('2026-10-01', '10:00'));
+	await page.clock.setFixedTime(em('2026-10-09', '10:00'));
 	await abrirPainel(page);
 	await expect(resumo(page).getByText('Nenhuma tarefa concluída ainda.', { exact: false })).toBeVisible();
 
@@ -271,7 +271,7 @@ test('Cenário 4: "Exportar progresso" baixa o CSV com uma linha por tópico', a
 			page.waitForEvent('download'),
 			resumo(page).getByRole('button', { name: 'Exportar progresso' }).click()
 		]);
-		expect(download.suggestedFilename()).toBe('progresso-plano-2026-10-01.csv');
+		expect(download.suggestedFilename()).toBe('progresso-plano-2026-10-09.csv');
 		return readFileSync((await download.path())!, 'utf8');
 	}
 	const CABECALHO = '﻿id,ultima_sessao,minutos,questoes_feitas,questoes_certas,status_sugerido\r\n';
@@ -279,23 +279,23 @@ test('Cenário 4: "Exportar progresso" baixa o CSV com uma linha por tópico', a
 	// Só a Leitura feita: o tópico sai sem questões e sem status sugerido.
 	await missao(page).getByRole('button', { name: 'Iniciar estudos' }).click();
 	await expect(timer(page)).toContainText('00:00');
-	await page.clock.setFixedTime(em('2026-10-01', '10:30'));
+	await page.clock.setFixedTime(em('2026-10-09', '10:30'));
 	await concluir(page);
 	await expect(resumo(page).getByText('1 tópico com tarefa concluída para lançar no ESTUDO.csv.')).toBeVisible();
-	expect(await exportar()).toBe(CABECALHO + `${t1.topicoId},2026-10-01,30,,,\r\n`);
+	expect(await exportar()).toBe(CABECALHO + `${t1.topicoId},2026-10-09,30,,,\r\n`);
 
 	// Com a Questões do mesmo tópico: ainda uma linha, minutos somados, questões dela e "estudado".
 	await missao(page).getByRole('button', { name: 'Iniciar estudos' }).click();
 	await expect(page).toHaveURL(rota(t2));
-	await page.clock.setFixedTime(em('2026-10-01', '10:50'));
+	await page.clock.setFixedTime(em('2026-10-09', '10:50'));
 	await concluir(page, { feitas: 10, certas: 7 });
 	await expect(resumo(page).getByText('1 tópico com tarefa concluída para lançar no ESTUDO.csv.')).toBeVisible();
-	expect(await exportar()).toBe(CABECALHO + `${t1.topicoId},2026-10-01,50,10,7,estudado\r\n`);
+	expect(await exportar()).toBe(CABECALHO + `${t1.topicoId},2026-10-09,50,10,7,estudado\r\n`);
 });
 
 test('feed: chamada da missão acima dos stories, sem tirar o 1º post da tela em 360 px', async ({ page }) => {
 	await page.setViewportSize({ width: 360, height: 780 });
-	await page.clock.setFixedTime(em('2026-10-01'));
+	await page.clock.setFixedTime(em('2026-10-09'));
 	await page.goto('/');
 	const chamada = page.getByRole('region', { name: 'Missão de hoje' });
 	await expect(chamada).toContainText('0 de 8 feitas, faltam 3 h');
@@ -330,7 +330,7 @@ test('feed: chamada da missão acima dos stories, sem tirar o 1º post da tela e
 });
 
 test('emenda D5: missão cumprida ⇒ "Continuar estudando" abre a 9ª da fila; extras contam e amanhã começa na 10ª', async ({ page }) => {
-	await page.clock.setFixedTime(em('2026-10-01', '09:00'));
+	await page.clock.setFixedTime(em('2026-10-09', '09:00'));
 	await abrirPainel(page);
 	const hoje = fila.slice(0, 8);
 	const [nona, decima] = [fila[8], fila[9]];
@@ -352,7 +352,7 @@ test('emenda D5: missão cumprida ⇒ "Continuar estudando" abre a 9ª da fila; 
 	await expect(page.getByRole('button', { name: 'Continuar estudando' })).toHaveCount(0);
 	await expect(page.getByRole('button', { name: 'Concluir tarefa' })).toBeVisible();
 
-	await page.clock.setFixedTime(em('2026-10-01', '09:25'));
+	await page.clock.setFixedTime(em('2026-10-09', '09:25'));
 	await concluir(page);
 
 	// Extras de hoje, % do plano, foto e identidade intactas.
@@ -363,8 +363,8 @@ test('emenda D5: missão cumprida ⇒ "Continuar estudando" abre a 9ª da fila; 
 	await expect(resumo(page).getByText(new RegExp(`do plano concluído, 9 de ${fila.length} tarefas\\.`))).toBeVisible();
 	await expect(resumo(page).getByRole('progressbar')).toHaveJSProperty('value', 9 / fila.length);
 	const gravado = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_PLANO);
-	expect(gravado.fotos).toEqual({ '2026-10-01': hoje.map((t) => t.id) });
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 1, emAberto: 0, restantes: 80 });
+	expect(gravado.fotos).toEqual({ '2026-10-09': hoje.map((t) => t.id) });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 1, emAberto: 0, restantes: 64 });
 
 	// No feed: "Missão cumprida · Continuar" abre a 10ª.
 	await page.goto('/');
@@ -375,7 +375,7 @@ test('emenda D5: missão cumprida ⇒ "Continuar estudando" abre a 9ª da fila; 
 	await expect(page.locator('#cronometro-estado')).toContainText('Correndo');
 
 	// Extra pausada: "Continuar estudando" retoma ela.
-	await page.clock.setFixedTime(em('2026-10-01', '09:35'));
+	await page.clock.setFixedTime(em('2026-10-09', '09:35'));
 	await page.getByRole('button', { name: 'Pausar' }).click();
 	await expect(page.locator('#cronometro-estado')).toContainText('Pausado');
 	await page.getByRole('link', { name: 'Voltar à missão' }).click();
@@ -386,63 +386,63 @@ test('emenda D5: missão cumprida ⇒ "Continuar estudando" abre a 9ª da fila; 
 	await page.getByRole('button', { name: 'Pausar' }).click();
 
 	// Dia seguinte: a missão começa na 10ª (depois da extra feita); o dia de ontem segue concluído.
-	await page.clock.setFixedTime(em('2026-10-02'));
+	await page.clock.setFixedTime(em('2026-10-10'));
 	await abrirPainel(page);
 	await expect(itens(page).first()).toContainText(folha(decima.topico));
 	await expect(itens(page).first()).toContainText(FAZER[decima.modo as keyof typeof FAZER]);
 	await expect(missao(page).getByText(/^Extras de hoje/)).toHaveCount(0);
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 1, emAberto: 0, restantes: 80 });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 1, emAberto: 0, restantes: 64 });
 	const depois = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_PLANO);
-	expect(depois.fotos['2026-10-01']).toEqual(hoje.map((t) => t.id));
-	expect(depois.fotos['2026-10-02'][0]).toBe(decima.id);
+	expect(depois.fotos['2026-10-09']).toEqual(hoje.map((t) => t.id));
+	expect(depois.fotos['2026-10-10'][0]).toBe(decima.id);
 });
 
 test('fora da janela: antes "ainda não começou", depois "encerrado"; feed sem chamada', async ({ page }) => {
-	await page.clock.setFixedTime(em('2026-09-30'));
+	await page.clock.setFixedTime(em('2026-10-08'));
 	await abrirPainel(page);
 	await expect(resumo(page).getByText(/Plano ainda não começou/)).toBeVisible();
-	await expect(missao(page).getByText('A primeira missão sai em 01/10/2026, quando o plano começa.')).toBeVisible();
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 0, emAberto: 0, restantes: 81 });
+	await expect(missao(page).getByText('A primeira missão sai em 09/10/2026, quando o plano começa.')).toBeVisible();
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 0, emAberto: 0, restantes: 65 });
 	await page.goto('/');
 	await expect(page.locator('[data-post-id]').first()).toBeVisible();
 	await expect(page.getByRole('region', { name: 'Missão de hoje' })).toHaveCount(0);
 
-	await page.clock.setFixedTime(em('2026-12-21'));
+	await page.clock.setFixedTime(em('2026-12-13'));
 	await abrirPainel(page);
-	await expect(resumo(page).getByText('Plano encerrado em 20/12/2026.')).toBeVisible();
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 0, emAberto: 81, restantes: 0 });
+	await expect(resumo(page).getByText('Plano encerrado em 12/12/2026.')).toBeVisible();
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 0, emAberto: 65, restantes: 0 });
 });
 
 test('fila esgotada: "Plano cumprido — revise" e o dia conta como concluído', async ({ page }) => {
-	const ontem = new Date('2026-10-04T12:00:00-03:00').toISOString();
+	const ontem = new Date('2026-10-12T12:00:00-03:00').toISOString();
 	await page.addInitScript(
 		([k, ids, quando]) => {
 			if (localStorage.getItem(k)) return;
 			const registros = Object.fromEntries(
-				ids.map((id) => [id, { dia: '2026-10-04', intervalos: [], rodandoDesde: null, concluidaEm: quando, questoes: null, certas: null }])
+				ids.map((id) => [id, { dia: '2026-10-12', intervalos: [], rodandoDesde: null, concluidaEm: quando, questoes: null, certas: null }])
 			);
 			localStorage.setItem(k, JSON.stringify({ registros, fotos: {} }));
 		},
 		[CHAVE_PLANO, fila.map((t) => t.id), ontem] as const
 	);
-	await page.clock.setFixedTime(em('2026-10-05'));
+	await page.clock.setFixedTime(em('2026-10-13'));
 	await abrirPainel(page);
 	await expect(missao(page).getByText('Plano cumprido — revise')).toBeVisible();
 	await expect(resumo(page).getByText(`100% do plano concluído, ${fila.length} de ${fila.length} tarefas.`)).toBeVisible();
-	expect(await conferirIdentidade(page)).toEqual({ noPlano: 81, concluidos: 1, emAberto: 4, restantes: 76 });
+	expect(await conferirIdentidade(page)).toEqual({ noPlano: 65, concluidos: 1, emAberto: 4, restantes: 60 });
 	await page.goto('/');
 	await expect(page.getByRole('region', { name: 'Missão de hoje' }).getByRole('link', { name: 'Plano cumprido — revise' })).toBeVisible();
 });
 
 test('/tarefa/<id inexistente> mostra "não encontrada" com volta ao painel', async ({ page }) => {
-	await page.clock.setFixedTime(em('2026-10-01'));
+	await page.clock.setFixedTime(em('2026-10-09'));
 	await page.goto('/tarefa/NAO-EXISTE');
 	await expect(page.getByRole('heading', { level: 1, name: 'Tarefa não encontrada' })).toBeVisible();
 	await expect(page.getByRole('link', { name: 'Voltar ao painel' })).toHaveAttribute('href', '/painel');
 });
 
 test('na tela da tarefa, a aba inferior destacada é Painel', async ({ page }) => {
-	await page.clock.setFixedTime(new Date('2026-10-01T09:00:00-03:00'));
+	await page.clock.setFixedTime(new Date('2026-10-09T09:00:00-03:00'));
 	await page.goto(rota(fila[0]));
 	await expect(page.locator('a.aba[aria-current="page"]')).toHaveAttribute('href', '/painel');
 });
@@ -451,14 +451,14 @@ test('foto do dia gravada antes da emenda D4 (ids sem :L/:Q) não vira "Plano cu
 	await page.addInitScript(
 		([k]) => {
 			if (localStorage.getItem(k)) return;
-			localStorage.setItem(k, JSON.stringify({ registros: {}, fotos: { '2026-10-02': ['BDD-01', 'BDD-02', 'BDD-03', 'BDD-04'] } }));
+			localStorage.setItem(k, JSON.stringify({ registros: {}, fotos: { '2026-10-10': ['BDD-01', 'BDD-02', 'BDD-03', 'BDD-04'] } }));
 		},
 		[CHAVE_PLANO] as const
 	);
-	await page.clock.setFixedTime(em('2026-10-02'));
+	await page.clock.setFixedTime(em('2026-10-10'));
 	await abrirPainel(page);
 	await expect(missao(page).getByText('Plano cumprido — revise')).toHaveCount(0);
 	await expect(missao(page).getByText('8 tarefas, 3 h estimadas.')).toBeVisible();
-	const foto = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}').fotos['2026-10-02'], CHAVE_PLANO);
+	const foto = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}').fotos['2026-10-10'], CHAVE_PLANO);
 	expect(foto).toEqual(fila.slice(0, 8).map((t) => t.id));
 });
