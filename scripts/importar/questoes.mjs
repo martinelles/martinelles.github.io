@@ -1,6 +1,8 @@
 /**
  * Linhas de `catalogo-questoes/questoes.csv` → posts de questão.
- * Gabarito copiado sem transformação (NFR-008).
+ * Gabarito copiado sem transformação (NFR-008) na questão Certo/Errado. Desde 2026-10-09 a
+ * de múltipla escolha vira itens Certo/Errado (`converterEmItens`): a prova do Edital CGU
+ * 1/2026 é toda de itens C/E (item 8.2).
  */
 import { materiaPorNome } from './materias.mjs';
 
@@ -117,9 +119,70 @@ export function lerTopicoEstudo(celula) {
 	return ID_TOPICO.test(v) ? v : undefined;
 }
 
+const ROMANOS = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const PALAVRAS_DE_LIGACAO = new Set(
+	'somente apenas só e a o as os afirmativa afirmativas assertiva assertivas item itens script scripts proposição proposições está estão correta corretas correto corretos'.split(' ')
+);
+
+/**
+ * Afirmativas romanas que uma alternativa aponta: `somente I e III` → `['I', 'III']`;
+ * `Todas …` → `'todas'`; `Nenhuma …` → `[]`. `null` quando a alternativa não é só isso.
+ * @param {string} texto
+ * @returns {string[] | 'todas' | null}
+ */
+export function romanosDaAlternativa(texto) {
+	const t = texto.trim().replace(/[.;]+$/, '');
+	if (/^tod[ao]s\b/i.test(t)) return 'todas';
+	if (/^nenhuma?\b/i.test(t)) return [];
+	const romanos = [];
+	for (const p of t.split(/[\s,]+/)) {
+		if (!p) continue;
+		if (ROMANOS.includes(p)) romanos.push(p);
+		else if (!PALAVRAS_DE_LIGACAO.has(p.toLowerCase())) return null;
+	}
+	return romanos.length ? romanos : null;
+}
+
+/**
+ * Questão de múltipla escolha → itens Certo/Errado, sem adivinhar se o comando pedia a
+ * correta ou a incorreta:
+ * - quando toda alternativa é combinação de afirmativas romanas (`somente I e II`), um item
+ *   por afirmativa: Certo se ela está na alternativa do gabarito;
+ * - nos demais casos, um item por alternativa: Certo se é a alternativa do gabarito.
+ * Id do item: `q:<id>:<letra>` ou `q:<id>:<romano>`.
+ * @param {any} post questão já montada, com `alternativas` e `gabarito` letra
+ * @returns {any[]}
+ */
+export function converterEmItens(post) {
+	const { alternativas, gabarito, enunciado, formato, ...resto } = post;
+	const certa = alternativas.find((/** @type {{ letra: string }} */ a) => a.letra === gabarito);
+	if (!certa) throw new Error(`${post.id}: gabarito "${gabarito}" não é letra de alternativa`);
+	const item = (/** @type {string} */ sufixo, /** @type {string} */ texto, /** @type {boolean} */ ok) => ({
+		...resto,
+		id: `${post.id}:${sufixo}`,
+		enunciado: `${enunciado}\n\n${texto}`,
+		formato: 'ce',
+		gabarito: ok ? 'C' : 'E'
+	});
+	/** @type {(string[] | 'todas' | null)[]} */
+	const conjuntos = alternativas.map((/** @type {{ texto: string }} */ a) => romanosDaAlternativa(a.texto));
+	if (conjuntos.every((c) => c !== null)) {
+		const universo = ROMANOS.filter((r) => conjuntos.some((c) => Array.isArray(c) && c.includes(r)));
+		const doGabarito = conjuntos[alternativas.indexOf(certa)];
+		const verdadeiras = doGabarito === 'todas' ? universo : doGabarito;
+		if (universo.length >= 2)
+			return universo.map((r) =>
+				item(r, `Item ${r}: Certo se ele está entre os que atendem ao comando.`, verdadeiras.includes(r))
+			);
+	}
+	return alternativas.map((/** @type {{ letra: string, texto: string }} */ a) =>
+		item(a.letra, `Alternativa ${a.letra}: ${a.texto}\n\nCerto se esta alternativa responde ao comando.`, a === certa)
+	);
+}
+
 /**
  * @param {Record<string, string>[]} linhas linhas do CSV (com cabeçalho)
- * @returns {{ posts: any[], descartes: Record<string, number>, avisos: string[], topicos: { questoes: number, distintos: number } }}
+ * @returns {{ posts: any[], descartes: Record<string, number>, avisos: string[], topicos: { questoes: number, distintos: number }, convertidas: { questoes: number, itens: number } }}
  */
 export function importarQuestoes(linhas) {
 	/** @type {any[]} */
@@ -134,6 +197,7 @@ export function importarQuestoes(linhas) {
 	/** @type {Set<string>} */
 	const topicosVistos = new Set();
 	let comTopico = 0;
+	const convertidas = { questoes: 0, itens: 0 };
 	for (const l of linhas) {
 		if (l.situacao === 'anulada') {
 			descartes.anulada++;
@@ -188,8 +252,13 @@ export function importarQuestoes(linhas) {
 		}
 		post.gabarito = gabarito;
 		post.situacao = l.situacao === 'alterada' ? 'alterada' : 'valida';
-		posts.push(post);
+		if (temAlternativas) {
+			const itens = converterEmItens(post);
+			convertidas.questoes++;
+			convertidas.itens += itens.length;
+			posts.push(...itens);
+		} else posts.push(post);
 	}
 	avisos.push(...[...avisosProva].sort(), ...[...avisosTopico].sort());
-	return { posts, descartes, avisos, topicos: { questoes: comTopico, distintos: topicosVistos.size } };
+	return { posts, descartes, avisos, topicos: { questoes: comTopico, distintos: topicosVistos.size }, convertidas };
 }

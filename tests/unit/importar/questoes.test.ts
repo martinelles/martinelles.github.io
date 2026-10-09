@@ -7,6 +7,8 @@ import {
 	lerProva,
 	importarQuestoes,
 	lerTopicoEstudo,
+	converterEmItens,
+	romanosDaAlternativa,
 	separarTextoBase
 } from '../../../scripts/importar/questoes.mjs';
 
@@ -78,7 +80,7 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 
 	it('descarta anulada e sem gabarito, contando por motivo', () => {
 		expect(r.descartes).toEqual({ anulada: 1, 'sem gabarito': 1, 'fora do edital': 0 });
-		expect(r.posts).toHaveLength(8);
+		expect(r.posts).toHaveLength(22);
 		expect(porId.has('q:TCU2026-AUFC-TI-1')).toBe(false);
 		expect(porId.has('q:TCU2026-AUFC-TI-101')).toBe(false);
 	});
@@ -90,14 +92,37 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 		}
 	});
 
-	it('C/E sem alternativas é ce; gabarito C com alternativas é me', () => {
+	it('C/E fica como está; múltipla escolha vira um item C/E por alternativa', () => {
 		expect(porId.get('q:TCU2026-AUFC-TI-113')).toMatchObject({ formato: 'ce', gabarito: 'C' });
 		expect(porId.get('q:TCU2026-AUFC-TI-114')).toMatchObject({ formato: 'ce', gabarito: 'E' });
-		const me = porId.get('q:CGU2012-P3-TI-DES-12');
-		expect(me).toMatchObject({ formato: 'me', gabarito: 'C' });
-		expect(me.alternativas).toHaveLength(5);
-		expect(me.alternativas[0].texto).toContain('|| significa “OU” lógico.');
-		expect(porId.get('q:CGU2022-AFFC-TI-61')).toMatchObject({ formato: 'me', gabarito: 'E' });
+		expect(r.posts.every((p) => p.formato === 'ce' && !('alternativas' in p))).toBe(true);
+		expect(porId.has('q:CGU2012-P3-TI-DES-12')).toBe(false);
+		const itens = ['A', 'B', 'C', 'D', 'E'].map((l) => porId.get(`q:CGU2012-P3-TI-DES-12:${l}`));
+		expect(itens.map((p) => p.gabarito)).toEqual(['E', 'E', 'C', 'E', 'E']);
+		expect(itens[0].enunciado).toContain('Alternativa A: ');
+		expect(itens[0].enunciado).toContain('|| significa “OU” lógico.');
+		expect(itens[0].enunciado).toMatch(/Certo se esta alternativa responde ao comando\.$/);
+		expect(itens[2]).toMatchObject({ numero: 12, topicoEstudo: 'DES-20', materia: itens[0].materia });
+		expect(r.convertidas).toEqual({ questoes: 4, itens: 18 });
+	});
+
+	it('afirmativas romanas viram um item por afirmativa, com o gabarito da alternativa certa', () => {
+		// CGU2022-AFFC-TI-61, gabarito E = "II e III".
+		expect(['I', 'II', 'III'].map((r) => porId.get(`q:CGU2022-AFFC-TI-61:${r}`)?.gabarito)).toEqual(['E', 'C', 'C']);
+		expect(porId.has('q:CGU2022-AFFC-TI-61:A')).toBe(false);
+		expect(romanosDaAlternativa('somente I e III')).toEqual(['I', 'III']);
+		expect(romanosDaAlternativa('I, II e III.')).toEqual(['I', 'II', 'III']);
+		expect(romanosDaAlternativa('Todas estão corretas')).toBe('todas');
+		expect(romanosDaAlternativa('Nenhuma')).toEqual([]);
+		expect(romanosDaAlternativa('apenas I e II estão incorretas')).toBeNull();
+		const base = { id: 'q:X', tipo: 'questao', materia: 'm', enunciado: 'Estão certas:', formato: 'me', situacao: 'valida' };
+		const alts = (...t: string[]) => t.map((texto, i) => ({ letra: 'ABCDE'[i], texto }));
+		const todas = converterEmItens({ ...base, gabarito: 'C', alternativas: alts('somente I', 'somente II', 'Todas') });
+		expect(todas.map((p: { id: string; gabarito: string }) => `${p.id}=${p.gabarito}`)).toEqual(['q:X:I=C', 'q:X:II=C']);
+		// Uma alternativa que não é só romano ⇒ volta ao item por alternativa.
+		const misto = converterEmItens({ ...base, gabarito: 'B', alternativas: alts('somente I', 'outra coisa') });
+		expect(misto.map((p: { id: string; gabarito: string }) => `${p.id}=${p.gabarito}`)).toEqual(['q:X:A=E', 'q:X:B=C']);
+		expect(() => converterEmItens({ ...base, gabarito: 'D', alternativas: alts('a', 'b') })).toThrow(/não é letra/);
 	});
 
 	it('texto-base, matéria, prova, número e situação', () => {
@@ -108,12 +133,12 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 		expect(q.prova).toEqual({ orgao: 'TCU', ano: 2026, cargo: 'AUFC TI', banca: 'Cebraspe' });
 		expect(q.numero).toBe(113);
 		expect(porId.get('q:TCU2015-BAS-91').textoBase).toContain('[20; 10; 10]');
-		expect(porId.get('q:CGU2022-AFFC-TI-29').situacao).toBe('alterada');
+		expect(porId.get('q:CGU2022-AFFC-TI-29:D').situacao).toBe('alterada');
 	});
 
 	it('topicoEstudo vem de topico_estudo; relatório conta questões e tópicos distintos', () => {
 		expect(porId.get('q:TCU2026-AUFC-TI-113').topicoEstudo).toBe('CDA-11');
-		expect(porId.get('q:CGU2022-AFFC-TI-29').topicoEstudo).toBe('AFO-05');
+		expect(porId.get('q:CGU2022-AFFC-TI-29:A').topicoEstudo).toBe('AFO-05');
 		expect(r.topicos).toEqual({ questoes: 8, distintos: 8 });
 	});
 

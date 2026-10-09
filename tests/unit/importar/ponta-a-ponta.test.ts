@@ -23,8 +23,9 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 	const lotes = Object.values(indice.lotes as Record<string, string>);
 	const posts = lotes.flatMap((arq) => lerJson(saida, arq));
 
-	it('totais por tipo: 8 questões, 7+12 artigos (Art. 9º da 12.813 em 3 redações vira 1), 1 resumo, 2+5 flashcards', () => {
-		expect(rel.totais).toEqual({ questao: 8, lei: 19, resumo: 1, flashcard: 7 });
+	it('totais por tipo: 8 questões (4 de múltipla escolha viram 18 itens C/E ⇒ 22 posts), 7+12 artigos (Art. 9º da 12.813 em 3 redações vira 1), 1 resumo, 2+5 flashcards', () => {
+		expect(rel.totais).toEqual({ questao: 22, lei: 19, resumo: 1, flashcard: 7 });
+		expect(rel.convertidas).toEqual({ questoes: 4, itens: 18 });
 		expect(rel.descartes).toMatchObject({
 			'questão anulada': 1,
 			'questão sem gabarito': 1,
@@ -55,7 +56,7 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 
 	it('entrada de questão com tópico ganha tp; as demais seguem com id, t, m, l', () => {
 		const comTp = indice.posts.filter((e: { tp?: string }) => e.tp !== undefined);
-		expect(comTp).toHaveLength(8);
+		expect(comTp).toHaveLength(22);
 		expect(rel.topicos).toEqual({ questoes: 8, distintos: 8 });
 		for (const e of indice.posts) {
 			const p = posts.find((x) => x.id === e.id);
@@ -71,7 +72,7 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 		expect(indice.versao).toBe(1);
 		expect(indice.geradoEm).toMatch(/^\d{4}-\d{2}-\d{2}T/);
 		for (const m of materias) expect(Object.keys(m)).toEqual(['id', 'nome', 'abrev', 'ordem', 'total']);
-		expect(materias[0]).toMatchObject({ id: 'ti-ciencia-de-dados', ordem: 1, total: 3 });
+		expect(materias[0]).toMatchObject({ id: 'ti-ciencia-de-dados', ordem: 1, total: 5 });
 		expect(materias.find((m: { id: string }) => m.id === 'outros-ramos-do-direito').total).toBe(27);
 	});
 
@@ -90,7 +91,8 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 
 	it('relatório formatado traz totais, descartes e maior lote', () => {
 		const texto = formatarRelatorio(rel);
-		expect(texto).toContain('questao: 8');
+		expect(texto).toContain('questao: 22');
+		expect(texto).toContain('múltipla escolha convertida em Certo/Errado: 4 questões → 18 itens');
 		expect(texto).toContain('questão anulada: 1');
 		expect(texto).toMatch(/maior: lote-.+ KB gzip/);
 		expect(texto).toContain('Arquivos recusados: 0');

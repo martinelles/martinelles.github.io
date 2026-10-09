@@ -71,11 +71,12 @@ test('1. "/" abre o feed com stories e posts em até 3 s, sem tela de escolha (S
 	await expect(abas.getByRole('link', { name: 'Feed' })).toHaveAttribute('aria-current', 'page');
 });
 
-test('2. responder C/E e múltipla escolha: retorno, gabarito e persistência', async ({ page }) => {
+test('2. responder Certo e Errado: retorno, gabarito e persistência (só há itens C/E desde o Edital CGU 1/2026)', async ({ page }) => {
 	await page.goto('/?tipo=questao');
 	const questoes = itens(page).filter({ has: page.getByRole('article', { name: /Questão/ }) });
+	await expect(page.getByRole('button', { name: /^Alternativa A/ })).toHaveCount(0);
 
-	// Certo/Errado
+	// Certo
 	const ce = await acharPost(page, questoes.filter({ has: page.getByRole('button', { name: 'Certo', exact: true }) }));
 	const idCe = await ce.getAttribute('data-post-id');
 	await ce.getByRole('button', { name: 'Certo', exact: true }).click();
@@ -83,25 +84,29 @@ test('2. responder C/E e múltipla escolha: retorno, gabarito e persistência', 
 	await expect(ce.getByRole('button', { name: /Certo|Errado/ }).first()).toBeDisabled();
 	await expect(ce.getByRole('article')).toHaveAccessibleName(/Questão · (CGU|TCU) \d{4} · .+ · Q\. \d+/);
 
-	// Múltipla escolha: a escolhida e a correta ficam destacadas.
-	const me = await acharPost(page, questoes.filter({ has: page.getByRole('button', { name: /^Alternativa A/ }) }));
-	const idMe = await me.getAttribute('data-post-id');
-	const alternativaA = me.getByRole('button', { name: /^Alternativa A/ });
-	await alternativaA.click();
-	await expect(me.getByText(/Você acertou|Você errou — gabarito: [A-E]$/)).toBeVisible();
-	await expect(alternativaA).toHaveClass(/correta|errada/);
+	// Errado, em outro item: a escolhida e a correta ficam destacadas.
+	const livre = await acharPost(
+		page,
+		questoes.filter({ has: page.getByRole('button', { name: 'Errado', exact: true, disabled: false }) })
+	);
+	const idMe = await livre.getAttribute('data-post-id');
+	const me = page.locator(`[data-post-id="${idMe}"]`);
+	const errado = me.getByRole('button', { name: /^Errado/ });
+	await errado.click();
+	await expect(me.getByText(/Você acertou|Você errou — gabarito: (Certo|Errado)$/)).toBeVisible();
+	await expect(errado).toHaveClass(/correta|errada/);
 	await expect(me.locator('button.correta')).toHaveCount(1);
 
 	const salvo = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}'), CHAVE_INTERACOES);
 	expect(Object.keys(salvo.respostas).sort()).toEqual([idCe, idMe].sort());
 	expect(salvo.respostas[idCe!].r).toBe('C');
-	expect(salvo.respostas[idMe!].r).toBe('A');
+	expect(salvo.respostas[idMe!].r).toBe('E');
 
 	// Reabrir: a mesma ordem do dia traz os posts de volta, já respondidos.
 	await page.reload();
 	for (const [id, padrao] of [
 		[idCe, /Você acertou|Você errou — gabarito: (Certo|Errado)$/],
-		[idMe, /Você acertou|Você errou — gabarito: [A-E]$/]
+		[idMe, /Você acertou|Você errou — gabarito: (Certo|Errado)$/]
 	] as const) {
 		const post = await acharPost(page, page.locator(`[data-post-id="${id}"]`));
 		await expect(post.getByText(padrao)).toBeVisible();

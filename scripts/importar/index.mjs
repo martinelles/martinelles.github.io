@@ -45,6 +45,7 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   lotes: { arquivo: string, posts: number, gzip: number }[],
  *   entradasIndice: number,
  *   topicos: { questoes: number, distintos: number },
+ *   convertidas: { questoes: number, itens: number },
  *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null
  * }} Relatorio
  */
@@ -101,6 +102,7 @@ export function importar({ vault, saida }) {
 	descartes['questão fora do edital'] = q.descartes['fora do edital'];
 	avisos.push(...q.avisos);
 	const topicos = q.topicos;
+	const convertidas = q.convertidas;
 
 	// Lei seca
 	/** @type {Map<string, Set<string>>} */
@@ -275,6 +277,7 @@ export function importar({ vault, saida }) {
 		lotes: lotesRel,
 		entradasIndice: entradas.length,
 		topicos,
+		convertidas,
 		plano: planoRel
 	};
 }
@@ -294,6 +297,7 @@ export function formatarRelatorio(r) {
 		`Posts: ${total} (índice: ${r.entradasIndice})`,
 		...Object.entries(r.totais).map(([t, n]) => `  ${t}: ${n}`),
 		`  questões com tópico de estudo: ${r.topicos.questoes} (${r.topicos.distintos} tópicos distintos)`,
+		`  múltipla escolha convertida em Certo/Errado: ${r.convertidas.questoes} questões → ${r.convertidas.itens} itens`,
 		'',
 		'Por matéria:',
 		...r.porMateria.map((m) => `  ${m.nome}: ${m.total} (${m.lotes} lote${m.lotes > 1 ? 's' : ''})`),
