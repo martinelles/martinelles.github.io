@@ -101,13 +101,15 @@ export const BARALHO_PARA_MATERIA = {
 
 /**
  * Ordena as matérias: grupo (Ciência de Dados, demais TI, outras), depois total de posts
- * (maior primeiro), depois nome. Devolve a lista de `materias.json`.
+ * (maior primeiro), depois nome. Devolve a lista de `materias.json`, sem as matérias que
+ * ficaram sem post (desde o Edital CGU 1/2026, as questões fora do edital não vão ao feed).
  * @param {Record<string, number>} totais posts por id de matéria
  * @returns {{ id: string, nome: string, abrev: string, ordem: number, total: number }[]}
  */
 export function ordenarMaterias(totais) {
 	return [...MATERIAS]
 		.map((m) => ({ ...m, total: totais[m.id] ?? 0 }))
+		.filter((m) => m.total > 0)
 		.sort(
 			(a, b) =>
 				a.grupo - b.grupo || b.total - a.total || (a.nome < b.nome ? -1 : a.nome > b.nome ? 1 : 0)

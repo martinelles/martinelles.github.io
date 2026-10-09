@@ -58,7 +58,7 @@ test('SC-005: todo o conteúdo fica no cache e o feed funciona offline', async (
 	await context.setOffline(true);
 
 	// Três matérias de lotes diferentes, três páginas de rolagem em cada.
-	for (const materia of ['direito-constitucional', 'ti-ciencia-de-dados', 'contabilidade']) {
+	for (const materia of ['direito-constitucional', 'ti-ciencia-de-dados', 'fundamentos-de-auditoria-governamental']) {
 		await page.goto(`/?materia=${materia}`);
 		await expect(itens(page).first()).toBeVisible();
 		await expect(page.getByRole('alert')).toHaveCount(0);

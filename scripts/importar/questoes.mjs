@@ -100,11 +100,15 @@ export function lerAlternativas(celula) {
 /** Id de tópico do `ESTUDO.csv` (ex.: `FAG-02`). */
 export const ID_TOPICO = /^[A-Z]+-\d+$/;
 
-/** Valor de `topico_estudo` que marca questão de matéria sem tópico no edital. */
+/**
+ * Valor de `topico_estudo` que marca questão sem tópico no edital vigente (Edital CGU 1/2026,
+ * desde 2026-10-09). Essa questão não vai ao feed: conta em `descartes['fora do edital']`.
+ */
 export const SEM_TOPICO = 'sem-topico';
 
 /**
  * `topico_estudo` → id do tópico, ou `undefined` (vazio, `sem-topico` ou fora do padrão).
+ * (`importarQuestoes` já descarta a questão `sem-topico` antes de chegar aqui.)
  * @param {string | undefined} celula
  * @returns {string | undefined}
  */
@@ -121,7 +125,7 @@ export function importarQuestoes(linhas) {
 	/** @type {any[]} */
 	const posts = [];
 	/** @type {Record<string, number>} */
-	const descartes = { anulada: 0, 'sem gabarito': 0 };
+	const descartes = { anulada: 0, 'sem gabarito': 0, 'fora do edital': 0 };
 	/** @type {string[]} */
 	const avisos = [];
 	const avisosProva = new Set();
@@ -138,6 +142,10 @@ export function importarQuestoes(linhas) {
 		const gabarito = (l.gabarito ?? '').trim();
 		if (!gabarito) {
 			descartes['sem gabarito']++;
+			continue;
+		}
+		if ((l.topico_estudo ?? '').trim() === SEM_TOPICO) {
+			descartes['fora do edital']++;
 			continue;
 		}
 		/** @type {string[]} */

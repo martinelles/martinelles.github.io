@@ -98,6 +98,7 @@ export function importar({ vault, saida }) {
 	posts.push(...q.posts);
 	descartes['questão anulada'] = q.descartes.anulada;
 	descartes['questão sem gabarito'] = q.descartes['sem gabarito'];
+	descartes['questão fora do edital'] = q.descartes['fora do edital'];
 	avisos.push(...q.avisos);
 	const topicos = q.topicos;
 

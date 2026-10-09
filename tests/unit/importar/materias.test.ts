@@ -44,8 +44,13 @@ describe('materias', () => {
 			'ti-governanca-gestao-e-contratacoes-de-ti',
 			'ti-seguranca-da-informacao'
 		]);
-		expect(lista[5]).toMatchObject({ id: 'direito-constitucional', ordem: 6, total: 900 });
-		expect(lista[6].id).toBe('contabilidade');
-		expect(lista.map((m) => m.ordem)).toEqual(Array.from({ length: 21 }, (_, i) => i + 1));
+		expect(lista[3]).toMatchObject({ id: 'direito-constitucional', ordem: 4, total: 900 });
+		expect(lista[4].id).toBe('contabilidade');
+		expect(lista.map((m) => m.ordem)).toEqual([1, 2, 3, 4, 5]);
+	});
+
+	it('matéria sem post fica fora da lista (questões fora do edital não vão ao feed)', () => {
+		const lista = ordenarMaterias({ 'ti-ciencia-de-dados': 3, 'lingua-portuguesa': 0 });
+		expect(lista.map((m) => m.id)).toEqual(['ti-ciencia-de-dados']);
 	});
 });

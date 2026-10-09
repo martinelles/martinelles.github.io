@@ -77,7 +77,7 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 	const porId = new Map(r.posts.map((p) => [p.id, p]));
 
 	it('descarta anulada e sem gabarito, contando por motivo', () => {
-		expect(r.descartes).toEqual({ anulada: 1, 'sem gabarito': 1 });
+		expect(r.descartes).toEqual({ anulada: 1, 'sem gabarito': 1, 'fora do edital': 0 });
 		expect(r.posts).toHaveLength(8);
 		expect(porId.has('q:TCU2026-AUFC-TI-1')).toBe(false);
 		expect(porId.has('q:TCU2026-AUFC-TI-101')).toBe(false);
@@ -117,7 +117,7 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 		expect(r.topicos).toEqual({ questoes: 8, distintos: 8 });
 	});
 
-	it('topico_estudo vazio, sem-topico ou fora do padrão ⇒ sem o campo; fora do padrão avisa', () => {
+	it('sem-topico sai do feed (fora do edital); vazio ou fora do padrão ⇒ sem o campo; fora do padrão avisa', () => {
 		const base = linhas().find((l) => l.id === 'TCU2026-AUFC-TI-113')!;
 		const rr = importarQuestoes([
 			{ ...base, id: 'X-1', topico_estudo: '' },
@@ -126,9 +126,10 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 			{ ...base, id: 'X-4', topico_estudo: ' FAG-02 ' },
 			{ ...base, id: 'X-5', topico_estudo: 'FAG-02' }
 		]);
-		const [vazio, sem, fora, comEspaco, ok] = rr.posts;
+		expect(rr.posts.map((p) => p.id)).not.toContain('q:X-2');
+		expect(rr.descartes['fora do edital']).toBe(1);
+		const [vazio, fora, comEspaco, ok] = rr.posts;
 		expect('topicoEstudo' in vazio).toBe(false);
-		expect('topicoEstudo' in sem).toBe(false);
 		expect('topicoEstudo' in fora).toBe(false);
 		expect(comEspaco.topicoEstudo).toBe('FAG-02');
 		expect(ok.topicoEstudo).toBe('FAG-02');
