@@ -44,6 +44,14 @@
 				</a>
 			</li>
 		{/if}
+		{#if concurso.prioridades}
+			<li>
+				<a class="edital" href={concurso.prioridades} target="_blank" rel="noopener">
+					<Icone nome="lista" tamanho={20} />
+					Prioridades do edital
+				</a>
+			</li>
+		{/if}
 	</ul>
 </header>
 

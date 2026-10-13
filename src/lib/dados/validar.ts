@@ -113,7 +113,7 @@ function validarCargo(c: Coletor, v: unknown, caminho: string): string | undefin
 
 function validarConcurso(c: Coletor, v: unknown, caminho: string): string | undefined {
 	const obrigatorios = ['id', 'nome', 'orgao', 'banca', 'area', 'situacao', 'icone', 'cor', 'cargos'];
-	const opcionais = ['emAlta', 'vagas', 'salario', 'dataProva', 'edital'];
+	const opcionais = ['emAlta', 'vagas', 'salario', 'dataProva', 'edital', 'prioridades'];
 	if (!c.objeto(v, caminho, obrigatorios, opcionais)) return undefined;
 	const id = c.id(v, caminho);
 	for (const k of ['nome', 'orgao', 'banca', 'area']) c.texto(v, k, caminho);
@@ -124,6 +124,7 @@ function validarConcurso(c: Coletor, v: unknown, caminho: string): string | unde
 	const data = c.texto(v, 'dataProva', caminho);
 	if (data !== undefined && !dataReal(data)) c.add(`${caminho}.dataProva`, `"${data}" não é data real AAAA-MM-DD`);
 	c.https(v, 'edital', caminho);
+	c.https(v, 'prioridades', caminho);
 	c.icone(v, caminho);
 	c.umDe(v, 'cor', caminho, CORES);
 	const cargos = c.lista(v, 'cargos', `${caminho}.cargos`);

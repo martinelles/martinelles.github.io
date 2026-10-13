@@ -70,6 +70,8 @@ export interface Concurso {
 	dataProva?: string;
 	/** https:// */
 	edital?: string;
+	/** https:// — mapa de prioridades do edital, subitem a subitem */
+	prioridades?: string;
 	icone: string;
 	cor: CorConcurso;
 	cargos: Cargo[];

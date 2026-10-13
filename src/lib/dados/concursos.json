@@ -8,6 +8,7 @@
 		"situacao": "previsto",
 		"icone": "escudo",
 		"cor": "azul",
+		"prioridades": "https://claude.ai/artifact/Jjm6kekrZGBneHmJNvgUPN",
 		"cargos": [
 			{
 				"id": "ti-ciencia-de-dados",

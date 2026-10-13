@@ -6,7 +6,9 @@ aqui foi copiado de outro aplicativo. O conteúdo de estudo do feed não mora aq
 
 - `concursos.json` — **exatamente um** concurso: `cgu-affc-ti-cd`, CGU — Auditor Federal de
   Finanças e Controle, cargo único TI — Ciência de Dados, banca Cebraspe. Sem `dataProva` nem
-  `edital` enquanto o edital de 2026 não sai: o painel mostra "Data a definir".
+  `edital` enquanto o edital de 2026 não sai: o painel mostra "Data a definir". `prioridades`
+  (`https://…`, opcional) vira o botão "Prioridades do edital" no cabeçalho: o mapa de
+  prioridades subitem a subitem, publicado como artifact no claude.ai.
 - `ferramentas.json` — as 12 ferramentas do painel, na ordem em que aparecem. Os ids
   `questoes-objetivas`, `resumos`, `flashcards` e `jurisprudencia` (exibido como "Lei seca")
   abrem o feed filtrado por tipo; o mapa fica em `rotaDaFerramenta`, em `index.ts`. As demais
