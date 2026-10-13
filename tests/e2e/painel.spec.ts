@@ -36,7 +36,7 @@ test('cabeçalho mostra a CGU, a banca e "Data a definir", sem trocar concurso',
 });
 
 test('foco: cargo fixo, disciplina começa em Ciência de Dados e persiste', async ({ page }) => {
-	await page.goto('/painel');
+	await page.goto('/painel/ajustes');
 	await expect(page.getByText('AFFC — TI — Ciência de Dados', { exact: true })).toBeVisible();
 	await expect(page.getByLabel('Cargo')).toHaveCount(0);
 	const disciplina = page.getByLabel('Disciplina');
@@ -50,6 +50,13 @@ test('foco: cargo fixo, disciplina começa em Ciência de Dados e persiste', asy
 	});
 	await page.reload();
 	await expect(page.getByLabel('Disciplina')).toHaveValue('direito-constitucional');
+
+	// No painel, o cabeçalho mostra o foco em texto (FR-006).
+	await page.goto('/painel');
+	const cabecalho = page.locator('header', {
+		has: page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })
+	});
+	await expect(cabecalho.getByText('Foco: Direito Constitucional', { exact: true })).toBeVisible();
 
 	// E o story dela passa a vir logo depois de "Tudo".
 	await abas(page).getByRole('link', { name: 'Feed' }).click();

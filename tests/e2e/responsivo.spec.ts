@@ -68,7 +68,15 @@ const TELAS: { nome: string; abrir: (page: Page) => Promise<void> }[] = [
 		abrir: async (page) => {
 			await page.goto('/painel');
 			await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
+			await expect(page.getByRole('link', { name: 'Ajustes' })).toBeVisible();
+		}
+	},
+	{
+		nome: '/painel/ajustes',
+		abrir: async (page) => {
+			await page.goto('/painel/ajustes');
 			await expect(page.getByLabel('Disciplina')).toBeEnabled();
+			await expect(page.getByRole('group', { name: 'Aparência' })).toBeVisible();
 		}
 	},
 	{

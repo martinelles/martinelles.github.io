@@ -1,12 +1,11 @@
 <script lang="ts">
-	// Painel da CGU (FR-014, FR-015): concurso fixo, foco, progresso calculado e atalhos.
+	// Painel da CGU (FR-014, FR-015): concurso fixo, foco em texto no cabeçalho, progresso calculado e atalhos.
+	// Foco de Estudo e Aparência ficam na tela /painel/ajustes, aberta pelo canto do cabeçalho.
 	// Plano de estudos (FR-002..FR-007, FR-011): missão de hoje e resumo do plano logo abaixo do cabeçalho.
 	import { getContext } from 'svelte';
 	import CabecalhoPainel from '$lib/componentes/CabecalhoPainel.svelte';
-	import FocoEstudo from '$lib/componentes/FocoEstudo.svelte';
 	import GradeFerramentas from '$lib/componentes/GradeFerramentas.svelte';
 	import ProgressoEstudo from '$lib/componentes/ProgressoEstudo.svelte';
-	import SeletorTema from '$lib/componentes/SeletorTema.svelte';
 	import AvisoRegistro from '$lib/componentes/plano/AvisoRegistro.svelte';
 	import MissaoDoDia from '$lib/componentes/plano/MissaoDoDia.svelte';
 	import ResumoPlano from '$lib/componentes/plano/ResumoPlano.svelte';
@@ -26,9 +25,6 @@
 	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
 	import type { Indice, Materia } from '$lib/feed/tipos';
 
-	/** Cargo fixo (D6): não há seletor. */
-	const CARGO = 'AFFC — TI — Ciência de Dados';
-
 	const repo = getContext<Repositorio>('repositorio');
 	const prazo = diasParaProva(concursoCgu.dataProva, hojeLocal());
 
@@ -37,6 +33,16 @@
 	// Sem conteúdo (rede), os totais ainda aparecem; só "por matéria" depende do índice.
 	repo.materias().then((m) => (materias = m), () => {});
 	repo.indice().then((i) => (indice = i), () => {});
+
+	/** Enquanto as matérias carregam, o id formatado: `ti-ciencia-de-dados` vira `Ti ciencia de dados`. */
+	function rotuloDoId(id: string): string {
+		const texto = id.replaceAll('-', ' ');
+		return texto.charAt(0).toUpperCase() + texto.slice(1);
+	}
+
+	const nomeFoco = $derived(
+		materias?.find((m) => m.id === foco.disciplina)?.nome ?? rotuloDoId(foco.disciplina)
+	);
 
 	const numeros = $derived(estatisticas(dadosInteracoes(), indice ?? undefined));
 
@@ -51,7 +57,7 @@
 </svelte:head>
 
 <div class="painel">
-	<CabecalhoPainel concurso={concursoCgu} {prazo} />
+	<CabecalhoPainel concurso={concursoCgu} {prazo} foco={nomeFoco} />
 	<AvisoRegistro />
 	{#if fonte.erro}
 		<p class="erro-plano" role="alert">{fonte.erro}</p>
@@ -68,14 +74,7 @@
 			/>
 		{/if}
 	{/if}
-	<FocoEstudo
-		cargo={CARGO}
-		{materias}
-		disciplina={foco.disciplina}
-		onescolherDisciplina={(id) => foco.escolherDisciplina(id)}
-	/>
 	<ProgressoEstudo estatisticas={numeros} {materias} />
-	<SeletorTema />
 	<div>
 		<GradeFerramentas ferramentas={dados.ferramentas} />
 	</div>

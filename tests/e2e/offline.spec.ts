@@ -17,6 +17,10 @@ test('depois da primeira visita, feed, salvos, painel e ferramenta abrem offline
 	await esperarServiceWorker(page);
 	await expect(page.locator('[data-post-id]').first()).toBeVisible();
 
+	// Ajustes: uma visita online, para a rota contar como visitada (inofensiva se o pré-cache já cobre).
+	await page.goto('/painel/ajustes');
+	await expect(page.getByRole('heading', { level: 1, name: 'Ajustes' })).toBeVisible();
+
 	await context.setOffline(true);
 
 	await page.goto('/');
@@ -37,6 +41,20 @@ test('depois da primeira visita, feed, salvos, painel e ferramenta abrem offline
 
 	await page.goto('/ferramenta/pdfs');
 	await expect(page.getByRole('heading', { level: 1, name: 'PDFs' })).toBeVisible();
+
+	// Ajustes offline (FR-007): link direto, com o tema trocando sem rede.
+	await page.goto('/painel/ajustes');
+	await expect(page.getByRole('heading', { level: 1, name: 'Ajustes' })).toBeVisible();
+	const aparencia = page.getByRole('group', { name: 'Aparência' });
+	await expect(aparencia).toBeVisible();
+	await aparencia.getByRole('radio', { name: 'Kindle', exact: true }).check();
+	await expect(page.locator('html')).toHaveAttribute('data-tema', 'kindle');
+
+	// Ajustes offline por navegação interna, a partir do painel.
+	await page.goto('/painel');
+	await page.getByRole('link', { name: 'Ajustes', exact: true }).click();
+	await expect(page).toHaveURL('/painel/ajustes');
+	await expect(page.getByRole('heading', { level: 1, name: 'Ajustes' })).toBeVisible();
 
 	await context.setOffline(false);
 });

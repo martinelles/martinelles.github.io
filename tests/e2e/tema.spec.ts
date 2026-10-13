@@ -44,8 +44,8 @@ async function fixarTema(page: Page, tema: Tema | 'sistema') {
 	await page.addInitScript(([k, t]) => localStorage.setItem(k, JSON.stringify({ tema: t })), [CHAVE, tema] as const);
 }
 
-async function abrirPainel(page: Page) {
-	await page.goto('/painel');
+async function abrirAjustes(page: Page) {
+	await page.goto('/painel/ajustes');
 	await expect(page.getByRole('group', { name: 'Aparência' })).toBeVisible();
 }
 
@@ -76,7 +76,7 @@ test.describe('padrão pelo aparelho, sem escolha salva', () => {
 });
 
 test('seletor: grupo "Aparência" com 4 rádios e "Seguir o aparelho" marcado (FR-001, FR-003, Cenário 2.1)', async ({ page }) => {
-	await abrirPainel(page);
+	await abrirAjustes(page);
 	const grupo = page.getByRole('group', { name: 'Aparência' });
 	const radios = grupo.getByRole('radio');
 	await expect(radios).toHaveCount(4);
@@ -89,7 +89,7 @@ test('seletor: grupo "Aparência" com 4 rádios e "Seguir o aparelho" marcado (F
 });
 
 test('troca e persistência: "Kindle" sobrevive ao reload (FR-003, SC-002)', async ({ page }) => {
-	await abrirPainel(page);
+	await abrirAjustes(page);
 	await radio(page, 'Kindle').check();
 	await expect(page.locator('html')).toHaveAttribute('data-tema', 'kindle');
 	expect(await lerChave(page)).toBe('{"tema":"kindle"}');
@@ -102,7 +102,7 @@ test('troca e persistência: "Kindle" sobrevive ao reload (FR-003, SC-002)', asy
 
 test('ao vivo: "Seguir o aparelho" acompanha claro/escuro sem recarregar (Cenário 2.3)', async ({ page }) => {
 	await page.emulateMedia({ colorScheme: 'light' });
-	await abrirPainel(page);
+	await abrirAjustes(page);
 	await expect(radio(page, /^Seguir o aparelho/)).toBeChecked();
 	await expect(page.locator('html')).toHaveAttribute('data-tema', 'aventura');
 	// Marca na janela: some se a página recarregar.
@@ -118,7 +118,7 @@ test('ao vivo: "Seguir o aparelho" acompanha claro/escuro sem recarregar (Cenár
 
 test('tema fixo ignora o aparelho (contrato §3)', async ({ page }) => {
 	await page.emulateMedia({ colorScheme: 'light' });
-	await abrirPainel(page);
+	await abrirAjustes(page);
 	await radio(page, 'Kindle').check();
 	await expect(page.locator('html')).toHaveAttribute('data-tema', 'kindle');
 	await page.emulateMedia({ colorScheme: 'dark' });
@@ -131,7 +131,7 @@ test.describe('teclado', () => {
 	// Escuro: "Seguir o aparelho" dá kindle-escuro, então cada seta muda o tema que aparece.
 	test.use({ colorScheme: 'dark' });
 	test('setas trocam o tema a cada tecla (NFR-005)', async ({ page }) => {
-		await abrirPainel(page);
+		await abrirAjustes(page);
 		await expect(page.locator('html')).toHaveAttribute('data-tema', 'kindle-escuro');
 		await radio(page, /^Seguir o aparelho/).focus();
 		await page.keyboard.press('ArrowDown');
@@ -163,6 +163,8 @@ test('posição do feed: ir ao painel, trocar o tema e voltar pela barra de abas
 		const antes = await page.evaluate(() => window.scrollY);
 		await abas.getByRole('link', { name: 'Painel' }).click();
 		await expect(page).toHaveURL('/painel');
+		await page.getByRole('link', { name: 'Ajustes' }).click();
+		await expect(page).toHaveURL('/painel/ajustes');
 		await expect(page.getByRole('group', { name: 'Aparência' })).toBeVisible();
 		if (trocar) {
 			await radio(page, trocar).check();
@@ -195,7 +197,7 @@ test('posição do feed: ir ao painel, trocar o tema e voltar pela barra de abas
 test('troca de tema não perde a posição na própria página (FR-010)', async ({ page }) => {
 	// O seletor fica no painel: a troca "na hora" é medida ali, rolado até o seletor.
 	await page.setViewportSize({ width: 412, height: 500 });
-	await abrirPainel(page);
+	await abrirAjustes(page);
 	await radio(page, 'Kindle').scrollIntoViewIfNeeded();
 	const antes = await page.evaluate(() => window.scrollY);
 	expect(antes).toBeGreaterThan(0);
@@ -216,7 +218,7 @@ test('preferência corrompida: abre pelo aparelho, sem erro, e a chave fica como
 		await expect(page.locator('[data-post-id]').first()).toBeVisible();
 		await expect(page.locator('html')).toHaveAttribute('data-tema', 'aventura');
 		expect(await lerChave(page), valor).toBe(valor);
-		await abrirPainel(page);
+		await abrirAjustes(page);
 		await expect(radio(page, /^Seguir o aparelho/)).toBeChecked();
 		expect(await lerChave(page), valor).toBe(valor);
 	}
@@ -312,6 +314,14 @@ const TELAS: { nome: string; abrir: (page: Page) => Promise<void> }[] = [
 		abrir: async (page) => {
 			await page.goto('/painel');
 			await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
+			await expect(page.getByRole('link', { name: 'Ajustes' })).toBeVisible();
+		}
+	},
+	{
+		nome: '/painel/ajustes',
+		abrir: async (page) => {
+			await page.goto('/painel/ajustes');
+			await expect(page.getByRole('heading', { level: 1, name: 'Ajustes' })).toBeVisible();
 			await expect(page.getByRole('group', { name: 'Aparência' })).toBeVisible();
 		}
 	},

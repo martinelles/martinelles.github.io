@@ -1,10 +1,20 @@
 <script lang="ts">
 	// Cabeçalho do painel: o app atende só à CGU (FR-001, FR-014), então não há "trocar concurso".
+	// No canto, o acesso aos Ajustes (FR-002); abaixo da banca, o foco atual em texto (FR-006).
 	import Icone from './Icone.svelte';
 	import type { Concurso } from '$lib/dados';
 	import { formatarData, type Prazo } from '$lib/datas';
 
-	let { concurso, prazo }: { concurso: Concurso; prazo: Prazo } = $props();
+	let {
+		concurso,
+		prazo,
+		foco
+	}: {
+		concurso: Concurso;
+		prazo: Prazo;
+		/** Nome da matéria de foco, já resolvido por quem monta o painel. */
+		foco?: string;
+	} = $props();
 
 	const cargo = $derived(concurso.cargos[0]?.nome);
 	const vagas = $derived(
@@ -15,10 +25,16 @@
 </script>
 
 <header class="cabecalho">
-	<h1>Seu Painel de Estudos</h1>
+	<div class="topo">
+		<h1>Seu Painel de Estudos</h1>
+		<a class="ajustes" href="/painel/ajustes" aria-label="Ajustes" title="Ajustes">
+			<Icone nome="ajustes" tamanho={22} />
+		</a>
+	</div>
 
 	<p class="concurso">{concurso.nome}{#if cargo}{' · '}<span class="cargo">{cargo}</span>{/if}</p>
 	<p class="banca">banca {concurso.banca} · {concurso.orgao}</p>
+	{#if foco}<p class="foco">Foco: {foco}</p>{/if}
 
 	<ul class="indicadores">
 		{#if vagas}
@@ -73,6 +89,13 @@
 		color: var(--cor-texto);
 	}
 
+	.topo {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 12px;
+	}
+
 	h1 {
 		margin: 0;
 		font-family: var(--fonte-titulo);
@@ -96,12 +119,25 @@
 		cursor: pointer;
 	}
 
-	.edital:focus-visible {
+	.ajustes {
+		display: grid;
+		place-items: center;
+		flex-shrink: 0;
+		width: 44px;
+		height: 44px;
+		border: var(--linha-peso) solid currentColor;
+		border-radius: calc(var(--raio) / 2);
+		color: inherit;
+	}
+
+	.edital:focus-visible,
+	.ajustes:focus-visible {
 		outline-color: var(--cor-primaria-texto);
 	}
 
 	/* Kindle: sobre a superfície, a cor do texto da primária some; o foco volta à primária. */
-	:global([data-tema^='kindle']) .edital:focus-visible {
+	:global([data-tema^='kindle']) .edital:focus-visible,
+	:global([data-tema^='kindle']) .ajustes:focus-visible {
 		outline-color: var(--cor-primaria);
 	}
 
@@ -116,7 +152,8 @@
 		font-weight: 600;
 	}
 
-	.banca {
+	.banca,
+	.foco {
 		margin: 0;
 	}
 

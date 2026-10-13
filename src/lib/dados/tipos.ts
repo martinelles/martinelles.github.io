@@ -46,7 +46,9 @@ export const ICONES = [
 	'x',
 	'lei',
 	'lampada',
-	'interrogacao'
+	'interrogacao',
+	// Ajustes
+	'ajustes'
 ] as const;
 export type NomeIcone = (typeof ICONES)[number];
 
