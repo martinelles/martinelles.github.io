@@ -68,6 +68,14 @@
 				</a>
 			</li>
 		{/if}
+		{#if concurso.missoes}
+			<li>
+				<a class="edital" href={concurso.missoes} target="_blank" rel="noopener">
+					<Icone nome="calendario" tamanho={20} />
+					Missões até a prova
+				</a>
+			</li>
+		{/if}
 	</ul>
 </header>
 

@@ -74,6 +74,8 @@ export interface Concurso {
 	edital?: string;
 	/** https:// — mapa de prioridades do edital, subitem a subitem */
 	prioridades?: string;
+	/** https:// — missões diárias de estudo até a prova */
+	missoes?: string;
 	icone: string;
 	cor: CorConcurso;
 	cargos: Cargo[];
