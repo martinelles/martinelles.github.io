@@ -190,14 +190,27 @@ teste de origem (`:137`), deixando explícito que a API nunca passa pelo cache.
 ### Critérios de aceite
 
 #### Automáticos
-- [ ] `npm test`: `tests/unit/armazenamento.test.ts` cobre o setItem que grava local e agenda o
+- [x] `npm test`: `tests/unit/armazenamento.test.ts` cobre o setItem que grava local e agenda o
       PUT, a falha de rede que deixa a chave pendente e o reenvio no `online`, a chave fora da
       lista que não sobe e a regra de entrada (servidor vazio; servidor mais novo; local mais novo).
-- [ ] `npm run check` sem erro.
-- [ ] Os testes atuais seguem passando sem alteração (281 unitários).
+- [x] `npm run check` sem erro.
+- [x] Os testes atuais seguem passando sem alteração (281 unitários).
 
 #### Manuais
 - [ ] Nenhum nesta fase: ela ainda não tem tela.
+
+### Nota de execução (2026-10-13)
+
+- O teste ficou em `tests/unit/conta/armazenamento.test.ts`, ao lado dos da fase 1.
+- O carimbo de cada chave sempre cresce (`max(agora, anterior + 1)`): o servidor só aceita carimbo
+  maior que o guardado, e duas gravações no mesmo milissegundo perderiam a segunda.
+- `entrar` apaga os carimbos (`painel-concurso:sinc:v1`) antes de recarregar. Carimbo de outro
+  usuário no mesmo aparelho faria o progresso dele parecer "mais novo" que o servidor.
+- Ao abrir logado, o layout chama `sincronizarAoAbrir`. Se o servidor trouxer algo mais novo, os
+  quatro stores leem de novo; o registro só relê se alguma tela já o tiver lido
+  (`recarregarRegistro` em `src/lib/componentes/plano/estado.svelte.ts`).
+- O service worker ignora `/api/` explicitamente (`src/service-worker.ts`, logo depois do teste
+  de origem).
 
 ---
 

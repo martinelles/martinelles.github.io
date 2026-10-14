@@ -11,6 +11,7 @@ import { carregarPlanoDe } from '$lib/plano/carregar';
 import { fasePlano, type FasePlano } from '$lib/plano/dias';
 import { exportarCsv, nomeArquivoExportacao } from '$lib/plano/exportar';
 import { carregarRegistro, registro } from '$lib/plano/registro.svelte';
+import { armazenamentoAtual } from '$lib/conta/sessao.svelte';
 import {
 	concluidasNaMissao,
 	filaEsgotada,
@@ -31,8 +32,13 @@ let registroCarregado = false;
  */
 export function garantirRegistro(): void {
 	if (registroCarregado) return;
-	carregarRegistro();
+	carregarRegistro(armazenamentoAtual());
 	registroCarregado = true;
+}
+
+/** Relê o registro depois que o login trouxe dados do servidor; se nenhuma tela leu ainda, nada a fazer. */
+export function recarregarRegistro(): void {
+	if (registroCarregado) carregarRegistro(armazenamentoAtual());
 }
 
 /**

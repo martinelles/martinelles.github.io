@@ -6,6 +6,8 @@
  *
  * A especialidade decide o conteúdo: o plano de estudos, as matérias do feed e o cargo no cabeçalho.
  */
+import { armazenamentoAtual } from '$lib/conta/sessao.svelte';
+
 export const CHAVE_FOCO = 'painel-concurso:preferencias:v2';
 
 export type IdEspecialidade = 'ciencia-de-dados' | 'auditoria';
@@ -96,7 +98,7 @@ export function carregarFoco(arm: Storage | null = tentarLocalStorage()): void {
 
 /** Lê o foco só se ninguém leu ainda nesta aba (sem armazenamento, reler apagaria a escolha). */
 export function garantirFoco(): void {
-	if (!carregado) carregarFoco();
+	if (!carregado) carregarFoco(armazenamentoAtual());
 }
 
 export const foco = {

@@ -4,17 +4,27 @@
 	import { page } from '$app/state';
 	import BarraAbas, { type Aba } from '$lib/componentes/feed/BarraAbas.svelte';
 	import { criarRepositorio } from '$lib/feed/conteudo';
-	import { garantirFoco } from '$lib/feed/foco.svelte';
+	import { carregarFoco, garantirFoco } from '$lib/feed/foco.svelte';
 	import { carregarInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
 	import { carregarTema } from '$lib/tema.svelte';
+	import { recarregarRegistro } from '$lib/componentes/plano/estado.svelte';
+	import { armazenamentoAtual, sincronizarAoAbrir } from '$lib/conta/sessao.svelte';
 
 	let { children }: { children: Snippet } = $props();
 
 	// Uma vez por aba: o layout raiz não é refeito ao navegar. O tema chega ao mesmo valor que o
 	// script inline de app.html já pôs (sem piscar) e passa a seguir o aparelho e o seletor.
-	carregarInteracoes();
+	carregarInteracoes(armazenamentoAtual());
 	garantirFoco();
-	carregarTema();
+	carregarTema(armazenamentoAtual());
+	// Logado: traz do servidor o que lá é mais novo e, se algo mudou, os stores leem de novo.
+	void sincronizarAoAbrir(() => {
+		const arm = armazenamentoAtual();
+		carregarInteracoes(arm);
+		carregarFoco(arm);
+		carregarTema(arm);
+		recarregarRegistro();
+	});
 	// Um repositório por aba: feed, salvos e painel dividem o cache de índice e lotes
 	// (as páginas leem com getContext('repositorio')).
 	setContext('repositorio', criarRepositorio());
