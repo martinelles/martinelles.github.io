@@ -1,22 +1,18 @@
 import { expect, test, type Page } from '@playwright/test';
+import subitens from '../../static/conteudo/artefatos/raiox-subitens.json' with { type: 'json' };
+import assuntos from '../../static/conteudo/artefatos/raiox-assuntos.json' with { type: 'json' };
 
-// Prioridades e Missões servidas pelo painel (planos/2026-10-14-artefatos-no-git.md, fase 1).
-// As páginas vêm do vault (`npm run importar`); o Raio-X ainda está no claude.ai até a fase 2.
-
-const RAIOX_CLAUDE = 'https://claude.ai/artifact/Q4MYW9Fpk7eg4oKnv36H12';
+// Prioridades, Missões e Raio-X servidos pelo painel (planos/2026-10-14-artefatos-no-git.md).
+// As páginas vêm do vault (`npm run importar`).
 
 test.beforeEach(async ({ page }) => {
 	await page.clock.setFixedTime(new Date('2026-10-14T12:00:00-03:00'));
 });
 
-/** Links para o claude.ai que sobraram na página, fora o Raio-X. */
+/** Links para o claude.ai que sobraram na página. */
 const linksClaude = (page: Page) =>
-	page.evaluate(
-		(raiox) =>
-			[...document.querySelectorAll('a[href]')]
-				.map((a) => (a as HTMLAnchorElement).href)
-				.filter((h) => h.includes('claude.ai/artifact/') && !h.startsWith(raiox)),
-		RAIOX_CLAUDE
+	page.evaluate(() =>
+		[...document.querySelectorAll('a[href]')].map((a) => (a as HTMLAnchorElement).href).filter((h) => h.includes('claude.ai/artifact/'))
 	);
 
 test('os botões do cabeçalho abrem as páginas do painel, e uma liga à outra', async ({ page, context }) => {
@@ -60,4 +56,35 @@ test('depois de uma visita ao app, as Missões abrem offline', async ({ page, co
 	await page.goto('/conteudo/artefatos/missoes.html#cd');
 	await expect(page.getByRole('heading', { level: 1, name: 'Missões até a prova' })).toBeVisible();
 	await context.setOffline(false);
+});
+
+test('Raio-X roda sem o claude.ai: números, gráficos, tabela e troca de cargo', async ({ page, context }) => {
+	const erros: string[] = [];
+	// Registrados no contexto: valem para a aba nova desde a primeira linha que ela roda.
+	context.on('weberror', (e) => erros.push(e.error().message));
+	context.on('console', (m) => m.type() === 'error' && erros.push(m.text()));
+
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	const [r] = await Promise.all([context.waitForEvent('page'), page.locator('#link-raiox').click()]);
+	await expect(r).toHaveURL(/\/conteudo\/artefatos\/raiox\.html$/);
+
+	await expect(r.getByRole('heading', { level: 1, name: 'Raio-X do Qconcursos' })).toBeVisible();
+	await expect(r.locator('[data-field="assuntos"]')).toHaveText(String(assuntos.length));
+	await expect(r.locator('#ch-blocos svg')).toBeVisible();
+	await expect(r.locator('#ch-conc svg')).toBeVisible();
+
+	const doCargo = (c: string) => subitens.filter((s) => s.cargo === 'Ambos' || s.cargo === c).length;
+	await expect(r.locator('#tb-todos tbody tr')).toHaveCount(doCargo('Ciência de Dados'));
+	await r.locator('#c-aud').click();
+	await expect(r.locator('#c-aud')).toHaveAttribute('aria-pressed', 'true');
+	await expect(r.locator('#tb-todos tbody tr')).toHaveCount(doCargo('Auditoria'));
+	expect(r.url()).toContain('cargo=Auditoria');
+
+	expect(await linksClaude(r)).toEqual([]);
+	expect(erros).toEqual([]);
+});
+
+test('Raio-X: a âncora #aud abre direto em Auditoria', async ({ page }) => {
+	await page.goto('/conteudo/artefatos/raiox.html#aud');
+	await expect(page.locator('#c-aud')).toHaveAttribute('aria-pressed', 'true');
 });

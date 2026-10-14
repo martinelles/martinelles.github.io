@@ -14,12 +14,13 @@
  * sendo só o do conteúdo do feed. Sem `ESTUDO.csv`: aviso e nenhum `plano.json`.
  *
  * Artefatos: `artifacts/_publicar/*.html` → `artefatos/*.html` (`artefatos.mjs`). Sem a pasta:
- * aviso e nenhum artefato.
+ * aviso e nenhum artefato. Raio-X: `artifacts/raiox/` (página e dados) + `scripts/importar/raiox/`
+ * (d3 e o substituto de `window.dash`) → `artefatos/raiox.html` e companhia.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ARTEFATOS, montarArtefatos } from './artefatos.mjs';
+import { ARTEFATOS, montarArtefatos, montarRaiox } from './artefatos.mjs';
 import { importarBaralho } from './baralhos.mjs';
 import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
@@ -276,7 +277,26 @@ export function importar({ vault, saida }) {
 			else avisos.push(`artifacts/_publicar/${a.fonte} ausente: ${a.arquivo} não gerado`);
 		}
 	}
-	const artefatos = montarArtefatos(fontesArtefatos);
+	// Raio-X: página e dados em artifacts/raiox/; d3 e o substituto de window.dash vêm do repositório
+	const dirRaiox = join(vault, 'artifacts', 'raiox');
+	const fontesRaiox = ['index.html', 'subitens.json', 'assuntos.json'].map((f) => join(dirRaiox, f));
+	const comRaiox = fontesRaiox.every((f) => existsSync(f));
+	if (!comRaiox) avisos.push('artifacts/raiox incompleto (index.html, subitens.json, assuntos.json): Raio-X não gerado');
+	const artefatos = montarArtefatos(fontesArtefatos, comRaiox);
+	if (comRaiox) {
+		const [pagina, subitens, assuntos] = fontesRaiox.map((f) => readFileSync(f, 'utf8'));
+		const daqui = (/** @type {string} */ f) => readFileSync(fileURLToPath(new URL(`./raiox/${f}`, import.meta.url)), 'utf8');
+		artefatos.push(
+			...montarRaiox({
+				pagina,
+				subitens,
+				assuntos,
+				dashLocal: daqui('dash-local.js'),
+				d3: daqui('d3-7.9.0.min.js'),
+				licencaD3: daqui('d3-LICENSE.txt')
+			})
+		);
+	}
 	arquivos.push(...artefatos);
 
 	// Escrita: temporário ao lado do destino, depois troca

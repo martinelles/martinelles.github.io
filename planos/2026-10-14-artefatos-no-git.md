@@ -150,12 +150,32 @@ sair do login por nome e do D1, e o Raio-X roda sem o tipo "dashboard" do claude
 
 ### Critérios de aceite
 #### Automáticos
-- [ ] `npm test`: `dash-local.js` testado com dados falsos (`data` passando de loading a ok,
+- [x] `npm test`: `dash-local.js` testado com dados falsos (`data` passando de loading a ok,
       `calc` com entradas, `params` ida e volta).
-- [ ] `npx playwright test`: `raiox.html` abre sem erro no console, mostra os 264 subitens e
+- [x] `npx playwright test`: `raiox.html` abre sem erro no console, mostra os 264 subitens e
       o total que aparece bate com a soma de `raiox-subitens.json`.
 #### Manuais
 - [ ] Comparar lado a lado com o Raio-X do claude.ai: os mesmos números e gráficos.
+
+### Nota de execução (2026-10-14)
+
+- **O d3 e o `dash-local.js` moram em `scripts/importar/raiox/`, não em `static/conteudo/artefatos/`.**
+  O importador recria `static/conteudo/` inteiro a cada execução e apagaria o que fosse posto
+  ali à mão; por isso ele copia os dois para a saída. O d3 7.9.0 saiu do `npm pack`, com a
+  integridade conferida contra o `dist.integrity` do registro (`sha512-e1U46jVP…`).
+- **Fonte do Raio-X no vault:** `artifacts/raiox/{index.html,subitens.json,assuntos.json,LEIA-ME.md}`.
+  Os anexos foram baixados com os sha256 conferidos (`9b963d3c…` e `3241c88e…`). Não há script
+  que regenere os dois JSON, e isso ficou dito no LEIA-ME de lá.
+- **Tokens:** a página usa uns 25 tokens de CSS do tipo dashboard (`--cds-*`, `--color-*`,
+  `--font-anthropic-*`). `montarRaiox` os define com a paleta e as fontes das Missões, claro e
+  escuro, e as 8 `dash.colors` viram `var(--dash-cor-N)`.
+- **Além do plano:** uma barra no topo liga às Prioridades e às Missões (a página original
+  não tinha volta), e a âncora `#cd`/`#aud` vale como cargo, como nas outras duas.
+- **Testes:** os unitários ficaram em `tests/unit/importar/raiox.test.ts`, e não em um arquivo
+  à parte do `dash-local.js`. O `dash-local.js` é carregado com `new Function(window, fetch)`.
+- **Visual:** capturas em 1280 px, claro e escuro, conferidas.
+- Resultado: `npm test` com 345, `npm run check` sem erro e `npx playwright test` com 246.
+  Nenhuma das três páginas tem mais link para `claude.ai/artifact`.
 
 ## Fase 3: marcações das Missões no login por nome
 

@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Raio-X do Qconcursos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --font-anthropic-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-anthropic-serif: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: #f5f7f8; --color-panel: #ffffff; --color-fg: #15233a; --color-fg-muted: #5b6878;
+  --color-border-line: #d9e0e6; --color-bad: #b01f4a;
+  --cds-gap-sm: 8px; --cds-gap-md: 16px; --cds-gap-xl: 32px;
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-lg: 16px;
+  --cds-radius: 10px; --cds-border: #d9e0e6;
+  --cds-font-size-title: clamp(28px, 5vw, 40px); --cds-font-size-heading: 18px; --cds-font-size-caption: 13px;
+  --cds-font-weight-medium: 600;
+  --cds-surface-popover: #ffffff; --cds-shadow-popover: 0 6px 24px rgb(21 35 58 / 0.14);
+  --cds-text-secondary: #5b6878;
+  --cds-chart-grid: #e6ebef; --cds-chart-axis: #b7c1ca; --cds-chart-muted: #b7c1ca;
+  --cds-dur-slow: 300ms;
+  --dash-cor-0: #0b6e6b; --dash-cor-1: #3d6aa8; --dash-cor-2: #7a4cc2; --dash-cor-3: #b4521a;
+  --dash-cor-4: #b01f4a; --dash-cor-5: #5d7a1f; --dash-cor-6: #8a6d00; --dash-cor-7: #4f5b66;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-bg: #0f1520; --color-panel: #161e2b; --color-fg: #e6ebf1; --color-fg-muted: #9aa6b4;
+    --color-border-line: #2a3546; --color-bad: #f0668e; --cds-border: #2a3546;
+    --cds-surface-popover: #1c2636; --cds-shadow-popover: 0 6px 24px rgb(0 0 0 / 0.5);
+    --cds-text-secondary: #9aa6b4;
+    --cds-chart-grid: #222c3b; --cds-chart-axis: #3a475a; --cds-chart-muted: #3a475a;
+    --dash-cor-0: #4cc2bd; --dash-cor-1: #7fa8e6; --dash-cor-2: #b493ee; --dash-cor-3: #f0915a;
+    --dash-cor-4: #f0668e; --dash-cor-5: #a6c95a; --dash-cor-6: #e0c050; --dash-cor-7: #9aa6b4;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: 15px; line-height: 1.5; }
+#dash-root { padding: 28px 16px 64px; }
+.dash-skeleton:empty::before { content: "—"; color: var(--color-fg-muted); }
+.rx-irmaos { max-width: 1180px; margin: 0 auto 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.rx-irmaos a { font-weight: 600; font-size: 13.5px; color: var(--color-fg); text-decoration: none; border: 1px solid var(--color-border-line); background: var(--color-panel); border-radius: 999px; padding: 6px 14px; }
+.rx-irmaos a:hover { border-color: var(--dash-cor-0); color: var(--dash-cor-0); }
+.rx-irmaos a:focus-visible { outline: 2px solid var(--dash-cor-0); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div id="dash-root">
+<nav class="rx-irmaos" aria-label="Outras páginas">
+<a href="/conteudo/artefatos/prioridades.html" target="_blank" rel="noopener">Prioridades do edital →</a>
+<a href="/conteudo/artefatos/missoes.html" target="_blank" rel="noopener">Missões até a prova →</a>
+</nav>
+<style>
+.rx { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); max-width: 1180px; margin-inline: auto; }
+.rx-head { display: grid; gap: var(--cds-gap-sm); }
+.rx-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+.rx-lede { margin: 0; color: var(--color-fg-muted); max-width: 70ch; }
+.rx-bar { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; }
+.rx-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: 999px; padding: 3px; }
+.rx-seg button { font: inherit; font-size: var(--cds-font-size-caption); border: 0; background: transparent; color: var(--color-fg-muted); padding: 5px 14px; border-radius: 999px; cursor: pointer; }
+.rx-seg button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
+.rx-seg button:focus-visible, .rx th button:focus-visible, .rx input:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.rx-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.rx-kpi { display: grid; gap: 2px; align-content: start; }
+.rx-kpi .v { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.rx-kpi .l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+.rx-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+.rx-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.rx-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 72ch; }
+.rx-chart { position: relative; min-height: 220px; }
+.rx-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); max-width: 260px; }
+.rx-tip .k { color: var(--cds-text-secondary); }
+.rx-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.rx-scroll { max-height: 420px; overflow: auto; }
+.rx table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.rx th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.rx th button { all: unset; cursor: pointer; }
+.rx td { padding: 6px 8px; border-bottom: 1px solid var(--cds-chart-grid); vertical-align: top; }
+.rx td.n, .rx th.n { text-align: right; white-space: nowrap; }
+.rx td.c { white-space: nowrap; font-weight: var(--cds-font-weight-medium); }
+.rx td.t { min-width: 14rem; }
+.rx .cell-bar { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.rx .cell-bar i { display: block; height: 8px; border-radius: 4px; background: var(--cds-chart-muted); }
+.rx .cell-bar.hi i { background: var(--rx-accent); }
+.rx-pill { font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--color-border-line); white-space: nowrap; }
+.rx-pill.alta { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.rx-search { font: inherit; font-size: var(--cds-font-size-caption); padding: 6px 10px; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); min-width: 0; flex: 1 1 14rem; max-width: 24rem; }
+.rx-wide { grid-column: 1 / -1; }
+.rx-fail { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); min-height: inherit; }
+.rx-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="rx">
+  <header class="rx-head" id="topo">
+    <h1 class="rx-title">Raio-X do Qconcursos</h1>
+    <p class="rx-lede dash-skeleton" id="lede" data-source="resumo"></p>
+    <div class="rx-bar">
+      <div class="rx-seg" role="group" aria-label="Cargo">
+        <button type="button" id="c-cd" data-c="Ciência de Dados">Ciência de Dados</button>
+        <button type="button" id="c-aud" data-c="Auditoria">Auditoria</button>
+      </div>
+      <span class="rx-note">P1 e P2 são comuns aos dois cargos; o filtro troca a P3.</span>
+    </div>
+  </header>
+
+  <section class="rx-kpis" id="numeros" aria-label="Números da contagem">
+    <div class="rx-kpi"><span class="v dash-skeleton" data-source="resumo" data-field="assuntos" data-row="0"></span><span class="l">assuntos do Qconcursos contados</span></div>
+    <div class="rx-kpi"><span class="v dash-skeleton" data-source="resumo" data-field="cortados" data-row="0"></span><span class="l">subitens em que o link abre só parte dos assuntos</span></div>
+    <div class="rx-kpi"><span class="v dash-skeleton" data-source="resumo" data-field="fora" data-row="0"></span><span class="l">assuntos deixados fora do link padrão, somando os subitens</span></div>
+    <div class="rx-kpi"><span class="v dash-skeleton" data-source="resumo" data-field="zeros" data-row="0"></span><span class="l">assuntos sem nenhuma questão no filtro</span></div>
+    <div class="rx-kpi"><span class="v dash-skeleton" data-source="resumo" data-field="termo" data-row="0"></span><span class="l">subitens sem assunto, buscados por termo</span></div>
+  </section>
+
+  <div class="rx-grid">
+    <section class="rx-card" id="blocos">
+      <h2>Onde há questões, por bloco do edital</h2>
+      <p class="rx-note">Soma das questões dos assuntos de cada subitem do bloco. Questão marcada com dois assuntos conta duas vezes, então leia como volume relativo.</p>
+      <div class="rx-legend" id="leg-prova"></div>
+      <div class="rx-chart" id="ch-blocos" data-source="por_bloco"></div>
+    </section>
+
+    <section class="rx-card" id="concentracao">
+      <h2>Quantos assuntos fazem 80% das questões</h2>
+      <p class="rx-note">Para cada subitem com assunto: quantos dos seus assuntos, do mais cobrado para baixo, já somam 80% das questões. É o tamanho do link "mais cobrados".</p>
+      <div class="rx-chart" id="ch-conc" data-source="concentracao"></div>
+    </section>
+
+    <section class="rx-card rx-wide" id="alta-pouca">
+      <h2>Prioridade alta com pouca questão</h2>
+      <p class="rx-note">Subitens de prioridade alta no guia com menos de 50 questões somadas. Aqui o Qconcursos ajuda pouco: o estudo sai do guia e da discursiva.</p>
+      <div class="rx-scroll">
+        <table id="tb-alta" data-source="subitens" data-row-key="chave">
+          <thead><tr><th data-field="chave">Subitem</th><th data-field="texto">Texto do edital</th><th class="n" data-field="total">Questões</th><th data-field="top_assunto">Assunto mais cobrado</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="rx-card" id="top-assuntos">
+      <h2>Os 20 assuntos mais cobrados</h2>
+      <p class="rx-note">Cebraspe, 2017–2026, nível superior, sem anuladas nem desatualizadas, entre os assuntos ligados a algum subitem.</p>
+      <div class="rx-scroll">
+        <table id="tb-top" data-source="assuntos" data-row-key="subject_id">
+          <thead><tr><th data-field="nome">Assunto</th><th data-field="disciplina">Disciplina</th><th class="n" data-field="qtd">Questões</th><th class="n" data-field="n_subitens">Subitens</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="rx-card" id="zeros">
+      <h2>Assuntos sem nenhuma questão</h2>
+      <p class="rx-note">Estão no mapa de assuntos mas não têm questão no filtro. Não atrapalham o link, mas são candidatos a trocar por outro assunto.</p>
+      <div class="rx-scroll">
+        <table id="tb-zero" data-source="assuntos" data-row-key="subject_id">
+          <thead><tr><th data-field="nome">Assunto</th><th data-field="disciplina">Disciplina</th><th data-field="subitens">Subitens</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="rx-card rx-wide" id="todos">
+      <h2>Todos os subitens</h2>
+      <p class="rx-note">Clique no cabeçalho para ordenar. "No link" é quantos assuntos o link padrão abre, de quantos o subitem tem.</p>
+      <div class="rx-bar"><input class="rx-search" id="busca" type="search" placeholder="Buscar no texto ou no assunto" aria-label="Buscar subitem"></div>
+      <div class="rx-scroll">
+        <table id="tb-todos" data-source="subitens" data-row-key="chave">
+          <thead><tr>
+            <th data-field="chave"><button type="button" data-sort="chave">Subitem</button></th>
+            <th data-field="prio"><button type="button" data-sort="prio">Prioridade</button></th>
+            <th data-field="texto">Texto do edital</th>
+            <th class="n" data-field="total"><button type="button" data-sort="total">Questões</button></th>
+            <th class="n" data-field="n_corte"><button type="button" data-sort="n_corte">No link</button></th>
+            <th data-field="top_assunto">Assunto mais cobrado</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>window.DASH_LOCAL = { datasets: { subitens: "/conteudo/artefatos/raiox-subitens.json", assuntos: "/conteudo/artefatos/raiox-assuntos.json" } };</script>
+<script src="/conteudo/artefatos/vendor/d3-7.9.0.min.js"></script>
+<script src="/conteudo/artefatos/dash-local.js"></script>
+<script>
+dash.calc('resumo', {
+  inputs: ['subitens', 'assuntos'],
+  title: 'Resumo da contagem',
+  description: 'Totais da contagem de 2026-10-13: assuntos, zeros, subitens com corte e por termo.',
+  fn: (subitens, assuntos) => {
+    const comAssunto = subitens.filter((s) => s.busca === 'assunto');
+    return [{
+      assuntos: assuntos.length,
+      zeros: assuntos.filter((a) => Number(a.qtd) === 0).length,
+      com_assunto: comAssunto.length,
+      cortados: comAssunto.filter((s) => Number(s.n_corte) < Number(s.n_assuntos)).length,
+      fora: comAssunto.reduce((t, s) => t + Number(s.n_assuntos) - Number(s.n_corte), 0),
+      termo: subitens.length - comAssunto.length,
+    }];
+  },
+});
+
+dash.calc('por_bloco', {
+  inputs: ['subitens'],
+  title: 'Questões por bloco do edital',
+  description: 'Soma das questões por bloco (B1…E4), para cada cargo; P1 e P2 entram nos dois.',
+  fn: (subitens) => ['Ciência de Dados', 'Auditoria'].flatMap((cargo) => {
+    const g = d3.rollups(subitens.filter((s) => s.cargo === 'Ambos' || s.cargo === cargo),
+      (v) => ({ total: d3.sum(v, (s) => Number(s.total)), n: v.length, prova: v[0].prova }), (s) => s.bloco);
+    return g.map(([bloco, x]) => ({ cargo, bloco, prova: x.prova, total: x.total, subitens: x.n }));
+  }),
+});
+
+dash.calc('concentracao', {
+  inputs: ['subitens'],
+  title: 'Assuntos que fazem 80%',
+  description: 'Para cada cargo, quantos subitens precisam de 1, 2, 3, 4 ou 5+ assuntos para somar 80% das questões.',
+  fn: (subitens) => ['Ciência de Dados', 'Auditoria'].flatMap((cargo) => {
+    const v = subitens.filter((s) => s.busca === 'assunto' && Number(s.total) > 0 && (s.cargo === 'Ambos' || s.cargo === cargo));
+    return ['1', '2', '3', '4', '5+'].map((faixa) => ({
+      cargo, faixa,
+      subitens: v.filter((s) => (Number(s.n_corte) >= 5 ? '5+' : String(s.n_corte)) === faixa).length,
+    }));
+  }),
+});
+
+(() => {
+  const fmt = d3.format(',');
+  const pt = (n) => fmt(n).replace(/,/g, '.');
+  const PROVAS = ['P1', 'P2', 'P3'];
+  const NOME_PROVA = { P1: 'P1 Básicos', P2: 'P2 Complementares', P3: 'P3 Específicos' };
+  const PRIO = { alta: 0, 'média': 1, baixa: 2 };
+  let sortKey = 'total', sortDir = -1;
+  const cargo = () => dash.params().cargo || 'Ciência de Dados';
+  const doCargo = (s) => s.cargo === 'Ambos' || s.cargo === cargo();
+
+  document.querySelectorAll('.rx-seg button').forEach((b) =>
+    b.addEventListener('click', () => dash.setParams({ cargo: b.dataset.c })));
+  document.getElementById('busca').addEventListener('input', () => draw());
+  document.querySelectorAll('#tb-todos th button').forEach((b) => b.addEventListener('click', () => {
+    if (sortKey === b.dataset.sort) sortDir = -sortDir; else { sortKey = b.dataset.sort; sortDir = b.dataset.sort === 'total' || b.dataset.sort === 'n_corte' ? -1 : 1; }
+    draw();
+  }));
+
+  const ok = (id) => dash.data(id).status === 'ok';
+  const fail = (el) => { el.replaceChildren(); const d = document.createElement('div'); d.className = 'rx-fail'; d.textContent = 'Failed to load'; el.append(d); };
+  const unskel = (sel) => document.querySelectorAll(sel).forEach((e) => e.classList.remove('dash-skeleton'));
+
+  function tip(box) {
+    let t = box.querySelector('.rx-tip');
+    if (!t) { t = document.createElement('div'); t.className = 'rx-tip'; t.hidden = true; box.append(t); }
+    return t;
+  }
+  function showTip(box, t, ev, lines) {
+    t.replaceChildren(...lines.map(([cls, txt]) => { const d = document.createElement('div'); if (cls) d.className = cls; d.textContent = txt; return d; }));
+    t.hidden = false;
+    const r = box.getBoundingClientRect();
+    let x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
+    x = Math.min(x, box.clientWidth - t.offsetWidth - 4);
+    t.style.left = Math.max(0, x) + 'px'; t.style.top = y + 'px';
+  }
+
+  function hbars(box, rows, { label, value, color, tipLines, minLabel = 40 }) {
+    const W = Math.max(280, box.clientWidth), bh = 22, gap = 6;
+    const H = rows.length * (bh + gap) + 24;
+    box.replaceChildren();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    const probe = svg.append('text').attr('font-size', 12);
+    const lw = d3.max(rows, (r) => { probe.text(label(r)); return probe.node().getComputedTextLength(); }) || minLabel;
+    const vw = d3.max(rows, (r) => { probe.text(pt(value(r))); return probe.node().getComputedTextLength(); }) || 20;
+    probe.remove();
+    const x0 = Math.ceil(lw) + 10, x1 = W - Math.ceil(vw) - 10;
+    const x = d3.scaleLinear([0, d3.max(rows, value) || 1], [x0, x1]);
+    const g = svg.append('g').attr('font-size', 12);
+    const row = g.selectAll('g').data(rows).join('g').attr('transform', (_, i) => `translate(0,${i * (bh + gap)})`);
+    row.append('text').attr('x', x0 - 8).attr('y', bh / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').text(label);
+    row.append('rect').attr('x', x0).attr('y', 3).attr('height', bh - 6).attr('rx', 4)
+      .attr('width', (r) => Math.max(value(r) > 0 ? 2 : 0, x(value(r)) - x0)).attr('fill', color);
+    row.append('text').attr('x', (r) => x(value(r)) + 6).attr('y', bh / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg-muted)').text((r) => pt(value(r)));
+    row.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', bh + gap).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => showTip(box, tip(box), ev, tipLines(r)))
+      .on('mouseleave', () => { tip(box).hidden = true; });
+    svg.append('line').attr('x1', x0).attr('x2', x0).attr('y1', 0).attr('y2', rows.length * (bh + gap)).attr('stroke', 'var(--cds-chart-axis)');
+  }
+
+  function cellBar(td, v, max, hi) {
+    const w = document.createElement('div'); w.className = 'cell-bar' + (hi ? ' hi' : '');
+    const s = document.createElement('span'); s.textContent = pt(v);
+    const i = document.createElement('i'); i.style.width = Math.max(v > 0 ? 2 : 0, Math.round(60 * v / (max || 1))) + 'px';
+    w.append(s, i); td.append(w);
+  }
+  function td(tr, text, cls) { const c = document.createElement('td'); if (cls) c.className = cls; if (text != null) c.textContent = text; tr.append(c); return c; }
+
+  function draw() {
+    const c = cargo();
+    document.querySelectorAll('.rx-seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.c === c)));
+    const accent = dash.colors[0];
+    document.querySelector('.rx').style.setProperty('--rx-accent', accent);
+    const provaCor = { P1: dash.colors[1], P2: dash.colors[2], P3: dash.colors[0] };
+
+    // resumo
+    const res = dash.data('resumo');
+    const lede = document.getElementById('lede');
+    if (res.status === 'ok' && res.data.length) {
+      const r = res.data[0];
+      unskel('[data-source="resumo"]');
+      document.querySelectorAll('.rx-kpi .v').forEach((e) => { e.textContent = pt(r[e.dataset.field]); });
+      lede.textContent = `Contagem de ${pt(r.assuntos)} assuntos lida no Qconcursos em 13/10/2026. Em ${pt(r.cortados)} dos ${pt(r.com_assunto)} subitens com assunto, poucos assuntos concentram 80% das questões, e o link padrão passou a abrir só esses.`;
+    } else if (res.status === 'error') { unskel('[data-source="resumo"]'); lede.textContent = ''; }
+
+    // blocos
+    const leg = document.getElementById('leg-prova');
+    leg.replaceChildren(...PROVAS.map((p) => { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = provaCor[p]; s.append(i, NOME_PROVA[p]); return s; }));
+    const bBox = document.getElementById('ch-blocos');
+    const pb = dash.data('por_bloco');
+    if (pb.status === 'ok') {
+      const rows = pb.data.filter((r) => r.cargo === c).sort((a, b) => d3.ascending(a.bloco[0], b.bloco[0]) || d3.descending(a.total, b.total));
+      hbars(bBox, rows, {
+        label: (r) => r.bloco, value: (r) => r.total, color: (r) => provaCor[r.prova],
+        tipLines: (r) => [['k', `${r.bloco} · ${NOME_PROVA[r.prova]}`], [null, `${pt(r.total)} questões em ${r.subitens} subitens`]],
+      });
+    } else if (pb.status === 'error') fail(bBox); else bBox.replaceChildren();
+
+    // concentração
+    const cBox = document.getElementById('ch-conc');
+    const cc = dash.data('concentracao');
+    if (cc.status === 'ok') {
+      const rows = cc.data.filter((r) => r.cargo === c);
+      const tot = d3.sum(rows, (r) => r.subitens);
+      hbars(cBox, rows, {
+        label: (r) => r.faixa === '1' ? '1 assunto' : `${r.faixa} assuntos`, value: (r) => r.subitens,
+        color: (r) => (r.faixa === '5+' ? 'var(--cds-chart-muted)' : accent),
+        tipLines: (r) => [['k', r.faixa === '1' ? '1 assunto faz 80%' : `${r.faixa} assuntos fazem 80%`], [null, `${r.subitens} subitens (${d3.format('.0%')(r.subitens / (tot || 1))})`]],
+      });
+    } else if (cc.status === 'error') fail(cBox); else cBox.replaceChildren();
+
+    const sd = dash.data('subitens');
+    const ad = dash.data('assuntos');
+
+    // alta com pouca questão
+    const tbA = document.querySelector('#tb-alta tbody');
+    tbA.replaceChildren();
+    if (sd.status === 'ok') {
+      const rows = sd.data.filter((s) => doCargo(s) && s.prio === 'alta' && Number(s.total) < 50).sort((a, b) => Number(a.total) - Number(b.total));
+      for (const s of rows) {
+        const tr = document.createElement('tr');
+        td(tr, s.chave, 'c'); td(tr, s.texto, 't');
+        td(tr, s.busca === 'termo' ? 'por termo' : pt(Number(s.total)), 'n');
+        td(tr, s.top_assunto || '');
+        tbA.append(tr);
+      }
+    }
+
+    // top assuntos
+    const tbT = document.querySelector('#tb-top tbody');
+    tbT.replaceChildren();
+    if (ad.status === 'ok') {
+      const rows = [...ad.data].sort((a, b) => Number(b.qtd) - Number(a.qtd)).slice(0, 20);
+      const max = d3.max(rows, (a) => Number(a.qtd));
+      for (const a of rows) {
+        const tr = document.createElement('tr'); tr.dataset.key = a.subject_id;
+        td(tr, a.nome, 't'); td(tr, a.disciplina); cellBar(td(tr, null, 'n'), Number(a.qtd), max, false); td(tr, a.n_subitens, 'n');
+        tbT.append(tr);
+      }
+      // zeros
+      const tbZ = document.querySelector('#tb-zero tbody');
+      tbZ.replaceChildren();
+      for (const a of ad.data.filter((x) => Number(x.qtd) === 0).sort((p, q) => d3.ascending(p.disciplina, q.disciplina))) {
+        const tr = document.createElement('tr'); tr.dataset.key = a.subject_id;
+        td(tr, a.nome, 't'); td(tr, a.disciplina); td(tr, a.subitens);
+        tbZ.append(tr);
+      }
+    }
+
+    // todos
+    const tbS = document.querySelector('#tb-todos tbody');
+    tbS.replaceChildren();
+    if (sd.status === 'ok') {
+      const q = document.getElementById('busca').value.trim().toLowerCase();
+      let rows = sd.data.filter(doCargo);
+      if (q) rows = rows.filter((s) => (s.chave + ' ' + s.texto + ' ' + s.top_assunto).toLowerCase().includes(q));
+      const val = (s) => sortKey === 'prio' ? PRIO[s.prio] : sortKey === 'chave' ? s.chave : Number(s[sortKey]);
+      rows.sort((a, b) => sortDir * (val(a) < val(b) ? -1 : val(a) > val(b) ? 1 : 0));
+      document.querySelectorAll('#tb-todos th').forEach((th) => {
+        const b = th.querySelector('button');
+        if (b) th.setAttribute('aria-sort', b.dataset.sort === sortKey ? (sortDir > 0 ? 'ascending' : 'descending') : 'none');
+      });
+      const max = d3.max(rows, (s) => Number(s.total));
+      for (const s of rows) {
+        const tr = document.createElement('tr');
+        td(tr, s.chave, 'c');
+        const p = td(tr, null); const pill = document.createElement('span'); pill.className = 'rx-pill ' + (s.prio === 'alta' ? 'alta' : ''); pill.textContent = s.prio; p.append(pill);
+        td(tr, s.texto, 't');
+        if (s.busca === 'termo') td(tr, 'por termo', 'n'); else cellBar(td(tr, null, 'n'), Number(s.total), max, s.prio === 'alta');
+        td(tr, s.busca === 'termo' ? '' : `${s.n_corte} de ${s.n_assuntos}`, 'n');
+        td(tr, s.top_assunto ? `${s.top_assunto} (${pt(Number(s.top_qtd))})` : '');
+        tbS.append(tr);
+      }
+    }
+  }
+
+  dash.onData(draw);
+  const named = document.getElementById(location.hash.slice(1));
+  if (named) { named.scrollIntoView(); dash.setLink(named.id); }
+})();
+</script>
+</div>
+</body>
+</html>
