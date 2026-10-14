@@ -7,7 +7,12 @@ guarda o progresso de quem entra com um nome, para seguir de um aparelho para ou
 ## O que tem
 
 - **Feed de estudo** (`/`) — stories por matéria no topo e posts em rolagem infinita:
-  questões Certo/Errado, resumos, flashcards e lei seca, sem repetir o que já apareceu.
+  questões Certo/Errado, resumos, flashcards e lei seca, sem repetir o que já apareceu. Como
+  no Instagram, puxar a tela para baixo no topo (ou tocar na aba Feed já no topo) atualiza: a
+  ordem é sorteada de novo e o filtro recomeça. Recarregar a página faz o mesmo; fora disso a
+  ordem fica (voltar a um filtro e voltar do popup de login não reembaralham). Intercala
+  questão 3 : lei 2 : resumo 1 : flashcard 2 — ver [src/lib/feed/rodada.ts](src/lib/feed/rodada.ts)
+  e [src/lib/feed/ordem.ts](src/lib/feed/ordem.ts).
 - **Painel** (`/painel`) — ferramentas, progresso, missão de hoje e foco de estudo.
 - **Missões** — plano de 61 dias até a prova, o mesmo da página das Missões; o painel e o
   feed seguem esse plano.

@@ -9,6 +9,13 @@
 
 	let { atual }: { /** Aba da página aberta. */ atual: Aba } = $props();
 
+	/** Feed tocado no próprio feed sem filtro: o feed sobe ao topo ou atualiza (evento `feed:aba`). */
+	function tocar(e: MouseEvent, id: Aba) {
+		if (id !== 'feed' || atual !== 'feed' || location.pathname !== '/' || location.search) return;
+		e.preventDefault();
+		window.dispatchEvent(new Event('feed:aba'));
+	}
+
 	const ABAS: { id: Aba; href: string; rotulo: string; icone: NomeIcone }[] = [
 		{ id: 'feed', href: '/', rotulo: 'Feed', icone: 'casa' },
 		{ id: 'salvos', href: '/salvos', rotulo: 'Salvos', icone: 'marcador' },
@@ -20,7 +27,7 @@
 	<ul>
 		{#each ABAS as aba (aba.id)}
 			<li>
-				<a href={aba.href} class="aba" aria-current={aba.id === atual ? 'page' : undefined}>
+				<a href={aba.href} class="aba" aria-current={aba.id === atual ? 'page' : undefined} onclick={(e) => tocar(e, aba.id)}>
 					<Icone nome={aba.id === atual && aba.icone === 'marcador' ? 'marcador-cheio' : aba.icone} />
 					<span>{aba.rotulo}</span>
 				</a>

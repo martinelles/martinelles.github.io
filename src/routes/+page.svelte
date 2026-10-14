@@ -11,11 +11,12 @@
 
 <script lang="ts">
 	// Feed de estudo (FR-002): stories no topo, posts em rolagem infinita, fim sem repetição.
-	import { getContext } from 'svelte';
+	import { getContext, tick } from 'svelte';
 	import { page } from '$app/state';
 	import BarraStories from '$lib/componentes/feed/BarraStories.svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
 	import FimDoFeed from '$lib/componentes/feed/FimDoFeed.svelte';
+	import PuxarParaAtualizar from '$lib/componentes/feed/PuxarParaAtualizar.svelte';
 	import Post from '$lib/componentes/feed/Post.svelte';
 	import ChamadaMissoes from '$lib/componentes/missoes/ChamadaMissoes.svelte';
 	import { usarPlanoMissoes } from '$lib/missoes/estado.svelte';
@@ -26,8 +27,8 @@
 	import { foco } from '$lib/feed/foco.svelte';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
 	import { alternarCurtida, alternarSalvo, responderQuestao } from '$lib/feed/pedidoLogin.svelte';
-	import { rodada } from '$lib/feed/rodada';
-	import { chaveFiltro, criarSessao } from '$lib/feed/sessao.svelte';
+	import { novaRodada, rodadaAtual } from '$lib/feed/rodada';
+	import { chaveFiltro, criarSessao, esquecerMostrados } from '$lib/feed/sessao.svelte';
 	import { TIPO_POR_INICIAL, type Filtro, type Indice, type Materia, type Post as PostFeed, type TipoPost as Tipo } from '$lib/feed/tipos';
 
 	const repo = getContext<Repositorio>('repositorio');
@@ -84,8 +85,10 @@
 	});
 	const rotuloQtd = (n: number) => (n === 1 ? '1 questão' : `${n.toLocaleString('pt-BR')} questões`);
 
+	let rodada = $state(rodadaAtual());
+	const chaveSessao = $derived(`${dia}|${rodada}|${chaveFiltro(filtro)}`);
 	const sessao = $derived.by(() => {
-		const chave = `${dia}|${chaveFiltro(filtro)}`;
+		const chave = chaveSessao;
 		let s = sessoes.get(chave);
 		if (!s) {
 			s = criarSessao(repo, filtro, `${dia}|${rodada}`);
@@ -142,6 +145,29 @@
 		return () => obs.disconnect();
 	});
 
+	/**
+	 * Atualizar (puxar no topo ou tocar no Feed já no topo): ordem nova e o filtro começa de novo,
+	 * como numa carga nova do app. Termina quando a primeira página nova chega.
+	 */
+	async function atualizar(): Promise<void> {
+		sessoes.delete(chaveSessao);
+		esquecerMostrados(chaveFiltro(filtro));
+		rodada = novaRodada();
+		window.scrollTo({ top: 0 });
+		await tick();
+		await sessao.proximaPagina();
+	}
+
+	// Tocar na aba Feed estando no feed, como no Instagram: longe do topo, sobe; no topo, atualiza.
+	$effect(() => {
+		const aoTocarNoFeed = () => {
+			if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+			else void atualizar();
+		};
+		window.addEventListener('feed:aba', aoTocarNoFeed);
+		return () => window.removeEventListener('feed:aba', aoTocarNoFeed);
+	});
+
 	function tentarDeNovo(): void {
 		if (falhaBase) carregarBase();
 		sessao.proximaPagina();
@@ -153,6 +179,8 @@
 </svelte:head>
 
 <h1 class="so-leitor">Feed de estudo</h1>
+
+<PuxarParaAtualizar onAtualizar={atualizar} />
 
 <div class="feed">
 	<ChamadaMissoes plano={missoes.plano} cargo={missoes.cargo} hoje={dia} marcas={marcasMissoes.todas()} />
@@ -222,7 +250,7 @@
 			<span class="marca" aria-hidden="true"><Icone nome="check" tamanho={28} /></span>
 			{#if sessao.posts.length > 0}
 				<h2>Você viu tudo deste tópico</h2>
-				<p>As questões de {filtro.topico} voltam amanhã, em outra ordem.</p>
+				<p>Puxe a tela para baixo no topo e as questões de {filtro.topico} voltam em outra ordem.</p>
 			{:else}
 				<h2>Nenhuma questão deste tópico</h2>
 				<p>Não há questão do catálogo ligada a {filtro.topico}.</p>

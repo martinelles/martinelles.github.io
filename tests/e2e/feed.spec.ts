@@ -260,3 +260,60 @@ test('filtro de tipo vindo do painel mostra só aquele tipo e oferece voltar', a
 	await page.getByRole('link', { name: 'Mostrar todos os tipos' }).click();
 	await expect(page).toHaveURL('/');
 });
+
+/** Arrasta o dedo de cima para baixo no topo da página (o Playwright só simula toques simples). */
+async function puxar(page: Page, distancia: number) {
+	await page.evaluate((d) => {
+		const toque = (y: number) => new Touch({ identifier: 1, target: document.body, clientX: 200, clientY: y });
+		const disparar = (tipo: string, y: number) =>
+			window.dispatchEvent(
+				new TouchEvent(tipo, { touches: tipo === 'touchend' ? [] : [toque(y)], changedTouches: [toque(y)], cancelable: true, bubbles: true })
+			);
+		disparar('touchstart', 100);
+		for (let y = 110; y <= 100 + d; y += 10) disparar('touchmove', y);
+		disparar('touchend', 100 + d);
+	}, distancia);
+}
+
+const primeirosIds = async (page: Page) => {
+	await expect.poll(() => itens(page).count()).toBeGreaterThanOrEqual(5);
+	return (await itens(page).evaluateAll((els) => els.slice(0, 5).map((e) => e.getAttribute('data-post-id')))).join(',');
+};
+
+test('puxar para baixo no topo atualiza o feed em outra ordem; puxão curto não', async ({ page }) => {
+	await page.goto('/');
+	const antes = await primeirosIds(page);
+
+	await puxar(page, 60); // amortecido pela metade: 30 px, abaixo do limiar
+	await expect(page.getByRole('status').filter({ hasText: /atualiz/i })).toHaveCount(0);
+	expect(await primeirosIds(page)).toBe(antes);
+
+	// Duas atualizações seguidas com os mesmos 5 primeiros seriam coincidência de 1 em milhões.
+	const ordens = new Set([antes]);
+	for (let i = 0; i < 2; i++) {
+		await puxar(page, 200);
+		await expect(page.getByText('Atualizando o feed…')).toHaveCount(0);
+		ordens.add(await primeirosIds(page));
+	}
+	expect(ordens.size).toBeGreaterThan(1);
+});
+
+test('tocar na aba Feed no feed: longe do topo, sobe; no topo, atualiza', async ({ page }) => {
+	await page.goto('/');
+	const antes = await primeirosIds(page);
+	const feed = page.getByRole('navigation', { name: 'Seções' }).getByRole('link', { name: 'Feed' });
+
+	await page.evaluate(() => window.scrollTo(0, 1500));
+	await feed.click();
+	await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+	expect(await primeirosIds(page)).toBe(antes);
+
+	const ordens = new Set([antes]);
+	for (let i = 0; i < 2; i++) {
+		await feed.click();
+		await expect(page.getByText('Atualizando o feed…')).toHaveCount(0);
+		ordens.add(await primeirosIds(page));
+	}
+	expect(ordens.size).toBeGreaterThan(1);
+	await expect(page).toHaveURL('/');
+});

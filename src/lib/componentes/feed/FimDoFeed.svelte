@@ -15,11 +15,11 @@
 	<span class="marca" aria-hidden="true"><Icone nome="check" tamanho={28} /></span>
 	{#if materia}
 		<h2>Você viu tudo desta matéria</h2>
-		<p>Os posts de {materia.nome} voltam amanhã, em outra ordem.</p>
+		<p>Puxe a tela para baixo no topo e os posts de {materia.nome} voltam em outra ordem.</p>
 		<a class="acao" href="/">Ver tudo</a>
 	{:else}
 		<h2>Você viu tudo por hoje</h2>
-		<p>Amanhã o feed volta com outra ordem.</p>
+		<p>Puxe a tela para baixo no topo e o feed volta em outra ordem.</p>
 	{/if}
 </section>
 

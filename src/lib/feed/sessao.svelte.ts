@@ -20,9 +20,10 @@ export function chaveFiltro(filtro: Filtro): string {
 	return filtro.especialidade ? `${comTopico}|@${filtro.especialidade}` : comTopico;
 }
 
-/** Esquece o que já foi mostrado em todos os filtros (testes; não usado pelas telas). */
-export function esquecerMostrados(): void {
-	mostradosPorFiltro.clear();
+/** Esquece o que já foi mostrado num filtro (`chave`, ao atualizar o feed) ou em todos (testes). */
+export function esquecerMostrados(chave?: string): void {
+	if (chave === undefined) mostradosPorFiltro.clear();
+	else mostradosPorFiltro.delete(chave);
 }
 
 export interface Sessao {
