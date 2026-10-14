@@ -69,15 +69,22 @@ test('logada: marcar no painel aparece na página das Missões, e o contrário t
 	await expect(missao(page)).toContainText(`2 de ${diaCd.blocos.length} blocos feitos`);
 });
 
-test('sem login: a bolha leva a /entrar e, depois de entrar, o bloco tocado está marcado', async ({ page }) => {
+test('sem login: a bolha abre o popup; "Agora não" não marca e, depois de entrar, o bloco tocado está marcado', async ({ page }) => {
 	await simularApi(page);
 	await page.goto('/painel');
+	const popup = page.getByRole('dialog', { name: 'Entre para marcar' });
 	await bolhas(page).nth(2).click();
-	await expect(page).toHaveURL(/\/entrar$/);
+	await expect(popup).toBeVisible();
+	await popup.getByRole('button', { name: 'Agora não' }).click();
+	await expect(popup).toBeHidden();
+	await expect(bolhas(page).nth(2)).not.toBeChecked();
 	expect(await marcas(page)).toEqual({});
 
-	await page.getByLabel('Seu nome').fill('maria');
-	await page.getByRole('button', { name: 'Entrar' }).click();
+	// Marcar exige login: o popup volta no próximo toque.
+	await bolhas(page).nth(2).click();
+	await expect(popup).toBeVisible();
+	await popup.getByLabel('Seu nome').fill('maria');
+	await popup.getByRole('button', { name: 'Entrar' }).click();
 	await expect(page).toHaveURL(/\/painel$/);
 	await expect(bolhas(page).nth(2)).toBeChecked();
 	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~2`]: true });

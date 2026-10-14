@@ -7,7 +7,7 @@ import { montarMissoes, validarMissoes as validarNoImportador } from '../../../s
 import { importar } from '../../../scripts/importar/index.mjs';
 import { chaveBloco, diaCumprido, diaDeHoje, progressoDoDia, resumo } from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
-import { carregarMarcas, guardarPendente, lerMarcas, marcasMissoes, tomarPendente } from '$lib/missoes/marcas.svelte';
+import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
 import type { PlanoMissoes } from '$lib/missoes/tipos';
 import { StorageFalso } from '../feed/apoio';
 
@@ -144,13 +144,5 @@ describe('marcações', () => {
 		marcasMissoes.marcar('cd~2026-10-13~0', false);
 		expect(JSON.parse(arm.getItem('missoes-cgu-2026')!)).toEqual({ 'cd~2026-10-13~1': true });
 		expect(marcasMissoes.feito('cd~2026-10-13~1')).toBe(true);
-	});
-
-	it('pendência de login: guardada uma vez, tomada uma vez', () => {
-		const sessao = new StorageFalso();
-		guardarPendente('cd~2026-10-13~0', true, sessao);
-		expect(sessao.getItem('missoes-cgu-2026:pendente')).toBe('{"k":"cd~2026-10-13~0","on":true}');
-		expect(tomarPendente(sessao)).toEqual({ k: 'cd~2026-10-13~0', on: true });
-		expect(tomarPendente(sessao)).toBeNull();
 	});
 });

@@ -1,6 +1,6 @@
 <script lang="ts">
-	// Popup de login que o feed abre ao responder, curtir ou salvar sem login
-	// (src/lib/feed/pedidoLogin.svelte.ts).
+	// Popup de login que o feed abre ao responder, curtir ou salvar sem login, e o painel ao
+	// marcar missão (src/lib/feed/pedidoLogin.svelte.ts).
 	// `<dialog>` modal: o navegador prende o foco e o Esc vale como "Agora não".
 	import { page } from '$app/state';
 	import FormEntrar from '$lib/componentes/FormEntrar.svelte';
@@ -9,8 +9,14 @@
 	let dialogo: HTMLDialogElement;
 
 	const aberto = $derived(pedidoLogin.pedido !== null);
-	const TITULOS = { responder: 'sua resposta', curtir: 'sua curtida', salvar: 'seus salvos' } as const;
-	const titulo = $derived(`Entre para guardar ${TITULOS[pedidoLogin.pedido?.acao ?? 'responder']}`);
+	const TITULOS = {
+		responder: 'Entre para guardar sua resposta',
+		curtir: 'Entre para guardar sua curtida',
+		salvar: 'Entre para guardar seus salvos',
+		missao: 'Entre para marcar'
+	} as const;
+	const titulo = $derived(TITULOS[pedidoLogin.pedido?.acao ?? 'responder']);
+	const missao = $derived(pedidoLogin.pedido?.acao === 'missao');
 
 	$effect(() => {
 		if (aberto && !dialogo.open) dialogo.showModal();
@@ -25,7 +31,11 @@
 
 <dialog bind:this={dialogo} aria-labelledby="popup-entrar-titulo" oncancel={cancelar}>
 	<h2 id="popup-entrar-titulo">{titulo}</h2>
-	<p>Com login, o que você responde, curte e salva fica na sua conta e aparece em qualquer aparelho.</p>
+	{#if missao}
+		<p>Sem login, as Missões ficam só para leitura. Com login, as marcações aparecem em qualquer aparelho.</p>
+	{:else}
+		<p>Com login, o que você responde, curte e salva fica na sua conta e aparece em qualquer aparelho.</p>
+	{/if}
 	{#if aberto}
 		<FormEntrar destino={page.url.pathname + page.url.search}>
 			{#snippet depois()}

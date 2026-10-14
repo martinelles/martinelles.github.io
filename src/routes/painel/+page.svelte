@@ -3,23 +3,22 @@
 	// Foco de Estudo e Aparência ficam na tela /painel/ajustes, aberta pelo canto do cabeçalho.
 	// Missão de hoje e resumo do plano logo abaixo do cabeçalho: o plano de 61 dias das Missões, com as
 	// mesmas marcações da página (planos/2026-10-14-missao-unica.md).
-	import { getContext, onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { getContext } from 'svelte';
 	import CabecalhoPainel from '$lib/componentes/CabecalhoPainel.svelte';
 	import GradeFerramentas from '$lib/componentes/GradeFerramentas.svelte';
 	import ProgressoEstudo from '$lib/componentes/ProgressoEstudo.svelte';
 	import MissaoDeHoje from '$lib/componentes/missoes/MissaoDeHoje.svelte';
 	import ResumoMissoes from '$lib/componentes/missoes/ResumoMissoes.svelte';
-	import { conta, sincronizacaoInicial } from '$lib/conta/sessao.svelte';
 	import { concursoCgu, dados } from '$lib/dados';
 	import { diasParaProva, hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
 	import { estatisticas } from '$lib/feed/estatisticas';
 	import { foco } from '$lib/feed/foco.svelte';
 	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
+	import { marcarMissao } from '$lib/feed/pedidoLogin.svelte';
 	import type { Indice, Materia } from '$lib/feed/tipos';
 	import { usarPlanoMissoes } from '$lib/missoes/estado.svelte';
-	import { guardarPendente, marcasMissoes, tomarPendente } from '$lib/missoes/marcas.svelte';
+	import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 
 	const repo = getContext<Repositorio>('repositorio');
 	const prazo = diasParaProva(concursoCgu.dataProva, hojeLocal());
@@ -57,24 +56,6 @@
 		return m;
 	});
 
-	/** Marcar exige login, como na página das Missões: sem nome, guarda o toque e vai entrar. */
-	function marcar(chave: string, feito: boolean) {
-		if (!conta.usuario) {
-			guardarPendente(chave, feito);
-			void goto('/entrar');
-			return;
-		}
-		marcasMissoes.marcar(chave, feito);
-	}
-
-	// Voltando do login: a marcação que o pediu entra depois da sincronização, para ser a mais nova.
-	onMount(() => {
-		if (!conta.usuario) return;
-		void sincronizacaoInicial().then(() => {
-			const p = tomarPendente();
-			if (p) marcasMissoes.marcar(p.k, p.on);
-		});
-	});
 </script>
 
 <svelte:head>
@@ -92,7 +73,7 @@
 	{#if erroPlano}
 		<p class="erro-plano" role="alert">{erroPlano}</p>
 	{:else}
-		<MissaoDeHoje {plano} {cargo} {hoje} {marcas} {questoesPorTopico} onmarcar={marcar} />
+		<MissaoDeHoje {plano} {cargo} {hoje} {marcas} {questoesPorTopico} onmarcar={marcarMissao} />
 		{#if plano}
 			<ResumoMissoes {plano} {cargo} {marcas} />
 		{/if}

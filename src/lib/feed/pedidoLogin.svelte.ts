@@ -7,8 +7,12 @@
  * nova, como a marcação das Missões. Curtir e salvar guardam o estado pedido (`on`), não o
  * alternar: o servidor pode já ter o post curtido. "Agora não" faz a interação só no aparelho e
  * não pergunta de novo nesta aba.
+ *
+ * Marcar missão no painel usa o mesmo popup, mas exige login, como na página das Missões: sem
+ * nome, "Agora não" não marca, e o popup volta no próximo toque.
  */
 import { conta } from '$lib/conta/sessao.svelte';
+import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 import { CHAVE_INTERACOES, interacoes } from './interacoes.svelte';
 
 export const CHAVE_PENDENTE = `${CHAVE_INTERACOES}:pendente`;
@@ -16,7 +20,7 @@ export const CHAVE_DISPENSADO = `${CHAVE_INTERACOES}:sem-login`;
 
 export type Pendente =
 	| { acao: 'responder'; id: string; r: string; gabarito: string }
-	| { acao: 'curtir' | 'salvar'; id: string; on: boolean };
+	| { acao: 'curtir' | 'salvar' | 'missao'; id: string; on: boolean };
 
 let pedido = $state<Pendente | null>(null);
 
@@ -36,9 +40,11 @@ function dispensado(sessao: Storage | null): boolean {
 	}
 }
 
-/** Faz a interação; curtir e salvar só alternam se o estado ainda não é o pedido. */
+/** Faz a interação; curtir e salvar só alternam se o estado ainda não é o pedido. Missão só com login. */
 export function aplicar(p: Pendente): void {
-	if (p.acao === 'responder') interacoes.responder(p.id, p.r, p.gabarito);
+	if (p.acao === 'missao') {
+		if (conta.usuario) marcasMissoes.marcar(p.id, p.on);
+	} else if (p.acao === 'responder') interacoes.responder(p.id, p.r, p.gabarito);
 	else if (p.acao === 'curtir') {
 		if (interacoes.curtido(p.id) !== p.on) interacoes.alternarCurtida(p.id);
 	} else if (interacoes.salvo(p.id) !== p.on) interacoes.alternarSalvo(p.id);
@@ -46,7 +52,7 @@ export function aplicar(p: Pendente): void {
 
 /** Logado (ou já disse "Agora não"): faz na hora. Sem login: guarda e abre o popup. */
 function pedir(p: Pendente, sessao: Storage | null): void {
-	if (conta.usuario || dispensado(sessao)) return aplicar(p);
+	if (conta.usuario || (p.acao !== 'missao' && dispensado(sessao))) return aplicar(p);
 	pedido = p;
 	try {
 		sessao?.setItem(CHAVE_PENDENTE, JSON.stringify(p));
@@ -67,6 +73,11 @@ export function alternarSalvo(id: string, sessao = tentarSessao()): void {
 	pedir({ acao: 'salvar', id, on: !interacoes.salvo(id) }, sessao);
 }
 
+/** `chave` é a do bloco (`cd~2026-10-13~0`), a mesma da página das Missões. */
+export function marcarMissao(chave: string, feito: boolean, sessao = tentarSessao()): void {
+	pedir({ acao: 'missao', id: chave, on: feito }, sessao);
+}
+
 /** Tira a interação pendente da sessão (uma vez só). */
 export function tomarPendente(sessao = tentarSessao()): Pendente | null {
 	try {
@@ -77,7 +88,8 @@ export function tomarPendente(sessao = tentarSessao()): Pendente | null {
 			if (typeof id !== 'string') return null;
 			if (acao === 'responder' && typeof r === 'string' && typeof gabarito === 'string')
 				return { acao, id, r, gabarito };
-			if ((acao === 'curtir' || acao === 'salvar') && typeof on === 'boolean') return { acao, id, on };
+			if ((acao === 'curtir' || acao === 'salvar' || acao === 'missao') && typeof on === 'boolean')
+				return { acao, id, on };
 		}
 	} catch {
 		// Corrompida: nada pendente.
@@ -90,11 +102,12 @@ export const pedidoLogin = {
 	get pedido(): Pendente | null {
 		return pedido;
 	},
-	/** Faz só no aparelho e não pergunta mais nesta aba. */
+	/** Faz só no aparelho e não pergunta mais nesta aba. Missão: não marca, e pergunta de novo. */
 	agoraNao(sessao = tentarSessao()): void {
 		const p = pedido;
 		pedido = null;
 		tomarPendente(sessao);
+		if (p?.acao === 'missao') return;
 		try {
 			sessao?.setItem(CHAVE_DISPENSADO, '1');
 		} catch {
