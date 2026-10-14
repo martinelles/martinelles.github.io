@@ -8,6 +8,7 @@
 	import { hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
+	import { responderQuestao } from '$lib/feed/pedidoLogin.svelte';
 	import type { Materia, Post as PostFeed } from '$lib/feed/tipos';
 
 	const repo = getContext<Repositorio>('repositorio');
@@ -36,7 +37,7 @@
 	const materiaDe = (id: string): Materia => porId.get(id) ?? { id, nome: id, abrev: id, ordem: 0, total: 0 };
 
 	function responder(post: PostFeed, r: string): void {
-		if (post.tipo === 'questao') interacoes.responder(post.id, r, post.gabarito);
+		if (post.tipo === 'questao') responderQuestao(post.id, r, post.gabarito);
 	}
 </script>
 

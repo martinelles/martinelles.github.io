@@ -78,6 +78,7 @@ test('estatísticas são calculadas e mudam ao responder e salvar no feed (SC-00
 	await page.goto('/?tipo=questao');
 	const questao = page.locator('[data-post-id]').first();
 	await questao.getByRole('group', { name: 'Responder' }).getByRole('button').first().click();
+	await page.getByRole('dialog').getByRole('button', { name: 'Agora não' }).click();
 	const resultado = questao.getByText(/Você (acertou|errou)/);
 	await expect(resultado).toBeVisible();
 	const acertou = (await resultado.textContent())!.includes('Você acertou');

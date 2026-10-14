@@ -84,11 +84,15 @@ export const conta = {
 		return usuario;
 	},
 	/**
-	 * Confere que a API responde, grava o nome e abre o painel numa carga nova (que traz o
+	 * Confere que a API responde, grava o nome e abre `destino` numa carga nova (que traz o
 	 * progresso do servidor ao abrir). Lança `RangeError` para nome inválido e `ApiIndisponivel`
 	 * quando o endereço não tem a API (GitHub Pages) ou não há rede.
 	 */
-	async entrar(texto: string, f: typeof fetch = (...a) => globalThis.fetch(...a)): Promise<void> {
+	async entrar(
+		texto: string,
+		f: typeof fetch = (...a) => globalThis.fetch(...a),
+		destino = '/painel'
+	): Promise<void> {
 		const nome = normalizarNome(texto);
 		if (!nomeValido(nome)) throw new RangeError('O nome precisa de 3 a 30 letras ou números.');
 		await lerServidor(nome, f);
@@ -97,7 +101,7 @@ export const conta = {
 		local.setItem(CHAVE_USUARIO, nome);
 		// Carimbos de outro usuário não valem para este: o progresso local sobe só se o servidor não tiver nada.
 		local.removeItem(CHAVE_SINC);
-		globalThis.location.assign('/painel');
+		globalThis.location.assign(destino);
 	},
 	/** Sobe o que falta, apaga o nome e o progresso deste aparelho e recarrega. */
 	async sair(): Promise<void> {

@@ -80,6 +80,11 @@ test('2. responder Certo e Errado: retorno, gabarito e persistência (só há it
 	const ce = await acharPost(page, questoes.filter({ has: page.getByRole('button', { name: 'Certo', exact: true }) }));
 	const idCe = await ce.getAttribute('data-post-id');
 	await ce.getByRole('button', { name: 'Certo', exact: true }).click();
+	// Sem login, a primeira resposta pede o login; "Agora não" responde só no aparelho.
+	const popup = page.getByRole('dialog', { name: 'Entre para guardar sua resposta' });
+	await expect(popup).toBeVisible();
+	await popup.getByRole('button', { name: 'Agora não' }).click();
+	await expect(popup).toBeHidden();
 	await expect(ce.getByText(/Você acertou|Você errou — gabarito: (Certo|Errado)$/)).toBeVisible();
 	await expect(ce.getByRole('button', { name: /Certo|Errado/ }).first()).toBeDisabled();
 	await expect(ce.getByRole('article')).toHaveAccessibleName(/Questão · (CGU|TCU) \d{4} · .+ · Q\. \d+/);
@@ -93,6 +98,8 @@ test('2. responder Certo e Errado: retorno, gabarito e persistência (só há it
 	const me = page.locator(`[data-post-id="${idMe}"]`);
 	const errado = me.getByRole('button', { name: /^Errado/ });
 	await errado.click();
+	// Nesta aba ela já disse "Agora não": não pergunta de novo.
+	await expect(popup).toBeHidden();
 	await expect(me.getByText(/Você acertou|Você errou — gabarito: (Certo|Errado)$/)).toBeVisible();
 	await expect(errado).toHaveClass(/correta|errada/);
 	await expect(me.locator('button.correta')).toHaveCount(1);

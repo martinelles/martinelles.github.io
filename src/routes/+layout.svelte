@@ -3,9 +3,11 @@
 	import { setContext, type Snippet } from 'svelte';
 	import { page } from '$app/state';
 	import BarraAbas, { type Aba } from '$lib/componentes/feed/BarraAbas.svelte';
+	import PopupEntrar from '$lib/componentes/feed/PopupEntrar.svelte';
 	import { criarRepositorio } from '$lib/feed/conteudo';
 	import { carregarFoco, garantirFoco } from '$lib/feed/foco.svelte';
 	import { carregarInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
+	import { tomarRespostaPendente } from '$lib/feed/pedidoLogin.svelte';
 	import { carregarTema } from '$lib/tema.svelte';
 	import { armazenamentoAtual, sincronizarAoAbrir } from '$lib/conta/sessao.svelte';
 	import { carregarMarcas } from '$lib/missoes/marcas.svelte';
@@ -25,6 +27,10 @@
 		carregarFoco(arm);
 		carregarTema(arm);
 		carregarMarcas(arm);
+	}).then(() => {
+		// Voltando do popup de login: a resposta que o pediu entra depois da sincronização, para ser a mais nova.
+		const p = tomarRespostaPendente();
+		if (p) interacoes.responder(p.id, p.r, p.gabarito);
 	});
 	// Um repositório por aba: feed, salvos e painel dividem o cache de índice e lotes
 	// (as páginas leem com getContext('repositorio')).
@@ -52,6 +58,8 @@
 <main class="app">{@render children()}</main>
 
 <BarraAbas atual={aba} />
+
+<PopupEntrar />
 
 <style>
 	.app {

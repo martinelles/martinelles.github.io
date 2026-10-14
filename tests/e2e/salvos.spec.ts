@@ -83,6 +83,7 @@ test('questão ainda não respondida só curte pelo coração (R9)', async ({ pa
 	await questao.locator('.enunciado').dblclick();
 	await expect(questao.getByRole('button', { name: 'Curtir' })).toHaveAttribute('aria-pressed', 'false');
 	await questao.getByRole('group', { name: 'Responder' }).getByRole('button').first().click();
+	await page.getByRole('dialog').getByRole('button', { name: 'Agora não' }).click();
 	await questao.locator('.enunciado').dblclick();
 	await expect(questao.getByRole('button', { name: 'Curtir' })).toHaveAttribute('aria-pressed', 'true');
 });

@@ -5,6 +5,7 @@ import { expect, test, type Page } from '@playwright/test';
 
 const CHAVE_USUARIO = 'painel-concurso:usuario:v1';
 const CHAVE_TEMA = 'painel-concurso:tema:v1';
+const CHAVE_INTERACOES = 'painel-concurso:interacoes:v1';
 
 type Gravado = { valor: string; atualizadoEm: number };
 
@@ -112,4 +113,37 @@ test('endereço sem API (GitHub Pages): avisa e não entra', async ({ page }) =>
 	await expect(page.getByRole('alert')).toContainText('Login indisponível neste endereço');
 	await expect(page).toHaveURL(/\/entrar$/);
 	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE_USUARIO)).toBeNull();
+});
+
+test('responder no feed sem login abre o popup; entrando, a resposta volta ao feed e sobe', async ({ page }) => {
+	// O servidor já tem progresso desta conta: sem o popup, a resposta só do aparelho se perderia no login.
+	const antes = JSON.stringify({ respostas: { 'q:antiga': { r: 'C', ok: true, em: '2026-09-29' } }, curtidas: [], salvos: {}, vistos: {} });
+	const dados = await simularApi(page, { maria: { [CHAVE_INTERACOES]: { valor: antes, atualizadoEm: 5 } } });
+	await page.goto('/?tipo=questao');
+	const questao = page.locator('[data-post-id]').first();
+	const id = await questao.getAttribute('data-post-id');
+	await questao.getByRole('group', { name: 'Responder' }).getByRole('button').first().click();
+
+	const popup = page.getByRole('dialog', { name: 'Entre para guardar sua resposta' });
+	await expect(popup).toBeVisible();
+	await popup.getByLabel('Seu nome').fill('maria');
+	await popup.getByRole('button', { name: 'Entrar' }).click();
+
+	await expect(page).toHaveURL(/\/\?tipo=questao$/);
+	await expect(popup).toBeHidden();
+	await expect
+		.poll(() => Object.keys(JSON.parse(dados.maria?.[CHAVE_INTERACOES]?.valor ?? '{}').respostas ?? {}).sort(), {
+			timeout: 15_000
+		})
+		.toEqual([id, 'q:antiga'].sort());
+});
+
+test('logado, responder no feed não abre o popup', async ({ page }) => {
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), CHAVE_USUARIO);
+	await page.goto('/?tipo=questao');
+	const questao = page.locator('[data-post-id]').first();
+	await questao.getByRole('group', { name: 'Responder' }).getByRole('button').first().click();
+	await expect(questao.getByText(/Você (acertou|errou)/)).toBeVisible();
+	await expect(page.getByRole('dialog')).toBeHidden();
 });
