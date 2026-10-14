@@ -117,6 +117,24 @@ test('Prioridades, no celular: tocar num subitem leva à linha da lista, sem dic
 	await contexto.close();
 });
 
+test('Prioridades, no celular: os links de questões de cada subitem ficam à vista, sem rolar de lado', async ({ browser }) => {
+	const contexto = await browser.newContext({ hasTouch: true, isMobile: true, viewport: { width: 360, height: 780 } });
+	const page = await contexto.newPage();
+	await page.goto('/conteudo/artefatos/prioridades.html#cd');
+	const linha = page.locator('#corpo tr:not([hidden])').first();
+	const links = linha.locator('a.qc');
+	expect(await links.count()).toBeGreaterThan(0);
+	for (const a of await links.all()) {
+		await expect(a).toBeVisible();
+		const c = (await a.boundingBox())!;
+		expect(c.x + c.width).toBeLessThanOrEqual(360);
+		expect(c.height).toBeGreaterThanOrEqual(44);
+	}
+	expect(await page.locator('.tabela').evaluate((el) => el.scrollWidth > el.clientWidth + 1)).toBe(false);
+	expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
+	await contexto.close();
+});
+
 test('rota de artefato desconhecida dá 404', async ({ page }) => {
 	await page.goto('/artefato/nao-existe');
 	await expect(page.getByText('Página não encontrada')).toBeVisible();

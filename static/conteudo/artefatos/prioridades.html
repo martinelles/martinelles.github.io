@@ -206,6 +206,22 @@ tr.foco td { background: var(--realce); }
 .qc-aviso { font-size: .82rem; color: var(--tinta-suave); }
 td.qcs { white-space: nowrap; }
 .qc:focus-visible { outline: 3px solid var(--destaque); outline-offset: 2px; }
+/* Celular: a tabela vira um cartão por subitem, e os links de questões ficam à vista, sem rolar de lado. */
+@media (max-width: 680px) {
+  .tabela { overflow-x: visible; }
+  .tabela table, .tabela tbody { display: block; }
+  .tabela thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .tabela tr { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 6px 10px; padding: 12px 4px; border-bottom: 1px solid color-mix(in srgb, var(--linha) 25%, transparent); }
+  .tabela tr[hidden] { display: none; }
+  .tabela td { display: block; padding: 0; border: 0; }
+  tr.foco { background: var(--realce); }
+  td.item { grid-row: 1; grid-column: 1; }
+  td.pg { grid-row: 1; grid-column: 3; }
+  td.pg::before { content: "p. "; }
+  .tabela td:nth-child(3), td.qcs { grid-column: 1 / -1; }
+  td.qcs { white-space: normal; display: flex; flex-wrap: wrap; gap: 0 18px; }
+  td.qcs .qc { display: inline-flex; align-items: center; min-height: 44px; }
+}
 footer { font-size: .82rem; color: var(--tinta-suave); display: grid; gap: 6px; }
 </style>
 
