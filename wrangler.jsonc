@@ -1,10 +1,16 @@
-// Cloudflare Workers: serve o build estático do SvelteKit (adapter-static, pasta build/).
+// Cloudflare Workers: o app sai do build estático do SvelteKit (adapter-static, pasta build/);
+// só /api/* passa pelo Worker (worker/index.ts), que guarda o progresso por nome no D1.
 {
 	"name": "cgu",
+	"main": "worker/index.ts",
 	"compatibility_date": "2026-10-01",
 	"assets": {
 		"directory": "./build",
+		"binding": "ASSETS",
 		// Mesmo papel do fallback index.html do adapter: rota desconhecida cai no app.
-		"not_found_handling": "single-page-application"
-	}
+		"not_found_handling": "single-page-application",
+		"run_worker_first": ["/api/*"]
+	},
+	// Sem database_id: o wrangler cria o banco "cgu" no primeiro deploy e o reaproveita depois.
+	"d1_databases": [{ "binding": "DB", "database_name": "cgu" }]
 }

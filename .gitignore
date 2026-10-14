@@ -36,3 +36,6 @@ playwright-report/
 
 # Fontes de origem baixadas por scripts/fontes/cortar.py (identidade visual, WP01)
 scripts/fontes/origem/
+
+# Estado local do wrangler dev (D1 local, cache)
+.wrangler/
