@@ -55,15 +55,27 @@ export function armazenamentoAtual(): Storage | null {
  * Se algo mudou aqui, chama `recarregar` para os stores lerem de novo. Falha de rede é silenciosa:
  * o app segue com o que tem no aparelho.
  */
-export async function sincronizarAoAbrir(recarregar: () => void): Promise<void> {
+export function sincronizarAoAbrir(recarregar: () => void): Promise<void> {
 	const { sinc } = iniciar();
-	if (!sinc) return;
-	try {
-		await sinc.enviarPendentes();
-		if ((await sinc.trazer()).length) recarregar();
-	} catch {
-		// Sem rede ou API fora do ar: fica para a próxima abertura.
-	}
+	if (!sinc) return (inicial = Promise.resolve());
+	return (inicial = (async () => {
+		try {
+			await sinc.enviarPendentes();
+			if ((await sinc.trazer()).length) recarregar();
+		} catch {
+			// Sem rede ou API fora do ar: fica para a próxima abertura.
+		}
+	})());
+}
+
+let inicial: Promise<void> | null = null;
+
+/**
+ * Termina quando a sincronização da abertura termina (ou na hora, se ela não começou). Quem grava
+ * algo que deve vencer o servidor espera por ela: a marcação das Missões que pediu o login.
+ */
+export function sincronizacaoInicial(): Promise<void> {
+	return inicial ?? Promise.resolve();
 }
 
 export const conta = {

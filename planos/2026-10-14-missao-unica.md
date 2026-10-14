@@ -146,16 +146,16 @@ hoje|Exportar progresso|plano.json` em `tests/e2e`):
 
 ### Critérios de aceite
 #### Automáticos
-- [ ] `npx playwright test`: `tests/e2e/missao.spec.ts` (novo). Cobre:
+- [x] `npx playwright test`: `tests/e2e/missao.spec.ts` (novo). Cobre:
   - o dia de hoje mostra os mesmos blocos e subitens que a página das Missões no mesmo dia;
   - marcar no painel aparece marcado na página, e o contrário também;
   - sem login, a bolha leva a `/entrar` e, depois de entrar, o bloco está marcado;
   - antes de 13/10 e depois de 12/12;
   - Auditoria troca o plano;
   - o atalho do tópico abre o feed filtrado.
-- [ ] `responsivo.spec.ts`: a tela `/painel (missão do dia)` volta a passar nos 3 temas, a 360 e
+- [x] `responsivo.spec.ts`: a tela `/painel (missão do dia)` volta a passar nos 3 temas, a 360 e
       1440 px, com alvos de 44 px.
-- [ ] `npm test`, `npm run check`.
+- [x] `npm test`, `npm run check`.
 #### Manuais
 - [ ] No celular, logada: marcar um bloco no painel e vê-lo marcado nas Missões no PC.
 
@@ -173,8 +173,8 @@ hoje|Exportar progresso|plano.json` em `tests/e2e`):
 
 ### Critérios de aceite
 #### Automáticos
-- [ ] `npm test`, `npm run check` e `npx playwright test` sem falha.
-- [ ] `grep -r "\$lib/plano\|componentes/plano" src` sem resultado.
+- [x] `npm test`, `npm run check` e `npx playwright test` sem falha.
+- [x] `grep -r "\$lib/plano\|componentes/plano" src` sem resultado.
 #### Manuais
 - [ ] Abrir o feed: a chamada mostra o progresso de hoje e leva ao painel.
 
@@ -195,3 +195,31 @@ hoje|Exportar progresso|plano.json` em `tests/e2e`):
 - Vault: `artifacts/missoes/plano.py`, `artifacts/missoes/plano-{cd,aud}.json`.
 - Painel: `src/routes/painel/+page.svelte:49-74`, `src/routes/+page.svelte:20-37`,
   `src/routes/tarefa/[id]/+page.svelte:68`, `src/lib/conta/regras.ts`.
+
+## Nota de execução das fases 2 e 3 (2026-10-14)
+
+- **As fases 2 e 3 foram feitas juntas.** Na Fase 2, o painel perdeu o botão "Iniciar estudos",
+  de que dependiam os testes antigos (`plano.spec.ts` e as telas `/tarefa` do
+  `responsivo.spec.ts`). Com isso a suíte não ficava verde entre as fases, então a remoção da
+  Fase 3 veio logo em seguida, e a verificação manual das duas fica para o fim.
+- **`usarPlanoMissoes()`** (`src/lib/missoes/estado.svelte.ts`) carrega o plano do cargo para o
+  painel e para o feed, no lugar do `usarPlano` antigo.
+- **Componentes novos** em `src/lib/componentes/missoes/`: `MissaoDeHoje`, `ResumoMissoes` e
+  `ChamadaMissoes`. A chamada do feed tem "Abrir", e não "Iniciar", porque não há mais cronômetro.
+  As bolhas são um checkbox transparente de 44 px sobre o círculo, como no seletor de tema, para
+  passar no teste de alvo de toque.
+- **`sincronizacaoInicial()`** foi para `src/lib/conta/sessao.svelte.ts`. O painel aplica a
+  marcação pendente do login depois dela.
+- **Removidos:** `src/routes/tarefa/`, `src/lib/plano/`, `src/lib/componentes/plano/`,
+  `scripts/importar/plano.mjs`, `tests/e2e/plano.spec.ts`, `tests/unit/plano/`,
+  `tests/unit/importar/plano.test.ts` e `fixtures/plano`. Também saíram `Especialidade.plano`
+  (a âncora virou `'cd' | 'aud'`) e a chave `painel-concurso:plano:v1` da conta. O
+  `npm run importar` real já não gera `plano.json` nem `plano-auditoria.json`.
+- **`feed-topico.spec.ts`** agora entra pelo atalho do subitem no painel, no dia em que o
+  subitem está na missão. Saiu o teste de "tarefa de Leitura", que não tem equivalente.
+- **Em `missao.spec.ts`** entraram os dois testes da chamada no feed que estavam no
+  `plano.spec.ts` (acima dos stories em 360 px; cumprida e fora da janela).
+- **Visual:** uma captura do painel em 14/10 mostrou um conflito da classe `.feito` (o resumo do
+  dia contra o bloco marcado), corrigido.
+- Resultado: `npm test` com 280, `npm run check` sem erro, `npx playwright test` com 222, e
+  `grep -r "lib/plano|componentes/plano" src` sem resultado.

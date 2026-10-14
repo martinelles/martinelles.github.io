@@ -18,10 +18,11 @@ export interface Especialidade {
 	nome: string;
 	/** Cargo no edital CGU 1/2026, para o cabeçalho. */
 	cargo: string;
-	/** Arquivo do plano em `/conteudo/` (gerado pelo importador). */
-	plano: string;
-	/** Âncora que as Missões e as Prioridades do edital entendem (`#cd`, `#aud`). */
-	ancora: string;
+	/**
+	 * Âncora que as Missões e as Prioridades do edital entendem (`#cd`, `#aud`); também escolhe o
+	 * plano das Missões do painel (`/conteudo/missoes-<ancora>.json`).
+	 */
+	ancora: 'cd' | 'aud';
 	/** Disciplina de foco ao escolher a especialidade. */
 	disciplinaPadrao: string;
 	/** Matérias do feed que não são cobradas nesta especialidade. */
@@ -33,7 +34,6 @@ export const ESPECIALIDADES: readonly Especialidade[] = [
 		id: 'ciencia-de-dados',
 		nome: 'Ciência de Dados',
 		cargo: 'TI — Ciência de Dados',
-		plano: 'plano.json',
 		ancora: 'cd',
 		disciplinaPadrao: 'ti-ciencia-de-dados',
 		fora: () => false
@@ -42,7 +42,6 @@ export const ESPECIALIDADES: readonly Especialidade[] = [
 		id: 'auditoria',
 		nome: 'Auditoria',
 		cargo: 'Auditoria',
-		plano: 'plano-auditoria.json',
 		ancora: 'aud',
 		disciplinaPadrao: 'fundamentos-de-auditoria-governamental',
 		// A P3 de Auditoria não cobra TI; P1 e P2 são comuns aos cargos.

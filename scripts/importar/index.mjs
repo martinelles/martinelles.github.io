@@ -9,9 +9,8 @@
  * anterior fica intacta. Saída determinística: `geradoEm` é a data do arquivo-fonte mais
  * recente, não a hora da execução.
  *
- * Plano de estudos: `ESTUDO.csv` (+ `feed-conteudo/plano.md`) → `plano.json`, com `geradoEm`
- * = mtime do `ESTUDO.csv`. Essas duas fontes não entram no `geradoEm` do índice, que segue
- * sendo só o do conteúdo do feed. Sem `ESTUDO.csv`: aviso e nenhum `plano.json`.
+ * Plano das Missões: `artifacts/missoes/plano-<cargo>.json` → `missoes-<cargo>.json`
+ * (`missoes.mjs`; desde 2026-10-14 o painel usa esse plano, e o `plano.json` do `ESTUDO.csv` saiu).
  *
  * Artefatos: `artifacts/_publicar/*.html` → `artefatos/*.html` (`artefatos.mjs`). Sem a pasta:
  * aviso e nenhum artefato. Raio-X: `artifacts/raiox/` (página e dados) + `scripts/importar/raiox/`
@@ -28,7 +27,6 @@ import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
 import { importarLei } from './lei-seca.mjs';
 import { LEI_PARA_MATERIA, LEIS_IGNORADAS, ordenarMaterias } from './materias.mjs';
-import { importarPlano, serializarPlano } from './plano.mjs';
 import { importarQuestoes } from './questoes.mjs';
 import { comparar } from './texto.mjs';
 
@@ -52,7 +50,6 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   entradasIndice: number,
  *   topicos: { questoes: number, distintos: number },
  *   convertidas: { questoes: number, itens: number },
- *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null,
  *   artefatos: string[],
  *   missoes: string[]
  * }} Relatorio
@@ -233,38 +230,6 @@ export function importar({ vault, saida }) {
 		conteudo: `[\n${materias.map((m) => JSON.stringify(m)).join(',\n')}\n]\n`
 	});
 
-	// Plano de estudos (lido fora de `ler`: não mexe no geradoEm do índice)
-	/** @type {Relatorio['plano']} */
-	let planoRel = null;
-	const csvEstudo = join(vault, 'ESTUDO.csv');
-	const mdParametros = join(dirFeed, 'plano.md');
-	if (!existsSync(csvEstudo)) {
-		avisos.push('ESTUDO.csv ausente: plano.json não gerado');
-	} else {
-		const r = importarPlano({
-			csvTexto: readFileSync(csvEstudo, 'utf8'),
-			parametros: existsSync(mdParametros) ? readFileSync(mdParametros, 'utf8') : null,
-			mtime: statSync(csvEstudo).mtimeMs
-		});
-		const conteudo = serializarPlano(r.plano);
-		arquivos.push({ arquivo: 'plano.json', conteudo });
-		avisos.push(...r.relatorio.avisos);
-		planoRel = { ...r.relatorio, gzip: tamanhoGzip(conteudo) };
-		// Cargo 1 (Auditoria): P1/P2 do mesmo CSV, P3 dos subitens do guia de Auditoria
-		const jsonP3Aud = join(vault, 'catalogo-questoes', 'qconcursos', 'subitens', 'pE.json');
-		if (!existsSync(jsonP3Aud)) {
-			avisos.push('pE.json ausente: plano-auditoria.json não gerado');
-		} else {
-			const a = importarPlano({
-				csvTexto: readFileSync(csvEstudo, 'utf8'),
-				parametros: existsSync(mdParametros) ? readFileSync(mdParametros, 'utf8') : null,
-				mtime: statSync(csvEstudo).mtimeMs,
-				p3Auditoria: JSON.parse(readFileSync(jsonP3Aud, 'utf8'))
-			});
-			arquivos.push({ arquivo: 'plano-auditoria.json', conteudo: serializarPlano(a.plano) });
-		}
-	}
-
 	// Plano de 61 dias das Missões, o mesmo da página (planos/2026-10-14-missao-unica.md)
 	/** @type {Record<string, string>} */
 	const fontesMissoes = {};
@@ -349,7 +314,6 @@ export function importar({ vault, saida }) {
 		entradasIndice: entradas.length,
 		topicos,
 		convertidas,
-		plano: planoRel,
 		artefatos: artefatos.map((a) => a.arquivo),
 		missoes: missoes.map((a) => a.arquivo)
 	};
@@ -380,8 +344,6 @@ export function formatarRelatorio(r) {
 		'',
 		`Lotes: ${r.lotes.length}; maior: ${maior.arquivo} com ${kb(maior.gzip)} gzip`,
 		'',
-		...formatarPlano(r.plano, kb),
-		'',
 		`Missões (plano de 61 dias): ${r.missoes.length ? r.missoes.join(', ') : 'nenhum'}`,
 		`Artefatos: ${r.artefatos.length ? r.artefatos.join(', ') : 'nenhum'}`,
 		'',
@@ -393,24 +355,6 @@ export function formatarRelatorio(r) {
 		...r.avisos.map((x) => `  ${x}`)
 	];
 	return linhas.join('\n');
-}
-
-/**
- * @param {Relatorio['plano']} p
- * @param {(b: number) => string} kb
- * @returns {string[]}
- */
-function formatarPlano(p, kb) {
-	if (!p) return ['Plano: não gerado (sem ESTUDO.csv)'];
-	const o = p.origemParametros;
-	return [
-		`Plano: ${p.tarefas} tarefas (leitura + questões) de ${p.topicos} tópicos na fila, ${p.linhas} no ESTUDO.csv (plano.json com ${kb(p.gzip)} gzip)`,
-		`  por bloco: básicos ${p.porBloco.basicos}, complementares ${p.porBloco.complementares}, específicos ${p.porBloco.especificos}`,
-		`  excluídas: dominado ${p.excluidas.dominado}, cortado ${p.excluidas.cortado}`,
-		`  sem matéria: ${p.semMateria.length}${p.semMateria.length ? ` (${p.semMateria.join(', ')})` : ''}`,
-		`  parâmetros: ${p.parametros.inicio} a ${p.parametros.fim}, ${p.parametros.horasPorDia} h/dia, leitura ${p.parametros.minutosLeitura} min, questões ${p.parametros.minutosQuestoes} min` +
-			` (inicio ${o.inicio}, fim ${o.fim}, horas_por_dia ${o.horasPorDia}, minutos_leitura ${o.minutosLeitura}, minutos_questoes ${o.minutosQuestoes})`
-	];
 }
 
 /** @param {string[]} args */

@@ -76,7 +76,7 @@ describe('foco', () => {
 	it('especialidade: Auditoria tira as matérias de TI e troca o foco padrão; volta a Ciência de Dados', () => {
 		expect(foco.especialidade.id).toBe('ciencia-de-dados');
 		foco.escolherEspecialidade('auditoria');
-		expect(foco.especialidade.plano).toBe('plano-auditoria.json');
+		expect(foco.especialidade.ancora).toBe('aud');
 		expect(foco.disciplina).toBe('fundamentos-de-auditoria-governamental');
 		foco.escolherDisciplina('ti-seguranca-da-informacao');
 		expect(foco.disciplina).toBe('fundamentos-de-auditoria-governamental');

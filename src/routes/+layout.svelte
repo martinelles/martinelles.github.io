@@ -7,8 +7,8 @@
 	import { carregarFoco, garantirFoco } from '$lib/feed/foco.svelte';
 	import { carregarInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
 	import { carregarTema } from '$lib/tema.svelte';
-	import { recarregarRegistro } from '$lib/componentes/plano/estado.svelte';
 	import { armazenamentoAtual, sincronizarAoAbrir } from '$lib/conta/sessao.svelte';
+	import { carregarMarcas } from '$lib/missoes/marcas.svelte';
 
 	let { children }: { children: Snippet } = $props();
 
@@ -17,13 +17,14 @@
 	carregarInteracoes(armazenamentoAtual());
 	garantirFoco();
 	carregarTema(armazenamentoAtual());
+	carregarMarcas(armazenamentoAtual());
 	// Logado: traz do servidor o que lá é mais novo e, se algo mudou, os stores leem de novo.
 	void sincronizarAoAbrir(() => {
 		const arm = armazenamentoAtual();
 		carregarInteracoes(arm);
 		carregarFoco(arm);
 		carregarTema(arm);
-		recarregarRegistro();
+		carregarMarcas(arm);
 	});
 	// Um repositório por aba: feed, salvos e painel dividem o cache de índice e lotes
 	// (as páginas leem com getContext('repositorio')).
@@ -32,7 +33,7 @@
 	const aba = $derived.by((): Aba => {
 		const caminho = page.url.pathname;
 		if (caminho.startsWith('/salvos')) return 'salvos';
-		if (caminho.startsWith('/painel') || caminho.startsWith('/entrar') || caminho.startsWith('/ferramenta') || caminho.startsWith('/tarefa'))
+		if (caminho.startsWith('/painel') || caminho.startsWith('/entrar') || caminho.startsWith('/ferramenta'))
 			return 'painel';
 		return 'feed';
 	});

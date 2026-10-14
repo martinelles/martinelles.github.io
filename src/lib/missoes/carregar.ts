@@ -1,5 +1,5 @@
 /**
- * Carga de `/conteudo/missoes-<cargo>.json`, no padrão de `$lib/plano/carregar`: uma busca por
+ * Carga de `/conteudo/missoes-<cargo>.json`, no padrão do repositório do feed: uma busca por
  * arquivo (promessa compartilhada), falha sai do cache, e arquivo inválido é buscado uma vez de
  * novo sem cache (o service worker pode estar servindo uma cópia de antes de uma importação).
  */

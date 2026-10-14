@@ -166,7 +166,7 @@ test('especialidade Auditoria: plano, feed sem TI, cargo e links do cabeçalho s
 		especialidade: 'auditoria'
 	});
 
-	const plano = page.waitForRequest('**/conteudo/plano-auditoria.json');
+	const plano = page.waitForRequest('**/conteudo/missoes-aud.json');
 	await page.goto('/painel');
 	await plano;
 	const cabecalho = page.locator('header', {

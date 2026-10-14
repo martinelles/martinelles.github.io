@@ -1,11 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-import plano from '../../static/conteudo/plano.json' with { type: 'json' };
+import missoes from '../../static/conteudo/missoes-cd.json' with { type: 'json' };
 
-// Questões por tarefa (FR-002, FR-003, FR-004; Cenários 1 e 2 e bordas) contra o conteúdo real.
-// A contagem esperada vem sempre do índice; o tópico de cada post, do próprio lote.
-
-const HOJE = '2026-09-30';
+// Questões por tópico (FR-002, FR-003, FR-004; Cenários 1 e 2 e bordas) contra o conteúdo real.
+// A contagem esperada vem sempre do índice; o tópico de cada post, do próprio lote. Desde
+// 2026-10-14 o atalho do tópico fica em cada subitem da "Missão de hoje" do painel, que segue o
+// plano das Missões (planos/2026-10-14-missao-unica.md); antes ficava na tela /tarefa.
 const CHAVE_TEMA = 'painel-concurso:tema:v1';
 const TEMAS = ['aventura', 'kindle', 'kindle-escuro'] as const;
 
@@ -28,24 +28,32 @@ for (const arquivo of Object.values(indice.lotes)) {
 }
 const ligadas = (topico: string) => indice.posts.filter((e) => e.t === 'q' && e.tp === topico).length;
 
+/** Subitens das Missões (Ciência de Dados), com o dia em que aparecem. */
+const subitens = missoes.plan.flatMap((d) =>
+	d.blocos.flatMap((b) => (b.itens ?? []).map((it) => ({ dia: d.data, cid: it.cid, cod: it.cod, texto: it.texto })))
+);
 /**
- * Tarefa de Questões com questões ligadas e uma sem nenhuma. Desde 2026-10-09 o `ESTUDO.csv`
- * segue o Edital CGU 1/2026 e o catálogo ainda aponta para os ids antigos (ESTADO.csv F6-02 do
- * vault): enquanto nenhum tópico tiver questão ligada, os testes que precisam de uma são pulados.
+ * Um subitem com questões ligadas e um sem nenhuma, no plano das Missões. Se nenhum tópico tiver
+ * questão ligada (o catálogo apontando para ids antigos, F6-02 do vault), os testes que precisam
+ * de uma são pulados.
  */
-const comQuestoes = plano.tarefas.find((t) => t.modo === 'questoes' && ligadas(t.topicoId) > 0)!;
-const semQuestoes = plano.tarefas.find((t) => t.modo === 'questoes' && t.materia !== null && ligadas(t.topicoId) === 0)!;
-const N = comQuestoes ? ligadas(comQuestoes.topicoId) : 0;
+const comQuestoes = subitens.find((s) => ligadas(s.cid) > 0)!;
+const semQuestoes = subitens.find((s) => ligadas(s.cid) === 0)!;
+const N = comQuestoes ? ligadas(comQuestoes.cid) : 0;
 const SEM_LIGADAS = 'nenhum tópico do plano tem questão ligada no catálogo (F6-02 do vault)';
 const pularSemLigadas = () => test.skip(!comQuestoes, SEM_LIGADAS);
-const rota = (t: { id: string }) => `/tarefa/${encodeURIComponent(t.id)}`;
+/** Abre o painel no dia em que o subitem está na missão; devolve o item da lista. */
+async function abrirNoPainel(page: Page, s: { dia: string; texto: string }) {
+	await page.clock.setFixedTime(new Date(`${s.dia}T09:00:00-03:00`));
+	await page.goto('/painel');
+	return page.getByRole('region', { name: 'Missão de hoje' }).locator('.itens li', { hasText: s.texto }).first();
+}
 const feedTopico = (topico: string) => `/?topico=${encodeURIComponent(topico)}&tipo=questao`;
 
 const itens = (page: Page) => page.locator('[data-post-id]');
 
-test.beforeEach(async ({ page, context }) => {
+test.beforeEach(async ({ context }) => {
 	await context.clearCookies();
-	await page.clock.setFixedTime(new Date(`${HOJE}T12:00:00-03:00`));
 });
 
 test('as amostras existem no conteúdo real', () => {
@@ -54,30 +62,22 @@ test('as amostras existem no conteúdo real', () => {
 	expect(N).toBeGreaterThan(0);
 });
 
-test('tarefa de Questões com questões ligadas: contagem e 1 toque até o feed do tópico (FR-003, SC-001)', async ({ page }) => {
+test('subitem com questões ligadas: contagem e 1 toque até o feed do tópico (FR-003, SC-001)', async ({ page }) => {
 	pularSemLigadas();
-	await page.goto(rota(comQuestoes));
-	const fazer = page.getByRole('region', { name: 'O que fazer' });
-	await expect(fazer.getByText(`${N} questões deste tópico.`, { exact: true })).toBeVisible();
-	const atalho = fazer.getByRole('link', { name: 'Questões deste tópico' });
-	await expect(atalho).toHaveAttribute('href', feedTopico(comQuestoes.topicoId));
-	// A matéria inteira continua à mão, como saída de segunda ordem.
-	await expect(fazer.getByRole('link', { name: 'Questões desta matéria' })).toHaveAttribute(
-		'href',
-		`/?materia=${comQuestoes.materia}&tipo=questao`
-	);
-	await expect(fazer.getByText('Nenhuma questão do catálogo')).toHaveCount(0);
+	const item = await abrirNoPainel(page, comQuestoes);
+	const atalho = item.getByRole('link', { name: `${N} ${N === 1 ? 'questão' : 'questões'} deste tópico` });
+	await expect(atalho).toHaveAttribute('href', feedTopico(comQuestoes.cid));
 
 	await atalho.click();
-	await expect(page).toHaveURL(feedTopico(comQuestoes.topicoId));
-	await expect(page.getByRole('heading', { level: 2, name: `Questões de ${comQuestoes.topicoId}` })).toBeVisible();
+	await expect(page).toHaveURL(feedTopico(comQuestoes.cid));
+	await expect(page.getByRole('heading', { level: 2, name: `Questões de ${comQuestoes.cid}` })).toBeVisible();
 	await expect(page.getByText(`${N} questões`, { exact: true })).toBeVisible();
-	await expect(page).toHaveTitle(`Questões de ${comQuestoes.topicoId} · Feed · Painel de Concurso`);
+	await expect(page).toHaveTitle(`Questões de ${comQuestoes.cid} · Feed · Painel de Concurso`);
 });
 
 test('feed do tópico: só as questões ligadas, sem repetir, e o fim chega depois de exatamente N (FR-002, FR-004)', async ({ page }) => {
 	pularSemLigadas();
-	await page.goto(feedTopico(comQuestoes.topicoId));
+	await page.goto(feedTopico(comQuestoes.cid));
 	// O resto do feed segue: stories e barra de abas.
 	await expect(page.getByRole('navigation', { name: 'Matérias' })).toBeVisible();
 	await expect(page.getByRole('navigation', { name: 'Seções' })).toBeVisible();
@@ -99,26 +99,13 @@ test('feed do tópico: só as questões ligadas, sem repetir, e o fim chega depo
 	expect(ids).toHaveLength(N);
 	expect(new Set(ids).size).toBe(N);
 	expect(new Set(tipos)).toEqual(new Set(['questao']));
-	for (const id of ids) expect(topicoDoPost.get(id), id).toBe(comQuestoes.topicoId);
+	for (const id of ids) expect(topicoDoPost.get(id), id).toBe(comQuestoes.cid);
 });
 
-test('tarefa de Questões sem questões ligadas: aviso e atalho da matéria (Cenário 2)', async ({ page }) => {
-	await page.goto(rota(semQuestoes));
-	const fazer = page.getByRole('region', { name: 'O que fazer' });
-	await expect(fazer.getByText('Nenhuma questão do catálogo ligada a este tópico ainda.')).toBeVisible();
-	await expect(fazer.getByRole('link', { name: 'Questões deste tópico' })).toHaveCount(0);
-	await expect(fazer.getByRole('link', { name: 'Questões desta matéria' })).toHaveAttribute(
-		'href',
-		`/?materia=${semQuestoes.materia}&tipo=questao`
-	);
-});
-
-test('tarefa de Leitura não ganha contagem nem atalho de tópico', async ({ page }) => {
-	await page.goto(rota({ id: `${semQuestoes.topicoId}:L` }));
-	const fazer = page.getByRole('region', { name: 'O que fazer' });
-	await expect(fazer.getByRole('link', { name: 'Lei seca e resumos desta matéria' })).toBeVisible();
-	await expect(fazer.getByText(/questões? deste tópico|Nenhuma questão do catálogo/)).toHaveCount(0);
-	await expect(fazer.getByRole('link', { name: 'Questões deste tópico' })).toHaveCount(0);
+test('subitem sem questões ligadas: sem atalho de tópico (Cenário 2)', async ({ page }) => {
+	const item = await abrirNoPainel(page, semQuestoes);
+	await expect(item).toBeVisible();
+	await expect(item.getByRole('link', { name: /deste tópico/ })).toHaveCount(0);
 });
 
 test('id de tópico inexistente na URL: fim imediato com link para "Tudo"', async ({ page }) => {
@@ -133,23 +120,22 @@ test('id de tópico inexistente na URL: fim imediato com link para "Tudo"', asyn
 });
 
 for (const tema of TEMAS) {
-	test(`360 px sem rolagem horizontal no tema ${tema}: tarefa e feed do tópico`, async ({ page }) => {
+	test(`360 px sem rolagem horizontal no tema ${tema}: missão e feed do tópico`, async ({ page }) => {
 		await page.addInitScript(([k, t]) => localStorage.setItem(k, JSON.stringify({ tema: t })), [CHAVE_TEMA, tema] as const);
 		await page.setViewportSize({ width: 360, height: 780 });
 		const semRolagem = () =>
 			page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth);
 
-		await page.goto(rota(semQuestoes));
+		await expect(await abrirNoPainel(page, semQuestoes)).toBeVisible();
 		await expect(page.locator('html')).toHaveAttribute('data-tema', tema);
-		await expect(page.getByText('Nenhuma questão do catálogo ligada a este tópico ainda.')).toBeVisible();
 		expect(await semRolagem()).toBe(true);
 
 		if (comQuestoes) {
-			await page.goto(rota(comQuestoes));
-			await expect(page.getByRole('link', { name: 'Questões deste tópico' })).toBeVisible();
+			const item = await abrirNoPainel(page, comQuestoes);
+			await expect(item.getByRole('link', { name: /deste tópico/ })).toBeVisible();
 			expect(await semRolagem()).toBe(true);
 
-			await page.goto(feedTopico(comQuestoes.topicoId));
+			await page.goto(feedTopico(comQuestoes.cid));
 			await expect(itens(page).first()).toBeVisible();
 			await expect(page.getByText(`${N} questões`, { exact: true })).toBeVisible();
 			expect(await semRolagem()).toBe(true);

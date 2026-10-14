@@ -1,22 +1,16 @@
 <script lang="ts">
 	// Painel da CGU (FR-014, FR-015): concurso fixo, foco em texto no cabeçalho, progresso calculado e atalhos.
 	// Foco de Estudo e Aparência ficam na tela /painel/ajustes, aberta pelo canto do cabeçalho.
-	// Plano de estudos (FR-002..FR-007, FR-011): missão de hoje e resumo do plano logo abaixo do cabeçalho.
-	import { getContext } from 'svelte';
+	// Missão de hoje e resumo do plano logo abaixo do cabeçalho: o plano de 61 dias das Missões, com as
+	// mesmas marcações da página (planos/2026-10-14-missao-unica.md).
+	import { getContext, onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import CabecalhoPainel from '$lib/componentes/CabecalhoPainel.svelte';
 	import GradeFerramentas from '$lib/componentes/GradeFerramentas.svelte';
 	import ProgressoEstudo from '$lib/componentes/ProgressoEstudo.svelte';
-	import AvisoRegistro from '$lib/componentes/plano/AvisoRegistro.svelte';
-	import MissaoDoDia from '$lib/componentes/plano/MissaoDoDia.svelte';
-	import ResumoPlano from '$lib/componentes/plano/ResumoPlano.svelte';
-	import {
-		baixarProgresso,
-		garantirRegistro,
-		iniciarEstudos,
-		usarAgora,
-		usarMissao,
-		usarPlano
-	} from '$lib/componentes/plano/estado.svelte';
+	import MissaoDeHoje from '$lib/componentes/missoes/MissaoDeHoje.svelte';
+	import ResumoMissoes from '$lib/componentes/missoes/ResumoMissoes.svelte';
+	import { conta, sincronizacaoInicial } from '$lib/conta/sessao.svelte';
 	import { concursoCgu, dados } from '$lib/dados';
 	import { diasParaProva, hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
@@ -24,6 +18,8 @@
 	import { foco } from '$lib/feed/foco.svelte';
 	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
 	import type { Indice, Materia } from '$lib/feed/tipos';
+	import { usarPlanoMissoes } from '$lib/missoes/estado.svelte';
+	import { guardarPendente, marcasMissoes, tomarPendente } from '$lib/missoes/marcas.svelte';
 
 	const repo = getContext<Repositorio>('repositorio');
 	const prazo = diasParaProva(concursoCgu.dataProva, hojeLocal());
@@ -46,10 +42,39 @@
 
 	const numeros = $derived(estatisticas(dadosInteracoes(), indice ?? undefined));
 
-	garantirRegistro();
-	const fonte = usarPlano();
-	const agora = usarAgora();
-	const missao = usarMissao(fonte, agora);
+	const hoje = hojeLocal();
+	const missoes = usarPlanoMissoes();
+	const cargo = $derived(missoes.cargo);
+	const plano = $derived(missoes.plano);
+	const erroPlano = $derived(missoes.erro);
+	const marcas = $derived(marcasMissoes.todas());
+
+	/** Questões do feed por tópico (`tp`), para o atalho de cada subitem. */
+	const questoesPorTopico = $derived.by(() => {
+		if (!indice) return null;
+		const m = new Map<string, number>();
+		for (const e of indice.posts) if (e.t === 'q' && e.tp) m.set(e.tp, (m.get(e.tp) ?? 0) + 1);
+		return m;
+	});
+
+	/** Marcar exige login, como na página das Missões: sem nome, guarda o toque e vai entrar. */
+	function marcar(chave: string, feito: boolean) {
+		if (!conta.usuario) {
+			guardarPendente(chave, feito);
+			void goto('/entrar');
+			return;
+		}
+		marcasMissoes.marcar(chave, feito);
+	}
+
+	// Voltando do login: a marcação que o pediu entra depois da sincronização, para ser a mais nova.
+	onMount(() => {
+		if (!conta.usuario) return;
+		void sincronizacaoInicial().then(() => {
+			const p = tomarPendente();
+			if (p) marcasMissoes.marcar(p.k, p.on);
+		});
+	});
 </script>
 
 <svelte:head>
@@ -64,20 +89,12 @@
 		cargo={foco.especialidade.cargo}
 		ancora={foco.especialidade.ancora}
 	/>
-	<AvisoRegistro />
-	{#if fonte.erro}
-		<p class="erro-plano" role="alert">{fonte.erro}</p>
+	{#if erroPlano}
+		<p class="erro-plano" role="alert">{erroPlano}</p>
 	{:else}
-		<MissaoDoDia plano={fonte.plano} {missao} oniniciar={(t) => iniciarEstudos(t, agora.hoje)} />
-		{#if fonte.plano}
-			{@const plano = fonte.plano}
-			<ResumoPlano
-				{plano}
-				dados={missao.dados}
-				agora={agora.ms}
-				hoje={agora.hoje}
-				onexportar={() => baixarProgresso(plano, agora.hoje)}
-			/>
+		<MissaoDeHoje {plano} {cargo} {hoje} {marcas} {questoesPorTopico} onmarcar={marcar} />
+		{#if plano}
+			<ResumoMissoes {plano} {cargo} {marcas} />
 		{/if}
 	{/if}
 	<ProgressoEstudo estatisticas={numeros} {materias} />
