@@ -170,6 +170,7 @@ button:focus-visible, input:focus-visible, .cel:focus-visible { outline: 3px sol
   background: var(--papel); color: var(--tinta); border: var(--linha-peso) solid var(--linha); border-radius: 8px;
   box-shadow: var(--sombra); padding: 10px 12px; font-size: .86rem; line-height: 1.4; display: grid; gap: 4px;
 }
+#dica[hidden] { display: none; } /* o display: grid acima ganharia do atributo */
 #dica .cab { font-family: var(--f-dado); font-size: .74rem; color: var(--tinta-suave); }
 
 /* Lista */
@@ -446,6 +447,9 @@ mapa.addEventListener("focusin", e => { const c = e.target.closest(".cel"); if (
 mapa.addEventListener("mouseout", e => { if (e.target.closest(".cel")) dica.hidden = true; });
 mapa.addEventListener("focusout", () => { dica.hidden = true; });
 addEventListener("scroll", () => { dica.hidden = true; }, { passive: true });
+// No toque não há "tirar o mouse de cima": tocar fora e Esc também fecham a dica.
+document.addEventListener("pointerdown", e => { if (!e.target.closest(".cel")) dica.hidden = true; });
+addEventListener("keydown", e => { if (e.key === "Escape") dica.hidden = true; });
 
 document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
   const set = b.dataset.p ? filtroP : filtroB, v = b.dataset.p || b.dataset.b;
@@ -456,6 +460,7 @@ document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () =
 busca.addEventListener("input", aplica);
 mapa.addEventListener("click", e => {
   const c = e.target.closest(".cel"); if (!c) return;
+  dica.hidden = true; // o clique leva à linha da lista, que já tem o texto inteiro
   const row = document.getElementById("row-" + c.dataset.id);
   if (row.hidden) { filtroP.clear(); filtroB.clear(); busca.value = ""; document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", "false")); aplica(); }
   document.querySelectorAll("tr.foco").forEach(r => r.classList.remove("foco"));

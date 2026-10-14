@@ -73,6 +73,50 @@ test('as páginas seguem o tema escolhido no app, não só o do aparelho', async
 	expect(await fundo()).toBe('rgb(15, 21, 32)');
 });
 
+test('Prioridades: a dica de um subitem some ao tirar o mouse, ao tocar fora e com Esc', async ({ page }) => {
+	await page.goto('/conteudo/artefatos/prioridades.html#aud');
+	const dica = page.locator('#dica');
+	const cel = page.locator('.cel').first();
+	// Rolar esconde a dica: antes de cada hover, a célula à vista e a rolagem parada.
+	const sobre = async () => {
+		await cel.scrollIntoViewIfNeeded();
+		await expect.poll(() => page.evaluate(() => new Promise((ok) => {
+			const y = scrollY;
+			setTimeout(() => ok(scrollY === y), 150);
+		}))).toBe(true);
+		// Mouse parado em cima não dispara outro mouseover; e o hover() do Playwright rola a página.
+		await page.mouse.move(2, 2);
+		const c = (await cel.boundingBox())!;
+		await page.mouse.move(c.x + c.width / 2, c.y + c.height / 2);
+	};
+
+	await sobre();
+	await expect(dica).toBeVisible();
+	await page.mouse.move(2, 2);
+	await expect(dica).toBeHidden(); // o display: grid da dica ganhava do atributo hidden
+
+	await sobre();
+	await expect(dica).toBeVisible();
+	await page.keyboard.press('Escape');
+	await expect(dica).toBeHidden();
+
+	await sobre();
+	await expect(dica).toBeVisible();
+	await page.locator('h1').dispatchEvent('pointerdown');
+	await expect(dica).toBeHidden();
+});
+
+test('Prioridades, no celular: tocar num subitem leva à linha da lista, sem dica presa na tela', async ({ browser }) => {
+	const contexto = await browser.newContext({ hasTouch: true, isMobile: true, viewport: { width: 390, height: 844 } });
+	const page = await contexto.newPage();
+	await page.goto('/conteudo/artefatos/prioridades.html#aud');
+	const cel = page.locator('.cel').first();
+	await cel.tap();
+	await expect(page.locator('tr.foco')).toHaveCount(1);
+	await expect(page.locator('#dica')).toBeHidden();
+	await contexto.close();
+});
+
 test('rota de artefato desconhecida dá 404', async ({ page }) => {
 	await page.goto('/artefato/nao-existe');
 	await expect(page.getByText('Página não encontrada')).toBeVisible();
