@@ -229,12 +229,12 @@ teste de origem (`:137`), deixando explícito que a API nunca passa pelo cache.
 ### Critérios de aceite
 
 #### Automáticos
-- [ ] `npx playwright test`: `tests/e2e/conta.spec.ts`, com `/api` simulada por `page.route`
+- [x] `npx playwright test`: `tests/e2e/conta.spec.ts`, com `/api` simulada por `page.route`
       (o `vite preview` não roda Worker), cobre entrar, ver o nome nos Ajustes, sair e voltar ao
       estado vazio. Também cobre o erro "Login indisponível" quando `/api` responde 404.
-- [ ] `/entrar` e os Ajustes com a seção Conta entram nas listas de rotas de
+- [x] `/entrar` e os Ajustes com a seção Conta entram nas listas de rotas de
       `tests/e2e/responsivo.spec.ts` (rolagem horizontal, texto a 200%, alvos de 44 px).
-- [ ] `npm test` e `npm run check` sem erro.
+- [x] `npm test` e `npm run check` sem erro.
 
 #### Manuais
 - [ ] No celular, entrar como `teste-cel`, responder uma questão e salvar um post.
@@ -243,6 +243,17 @@ teste de origem (`:137`), deixando explícito que a API nunca passa pelo cache.
       resposta aparece.
 - [ ] Em `martinelles.github.io/entrar`: aparece "Login indisponível neste endereço" e o
       resto do app funciona.
+
+### Nota de execução (2026-10-13)
+
+- A seção Conta virou o componente `src/lib/componentes/ContaAjustes.svelte`, usado no fim dos Ajustes.
+- `/entrar` acende a aba Painel (`src/routes/+layout.svelte`), igual a `/painel/*`.
+- Os timers do e2e correm de verdade (`setFixedTime` só congela a data), então o teste do envio
+  espera os 2 s reais. A asserção de tema depois do login tem 15 s de folga: na suíte cheia, ela
+  falhou uma vez por tempo (passou nas 10 repetições isoladas e na segunda rodada completa).
+- Resultado: `npx playwright test` com 241 testes passando (os 221 de antes, mais 6 de
+  `conta.spec.ts`, mais 14 da rota `/entrar` em `responsivo.spec.ts`); `npm test` com 326;
+  `npm run check` sem erro.
 
 ---
 

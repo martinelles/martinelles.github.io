@@ -1,5 +1,7 @@
 <script lang="ts">
-	// Ajustes (FR-003 a FR-005): Foco de Estudo e Aparência, fora da primeira página do painel.
+	// Ajustes (FR-003 a FR-005): Foco de Estudo e Aparência, fora da primeira página do painel; e a Conta
+	// (login por nome, planos/2026-10-13-login-por-nome-backend-cloudflare.md).
+	import ContaAjustes from '$lib/componentes/ContaAjustes.svelte';
 	import { getContext } from 'svelte';
 	import FocoEstudo from '$lib/componentes/FocoEstudo.svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
@@ -32,6 +34,7 @@
 		onescolherDisciplina={(id) => foco.escolherDisciplina(id)}
 	/>
 	<SeletorTema />
+	<ContaAjustes />
 </div>
 
 <style>

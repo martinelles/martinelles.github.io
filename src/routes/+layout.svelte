@@ -32,7 +32,7 @@
 	const aba = $derived.by((): Aba => {
 		const caminho = page.url.pathname;
 		if (caminho.startsWith('/salvos')) return 'salvos';
-		if (caminho.startsWith('/painel') || caminho.startsWith('/ferramenta') || caminho.startsWith('/tarefa'))
+		if (caminho.startsWith('/painel') || caminho.startsWith('/entrar') || caminho.startsWith('/ferramenta') || caminho.startsWith('/tarefa'))
 			return 'painel';
 		return 'feed';
 	});

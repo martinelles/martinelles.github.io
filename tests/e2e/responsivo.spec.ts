@@ -80,6 +80,14 @@ const TELAS: { nome: string; abrir: (page: Page) => Promise<void> }[] = [
 		}
 	},
 	{
+		nome: '/entrar',
+		abrir: async (page) => {
+			await page.goto('/entrar');
+			await page.getByLabel('Seu nome').fill('Maria Sílva');
+			await expect(page.getByRole('button', { name: 'Entrar' })).toBeEnabled();
+		}
+	},
+	{
 		nome: '/painel (missão do dia)',
 		abrir: async (page) => {
 			await page.clock.setFixedTime(DIA_DO_PLANO);
