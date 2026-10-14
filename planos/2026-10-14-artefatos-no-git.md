@@ -245,3 +245,15 @@ para leitura**. As bolhas aparecem desabilitadas, o clique é ignorado mesmo que
 marcações que já estavam no navegador continuam aparecendo. Mudança em
 `artifacts/missoes/script.html` (vault), com `_publicar/` regenerado e reimportado. O e2e
 "sem login" agora confere as bolhas desabilitadas, que nada é gravado e que nada vai ao servidor.
+
+## Ajuste: popup de login ao marcar (2026-10-14)
+
+Pedido seu: em vez de bolha desabilitada, tocar numa bolha sem login abre um popup "Entre
+para marcar", com o mesmo login por nome da tela `/entrar` (normalização e regra de
+`src/lib/conta/regras.ts`, repetidas no script da página). Ao entrar, a página guarda o nome,
+apaga os carimbos de outro usuário (igual ao `entrar` do painel), recarrega e aplica a
+marcação que pediu o login, depois de trazer a conta, para que ela seja a mais nova. "Agora
+não" fecha o popup sem marcar nada. Sem API (GitHub Pages ou sem rede), o popup avisa e não
+entra. Mudanças em `artifacts/missoes/{script,template}.html` (vault), com o `--check` passando
+e `_publicar/` regenerado. Os e2e cobrem cancelar, entrar e marcar, e a falta de API.
+`npm test` com 346, `npx playwright test` com 252.

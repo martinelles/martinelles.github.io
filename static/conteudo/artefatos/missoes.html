@@ -105,6 +105,20 @@ footer{font-size:12.5px;color:var(--muted)}
 .sync.ok{color:var(--accent)}
 .sync.err{color:var(--sim)}
 .bubble:disabled{cursor:not-allowed;opacity:.6}
+/* popup de login: aparece ao marcar sem estar logada */
+.login{border:1px solid var(--line);border-radius:12px;padding:0;background:var(--sheet);color:var(--ink);max-width:min(26rem,calc(100vw - 32px));width:100%}
+.login::backdrop{background:rgb(15 21 32 / .45)}
+.login form{display:grid;gap:10px;padding:20px}
+.login h2{font-size:20px}
+.login p{margin:0;color:var(--muted);font-size:13.5px}
+.login label{font-weight:600;font-size:13.5px}
+.login input{font:inherit;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.login input:focus-visible,.login button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.login .erro{color:var(--sim);font-weight:600}
+.login .acoes{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:4px}
+.login button{font:inherit;font-weight:600;min-height:44px;padding:8px 16px;border-radius:999px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink)}
+.login button[type=submit]{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.login button:disabled{opacity:.55;cursor:not-allowed}
 @media (max-width:520px){.ruler button{height:20px}.day{padding:12px}}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 </style>
@@ -299,7 +313,7 @@ function blockHTML(p, b, j) {
   }).join('');
   const id = 'b-' + k.replace(/[^0-9a-z]/gi, '-');
   return `<div class="block t-${b.tipo}${ck ? ' done' : ''}">
-    <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} ${USUARIO ? '' : 'disabled'} aria-label="Marcar ${esc(b.titulo)} como cumprido">
+    <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} aria-label="Marcar ${esc(b.titulo)} como cumprido">
     <div class="bt"><label for="${id}" class="k">${KIND[b.tipo]}</label>
       <div class="t"><span>${esc(b.titulo)}</span>${b.min ? `<span class="min">${b.min} min</span>` : ''}</div>
       ${itens ? `<ul class="items">${itens}</ul>` : ''}
@@ -358,10 +372,75 @@ async function enviar() {
 }
 const SALVO = () => `Salvo na conta ${USUARIO}: aparece em qualquer aparelho.`;
 
+// Login por nome, como na tela /entrar do painel (mesma normalização de src/lib/conta/regras.ts).
+const NOME_RE = /^[a-z0-9][a-z0-9-]{1,28}[a-z0-9]$/;
+const normalizarNome = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30).replace(/-+$/, '');
+const PENDENTE = KEY + ':pendente'; // a marcação que pediu o login, aplicada depois de entrar
+function pedirLogin(k, on) {
+  let dlg = $('login');
+  if (!dlg) {
+    dlg = document.createElement('dialog');
+    dlg.id = 'login'; dlg.className = 'login'; dlg.setAttribute('aria-labelledby', 'login-titulo');
+    dlg.innerHTML = `<form>
+      <h2 id="login-titulo">Entre para marcar</h2>
+      <p>Sem senha: o mesmo nome abre as mesmas marcações em qualquer aparelho.</p>
+      <label for="login-nome">Seu nome</label>
+      <input id="login-nome" name="nome" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="60">
+      <p id="login-ajuda" aria-live="polite"></p>
+      <div class="acoes"><button type="button" id="login-cancelar">Agora não</button><button type="submit" id="login-entrar" disabled>Entrar e marcar</button></div>
+    </form>`;
+    document.body.append(dlg);
+    const campo = $('login-nome'), ajuda = $('login-ajuda'), botao = $('login-entrar');
+    const atualizar = () => {
+      const nome = normalizarNome(campo.value); const ok = NOME_RE.test(nome);
+      ajuda.className = ''; botao.disabled = !ok;
+      ajuda.textContent = !campo.value.trim() ? '' : ok ? `Você vai entrar como ${nome}.` : 'O nome precisa de 3 a 30 letras ou números.';
+    };
+    campo.addEventListener('input', atualizar);
+    $('login-cancelar').onclick = () => dlg.close();
+    dlg.querySelector('form').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      const nome = normalizarNome(campo.value);
+      if (!NOME_RE.test(nome)) return;
+      botao.disabled = true; botao.textContent = 'Entrando…';
+      try {
+        const r = await fetch('/api/progresso/' + encodeURIComponent(nome), { cache: 'no-store' });
+        if (!r.ok || !(r.headers.get('content-type') || '').includes('application/json')) throw new Error('sem API');
+        lsSet('painel-concurso:usuario:v1', nome);
+        // Carimbos de outro usuário não valem para este (igual ao entrar do painel).
+        try { localStorage.removeItem(SINC); } catch (e) {}
+        try { sessionStorage.setItem(PENDENTE, JSON.stringify(dlg.dataset.pendente ? JSON.parse(dlg.dataset.pendente) : null)); } catch (e) {}
+        location.reload();
+      } catch (e) {
+        ajuda.className = 'erro';
+        ajuda.textContent = 'Login indisponível agora. Confira a internet e tente de novo.';
+        botao.disabled = false; botao.textContent = 'Entrar e marcar';
+      }
+    });
+  }
+  dlg.dataset.pendente = JSON.stringify({ k, on });
+  $('login-nome').value = ''; $('login-ajuda').textContent = ''; $('login-entrar').disabled = true;
+  dlg.showModal();
+  $('login-nome').focus();
+}
+// Depois de entrar pelo popup: aplica a marcação que o pediu.
+async function aplicarPendente() {
+  let p = null;
+  try { p = JSON.parse(sessionStorage.getItem(PENDENTE) || 'null'); sessionStorage.removeItem(PENDENTE); } catch (e) {}
+  if (!p || !p.k) return;
+  if (p.on) done[p.k] = true; else delete done[p.k];
+  saveLocal();
+  const anterior = (carimbos()[KEY] || {}).em || 0;
+  carimbar(Math.max(Date.now(), anterior + 1), true);
+  renderStats(); renderRuler(); renderList();
+  if (await enviar()) setSync(SALVO(), 'ok');
+}
+
 $('list').addEventListener('change', async e => {
   const el = e.target; const k = el.dataset.k; if (!k) return;
   const on = el.checked;
-  if (!USUARIO) { el.checked = !on; return; } // sem login, só leitura
+  if (!USUARIO) { el.checked = !on; pedirLogin(k, on); return; } // sem login: pede o nome antes
   el.closest('.block').classList.toggle('done', on);
   if (on) done[k] = true; else delete done[k];
   renderStats(); renderRuler();
@@ -375,13 +454,7 @@ $('list').addEventListener('change', async e => {
 ['cd', 'aud'].forEach(x => $('c-' + x).onclick = () => setCargo(x));
 renderAll(); setView(view);
 if (USUARIO) setSync('Carregando suas marcações…');
-else {
-  // Sem login, as missões ficam só para leitura: marcar exige a conta do painel.
-  setSync('Para marcar missões, ');
-  const entrar = document.createElement('a');
-  entrar.href = '/entrar'; entrar.textContent = 'entre com seu nome no painel';
-  $('sync').append(entrar, '.');
-}
+else setSync('Para marcar missões, toque numa bolha e entre com seu nome.');
 
 // Ao abrir, logada: sobe o que ficou pendente e traz da conta o que lá for mais novo.
 if (USUARIO) (async () => {
@@ -403,6 +476,8 @@ if (USUARIO) (async () => {
   } catch (e) {
     setSync('Sem conexão com a conta: as marcações ficam neste aparelho por enquanto.', 'err');
   }
+  // Depois de trazer a conta: a marcação que pediu o login é a mais nova e sobe por cima.
+  await aplicarPendente();
 })();
 addEventListener('online', () => { if (USUARIO) enviar().then((ok) => ok && setSync(SALVO(), 'ok')); });
 </script>

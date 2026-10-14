@@ -32,9 +32,8 @@ test('os botões do cabeçalho abrem as páginas do painel, e uma liga à outra'
 	await expect(m.getByRole('heading', { level: 1, name: 'Missões até a prova' })).toBeVisible();
 	await expect(m.locator('#link-prioridades')).toHaveAttribute('href', /^\/conteudo\/artefatos\/prioridades\.html#/);
 	expect(await linksClaude(m)).toEqual([]);
-	// Sem login, as missões ficam só para leitura, com o convite para entrar.
-	await expect(m.locator('#sync')).toHaveText('Para marcar missões, entre com seu nome no painel.');
-	await expect(m.locator('#sync a')).toHaveAttribute('href', '/entrar');
+	// Sem login, marcar pede o nome antes.
+	await expect(m.locator('#sync')).toHaveText('Para marcar missões, toque numa bolha e entre com seu nome.');
 });
 
 test('a âncora escolhe o cargo nas Missões', async ({ page }) => {
@@ -139,16 +138,51 @@ test('Missões, logada: a conta mais nova traz as marcações de outro aparelho'
 	expect(api.pedidos.filter((p) => p.startsWith('PUT'))).toEqual([]);
 });
 
-test('Missões, sem login: só leitura, nada é marcado nem enviado', async ({ page }) => {
+test('Missões, sem login: tocar numa bolha abre o login; cancelar não marca nada', async ({ page }) => {
 	const api = await simularApi(page);
 	await page.goto('/conteudo/artefatos/missoes.html#cd');
-	const bolhas = page.locator('.bubble');
-	await expect(bolhas.first()).toBeVisible();
-	expect(await bolhas.evaluateAll((els) => els.every((e) => (e as HTMLInputElement).disabled))).toBe(true);
-	await bolhas.first().click({ force: true });
-	await expect(bolhas.first()).not.toBeChecked();
+	const bolha = page.locator('.bubble').first();
+	await bolha.click();
+	const popup = page.getByRole('dialog', { name: 'Entre para marcar' });
+	await expect(popup).toBeVisible();
+	await expect(bolha).not.toBeChecked();
+	await popup.getByRole('button', { name: 'Agora não' }).click();
+	await expect(popup).toBeHidden();
 	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toBeNull();
 	expect(api.pedidos).toEqual([]);
+});
+
+test('Missões, sem login: entrar pelo popup marca o bloco tocado e sobe para a conta', async ({ page }) => {
+	const api = await simularApi(page);
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	const bolha = page.locator('.bubble').first();
+	const chaveBloco = await bolha.getAttribute('data-k');
+	await bolha.click();
+	const popup = page.getByRole('dialog', { name: 'Entre para marcar' });
+	const entrar = popup.getByRole('button', { name: 'Entrar e marcar' });
+
+	await popup.getByLabel('Seu nome').fill('Zé');
+	await expect(popup.getByText('O nome precisa de 3 a 30 letras ou números.')).toBeVisible();
+	await expect(entrar).toBeDisabled();
+	await popup.getByLabel('Seu nome').fill('Maria Sílva');
+	await expect(popup.getByText('Você vai entrar como maria-silva.')).toBeVisible();
+	await entrar.click();
+
+	await expect(page.locator(`.bubble[data-k="${chaveBloco}"]`)).toBeChecked();
+	await expect(page.locator('#sync')).toHaveText('Salvo na conta maria-silva: aparece em qualquer aparelho.');
+	expect(await page.evaluate(() => localStorage.getItem('painel-concurso:usuario:v1'))).toBe('maria-silva');
+	await expect.poll(() => api.dados[CHAVE]?.valor).toBe(JSON.stringify({ [chaveBloco!]: true }));
+});
+
+test('Missões, sem login e sem API: o popup avisa e não entra', async ({ page }) => {
+	await page.route('**/api/**', (r) => r.fulfill({ status: 404, contentType: 'text/html', body: '<!doctype html>' }));
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await page.locator('.bubble').first().click();
+	const popup = page.getByRole('dialog', { name: 'Entre para marcar' });
+	await popup.getByLabel('Seu nome').fill('maria');
+	await popup.getByRole('button', { name: 'Entrar e marcar' }).click();
+	await expect(popup.getByText('Login indisponível agora. Confira a internet e tente de novo.')).toBeVisible();
+	expect(await page.evaluate(() => localStorage.getItem('painel-concurso:usuario:v1'))).toBeNull();
 });
 
 test('Missões, logada e sem API (GitHub Pages): avisa e guarda no aparelho', async ({ page }) => {
