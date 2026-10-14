@@ -72,9 +72,9 @@ export interface Concurso {
 	dataProva?: string;
 	/** https:// */
 	edital?: string;
-	/** https:// — mapa de prioridades do edital, subitem a subitem */
+	/** https:// ou /conteudo/artefatos/… — mapa de prioridades do edital, subitem a subitem */
 	prioridades?: string;
-	/** https:// — missões diárias de estudo até a prova */
+	/** https:// ou /conteudo/artefatos/… — missões diárias de estudo até a prova */
 	missoes?: string;
 	icone: string;
 	cor: CorConcurso;

@@ -24,6 +24,7 @@ declare module 'node:fs' {
 }
 
 declare module 'node:path' {
+	export function dirname(caminho: string): string;
 	export function join(...partes: string[]): string;
 	export function resolve(...partes: string[]): string;
 	export const sep: string;

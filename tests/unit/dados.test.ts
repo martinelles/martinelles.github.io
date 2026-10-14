@@ -143,6 +143,15 @@ describe('validarDados recusa dado malformado', () => {
 		expect(() => validarDados(d)).not.toThrow();
 	});
 
+	it('prioridades e missões: https:// ou página do painel', () => {
+		falhaCom((d) => (d.concursos[0].prioridades = 'http://exemplo.org'), 'concursos[0].prioridades: deveria começar com https:// ou /conteudo/artefatos/');
+		falhaCom((d) => (d.concursos[0].missoes = '/painel'), 'concursos[0].missoes');
+		const d: Mutavel = base();
+		d.concursos[0].prioridades = 'https://exemplo.org/p';
+		d.concursos[0].missoes = '/conteudo/artefatos/missoes.html';
+		expect(() => validarDados(d)).not.toThrow();
+	});
+
 	it('ícone fora de ICONES', () => {
 		falhaCom((d) => (d.concursos[0].icone = 'foguete'), 'concursos[0].icone: ícone "foguete" não existe');
 		falhaCom((d) => (d.ferramentas[2].icone = 'foguete'), 'ferramentas[2].icone');

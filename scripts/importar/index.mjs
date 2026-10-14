@@ -12,10 +12,14 @@
  * Plano de estudos: `ESTUDO.csv` (+ `feed-conteudo/plano.md`) → `plano.json`, com `geradoEm`
  * = mtime do `ESTUDO.csv`. Essas duas fontes não entram no `geradoEm` do índice, que segue
  * sendo só o do conteúdo do feed. Sem `ESTUDO.csv`: aviso e nenhum `plano.json`.
+ *
+ * Artefatos: `artifacts/_publicar/*.html` → `artefatos/*.html` (`artefatos.mjs`). Sem a pasta:
+ * aviso e nenhum artefato.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import { join, resolve, sep } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ARTEFATOS, montarArtefatos } from './artefatos.mjs';
 import { importarBaralho } from './baralhos.mjs';
 import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
@@ -46,7 +50,8 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   entradasIndice: number,
  *   topicos: { questoes: number, distintos: number },
  *   convertidas: { questoes: number, itens: number },
- *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null
+ *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null,
+ *   artefatos: string[]
  * }} Relatorio
  */
 
@@ -257,13 +262,33 @@ export function importar({ vault, saida }) {
 		}
 	}
 
+	// Artefatos (Prioridades, Missões…), montados no vault por scripts/montar_artifacts.py
+	const dirPublicar = join(vault, 'artifacts', '_publicar');
+	/** @type {Record<string, string>} */
+	const fontesArtefatos = {};
+	if (!existsSync(dirPublicar)) {
+		avisos.push('artifacts/_publicar ausente: nenhum artefato gerado');
+	} else {
+		for (const a of ARTEFATOS) {
+			if (!a.fonte) continue;
+			const f = join(dirPublicar, a.fonte);
+			if (existsSync(f)) fontesArtefatos[a.fonte] = readFileSync(f, 'utf8');
+			else avisos.push(`artifacts/_publicar/${a.fonte} ausente: ${a.arquivo} não gerado`);
+		}
+	}
+	const artefatos = montarArtefatos(fontesArtefatos);
+	arquivos.push(...artefatos);
+
 	// Escrita: temporário ao lado do destino, depois troca
 	const tmp = `${saida}.tmp-${process.pid}`;
 	const velho = `${saida}.old-${process.pid}`;
 	rmSync(tmp, { recursive: true, force: true });
 	mkdirSync(tmp, { recursive: true });
 	try {
-		for (const a of arquivos) writeFileSync(join(tmp, a.arquivo), a.conteudo, 'utf8');
+		for (const a of arquivos) {
+			mkdirSync(dirname(join(tmp, a.arquivo)), { recursive: true });
+			writeFileSync(join(tmp, a.arquivo), a.conteudo, 'utf8');
+		}
 		const existia = existsSync(saida);
 		if (existia) renameSync(saida, velho);
 		renameSync(tmp, saida);
@@ -291,7 +316,8 @@ export function importar({ vault, saida }) {
 		entradasIndice: entradas.length,
 		topicos,
 		convertidas,
-		plano: planoRel
+		plano: planoRel,
+		artefatos: artefatos.map((a) => a.arquivo)
 	};
 }
 
@@ -321,6 +347,8 @@ export function formatarRelatorio(r) {
 		`Lotes: ${r.lotes.length}; maior: ${maior.arquivo} com ${kb(maior.gzip)} gzip`,
 		'',
 		...formatarPlano(r.plano, kb),
+		'',
+		`Artefatos: ${r.artefatos.length ? r.artefatos.join(', ') : 'nenhum'}`,
 		'',
 		`Arquivos recusados: ${r.recusados.length}`,
 		...r.recusados.map((x) => `  ${x.arquivo}: ${x.motivo}`),

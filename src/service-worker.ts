@@ -26,6 +26,7 @@ const CACHE = `painel-concurso-${version}`;
 // responde 404 a ela, e um único 404 faz o addAll falhar e o SW inteiro não instalar.
 const CASCA = '/';
 const PREFIXO_CONTEUDO = '/conteudo/';
+const PREFIXO_ARTEFATOS = '/conteudo/artefatos/';
 const TODOS = [...new Set([...build, ...files])];
 const SHELL = TODOS.filter((f) => !f.startsWith(PREFIXO_CONTEUDO));
 // Índice e matérias primeiro: sem eles o feed não abre.
@@ -137,9 +138,17 @@ sw.addEventListener('fetch', (e) => {
 	if (url.pathname.startsWith('/api/')) return; // progresso do login: sempre a rede, nunca o cache
 
 	if (req.mode === 'navigate') {
-		// SPA: online pega a versão nova da rede; offline toda navegação cai na casca.
+		// SPA: online pega a versão nova da rede; offline toda navegação cai na casca. Exceção: as
+		// páginas de artefato (`/conteudo/artefatos/*.html`) não são o app; offline, a cópia delas
+		// que a fase 2 guardou.
+		const artefato = url.pathname.startsWith(PREFIXO_ARTEFATOS);
 		e.respondWith(
-			fetch(req).catch(async () => (await caches.match(CASCA)) ?? Response.error())
+			fetch(req).catch(
+				async () =>
+					(artefato ? await caches.match(url.pathname) : undefined) ??
+					(await caches.match(CASCA)) ??
+					Response.error()
+			)
 		);
 		// Cada abertura do app completa o conteúdo que faltou, sem atrasar a resposta.
 		e.waitUntil(completarConteudo());

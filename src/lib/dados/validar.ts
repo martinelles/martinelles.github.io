@@ -65,6 +65,13 @@ class Coletor {
 		if (v !== undefined && !v.startsWith('https://')) this.add(`${caminho}.${k}`, 'deveria começar com https://');
 	}
 
+	/** `https://…` ou página de artefato servida pelo próprio painel (`/conteudo/artefatos/…`). */
+	httpsOuArtefato(o: Objeto, k: string, caminho: string) {
+		const v = this.texto(o, k, caminho);
+		if (v !== undefined && !v.startsWith('https://') && !v.startsWith('/conteudo/artefatos/'))
+			this.add(`${caminho}.${k}`, 'deveria começar com https:// ou /conteudo/artefatos/');
+	}
+
 	icone(o: Objeto, caminho: string) {
 		const v = this.texto(o, 'icone', caminho);
 		if (v !== undefined && !(ICONES as readonly string[]).includes(v))
@@ -124,8 +131,8 @@ function validarConcurso(c: Coletor, v: unknown, caminho: string): string | unde
 	const data = c.texto(v, 'dataProva', caminho);
 	if (data !== undefined && !dataReal(data)) c.add(`${caminho}.dataProva`, `"${data}" não é data real AAAA-MM-DD`);
 	c.https(v, 'edital', caminho);
-	c.https(v, 'prioridades', caminho);
-	c.https(v, 'missoes', caminho);
+	c.httpsOuArtefato(v, 'prioridades', caminho);
+	c.httpsOuArtefato(v, 'missoes', caminho);
 	c.icone(v, caminho);
 	c.umDe(v, 'cor', caminho, CORES);
 	const cargos = c.lista(v, 'cargos', `${caminho}.cargos`);
