@@ -1,0 +1,10 @@
+// Cloudflare Workers: serve o build estático do SvelteKit (adapter-static, pasta build/).
+{
+	"name": "cgu",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./build",
+		// Mesmo papel do fallback index.html do adapter: rota desconhecida cai no app.
+		"not_found_handling": "single-page-application"
+	}
+}
