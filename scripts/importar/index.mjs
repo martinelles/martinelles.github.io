@@ -22,6 +22,7 @@ import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTEFATOS, montarArtefatos, montarRaiox } from './artefatos.mjs';
 import { importarBaralho } from './baralhos.mjs';
+import { CARGOS, montarMissoes } from './missoes.mjs';
 import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
@@ -52,7 +53,8 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   topicos: { questoes: number, distintos: number },
  *   convertidas: { questoes: number, itens: number },
  *   plano: (import('./plano.mjs').RelatorioPlano & { gzip: number }) | null,
- *   artefatos: string[]
+ *   artefatos: string[],
+ *   missoes: string[]
  * }} Relatorio
  */
 
@@ -263,6 +265,17 @@ export function importar({ vault, saida }) {
 		}
 	}
 
+	// Plano de 61 dias das Missões, o mesmo da página (planos/2026-10-14-missao-unica.md)
+	/** @type {Record<string, string>} */
+	const fontesMissoes = {};
+	for (const c of CARGOS) {
+		const f = join(vault, 'artifacts', 'missoes', `plano-${c}.json`);
+		if (existsSync(f)) fontesMissoes[c] = readFileSync(f, 'utf8');
+		else avisos.push(`artifacts/missoes/plano-${c}.json ausente: missoes-${c}.json não gerado`);
+	}
+	const missoes = montarMissoes(fontesMissoes);
+	arquivos.push(...missoes);
+
 	// Artefatos (Prioridades, Missões…), montados no vault por scripts/montar_artifacts.py
 	const dirPublicar = join(vault, 'artifacts', '_publicar');
 	/** @type {Record<string, string>} */
@@ -337,7 +350,8 @@ export function importar({ vault, saida }) {
 		topicos,
 		convertidas,
 		plano: planoRel,
-		artefatos: artefatos.map((a) => a.arquivo)
+		artefatos: artefatos.map((a) => a.arquivo),
+		missoes: missoes.map((a) => a.arquivo)
 	};
 }
 
@@ -368,6 +382,7 @@ export function formatarRelatorio(r) {
 		'',
 		...formatarPlano(r.plano, kb),
 		'',
+		`Missões (plano de 61 dias): ${r.missoes.length ? r.missoes.join(', ') : 'nenhum'}`,
 		`Artefatos: ${r.artefatos.length ? r.artefatos.join(', ') : 'nenhum'}`,
 		'',
 		`Arquivos recusados: ${r.recusados.length}`,
