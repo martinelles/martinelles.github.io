@@ -14,6 +14,7 @@
 import { conta } from '$lib/conta/sessao.svelte';
 import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 import { CHAVE_INTERACOES, interacoes } from './interacoes.svelte';
+import { manterRodada } from './rodada';
 
 export const CHAVE_PENDENTE = `${CHAVE_INTERACOES}:pendente`;
 export const CHAVE_DISPENSADO = `${CHAVE_INTERACOES}:sem-login`;
@@ -54,6 +55,8 @@ export function aplicar(p: Pendente): void {
 function pedir(p: Pendente, sessao: Storage | null): void {
 	if (conta.usuario || (p.acao !== 'missao' && dispensado(sessao))) return aplicar(p);
 	pedido = p;
+	// Se ela entrar, a carga nova volta ao feed na mesma ordem, com o post à vista.
+	manterRodada();
 	try {
 		sessao?.setItem(CHAVE_PENDENTE, JSON.stringify(p));
 	} catch {
@@ -107,6 +110,7 @@ export const pedidoLogin = {
 		const p = pedido;
 		pedido = null;
 		tomarPendente(sessao);
+		manterRodada(false);
 		if (p?.acao === 'missao') return;
 		try {
 			sessao?.setItem(CHAVE_DISPENSADO, '1');

@@ -109,16 +109,31 @@ test('2. responder Certo e Errado: retorno, gabarito e persistência (só há it
 	expect(salvo.respostas[idCe!].r).toBe('C');
 	expect(salvo.respostas[idMe!].r).toBe('E');
 
-	// Reabrir: a mesma ordem do dia traz os posts de volta, já respondidos.
+	// Reabrir: a ordem é outra (embaralha a cada carga), mas as respostas continuam guardadas.
 	await page.reload();
-	for (const [id, padrao] of [
-		[idCe, /Você acertou|Você errou — gabarito: (Certo|Errado)$/],
-		[idMe, /Você acertou|Você errou — gabarito: (Certo|Errado)$/]
-	] as const) {
-		const post = await acharPost(page, page.locator(`[data-post-id="${id}"]`));
-		await expect(post.getByText(padrao)).toBeVisible();
-		await expect(post.getByRole('group', { name: 'Responder' }).getByRole('button').first()).toBeDisabled();
+	await expect(itens(page).first()).toBeVisible();
+	const depois = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}'), CHAVE_INTERACOES);
+	expect(Object.keys(depois.respostas).sort()).toEqual([idCe, idMe].sort());
+});
+
+test('cada atualização embaralha o feed de novo; dentro da mesma carga, voltar ao filtro mantém a ordem', async ({ page }) => {
+	const primeiros = async () => {
+		await expect.poll(() => itens(page).count()).toBeGreaterThanOrEqual(5);
+		return (await itens(page).evaluateAll((els) => els.slice(0, 5).map((e) => e.getAttribute('data-post-id')))).join(',');
+	};
+	await page.goto('/');
+	const a = await primeiros();
+	await page.getByRole('navigation', { name: 'Seções' }).getByRole('link', { name: 'Salvos' }).click();
+	await page.getByRole('navigation', { name: 'Seções' }).getByRole('link', { name: 'Feed' }).click();
+	expect(await primeiros()).toBe(a);
+
+	// Duas atualizações seguidas com a mesma ordem dos 5 primeiros seriam coincidência de 1 em milhões.
+	const ordens = new Set([a]);
+	for (let i = 0; i < 2; i++) {
+		await page.reload();
+		ordens.add(await primeiros());
 	}
+	expect(ordens.size).toBeGreaterThan(1);
 });
 
 test('3. story filtra por matéria, "Tudo" desfaz; foco logo depois de "Tudo"', async ({ page }) => {

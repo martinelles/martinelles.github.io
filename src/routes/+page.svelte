@@ -26,6 +26,7 @@
 	import { foco } from '$lib/feed/foco.svelte';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
 	import { alternarCurtida, alternarSalvo, responderQuestao } from '$lib/feed/pedidoLogin.svelte';
+	import { rodada } from '$lib/feed/rodada';
 	import { chaveFiltro, criarSessao } from '$lib/feed/sessao.svelte';
 	import { TIPO_POR_INICIAL, type Filtro, type Indice, type Materia, type Post as PostFeed, type TipoPost as Tipo } from '$lib/feed/tipos';
 
@@ -87,7 +88,7 @@
 		const chave = `${dia}|${chaveFiltro(filtro)}`;
 		let s = sessoes.get(chave);
 		if (!s) {
-			s = criarSessao(repo, filtro, dia);
+			s = criarSessao(repo, filtro, `${dia}|${rodada}`);
 			sessoes.set(chave, s);
 		}
 		return s;

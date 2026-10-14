@@ -1,5 +1,5 @@
 /**
- * Sessão do feed para um filtro (FR-010, research R5): páginas de 10 posts na ordem do dia,
+ * Sessão do feed para um filtro (FR-010, research R5): páginas de 10 posts na ordem da semente,
  * sem nunca repetir um post já mostrado no mesmo filtro enquanto a aba estiver aberta.
  * Trocar de filtro = criar outra sessão; o conjunto de mostrados por filtro vive neste módulo.
  */
@@ -38,7 +38,8 @@ export interface Sessao {
 	proximaPagina(): Promise<void>;
 }
 
-export function criarSessao(repo: Repositorio, filtro: Filtro, dia: string): Sessao {
+/** `semente` decide a ordem: o feed passa o dia e a rodada da carga, que muda a cada atualização. */
+export function criarSessao(repo: Repositorio, filtro: Filtro, semente: string): Sessao {
 	const filtroCopia: Filtro = { ...filtro };
 	const chave = chaveFiltro(filtroCopia);
 	let mostrados = mostradosPorFiltro.get(chave);
@@ -65,7 +66,7 @@ export function criarSessao(repo: Repositorio, filtro: Filtro, dia: string): Ses
 
 	async function carregarPagina(): Promise<void> {
 		try {
-			ordem ??= ordemDoDia(await repo.indice(), filtroCopia, dia);
+			ordem ??= ordemDoDia(await repo.indice(), filtroCopia, semente);
 			avancar(ordem);
 			if (fim) {
 				erro = null;
