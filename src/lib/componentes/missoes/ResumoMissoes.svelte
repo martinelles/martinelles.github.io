@@ -25,7 +25,7 @@
 		<div><dt>blocos feitos</dt><dd>{r.blocosFeitos} <small>de {r.blocos}</small></dd></div>
 		<div><dt>horas feitas</dt><dd>{h(r.minutosFeitos)} <small>de {h(r.minutos)} h</small></dd></div>
 	</dl>
-	<a class="secundario" href="/conteudo/artefatos/missoes.html#{cargo}" target="_blank" rel="noopener">Ver os {r.dias} dias nas Missões</a>
+	<a class="secundario" href="/artefato/missoes#{cargo}">Ver os {r.dias} dias nas Missões</a>
 </section>
 
 <style>

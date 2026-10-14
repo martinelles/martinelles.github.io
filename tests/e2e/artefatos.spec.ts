@@ -15,25 +15,39 @@ const linksClaude = (page: Page) =>
 		[...document.querySelectorAll('a[href]')].map((a) => (a as HTMLAnchorElement).href).filter((h) => h.includes('claude.ai/artifact/'))
 	);
 
-test('os botões do cabeçalho abrem as páginas do painel, e uma liga à outra', async ({ page, context }) => {
+test('os botões do cabeçalho abrem as páginas dentro do app, com as abas, e uma liga à outra', async ({ page }) => {
 	await page.goto('/painel');
 	const prioridades = page.getByRole('link', { name: 'Prioridades do edital' });
-	await expect(prioridades).toHaveAttribute('href', /^\/conteudo\/artefatos\/prioridades\.html#(cd|aud)$/);
-	await expect(page.getByRole('link', { name: 'Missões até a prova' })).toHaveAttribute(
-		'href',
-		/^\/conteudo\/artefatos\/missoes\.html#(cd|aud)$/
-	);
+	await expect(prioridades).toHaveAttribute('href', /^\/artefato\/prioridades#(cd|aud)$/);
+	await expect(prioridades).not.toHaveAttribute('target');
+	await expect(page.getByRole('link', { name: 'Missões até a prova' })).toHaveAttribute('href', /^\/artefato\/missoes#(cd|aud)$/);
 
-	const [p] = await Promise.all([context.waitForEvent('page'), prioridades.click()]);
+	await prioridades.click();
+	await expect(page).toHaveURL(/\/artefato\/prioridades#(cd|aud)$/);
+	const p = page.frameLocator('iframe');
 	await expect(p.getByRole('heading', { level: 1, name: 'Prioridades do edital, subitem a subitem' })).toBeVisible();
-	expect(await linksClaude(p)).toEqual([]);
+	const abas = page.getByRole('navigation', { name: 'Seções' });
+	await expect(abas.getByRole('link', { name: 'Painel' })).toHaveAttribute('aria-current', 'page');
 
-	const [m] = await Promise.all([context.waitForEvent('page'), p.locator('#link-missoes').click()]);
+	// O link para as Missões, que vem do vault com aba nova, troca a rota aqui mesmo.
+	await p.locator('#link-missoes').click();
+	await expect(page).toHaveURL(/\/artefato\/missoes#/);
+	const m = page.frameLocator('iframe');
 	await expect(m.getByRole('heading', { level: 1, name: 'Missões até a prova' })).toBeVisible();
-	await expect(m.locator('#link-prioridades')).toHaveAttribute('href', /^\/conteudo\/artefatos\/prioridades\.html#/);
-	expect(await linksClaude(m)).toEqual([]);
+	expect(await page.frames()[1].evaluate(() =>
+		[...document.querySelectorAll('a[href]')].map((a) => (a as HTMLAnchorElement).href).filter((h) => h.includes('claude.ai/artifact/'))
+	)).toEqual([]);
 	// Sem login, marcar pede o nome antes.
 	await expect(m.locator('#sync')).toHaveText('Para marcar missões, toque numa bolha e entre com seu nome.');
+
+	// E as abas levam de volta ao feed.
+	await abas.getByRole('link', { name: 'Feed' }).click();
+	await expect(page).toHaveURL('/');
+});
+
+test('rota de artefato desconhecida dá 404', async ({ page }) => {
+	await page.goto('/artefato/nao-existe');
+	await expect(page.getByText('Página não encontrada')).toBeVisible();
 });
 
 test('a âncora escolhe o cargo nas Missões', async ({ page }) => {

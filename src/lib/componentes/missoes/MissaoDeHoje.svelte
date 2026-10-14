@@ -39,7 +39,7 @@
 	const progresso = $derived(dia ? progressoDoDia(marcas, cargo, dia) : null);
 	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + b.min, 0) : 0);
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
-	const linkMissoes = $derived(`/conteudo/artefatos/missoes.html#${cargo}`);
+	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
 </script>
 
 <section class="missao" aria-labelledby="titulo-missao">
@@ -112,7 +112,7 @@
 				Missão cumprida
 			</p>
 		{/if}
-		<a class="secundario" href={linkMissoes} target="_blank" rel="noopener">Abrir nas Missões, com os links de questões</a>
+		<a class="secundario" href={linkMissoes}>Abrir nas Missões, com os links de questões</a>
 	{/if}
 </section>
 

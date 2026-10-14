@@ -107,7 +107,7 @@ test('Auditoria troca o plano do dia', async ({ page }) => {
 	const diaAud = missoesAud.plan.find((d) => d.data === HOJE)!;
 	await expect(bolhas(page)).toHaveCount(diaAud.blocos.length);
 	for (const b of diaAud.blocos) for (const it of b.itens ?? []) await expect(missao(page)).toContainText(it.cod);
-	await expect(page.getByRole('link', { name: /Abrir nas Missões/ })).toHaveAttribute('href', '/conteudo/artefatos/missoes.html#aud');
+	await expect(page.getByRole('link', { name: /Abrir nas Missões/ })).toHaveAttribute('href', '/artefato/missoes#aud');
 });
 
 test('o atalho do subitem abre o feed só com as questões do tópico', async ({ page }) => {

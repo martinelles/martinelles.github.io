@@ -39,7 +39,12 @@
 	const aba = $derived.by((): Aba => {
 		const caminho = page.url.pathname;
 		if (caminho.startsWith('/salvos')) return 'salvos';
-		if (caminho.startsWith('/painel') || caminho.startsWith('/entrar') || caminho.startsWith('/ferramenta'))
+		if (
+			caminho.startsWith('/painel') ||
+			caminho.startsWith('/entrar') ||
+			caminho.startsWith('/ferramenta') ||
+			caminho.startsWith('/artefato')
+		)
 			return 'painel';
 		return 'feed';
 	});
@@ -55,7 +60,8 @@
 	</div>
 {/if}
 
-<main class="app">{@render children()}</main>
+<!-- Páginas de artefato ocupam a tela toda acima das abas: o iframe tem a própria coluna. -->
+<main class="app" class:tela-cheia={page.url.pathname.startsWith('/artefato/')}>{@render children()}</main>
 
 <BarraAbas atual={aba} />
 
@@ -69,6 +75,12 @@
 		/* A barra de abas é fixa: o fim da página não pode ficar embaixo dela. */
 		padding-bottom: calc(var(--espaco) + var(--altura-abas) + env(safe-area-inset-bottom));
 		min-height: 100dvh;
+	}
+
+	.app.tela-cheia {
+		max-width: none;
+		padding: 0;
+		min-height: 0;
 	}
 
 	.aviso {

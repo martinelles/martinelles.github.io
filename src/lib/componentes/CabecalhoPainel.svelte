@@ -2,6 +2,7 @@
 	// Cabeçalho do painel: o app atende só à CGU (FR-001, FR-014), então não há "trocar concurso".
 	// No canto, o acesso aos Ajustes (FR-002); abaixo da banca, o foco atual em texto (FR-006).
 	import Icone from './Icone.svelte';
+	import { rotaDoArtefato } from '$lib/artefatos/rotas';
 	import type { Concurso } from '$lib/dados';
 	import { formatarData, type Prazo } from '$lib/datas';
 
@@ -22,7 +23,13 @@
 		ancora?: string;
 	} = $props();
 
-	const comAncora = (url: string) => (ancora ? `${url.split('#')[0]}#${ancora}` : url);
+	/** Com a âncora da especialidade; página do painel abre na rota do app, com a barra de abas. */
+	const comAncora = (url: string) => {
+		const com = ancora ? `${url.split('#')[0]}#${ancora}` : url;
+		return rotaDoArtefato(com) ?? com;
+	};
+	/** Só o que sai do app (claude.ai) abre em aba nova. */
+	const fora = (url: string) => (url.startsWith('https://') ? { target: '_blank', rel: 'noopener' } : {});
 	const vagas = $derived(
 		concurso.vagas === undefined
 			? null
@@ -68,7 +75,7 @@
 		{/if}
 		{#if concurso.prioridades}
 			<li>
-				<a class="edital" href={comAncora(concurso.prioridades)} target="_blank" rel="noopener">
+				<a class="edital" href={comAncora(concurso.prioridades)} {...fora(concurso.prioridades)}>
 					<Icone nome="lista" tamanho={20} />
 					Prioridades do edital
 				</a>
@@ -76,7 +83,7 @@
 		{/if}
 		{#if concurso.missoes}
 			<li>
-				<a class="edital" href={comAncora(concurso.missoes)} target="_blank" rel="noopener">
+				<a class="edital" href={comAncora(concurso.missoes)} {...fora(concurso.missoes)}>
 					<Icone nome="calendario" tamanho={20} />
 					Missões até a prova
 				</a>
