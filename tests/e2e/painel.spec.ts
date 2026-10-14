@@ -25,9 +25,10 @@ test('cabeçalho mostra a CGU, a banca e "Data a definir", sem trocar concurso',
 	await page.goto('/painel');
 	await expect(page).toHaveTitle('Painel · Painel de Concurso');
 	await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
-	await expect(
-		page.getByText('CGU — Auditor Federal de Finanças e Controle · TI — Ciência de Dados', { exact: true })
-	).toBeVisible();
+	await expect(page.getByText('CGU — Auditor Federal de Finanças e Controle', { exact: true })).toBeVisible();
+	const cargos = page.getByRole('group', { name: 'Cargo' });
+	await expect(cargos.getByRole('button', { name: 'TI — Ciência de Dados' })).toHaveAttribute('aria-pressed', 'true');
+	await expect(cargos.getByRole('button', { name: 'Auditoria' })).toHaveAttribute('aria-pressed', 'false');
 	await expect(page.getByText(/banca Cebraspe/)).toBeVisible();
 	await expect(page.getByText('Data a definir')).toBeVisible();
 	await expect(page.getByRole('button', { name: 'Trocar concurso' })).toHaveCount(0);
@@ -156,6 +157,26 @@ test('em 360 px nenhum cartão da grade estoura a coluna', async ({ page }) => {
 	expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
 });
 
+test('o cargo troca direto no cabeçalho do painel, com o plano e os links juntos', async ({ page }) => {
+	await page.goto('/painel');
+	const cargos = page.getByRole('group', { name: 'Cargo' });
+	const plano = page.waitForRequest('**/conteudo/missoes-aud.json');
+	await cargos.getByRole('button', { name: 'Auditoria' }).click();
+	await plano;
+	await expect(cargos.getByRole('button', { name: 'Auditoria' })).toHaveAttribute('aria-pressed', 'true');
+	await expect(cargos.getByRole('button', { name: 'TI — Ciência de Dados' })).toHaveAttribute('aria-pressed', 'false');
+	await expect(page.getByRole('link', { name: 'Missões até a prova' })).toHaveAttribute('href', /#aud$/);
+	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
+		disciplina: 'fundamentos-de-auditoria-governamental',
+		especialidade: 'auditoria'
+	});
+
+	await cargos.getByRole('button', { name: 'TI — Ciência de Dados' }).click();
+	await expect(page.getByRole('link', { name: 'Missões até a prova' })).toHaveAttribute('href', /#cd$/);
+	await page.goto('/painel/ajustes');
+	await expect(page.getByRole('radio', { name: 'Ciência de Dados' })).toBeChecked();
+});
+
 test('especialidade Auditoria: plano, feed sem TI, cargo e links do cabeçalho seguem a escolha', async ({ page }) => {
 	await page.goto('/painel/ajustes');
 	await page.getByRole('radio', { name: 'Auditoria' }).check();
@@ -173,7 +194,7 @@ test('especialidade Auditoria: plano, feed sem TI, cargo e links do cabeçalho s
 	const cabecalho = page.locator('header', {
 		has: page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })
 	});
-	await expect(cabecalho.getByText('Auditoria', { exact: true })).toBeVisible();
+	await expect(cabecalho.getByRole('button', { name: 'Auditoria' })).toHaveAttribute('aria-pressed', 'true');
 	await expect(cabecalho.getByRole('link', { name: /Missões/ })).toHaveAttribute('href', /#aud$/);
 
 	await page.goto('/');

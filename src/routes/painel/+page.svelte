@@ -13,7 +13,7 @@
 	import { diasParaProva, hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
 	import { estatisticas } from '$lib/feed/estatisticas';
-	import { foco } from '$lib/feed/foco.svelte';
+	import { ESPECIALIDADES, foco } from '$lib/feed/foco.svelte';
 	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
 	import { marcarMissao } from '$lib/feed/pedidoLogin.svelte';
 	import type { Indice, Materia } from '$lib/feed/tipos';
@@ -67,7 +67,9 @@
 		concurso={concursoCgu}
 		{prazo}
 		foco={nomeFoco}
-		cargo={foco.especialidade.cargo}
+		especialidades={ESPECIALIDADES}
+		especialidade={foco.especialidade.id}
+		onescolherEspecialidade={(id) => foco.escolherEspecialidade(id)}
 		ancora={foco.especialidade.ancora}
 	/>
 	{#if erroPlano}

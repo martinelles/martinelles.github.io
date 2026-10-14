@@ -1,6 +1,8 @@
 <script lang="ts">
 	// Cabeçalho do painel: o app atende só à CGU (FR-001, FR-014), então não há "trocar concurso".
 	// No canto, o acesso aos Ajustes (FR-002); abaixo da banca, o foco atual em texto (FR-006).
+	// O cargo é um seletor à vista (Ciência de Dados ou Auditoria): escondido nos Ajustes, ninguém
+	// achava a troca.
 	import Icone from './Icone.svelte';
 	import { rotaDoArtefato } from '$lib/artefatos/rotas';
 	import type { Concurso } from '$lib/dados';
@@ -10,15 +12,20 @@
 		concurso,
 		prazo,
 		foco,
-		cargo,
+		especialidades = [],
+		especialidade,
+		onescolherEspecialidade,
 		ancora
 	}: {
 		concurso: Concurso;
 		prazo: Prazo;
 		/** Nome da matéria de foco, já resolvido por quem monta o painel. */
 		foco?: string;
-		/** Cargo da especialidade escolhida em Ajustes. */
-		cargo?: string;
+		/** Cargos que dá para escolher; o rótulo é o cargo do edital. */
+		especialidades?: readonly { id: string; cargo: string }[];
+		/** Id da especialidade escolhida. */
+		especialidade?: string;
+		onescolherEspecialidade?: (id: string) => void;
 		/** Âncora da especialidade nas Prioridades e nas Missões (`cd`, `aud`). */
 		ancora?: string;
 	} = $props();
@@ -45,7 +52,20 @@
 		</a>
 	</div>
 
-	<p class="concurso">{concurso.nome}{#if cargo}{' · '}<span class="cargo">{cargo}</span>{/if}</p>
+	<p class="concurso">{concurso.nome}</p>
+	{#if especialidades.length > 1}
+		<div class="cargos" role="group" aria-label="Cargo">
+			{#each especialidades as e (e.id)}
+				<button
+					type="button"
+					aria-pressed={e.id === especialidade}
+					onclick={() => onescolherEspecialidade?.(e.id)}
+				>
+					{e.cargo}
+				</button>
+			{/each}
+		</div>
+	{/if}
 	<p class="banca">banca {concurso.banca} · {concurso.orgao}</p>
 	{#if foco}<p class="foco">Foco: {foco}</p>{/if}
 
@@ -163,14 +183,54 @@
 	}
 
 	.concurso {
-		margin: 8px 0 2px;
+		margin: 8px 0 6px;
 		font-size: 1.0625rem;
 		font-weight: 700;
 		line-height: 1.25;
 	}
 
-	.cargo {
+	.cargos {
+		display: inline-flex;
+		flex-wrap: wrap;
+		margin: 4px 0 8px;
+		border: var(--linha-peso) solid currentColor;
+		border-radius: calc(var(--raio) / 2);
+		overflow: hidden;
+	}
+
+	.cargos button {
+		min-height: 44px;
+		padding: 6px 12px;
+		border: 0;
+		background: transparent;
+		color: inherit;
+		font: inherit;
 		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.cargos button + button {
+		border-left: var(--linha-peso) solid currentColor;
+	}
+
+	/* O escolhido em cor invertida; no Kindle, na primária. */
+	.cargos button[aria-pressed='true'] {
+		background: var(--cor-primaria-texto);
+		color: var(--cor-primaria);
+	}
+
+	:global([data-tema^='kindle']) .cargos button[aria-pressed='true'] {
+		background: var(--cor-primaria);
+		color: var(--cor-primaria-texto);
+	}
+
+	.cargos button:focus-visible {
+		outline-color: var(--cor-primaria-texto);
+		outline-offset: -4px;
+	}
+
+	:global([data-tema^='kindle']) .cargos button:focus-visible {
+		outline-color: var(--cor-primaria);
 	}
 
 	.banca,
