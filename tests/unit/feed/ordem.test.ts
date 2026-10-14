@@ -53,6 +53,14 @@ describe('ordemDoDia', () => {
 		expect(ordemDoDia(indice, {}, '2026-09-30')).toEqual(ordemDoDia(indice, {}, '2026-09-30'));
 	});
 
+	it('especialidade Auditoria tira as matérias de TI; sem especialidade nada sai', () => {
+		const aud = ordemDoDia(indice, { especialidade: 'auditoria' }, '2026-09-30');
+		expect(aud.length).toBeGreaterThan(0);
+		expect(aud.some((id) => materiaDe.get(id)!.startsWith('ti-'))).toBe(false);
+		expect(aud).toHaveLength(indice.posts.filter((e) => !e.m.startsWith('ti-')).length);
+		expect(ordemDoDia(indice, { especialidade: 'ciencia-de-dados' }, '2026-09-30')).toEqual(ordemDoDia(indice, {}, '2026-09-30'));
+	});
+
 	it('dia diferente ⇒ ordem diferente', () => {
 		expect(ordemDoDia(indice, {}, '2026-10-01')).not.toEqual(ordemDoDia(indice, {}, '2026-09-30'));
 	});

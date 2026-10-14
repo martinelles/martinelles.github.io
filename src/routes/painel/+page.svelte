@@ -57,7 +57,13 @@
 </svelte:head>
 
 <div class="painel">
-	<CabecalhoPainel concurso={concursoCgu} {prazo} foco={nomeFoco} />
+	<CabecalhoPainel
+		concurso={concursoCgu}
+		{prazo}
+		foco={nomeFoco}
+		cargo={foco.especialidade.cargo}
+		ancora={foco.especialidade.ancora}
+	/>
 	<AvisoRegistro />
 	{#if fonte.erro}
 		<p class="erro-plano" role="alert">{fonte.erro}</p>

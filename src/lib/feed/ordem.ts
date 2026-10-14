@@ -3,6 +3,7 @@
  * depois intercalação por tipo na proporção questão 3 : lei 2 : resumo 1 : flashcard 2.
  * Tudo puro: o dia chega por parâmetro.
  */
+import { especialidadePorId } from './foco.svelte';
 import { TIPO_POR_INICIAL, type Filtro, type Indice, type TipoPost } from './tipos';
 
 /** PRNG de 32 bits; devolve números em [0, 1). */
@@ -54,10 +55,12 @@ function semente(dia: string, filtro: Filtro, tipo: TipoPost): string {
 /** Ids do índice que passam no filtro, em ordem do dia. É sempre uma permutação dos ids filtrados. */
 export function ordemDoDia(indice: Pick<Indice, 'posts'>, filtro: Filtro, dia: string): string[] {
 	const filas = new Map<TipoPost, string[]>(PROPORCAO.map(([tipo]) => [tipo, []]));
+	const fora = filtro.especialidade ? especialidadePorId(filtro.especialidade).fora : () => false;
 	for (const e of indice.posts) {
 		const tipo = TIPO_POR_INICIAL[e.t];
 		if (!tipo) continue;
 		if (filtro.materia !== undefined && e.m !== filtro.materia) continue;
+		if (fora(e.m)) continue;
 		if (filtro.tipo !== undefined && tipo !== filtro.tipo) continue;
 		if (filtro.topico !== undefined && e.tp !== filtro.topico) continue;
 		filas.get(tipo)!.push(e.id);

@@ -16,7 +16,8 @@ const mostradosPorFiltro = new Map<string, Set<string>>();
 
 export function chaveFiltro(filtro: Filtro): string {
 	const base = `${filtro.materia ?? '*'}|${filtro.tipo ?? '*'}`;
-	return filtro.topico === undefined ? base : `${base}|${filtro.topico}`;
+	const comTopico = filtro.topico === undefined ? base : `${base}|${filtro.topico}`;
+	return filtro.especialidade ? `${comTopico}|@${filtro.especialidade}` : comTopico;
 }
 
 /** Esquece o que já foi mostrado em todos os filtros (testes; não usado pelas telas). */

@@ -3,6 +3,8 @@
  * (saída da importação em `static/conteudo/`).
  */
 
+import type { IdEspecialidade } from './foco.svelte';
+
 export type TipoPost = 'questao' | 'lei' | 'resumo' | 'flashcard';
 export type InicialTipo = 'q' | 'l' | 'r' | 'f';
 
@@ -112,4 +114,6 @@ export interface Filtro {
 	tipo?: TipoPost;
 	/** Id do tópico de estudo: só passam entradas com `tp` igual. */
 	topico?: string;
+	/** Especialidade que tira matérias do feed (ex.: TI em Auditoria); ausente = nenhuma sai. */
+	especialidade?: IdEspecialidade;
 }

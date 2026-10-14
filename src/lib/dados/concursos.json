@@ -15,6 +15,11 @@
 				"id": "ti-ciencia-de-dados",
 				"nome": "TI — Ciência de Dados",
 				"disciplinas": ["TI: Ciência de Dados"]
+			},
+			{
+				"id": "auditoria",
+				"nome": "Auditoria",
+				"disciplinas": ["Fundamentos de Auditoria Governamental"]
 			}
 		]
 	}

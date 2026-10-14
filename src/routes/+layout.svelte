@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 	import BarraAbas, { type Aba } from '$lib/componentes/feed/BarraAbas.svelte';
 	import { criarRepositorio } from '$lib/feed/conteudo';
-	import { carregarFoco } from '$lib/feed/foco.svelte';
+	import { garantirFoco } from '$lib/feed/foco.svelte';
 	import { carregarInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
 	import { carregarTema } from '$lib/tema.svelte';
 
@@ -13,7 +13,7 @@
 	// Uma vez por aba: o layout raiz não é refeito ao navegar. O tema chega ao mesmo valor que o
 	// script inline de app.html já pôs (sem piscar) e passa a seguir o aparelho e o seletor.
 	carregarInteracoes();
-	carregarFoco();
+	garantirFoco();
 	carregarTema();
 	// Um repositório por aba: feed, salvos e painel dividem o cache de índice e lotes
 	// (as páginas leem com getContext('repositorio')).

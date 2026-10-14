@@ -7,6 +7,7 @@ import { formatarRelatorio, importar } from '../../../scripts/importar/index.mjs
 import { lerCsv } from '../../../scripts/importar/csv.mjs';
 import { materiaPorId } from '../../../scripts/importar/materias.mjs';
 import {
+	DISCIPLINA_AUDITORIA,
 	DISCIPLINA_PARA_BLOCO,
 	DISCIPLINA_PARA_MATERIA,
 	PARAMETROS_PADRAO,
@@ -122,8 +123,10 @@ describe('plano: fila', () => {
 	it('as 13 disciplinas reais (fixture copiada do ESTUDO.csv) têm matéria existente no feed', () => {
 		const reais = [...new Set((lerCsv(CSV) as Record<string, string>[]).map((l) => l.disciplina))];
 		expect(reais).toHaveLength(13);
-		expect(Object.keys(DISCIPLINA_PARA_MATERIA).sort()).toEqual([...reais].sort());
-		expect(Object.keys(DISCIPLINA_PARA_BLOCO).sort()).toEqual([...reais].sort());
+		const todas = [...reais, ...Object.values(DISCIPLINA_AUDITORIA)].sort();
+		expect(Object.keys(DISCIPLINA_PARA_MATERIA).sort()).toEqual(todas);
+		expect(Object.keys(DISCIPLINA_PARA_BLOCO).sort()).toEqual(todas);
+		for (const d of Object.values(DISCIPLINA_AUDITORIA)) expect(materiaPorId(DISCIPLINA_PARA_MATERIA[d]), d).toBeDefined();
 		for (const d of reais) expect(materiaPorId(DISCIPLINA_PARA_MATERIA[d]), d).toBeDefined();
 		expect(DISCIPLINA_PARA_MATERIA['P3 · Aprendizado de Máquina e Inteligência Artificial']).toBe('ti-ciencia-de-dados');
 		expect(DISCIPLINA_PARA_MATERIA['P2 · Fundamentos de Auditoria Governamental e Atuação Integrada da CGU']).toBe(
@@ -272,5 +275,31 @@ describe('plano: importação completa (index.mjs)', () => {
 		expect(() => importar({ vault: ruim, saida })).toThrow(/plano\.md: fim deve ser uma data real/);
 		expect(bytes(saida)).toEqual(antes);
 		expect(existsSync(join(saida, 'plano.json'))).toBe(true);
+	});
+});
+
+describe('plano do Cargo 1 (Auditoria)', () => {
+	const pE = [
+		{ id: 'E1-1.1', prio: 'alta', texto: 'Seleção da forma de atuação.' },
+		{ id: 'E4-1.2', prio: 'média', texto: 'Contratações.' }
+	];
+	const { plano } = importarPlano({ csvTexto: CSV, mtime: MTIME, p3Auditoria: pE });
+
+	it('troca a P3 do CSV pelos subitens do guia de Auditoria e mantém P1/P2', () => {
+		const p3 = plano.tarefas.filter((t) => t.bloco === 'especificos');
+		expect([...new Set(p3.map((t) => t.topicoId))].sort()).toEqual(['ACT-01', 'AGV-01']);
+		expect(p3.find((t) => t.id === 'ACT-01:Q')).toMatchObject({
+			disciplina: DISCIPLINA_AUDITORIA.E4,
+			materia: 'direito-administrativo',
+			prioridade: 5,
+			status: 'nao_iniciado'
+		});
+		const comuns = (p: typeof plano) => p.tarefas.filter((t) => t.bloco !== 'especificos').map((t) => t.id);
+		expect(comuns(plano)).toEqual(comuns(importarPlano({ csvTexto: CSV, mtime: MTIME }).plano));
+		expect(violacoesPlano(plano)).toEqual([]);
+	});
+
+	it('subitem malformado é erro fatal', () => {
+		expect(() => importarPlano({ csvTexto: CSV, mtime: MTIME, p3Auditoria: [{ id: 'X9', texto: 'a' }] })).toThrow(/pE.json/);
 	});
 });

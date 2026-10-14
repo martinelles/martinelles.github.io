@@ -11,7 +11,8 @@ export const URL_PLANO = `${BASE_CONTEUDO}plano.json`;
 const DIA_RE = /^\d{4}-\d{2}-\d{2}$/;
 const BLOCOS: readonly BlocoTarefa[] = ['basicos', 'complementares', 'especificos'];
 
-let cache: Promise<Plano> | null = null;
+/** Promessa por URL: cada especialidade tem o seu arquivo de plano. */
+const cache = new Map<string, Promise<Plano>>();
 
 /** Confere o mínimo de que o motor depende; o schema completo é garantido pelo importador. */
 export function validarPlano(bruto: unknown): Plano {
@@ -56,20 +57,23 @@ export async function fetchJsonRecarregando(url: string): Promise<unknown> {
  * Plano importado. Erro claro se a busca falhar ou o arquivo vier inválido.
  * Se vier inválido, tenta uma vez de novo sem cache: depois de uma importação nova, um service
  * worker antigo pode servir o `plano.json` anterior a um app que já espera o formato novo.
+ * `url` escolhe o arquivo (`plano.json` é Ciência de Dados; `plano-auditoria.json`, Auditoria).
  */
 export function carregarPlano(
 	buscar: Buscar = fetchJson,
-	recarregar: Buscar = fetchJsonRecarregando
+	recarregar: Buscar = fetchJsonRecarregando,
+	url: string = URL_PLANO
 ): Promise<Plano> {
-	if (cache) return cache;
+	const atual = cache.get(url);
+	if (atual) return atual;
 	const nova = (async () => {
 		const falhaDeBusca = (e: unknown) =>
 			new Error(
-				`Não foi possível carregar o plano de estudos (${URL_PLANO}): ${e instanceof Error ? e.message : String(e)}`
+				`Não foi possível carregar o plano de estudos (${url}): ${e instanceof Error ? e.message : String(e)}`
 			);
 		let bruto: unknown;
 		try {
-			bruto = await buscar(URL_PLANO);
+			bruto = await buscar(url);
 		} catch (e) {
 			throw falhaDeBusca(e);
 		}
@@ -77,21 +81,26 @@ export function carregarPlano(
 			return validarPlano(bruto);
 		} catch {
 			try {
-				bruto = await recarregar(URL_PLANO);
+				bruto = await recarregar(url);
 			} catch (e) {
 				throw falhaDeBusca(e);
 			}
 			return validarPlano(bruto);
 		}
 	})();
-	cache = nova;
+	cache.set(url, nova);
 	nova.catch(() => {
-		if (cache === nova) cache = null;
+		if (cache.get(url) === nova) cache.delete(url);
 	});
 	return nova;
 }
 
 /** Esquece o plano em cache (testes; nova importação). */
 export function esquecerPlano(): void {
-	cache = null;
+	cache.clear();
+}
+
+/** Plano da especialidade escolhida em Ajustes. */
+export function carregarPlanoDe(arquivo: string): Promise<Plano> {
+	return carregarPlano(fetchJson, fetchJsonRecarregando, `${BASE_CONTEUDO}${arquivo}`);
 }

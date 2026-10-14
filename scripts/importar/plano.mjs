@@ -17,7 +17,7 @@ import { materiaPorId } from './materias.mjs';
 import { comparar } from './texto.mjs';
 
 /**
- * As 13 disciplinas do `ESTUDO.csv` (nome exato) → id de matéria do feed (`materias.mjs`).
+ * As 13 disciplinas do `ESTUDO.csv` (nome exato), mais as 5 da P3 de Auditoria, → id de matéria do feed (`materias.mjs`).
  * Desde 2026-10-09 o `ESTUDO.csv` segue o item 15 do Edital CGU nº 1/2026 (Cargo 2, Ciência
  * de Dados): a disciplina leva a prova na frente (`P1 · `, `P2 · `, `P3 · `). As matérias do
  * feed continuam as do catálogo de questões; cada bloco do edital aponta para a mais próxima.
@@ -37,7 +37,33 @@ export const DISCIPLINA_PARA_MATERIA = {
 	'P3 · Estatística, Programação e Análise de Dados': 'estatistica',
 	'P3 · Engenharia, Arquitetura e Governança de Dados': 'ti-ciencia-de-dados',
 	'P3 · Aprendizado de Máquina e Inteligência Artificial': 'ti-ciencia-de-dados',
-	'P3 · Operação, Governança e Gestão de Soluções de Dados e IA': 'ti-governanca-gestao-e-contratacoes-de-ti'
+	'P3 · Operação, Governança e Gestão de Soluções de Dados e IA': 'ti-governanca-gestao-e-contratacoes-de-ti',
+	// P3 do Cargo 1 (Auditoria), ver DISCIPLINA_AUDITORIA
+	'P3 · Auditoria Governamental: Avaliação, Consultoria e Apuração': 'fundamentos-de-auditoria-governamental',
+	'P3 · Finanças Públicas, Orçamento e Contabilidade Pública': 'adm-financeira-e-orcamentaria',
+	'P3 · Políticas Públicas e Métodos de Investigação e Avaliação': 'adm-publica-politicas-publicas-e-adm-geral',
+	'P3 · Auditoria de Contratações, Transferências e Execução de Recursos': 'direito-administrativo',
+	'P3 · Integridade, Transparência e Responsabilização Aplicadas ao Controle Público': 'cgu-correicao-integridade-e-leniencia'
+};
+
+/**
+ * Sigla do id dos tópicos da P3 de Auditoria, por código do guia. O contrato do plano pede
+ * `SIGLA-NN`; NN é a ordem do subitem dentro da disciplina em `pE.json` (E1 1.1 ⇒ `AGV-01`).
+ */
+export const SIGLA_AUDITORIA = /** @type {Record<string, string>} */ ({ E1: 'AGV', E2: 'FPC', E3: 'PPA', E4: 'ACT', E5: 'ITR' });
+
+/**
+ * Disciplinas da P3 do Cargo 1 (Auditoria), pelo código do guia (`E1`…`E5`). O `ESTUDO.csv` é do
+ * Cargo 2; a P3 de Auditoria vem de `catalogo-questoes/qconcursos/subitens/pE.json` e as P1/P2,
+ * comuns aos cargos, do próprio CSV.
+ * @type {Record<string, string>}
+ */
+export const DISCIPLINA_AUDITORIA = {
+	E1: 'P3 · Auditoria Governamental: Avaliação, Consultoria e Apuração',
+	E2: 'P3 · Finanças Públicas, Orçamento e Contabilidade Pública',
+	E3: 'P3 · Políticas Públicas e Métodos de Investigação e Avaliação',
+	E4: 'P3 · Auditoria de Contratações, Transferências e Execução de Recursos',
+	E5: 'P3 · Integridade, Transparência e Responsabilização Aplicadas ao Controle Público'
 };
 
 for (const [disciplina, id] of Object.entries(DISCIPLINA_PARA_MATERIA)) {
@@ -166,11 +192,14 @@ export function lerParametros(texto) {
 }
 
 /**
- * @param {{ csvTexto: string, parametros?: string | null, mtime: number }} entrada
+ * @param {{ csvTexto: string, parametros?: string | null, mtime: number, p3Auditoria?: unknown }} entrada
  *   `parametros` = texto de `feed-conteudo/plano.md` (ou ausente); `mtime` = mtime do `ESTUDO.csv` em ms.
+ *   `p3Auditoria` = conteúdo de `pE.json` (`[{ id: "E1-1.1", prio, texto }]`): com ele, sai o plano do
+ *   Cargo 1 — as linhas P3 do CSV ficam de fora e entram estes subitens (id em SIGLA_AUDITORIA),
+ *   prioridade 5 (peso da P3) e status `nao_iniciado`.
  * @returns {{ plano: Plano, relatorio: RelatorioPlano }}
  */
-export function importarPlano({ csvTexto, parametros: textoParametros, mtime }) {
+export function importarPlano({ csvTexto, parametros: textoParametros, mtime, p3Auditoria }) {
 	const { parametros, origem, avisos } = lerParametros(textoParametros);
 	const linhas = /** @type {Record<string, string>[]} */ (lerCsv(csvTexto));
 	if (linhas.length) {
@@ -203,6 +232,7 @@ export function importarPlano({ csvTexto, parametros: textoParametros, mtime }) 
 		if (l.prioridade.trim() === '' || !Number.isFinite(prioridade))
 			throw new Error(`${onde} (${id}): prioridade não numérica "${l.prioridade}"`);
 		const disciplina = l.disciplina.trim();
+		if (p3Auditoria && disciplina.startsWith('P3')) return;
 		const bloco = DISCIPLINA_PARA_BLOCO[disciplina];
 		if (!bloco)
 			throw new Error(`${onde} (${id}): disciplina "${disciplina}" sem bloco em DISCIPLINA_PARA_BLOCO (plano.mjs)`);
@@ -213,6 +243,7 @@ export function importarPlano({ csvTexto, parametros: textoParametros, mtime }) 
 		}
 		topicos.push({ id, bloco, disciplina, materia, topico, prioridade, status });
 	});
+	if (p3Auditoria) topicos.push(...topicosAuditoria(p3Auditoria));
 	topicos.sort((a, b) => b.prioridade - a.prioridade || comparar(a.id, b.id));
 	/** @type {Record<Bloco, number>} */
 	const porBloco = { basicos: 0, complementares: 0, especificos: 0 };
@@ -234,6 +265,31 @@ export function importarPlano({ csvTexto, parametros: textoParametros, mtime }) 
 		plano: { versao: 1, geradoEm, ...parametros, tarefas },
 		relatorio: { tarefas: tarefas.length, topicos: topicos.length, porBloco, linhas: linhas.length, excluidas, semMateria, parametros, origemParametros: origem, avisos }
 	};
+}
+
+/**
+ * Subitens da P3 de Auditoria (`pE.json`) como tópicos do plano. Formato fora do esperado é erro fatal.
+ * @param {unknown} lista
+ */
+function topicosAuditoria(lista) {
+	if (!Array.isArray(lista) || !lista.length) throw new Error('pE.json: esperada uma lista de subitens');
+	/** @type {Record<string, number>} */
+	const seq = {};
+	return lista.map((o, i) => {
+		const m = /^(E[1-5])-\d+\.\d+$/.exec(typeof o?.id === 'string' ? o.id : '');
+		if (!m || typeof o.texto !== 'string' || !o.texto.trim()) throw new Error(`pE.json item ${i}: subitem malformado ${JSON.stringify(o)}`);
+		const disciplina = DISCIPLINA_AUDITORIA[m[1]];
+		seq[m[1]] = (seq[m[1]] ?? 0) + 1;
+		return {
+			id: `${SIGLA_AUDITORIA[m[1]]}-${String(seq[m[1]]).padStart(2, '0')}`,
+			bloco: /** @type {Bloco} */ ('especificos'),
+			disciplina,
+			materia: DISCIPLINA_PARA_MATERIA[disciplina],
+			topico: o.texto.trim(),
+			prioridade: 5,
+			status: 'nao_iniciado'
+		};
+	});
 }
 
 /**

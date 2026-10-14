@@ -156,7 +156,7 @@ test.describe('foco escolhido em 2 interações', () => {
 
 	test('2 interações do painel até trocar o foco (NFR-001)', async ({ page }) => {
 		await escolherDireitoConstitucional(page);
-		expect(await lerChave(page, CHAVE_FOCO)).toEqual({ disciplina: 'direito-constitucional' });
+		expect(await lerChave(page, CHAVE_FOCO)).toEqual({ disciplina: 'direito-constitucional', especialidade: 'ciencia-de-dados' });
 	});
 
 	test('o texto do foco no painel acompanha (FR-006, Cenário 3.1)', async ({ page }) => {

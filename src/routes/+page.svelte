@@ -69,7 +69,9 @@
 		const tipo = p.get('tipo');
 		// Tópico de estudo (FR-002): só passam as questões ligadas a ele; id inexistente dá fim imediato.
 		const topico = p.get('topico') || undefined;
-		return { materia, tipo: ehTipo(tipo) ? tipo : undefined, topico };
+		// Matérias fora da especialidade (ex.: TI em Auditoria) não entram no "Tudo" nem nos stories.
+		const especialidade = foco.especialidade.id === 'ciencia-de-dados' ? undefined : foco.especialidade.id;
+		return { materia, tipo: ehTipo(tipo) ? tipo : undefined, topico, especialidade };
 	});
 
 	/** Quantos posts o filtro de tópico tem, contados no índice (FR-004); null enquanto o índice carrega. */
@@ -92,7 +94,9 @@
 		return s;
 	});
 
-	const stories = $derived(materias ? ordenarStories(materias, foco.disciplina) : []);
+	const stories = $derived(
+		materias ? ordenarStories(materias.filter((m) => !foco.especialidade.fora(m.id)), foco.disciplina) : []
+	);
 	const vistas = $derived.by(() => {
 		if (!indice) return new Set<string>();
 		const hoje = interacoes.vistosNoDia(dia);

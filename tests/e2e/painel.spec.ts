@@ -35,10 +35,10 @@ test('cabeçalho mostra a CGU, a banca e "Data a definir", sem trocar concurso',
 	await expect(abas(page).getByRole('link', { name: 'Painel' })).toHaveAttribute('aria-current', 'page');
 });
 
-test('foco: cargo fixo, disciplina começa em Ciência de Dados e persiste', async ({ page }) => {
+test('foco: especialidade começa em Ciência de Dados, disciplina também, e persiste', async ({ page }) => {
 	await page.goto('/painel/ajustes');
-	await expect(page.getByText('AFFC — TI — Ciência de Dados', { exact: true })).toBeVisible();
-	await expect(page.getByLabel('Cargo')).toHaveCount(0);
+	await expect(page.getByRole('radio', { name: 'Ciência de Dados' })).toBeChecked();
+	await expect(page.getByRole('radio', { name: 'Auditoria' })).not.toBeChecked();
 	const disciplina = page.getByLabel('Disciplina');
 	await expect(disciplina).toBeEnabled();
 	await expect(disciplina).toHaveValue('ti-ciencia-de-dados');
@@ -46,7 +46,8 @@ test('foco: cargo fixo, disciplina começa em Ciência de Dados e persiste', asy
 
 	await disciplina.selectOption({ label: 'Direito Constitucional' });
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
-		disciplina: 'direito-constitucional'
+		disciplina: 'direito-constitucional',
+		especialidade: 'ciencia-de-dados'
 	});
 	await page.reload();
 	await expect(page.getByLabel('Disciplina')).toHaveValue('direito-constitucional');
@@ -152,4 +153,30 @@ test('em 360 px nenhum cartão da grade estoura a coluna', async ({ page }) => {
 	);
 	expect(estouros).toEqual([]);
 	expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
+});
+
+test('especialidade Auditoria: plano, feed sem TI, cargo e links do cabeçalho seguem a escolha', async ({ page }) => {
+	await page.goto('/painel/ajustes');
+	await page.getByRole('radio', { name: 'Auditoria' }).check();
+	const disciplina = page.getByLabel('Disciplina');
+	await expect(disciplina).toHaveValue('fundamentos-de-auditoria-governamental');
+	await expect(disciplina.locator('option', { hasText: 'TI:' })).toHaveCount(0);
+	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
+		disciplina: 'fundamentos-de-auditoria-governamental',
+		especialidade: 'auditoria'
+	});
+
+	const plano = page.waitForRequest('**/conteudo/plano-auditoria.json');
+	await page.goto('/painel');
+	await plano;
+	const cabecalho = page.locator('header', {
+		has: page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })
+	});
+	await expect(cabecalho.getByText('Auditoria', { exact: true })).toBeVisible();
+	await expect(cabecalho.getByRole('link', { name: /Missões/ })).toHaveAttribute('href', /#aud$/);
+
+	await page.goto('/');
+	const stories = page.getByRole('navigation', { name: 'Matérias' });
+	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/Fundamentos de Auditoria Governamental/);
+	await expect(stories.getByRole('link', { name: /TI:/ })).toHaveCount(0);
 });

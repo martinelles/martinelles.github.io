@@ -6,7 +6,8 @@
 import { untrack } from 'svelte';
 import { goto } from '$app/navigation';
 import { hojeLocal } from '$lib/datas';
-import { carregarPlano } from '$lib/plano/carregar';
+import { foco } from '$lib/feed/foco.svelte';
+import { carregarPlanoDe } from '$lib/plano/carregar';
 import { fasePlano, type FasePlano } from '$lib/plano/dias';
 import { exportarCsv, nomeArquivoExportacao } from '$lib/plano/exportar';
 import { carregarRegistro, registro } from '$lib/plano/registro.svelte';
@@ -34,14 +35,24 @@ export function garantirRegistro(): void {
 	registroCarregado = true;
 }
 
-/** Plano importado, carregado em segundo plano; `erro` com a mensagem se a busca falhar. */
+/**
+ * Plano da especialidade escolhida, carregado em segundo plano; `erro` com a mensagem se a busca
+ * falhar. Trocar a especialidade troca o plano (resposta atrasada da anterior é descartada).
+ */
 export function usarPlano(): { readonly plano: Plano | null; readonly erro: string | null } {
 	let plano = $state.raw<Plano | null>(null);
 	let erro = $state<string | null>(null);
-	carregarPlano().then(
-		(p) => (plano = p),
-		(e: unknown) => (erro = e instanceof Error ? e.message : String(e))
-	);
+	$effect(() => {
+		const arquivo = foco.especialidade.plano;
+		let vale = true;
+		plano = null;
+		erro = null;
+		carregarPlanoDe(arquivo).then(
+			(p) => vale && (plano = p),
+			(e: unknown) => vale && (erro = e instanceof Error ? e.message : String(e))
+		);
+		return () => (vale = false);
+	});
 	return {
 		get plano() {
 			return plano;

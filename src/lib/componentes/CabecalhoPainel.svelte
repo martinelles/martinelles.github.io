@@ -8,15 +8,21 @@
 	let {
 		concurso,
 		prazo,
-		foco
+		foco,
+		cargo,
+		ancora
 	}: {
 		concurso: Concurso;
 		prazo: Prazo;
 		/** Nome da matéria de foco, já resolvido por quem monta o painel. */
 		foco?: string;
+		/** Cargo da especialidade escolhida em Ajustes. */
+		cargo?: string;
+		/** Âncora da especialidade nas Prioridades e nas Missões (`cd`, `aud`). */
+		ancora?: string;
 	} = $props();
 
-	const cargo = $derived(concurso.cargos[0]?.nome);
+	const comAncora = (url: string) => (ancora ? `${url.split('#')[0]}#${ancora}` : url);
 	const vagas = $derived(
 		concurso.vagas === undefined
 			? null
@@ -62,7 +68,7 @@
 		{/if}
 		{#if concurso.prioridades}
 			<li>
-				<a class="edital" href={concurso.prioridades} target="_blank" rel="noopener">
+				<a class="edital" href={comAncora(concurso.prioridades)} target="_blank" rel="noopener">
 					<Icone nome="lista" tamanho={20} />
 					Prioridades do edital
 				</a>
@@ -70,7 +76,7 @@
 		{/if}
 		{#if concurso.missoes}
 			<li>
-				<a class="edital" href={concurso.missoes} target="_blank" rel="noopener">
+				<a class="edital" href={comAncora(concurso.missoes)} target="_blank" rel="noopener">
 					<Icone nome="calendario" tamanho={20} />
 					Missões até a prova
 				</a>

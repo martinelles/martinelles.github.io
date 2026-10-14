@@ -35,7 +35,7 @@ describe('dados reais', () => {
 		expect(concursoCgu.situacao).toBe('previsto');
 		expect(concursoCgu.dataProva).toBeUndefined();
 		expect(concursoCgu.edital).toBeUndefined();
-		expect(concursoCgu.cargos.map((c) => c.nome)).toEqual(['TI — Ciência de Dados']);
+		expect(concursoCgu.cargos.map((c) => c.nome)).toEqual(['TI — Ciência de Dados', 'Auditoria']);
 	});
 
 	it('trazem as 12 ferramentas na ordem da spec, com "Lei seca" no lugar de Jurisprudência', () => {
@@ -110,7 +110,7 @@ describe('validarDados recusa dado malformado', () => {
 	it('id de cargo repetido dentro do concurso', () => {
 		falhaCom(
 			(d) => d.concursos[0].cargos.push({ ...d.concursos[0].cargos[0] }),
-			'concursos[0].cargos[1].id: id "ti-ciencia-de-dados" repetido'
+			'concursos[0].cargos[2].id: id "ti-ciencia-de-dados" repetido'
 		);
 	});
 

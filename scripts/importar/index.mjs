@@ -242,6 +242,19 @@ export function importar({ vault, saida }) {
 		arquivos.push({ arquivo: 'plano.json', conteudo });
 		avisos.push(...r.relatorio.avisos);
 		planoRel = { ...r.relatorio, gzip: tamanhoGzip(conteudo) };
+		// Cargo 1 (Auditoria): P1/P2 do mesmo CSV, P3 dos subitens do guia de Auditoria
+		const jsonP3Aud = join(vault, 'catalogo-questoes', 'qconcursos', 'subitens', 'pE.json');
+		if (!existsSync(jsonP3Aud)) {
+			avisos.push('pE.json ausente: plano-auditoria.json não gerado');
+		} else {
+			const a = importarPlano({
+				csvTexto: readFileSync(csvEstudo, 'utf8'),
+				parametros: existsSync(mdParametros) ? readFileSync(mdParametros, 'utf8') : null,
+				mtime: statSync(csvEstudo).mtimeMs,
+				p3Auditoria: JSON.parse(readFileSync(jsonP3Aud, 'utf8'))
+			});
+			arquivos.push({ arquivo: 'plano-auditoria.json', conteudo: serializarPlano(a.plano) });
+		}
 	}
 
 	// Escrita: temporário ao lado do destino, depois troca

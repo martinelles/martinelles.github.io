@@ -5,11 +5,8 @@
 	import Icone from '$lib/componentes/Icone.svelte';
 	import SeletorTema from '$lib/componentes/SeletorTema.svelte';
 	import type { Repositorio } from '$lib/feed/conteudo';
-	import { foco } from '$lib/feed/foco.svelte';
+	import { ESPECIALIDADES, foco } from '$lib/feed/foco.svelte';
 	import type { Materia } from '$lib/feed/tipos';
-
-	/** Cargo fixo (D6 da missão do feed): não há seletor. */
-	const CARGO = 'AFFC — TI — Ciência de Dados';
 
 	const repo = getContext<Repositorio>('repositorio');
 	let materias = $state.raw<Materia[] | null>(null);
@@ -27,9 +24,11 @@
 		<a class="voltar" href="/painel"><Icone nome="voltar" tamanho={20} /> Voltar ao painel</a>
 	</header>
 	<FocoEstudo
-		cargo={CARGO}
+		especialidades={ESPECIALIDADES}
+		especialidade={foco.especialidade}
 		{materias}
 		disciplina={foco.disciplina}
+		onescolherEspecialidade={(id) => foco.escolherEspecialidade(id)}
 		onescolherDisciplina={(id) => foco.escolherDisciplina(id)}
 	/>
 	<SeletorTema />

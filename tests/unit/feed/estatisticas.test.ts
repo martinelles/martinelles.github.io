@@ -73,9 +73,34 @@ describe('foco', () => {
 		expect(arm.getItem(CHAVE_FOCO)).toBeNull();
 	});
 
+	it('especialidade: Auditoria tira as matérias de TI e troca o foco padrão; volta a Ciência de Dados', () => {
+		expect(foco.especialidade.id).toBe('ciencia-de-dados');
+		foco.escolherEspecialidade('auditoria');
+		expect(foco.especialidade.plano).toBe('plano-auditoria.json');
+		expect(foco.disciplina).toBe('fundamentos-de-auditoria-governamental');
+		foco.escolherDisciplina('ti-seguranca-da-informacao');
+		expect(foco.disciplina).toBe('fundamentos-de-auditoria-governamental');
+		foco.escolherDisciplina('direito-administrativo');
+		carregarFoco(arm);
+		expect(foco.especialidade.id).toBe('auditoria');
+		expect(foco.disciplina).toBe('direito-administrativo');
+		foco.escolherEspecialidade('ciencia-de-dados');
+		expect(foco.disciplina).toBe('direito-administrativo');
+		foco.escolherEspecialidade('qualquer');
+		expect(foco.especialidade.id).toBe('ciencia-de-dados');
+	});
+
+	it('gravação antiga com disciplina de TI e especialidade Auditoria cai no padrão de Auditoria', () => {
+		arm.setItem(CHAVE_FOCO, '{"disciplina":"ti-ciencia-de-dados","especialidade":"auditoria"}');
+		carregarFoco(arm);
+		expect(foco.disciplina).toBe('fundamentos-de-auditoria-governamental');
+	});
+
 	it('escolher grava no formato do contrato e relê', () => {
 		foco.escolherDisciplina('direito-administrativo');
-		expect(arm.getItem('painel-concurso:preferencias:v2')).toBe('{"disciplina":"direito-administrativo"}');
+		expect(arm.getItem('painel-concurso:preferencias:v2')).toBe(
+			'{"disciplina":"direito-administrativo","especialidade":"ciencia-de-dados"}'
+		);
 		carregarFoco(new StorageFalso());
 		expect(foco.disciplina).toBe(DISCIPLINA_PADRAO);
 		carregarFoco(arm);
