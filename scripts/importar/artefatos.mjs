@@ -15,6 +15,25 @@ export const ARTEFATOS = [
 	{ id: 'Q4MYW9Fpk7eg4oKnv36H12', fonte: null, arquivo: 'artefatos/raiox.html' }
 ];
 
+/**
+ * O tema escolhido no app (Ajustes) vale também aqui: Kindle escuro é `data-theme="dark"`, Aventura
+ * e Kindle são `light`, e "sistema" deixa o CSS seguir o aparelho. Roda antes da primeira pintura e
+ * acompanha a troca feita em outra aba. Mesma chave de src/lib/tema.svelte.ts.
+ */
+export const TEMA_ARTEFATO = `<script>
+(function () {
+  function aplicar() {
+    var t = null;
+    try { t = (JSON.parse(localStorage.getItem('painel-concurso:tema:v1') || 'null') || {}).tema; } catch (e) {}
+    var v = t === 'kindle-escuro' ? 'dark' : t === 'aventura' || t === 'kindle' ? 'light' : null;
+    if (v) document.documentElement.setAttribute('data-theme', v);
+    else document.documentElement.removeAttribute('data-theme');
+  }
+  aplicar();
+  addEventListener('storage', function (e) { if (e.key === null || e.key === 'painel-concurso:tema:v1') aplicar(); });
+})();
+</script>`;
+
 const LINK_RE = /https:\/\/claude\.ai\/artifact\/([A-Za-z0-9]+)/g;
 
 /**
@@ -47,6 +66,7 @@ export function envolver(fragmento) {
 		'<head>',
 		'<meta charset="utf-8">',
 		'<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
+		TEMA_ARTEFATO,
 		...(titulo ? [titulo] : []),
 		'</head>',
 		'<body>',
@@ -74,7 +94,7 @@ export function montarArtefatos(fontes, comRaiox = false) {
 
 /**
  * Tokens que a página do Raio-X espera do tipo "dashboard" do claude.ai, com a paleta e as
- * fontes das Missões, claro e escuro.
+ * fontes das Missões, claro e escuro (o escuro também por `data-theme`, como nas Missões).
  */
 const TOKENS_RAIOX = `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +119,7 @@ const TOKENS_RAIOX = `<link rel="preconnect" href="https://fonts.googleapis.com"
   --dash-cor-4: #b01f4a; --dash-cor-5: #5d7a1f; --dash-cor-6: #8a6d00; --dash-cor-7: #4f5b66;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
     --color-bg: #0f1520; --color-panel: #161e2b; --color-fg: #e6ebf1; --color-fg-muted: #9aa6b4;
     --color-border-line: #2a3546; --color-bad: #f0668e; --cds-border: #2a3546;
@@ -109,6 +129,16 @@ const TOKENS_RAIOX = `<link rel="preconnect" href="https://fonts.googleapis.com"
     --dash-cor-0: #4cc2bd; --dash-cor-1: #7fa8e6; --dash-cor-2: #b493ee; --dash-cor-3: #f0915a;
     --dash-cor-4: #f0668e; --dash-cor-5: #a6c95a; --dash-cor-6: #e0c050; --dash-cor-7: #9aa6b4;
   }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0f1520; --color-panel: #161e2b; --color-fg: #e6ebf1; --color-fg-muted: #9aa6b4;
+  --color-border-line: #2a3546; --color-bad: #f0668e; --cds-border: #2a3546;
+  --cds-surface-popover: #1c2636; --cds-shadow-popover: 0 6px 24px rgb(0 0 0 / 0.5);
+  --cds-text-secondary: #9aa6b4;
+  --cds-chart-grid: #222c3b; --cds-chart-axis: #3a475a; --cds-chart-muted: #3a475a;
+  --dash-cor-0: #4cc2bd; --dash-cor-1: #7fa8e6; --dash-cor-2: #b493ee; --dash-cor-3: #f0915a;
+  --dash-cor-4: #f0668e; --dash-cor-5: #a6c95a; --dash-cor-6: #e0c050; --dash-cor-7: #9aa6b4;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: 15px; line-height: 1.5; }
@@ -136,6 +166,7 @@ export function montarRaiox(f) {
 		'<head>',
 		'<meta charset="utf-8">',
 		'<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
+		TEMA_ARTEFATO,
 		'<title>Raio-X do Qconcursos</title>',
 		TOKENS_RAIOX,
 		'</head>',

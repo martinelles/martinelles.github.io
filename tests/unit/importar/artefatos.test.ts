@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, it } from 'vitest';
-import { envolver, montarArtefatos, trocarLinks } from '../../../scripts/importar/artefatos.mjs';
+import { envolver, montarArtefatos, TEMA_ARTEFATO, trocarLinks } from '../../../scripts/importar/artefatos.mjs';
 import { importar } from '../../../scripts/importar/index.mjs';
 
 const PRIOR = 'https://claude.ai/artifact/Jjm6kekrZGBneHmJNvgUPN';
@@ -35,6 +35,9 @@ describe('artefatos do vault', () => {
 		expect(html).toMatch(/<\/head>\n<body>\n<style>/);
 		expect(html.indexOf('<title>Missões</title>')).toBeLessThan(html.indexOf('</head>'));
 		expect(html.match(/<title>/g)).toHaveLength(1);
+		// O tema do app entra antes da primeira pintura.
+		expect(html.indexOf(TEMA_ARTEFATO)).toBeGreaterThan(0);
+		expect(html.indexOf(TEMA_ARTEFATO)).toBeLessThan(html.indexOf('</head>'));
 		expect(html.endsWith('</body>\n</html>\n')).toBe(true);
 	});
 

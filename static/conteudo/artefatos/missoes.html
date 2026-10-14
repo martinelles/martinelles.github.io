@@ -3,6 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+(function () {
+  function aplicar() {
+    var t = null;
+    try { t = (JSON.parse(localStorage.getItem('painel-concurso:tema:v1') || 'null') || {}).tema; } catch (e) {}
+    var v = t === 'kindle-escuro' ? 'dark' : t === 'aventura' || t === 'kindle' ? 'light' : null;
+    if (v) document.documentElement.setAttribute('data-theme', v);
+    else document.documentElement.removeAttribute('data-theme');
+  }
+  aplicar();
+  addEventListener('storage', function (e) { if (e.key === null || e.key === 'painel-concurso:tema:v1') aplicar(); });
+})();
+</script>
 <title>Missões CGU 2026</title>
 </head>
 <body>

@@ -45,6 +45,34 @@ test('os botões do cabeçalho abrem as páginas dentro do app, com as abas, e u
 	await expect(page).toHaveURL('/');
 });
 
+test('as páginas seguem o tema escolhido no app, não só o do aparelho', async ({ page }) => {
+	const escolher = (t: string) => page.evaluate((t) => localStorage.setItem('painel-concurso:tema:v1', JSON.stringify({ tema: t })), t);
+	const fundo = (f = page.mainFrame()) => f.evaluate(() => getComputedStyle(document.body).backgroundColor);
+
+	// Aparelho claro, Kindle escuro escolhido: escuro.
+	await page.emulateMedia({ colorScheme: 'light' });
+	await page.goto('/painel/ajustes');
+	await escolher('kindle-escuro');
+	for (const nome of ['missoes', 'prioridades', 'raiox']) {
+		await page.goto(`/artefato/${nome}`);
+		await expect(page.frameLocator('iframe').locator('html')).toHaveAttribute('data-theme', 'dark');
+		expect(await fundo(page.frames()[1]), nome).not.toMatch(/^rgb\(2[0-9]{2}, 2[0-9]{2}, 2[0-9]{2}\)$/);
+	}
+
+	// Aparelho escuro, Aventura escolhida: claro.
+	await page.emulateMedia({ colorScheme: 'dark' });
+	await escolher('aventura');
+	await page.goto('/conteudo/artefatos/raiox.html');
+	await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+	expect(await fundo()).toBe('rgb(245, 247, 248)');
+
+	// "Sistema" deixa o aparelho decidir.
+	await escolher('sistema');
+	await page.reload();
+	await expect(page.locator('html')).not.toHaveAttribute('data-theme', /./);
+	expect(await fundo()).toBe('rgb(15, 21, 32)');
+});
+
 test('rota de artefato desconhecida dá 404', async ({ page }) => {
 	await page.goto('/artefato/nao-existe');
 	await expect(page.getByText('Página não encontrada')).toBeVisible();
