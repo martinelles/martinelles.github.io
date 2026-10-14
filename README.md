@@ -9,14 +9,17 @@ guarda o progresso de quem entra com um nome, para seguir de um aparelho para ou
 - **Feed de estudo** (`/`) — stories por matéria no topo e posts em rolagem infinita:
   questões Certo/Errado, resumos, flashcards e lei seca, sem repetir o que já apareceu.
 - **Painel** (`/painel`) — ferramentas, progresso, missão de hoje e foco de estudo.
-- **Missões** — plano de 61 dias até a prova, o mesmo da página `artefatos/missoes.html`; o
-  painel e o feed seguem esse plano.
+- **Missões** — plano de 61 dias até a prova, o mesmo da página das Missões; o painel e o
+  feed seguem esse plano.
 - **Ajustes** (`/painel/ajustes`) — especialidade (Ciência de Dados ou Auditoria), que decide
   o conteúdo, aparência e conta.
-- **Entrar** (`/entrar`) — login só por nome, sem senha: o nome é a credencial.
+- **Entrar** (`/entrar`, ou o popup) — login só por nome, sem senha: o nome é a credencial.
 - **Salvos** (`/salvos`) — posts marcados para revisar.
-- **Artefatos** (`/conteudo/artefatos/`) — Missões, Prioridades e Raio-X do Qconcursos,
-  servidos pelo próprio painel.
+- **Artefatos** (`/artefato/missoes`, `/artefato/prioridades`, `/artefato/raiox`) — Missões,
+  Prioridades e Raio-X do Qconcursos dentro do app, com a barra de abas. A rota mostra num
+  iframe a página do vault, servida em `/conteudo/artefatos/<nome>.html` (mesma origem, então
+  mesmo armazenamento e mesmo login); os links entre elas trocam a rota em vez de abrir aba nova.
+  Aberta direto pelo `.html`, a página fica sem o menu.
 
 ## Conta e servidor
 
@@ -31,6 +34,14 @@ O servidor é o Worker em [worker/](worker/), que atende só `/api/*` e grava no
 GET /api/progresso/:usuario         → { [chave]: { valor, atualizadoEm } }
 PUT /api/progresso/:usuario/:chave  { valor, atualizadoEm } → { gravado, atual }
 ```
+
+Responder, curtir ou salvar no feed sem login abre um popup para entrar, porque a interação só
+no aparelho se perderia no primeiro login de uma conta que já tem progresso no servidor. Ao
+entrar, a carga nova volta à mesma tela e aplica a interação depois da sincronização (curtir e
+salvar guardam o estado pedido, não o alternar). "Agora não" faz a interação só no aparelho e
+não pergunta de novo na aba. Marcar missão no painel usa o mesmo popup, mas exige login: "Agora
+não" não marca. Fica em [src/lib/feed/pedidoLogin.svelte.ts](src/lib/feed/pedidoLogin.svelte.ts).
+A página das Missões tem o popup próprio dela, com a mesma regra.
 
 A tabela é criada na primeira requisição; não há migração a aplicar. As regras do nome e das
 chaves que sobem ficam em [src/lib/conta/regras.ts](src/lib/conta/regras.ts), divididas entre
@@ -77,6 +88,7 @@ de prova.
 | `src/lib/feed/` | sessão, ordem, interações e estatísticas do feed |
 | `src/lib/missoes/` | plano das Missões: carga, cálculos e marcações |
 | `src/lib/conta/` | login por nome e armazenamento sincronizado |
+| `src/lib/artefatos/` | rotas `/artefato/<nome>` ↔ páginas do vault |
 | `src/lib/dados/` | concurso, ferramentas, config e validação na carga |
 | `src/service-worker.ts` | cache para uso offline |
 | `worker/` | Worker do Cloudflare: API de progresso no D1 |
