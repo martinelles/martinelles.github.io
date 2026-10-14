@@ -4,6 +4,11 @@
  * página das Missões mostra; o painel passa a usá-lo na "Missão de hoje".
  *
  * Formato fora do esperado é erro fatal: o painel confiaria em datas e blocos que não existem.
+ *
+ * Link do Qconcursos de cada subitem (`qc`, por `cid`): o padrão do par que a página das Missões
+ * mostra, de `catalogo-questoes/qconcursos/links.json`. Assim todo subitem da "Missão de hoje" tem
+ * onde treinar, mesmo sem questão no feed. A chave é a da página: `<CARGO>:` nos itens `E…`, o código
+ * com hífen (`CD:E4-1.1`), e o subitem pai quando o próprio não tem link.
  */
 
 export const CARGOS = ['cd', 'aud'];
@@ -20,6 +25,31 @@ const ehObjeto = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const texto = (v) => typeof v === 'string' && v.trim() !== '';
 /** Minutos do bloco: 0 vale (a revisão "encaixe 15 min" dos dias de simulado, já contada nele). */
 const minutos = (/** @type {unknown} */ v) => Number.isInteger(v) && /** @type {number} */ (v) >= 0;
+
+/** `E4 1.1` do cargo `cd` → `CD:E4-1.1`; os blocos comuns (`B1 1.1`) não levam o cargo. */
+export const chaveLink = (/** @type {string} */ cargo, /** @type {string} */ cod) =>
+	(/^E/.test(cod) ? `${cargo.toUpperCase()}:` : '') + cod.replace(' ', '-');
+const paiDe = (/** @type {string} */ k) => /^(.*-\d+\.\d+)\.\d+$/.exec(k)?.[1] ?? null;
+
+/**
+ * `{ cid: url }` dos itens do plano que têm link.
+ * @param {{ plan: { blocos: { itens?: { cid: string, cod: string }[] }[] }[] }} plano
+ * @param {string} cargo
+ * @param {Record<string, unknown>} links conteúdo de links.json
+ */
+export function linksDoPlano(plano, cargo, links) {
+	/** @type {Record<string, string>} */
+	const qc = {};
+	for (const d of plano.plan)
+		for (const b of d.blocos)
+			for (const it of b.itens ?? []) {
+				const ch = chaveLink(cargo, it.cod);
+				const l = /** @type {Record<string, unknown> | undefined} */ (links[ch] ?? links[paiDe(ch) ?? '']);
+				const url = l && typeof l.padrao === 'string' ? l[l.padrao] : undefined;
+				if (typeof url === 'string' && url.startsWith('https://www.qconcursos.com/')) qc[it.cid] = url;
+			}
+	return qc;
+}
 
 /**
  * Valida e enxuga o plano de um cargo: só o que o painel usa (`plan`, `cortes`, `gerado`).
@@ -57,9 +87,20 @@ export function validarMissoes(bruto, onde) {
 
 /**
  * @param {Record<string, string>} fontes `plano-<cargo>.json` presentes no vault, por cargo
+ * @param {string} [links] conteúdo de `catalogo-questoes/qconcursos/links.json`; sem ele, sem `qc`
  * @returns {{ arquivo: string, conteudo: string }[]}
  */
-export function montarMissoes(fontes) {
+export function montarMissoes(fontes, links) {
+	/** @type {Record<string, unknown> | null} */
+	let mapa = null;
+	if (links !== undefined) {
+		try {
+			mapa = JSON.parse(links);
+		} catch (e) {
+			throw new Error(`catalogo-questoes/qconcursos/links.json: JSON inválido (${/** @type {Error} */ (e).message})`);
+		}
+		if (!ehObjeto(mapa)) throw new Error('catalogo-questoes/qconcursos/links.json: não é um objeto');
+	}
 	return CARGOS.filter((c) => fontes[c] !== undefined).map((c) => {
 		const onde = `artifacts/missoes/plano-${c}.json`;
 		let bruto;
@@ -68,6 +109,8 @@ export function montarMissoes(fontes) {
 		} catch (e) {
 			throw new Error(`${onde}: JSON inválido (${/** @type {Error} */ (e).message})`);
 		}
-		return { arquivo: `missoes-${c}.json`, conteudo: `${JSON.stringify(validarMissoes(bruto, onde))}\n` };
+		const plano = validarMissoes(bruto, onde);
+		const saida = mapa ? { ...plano, qc: linksDoPlano(plano, c, mapa) } : plano;
+		return { arquivo: `missoes-${c}.json`, conteudo: `${JSON.stringify(saida)}\n` };
 	});
 }

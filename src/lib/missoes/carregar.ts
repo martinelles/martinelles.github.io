@@ -24,7 +24,8 @@ export function validarMissoes(bruto: unknown): PlanoMissoes {
 		for (const b of d.blocos)
 			if (!b || !TIPOS.includes(b.tipo) || !Number.isInteger(b.min)) throw erro(`bloco malformado em ${d.data}`);
 	}
-	return { gerado: String(p.gerado ?? ''), plan: p.plan, cortes: Array.isArray(p.cortes) ? p.cortes : [] };
+	const qc = p.qc && typeof p.qc === 'object' && !Array.isArray(p.qc) ? p.qc : {};
+	return { gerado: String(p.gerado ?? ''), plan: p.plan, cortes: Array.isArray(p.cortes) ? p.cortes : [], qc };
 }
 
 async function buscarSemCache(url: string): Promise<unknown> {

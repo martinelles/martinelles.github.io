@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, it } from 'vitest';
-import { montarMissoes, validarMissoes as validarNoImportador } from '../../../scripts/importar/missoes.mjs';
+import { chaveLink, montarMissoes, validarMissoes as validarNoImportador } from '../../../scripts/importar/missoes.mjs';
 import { importar } from '../../../scripts/importar/index.mjs';
 import { chaveBloco, diaCumprido, diaDeHoje, progressoDoDia, resumo } from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
@@ -16,6 +16,7 @@ const item = (cid: string) => ({ cid, cod: 'E1 1.1', texto: 'Tópico' });
 const PLANO: PlanoMissoes = {
 	gerado: '2026-10-13',
 	cortes: [],
+	qc: {},
 	plan: [
 		{ data: '2026-10-13', dow: 'ter', fase: 'Base', blocos: [{ tipo: 'novo', titulo: 'N', min: 45, itens: [item('EPA-01')] }, { tipo: 'rev', titulo: 'R', min: 45, itens: [] }] },
 		{ data: '2026-10-14', dow: 'qua', fase: 'Base', blocos: [{ tipo: 'sim', titulo: 'S', min: 90 }, { tipo: 'rev', titulo: 'Encaixe', min: 0 }] },
@@ -42,6 +43,22 @@ describe('importador das Missões', () => {
 		const p = bruto();
 		estragar(p);
 		expect(() => validarNoImportador(p, 'plano-cd.json')).toThrow(msg);
+	});
+
+	it('com links.json: o link padrão do Qconcursos de cada subitem, por cid, com a chave da página', () => {
+		const qc = (x: string) => `https://www.qconcursos.com/questoes-de-concursos/questoes?${x}`;
+		const p = bruto();
+		p.plan[0].blocos[1].itens = [{ cid: 'EDC-06', cod: 'B1 6.1', texto: 'Comum' }, { cid: 'EPA-02', cod: 'E1 2.1.3', texto: 'Neto' }];
+		const links = {
+			'CD:E1-1.1': { padrao: 'amplo', amplo: qc('a'), cobrados: qc('c') },
+			'B1-6.1': { padrao: 'cobrados', amplo: qc('b-a'), cobrados: qc('b-c') },
+			'CD:E1-2.1': { padrao: 'amplo', amplo: qc('pai') }
+		};
+		const [cd] = montarMissoes({ cd: JSON.stringify(p) }, JSON.stringify(links));
+		expect(JSON.parse(cd.conteudo).qc).toEqual({ 'EPA-01': qc('a'), 'EDC-06': qc('b-c'), 'EPA-02': qc('pai') });
+		expect(chaveLink('aud', 'E4 1.1')).toBe('AUD:E4-1.1');
+		expect(chaveLink('aud', 'B2 3.1')).toBe('B2-3.1');
+		expect(() => montarMissoes({ cd: JSON.stringify(p) }, '[')).toThrow('links.json: JSON inválido');
 	});
 
 	it('JSON inválido é erro com o nome do arquivo', () => {

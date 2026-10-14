@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Missão de hoje no painel (planos/2026-10-14-missao-unica.md): o dia do plano de 61 dias das
 	// Missões, com as mesmas bolhas da página (mesma chave e mesma conta). Cada subitem leva às
-	// questões do tópico no feed, quando há; os links do Qconcursos ficam na página das Missões.
+	// questões do tópico no feed, quando há, e às do Qconcursos (o mesmo link da página das Missões).
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { formatarData } from '$lib/datas';
 	import { blocoFeito, chaveBloco, diaDeHoje, progressoDoDia } from '$lib/missoes/calculos';
@@ -91,10 +91,19 @@
 										<span class="texto">
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
-											{#if n > 0}
-												<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
-													{n} {n === 1 ? 'questão' : 'questões'} deste tópico
-												</a>
+											{#if n > 0 || plano.qc[it.cid]}
+												<span class="atalhos">
+													{#if n > 0}
+														<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
+															{n} {n === 1 ? 'questão' : 'questões'} deste tópico
+														</a>
+													{/if}
+													{#if plano.qc[it.cid]}
+														<a class="topico" href={plano.qc[it.cid]} target="_blank" rel="noopener">
+															Questões no Qconcursos ↗
+														</a>
+													{/if}
+												</span>
 											{/if}
 										</span>
 									</li>
@@ -284,6 +293,12 @@
 		font-style: normal;
 		color: var(--cor-texto-suave);
 		font-size: 0.875rem;
+	}
+
+	.atalhos {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 16px;
 	}
 
 	.topico {

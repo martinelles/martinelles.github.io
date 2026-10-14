@@ -238,7 +238,10 @@ export function importar({ vault, saida }) {
 		if (existsSync(f)) fontesMissoes[c] = readFileSync(f, 'utf8');
 		else avisos.push(`artifacts/missoes/plano-${c}.json ausente: missoes-${c}.json não gerado`);
 	}
-	const missoes = montarMissoes(fontesMissoes);
+	const arqLinks = join(vault, 'catalogo-questoes', 'qconcursos', 'links.json');
+	const temLinks = existsSync(arqLinks);
+	if (!temLinks) avisos.push('catalogo-questoes/qconcursos/links.json ausente: Missões do painel sem links do Qconcursos');
+	const missoes = montarMissoes(fontesMissoes, temLinks ? readFileSync(arqLinks, 'utf8') : undefined);
 	arquivos.push(...missoes);
 
 	// Artefatos (Prioridades, Missões…), montados no vault por scripts/montar_artifacts.py

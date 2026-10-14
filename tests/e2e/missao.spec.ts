@@ -121,6 +121,17 @@ test('o atalho do subitem abre o feed só com as questões do tópico', async ({
 	await expect(page.locator('[data-post-id]').first()).toBeVisible();
 });
 
+test('todo subitem do dia tem link do Qconcursos, mesmo sem questão no feed', async ({ page }) => {
+	await page.goto('/painel');
+	const itens = diaCd.blocos.flatMap((b) => (b.itens ?? []) as { cid: string }[]);
+	const links = missao(page).getByRole('link', { name: 'Questões no Qconcursos ↗' });
+	await expect(links).toHaveCount(itens.length);
+	for (const [i, it] of itens.entries()) {
+		await expect(links.nth(i)).toHaveAttribute('href', (missoesCd.qc as Record<string, string>)[it.cid]);
+		await expect(links.nth(i)).toHaveAttribute('target', '_blank');
+	}
+});
+
 test('"Seu plano" conta dias, blocos e horas das marcações', async ({ page }) => {
 	await page.addInitScript(
 		([k, dia, n]) => {
