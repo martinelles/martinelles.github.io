@@ -6,6 +6,8 @@ export default {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({ fallback: 'index.html' }),
-		serviceWorker: { register: true }
+		serviceWorker: { register: true },
+		// Aba do app aberta há horas: confere a versão publicada para trocar na próxima navegação.
+		version: { pollInterval: 60_000 }
 	}
 };

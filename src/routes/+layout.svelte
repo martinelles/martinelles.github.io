@@ -1,7 +1,8 @@
 <script lang="ts">
 	import '../app.css';
 	import { setContext, type Snippet } from 'svelte';
-	import { page } from '$app/state';
+	import { beforeNavigate } from '$app/navigation';
+	import { page, updated } from '$app/state';
 	import BarraAbas, { type Aba } from '$lib/componentes/feed/BarraAbas.svelte';
 	import PopupEntrar from '$lib/componentes/feed/PopupEntrar.svelte';
 	import { criarRepositorio } from '$lib/feed/conteudo';
@@ -32,6 +33,12 @@
 		const p = tomarPendente();
 		if (p) aplicar(p);
 	});
+	// Saiu versão nova (deploy) com o app aberto: a próxima navegação carrega a página inteira, para
+	// não seguir com o código antigo (que, por exemplo, abria as Missões numa aba sem o menu).
+	beforeNavigate(({ willUnload, to }) => {
+		if (updated.current && !willUnload && to?.url) location.href = to.url.href;
+	});
+
 	// Um repositório por aba: feed, salvos e painel dividem o cache de índice e lotes
 	// (as páginas leem com getContext('repositorio')).
 	setContext('repositorio', criarRepositorio());

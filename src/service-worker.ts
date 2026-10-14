@@ -136,6 +136,7 @@ sw.addEventListener('fetch', (e) => {
 	const url = new URL(req.url);
 	if (url.origin !== sw.location.origin) return; // edital e WhatsApp são externos: não interceptar
 	if (url.pathname.startsWith('/api/')) return; // progresso do login: sempre a rede, nunca o cache
+	if (url.pathname === '/_app/version.json') return; // o app confere se saiu versão nova: sempre a rede
 
 	if (req.mode === 'navigate') {
 		// SPA: online pega a versão nova da rede; offline toda navegação cai na casca. Exceção: as
