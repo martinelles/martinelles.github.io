@@ -1,5 +1,6 @@
 <script lang="ts">
-	// Popup de login que o feed abre ao responder sem login (src/lib/feed/pedidoLogin.svelte.ts).
+	// Popup de login que o feed abre ao responder, curtir ou salvar sem login
+	// (src/lib/feed/pedidoLogin.svelte.ts).
 	// `<dialog>` modal: o navegador prende o foco e o Esc vale como "Agora não".
 	import { page } from '$app/state';
 	import FormEntrar from '$lib/componentes/FormEntrar.svelte';
@@ -7,9 +8,13 @@
 
 	let dialogo: HTMLDialogElement;
 
+	const aberto = $derived(pedidoLogin.pedido !== null);
+	const TITULOS = { responder: 'sua resposta', curtir: 'sua curtida', salvar: 'seus salvos' } as const;
+	const titulo = $derived(`Entre para guardar ${TITULOS[pedidoLogin.pedido?.acao ?? 'responder']}`);
+
 	$effect(() => {
-		if (pedidoLogin.aberto && !dialogo.open) dialogo.showModal();
-		else if (!pedidoLogin.aberto && dialogo.open) dialogo.close();
+		if (aberto && !dialogo.open) dialogo.showModal();
+		else if (!aberto && dialogo.open) dialogo.close();
 	});
 
 	function cancelar(e: Event) {
@@ -19,9 +24,9 @@
 </script>
 
 <dialog bind:this={dialogo} aria-labelledby="popup-entrar-titulo" oncancel={cancelar}>
-	<h2 id="popup-entrar-titulo">Entre para guardar sua resposta</h2>
-	<p>Com login, o que você responde fica salvo na sua conta e aparece em qualquer aparelho.</p>
-	{#if pedidoLogin.aberto}
+	<h2 id="popup-entrar-titulo">{titulo}</h2>
+	<p>Com login, o que você responde, curte e salva fica na sua conta e aparece em qualquer aparelho.</p>
+	{#if aberto}
 		<FormEntrar destino={page.url.pathname + page.url.search}>
 			{#snippet depois()}
 				<button type="button" class="secundario" onclick={() => pedidoLogin.agoraNao()}>Agora não</button>

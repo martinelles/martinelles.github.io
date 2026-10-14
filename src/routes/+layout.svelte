@@ -7,7 +7,7 @@
 	import { criarRepositorio } from '$lib/feed/conteudo';
 	import { carregarFoco, garantirFoco } from '$lib/feed/foco.svelte';
 	import { carregarInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
-	import { tomarRespostaPendente } from '$lib/feed/pedidoLogin.svelte';
+	import { aplicar, tomarPendente } from '$lib/feed/pedidoLogin.svelte';
 	import { carregarTema } from '$lib/tema.svelte';
 	import { armazenamentoAtual, sincronizarAoAbrir } from '$lib/conta/sessao.svelte';
 	import { carregarMarcas } from '$lib/missoes/marcas.svelte';
@@ -28,9 +28,9 @@
 		carregarTema(arm);
 		carregarMarcas(arm);
 	}).then(() => {
-		// Voltando do popup de login: a resposta que o pediu entra depois da sincronização, para ser a mais nova.
-		const p = tomarRespostaPendente();
-		if (p) interacoes.responder(p.id, p.r, p.gabarito);
+		// Voltando do popup de login: a interação que o pediu entra depois da sincronização, para ser a mais nova.
+		const p = tomarPendente();
+		if (p) aplicar(p);
 	});
 	// Um repositório por aba: feed, salvos e painel dividem o cache de índice e lotes
 	// (as páginas leem com getContext('repositorio')).

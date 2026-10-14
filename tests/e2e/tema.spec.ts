@@ -530,6 +530,7 @@ for (const tema of ['kindle', 'kindle-escuro'] as const) {
 		await conferir('abrir o feed');
 		const curtir = page.locator('[data-post-id]').first().getByRole('button', { name: 'Curtir' });
 		await curtir.click();
+		await page.getByRole('dialog').getByRole('button', { name: 'Agora não' }).click();
 		await expect(curtir).toHaveAttribute('aria-pressed', 'true');
 		await conferir('curtir pelo botão');
 		await post.scrollIntoViewIfNeeded();

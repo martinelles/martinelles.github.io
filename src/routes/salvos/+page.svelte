@@ -8,7 +8,7 @@
 	import { hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
-	import { responderQuestao } from '$lib/feed/pedidoLogin.svelte';
+	import { alternarCurtida, alternarSalvo, responderQuestao } from '$lib/feed/pedidoLogin.svelte';
 	import type { Materia, Post as PostFeed } from '$lib/feed/tipos';
 
 	const repo = getContext<Repositorio>('repositorio');
@@ -68,8 +68,8 @@
 							curtido={interacoes.curtido(post.id)}
 							salvo={interacoes.salvo(post.id)}
 							resposta={interacoes.resposta(post.id) ?? undefined}
-							onCurtir={() => interacoes.alternarCurtida(post.id)}
-							onSalvar={() => interacoes.alternarSalvo(post.id)}
+							onCurtir={() => alternarCurtida(post.id)}
+							onSalvar={() => alternarSalvo(post.id)}
 							onResponder={(r) => responder(post, r)}
 							onVisto={() => interacoes.marcarVisto(post.id, dia)}
 						/>

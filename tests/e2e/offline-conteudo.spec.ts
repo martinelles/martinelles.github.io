@@ -72,6 +72,7 @@ test('SC-005: todo o conteúdo fica no cache e o feed funciona offline', async (
 	const id = await post.getAttribute('data-post-id');
 	await post.scrollIntoViewIfNeeded();
 	await post.getByRole('button', { name: 'Salvar' }).click();
+	await page.getByRole('dialog', { name: 'Entre para guardar seus salvos' }).getByRole('button', { name: 'Agora não' }).click();
 	await page.goto('/salvos');
 	await expect(itens(page)).toHaveCount(1);
 	await expect(itens(page).first()).toHaveAttribute('data-post-id', id!);

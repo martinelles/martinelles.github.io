@@ -25,7 +25,7 @@
 	import { materiaVistaHoje, ordenarStories } from '$lib/feed/estatisticas';
 	import { foco } from '$lib/feed/foco.svelte';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
-	import { responderQuestao } from '$lib/feed/pedidoLogin.svelte';
+	import { alternarCurtida, alternarSalvo, responderQuestao } from '$lib/feed/pedidoLogin.svelte';
 	import { chaveFiltro, criarSessao } from '$lib/feed/sessao.svelte';
 	import { TIPO_POR_INICIAL, type Filtro, type Indice, type Materia, type Post as PostFeed, type TipoPost as Tipo } from '$lib/feed/tipos';
 
@@ -190,8 +190,8 @@
 					curtido={interacoes.curtido(post.id)}
 					salvo={interacoes.salvo(post.id)}
 					resposta={interacoes.resposta(post.id) ?? undefined}
-					onCurtir={() => interacoes.alternarCurtida(post.id)}
-					onSalvar={() => interacoes.alternarSalvo(post.id)}
+					onCurtir={() => alternarCurtida(post.id)}
+					onSalvar={() => alternarSalvo(post.id)}
 					onResponder={(r) => responder(post, r)}
 					onVisto={() => interacoes.marcarVisto(post.id, dia)}
 				/>

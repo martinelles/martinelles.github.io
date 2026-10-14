@@ -36,6 +36,11 @@ test('7. curtir pelo coração e por duplo toque, salvar, rever em /salvos e rec
 	// Coração: liga e desliga.
 	const curtir = primeiro.getByRole('button', { name: 'Curtir' });
 	await curtir.click();
+	// Sem login, a primeira interação pede o login; "Agora não" curte só no aparelho.
+	const popup = page.getByRole('dialog', { name: 'Entre para guardar sua curtida' });
+	await expect(popup).toBeVisible();
+	await expect(curtir).toHaveAttribute('aria-pressed', 'false');
+	await popup.getByRole('button', { name: 'Agora não' }).click();
 	await expect(curtir).toHaveAttribute('aria-pressed', 'true');
 	await curtir.click();
 	await expect(curtir).toHaveAttribute('aria-pressed', 'false');

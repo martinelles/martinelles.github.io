@@ -147,3 +147,32 @@ test('logado, responder no feed não abre o popup', async ({ page }) => {
 	await expect(questao.getByText(/Você (acertou|errou)/)).toBeVisible();
 	await expect(page.getByRole('dialog')).toBeHidden();
 });
+
+test('curtir e salvar sem login abrem o popup; entrando, voltam ao feed e sobem', async ({ page }) => {
+	// O servidor já tem este post curtido: o pedido é "curtir", não "alternar", e não descurte.
+	const antes = (curtidas: string[]) => JSON.stringify({ respostas: {}, curtidas, salvos: {}, vistos: {} });
+	await page.goto('/?tipo=lei');
+	const post = page.locator('[data-post-id]').first();
+	const id = (await post.getAttribute('data-post-id'))!;
+	const dados = await simularApi(page, { maria: { [CHAVE_INTERACOES]: { valor: antes([id]), atualizadoEm: 5 } } });
+
+	await post.getByRole('button', { name: 'Curtir' }).click();
+	const popup = page.getByRole('dialog', { name: 'Entre para guardar sua curtida' });
+	await expect(popup).toBeVisible();
+	await popup.getByLabel('Seu nome').fill('maria');
+	await popup.getByRole('button', { name: 'Entrar' }).click();
+	await expect(page).toHaveURL(/\/\?tipo=lei$/);
+	await expect(page.locator(`[data-post-id="${id}"]`).getByRole('button', { name: 'Curtir' })).toHaveAttribute(
+		'aria-pressed',
+		'true',
+		{ timeout: 15_000 }
+	);
+
+	// Logado, salvar não pergunta e sobe.
+	await page.locator(`[data-post-id="${id}"]`).getByRole('button', { name: 'Salvar' }).click();
+	await expect(page.getByRole('dialog')).toBeHidden();
+	await expect
+		.poll(() => Object.keys(JSON.parse(dados.maria[CHAVE_INTERACOES].valor).salvos), { timeout: 6000 })
+		.toEqual([id]);
+	expect(JSON.parse(dados.maria[CHAVE_INTERACOES].valor).curtidas).toEqual([id]);
+});
