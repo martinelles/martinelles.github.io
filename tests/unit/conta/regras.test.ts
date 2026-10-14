@@ -1,13 +1,19 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { CHAVES_SINCRONIZADAS, nomeValido, normalizarNome } from '$lib/conta/regras';
+import { CHAVE_MISSOES, CHAVES_SINCRONIZADAS, nomeValido, normalizarNome } from '$lib/conta/regras';
 import { CHAVE_INTERACOES } from '$lib/feed/interacoes.svelte';
 import { CHAVE_PLANO } from '$lib/plano/registro.svelte';
 import { CHAVE_FOCO } from '$lib/feed/foco.svelte';
 import { CHAVE_TEMA } from '$lib/tema.svelte';
 
 describe('regras da conta', () => {
-	it('as chaves sincronizadas são exatamente as dos quatro stores', () => {
-		expect([...CHAVES_SINCRONIZADAS].sort()).toEqual([CHAVE_INTERACOES, CHAVE_PLANO, CHAVE_FOCO, CHAVE_TEMA].sort());
+	it('as chaves sincronizadas são as dos quatro stores e a das marcações das Missões', () => {
+		expect([...CHAVES_SINCRONIZADAS].sort()).toEqual([CHAVE_INTERACOES, CHAVE_PLANO, CHAVE_FOCO, CHAVE_TEMA, CHAVE_MISSOES].sort());
+	});
+
+	it('a chave das Missões é a mesma que a página grava', () => {
+		const pagina = readFileSync('static/conteudo/artefatos/missoes.html', 'utf8');
+		expect(pagina).toContain(`const KEY = '${CHAVE_MISSOES}';`);
 	});
 
 	it.each([

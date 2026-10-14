@@ -32,8 +32,10 @@ test('os botões do cabeçalho abrem as páginas do painel, e uma liga à outra'
 	await expect(m.getByRole('heading', { level: 1, name: 'Missões até a prova' })).toBeVisible();
 	await expect(m.locator('#link-prioridades')).toHaveAttribute('href', /^\/conteudo\/artefatos\/prioridades\.html#/);
 	expect(await linksClaude(m)).toEqual([]);
-	// Sem o banco do claude.ai, as marcações ficam no navegador (modo de antes da v6).
-	await expect(m.locator('#sync')).toHaveText('Marcações salvas só neste navegador.');
+	// Sem login, as marcações ficam no navegador.
+	await expect(m.locator('#sync')).toHaveText(
+		'Marcações salvas só neste navegador. Entre no painel (Ajustes → Conta) para levá-las a outro aparelho.'
+	);
 });
 
 test('a âncora escolhe o cargo nas Missões', async ({ page }) => {
@@ -87,4 +89,70 @@ test('Raio-X roda sem o claude.ai: números, gráficos, tabela e troca de cargo'
 test('Raio-X: a âncora #aud abre direto em Auditoria', async ({ page }) => {
 	await page.goto('/conteudo/artefatos/raiox.html#aud');
 	await expect(page.locator('#c-aud')).toHaveAttribute('aria-pressed', 'true');
+});
+
+// Fase 3: marcações das Missões na conta do login por nome. A API é simulada, com a regra do Worker.
+const CHAVE = 'missoes-cgu-2026';
+type Gravado = { valor: string; atualizadoEm: number };
+
+async function simularApi(page: Page, inicial: Record<string, Gravado> = {}) {
+	const dados: Record<string, Gravado> = { ...inicial };
+	const pedidos: string[] = [];
+	await page.route('**/api/progresso/**', async (rota) => {
+		const req = rota.request();
+		pedidos.push(`${req.method()} ${decodeURIComponent(new URL(req.url()).pathname)}`);
+		const chave = decodeURIComponent(new URL(req.url()).pathname.split('/')[4] ?? '');
+		if (req.method() === 'PUT') {
+			const novo = req.postDataJSON() as Gravado;
+			const gravado = !dados[chave] || novo.atualizadoEm > dados[chave].atualizadoEm;
+			if (gravado) dados[chave] = novo;
+			return rota.fulfill({ json: { gravado, atual: dados[chave] } });
+		}
+		return rota.fulfill({ json: dados });
+	});
+	return { dados, pedidos };
+}
+
+const logar = (page: Page, nome = 'maria') =>
+	page.addInitScript((n) => localStorage.setItem('painel-concurso:usuario:v1', n), nome);
+
+test('Missões, logada: marcar um bloco sobe para a conta', async ({ page }) => {
+	const api = await simularApi(page);
+	await logar(page);
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await expect(page.locator('#sync')).toHaveText('Salvo na conta maria: aparece em qualquer aparelho.');
+
+	const bolha = page.locator('.bubble').first();
+	const chaveBloco = await bolha.getAttribute('data-k');
+	await bolha.check();
+	await expect.poll(() => api.dados[CHAVE]?.valor).toBe(JSON.stringify({ [chaveBloco!]: true }));
+	expect(api.pedidos).toContain(`PUT /api/progresso/maria/${CHAVE}`);
+});
+
+test('Missões, logada: a conta mais nova traz as marcações de outro aparelho', async ({ page }) => {
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	const chaveBloco = await page.locator('.bubble').first().getAttribute('data-k');
+	const api = await simularApi(page, { [CHAVE]: { valor: JSON.stringify({ [chaveBloco!]: true }), atualizadoEm: 5 } });
+	await logar(page);
+	await page.reload();
+	await expect(page.locator(`.bubble[data-k="${chaveBloco}"]`)).toBeChecked();
+	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toBe(JSON.stringify({ [chaveBloco!]: true }));
+	expect(api.pedidos.filter((p) => p.startsWith('PUT'))).toEqual([]);
+});
+
+test('Missões, sem login: marcar não fala com o servidor', async ({ page }) => {
+	const api = await simularApi(page);
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await page.locator('.bubble').first().check();
+	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toContain('true');
+	expect(api.pedidos).toEqual([]);
+});
+
+test('Missões, logada e sem API (GitHub Pages): avisa e guarda no aparelho', async ({ page }) => {
+	await page.route('**/api/**', (r) => r.fulfill({ status: 404, contentType: 'text/html', body: '<!doctype html>' }));
+	await logar(page);
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await expect(page.locator('#sync')).toHaveText('Sem conexão com a conta: as marcações ficam neste aparelho por enquanto.');
+	await page.locator('.bubble').first().check();
+	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toContain('true');
 });

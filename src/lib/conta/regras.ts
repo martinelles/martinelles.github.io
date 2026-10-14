@@ -3,16 +3,22 @@
  * chaves do armazenamento que sobem para o servidor. Plano: planos/2026-10-13-login-por-nome-backend-cloudflare.md.
  */
 
+/** Chave das marcações da página das Missões (`KEY` no script dela, no vault). */
+export const CHAVE_MISSOES = 'missoes-cgu-2026';
+
 /**
- * As quatro chaves de progresso; qualquer outra não sobe. Escritas por extenso porque o Worker
- * importa este arquivo e não pode puxar os stores (runas do Svelte); `tests/unit/conta` confere
- * que batem com `CHAVE_INTERACOES`, `CHAVE_PLANO`, `CHAVE_FOCO` e `CHAVE_TEMA`.
+ * As chaves de progresso; qualquer outra não sobe. As quatro primeiras são dos stores do app,
+ * escritas por extenso porque o Worker importa este arquivo e não pode puxar os stores (runas do
+ * Svelte); `tests/unit/conta` confere que batem com `CHAVE_INTERACOES`, `CHAVE_PLANO`,
+ * `CHAVE_FOCO` e `CHAVE_TEMA`. A última é das marcações da página das Missões
+ * (`/conteudo/artefatos/missoes.html`, que a grava sozinha; planos/2026-10-14-artefatos-no-git.md).
  */
 export const CHAVES_SINCRONIZADAS: readonly string[] = [
 	'painel-concurso:interacoes:v1',
 	'painel-concurso:plano:v1',
 	'painel-concurso:preferencias:v2',
-	'painel-concurso:tema:v1'
+	'painel-concurso:tema:v1',
+	CHAVE_MISSOES
 ];
 
 /** 3 a 30 caracteres, `a-z`, `0-9` e `-`, sem hífen nas pontas (decisão 2). */

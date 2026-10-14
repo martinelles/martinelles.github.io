@@ -193,13 +193,29 @@ sair do login por nome e do D1, e o Raio-X roda sem o tipo "dashboard" do claude
 
 ### Critérios de aceite
 #### Automáticos
-- [ ] `npm test` e `npm run check`.
-- [ ] `npx playwright test`: com `/api` simulada, marcar um bloco logado sobe para
+- [x] `npm test` e `npm run check`.
+- [x] `npx playwright test`: com `/api` simulada, marcar um bloco logado sobe para
       `missoes-cgu-2026`; deslogado, nada vai ao servidor.
-- [ ] `python scripts/montar_artifacts.py --check` no vault sem erro.
+- [x] `python scripts/montar_artifacts.py --check` no vault sem erro.
 #### Manuais
 - [ ] Depois da migração, as marcações que você já tinha aparecem nas Missões do painel.
 - [ ] Marcar no celular e ver no PC.
+
+### Nota de execução (2026-10-14)
+
+- **Migração: nada a migrar.** A coleção `marcas` do artefato das Missões no claude.ai foi lida
+  com `ArtifactData` e está vazia: nenhuma marcação foi feita com o banco de lá. O item manual
+  "as marcações que você já tinha aparecem" vale só para as que estiverem no `localStorage` do
+  domínio do claude.ai, que não atravessam (ver "Migração de dados").
+- **No vault:** `artifacts/missoes/script.html` trocou o bloco `window.claude.use` pela conta do
+  painel, com as mesmas chaves (`painel-concurso:usuario:v1`, `painel-concurso:sinc:v1`) e a
+  mesma regra de carimbo de `src/lib/conta/`. Saiu também o `canWrite` (só o dono marcava),
+  que não faz sentido sem o banco do claude.ai. O `python scripts/montar_artifacts.py --check`
+  deu 264 links iguais à referência nas duas páginas, e os `_publicar/` foram regenerados.
+- **No painel:** `CHAVE_MISSOES` foi para `src/lib/conta/regras.ts`. O teste confere que é a
+  mesma `KEY` que a página grava. Com isso, o app também traz e sobe essa chave ao abrir, e o
+  "Sair" a apaga.
+- Resultado: `npm test` com 346, `npm run check` sem erro e `npx playwright test` com 250.
 
 ## Estratégia de teste
 - O importador é testado como os outros (`tests/unit/importar/`), com um vault falso em pasta

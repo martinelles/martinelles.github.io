@@ -220,14 +220,18 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const lsGet = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch (e) { return d; } };
 const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
 
-// Marcações: chave "cargo~data~bloco". Com o banco, a fonte é a coleção "marcas"; sem ele, este navegador.
-let done = {};
-try {
-  const raw = JSON.parse(lsGet(KEY, '{}')) || {};
-  for (const [k, v] of Object.entries(raw)) if (v) done[k.includes('~') ? k : 'cd~' + k.replace('#', '~')] = true;
-} catch (e) { done = {}; }
+// Marcações: chave "cargo~data~bloco", guardadas neste navegador em KEY. Com o login por nome do
+// painel, sobem para a conta (/api/progresso), e vale a gravação mais nova, como no resto do app.
+function lerMarcas(txt) {
+  const d = {};
+  try {
+    const raw = JSON.parse(txt) || {};
+    for (const [k, v] of Object.entries(raw)) if (v) d[k.includes('~') ? k : 'cd~' + k.replace('#', '~')] = true;
+  } catch (e) {}
+  return d;
+}
+let done = lerMarcas(lsGet(KEY, '{}'));
 const saveLocal = () => lsSet(KEY, JSON.stringify(done));
-let db = null, canWrite = true;
 
 // #cd ou #aud no link (vindo das Prioridades do edital) escolhe o cargo
 let cargo = (location.hash === '#cd' || location.hash === '#aud') ? location.hash.slice(1) : lsGet(KEY + ':cargo', 'cd');
@@ -295,7 +299,7 @@ function blockHTML(p, b, j) {
   }).join('');
   const id = 'b-' + k.replace(/[^0-9a-z]/gi, '-');
   return `<div class="block t-${b.tipo}${ck ? ' done' : ''}">
-    <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} ${canWrite ? '' : 'disabled'} aria-label="Marcar ${esc(b.titulo)} como cumprido">
+    <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} aria-label="Marcar ${esc(b.titulo)} como cumprido">
     <div class="bt"><label for="${id}" class="k">${KIND[b.tipo]}</label>
       <div class="t"><span>${esc(b.titulo)}</span>${b.min ? `<span class="min">${b.min} min</span>` : ''}</div>
       ${itens ? `<ul class="items">${itens}</ul>` : ''}
@@ -329,57 +333,71 @@ function setView(v) {
 }
 function setCargo(c) { cargo = c; lsSet(KEY + ':cargo', c); renderAll(); }
 
+// Conta do painel: nome do login, carimbos e envio. Mesmas chaves e regra de src/lib/conta/ do painel.
+const USUARIO = lsGet('painel-concurso:usuario:v1', '');
+const SINC = 'painel-concurso:sinc:v1';
+const urlConta = (chave) => '/api/progresso/' + encodeURIComponent(USUARIO) + (chave ? '/' + encodeURIComponent(chave) : '');
+function carimbos() {
+  try { const c = JSON.parse(lsGet(SINC, '{}')); return c && typeof c === 'object' ? c : {}; } catch (e) { return {}; }
+}
+function carimbar(em, pendente) { const c = carimbos(); c[KEY] = { em, pendente }; lsSet(SINC, JSON.stringify(c)); }
+// Sobe a marcação pendente; true se o servidor respondeu (gravou ou já tinha algo mais novo).
+async function enviar() {
+  const c = carimbos()[KEY];
+  if (!USUARIO || !c || !c.pendente) return true;
+  try {
+    const r = await fetch(urlConta(KEY), {
+      method: 'PUT', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ valor: lsGet(KEY, '{}'), atualizadoEm: c.em })
+    });
+    if (r.status >= 500) return false;
+    const atual = carimbos()[KEY];
+    if (atual && atual.em === c.em) carimbar(c.em, false);
+    return true;
+  } catch (e) { return false; }
+}
+const SALVO = () => `Salvo na conta ${USUARIO}: aparece em qualquer aparelho.`;
+
 $('list').addEventListener('change', async e => {
   const el = e.target; const k = el.dataset.k; if (!k) return;
   const on = el.checked;
   el.closest('.block').classList.toggle('done', on);
   if (on) done[k] = true; else delete done[k];
   renderStats(); renderRuler();
-  if (!db) { saveLocal(); return; }
-  el.disabled = true;
-  try {
-    const [cg, data, bloco] = k.split('~');
-    const ref = db.collection('marcas').doc(k);
-    if (on) await ref.set({ cargo: cg, data, bloco: +bloco, feito: true, em: new Date().toISOString() });
-    else await ref.delete();
-    setSync('Salvo na sua conta: aparece em qualquer aparelho.', 'ok');
-  } catch (err) {
-    if (on) delete done[k]; else done[k] = true;
-    el.checked = !on; el.closest('.block').classList.toggle('done', !on);
-    renderStats(); renderRuler();
-    setSync(err && err.code === 'quota_exceeded' ? 'O banco do artefato está cheio; a marcação não foi salva.' : 'Não consegui salvar esta marcação. Tente de novo em instantes.', 'err');
-  } finally { el.disabled = !canWrite; }
+  saveLocal();
+  if (!USUARIO) return;
+  const anterior = (carimbos()[KEY] || {}).em || 0;
+  carimbar(Math.max(Date.now(), anterior + 1), true);
+  if (await enviar()) setSync(SALVO(), 'ok');
+  else setSync('Sem conexão: a marcação ficou neste aparelho e sobe quando a rede voltar.', 'err');
 });
 ['hoje', 'semana', 'tudo'].forEach(x => $('v-' + x).onclick = () => setView(x));
 ['cd', 'aud'].forEach(x => $('c-' + x).onclick = () => setCargo(x));
 renderAll(); setView(view);
-setSync('Marcações salvas só neste navegador.');
+setSync(USUARIO ? 'Carregando suas marcações…' : 'Marcações salvas só neste navegador. Entre no painel (Ajustes → Conta) para levá-las a outro aparelho.');
 
-(async () => {
-  if (!window.claude?.use) return;
-  const [dbNs, user] = await Promise.all([claude.use('db'), claude.use('user')]);
-  if (!dbNs) return;
-  if (user) { try { canWrite = await user.isOwner(); } catch (e) {} }
-  db = dbNs;
-  let first = true;
-  db.collection('marcas').limit(1000).onSnapshot(async snap => {
-    const remote = {};
-    snap.docs.forEach(d => { if (d.exists && d.data()?.feito) remote[d.id] = true; });
-    if (first) {
-      first = false;
-      const pend = Object.keys(done).filter(k => !remote[k]);
-      if (canWrite && pend.length && snap.empty) { // primeira vez com banco: leva as marcações deste navegador
-        for (const k of pend) {
-          const [cg, data, bloco] = k.split('~');
-          try { await db.collection('marcas').doc(k).set({ cargo: cg, data, bloco: +bloco, feito: true, em: new Date().toISOString() }); remote[k] = true; } catch (e) {}
-        }
-      }
+// Ao abrir, logada: sobe o que ficou pendente e traz da conta o que lá for mais novo.
+if (USUARIO) (async () => {
+  try {
+    await enviar();
+    const r = await fetch(urlConta(), { cache: 'no-store' });
+    if (!r.ok || !(r.headers.get('content-type') || '').includes('application/json')) throw new Error('sem API');
+    const s = (await r.json())[KEY];
+    const c = carimbos()[KEY];
+    if (s && (!c || s.atualizadoEm > c.em)) {
+      lsSet(KEY, s.valor); carimbar(s.atualizadoEm, false);
+      done = lerMarcas(s.valor);
+      renderStats(); renderRuler(); renderList();
+    } else if (lsGet(KEY, null) !== null && (!s || c.em > s.atualizadoEm)) {
+      carimbar(c ? c.em : Date.now(), true);
+      if (!(await enviar())) throw new Error('envio falhou');
     }
-    done = remote;
-    renderStats(); renderRuler(); renderList();
-    setSync(canWrite ? 'Salvo na sua conta: aparece em qualquer aparelho.' : 'Só quem criou o plano marca missões; aqui você vê o progresso.', 'ok');
-  }, () => { db = null; setSync('A conexão com o banco caiu; as marcações voltaram a ficar só neste navegador.', 'err'); });
+    setSync(SALVO(), 'ok');
+  } catch (e) {
+    setSync('Sem conexão com a conta: as marcações ficam neste aparelho por enquanto.', 'err');
+  }
 })();
+addEventListener('online', () => { if (USUARIO) enviar().then((ok) => ok && setSync(SALVO(), 'ok')); });
 </script>
 </body>
 </html>
