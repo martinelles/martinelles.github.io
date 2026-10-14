@@ -8,7 +8,8 @@
  * Link do Qconcursos de cada subitem (`qc`, por `cid`): o padrão do par que a página das Missões
  * mostra, de `catalogo-questoes/qconcursos/links.json`. Assim todo subitem da "Missão de hoje" tem
  * onde treinar, mesmo sem questão no feed. A chave é a da página: `<CARGO>:` nos itens `E…`, o código
- * com hífen (`CD:E4-1.1`), e o subitem pai quando o próprio não tem link.
+ * com hífen (`CD:E4-1.1`), e o subitem pai quando o próprio não tem link. Nos itens das revisões, também
+ * o link só das questões que ela errou (`qcErros`), como o "erros ↗" da página.
  */
 
 export const CARGOS = ['cd', 'aud'];
@@ -31,24 +32,31 @@ export const chaveLink = (/** @type {string} */ cargo, /** @type {string} */ cod
 	(/^E/.test(cod) ? `${cargo.toUpperCase()}:` : '') + cod.replace(' ', '-');
 const paiDe = (/** @type {string} */ k) => /^(.*-\d+\.\d+)\.\d+$/.exec(k)?.[1] ?? null;
 
+const ehQc = (/** @type {unknown} */ u) => typeof u === 'string' && u.startsWith('https://www.qconcursos.com/');
+
 /**
- * `{ cid: url }` dos itens do plano que têm link.
- * @param {{ plan: { blocos: { itens?: { cid: string, cod: string }[] }[] }[] }} plano
+ * `{ qc, qcErros }`, cada um `{ cid: url }`: o link padrão de todo item que tem link e, nos itens
+ * das revisões, o das questões erradas.
+ * @param {{ plan: { blocos: { tipo: string, itens?: { cid: string, cod: string }[] }[] }[] }} plano
  * @param {string} cargo
  * @param {Record<string, unknown>} links conteúdo de links.json
  */
 export function linksDoPlano(plano, cargo, links) {
 	/** @type {Record<string, string>} */
 	const qc = {};
+	/** @type {Record<string, string>} */
+	const qcErros = {};
 	for (const d of plano.plan)
 		for (const b of d.blocos)
 			for (const it of b.itens ?? []) {
 				const ch = chaveLink(cargo, it.cod);
 				const l = /** @type {Record<string, unknown> | undefined} */ (links[ch] ?? links[paiDe(ch) ?? '']);
-				const url = l && typeof l.padrao === 'string' ? l[l.padrao] : undefined;
-				if (typeof url === 'string' && url.startsWith('https://www.qconcursos.com/')) qc[it.cid] = url;
+				if (!l) continue;
+				const url = typeof l.padrao === 'string' ? l[l.padrao] : undefined;
+				if (ehQc(url)) qc[it.cid] = /** @type {string} */ (url);
+				if (b.tipo === 'rev' && ehQc(l.erros)) qcErros[it.cid] = /** @type {string} */ (l.erros);
 			}
-	return qc;
+	return { qc, qcErros };
 }
 
 /**
@@ -110,7 +118,7 @@ export function montarMissoes(fontes, links) {
 			throw new Error(`${onde}: JSON inválido (${/** @type {Error} */ (e).message})`);
 		}
 		const plano = validarMissoes(bruto, onde);
-		const saida = mapa ? { ...plano, qc: linksDoPlano(plano, c, mapa) } : plano;
+		const saida = mapa ? { ...plano, ...linksDoPlano(plano, c, mapa) } : plano;
 		return { arquivo: `missoes-${c}.json`, conteudo: `${JSON.stringify(saida)}\n` };
 	});
 }

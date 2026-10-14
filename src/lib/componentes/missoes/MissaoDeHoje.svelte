@@ -1,7 +1,8 @@
 <script lang="ts">
 	// Missão de hoje no painel (planos/2026-10-14-missao-unica.md): o dia do plano de 61 dias das
 	// Missões, com as mesmas bolhas da página (mesma chave e mesma conta). Cada subitem leva às
-	// questões do tópico no feed, quando há, e às do Qconcursos (o mesmo link da página das Missões).
+	// questões do tópico no feed, quando há, e às do Qconcursos (o mesmo link da página das
+	// Missões); nas revisões, também às que ela errou lá.
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { formatarData } from '$lib/datas';
 	import { blocoFeito, chaveBloco, diaDeHoje, progressoDoDia } from '$lib/missoes/calculos';
@@ -86,12 +87,13 @@
 							<ul class="itens">
 								{#each b.itens as it (it.cid)}
 									{@const n = questoesPorTopico?.get(it.cid) ?? 0}
+									{@const erros = b.tipo === 'rev' ? plano.qcErros[it.cid] : undefined}
 									<li>
 										<span class="cod">{it.cod}</span>
 										<span class="texto">
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
-											{#if n > 0 || plano.qc[it.cid]}
+											{#if n > 0 || plano.qc[it.cid] || erros}
 												<span class="atalhos">
 													{#if n > 0}
 														<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
@@ -101,6 +103,11 @@
 													{#if plano.qc[it.cid]}
 														<a class="topico" href={plano.qc[it.cid]} target="_blank" rel="noopener">
 															Questões no Qconcursos ↗
+														</a>
+													{/if}
+													{#if erros}
+														<a class="topico" href={erros} target="_blank" rel="noopener">
+															Questões que errei ↗
 														</a>
 													{/if}
 												</span>

@@ -132,6 +132,19 @@ test('todo subitem do dia tem link do Qconcursos, mesmo sem questão no feed', a
 	}
 });
 
+test('nas revisões do dia, cada subitem leva também às questões que ela errou no Qconcursos', async ({ page }) => {
+	await page.goto('/painel');
+	const itensRev = diaCd.blocos.filter((b) => b.tipo === 'rev').flatMap((b) => (b.itens ?? []) as { cid: string }[]);
+	expect(itensRev.length).toBeGreaterThan(0);
+	const erros = missao(page).getByRole('link', { name: 'Questões que errei ↗' });
+	await expect(erros).toHaveCount(itensRev.length);
+	for (const [i, it] of itensRev.entries()) {
+		const href = (missoesCd.qcErros as Record<string, string>)[it.cid];
+		expect(href).toContain('my_questions=wrong');
+		await expect(erros.nth(i)).toHaveAttribute('href', href);
+	}
+});
+
 test('"Seu plano" conta dias, blocos e horas das marcações', async ({ page }) => {
 	await page.addInitScript(
 		([k, dia, n]) => {

@@ -17,6 +17,7 @@ const PLANO: PlanoMissoes = {
 	gerado: '2026-10-13',
 	cortes: [],
 	qc: {},
+	qcErros: {},
 	plan: [
 		{ data: '2026-10-13', dow: 'ter', fase: 'Base', blocos: [{ tipo: 'novo', titulo: 'N', min: 45, itens: [item('EPA-01')] }, { tipo: 'rev', titulo: 'R', min: 45, itens: [] }] },
 		{ data: '2026-10-14', dow: 'qua', fase: 'Base', blocos: [{ tipo: 'sim', titulo: 'S', min: 90 }, { tipo: 'rev', titulo: 'Encaixe', min: 0 }] },
@@ -50,12 +51,15 @@ describe('importador das Missões', () => {
 		const p = bruto();
 		p.plan[0].blocos[1].itens = [{ cid: 'EDC-06', cod: 'B1 6.1', texto: 'Comum' }, { cid: 'EPA-02', cod: 'E1 2.1.3', texto: 'Neto' }];
 		const links = {
-			'CD:E1-1.1': { padrao: 'amplo', amplo: qc('a'), cobrados: qc('c') },
-			'B1-6.1': { padrao: 'cobrados', amplo: qc('b-a'), cobrados: qc('b-c') },
+			'CD:E1-1.1': { padrao: 'amplo', amplo: qc('a'), cobrados: qc('c'), erros: qc('a-e') },
+			'B1-6.1': { padrao: 'cobrados', amplo: qc('b-a'), cobrados: qc('b-c'), erros: qc('b-e') },
 			'CD:E1-2.1': { padrao: 'amplo', amplo: qc('pai') }
 		};
 		const [cd] = montarMissoes({ cd: JSON.stringify(p) }, JSON.stringify(links));
-		expect(JSON.parse(cd.conteudo).qc).toEqual({ 'EPA-01': qc('a'), 'EDC-06': qc('b-c'), 'EPA-02': qc('pai') });
+		const saida = JSON.parse(cd.conteudo);
+		expect(saida.qc).toEqual({ 'EPA-01': qc('a'), 'EDC-06': qc('b-c'), 'EPA-02': qc('pai') });
+		// "erros" só nos itens de revisão (o bloco 1 do dia 13 é rev; EPA-01 está num bloco novo).
+		expect(saida.qcErros).toEqual({ 'EDC-06': qc('b-e') });
 		expect(chaveLink('aud', 'E4 1.1')).toBe('AUD:E4-1.1');
 		expect(chaveLink('aud', 'B2 3.1')).toBe('B2-3.1');
 		expect(() => montarMissoes({ cd: JSON.stringify(p) }, '[')).toThrow('links.json: JSON inválido');
