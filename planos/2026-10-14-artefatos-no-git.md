@@ -235,3 +235,13 @@ sair do login por nome e do D1, e o Raio-X roda sem o tipo "dashboard" do claude
   `src/lib/componentes/CabecalhoPainel.svelte:25`, `src/service-worker.ts:29-63`,
   `src/lib/conta/regras.ts`
 - Login: `planos/2026-10-13-login-por-nome-backend-cloudflare.md`
+
+## Correção depois do teste manual (2026-10-14)
+
+No teste, você viu que as Missões ainda deixavam marcar sem login. A decisão 4 previa voltar
+ao `localStorage` nesse caso, mas a regra passa a ser outra: **sem login, as Missões ficam só
+para leitura**. As bolhas aparecem desabilitadas, o clique é ignorado mesmo que chegue ao
+`change`, e o aviso "Para marcar missões, entre com seu nome no painel" leva a `/entrar`. As
+marcações que já estavam no navegador continuam aparecendo. Mudança em
+`artifacts/missoes/script.html` (vault), com `_publicar/` regenerado e reimportado. O e2e
+"sem login" agora confere as bolhas desabilitadas, que nada é gravado e que nada vai ao servidor.

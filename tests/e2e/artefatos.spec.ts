@@ -32,10 +32,9 @@ test('os botões do cabeçalho abrem as páginas do painel, e uma liga à outra'
 	await expect(m.getByRole('heading', { level: 1, name: 'Missões até a prova' })).toBeVisible();
 	await expect(m.locator('#link-prioridades')).toHaveAttribute('href', /^\/conteudo\/artefatos\/prioridades\.html#/);
 	expect(await linksClaude(m)).toEqual([]);
-	// Sem login, as marcações ficam no navegador.
-	await expect(m.locator('#sync')).toHaveText(
-		'Marcações salvas só neste navegador. Entre no painel (Ajustes → Conta) para levá-las a outro aparelho.'
-	);
+	// Sem login, as missões ficam só para leitura, com o convite para entrar.
+	await expect(m.locator('#sync')).toHaveText('Para marcar missões, entre com seu nome no painel.');
+	await expect(m.locator('#sync a')).toHaveAttribute('href', '/entrar');
 });
 
 test('a âncora escolhe o cargo nas Missões', async ({ page }) => {
@@ -140,11 +139,15 @@ test('Missões, logada: a conta mais nova traz as marcações de outro aparelho'
 	expect(api.pedidos.filter((p) => p.startsWith('PUT'))).toEqual([]);
 });
 
-test('Missões, sem login: marcar não fala com o servidor', async ({ page }) => {
+test('Missões, sem login: só leitura, nada é marcado nem enviado', async ({ page }) => {
 	const api = await simularApi(page);
 	await page.goto('/conteudo/artefatos/missoes.html#cd');
-	await page.locator('.bubble').first().check();
-	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toContain('true');
+	const bolhas = page.locator('.bubble');
+	await expect(bolhas.first()).toBeVisible();
+	expect(await bolhas.evaluateAll((els) => els.every((e) => (e as HTMLInputElement).disabled))).toBe(true);
+	await bolhas.first().click({ force: true });
+	await expect(bolhas.first()).not.toBeChecked();
+	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toBeNull();
 	expect(api.pedidos).toEqual([]);
 });
 

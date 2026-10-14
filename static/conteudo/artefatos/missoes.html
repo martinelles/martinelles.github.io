@@ -299,7 +299,7 @@ function blockHTML(p, b, j) {
   }).join('');
   const id = 'b-' + k.replace(/[^0-9a-z]/gi, '-');
   return `<div class="block t-${b.tipo}${ck ? ' done' : ''}">
-    <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} aria-label="Marcar ${esc(b.titulo)} como cumprido">
+    <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} ${USUARIO ? '' : 'disabled'} aria-label="Marcar ${esc(b.titulo)} como cumprido">
     <div class="bt"><label for="${id}" class="k">${KIND[b.tipo]}</label>
       <div class="t"><span>${esc(b.titulo)}</span>${b.min ? `<span class="min">${b.min} min</span>` : ''}</div>
       ${itens ? `<ul class="items">${itens}</ul>` : ''}
@@ -361,11 +361,11 @@ const SALVO = () => `Salvo na conta ${USUARIO}: aparece em qualquer aparelho.`;
 $('list').addEventListener('change', async e => {
   const el = e.target; const k = el.dataset.k; if (!k) return;
   const on = el.checked;
+  if (!USUARIO) { el.checked = !on; return; } // sem login, só leitura
   el.closest('.block').classList.toggle('done', on);
   if (on) done[k] = true; else delete done[k];
   renderStats(); renderRuler();
   saveLocal();
-  if (!USUARIO) return;
   const anterior = (carimbos()[KEY] || {}).em || 0;
   carimbar(Math.max(Date.now(), anterior + 1), true);
   if (await enviar()) setSync(SALVO(), 'ok');
@@ -374,7 +374,14 @@ $('list').addEventListener('change', async e => {
 ['hoje', 'semana', 'tudo'].forEach(x => $('v-' + x).onclick = () => setView(x));
 ['cd', 'aud'].forEach(x => $('c-' + x).onclick = () => setCargo(x));
 renderAll(); setView(view);
-setSync(USUARIO ? 'Carregando suas marcações…' : 'Marcações salvas só neste navegador. Entre no painel (Ajustes → Conta) para levá-las a outro aparelho.');
+if (USUARIO) setSync('Carregando suas marcações…');
+else {
+  // Sem login, as missões ficam só para leitura: marcar exige a conta do painel.
+  setSync('Para marcar missões, ');
+  const entrar = document.createElement('a');
+  entrar.href = '/entrar'; entrar.textContent = 'entre com seu nome no painel';
+  $('sync').append(entrar, '.');
+}
 
 // Ao abrir, logada: sobe o que ficou pendente e traz da conta o que lá for mais novo.
 if (USUARIO) (async () => {
