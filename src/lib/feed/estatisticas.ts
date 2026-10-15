@@ -2,6 +2,7 @@
  * Números do painel e dos stories, calculados a cada chamada sobre as interações e o índice
  * (FR-009, FR-014, SC-007; research R8: nada é armazenado).
  */
+import { naMateria } from './entrada';
 import type { DadosInteracoes } from './interacoes.svelte';
 import type { Indice, Materia } from './tipos';
 
@@ -60,7 +61,7 @@ export function ordenarStories(materias: readonly Materia[], foco: string | null
 export function materiaVistaHoje(materia: string, indice: Pick<Indice, 'posts'>, vistosHoje: ReadonlySet<string>): boolean {
 	let algum = false;
 	for (const e of indice.posts) {
-		if (e.m !== materia) continue;
+		if (!naMateria(e, materia)) continue;
 		if (!vistosHoje.has(e.id)) return false;
 		algum = true;
 	}

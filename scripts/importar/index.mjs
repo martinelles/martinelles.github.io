@@ -26,7 +26,7 @@ import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
 import { importarLei } from './lei-seca.mjs';
-import { disciplinaDoPost, ordenarDisciplinas } from './disciplinas.mjs';
+import { ARQUIVO_SEGUNDO_TOPICO, disciplinaDoPost, lerSegundosTopicos, ordenarDisciplinas } from './disciplinas.mjs';
 import { LEI_PARA_MATERIA, LEIS_IGNORADAS } from './materias.mjs';
 import { importarQuestoes } from './questoes.mjs';
 import { comparar } from './texto.mjs';
@@ -200,10 +200,33 @@ export function importar({ vault, saida }) {
 	/** @type {Record<string, number>} */
 	const totaisMateria = {};
 	for (const [m, lista] of Object.entries(porMateria)) totaisMateria[m] = lista.length;
+
+	// Segundo tópico: questão de P1/P2 que também cobre um subitem da P3 de Auditoria. Fica no
+	// lote da disciplina principal; o índice ganha `m2` e `tp2`, e o total de `m2` a conta.
+	/** @type {Map<string, { m2: string, tp2: string }>} */
+	const segundos = new Map();
+	const arqSegundo = join(vault, ARQUIVO_SEGUNDO_TOPICO);
+	if (existsSync(arqSegundo)) {
+		const s = lerSegundosTopicos(/** @type {Record<string, string>[]} */ (lerCsv(ler(arqSegundo))));
+		avisos.push(...s.avisos);
+		const usados = new Set();
+		for (const p of posts) {
+			if (p.tipo !== 'questao') continue;
+			const base = p.id.replace(/^q:/, '').replace(/:[A-Z]$/, '');
+			const extra = s.mapa.get(base);
+			if (!extra || extra.m2 === p.materia || !porMateria[p.materia]?.includes(p)) continue;
+			segundos.set(p.id, extra);
+			usados.add(base);
+			totaisMateria[extra.m2] = (totaisMateria[extra.m2] ?? 0) + 1;
+		}
+		for (const id of s.mapa.keys()) {
+			if (!usados.has(id)) avisos.push(`${ARQUIVO_SEGUNDO_TOPICO}: ${id} não está no feed`);
+		}
+	}
 	const materias = ordenarDisciplinas(totaisMateria);
 
 	const geradoEm = new Date(Math.floor(maisRecente / 1000) * 1000).toISOString();
-	/** @type {{ id: string, t: string, m: string, l: string, tp?: string }[]} */
+	/** @type {{ id: string, t: string, m: string, l: string, tp?: string, m2?: string, tp2?: string }[]} */
 	const entradas = [];
 	/** @type {Record<string, string>} */
 	const mapaLotes = {};
@@ -215,16 +238,21 @@ export function importar({ vault, saida }) {
 	const materiasRel = [];
 	for (const m of materias) {
 		const lista = porMateria[m.id];
-		if (!lista?.length) continue;
+		if (!lista?.length) {
+			materiasRel.push({ id: m.id, nome: m.nome, total: m.total, lotes: 0 });
+			continue;
+		}
 		const lotes = fatiarMateria(m.id, lista);
 		for (const lote of lotes) {
 			mapaLotes[lote.chave] = lote.arquivo;
 			arquivos.push({ arquivo: lote.arquivo, conteudo: lote.conteudo });
 			lotesRel.push({ arquivo: lote.arquivo, posts: lote.posts.length, gzip: lote.gzip });
 			for (const p of lote.posts) {
-				/** @type {{ id: string, t: string, m: string, l: string, tp?: string }} */
+				/** @type {{ id: string, t: string, m: string, l: string, tp?: string, m2?: string, tp2?: string }} */
 				const e = { id: p.id, t: p.tipo[0], m: m.id, l: lote.chave };
 				if (p.tipo === 'questao' && p.topicoEstudo) e.tp = p.topicoEstudo;
+				const extra = segundos.get(p.id);
+				if (extra) Object.assign(e, extra);
 				entradas.push(e);
 			}
 		}
@@ -350,7 +378,7 @@ export function formatarRelatorio(r) {
 		`  múltipla escolha convertida em Certo/Errado: ${r.convertidas.questoes} questões → ${r.convertidas.itens} itens`,
 		'',
 		'Por matéria:',
-		...r.porMateria.map((m) => `  ${m.nome}: ${m.total} (${m.lotes} lote${m.lotes > 1 ? 's' : ''})`),
+		...r.porMateria.map((m) => `  ${m.nome}: ${m.total} (${m.lotes ? `${m.lotes} lote${m.lotes > 1 ? 's' : ''}` : 'só como 2º tópico'})`),
 		'',
 		'Descartes:',
 		...Object.entries(r.descartes).map(([motivo, n]) => `  ${motivo}: ${n}`),

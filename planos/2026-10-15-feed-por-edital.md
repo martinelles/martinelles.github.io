@@ -69,3 +69,23 @@ importador agora aceita (`ID_TOPICO` em `questoes.mjs`) e leva a `aud-e<n>`.
   governamental) e E5 (integridade e responsabilização), ou se ela quiser reclassificar as
   questões de P1/P2 que também servem à P3 de Auditoria (isso pediria um post em duas disciplinas,
   que o índice hoje não suporta).
+
+## Atualização de 2026-10-15: E1 e E5 de Auditoria por segundo tópico
+
+Questão de P1/P2 que também cobre um subitem de E1 ou E5 de Auditoria passa a aparecer nas duas
+disciplinas. O post fica no lote da disciplina principal; a entrada do índice ganha `m2`
+(`aud-e1`/`aud-e5`) e `tp2` (o subitem), e o filtro por disciplina e por tópico, o anel de "tudo
+visto" e a contagem "N questões deste tópico" leem os dois (`src/lib/feed/entrada.ts`). Respostas e
+estatísticas por matéria continuam contando a questão uma vez só, na principal.
+
+- **Onde mora:** `catalogo-questoes/topicos-p3-auditoria.csv` no vault (`id`, `topico`,
+  `data_conferido`, `obs`), arquivo novo; o `questoes.csv` não mudou de esquema nem de conteúdo
+  nesta etapa. Id do arquivo que não chega ao feed vira aviso na importação.
+- **Classificação:** quatro agentes leram as 357 questões com tópico DPC, AGI, GRI, TOP e EPR contra
+  os 45 subitens de E1 e E5, com critério estrito. Saíram 97 atribuições; tirei as 37 que os
+  próprios agentes marcaram como leitura branda. Ficaram 60 questões (25 em E1, 35 em E5).
+- **Resultado no feed:** E1 de Auditoria com 109 posts e E5 com 142 (múltipla escolha vira itens C/E).
+  Com isso as cinco disciplinas da P3 de Auditoria têm conteúdo.
+- Reabrir se as 37 de leitura branda devem entrar (lista nos `resultado*.json` da sessão, não
+  guardados no repositório) ou se a mesma regra deve valer para as questões de P1/P2 que cobrem
+  E2–E4.

@@ -12,6 +12,7 @@
 	import { concursoCgu, dados } from '$lib/dados';
 	import { diasParaProva, hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
+	import { topicosDa } from '$lib/feed/entrada';
 	import { estatisticas } from '$lib/feed/estatisticas';
 	import { ESPECIALIDADES, foco } from '$lib/feed/foco.svelte';
 	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
@@ -51,7 +52,7 @@
 	const questoesPorTopico = $derived.by(() => {
 		if (!indice) return null;
 		const m = new Map<string, number>();
-		for (const e of indice.posts) if (e.t === 'q' && e.tp) m.set(e.tp, (m.get(e.tp) ?? 0) + 1);
+		for (const e of indice.posts) if (e.t === 'q') for (const tp of topicosDa(e)) m.set(tp, (m.get(tp) ?? 0) + 1);
 		return m;
 	});
 

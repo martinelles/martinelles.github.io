@@ -23,6 +23,7 @@
 	import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 	import { hojeLocal } from '$lib/datas';
 	import type { Repositorio } from '$lib/feed/conteudo';
+	import { naMateria, noTopico } from '$lib/feed/entrada';
 	import { materiaVistaHoje, ordenarStories } from '$lib/feed/estatisticas';
 	import { foco } from '$lib/feed/foco.svelte';
 	import { interacoes } from '$lib/feed/interacoes.svelte';
@@ -80,7 +81,7 @@
 		const { topico, materia, tipo } = filtro;
 		if (topico === undefined || !indice) return null;
 		return indice.posts.filter(
-			(e) => e.tp === topico && (materia === undefined || e.m === materia) && (tipo === undefined || TIPO_POR_INICIAL[e.t] === tipo)
+			(e) => noTopico(e, topico) && (materia === undefined || naMateria(e, materia)) && (tipo === undefined || TIPO_POR_INICIAL[e.t] === tipo)
 		).length;
 	});
 	const rotuloQtd = (n: number) => (n === 1 ? '1 questão' : `${n.toLocaleString('pt-BR')} questões`);

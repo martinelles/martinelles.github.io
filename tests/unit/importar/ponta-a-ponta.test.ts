@@ -11,6 +11,7 @@ const VAULT = fileURLToPath(new URL('./fixtures/vault', import.meta.url));
 const raiz = mkdtempSync(join(tmpdir(), 'painel-importar-'));
 afterAll(() => rmSync(raiz, { recursive: true, force: true }));
 
+const e5 = (ms: { id: string; total: number }[]) => ms.find((m) => m.id === 'aud-e5')!;
 const lerJson = (dir: string, arq: string) => JSON.parse(readFileSync(join(dir, arq), 'utf8'));
 const bytes = (dir: string) =>
 	Object.fromEntries(readdirSync(dir).sort().map((f) => [f, readFileSync(join(dir, f), 'utf8')]));
@@ -62,6 +63,7 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 			const p = posts.find((x) => x.id === e.id);
 			if (e.t === 'q') expect(e.tp).toBe(p.topicoEstudo);
 			const chaves = e.tp === undefined ? ['id', 't', 'm', 'l'] : ['id', 't', 'm', 'l', 'tp'];
+			if (e.m2 !== undefined) chaves.push('m2', 'tp2');
 			expect(Object.keys(e)).toEqual(chaves);
 		}
 		expect(indice.posts.find((e: { id: string }) => e.id === 'q:TCU2026-AUFC-TI-113').tp).toBe('AMI-11');
@@ -73,10 +75,16 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 		expect(indice.geradoEm).toMatch(/^\d{4}-\d{2}-\d{2}T/);
 		for (const m of materias) expect(Object.keys(m)).toEqual(['id', 'nome', 'abrev', 'ordem', 'total']);
 		// Disciplinas do edital, na ordem do edital: a LAI, o resumo e os flashcards caem em C2.
-		expect(materias.map((m: { id: string }) => m.id)).toEqual(['b3', 'b4', 'c1', 'c2', 'cd-e2', 'cd-e3', 'cd-e4']);
+		expect(materias.map((m: { id: string }) => m.id)).toEqual(['b3', 'b4', 'c1', 'c2', 'cd-e2', 'cd-e3', 'cd-e4', 'aud-e5']);
 		expect(materias[0]).toMatchObject({ id: 'b3', nome: 'B3 · Ética Pública e Responsabilidade Profissional', ordem: 1, total: 12 });
 		expect(materias.find((m: { id: string }) => m.id === 'c2').total).toBe(15);
 		expect(rel.descartes['sem disciplina do edital']).toBe(0);
+		// Segundo tópico (topicos-p3-auditoria.csv): a questão fica no lote de B4 e conta em E5 de Auditoria.
+		const segunda = indice.posts.filter((e: { m2?: string }) => e.m2 === 'aud-e5');
+		expect(segunda.length).toBeGreaterThan(0);
+		for (const e of segunda) expect(e).toMatchObject({ m: 'b4', l: 'b4-1', tp2: 'AUD-E5-1.1' });
+		expect(e5(materias).total).toBe(segunda.length);
+		expect(rel.avisos).toContain('catalogo-questoes/topicos-p3-auditoria.csv: NAO-EXISTE-1 não está no feed');
 	});
 
 	it('nenhum lote passa de 150 KB gzip', () => {

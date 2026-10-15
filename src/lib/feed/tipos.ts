@@ -90,7 +90,8 @@ export interface Materia {
 
 /**
  * Entrada curta do índice: `t` inicial do tipo, `m` id da matéria, `l` chave do lote em `Indice.lotes`,
- * `tp` id do tópico de estudo (só em questão com tópico).
+ * `tp` id do tópico de estudo (só em questão com tópico). `m2`/`tp2`: segunda disciplina e tópico,
+ * em questão de P1/P2 que também cobre um subitem da P3 de Auditoria (ver `entrada.ts`).
  */
 export interface EntradaIndice {
 	id: string;
@@ -98,6 +99,8 @@ export interface EntradaIndice {
 	m: string;
 	l: string;
 	tp?: string;
+	m2?: string;
+	tp2?: string;
 }
 
 /** `indice.json`. */

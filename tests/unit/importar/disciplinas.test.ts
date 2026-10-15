@@ -5,6 +5,7 @@ import {
 	disciplinaDoPost,
 	disciplinaPorId,
 	FEED_PARA_DISCIPLINA,
+	lerSegundosTopicos,
 	LEI_PARA_DISCIPLINA,
 	ordenarDisciplinas,
 	TOPICO_PARA_DISCIPLINA
@@ -56,5 +57,15 @@ describe('disciplinas do edital', () => {
 			{ id: 'c3', nome: 'C3 · Direito Público Aplicado, Controle e Responsabilização', abrev: 'Dir. Públ.', ordem: 2, total: 9 },
 			{ id: 'cd-e3', nome: 'E3 · Aprendizado de Máquina e Inteligência Artificial', abrev: 'ML e IA', ordem: 3, total: 4 }
 		]);
+	});
+
+	it('segundo tópico: só subitem de Auditoria, com a disciplina tirada do id', () => {
+		const { mapa, avisos } = lerSegundosTopicos([
+			{ id: 'CGU2022-AFFC-AUD-31', topico: 'AUD-E1-1.2' },
+			{ id: 'X-1', topico: 'DPC-01' },
+			{ id: '', topico: 'AUD-E5-1.1' }
+		]);
+		expect([...mapa]).toEqual([['CGU2022-AFFC-AUD-31', { m2: 'aud-e1', tp2: 'AUD-E1-1.2' }]]);
+		expect(avisos).toHaveLength(2);
 	});
 });

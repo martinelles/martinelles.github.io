@@ -3,6 +3,7 @@
  * depois intercalação por tipo na proporção questão 3 : lei 2 : resumo 1 : flashcard 2.
  * Tudo puro: o dia chega por parâmetro.
  */
+import { naMateria, noTopico } from './entrada';
 import { especialidadePorId } from './foco.svelte';
 import { TIPO_POR_INICIAL, type Filtro, type Indice, type TipoPost } from './tipos';
 
@@ -59,10 +60,10 @@ export function ordemDoDia(indice: Pick<Indice, 'posts'>, filtro: Filtro, dia: s
 	for (const e of indice.posts) {
 		const tipo = TIPO_POR_INICIAL[e.t];
 		if (!tipo) continue;
-		if (filtro.materia !== undefined && e.m !== filtro.materia) continue;
+		if (filtro.materia !== undefined && !naMateria(e, filtro.materia)) continue;
 		if (fora(e.m)) continue;
 		if (filtro.tipo !== undefined && tipo !== filtro.tipo) continue;
-		if (filtro.topico !== undefined && e.tp !== filtro.topico) continue;
+		if (filtro.topico !== undefined && !noTopico(e, filtro.topico)) continue;
 		filas.get(tipo)!.push(e.id);
 	}
 

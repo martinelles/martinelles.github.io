@@ -134,6 +134,35 @@ export function disciplinaDoPost(post) {
 	return undefined;
 }
 
+/** Arquivo do vault com o segundo tópico das questões (P3 de Auditoria). */
+export const ARQUIVO_SEGUNDO_TOPICO = 'catalogo-questoes/topicos-p3-auditoria.csv';
+
+const SUBITEM_AUD = /^AUD-E([1-5])-\d+\.\d+$/;
+
+/**
+ * Segundo tópico de questões que já têm tópico de P1/P2 e também cobrem um subitem da P3 de
+ * Auditoria (planos/2026-10-15-feed-por-edital.md). Linhas de `topicos-p3-auditoria.csv`
+ * (`id`, `topico`, …) → id da questão no catálogo → `{ m2: 'aud-e1', tp2: 'AUD-E1-2.1' }`.
+ * @param {Record<string, string>[]} linhas
+ * @returns {{ mapa: Map<string, { m2: string, tp2: string }>, avisos: string[] }}
+ */
+export function lerSegundosTopicos(linhas) {
+	const mapa = new Map();
+	/** @type {string[]} */
+	const avisos = [];
+	for (const l of linhas) {
+		const id = (l.id ?? '').trim();
+		const tp2 = (l.topico ?? '').trim();
+		const m = SUBITEM_AUD.exec(tp2);
+		if (!id || !m) {
+			avisos.push(`${ARQUIVO_SEGUNDO_TOPICO}: linha ignorada (id "${id}", topico "${tp2}")`);
+			continue;
+		}
+		mapa.set(id, { m2: `aud-e${m[1]}`, tp2 });
+	}
+	return { mapa, avisos };
+}
+
 /**
  * Lista de `materias.json`: as disciplinas na ordem do edital, sem as que ficaram sem post.
  * O nome leva o código ("C3 · Direito Público…"), para casar com o edital, os guias e as Missões.
