@@ -113,16 +113,15 @@ describe('contas das Missões', () => {
 		};
 		expect(resumo(PLANO, marcas, 'cd')).toEqual({
 			dias: 3,
-			diasCumpridos: 1,
 			blocos: 5,
 			blocosFeitos: 3,
 			minutos: 270,
 			minutosFeitos: 135
 		});
 		expect(diaCumprido(marcas, 'cd', PLANO.plan[0])).toBe(false);
+		expect(diaCumprido(marcas, 'cd', PLANO.plan[1])).toBe(true);
 		expect(progressoDoDia(marcas, 'cd', PLANO.plan[0])).toEqual({ feitos: 1, total: 2 });
 		// A marcação de outro cargo não conta.
-		expect(resumo(PLANO, marcas, 'aud').diasCumpridos).toBe(1);
 		expect(resumo(PLANO, marcas, 'aud').blocosFeitos).toBe(1);
 	});
 });

@@ -160,7 +160,7 @@ test('"Seu plano" conta dias, blocos e horas das marcações', async ({ page }) 
 	const horas = (min: number) => (min / 60).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 	const minTotal = missoesCd.plan.reduce((n, d) => n + d.blocos.reduce((m, b) => m + b.min, 0), 0);
 	const minHoje = diaCd.blocos.reduce((m, b) => m + b.min, 0);
-	await expect(resumo).toContainText(`dias cumpridos1 de ${missoesCd.plan.length}`);
+	await expect(resumo).not.toContainText('dias cumpridos');
 	await expect(resumo).toContainText(`blocos feitos${diaCd.blocos.length} de ${blocos}`);
 	await expect(resumo).toContainText(`horas feitas${horas(minHoje)} de ${horas(minTotal)} h`);
 	await expect(missao(page)).toContainText('Missão cumprida');

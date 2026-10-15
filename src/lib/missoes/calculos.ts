@@ -25,7 +25,6 @@ export const diaCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao): boole
 
 export interface ResumoMissoes {
 	dias: number;
-	diasCumpridos: number;
 	blocos: number;
 	blocosFeitos: number;
 	/** Minutos de todos os blocos e dos blocos marcados. */
@@ -34,9 +33,8 @@ export interface ResumoMissoes {
 }
 
 export function resumo(plano: PlanoMissoes, marcas: Marcas, cargo: Cargo): ResumoMissoes {
-	const r: ResumoMissoes = { dias: plano.plan.length, diasCumpridos: 0, blocos: 0, blocosFeitos: 0, minutos: 0, minutosFeitos: 0 };
+	const r: ResumoMissoes = { dias: plano.plan.length, blocos: 0, blocosFeitos: 0, minutos: 0, minutosFeitos: 0 };
 	for (const dia of plano.plan) {
-		if (diaCumprido(marcas, cargo, dia)) r.diasCumpridos++;
 		dia.blocos.forEach((b, i) => {
 			r.blocos++;
 			r.minutos += b.min;

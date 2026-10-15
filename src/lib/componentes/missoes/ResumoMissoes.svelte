@@ -1,6 +1,6 @@
 <script lang="ts">
-	// "Seu plano" (planos/2026-10-14-missao-unica.md): o plano de 61 dias das Missões em três números,
-	// das mesmas marcações das bolhas. O detalhe dos 61 dias fica na página das Missões.
+	// "Seu plano" (planos/2026-10-14-missao-unica.md): o plano das Missões em dois números,
+	// das mesmas marcações das bolhas. O detalhe fica na página das Missões.
 	import { formatarData } from '$lib/datas';
 	import { resumo } from '$lib/missoes/calculos';
 	import type { Cargo, Marcas, PlanoMissoes } from '$lib/missoes/tipos';
@@ -15,17 +15,16 @@
 <section class="resumo" aria-labelledby="titulo-resumo">
 	<h2 id="titulo-resumo">Seu plano</h2>
 	<p class="periodo">
-		De {formatarData(plano.plan[0].data)} a {formatarData(plano.plan[plano.plan.length - 1].data)}, {r.dias} dias.
+		De {formatarData(plano.plan[0].data)} a {formatarData(plano.plan[plano.plan.length - 1].data)}.
 	</p>
 	<div class="barra" role="progressbar" aria-label="Horas do plano cumpridas" aria-valuemin="0" aria-valuemax="100" aria-valuenow={pct}>
 		<span style:width="{pct}%"></span>
 	</div>
 	<dl class="numeros">
-		<div><dt>dias cumpridos</dt><dd>{r.diasCumpridos} <small>de {r.dias}</small></dd></div>
 		<div><dt>blocos feitos</dt><dd>{r.blocosFeitos} <small>de {r.blocos}</small></dd></div>
 		<div><dt>horas feitas</dt><dd>{h(r.minutosFeitos)} <small>de {h(r.minutos)} h</small></dd></div>
 	</dl>
-	<a class="secundario" href="/artefato/missoes#{cargo}">Ver os {r.dias} dias nas Missões</a>
+	<a class="secundario" href="/artefato/missoes#{cargo}">Ver o plano nas Missões</a>
 </section>
 
 <style>
@@ -64,7 +63,7 @@
 
 	.numeros {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 8px;
 		margin: 12px 0 0;
 	}
