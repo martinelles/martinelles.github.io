@@ -37,3 +37,7 @@ e é gravada na chave de foco com o id `infraestrutura`.
   e as páginas das Missões e das Prioridades só entendem `#cd` e `#aud`. Reabrir quando o vault
   ganhar um `plano-infra.json`: aí é preciso acrescentar `infra` a `CARGOS` em
   `scripts/importar/missoes.mjs` e ao tipo `Cargo`, e dar `ancora: 'infra'` à especialidade.
+
+## Atualização de 2026-10-15: a P3 vem do guia
+
+O primeiro item das limitações deixou de valer. As disciplinas `infra-e1` a `infra-e4` passam a ter posts, gerados pelo `GUIA CGU 2026 AFFC Infraestrutura P3.md` (plano `2026-10-15-guia-infraestrutura-no-feed`). Com isso, o foco padrão passou de C4 para `infra-e1`. A falta de plano nas Missões continua.

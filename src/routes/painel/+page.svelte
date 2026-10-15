@@ -75,7 +75,7 @@
 	{#if !cargo}
 		<section class="sem-plano" aria-labelledby="titulo-missao">
 			<h2 id="titulo-missao">Missão de hoje</h2>
-			<p>{foco.especialidade.nome} ainda não tem plano nas Missões; o feed já traz as provas P1 e P2.</p>
+			<p>{foco.especialidade.nome} ainda não tem plano nas Missões; o feed já traz as provas P1 e P2 e a P3 pelo guia de conteúdo programático.</p>
 		</section>
 	{:else if erroPlano}
 		<p class="erro-plano" role="alert">{erroPlano}</p>

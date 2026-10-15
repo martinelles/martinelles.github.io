@@ -8,6 +8,8 @@
  * ao feed é a disciplina dada por `disciplinaDoPost`.
  */
 
+import { GUIAS } from './guias.mjs';
+
 /** @typedef {{ id: string, cod: string, nome: string, abrev: string }} DefDisciplina */
 
 /** Na ordem do edital. `id` com prefixo `cd-`/`aud-`/`infra-` só na P3, que é de um cargo só. @type {DefDisciplina[]} */
@@ -30,7 +32,7 @@ export const DISCIPLINAS = [
 	{ id: 'aud-e3', cod: 'E3', nome: 'Políticas Públicas e Métodos de Investigação e Avaliação', abrev: 'Políticas' },
 	{ id: 'aud-e4', cod: 'E4', nome: 'Auditoria de Contratações, Transferências e Execução de Recursos', abrev: 'Contrat.' },
 	{ id: 'aud-e5', cod: 'E5', nome: 'Integridade, Transparência e Responsabilização Aplicadas ao Controle Público', abrev: 'Integrid.' },
-	// Cargo 3: ainda sem post no feed (planos/2026-10-15-especialidade-infraestrutura.md).
+	// Cargo 3: posts vêm do guia da P3 (guias.mjs; planos/2026-10-15-guia-infraestrutura-no-feed.md).
 	{ id: 'infra-e1', cod: 'E1', nome: 'Redes, Sistemas e Plataformas de Dados', abrev: 'Redes' },
 	{ id: 'infra-e2', cod: 'E2', nome: 'Computação em Nuvem, Virtualização e Automação', abrev: 'Nuvem' },
 	{ id: 'infra-e3', cod: 'E3', nome: 'Cibersegurança, Privacidade e Continuidade de Serviços', abrev: 'Ciberseg.' },
@@ -119,10 +121,16 @@ export const FEED_PARA_DISCIPLINA = [
 
 /**
  * Disciplina do edital de um post importado, ou `undefined` se nenhuma regra o alcança.
- * @param {{ tipo: string, topicoEstudo?: string, fonte?: { arquivo?: string } }} post
+ * @param {{ tipo: string, topicoEstudo?: string, subtopico?: string, fonte?: { arquivo?: string } }} post
  * @returns {string | undefined}
  */
 export function disciplinaDoPost(post) {
+	const prefixoGuia = GUIAS[/** @type {keyof typeof GUIAS} */ (post.fonte?.arquivo ?? '')];
+	if (prefixoGuia) {
+		// Post do guia da P3 (guias.mjs): o código do subitem abre o subtópico ("E3 6.4 · …").
+		const e = /^E([1-9]) /.exec(post.subtopico ?? '');
+		return e ? disciplinaPorId(`${prefixoGuia}-e${e[1]}`)?.id : undefined;
+	}
 	if (post.tipo === 'questao') {
 		const [prefixo, especifica] = (post.topicoEstudo ?? '').split('-');
 		if (prefixo === 'AUD') return disciplinaPorId(`aud-${especifica?.toLowerCase()}`)?.id;

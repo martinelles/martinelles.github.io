@@ -55,12 +55,12 @@ export const ESPECIALIDADES: readonly Especialidade[] = [
 		fora: foraDaP3('aud')
 	},
 	{
-		// Cargo 3. A P3 ainda não tem conteúdo no feed: o foco começa na disciplina comum mais
-		// próxima (C4). Plano: planos/2026-10-15-especialidade-infraestrutura.md.
+		// Cargo 3, sem plano nas Missões; a P3 vem do guia (planos/2026-10-15-especialidade-infraestrutura.md
+		// e planos/2026-10-15-guia-infraestrutura-no-feed.md).
 		id: 'infraestrutura',
 		nome: 'Infraestrutura',
 		cargo: 'TI — Infraestrutura',
-		disciplinaPadrao: 'c4',
+		disciplinaPadrao: 'infra-e1',
 		fora: foraDaP3('infra')
 	}
 ];

@@ -25,6 +25,7 @@ import { CARGOS, montarMissoes } from './missoes.mjs';
 import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
+import { GUIAS, importarGuia } from './guias.mjs';
 import { importarLei } from './lei-seca.mjs';
 import { ARQUIVO_SEGUNDO_TOPICO, disciplinaDoPost, lerSegundosTopicos, ordenarDisciplinas } from './disciplinas.mjs';
 import { LEI_PARA_MATERIA, LEIS_IGNORADAS } from './materias.mjs';
@@ -175,6 +176,18 @@ export function importar({ vault, saida }) {
 				recusados.push({ arquivo: `feed-conteudo/flashcards/${arquivo}`, motivo: /** @type {Error} */ (e).message });
 			}
 		}
+	}
+
+	// Guias da P3 (guias.mjs): resumo e flashcards por subitem
+	for (const arquivo of Object.keys(GUIAS)) {
+		const caminho = join(vault, arquivo);
+		if (!existsSync(caminho)) {
+			avisos.push(`${arquivo} não encontrado na raiz do vault: P3 sem o guia`);
+			continue;
+		}
+		const r = importarGuia(arquivo, ler(caminho));
+		posts.push(...r.posts);
+		avisos.push(...r.avisos);
 	}
 
 	// Ids únicos

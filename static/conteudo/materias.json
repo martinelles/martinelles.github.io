@@ -16,5 +16,9 @@
 {"id":"aud-e2","nome":"E2 · Finanças Públicas, Orçamento e Contabilidade Pública","abrev":"Finanças","ordem":15,"total":199},
 {"id":"aud-e3","nome":"E3 · Políticas Públicas e Métodos de Investigação e Avaliação","abrev":"Políticas","ordem":16,"total":10},
 {"id":"aud-e4","nome":"E4 · Auditoria de Contratações, Transferências e Execução de Recursos","abrev":"Contrat.","ordem":17,"total":7},
-{"id":"aud-e5","nome":"E5 · Integridade, Transparência e Responsabilização Aplicadas ao Controle Público","abrev":"Integrid.","ordem":18,"total":142}
+{"id":"aud-e5","nome":"E5 · Integridade, Transparência e Responsabilização Aplicadas ao Controle Público","abrev":"Integrid.","ordem":18,"total":142},
+{"id":"infra-e1","nome":"E1 · Redes, Sistemas e Plataformas de Dados","abrev":"Redes","ordem":19,"total":80},
+{"id":"infra-e2","nome":"E2 · Computação em Nuvem, Virtualização e Automação","abrev":"Nuvem","ordem":20,"total":81},
+{"id":"infra-e3","nome":"E3 · Cibersegurança, Privacidade e Continuidade de Serviços","abrev":"Ciberseg.","ordem":21,"total":110},
+{"id":"infra-e4","nome":"E4 · Operação, Governança e Gestão de Serviços Digitais","abrev":"Operação","ordem":22,"total":116}
 ]

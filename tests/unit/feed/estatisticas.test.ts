@@ -98,13 +98,15 @@ describe('foco', () => {
 		expect(foco.especialidade.id).toBe('ciencia-de-dados');
 	});
 
-	it('infraestrutura: sem plano nas Missões, tira a P3 dos outros dois cargos e começa em C4', () => {
+	it('infraestrutura: sem plano nas Missões, tira a P3 dos outros dois cargos e começa em E1', () => {
 		foco.escolherEspecialidade('infraestrutura');
 		expect(foco.especialidade.ancora).toBeUndefined();
-		expect(foco.disciplina).toBe('c4');
+		expect(foco.disciplina).toBe('infra-e1');
 		const { fora } = foco.especialidade;
 		expect(['cd-e1', 'aud-e5'].filter(fora)).toEqual(['cd-e1', 'aud-e5']);
 		expect(['b1', 'c5', 'infra-e3'].some(fora)).toBe(false);
+		foco.escolherDisciplina('c4');
+		expect(foco.disciplina).toBe('c4');
 		foco.escolherDisciplina('infra-e3');
 		expect(foco.disciplina).toBe('infra-e3');
 		expect(especialidadePorId('ciencia-de-dados').fora('infra-e3')).toBe(true);

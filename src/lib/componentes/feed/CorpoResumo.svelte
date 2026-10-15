@@ -57,7 +57,8 @@
 		font-family: var(--fonte-texto);
 		font-size: 1.0625rem;
 		line-height: 1.6;
-		white-space: pre-line;
+		/* pre-wrap: o recuo das listas aninhadas e das consultas SQL dos guias aparece. */
+		white-space: pre-wrap;
 		overflow-wrap: anywhere;
 		max-width: var(--medida);
 	}
