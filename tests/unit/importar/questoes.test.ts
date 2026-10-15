@@ -54,6 +54,8 @@ describe('lerTopicoEstudo', () => {
 	it('só id de tópico do ESTUDO.csv', () => {
 		expect(lerTopicoEstudo('FAG-02')).toBe('FAG-02');
 		expect(lerTopicoEstudo('CDA-41')).toBe('CDA-41');
+		expect(lerTopicoEstudo('AUD-E2-3.1')).toBe('AUD-E2-3.1');
+		expect(lerTopicoEstudo('AUD-E2-3')).toBeUndefined();
 		expect(lerTopicoEstudo('')).toBeUndefined();
 		expect(lerTopicoEstudo(undefined)).toBeUndefined();
 		expect(lerTopicoEstudo('sem-topico')).toBeUndefined();

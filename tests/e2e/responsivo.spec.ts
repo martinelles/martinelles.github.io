@@ -15,6 +15,7 @@ const TIPOS: Record<string, string> = { q: 'questao', l: 'lei', r: 'resumo', f: 
 const menor = (() => {
 	const contagem = new Map<string, number>();
 	for (const e of indice.posts) {
+		if (e.m.startsWith('aud-')) continue; // fora da especialidade padrão (Ciência de Dados)
 		const filtro = `materia=${e.m}&tipo=${TIPOS[e.t]}`;
 		contagem.set(filtro, (contagem.get(filtro) ?? 0) + 1);
 	}

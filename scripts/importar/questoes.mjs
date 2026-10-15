@@ -99,8 +99,11 @@ export function lerAlternativas(celula) {
 	});
 }
 
-/** Id de tópico do `ESTUDO.csv` (ex.: `FAG-02`). */
-export const ID_TOPICO = /^[A-Z]+-\d+$/;
+/**
+ * Id de tópico: o do `ESTUDO.csv` (ex.: `FAG-02`) ou o subitem da P3 de Auditoria das Missões
+ * (ex.: `AUD-E2-3.1`), que o `ESTUDO.csv` não tem (planos/2026-10-15-feed-por-edital.md).
+ */
+export const ID_TOPICO = /^(?:[A-Z]+-\d+|AUD-E[1-5]-\d+\.\d+)$/;
 
 /**
  * Valor de `topico_estudo` que marca questão sem tópico no edital vigente (Edital CGU 1/2026,

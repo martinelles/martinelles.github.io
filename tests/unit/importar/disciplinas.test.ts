@@ -34,6 +34,8 @@ describe('disciplinas do edital', () => {
 	it('disciplinaDoPost: questão pelo tópico, o resto pelo arquivo de origem', () => {
 		expect(disciplinaDoPost({ tipo: 'questao', topicoEstudo: 'DPC-07' })).toBe('c3');
 		expect(disciplinaDoPost({ tipo: 'questao', topicoEstudo: 'AMI-12' })).toBe('cd-e3');
+		expect(disciplinaDoPost({ tipo: 'questao', topicoEstudo: 'AUD-E2-3.1' })).toBe('aud-e2');
+		expect(disciplinaDoPost({ tipo: 'questao', topicoEstudo: 'AUD-E9-1.1' })).toBeUndefined();
 		expect(disciplinaDoPost({ tipo: 'questao', topicoEstudo: 'XYZ-01' })).toBeUndefined();
 		expect(disciplinaDoPost({ tipo: 'questao' })).toBeUndefined();
 		expect(disciplinaDoPost({ tipo: 'lei', fonte: { arquivo: 'leis-secas/06-Lei-12527-2011-LAI.md' } })).toBe('c2');

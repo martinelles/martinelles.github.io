@@ -38,7 +38,8 @@ export const disciplinaPorId = (id) => POR_ID.get(id);
 
 /**
  * Prefixo do id de tópico do `ESTUDO.csv` (`topico_estudo` da questão) → disciplina. O `ESTUDO.csv`
- * só tem a P3 de Ciência de Dados; a P3 de Auditoria (ids `AUD-E*` das Missões) não tem questão.
+ * só tem a P3 de Ciência de Dados; a de Auditoria usa os ids dos subitens das Missões
+ * (`AUD-E2-3.1` → `aud-e2`), tratados em `disciplinaDoPost`.
  * @type {Record<string, string>}
  */
 export const TOPICO_PARA_DISCIPLINA = {
@@ -117,7 +118,9 @@ export const FEED_PARA_DISCIPLINA = [
  */
 export function disciplinaDoPost(post) {
 	if (post.tipo === 'questao') {
-		return post.topicoEstudo ? TOPICO_PARA_DISCIPLINA[post.topicoEstudo.split('-')[0]] : undefined;
+		const [prefixo, especifica] = (post.topicoEstudo ?? '').split('-');
+		if (prefixo === 'AUD') return disciplinaPorId(`aud-${especifica?.toLowerCase()}`)?.id;
+		return TOPICO_PARA_DISCIPLINA[prefixo];
 	}
 	const arquivo = post.fonte?.arquivo ?? '';
 	const [pasta, ...resto] = arquivo.split('/');

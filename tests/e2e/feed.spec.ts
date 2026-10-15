@@ -157,7 +157,7 @@ test('3. story filtra por matéria, "Tudo" desfaz; foco logo depois de "Tudo"', 
 });
 
 test('3b. foco escolhido vem logo depois de "Tudo"; matéria toda vista fica com anel cinza', async ({ page }) => {
-	const menor = [...materias].sort((a, b) => a.total - b.total)[0];
+	const menor = [...materias].filter((m) => !m.id.startsWith('aud-')).sort((a, b) => a.total - b.total)[0];
 	const idsMenor = indice.posts.filter((p) => p.m === menor.id).map((p) => p.id);
 	await page.addInitScript(
 		([chaveFoco, chaveInteracoes, vistos, dia]) => {

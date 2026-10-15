@@ -46,3 +46,26 @@ Na importação de 2026-10-15: 6.365 posts, nenhum sem disciplina.
   a regra em `disciplinas.mjs`.
 - O progresso por matéria do painel passa a contar por disciplina; as respostas e os vistos, que
   são por post, continuam valendo.
+
+## Atualização de 2026-10-15: a P3 de Auditoria ganha questões
+
+O primeiro item das limitações deixou de valer em parte. Em vez de levar a P3 de Auditoria ao
+`ESTUDO.csv` (que guia o estudo de Ciência de Dados e passaria a puxar subitens de Auditoria para
+o `HOJE.md`), as questões recebem direto o id do subitem das Missões (`AUD-E2-3.1`), que o
+importador agora aceita (`ID_TOPICO` em `questoes.mjs`) e leva a `aud-e<n>`.
+
+- **Só as descartadas:** entraram apenas as 425 questões marcadas `sem-topico` (fora Português,
+  Inglês, RLM e TI). As que já tinham tópico de P1/P2 ficaram onde estavam, para não sumirem do
+  feed de Ciência de Dados.
+- **Classificação:** cinco agentes leram cada questão contra o texto dos 89 subitens, com critério
+  estrito (só quando estudar o subitem bastaria para responder). Saíram 64 atribuições; tirei 12 de
+  custos industriais genéricos (TCU2015-AUD-145 e 147 a 157), que o próprio agente marcou como
+  leitura branda de E2 5.2/5.3. Ficaram 52 questões, gravadas no `catalogo-questoes/questoes.csv`
+  do vault com nota datada em `obs`; cópia anterior guardada fora do vault antes da edição.
+- **Resultado no feed:** 216 posts (as de múltipla escolha viram itens C/E): E2 com 199, E3 com 10,
+  E4 com 7. **E1 e E5 de Auditoria continuam vazias**: o catálogo não tem questão descartada que
+  caiba nelas. Os subitens com questão passam a mostrar "N questões deste tópico" na Missão de hoje.
+- Reabrir quando entrarem no catálogo provas de Auditoria com conteúdo de E1 (auditoria
+  governamental) e E5 (integridade e responsabilização), ou se ela quiser reclassificar as
+  questões de P1/P2 que também servem à P3 de Auditoria (isso pediria um post em duas disciplinas,
+  que o índice hoje não suporta).
