@@ -26,7 +26,8 @@ import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
 import { importarLei } from './lei-seca.mjs';
-import { LEI_PARA_MATERIA, LEIS_IGNORADAS, ordenarMaterias } from './materias.mjs';
+import { disciplinaDoPost, ordenarDisciplinas } from './disciplinas.mjs';
+import { LEI_PARA_MATERIA, LEIS_IGNORADAS } from './materias.mjs';
 import { importarQuestoes } from './questoes.mjs';
 import { comparar } from './texto.mjs';
 
@@ -183,14 +184,23 @@ export function importar({ vault, saida }) {
 		vistos.add(p.id);
 	}
 
-	// Matérias, lotes e índice
+	// Disciplinas do edital (disciplinas.mjs): a matéria do post passa a ser a disciplina
+	descartes['sem disciplina do edital'] = 0;
 	/** @type {Record<string, any[]>} */
 	const porMateria = {};
-	for (const p of posts) (porMateria[p.materia] ??= []).push(p);
+	for (const p of posts) {
+		const disciplina = disciplinaDoPost(p);
+		if (!disciplina) {
+			descartes['sem disciplina do edital']++;
+			continue;
+		}
+		p.materia = disciplina;
+		(porMateria[disciplina] ??= []).push(p);
+	}
 	/** @type {Record<string, number>} */
 	const totaisMateria = {};
 	for (const [m, lista] of Object.entries(porMateria)) totaisMateria[m] = lista.length;
-	const materias = ordenarMaterias(totaisMateria);
+	const materias = ordenarDisciplinas(totaisMateria);
 
 	const geradoEm = new Date(Math.floor(maisRecente / 1000) * 1000).toISOString();
 	/** @type {{ id: string, t: string, m: string, l: string, tp?: string }[]} */

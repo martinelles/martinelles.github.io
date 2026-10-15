@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import materias from '../../static/conteudo/materias.json' with { type: 'json' };
+import indice from '../../static/conteudo/indice.json' with { type: 'json' };
 
 // NFR-007: sem rolagem horizontal de 360 a 1440 px e alvos de toque de 44 px no celular.
 // Missão identidade-visual (NFR-006): os 3 temas a 360 e 1440 px; nas larguras intermediárias, só
@@ -10,7 +10,17 @@ const CHAVE_TEMA = 'painel-concurso:tema:v1';
 const TEMAS = ['aventura', 'kindle', 'kindle-escuro'] as const;
 type Tema = (typeof TEMAS)[number];
 const LARGURAS_TODOS_OS_TEMAS = [360, 1440];
-const menor = [...materias].sort((a, b) => a.total - b.total)[0];
+const TIPOS: Record<string, string> = { q: 'questao', l: 'lei', r: 'resumo', f: 'flashcard' };
+/** Filtro pequeno (matéria + tipo) que cabe numa página de 10 posts: as disciplinas do edital passam todas de 10. */
+const menor = (() => {
+	const contagem = new Map<string, number>();
+	for (const e of indice.posts) {
+		const filtro = `materia=${e.m}&tipo=${TIPOS[e.t]}`;
+		contagem.set(filtro, (contagem.get(filtro) ?? 0) + 1);
+	}
+	const [filtro] = [...contagem].filter(([, n]) => n <= 10).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))[0];
+	return filtro;
+})();
 /** Um dia do plano das Missões (planos/2026-10-14-missao-unica.md), com a missão no painel. */
 const DIA_DO_PLANO = new Date('2026-10-14T09:00:00-03:00');
 
@@ -34,9 +44,9 @@ const TELAS: { nome: string; abrir: (page: Page) => Promise<void> }[] = [
 	},
 	{
 		// Filtro pequeno: cabe numa página e mostra o fim do feed.
-		nome: `/?materia=${menor.id}`,
+		nome: `/?${menor}`,
 		abrir: async (page) => {
-			await page.goto(`/?materia=${menor.id}`);
+			await page.goto(`/?${menor}`);
 			await esperarPosts(page);
 			await expect(page.getByRole('heading', { name: 'Você viu tudo desta matéria' })).toBeVisible();
 		}

@@ -42,28 +42,28 @@ test('foco: especialidade começa em Ciência de Dados, disciplina também, e pe
 	await expect(page.getByRole('radio', { name: 'Auditoria' })).not.toBeChecked();
 	const disciplina = page.getByLabel('Disciplina');
 	await expect(disciplina).toBeEnabled();
-	await expect(disciplina).toHaveValue('ti-ciencia-de-dados');
-	await expect(disciplina.locator('option:checked')).toHaveText('TI: Ciência de Dados');
+	await expect(disciplina).toHaveValue('cd-e1');
+	await expect(disciplina.locator('option:checked')).toHaveText('E1 · Estatística, Programação e Análise de Dados');
 
-	await disciplina.selectOption({ label: 'Direito Constitucional' });
+	await disciplina.selectOption({ label: 'C3 · Direito Público Aplicado, Controle e Responsabilização' });
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
-		disciplina: 'direito-constitucional',
+		disciplina: 'c3',
 		especialidade: 'ciencia-de-dados'
 	});
 	await page.reload();
-	await expect(page.getByLabel('Disciplina')).toHaveValue('direito-constitucional');
+	await expect(page.getByLabel('Disciplina')).toHaveValue('c3');
 
 	// No painel, o cabeçalho mostra o foco em texto (FR-006).
 	await page.goto('/painel');
 	const cabecalho = page.locator('header', {
 		has: page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })
 	});
-	await expect(cabecalho.getByText('Foco: Direito Constitucional', { exact: true })).toBeVisible();
+	await expect(cabecalho.getByText('Foco: C3 · Direito Público Aplicado, Controle e Responsabilização', { exact: true })).toBeVisible();
 
 	// E o story dela passa a vir logo depois de "Tudo".
 	await abas(page).getByRole('link', { name: 'Feed' }).click();
 	await expect(page.getByRole('navigation', { name: 'Matérias' }).getByRole('link').nth(1)).toHaveAccessibleName(
-		/^Const\. — Direito Constitucional/
+		/^Dir\. Públ\. — C3 · Direito Público Aplicado/
 	);
 });
 
@@ -167,7 +167,7 @@ test('o cargo troca direto no cabeçalho do painel, com o plano e os links junto
 	await expect(cargos.getByRole('button', { name: 'TI — Ciência de Dados' })).toHaveAttribute('aria-pressed', 'false');
 	await expect(page.getByRole('link', { name: 'Missões até a prova' })).toHaveAttribute('href', /#aud$/);
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
-		disciplina: 'fundamentos-de-auditoria-governamental',
+		disciplina: 'c5',
 		especialidade: 'auditoria'
 	});
 
@@ -177,14 +177,14 @@ test('o cargo troca direto no cabeçalho do painel, com o plano e os links junto
 	await expect(page.getByRole('radio', { name: 'Ciência de Dados' })).toBeChecked();
 });
 
-test('especialidade Auditoria: plano, feed sem TI, cargo e links do cabeçalho seguem a escolha', async ({ page }) => {
+test('especialidade Auditoria: plano, feed sem a P3 de Ciência de Dados, cargo e links do cabeçalho seguem a escolha', async ({ page }) => {
 	await page.goto('/painel/ajustes');
 	await page.getByRole('radio', { name: 'Auditoria' }).check();
 	const disciplina = page.getByLabel('Disciplina');
-	await expect(disciplina).toHaveValue('fundamentos-de-auditoria-governamental');
-	await expect(disciplina.locator('option', { hasText: 'TI:' })).toHaveCount(0);
+	await expect(disciplina).toHaveValue('c5');
+	await expect(disciplina.locator('option', { hasText: 'Aprendizado de Máquina' })).toHaveCount(0);
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
-		disciplina: 'fundamentos-de-auditoria-governamental',
+		disciplina: 'c5',
 		especialidade: 'auditoria'
 	});
 
@@ -199,6 +199,6 @@ test('especialidade Auditoria: plano, feed sem TI, cargo e links do cabeçalho s
 
 	await page.goto('/');
 	const stories = page.getByRole('navigation', { name: 'Matérias' });
-	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/Fundamentos de Auditoria Governamental/);
-	await expect(stories.getByRole('link', { name: /TI:/ })).toHaveCount(0);
+	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/C5 · Auditoria Governamental e Atuação Integrada da CGU/);
+	await expect(stories.getByRole('link', { name: /Aprendizado de Máquina/ })).toHaveCount(0);
 });

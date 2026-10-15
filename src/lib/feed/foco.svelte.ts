@@ -5,6 +5,8 @@
  * Toda leitura e escrita do armazenamento fica em try/catch: se falhar, o foco vive só em memória.
  *
  * A especialidade decide o conteúdo: o plano de estudos, as matérias do feed e o cargo no cabeçalho.
+ * As matérias são as disciplinas do Edital CGU 1/2026 (scripts/importar/disciplinas.mjs): B1–B4 e
+ * C1–C5 comuns aos cargos, e a P3 de cada um (`cd-e1`…`cd-e4`, `aud-e1`…`aud-e5`).
  */
 import { armazenamentoAtual } from '$lib/conta/sessao.svelte';
 
@@ -35,25 +37,26 @@ export const ESPECIALIDADES: readonly Especialidade[] = [
 		nome: 'Ciência de Dados',
 		cargo: 'TI — Ciência de Dados',
 		ancora: 'cd',
-		disciplinaPadrao: 'ti-ciencia-de-dados',
-		fora: () => false
+		disciplinaPadrao: 'cd-e1',
+		fora: (materia) => materia.startsWith('aud-')
 	},
 	{
 		id: 'auditoria',
 		nome: 'Auditoria',
 		cargo: 'Auditoria',
 		ancora: 'aud',
-		disciplinaPadrao: 'fundamentos-de-auditoria-governamental',
-		// A P3 de Auditoria não cobra TI; P1 e P2 são comuns aos cargos.
-		fora: (materia) => materia.startsWith('ti-')
+		disciplinaPadrao: 'c5',
+		// P1 e P2 são comuns aos cargos; a P3 é de cada um.
+		fora: (materia) => materia.startsWith('cd-')
 	}
 ];
 
 export const ESPECIALIDADE_PADRAO: IdEspecialidade = 'ciencia-de-dados';
-export const DISCIPLINA_PADRAO = 'ti-ciencia-de-dados';
+export const DISCIPLINA_PADRAO = 'cd-e1';
 
-const SLUG = /^[a-z0-9-]+$/;
-const valida = (v: unknown): v is string => typeof v === 'string' && SLUG.test(v);
+/** Id de disciplina do edital; a gravada antes da divisão pelo edital (ex.: `ti-ciencia-de-dados`) volta ao padrão. */
+const DISCIPLINA = /^(b[1-4]|c[1-5]|cd-e[1-4]|aud-e[1-5])$/;
+const valida = (v: unknown): v is string => typeof v === 'string' && DISCIPLINA.test(v);
 const especialidadeValida = (v: unknown): v is IdEspecialidade => ESPECIALIDADES.some((e) => e.id === v);
 export const especialidadePorId = (id: IdEspecialidade): Especialidade => ESPECIALIDADES.find((e) => e.id === id)!;
 
@@ -107,7 +110,7 @@ export const foco = {
 	get especialidade(): Especialidade {
 		return especialidadePorId(especialidade);
 	},
-	/** Id de matéria (slug). Valor que não é slug ou que está fora da especialidade é ignorado. */
+	/** Id de disciplina do edital. Valor que não é disciplina ou que está fora da especialidade é ignorado. */
 	escolherDisciplina(id: string): void {
 		if (!valida(id) || especialidadePorId(especialidade).fora(id)) return;
 		disciplina = id;

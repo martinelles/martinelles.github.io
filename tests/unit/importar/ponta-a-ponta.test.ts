@@ -64,7 +64,7 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 			const chaves = e.tp === undefined ? ['id', 't', 'm', 'l'] : ['id', 't', 'm', 'l', 'tp'];
 			expect(Object.keys(e)).toEqual(chaves);
 		}
-		expect(indice.posts.find((e: { id: string }) => e.id === 'q:TCU2026-AUFC-TI-113').tp).toBe('CDA-11');
+		expect(indice.posts.find((e: { id: string }) => e.id === 'q:TCU2026-AUFC-TI-113').tp).toBe('AMI-11');
 		expect(formatarRelatorio(rel)).toContain('questões com tópico de estudo: 8 (8 tópicos distintos)');
 	});
 
@@ -72,8 +72,11 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 		expect(indice.versao).toBe(1);
 		expect(indice.geradoEm).toMatch(/^\d{4}-\d{2}-\d{2}T/);
 		for (const m of materias) expect(Object.keys(m)).toEqual(['id', 'nome', 'abrev', 'ordem', 'total']);
-		expect(materias[0]).toMatchObject({ id: 'ti-ciencia-de-dados', ordem: 1, total: 5 });
-		expect(materias.find((m: { id: string }) => m.id === 'outros-ramos-do-direito').total).toBe(27);
+		// Disciplinas do edital, na ordem do edital: a LAI, o resumo e os flashcards caem em C2.
+		expect(materias.map((m: { id: string }) => m.id)).toEqual(['b3', 'b4', 'c1', 'c2', 'cd-e2', 'cd-e3', 'cd-e4']);
+		expect(materias[0]).toMatchObject({ id: 'b3', nome: 'B3 · Ética Pública e Responsabilidade Profissional', ordem: 1, total: 12 });
+		expect(materias.find((m: { id: string }) => m.id === 'c2').total).toBe(15);
+		expect(rel.descartes['sem disciplina do edital']).toBe(0);
 	});
 
 	it('nenhum lote passa de 150 KB gzip', () => {

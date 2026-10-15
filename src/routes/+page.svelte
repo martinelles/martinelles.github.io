@@ -70,8 +70,8 @@
 		const tipo = p.get('tipo');
 		// Tópico de estudo (FR-002): só passam as questões ligadas a ele; id inexistente dá fim imediato.
 		const topico = p.get('topico') || undefined;
-		// Matérias fora da especialidade (ex.: TI em Auditoria) não entram no "Tudo" nem nos stories.
-		const especialidade = foco.especialidade.id === 'ciencia-de-dados' ? undefined : foco.especialidade.id;
+		// A P3 do outro cargo não entra no "Tudo" nem nos stories.
+		const especialidade = foco.especialidade.id;
 		return { materia, tipo: ehTipo(tipo) ? tipo : undefined, topico, especialidade };
 	});
 

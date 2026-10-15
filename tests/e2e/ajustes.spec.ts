@@ -48,7 +48,7 @@ test('painel sem os blocos de Aparência e Disciplina, com o foco em texto (FR-0
 	await expect(cabecalho(page)).toBeVisible();
 	await expect(grupoAparencia(page)).toHaveCount(0);
 	await expect(page.getByLabel('Disciplina')).toHaveCount(0);
-	await expect(cabecalho(page).getByText('Foco: TI: Ciência de Dados', { exact: true })).toBeVisible();
+	await expect(cabecalho(page).getByText('Foco: E1 · Estatística, Programação e Análise de Dados', { exact: true })).toBeVisible();
 });
 
 test('link "Ajustes" no cabeçalho, com alvo de 44 × 44 (FR-002, NFR-002)', async ({ page }) => {
@@ -145,33 +145,33 @@ test('link direto para /painel/ajustes numa página nova (FR-007)', async ({ con
 // ---------------------------------------------------------------------------------------------
 
 test.describe('foco escolhido em 2 interações', () => {
-	async function escolherDireitoConstitucional(page: Page) {
+	async function escolherDireitoPublico(page: Page) {
 		await page.goto('/painel');
 		const passos = contador();
 		await passos.clicar(linkAjustes(page));
-		await passos.escolher(page.getByLabel('Disciplina'), 'Direito Constitucional');
+		await passos.escolher(page.getByLabel('Disciplina'), 'C3 · Direito Público Aplicado, Controle e Responsabilização');
 		expect(passos.total).toBe(2);
-		await expect(page.getByLabel('Disciplina')).toHaveValue('direito-constitucional');
+		await expect(page.getByLabel('Disciplina')).toHaveValue('c3');
 	}
 
 	test('2 interações do painel até trocar o foco (NFR-001)', async ({ page }) => {
-		await escolherDireitoConstitucional(page);
-		expect(await lerChave(page, CHAVE_FOCO)).toEqual({ disciplina: 'direito-constitucional', especialidade: 'ciencia-de-dados' });
+		await escolherDireitoPublico(page);
+		expect(await lerChave(page, CHAVE_FOCO)).toEqual({ disciplina: 'c3', especialidade: 'ciencia-de-dados' });
 	});
 
 	test('o texto do foco no painel acompanha (FR-006, Cenário 3.1)', async ({ page }) => {
-		await escolherDireitoConstitucional(page);
+		await escolherDireitoPublico(page);
 		await page.getByRole('link', { name: 'Voltar ao painel' }).click();
 		await expect(page).toHaveURL('/painel');
-		await expect(cabecalho(page).getByText('Foco: Direito Constitucional', { exact: true })).toBeVisible();
+		await expect(cabecalho(page).getByText('Foco: C3 · Direito Público Aplicado, Controle e Responsabilização', { exact: true })).toBeVisible();
 	});
 
 	test('os stories do feed acompanham (Cenário 3.1)', async ({ page }) => {
-		await escolherDireitoConstitucional(page);
+		await escolherDireitoPublico(page);
 		await abas(page).getByRole('link', { name: 'Feed' }).click();
 		await expect(page).toHaveURL('/');
 		await expect(page.getByRole('navigation', { name: 'Matérias' }).getByRole('link').nth(1)).toHaveAccessibleName(
-			/^Const\. — Direito Constitucional/
+			/^Dir\. Públ\. — C3 · Direito Público Aplicado/
 		);
 	});
 });
@@ -190,9 +190,9 @@ test('enquanto as matérias carregam, o foco aparece provisório e sem erro (cas
 	await page.goto('/painel');
 	const linhaFoco = cabecalho(page).getByText(/^Foco: /);
 	await expect(linhaFoco).toBeVisible();
-	await expect(linhaFoco).not.toHaveText('Foco: TI: Ciência de Dados');
+	await expect(linhaFoco).not.toHaveText('Foco: E1 · Estatística, Programação e Análise de Dados');
 
 	liberar();
-	await expect(cabecalho(page).getByText('Foco: TI: Ciência de Dados', { exact: true })).toBeVisible();
+	await expect(cabecalho(page).getByText('Foco: E1 · Estatística, Programação e Análise de Dados', { exact: true })).toBeVisible();
 	expect(erros).toEqual([]);
 });

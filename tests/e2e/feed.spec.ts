@@ -141,15 +141,15 @@ test('3. story filtra por matéria, "Tudo" desfaz; foco logo depois de "Tudo"', 
 	await expect(stories(page).first()).toHaveText(/Tudo/);
 	await expect(stories(page).first()).toHaveAttribute('aria-current', 'true');
 	const dados = stories(page).nth(1);
-	await expect(dados).toHaveAccessibleName(/^Dados — TI: Ciência de Dados/);
+	await expect(dados).toHaveAccessibleName(/^Estatíst\. — E1 · Estatística, Programação e Análise de Dados/);
 
 	await dados.click();
-	await expect(page).toHaveURL('/?materia=ti-ciencia-de-dados');
-	await expect(page).toHaveTitle('Dados · Feed · Painel de Concurso');
+	await expect(page).toHaveURL('/?materia=cd-e1');
+	await expect(page).toHaveTitle('Estatíst. · Feed · Painel de Concurso');
 	await expect(dados).toHaveAttribute('aria-current', 'true');
 	await expect.poll(() => itens(page).count()).toBeGreaterThanOrEqual(3);
 	const nomes = await itens(page).locator('article h2').allTextContents();
-	expect(new Set(nomes)).toEqual(new Set(['TI: Ciência de Dados']));
+	expect(new Set(nomes)).toEqual(new Set(['E1 · Estatística, Programação e Análise de Dados']));
 
 	await stories(page).first().click();
 	await expect(page).toHaveURL('/');
@@ -161,7 +161,7 @@ test('3b. foco escolhido vem logo depois de "Tudo"; matéria toda vista fica com
 	const idsMenor = indice.posts.filter((p) => p.m === menor.id).map((p) => p.id);
 	await page.addInitScript(
 		([chaveFoco, chaveInteracoes, vistos, dia]) => {
-			localStorage.setItem(chaveFoco, JSON.stringify({ disciplina: 'direito-constitucional' }));
+			localStorage.setItem(chaveFoco, JSON.stringify({ disciplina: 'c3' }));
 			localStorage.setItem(
 				chaveInteracoes,
 				JSON.stringify({ respostas: {}, curtidas: [], salvos: {}, vistos: { [dia]: vistos } })
@@ -170,9 +170,9 @@ test('3b. foco escolhido vem logo depois de "Tudo"; matéria toda vista fica com
 		[CHAVE_FOCO, CHAVE_INTERACOES, idsMenor, HOJE] as const
 	);
 	await page.goto('/');
-	await expect(stories(page).nth(1)).toHaveAccessibleName(/^Const\. — Direito Constitucional/);
+	await expect(stories(page).nth(1)).toHaveAccessibleName(/^Dir\. Públ\. — C3 · Direito Público Aplicado/);
 	await expect(stories(page).filter({ hasText: menor.abrev })).toHaveAccessibleName(new RegExp(`${menor.nome}, tudo visto$`));
-	await expect(stories(page).filter({ hasText: 'Dados' })).not.toHaveAccessibleName(/tudo visto/);
+	await expect(stories(page).filter({ hasText: 'Estatíst.' })).not.toHaveAccessibleName(/tudo visto/);
 });
 
 test('4. filtro pequeno rola até o fim sem repetir e mostra a mensagem de fim (FR-010)', async ({ page }) => {

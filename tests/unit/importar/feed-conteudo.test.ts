@@ -19,9 +19,9 @@ const TRES = '# Título\n\n## Um\nTexto um.\n\n## Dois\nTexto dois.\n\n## Três\
 
 describe('importarResumo', () => {
 	it('fixture: título, telas por ##, fonte e selo', () => {
-		const p = importarResumo('outros-ramos-do-direito--lai-direito-de-acesso', ler('feed-conteudo/resumos/outros-ramos-do-direito--lai-direito-de-acesso.md'), artigos, leis);
+		const p = importarResumo('lai--direito-de-acesso', ler('feed-conteudo/resumos/lai--direito-de-acesso.md'), artigos, leis);
 		expect(p).toMatchObject({
-			id: 'r:outros-ramos-do-direito--lai-direito-de-acesso',
+			id: 'r:lai--direito-de-acesso',
 			tipo: 'resumo',
 			materia: 'outros-ramos-do-direito',
 			subtopico: 'Lei de Acesso à Informação',
@@ -71,13 +71,13 @@ describe('artigosCitados', () => {
 
 describe('importarFlashcards', () => {
 	it('fixture: pares P:/R:, resposta com várias linhas, conferido do arquivo', () => {
-		const posts = importarFlashcards('outros-ramos-do-direito--lai', ler('feed-conteudo/flashcards/outros-ramos-do-direito--lai.md'));
-		expect(posts.map((p) => p.id)).toEqual(['f:outros-ramos-do-direito--lai:1', 'f:outros-ramos-do-direito--lai:2']);
+		const posts = importarFlashcards('lai--acesso', ler('feed-conteudo/flashcards/lai--acesso.md'));
+		expect(posts.map((p) => p.id)).toEqual(['f:lai--acesso:1', 'f:lai--acesso:2']);
 		expect(posts[1].resposta).toBe('A informação coletada na fonte,\ncom o máximo de detalhamento possível, sem modificações.');
 		expect(posts.every((p) => p.conferido === true && p.materia === 'outros-ramos-do-direito')).toBe(true);
 		expect(posts[0].fonte).toEqual({
 			rotulo: 'leis-secas/06-Lei-12527-2011-LAI.md, arts. 3º e 4º',
-			arquivo: 'feed-conteudo/flashcards/outros-ramos-do-direito--lai.md'
+			arquivo: 'feed-conteudo/flashcards/lai--acesso.md'
 		});
 	});
 

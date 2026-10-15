@@ -29,10 +29,9 @@
 	repo.materias().then((m) => (materias = m), () => {});
 	repo.indice().then((i) => (indice = i), () => {});
 
-	/** Enquanto as matérias carregam, o id formatado: `ti-ciencia-de-dados` vira `Ti ciencia de dados`. */
+	/** Enquanto as matérias carregam (ou sem post na disciplina), o código do edital: `cd-e1` vira `E1`. */
 	function rotuloDoId(id: string): string {
-		const texto = id.replaceAll('-', ' ');
-		return texto.charAt(0).toUpperCase() + texto.slice(1);
+		return (id.split('-').pop() ?? id).toUpperCase();
 	}
 
 	const nomeFoco = $derived(

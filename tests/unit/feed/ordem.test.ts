@@ -53,12 +53,17 @@ describe('ordemDoDia', () => {
 		expect(ordemDoDia(indice, {}, '2026-09-30')).toEqual(ordemDoDia(indice, {}, '2026-09-30'));
 	});
 
-	it('especialidade Auditoria tira as matérias de TI; sem especialidade nada sai', () => {
-		const aud = ordemDoDia(indice, { especialidade: 'auditoria' }, '2026-09-30');
-		expect(aud.length).toBeGreaterThan(0);
-		expect(aud.some((id) => materiaDe.get(id)!.startsWith('ti-'))).toBe(false);
-		expect(aud).toHaveLength(indice.posts.filter((e) => !e.m.startsWith('ti-')).length);
-		expect(ordemDoDia(indice, { especialidade: 'ciencia-de-dados' }, '2026-09-30')).toEqual(ordemDoDia(indice, {}, '2026-09-30'));
+	it('cada especialidade tira a P3 do outro cargo; sem especialidade nada sai', () => {
+		const m = ['c3', 'cd-e1', 'aud-e1'];
+		const posts = indice.posts.map((e, i) => ({ ...e, m: m[i % 3] }));
+		const comuns = posts.filter((e) => e.m === 'c3').length;
+		const aud = ordemDoDia({ posts }, { especialidade: 'auditoria' }, '2026-09-30');
+		expect(aud.some((id) => posts.find((e) => e.id === id)!.m === 'cd-e1')).toBe(false);
+		expect(aud).toHaveLength(comuns + posts.filter((e) => e.m === 'aud-e1').length);
+		const cd = ordemDoDia({ posts }, { especialidade: 'ciencia-de-dados' }, '2026-09-30');
+		expect(cd.some((id) => posts.find((e) => e.id === id)!.m === 'aud-e1')).toBe(false);
+		expect(cd).toHaveLength(comuns + posts.filter((e) => e.m === 'cd-e1').length);
+		expect(ordemDoDia({ posts }, {}, '2026-09-30')).toHaveLength(posts.length);
 	});
 
 	it('dia diferente ⇒ ordem diferente', () => {

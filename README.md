@@ -6,7 +6,9 @@ guarda o progresso de quem entra com um nome, para seguir de um aparelho para ou
 
 ## O que tem
 
-- **Feed de estudo** (`/`) — stories por matéria no topo e posts em rolagem infinita:
+- **Feed de estudo** (`/`) — stories por disciplina do edital no topo (B1–B4, C1–C5 e a P3 do
+  cargo escolhido, como nos guias e nas Missões; ver
+  [scripts/importar/disciplinas.mjs](scripts/importar/disciplinas.mjs)) e posts em rolagem infinita:
   questões Certo/Errado, resumos, flashcards e lei seca, sem repetir o que já apareceu. Como
   no Instagram, puxar a tela para baixo no topo (ou tocar na aba Feed já no topo) atualiza: a
   ordem é sorteada de novo e o filtro recomeça. Recarregar a página faz o mesmo; fora disso a

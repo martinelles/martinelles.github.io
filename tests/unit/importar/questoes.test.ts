@@ -102,7 +102,7 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 		expect(itens[0].enunciado).toContain('Alternativa A: ');
 		expect(itens[0].enunciado).toContain('|| significa “OU” lógico.');
 		expect(itens[0].enunciado).toMatch(/Certo se esta alternativa responde ao comando\.$/);
-		expect(itens[2]).toMatchObject({ numero: 12, topicoEstudo: 'DES-20', materia: itens[0].materia });
+		expect(itens[2]).toMatchObject({ numero: 12, topicoEstudo: 'EAG-20', materia: itens[0].materia });
 		expect(r.convertidas).toEqual({ questoes: 4, itens: 18 });
 	});
 
@@ -137,8 +137,8 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 	});
 
 	it('topicoEstudo vem de topico_estudo; relatório conta questões e tópicos distintos', () => {
-		expect(porId.get('q:TCU2026-AUFC-TI-113').topicoEstudo).toBe('CDA-11');
-		expect(porId.get('q:CGU2022-AFFC-TI-29:A').topicoEstudo).toBe('AFO-05');
+		expect(porId.get('q:TCU2026-AUFC-TI-113').topicoEstudo).toBe('AMI-11');
+		expect(porId.get('q:CGU2022-AFFC-TI-29:A').topicoEstudo).toBe('GRI-05');
 		expect(r.topicos).toEqual({ questoes: 8, distintos: 8 });
 	});
 
