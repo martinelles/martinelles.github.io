@@ -13,10 +13,11 @@ import {
 import { LEI_PARA_MATERIA } from '../../../scripts/importar/materias.mjs';
 
 describe('disciplinas do edital', () => {
-	it('B1–B4, C1–C5, E1–E4 de Ciência de Dados e E1–E5 de Auditoria; abrev ≤ 10', () => {
+	it('B1–B4, C1–C5 e a P3 de Ciência de Dados, Auditoria e Infraestrutura; abrev ≤ 10', () => {
 		expect(DISCIPLINAS.map((d) => d.id)).toEqual([
 			'b1', 'b2', 'b3', 'b4', 'c1', 'c2', 'c3', 'c4', 'c5',
-			'cd-e1', 'cd-e2', 'cd-e3', 'cd-e4', 'aud-e1', 'aud-e2', 'aud-e3', 'aud-e4', 'aud-e5'
+			'cd-e1', 'cd-e2', 'cd-e3', 'cd-e4', 'aud-e1', 'aud-e2', 'aud-e3', 'aud-e4', 'aud-e5',
+			'infra-e1', 'infra-e2', 'infra-e3', 'infra-e4'
 		]);
 		for (const d of DISCIPLINAS) expect(d.abrev.length, d.id).toBeLessThanOrEqual(10);
 	});

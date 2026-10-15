@@ -1,7 +1,8 @@
 /**
  * Divisão do feed pelas disciplinas do Edital CGU 1/2026 (itens 15.2.2 a 15.2.4), a mesma dos
  * guias de conteúdo programático e das Missões: B1–B4 (P1), C1–C5 (P2) e a P3 de cada cargo,
- * E1–E4 de Ciência de Dados e E1–E5 de Auditoria. Decisão em planos/2026-10-15-feed-por-edital.md.
+ * E1–E4 de Ciência de Dados, E1–E5 de Auditoria e E1–E4 de Infraestrutura de TI. Decisão em
+ * planos/2026-10-15-feed-por-edital.md.
  *
  * `materias.mjs` continua validando os nomes de matéria que chegam do vault; a matéria que vai
  * ao feed é a disciplina dada por `disciplinaDoPost`.
@@ -9,7 +10,7 @@
 
 /** @typedef {{ id: string, cod: string, nome: string, abrev: string }} DefDisciplina */
 
-/** Na ordem do edital. `id` com prefixo `cd-`/`aud-` só na P3, que é de um cargo só. @type {DefDisciplina[]} */
+/** Na ordem do edital. `id` com prefixo `cd-`/`aud-`/`infra-` só na P3, que é de um cargo só. @type {DefDisciplina[]} */
 export const DISCIPLINAS = [
 	{ id: 'b1', cod: 'B1', nome: 'Estado, Democracia, Direitos e Ciência Política', abrev: 'Estado' },
 	{ id: 'b2', cod: 'B2', nome: 'Sociedade Brasileira, Desigualdades, Diversidade e Desenvolvimento', abrev: 'Sociedade' },
@@ -28,7 +29,12 @@ export const DISCIPLINAS = [
 	{ id: 'aud-e2', cod: 'E2', nome: 'Finanças Públicas, Orçamento e Contabilidade Pública', abrev: 'Finanças' },
 	{ id: 'aud-e3', cod: 'E3', nome: 'Políticas Públicas e Métodos de Investigação e Avaliação', abrev: 'Políticas' },
 	{ id: 'aud-e4', cod: 'E4', nome: 'Auditoria de Contratações, Transferências e Execução de Recursos', abrev: 'Contrat.' },
-	{ id: 'aud-e5', cod: 'E5', nome: 'Integridade, Transparência e Responsabilização Aplicadas ao Controle Público', abrev: 'Integrid.' }
+	{ id: 'aud-e5', cod: 'E5', nome: 'Integridade, Transparência e Responsabilização Aplicadas ao Controle Público', abrev: 'Integrid.' },
+	// Cargo 3: ainda sem post no feed (planos/2026-10-15-especialidade-infraestrutura.md).
+	{ id: 'infra-e1', cod: 'E1', nome: 'Redes, Sistemas e Plataformas de Dados', abrev: 'Redes' },
+	{ id: 'infra-e2', cod: 'E2', nome: 'Computação em Nuvem, Virtualização e Automação', abrev: 'Nuvem' },
+	{ id: 'infra-e3', cod: 'E3', nome: 'Cibersegurança, Privacidade e Continuidade de Serviços', abrev: 'Ciberseg.' },
+	{ id: 'infra-e4', cod: 'E4', nome: 'Operação, Governança e Gestão de Serviços Digitais', abrev: 'Operação' }
 ];
 
 const POR_ID = new Map(DISCIPLINAS.map((d) => [d.id, d]));

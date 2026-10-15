@@ -189,8 +189,10 @@
 		line-height: 1.25;
 	}
 
+	/* Três cargos não cabem numa linha em 360 px: quebram e esticam até a borda. Cada botão traça a
+	   linha à direita e embaixo; a margem negativa leva as da borda para baixo do contorno do grupo. */
 	.cargos {
-		display: inline-flex;
+		display: flex;
 		flex-wrap: wrap;
 		margin: 4px 0 8px;
 		border: var(--linha-peso) solid currentColor;
@@ -199,9 +201,13 @@
 	}
 
 	.cargos button {
+		flex: 1 1 auto;
 		min-height: 44px;
+		margin: 0 calc(-1 * var(--linha-peso)) calc(-1 * var(--linha-peso)) 0;
 		padding: 6px 12px;
 		border: 0;
+		border-right: var(--linha-peso) solid currentColor;
+		border-bottom: var(--linha-peso) solid currentColor;
 		background: transparent;
 		color: inherit;
 		font: inherit;
@@ -209,17 +215,15 @@
 		cursor: pointer;
 	}
 
-	.cargos button + button {
-		border-left: var(--linha-peso) solid currentColor;
-	}
-
 	/* O escolhido em cor invertida; no Kindle, na primária. */
 	.cargos button[aria-pressed='true'] {
+		border-color: var(--cor-primaria-texto);
 		background: var(--cor-primaria-texto);
 		color: var(--cor-primaria);
 	}
 
 	:global([data-tema^='kindle']) .cargos button[aria-pressed='true'] {
+		border-color: var(--cor-primaria);
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
 	}

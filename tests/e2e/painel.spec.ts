@@ -202,3 +202,26 @@ test('especialidade Auditoria: plano, feed sem a P3 de Ciência de Dados, cargo 
 	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/C5 · Auditoria Governamental e Atuação Integrada da CGU/);
 	await expect(stories.getByRole('link', { name: /Aprendizado de Máquina/ })).toHaveCount(0);
 });
+
+test('especialidade Infraestrutura: sem plano nas Missões, feed só com P1 e P2, foco em C4', async ({ page }) => {
+	await page.goto('/painel');
+	const cargos = page.getByRole('group', { name: 'Cargo' });
+	await cargos.getByRole('button', { name: 'TI — Infraestrutura' }).click();
+	await expect(cargos.getByRole('button', { name: 'TI — Infraestrutura' })).toHaveAttribute('aria-pressed', 'true');
+	await expect(page.getByText('Infraestrutura ainda não tem plano nas Missões')).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Missões até a prova' })).not.toHaveAttribute('href', /#/);
+	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
+		disciplina: 'c4',
+		especialidade: 'infraestrutura'
+	});
+
+	await page.goto('/painel/ajustes');
+	await expect(page.getByRole('radio', { name: 'Infraestrutura' })).toBeChecked();
+	await expect(page.getByLabel('Disciplina')).toHaveValue('c4');
+
+	await page.goto('/');
+	await expect(page.getByRole('region', { name: 'Missão de hoje' })).toHaveCount(0);
+	const stories = page.getByRole('navigation', { name: 'Matérias' });
+	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/C4 · Evidências, Dados e Inteligência Artificial/);
+	await expect(stories.getByRole('link', { name: /Aprendizado de Máquina|Finanças Públicas/ })).toHaveCount(0);
+});

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { estatisticas, materiaVistaHoje, ordenarStories } from '$lib/feed/estatisticas';
-import { CHAVE_FOCO, carregarFoco, DISCIPLINA_PADRAO, foco } from '$lib/feed/foco.svelte';
+import { CHAVE_FOCO, carregarFoco, DISCIPLINA_PADRAO, especialidadePorId, foco } from '$lib/feed/foco.svelte';
 import { carregarInteracoes, dadosInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
 import type { Indice, Materia } from '$lib/feed/tipos';
 import { StorageFalso, StorageQueLanca } from './apoio';
@@ -96,6 +96,21 @@ describe('foco', () => {
 		expect(foco.disciplina).toBe('cd-e1');
 		foco.escolherEspecialidade('qualquer');
 		expect(foco.especialidade.id).toBe('ciencia-de-dados');
+	});
+
+	it('infraestrutura: sem plano nas Missões, tira a P3 dos outros dois cargos e começa em C4', () => {
+		foco.escolherEspecialidade('infraestrutura');
+		expect(foco.especialidade.ancora).toBeUndefined();
+		expect(foco.disciplina).toBe('c4');
+		const { fora } = foco.especialidade;
+		expect(['cd-e1', 'aud-e5'].filter(fora)).toEqual(['cd-e1', 'aud-e5']);
+		expect(['b1', 'c5', 'infra-e3'].some(fora)).toBe(false);
+		foco.escolherDisciplina('infra-e3');
+		expect(foco.disciplina).toBe('infra-e3');
+		expect(especialidadePorId('ciencia-de-dados').fora('infra-e3')).toBe(true);
+		expect(especialidadePorId('auditoria').fora('infra-e3')).toBe(true);
+		foco.escolherEspecialidade('auditoria');
+		expect(foco.disciplina).toBe('c5');
 	});
 
 	it('gravação anterior à divisão pelo edital cai no padrão da especialidade', () => {

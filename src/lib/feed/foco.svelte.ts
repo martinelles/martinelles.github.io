@@ -6,13 +6,14 @@
  *
  * A especialidade decide o conteúdo: o plano de estudos, as matérias do feed e o cargo no cabeçalho.
  * As matérias são as disciplinas do Edital CGU 1/2026 (scripts/importar/disciplinas.mjs): B1–B4 e
- * C1–C5 comuns aos cargos, e a P3 de cada um (`cd-e1`…`cd-e4`, `aud-e1`…`aud-e5`).
+ * C1–C5 comuns aos cargos, e a P3 de cada um (`cd-e1`…`cd-e4`, `aud-e1`…`aud-e5`, `infra-e1`…`infra-e4`).
  */
 import { armazenamentoAtual } from '$lib/conta/sessao.svelte';
+import type { Cargo } from '$lib/missoes/tipos';
 
 export const CHAVE_FOCO = 'painel-concurso:preferencias:v2';
 
-export type IdEspecialidade = 'ciencia-de-dados' | 'auditoria';
+export type IdEspecialidade = 'ciencia-de-dados' | 'auditoria' | 'infraestrutura';
 
 export interface Especialidade {
 	id: IdEspecialidade;
@@ -22,14 +23,19 @@ export interface Especialidade {
 	cargo: string;
 	/**
 	 * Âncora que as Missões e as Prioridades do edital entendem (`#cd`, `#aud`); também escolhe o
-	 * plano das Missões do painel (`/conteudo/missoes-<ancora>.json`).
+	 * plano das Missões do painel (`/conteudo/missoes-<ancora>.json`). Ausente: o cargo ainda não
+	 * tem plano nas Missões (Infraestrutura).
 	 */
-	ancora: 'cd' | 'aud';
+	ancora?: Cargo;
 	/** Disciplina de foco ao escolher a especialidade. */
 	disciplinaPadrao: string;
 	/** Matérias do feed que não são cobradas nesta especialidade. */
 	fora: (materia: string) => boolean;
 }
+
+/** P1 e P2 são comuns aos cargos; a P3 (`<prefixo>-e<n>`) é de cada um. */
+const P3 = /^(cd|aud|infra)-/;
+const foraDaP3 = (prefixo: string) => (materia: string) => P3.test(materia) && !materia.startsWith(`${prefixo}-`);
 
 export const ESPECIALIDADES: readonly Especialidade[] = [
 	{
@@ -38,7 +44,7 @@ export const ESPECIALIDADES: readonly Especialidade[] = [
 		cargo: 'TI — Ciência de Dados',
 		ancora: 'cd',
 		disciplinaPadrao: 'cd-e1',
-		fora: (materia) => materia.startsWith('aud-')
+		fora: foraDaP3('cd')
 	},
 	{
 		id: 'auditoria',
@@ -46,8 +52,16 @@ export const ESPECIALIDADES: readonly Especialidade[] = [
 		cargo: 'Auditoria',
 		ancora: 'aud',
 		disciplinaPadrao: 'c5',
-		// P1 e P2 são comuns aos cargos; a P3 é de cada um.
-		fora: (materia) => materia.startsWith('cd-')
+		fora: foraDaP3('aud')
+	},
+	{
+		// Cargo 3. A P3 ainda não tem conteúdo no feed: o foco começa na disciplina comum mais
+		// próxima (C4). Plano: planos/2026-10-15-especialidade-infraestrutura.md.
+		id: 'infraestrutura',
+		nome: 'Infraestrutura',
+		cargo: 'TI — Infraestrutura',
+		disciplinaPadrao: 'c4',
+		fora: foraDaP3('infra')
 	}
 ];
 
@@ -55,7 +69,7 @@ export const ESPECIALIDADE_PADRAO: IdEspecialidade = 'ciencia-de-dados';
 export const DISCIPLINA_PADRAO = 'cd-e1';
 
 /** Id de disciplina do edital; a gravada antes da divisão pelo edital (ex.: `ti-ciencia-de-dados`) volta ao padrão. */
-const DISCIPLINA = /^(b[1-4]|c[1-5]|cd-e[1-4]|aud-e[1-5])$/;
+const DISCIPLINA = /^(b[1-4]|c[1-5]|cd-e[1-4]|aud-e[1-5]|infra-e[1-4])$/;
 const valida = (v: unknown): v is string => typeof v === 'string' && DISCIPLINA.test(v);
 const especialidadeValida = (v: unknown): v is IdEspecialidade => ESPECIALIDADES.some((e) => e.id === v);
 export const especialidadePorId = (id: IdEspecialidade): Especialidade => ESPECIALIDADES.find((e) => e.id === id)!;

@@ -18,7 +18,7 @@ guarda o progresso de quem entra com um nome, para seguir de um aparelho para ou
 - **Painel** (`/painel`) — ferramentas, progresso, missão de hoje e foco de estudo.
 - **Missões** — plano de 61 dias até a prova, o mesmo da página das Missões; o painel e o
   feed seguem esse plano.
-- **Ajustes** (`/painel/ajustes`) — especialidade (Ciência de Dados ou Auditoria), que decide
+- **Ajustes** (`/painel/ajustes`) — especialidade (Ciência de Dados, Auditoria ou Infraestrutura), que decide
   o conteúdo, aparência e conta.
 - **Entrar** (`/entrar`, ou o popup) — login só por nome, sem senha: o nome é a credencial.
 - **Salvos** (`/salvos`) — posts marcados para revisar.

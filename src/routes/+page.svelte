@@ -184,7 +184,9 @@
 <PuxarParaAtualizar onAtualizar={atualizar} />
 
 <div class="feed">
-	<ChamadaMissoes plano={missoes.plano} cargo={missoes.cargo} hoje={dia} marcas={marcasMissoes.todas()} />
+	{#if missoes.cargo}
+		<ChamadaMissoes plano={missoes.plano} cargo={missoes.cargo} hoje={dia} marcas={marcasMissoes.todas()} />
+	{/if}
 
 	{#if materias}
 		<BarraStories materias={stories} selecionada={filtro.materia ?? null} {vistas} />

@@ -72,7 +72,12 @@
 		onescolherEspecialidade={(id) => foco.escolherEspecialidade(id)}
 		ancora={foco.especialidade.ancora}
 	/>
-	{#if erroPlano}
+	{#if !cargo}
+		<section class="sem-plano" aria-labelledby="titulo-missao">
+			<h2 id="titulo-missao">Missão de hoje</h2>
+			<p>{foco.especialidade.nome} ainda não tem plano nas Missões; o feed já traz as provas P1 e P2.</p>
+		</section>
+	{:else if erroPlano}
 		<p class="erro-plano" role="alert">{erroPlano}</p>
 	{:else}
 		<MissaoDeHoje {plano} {cargo} {hoje} {marcas} {questoesPorTopico} onmarcar={marcarMissao} />
@@ -91,6 +96,26 @@
 		display: flex;
 		flex-direction: column;
 		gap: calc(var(--espaco) * 1.25);
+	}
+
+	.sem-plano {
+		background: var(--cor-superficie);
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: var(--raio);
+		padding: var(--espaco);
+		box-shadow: var(--sombra);
+	}
+
+	.sem-plano h2 {
+		margin: 0;
+		font-family: var(--fonte-titulo);
+		font-size: 1.375rem;
+		line-height: 1.2;
+	}
+
+	.sem-plano p {
+		margin: 8px 0 0;
+		color: var(--cor-texto-suave);
 	}
 
 	.erro-plano {
