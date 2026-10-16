@@ -5,6 +5,7 @@
  * Toda leitura e escrita em try/catch: falhou, as marcações vivem só em memória.
  */
 import { CHAVE_MISSOES } from '$lib/conta/regras';
+import type { Mudancas } from './calculos';
 import type { Marcas } from './tipos';
 
 let marcas = $state<Marcas>({});
@@ -42,9 +43,15 @@ export const marcasMissoes = {
 		return !!marcas[chave];
 	},
 	marcar(chave: string, feito: boolean): void {
+		this.aplicar({ [chave]: feito });
+	},
+	/** Várias marcações numa gravação só (o subitem e o bloco dele). */
+	aplicar(mudancas: Mudancas): void {
 		const novas = { ...marcas };
-		if (feito) novas[chave] = true;
-		else delete novas[chave];
+		for (const [chave, feito] of Object.entries(mudancas)) {
+			if (feito) novas[chave] = true;
+			else delete novas[chave];
+		}
 		marcas = novas;
 		try {
 			armazenamento?.setItem(CHAVE_MISSOES, JSON.stringify(novas));

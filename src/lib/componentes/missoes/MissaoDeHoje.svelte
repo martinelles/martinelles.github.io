@@ -2,10 +2,19 @@
 	// Missão de hoje no painel (planos/2026-10-14-missao-unica.md): o dia do plano de 61 dias das
 	// Missões, com as mesmas bolhas da página (mesma chave e mesma conta). Cada subitem leva às
 	// questões do tópico no feed, quando há, e às do Qconcursos (o mesmo link da página das
-	// Missões); nas revisões, também às que ela errou lá.
+	// Missões); nas revisões, também às que ela errou lá. Bloco com mais de um subitem tem uma caixa
+	// por subitem: com todas marcadas, o bloco se marca (planos/2026-10-15-topico-da-missao.md).
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { formatarData } from '$lib/datas';
-	import { blocoFeito, chaveBloco, diaDeHoje, progressoDoDia } from '$lib/missoes/calculos';
+	import {
+		blocoFeito,
+		diaDeHoje,
+		itemFeito,
+		mudancasDoBloco,
+		mudancasDoItem,
+		progressoDoDia,
+		type Mudancas
+	} from '$lib/missoes/calculos';
 	import type { Cargo, Marcas, PlanoMissoes, TipoBloco } from '$lib/missoes/tipos';
 
 	let {
@@ -23,7 +32,7 @@
 		marcas: Marcas;
 		/** Questões do feed por tópico (`tp`); `null` enquanto o índice carrega. */
 		questoesPorTopico: Map<string, number> | null;
-		onmarcar: (chave: string, feito: boolean) => void;
+		onmarcar: (mudancas: Mudancas) => void;
 	} = $props();
 
 	const LETRA: Record<TipoBloco, string> = { rev: 'R', novo: 'N', disc: 'D', sim: 'S', q: 'Q' };
@@ -60,7 +69,6 @@
 		</p>
 		<ol class="blocos">
 			{#each dia.blocos as b, i (i)}
-				{@const chave = chaveBloco(cargo, dia.data, i)}
 				{@const feito = blocoFeito(marcas, cargo, dia, i)}
 				<li class="bloco t-{b.tipo}" class:feito>
 					<label class="bolha">
@@ -71,7 +79,7 @@
 								const alvo = e.currentTarget;
 								const marcar = alvo.checked;
 								alvo.checked = feito; // quem decide é o onmarcar (pode pedir login antes)
-								onmarcar(chave, marcar);
+								onmarcar(mudancasDoBloco(marcas, cargo, dia, i, marcar));
 							}}
 							aria-label="Marcar {b.titulo} como cumprido"
 						/>
@@ -84,11 +92,29 @@
 							{#if b.min}<span class="min">{b.min} min</span>{/if}
 						</p>
 						{#if b.itens?.length}
-							<ul class="itens">
+							{@const porItem = b.itens.length > 1}
+							<ul class="itens" class:por-item={porItem}>
 								{#each b.itens as it (it.cid)}
 									{@const n = questoesPorTopico?.get(it.cid) ?? 0}
 									{@const erros = b.tipo === 'rev' ? plano.qcErros[it.cid] : undefined}
-									<li>
+									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
+									<li class:feito={itemOk}>
+										{#if porItem}
+											<label class="caixa">
+												<input
+													type="checkbox"
+													checked={itemOk}
+													onchange={(e) => {
+														const alvo = e.currentTarget;
+														const marcar = alvo.checked;
+														alvo.checked = itemOk; // quem decide é o onmarcar (pode pedir login antes)
+														onmarcar(mudancasDoItem(marcas, cargo, dia, i, it.cid, marcar));
+													}}
+													aria-label="Marcar {it.cod} como estudado"
+												/>
+												<span class="quadrado" aria-hidden="true"><Icone nome="check" tamanho={14} /></span>
+											</label>
+										{/if}
 										<span class="cod">{it.cod}</span>
 										<span class="texto">
 											{it.texto}
@@ -288,6 +314,65 @@
 		display: grid;
 		grid-template-columns: auto minmax(0, 1fr);
 		gap: 8px;
+	}
+
+	/* Bloco com vários subitens: uma caixa por subitem, com alvo de 44 px como as bolhas. */
+	.itens.por-item li {
+		grid-template-columns: 44px auto minmax(0, 1fr);
+		gap: 0 8px;
+		/* A caixa fica embaixo da bolha do bloco, para sobrar largura ao texto em 360 px. */
+		margin-left: -54px;
+	}
+
+	.caixa {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		cursor: pointer;
+	}
+
+	.caixa input {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.quadrado {
+		display: grid;
+		place-items: center;
+		width: 22px;
+		height: 22px;
+		border: 2px solid var(--c);
+		border-radius: 4px;
+		color: transparent;
+	}
+
+	.caixa input:checked + .quadrado {
+		background: var(--c);
+		color: var(--cor-superficie);
+	}
+
+	.caixa:has(input:focus-visible) .quadrado {
+		outline: 3px solid var(--cor-primaria);
+		outline-offset: 2px;
+	}
+
+	.itens.por-item .cod,
+	.itens.por-item .texto {
+		padding-top: 11px;
+	}
+
+	.itens li.feito .cod,
+	.itens li.feito .texto {
+		color: var(--cor-texto-suave);
+		text-decoration: line-through;
+		text-decoration-thickness: 1px;
 	}
 
 	.cod {

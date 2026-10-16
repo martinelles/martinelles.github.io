@@ -12,6 +12,7 @@
  * nome, "Agora não" não marca, e o popup volta no próximo toque.
  */
 import { conta } from '$lib/conta/sessao.svelte';
+import type { Mudancas } from '$lib/missoes/calculos';
 import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 import { CHAVE_INTERACOES, interacoes } from './interacoes.svelte';
 import { manterRodada } from './rodada';
@@ -21,7 +22,9 @@ export const CHAVE_DISPENSADO = `${CHAVE_INTERACOES}:sem-login`;
 
 export type Pendente =
 	| { acao: 'responder'; id: string; r: string; gabarito: string }
-	| { acao: 'curtir' | 'salvar' | 'missao'; id: string; on: boolean };
+	| { acao: 'curtir' | 'salvar'; id: string; on: boolean }
+	/** Marcações do bloco ou do subitem, já calculadas no toque (`mudancasDoBloco`, `mudancasDoItem`). */
+	| { acao: 'missao'; mudancas: Mudancas };
 
 let pedido = $state<Pendente | null>(null);
 
@@ -44,7 +47,7 @@ function dispensado(sessao: Storage | null): boolean {
 /** Faz a interação; curtir e salvar só alternam se o estado ainda não é o pedido. Missão só com login. */
 export function aplicar(p: Pendente): void {
 	if (p.acao === 'missao') {
-		if (conta.usuario) marcasMissoes.marcar(p.id, p.on);
+		if (conta.usuario) marcasMissoes.aplicar(p.mudancas);
 	} else if (p.acao === 'responder') interacoes.responder(p.id, p.r, p.gabarito);
 	else if (p.acao === 'curtir') {
 		if (interacoes.curtido(p.id) !== p.on) interacoes.alternarCurtida(p.id);
@@ -76,9 +79,16 @@ export function alternarSalvo(id: string, sessao = tentarSessao()): void {
 	pedir({ acao: 'salvar', id, on: !interacoes.salvo(id) }, sessao);
 }
 
-/** `chave` é a do bloco (`cd~2026-10-13~0`), a mesma da página das Missões. */
-export function marcarMissao(chave: string, feito: boolean, sessao = tentarSessao()): void {
-	pedir({ acao: 'missao', id: chave, on: feito }, sessao);
+/** Chaves do bloco (`cd~2026-10-13~0`, a mesma da página das Missões) e dos subitens dele. */
+export function marcarMissao(mudancas: Mudancas, sessao = tentarSessao()): void {
+	pedir({ acao: 'missao', mudancas }, sessao);
+}
+
+function lerMudancas(m: unknown): Pendente | null {
+	if (!m || typeof m !== 'object' || Array.isArray(m)) return null;
+	const v = Object.entries(m);
+	if (!v.length || !v.every(([k, f]) => k.includes('~') && typeof f === 'boolean')) return null;
+	return { acao: 'missao', mudancas: m as Mudancas };
 }
 
 /** Tira a interação pendente da sessão (uma vez só). */
@@ -87,11 +97,12 @@ export function tomarPendente(sessao = tentarSessao()): Pendente | null {
 		const p: unknown = JSON.parse(sessao?.getItem(CHAVE_PENDENTE) ?? 'null');
 		sessao?.removeItem(CHAVE_PENDENTE);
 		if (p && typeof p === 'object') {
-			const { acao, id, r, gabarito, on } = p as Record<string, unknown>;
+			const { acao, id, r, gabarito, on, mudancas } = p as Record<string, unknown>;
+			if (acao === 'missao') return lerMudancas(mudancas);
 			if (typeof id !== 'string') return null;
 			if (acao === 'responder' && typeof r === 'string' && typeof gabarito === 'string')
 				return { acao, id, r, gabarito };
-			if ((acao === 'curtir' || acao === 'salvar' || acao === 'missao') && typeof on === 'boolean')
+			if ((acao === 'curtir' || acao === 'salvar') && typeof on === 'boolean')
 				return { acao, id, on };
 		}
 	} catch {

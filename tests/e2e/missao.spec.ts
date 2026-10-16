@@ -28,7 +28,8 @@ async function simularApi(page: Page) {
 }
 
 const missao = (page: Page) => page.getByRole('region', { name: 'Missão de hoje' });
-const bolhas = (page: Page) => missao(page).getByRole('checkbox');
+const bolhas = (page: Page) => missao(page).getByRole('checkbox', { name: /como cumprido$/ });
+const caixas = (page: Page) => missao(page).getByRole('checkbox', { name: /como estudado$/ });
 const marcas = (page: Page) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}'), CHAVE);
 
 test.beforeEach(async ({ page }) => {
@@ -88,6 +89,31 @@ test('sem login: a bolha abre o popup; "Agora não" não marca e, depois de entr
 	await expect(page).toHaveURL(/\/painel$/);
 	await expect(bolhas(page).nth(2)).toBeChecked();
 	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~2`]: true });
+});
+
+test('subitem marcado à parte: o último marca o bloco, e desmarcar o bloco limpa os subitens', async ({ page }) => {
+	// planos/2026-10-15-topico-da-missao.md. O bloco 0 de 14/10 tem dois subitens.
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	const [a, b] = diaCd.blocos[0].itens!;
+	await page.goto('/painel');
+	await expect(caixas(page)).toHaveCount(diaCd.blocos.filter((x) => (x.itens?.length ?? 0) > 1).reduce((n, x) => n + x.itens!.length, 0));
+
+	const caixaA = missao(page).getByRole('checkbox', { name: `Marcar ${a.cod} como estudado` }).first();
+	const caixaB = missao(page).getByRole('checkbox', { name: `Marcar ${b.cod} como estudado` }).first();
+	await caixaA.click();
+	await expect(caixaA).toBeChecked();
+	await expect(bolhas(page).first()).not.toBeChecked();
+	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~0~${a.cid}`]: true });
+
+	await caixaB.click();
+	await expect(bolhas(page).first()).toBeChecked();
+	await expect(missao(page)).toContainText(`1 de ${diaCd.blocos.length} blocos feitos`);
+
+	await bolhas(page).first().click();
+	await expect(caixaA).not.toBeChecked();
+	await expect(caixaB).not.toBeChecked();
+	expect(await marcas(page)).toEqual({});
 });
 
 test('fora da janela: antes de 13/10 e depois de 12/12', async ({ page }) => {

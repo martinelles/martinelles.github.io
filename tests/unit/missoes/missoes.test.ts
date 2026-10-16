@@ -5,7 +5,17 @@ import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, it } from 'vitest';
 import { chaveLink, montarMissoes, validarMissoes as validarNoImportador } from '../../../scripts/importar/missoes.mjs';
 import { importar } from '../../../scripts/importar/index.mjs';
-import { chaveBloco, diaCumprido, diaDeHoje, progressoDoDia, resumo } from '$lib/missoes/calculos';
+import {
+	chaveBloco,
+	chaveItem,
+	diaCumprido,
+	diaDeHoje,
+	itemFeito,
+	mudancasDoBloco,
+	mudancasDoItem,
+	progressoDoDia,
+	resumo
+} from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
 import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
 import type { PlanoMissoes } from '$lib/missoes/tipos';
@@ -126,6 +136,44 @@ describe('contas das Missões', () => {
 	});
 });
 
+describe('subitem da missão marcado à parte', () => {
+	// Planos/2026-10-15-topico-da-missao.md: bloco com dois subitens.
+	const dia = {
+		data: '2026-10-16',
+		dow: 'sex',
+		fase: 'Base',
+		blocos: [{ tipo: 'novo' as const, titulo: 'N', min: 90, itens: [item('EPA-01'), item('EPA-02')] }]
+	};
+	const bloco = 'cd~2026-10-16~0';
+	const um = 'cd~2026-10-16~0~EPA-01';
+	const dois = 'cd~2026-10-16~0~EPA-02';
+
+	it('a chave do subitem é a do bloco com o cid', () => {
+		expect(chaveItem('cd', '2026-10-16', 0, 'EPA-01')).toBe(um);
+	});
+
+	it('marcar um subitem não marca o bloco; o último marca', () => {
+		expect(mudancasDoItem({}, 'cd', dia, 0, 'EPA-01', true)).toEqual({ [um]: true });
+		expect(mudancasDoItem({ [um]: true }, 'cd', dia, 0, 'EPA-02', true)).toEqual({ [dois]: true, [bloco]: true });
+	});
+
+	it('bloco marcado vale para os subitens; desmarcar um deixa os outros marcados', () => {
+		const marcas = { [bloco]: true as const };
+		expect(itemFeito(marcas, 'cd', dia, 0, 'EPA-02')).toBe(true);
+		expect(mudancasDoItem(marcas, 'cd', dia, 0, 'EPA-01', false)).toEqual({ [um]: false, [bloco]: false, [dois]: true });
+	});
+
+	it('desmarcar o bloco apaga os subitens marcados dele', () => {
+		expect(mudancasDoBloco({ [bloco]: true, [um]: true }, 'cd', dia, 0, false)).toEqual({ [bloco]: false, [um]: false });
+		expect(mudancasDoBloco({}, 'cd', dia, 0, true)).toEqual({ [bloco]: true });
+	});
+
+	it('a marcação do subitem não conta como bloco feito', () => {
+		const plano = { ...PLANO, plan: [dia] };
+		expect(resumo(plano, { [um]: true }, 'cd').blocosFeitos).toBe(0);
+	});
+});
+
 describe('carga do plano das Missões', () => {
 	it('arquivo inválido: tenta de novo sem cache; falha dupla é erro com a URL', async () => {
 		esquecerMissoes();
@@ -164,5 +212,8 @@ describe('marcações', () => {
 		marcasMissoes.marcar('cd~2026-10-13~0', false);
 		expect(JSON.parse(arm.getItem('missoes-cgu-2026')!)).toEqual({ 'cd~2026-10-13~1': true });
 		expect(marcasMissoes.feito('cd~2026-10-13~1')).toBe(true);
+		// Subitem e bloco numa gravação só.
+		marcasMissoes.aplicar({ 'cd~2026-10-13~1': false, 'cd~2026-10-13~1~EPA-01': true });
+		expect(JSON.parse(arm.getItem('missoes-cgu-2026')!)).toEqual({ 'cd~2026-10-13~1~EPA-01': true });
 	});
 });
