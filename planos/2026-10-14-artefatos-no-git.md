@@ -270,3 +270,15 @@ Clicar num quadrado da régua abria "Os 61 dias" e rolava a página até o dia, 
 - **Publicação:** `python scripts/montar_artifacts.py` no vault, com `--check` dando 264 links iguais nas duas páginas, e depois `npm run importar`. Do que o importador regerou, só `missoes.html` entrou no commit; os outros artefatos voltaram com `git restore`.
 - **Backup** do `script.html`, do `template.html` e do `_publicar/missoes-cgu-2026.html` de antes, no scratchpad da sessão, em `backup/missoes-*.2026-10-15`.
 - **Teste:** um teste novo em `tests/e2e/missao.spec.ts` cobre o destaque do quadrado e do card, que só um quadrado fica destacado e o foco depois do segundo clique. O `npx playwright test` passou com 240.
+
+## Atualização de 2026-10-15: a régua das Missões acompanha a visão
+
+Os botões "Hoje" e "Esta semana" trocavam a lista, mas a régua continuava igual, inclusive com o destaque de um dia clicado antes.
+
+- **No vault** (`artifacts/missoes/script.html`):
+  - `naVista(p, i)` diz se o dia está na visão atual. A lista e a régua usam essa mesma regra.
+  - `marcarRegua()` liga e desliga as classes `fora` e `sel` nos botões que já existem, sem refazê-los, e roda a cada `setView`.
+  - "Hoje" e "Esta semana" tiram a escolha da régua; "Os 61 dias" a mantém.
+- **Estilo** (`template.html`): quadrado fora da visão fica com `opacity:.3`.
+- **Publicação:** do mesmo jeito da atualização anterior (`montar_artifacts.py`, `--check` com 264 links, `npm run importar` e só `missoes.html` no commit). Backup do vault em `backup/missoes-*.2026-10-15b`.
+- **Teste:** `tests/e2e/missao.spec.ts` confere a régua nas três visões: 1, 6 e 61 quadrados acesos, para 14/10. O `npx playwright test` passou com 241.

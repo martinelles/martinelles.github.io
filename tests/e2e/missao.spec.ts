@@ -238,3 +238,24 @@ test('página das Missões: o quadrado clicado na régua e o card do dia ficam d
 	await expect(regua.nth(30)).toBeFocused();
 	await expect(page.locator('.day.is-sel')).toHaveAttribute('id', `d-${missoesCd.plan[30].data}`);
 });
+
+test('página das Missões: a régua acompanha Hoje, Esta semana e Os 61 dias', async ({ page }) => {
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	const regua = page.locator('#ruler button');
+	const acesos = page.locator('#ruler button:not(.fora)');
+	await regua.nth(20).click();
+	await expect(acesos).toHaveCount(61);
+
+	await page.locator('#v-hoje').click();
+	await expect(acesos).toHaveCount(1);
+	await expect(acesos.first()).toHaveClass(/\btoday\b/);
+	await expect(page.locator('#ruler button.sel')).toHaveCount(0);
+
+	// 14/10 está na semana 1 do plano, de 13/10 a 18/10.
+	await page.locator('#v-semana').click();
+	const semana = missoesCd.plan.filter((d) => d.data <= '2026-10-18').length;
+	await expect(acesos).toHaveCount(semana);
+
+	await page.locator('#v-tudo').click();
+	await expect(acesos).toHaveCount(61);
+});
