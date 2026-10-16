@@ -223,3 +223,19 @@ hoje|Exportar progresso|plano.json` em `tests/e2e`):
   dia contra o bloco marcado), corrigido.
 - Resultado: `npm test` com 280, `npm run check` sem erro, `npx playwright test` com 222, e
   `grep -r "lib/plano|componentes/plano" src` sem resultado.
+
+## Atualização de 2026-10-15: os textos das Missões não citam mais o ESTUDO.csv
+
+O app funciona sem o `ESTUDO.csv`, mas o plano mandava "lançar" desempenho nele, e a página citava o arquivo como origem dos códigos e como "o registro que conta".
+
+- **No vault**, com backup em `backup/missoes-*.2026-10-15d`:
+  - `artifacts/missoes/plano.py`:
+    - as 49 revisões perderam "Lance no ESTUDO.csv.";
+    - os três simulados agora dizem "corrija e anote os tópicos em que errou";
+    - os dois blocos "taxa abaixo de 70%" agora dizem "nas suas questões";
+    - saiu a troca de texto que só valia para Auditoria. Ela gerava "lance … por id por id" nos simulados.
+  - `script.html`: as apresentações e o rodapé não citam mais o CSV.
+  - `template.html`: em "Fora do plano", saiu a menção ao CSV.
+- **Regeneração:** `plano.py` rodou de novo para `cd` e `aud`. Comparados aos backups, os dois planos têm a mesma estrutura (dias, blocos, minutos e itens); mudaram só `det` e `titulo`. Depois rodaram `montar_artifacts.py` (264 links iguais) e `npm run importar`.
+- **O `plano.py` ainda lê o `ESTUDO.csv`** para dar os ids dos tópicos (`EPA-01` etc.). É só entrada da geração; nenhum texto do app o cita. Os comentários em `src/lib/*/tipos.ts` que explicam a origem dos ids ficam.
+- **Verificação:** `npm test` passou com 300 e `npx playwright test` com 242.
