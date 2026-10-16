@@ -257,3 +257,16 @@ não" fecha o popup sem marcar nada. Sem API (GitHub Pages ou sem rede), o popup
 entra. Mudanças em `artifacts/missoes/{script,template}.html` (vault), com o `--check` passando
 e `_publicar/` regenerado. Os e2e cobrem cancelar, entrar e marcar, e a falta de API.
 `npm test` com 346, `npx playwright test` com 252.
+
+## Atualização de 2026-10-15: destaque do dia clicado na régua das Missões
+
+Clicar num quadrado da régua abria "Os 61 dias" e rolava a página até o dia, mas o único quadrado destacado continuava sendo o de hoje.
+
+- **Correção na fonte, no vault:** em `artifacts/missoes/script.html`, o dia clicado fica em `diaSel`. O nome não é `sel`, porque `renderList` já tem uma variável local com esse nome. O quadrado ganha a classe `sel` e `aria-current="true"`, e o card do dia ganha `is-sel`. O clique só troca as classes, sem refazer a régua, e com isso o foco do teclado continua no quadrado. Trocar de cargo limpa a escolha.
+- **Estilo** (`template.html`):
+  - o quadrado escolhido ganha contorno de 3 px na cor de destaque e fica 25% mais alto;
+  - o card do dia ganha borda na cor do texto;
+  - a régua ganhou 6 px de respiro em cima e embaixo, porque o `overflow:hidden` cortava os contornos.
+- **Publicação:** `python scripts/montar_artifacts.py` no vault, com `--check` dando 264 links iguais nas duas páginas, e depois `npm run importar`. Do que o importador regerou, só `missoes.html` entrou no commit; os outros artefatos voltaram com `git restore`.
+- **Backup** do `script.html`, do `template.html` e do `_publicar/missoes-cgu-2026.html` de antes, no scratchpad da sessão, em `backup/missoes-*.2026-10-15`.
+- **Teste:** um teste novo em `tests/e2e/missao.spec.ts` cobre o destaque do quadrado e do card, que só um quadrado fica destacado e o foco depois do segundo clique. O `npx playwright test` passou com 240.

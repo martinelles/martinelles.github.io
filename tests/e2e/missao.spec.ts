@@ -225,3 +225,16 @@ test('feed: missão cumprida vira um aviso discreto; fora da janela, sem chamada
 	await expect(page.getByRole('navigation', { name: 'Matérias' })).toBeVisible();
 	await expect(page.getByRole('region', { name: 'Missão de hoje' })).toHaveCount(0);
 });
+
+test('página das Missões: o quadrado clicado na régua e o card do dia ficam destacados', async ({ page }) => {
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	const regua = page.locator('#ruler button');
+	await regua.nth(20).click();
+	await expect(regua.nth(20)).toHaveClass(/\bsel\b/);
+	await expect(regua.nth(20)).toHaveAttribute('aria-current', 'true');
+	await expect(page.locator(`#d-${missoesCd.plan[20].data}`)).toHaveClass(/\bis-sel\b/);
+	await regua.nth(30).click();
+	await expect(page.locator('#ruler button.sel')).toHaveCount(1);
+	await expect(regua.nth(30)).toBeFocused();
+	await expect(page.locator('.day.is-sel')).toHaveAttribute('id', `d-${missoesCd.plan[30].data}`);
+});

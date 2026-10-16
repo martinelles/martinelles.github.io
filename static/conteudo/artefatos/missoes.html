@@ -56,7 +56,7 @@ header{display:grid;gap:18px}
 .stat b{display:block;font-family:var(--f-display);font-size:30px;font-weight:800;line-height:1}
 .stat span{font-size:12.5px;color:var(--muted)}
 /* régua */
-.ruler{display:grid;grid-template-columns:repeat(61,1fr);gap:2px;overflow:hidden}
+.ruler{display:grid;grid-template-columns:repeat(61,1fr);gap:2px;overflow:hidden;padding:6px 4px}
 .ruler button{all:unset;cursor:pointer;height:26px;border-radius:2px;background:var(--line);position:relative}
 .ruler button.f-Base{background:color-mix(in srgb,var(--novo) 28%,var(--line))}
 .ruler button.f-Consolidação{background:color-mix(in srgb,var(--q) 30%,var(--line))}
@@ -64,6 +64,7 @@ header{display:grid;gap:18px}
 .ruler button.has-sim::after{content:"";position:absolute;inset:auto 0 0 0;height:5px;background:var(--sim)}
 .ruler button.full{background:var(--accent)}
 .ruler button.today{outline:2px solid var(--ink);outline-offset:1px}
+.ruler button.sel{outline:3px solid var(--accent);outline-offset:1px;transform:scaleY(1.25);z-index:1}
 .ruler button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
@@ -79,6 +80,7 @@ header{display:grid;gap:18px}
 .week>h2 small{font-family:var(--f-body);font-size:13px;color:var(--muted);font-weight:500}
 .day{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:10px;scroll-margin-top:16px}
 .day.is-today{border:2px solid var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.day.is-sel{border:2px solid var(--ink);box-shadow:0 0 0 4px var(--accent-soft)}
 .dayhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;align-items:baseline}
 .dayhead h3{font-size:18px;font-weight:600}
 .dayhead .meta{font-size:12.5px;color:var(--muted)}
@@ -264,6 +266,8 @@ const saveLocal = () => lsSet(KEY, JSON.stringify(done));
 let cargo = (location.hash === '#cd' || location.hash === '#aud') ? location.hash.slice(1) : lsGet(KEY + ':cargo', 'cd');
 if (!DATA[cargo]) cargo = 'cd';
 let view = lsGet(KEY + ':view', 'hoje');
+// Dia escolhido na régua: o quadrado e o card dele ficam destacados até outro clique ou troca de cargo.
+let diaSel = null;
 const now = new Date();
 const localIso = new Date(now.getTime() - now.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
 const plan = () => DATA[cargo].plan;
@@ -304,10 +308,16 @@ function renderRuler() {
   const r = $('ruler'); r.innerHTML = ''; const t = todayIdx();
   plan().forEach((p, i) => {
     const b = document.createElement('button');
-    b.className = 'f-' + p.fase.split(' ')[0] + (p.blocos.some(x => x.tipo === 'sim') ? ' has-sim' : '') + (dayFull(p) ? ' full' : '') + (i === t ? ' today' : '');
+    b.className = 'f-' + p.fase.split(' ')[0] + (p.blocos.some(x => x.tipo === 'sim') ? ' has-sim' : '') + (dayFull(p) ? ' full' : '') + (i === t ? ' today' : '') + (p.data === diaSel ? ' sel' : '');
+    if (p.data === diaSel) b.setAttribute('aria-current', 'true');
     b.title = `${p.dow} ${fmt(p.data)} · ${p.fase}`;
     b.setAttribute('aria-label', b.title);
-    b.onclick = () => { setView('tudo'); requestAnimationFrame(() => $('d-' + p.data)?.scrollIntoView({ block: 'start' })); };
+    b.onclick = () => {
+      // Só troca o destaque, sem refazer a régua: o foco do teclado fica no quadrado clicado.
+      diaSel = p.data;
+      r.querySelectorAll('.sel').forEach(x => { x.classList.remove('sel'); x.removeAttribute('aria-current'); });
+      b.classList.add('sel'); b.setAttribute('aria-current', 'true');
+      setView('tudo'); requestAnimationFrame(() => $('d-' + p.data)?.scrollIntoView({ block: 'start' })); };
     r.appendChild(b);
   });
 }
@@ -344,7 +354,7 @@ function renderList() {
     const a = ds[0][0], z = ds[ds.length - 1][0];
     const head = view === 'hoje' ? '' : `<h2>Semana ${w + 1} <small>${fmt(a.data)} a ${fmt(z.data)} · ${a.fase}${a.fase !== z.fase ? ' → ' + z.fase : ''}</small></h2>`;
     return `<section class="week">${head}${ds.map(([p, i]) => `
-      <article class="day${i === t ? ' is-today' : ''}" id="d-${p.data}">
+      <article class="day${i === t ? ' is-today' : ''}${p.data === diaSel ? ' is-sel' : ''}" id="d-${p.data}">
         <div class="dayhead"><h3>${p.dow}, ${fmt(p.data)}${i === t ? '<span class="tag-today">hoje</span>' : ''}</h3>
         <span class="meta">dia ${i + 1} de 61 · ${p.fase} · ${p.blocos.reduce((a, b) => a + b.min, 0)} min</span></div>
         ${p.blocos.map((b, j) => blockHTML(p, b, j)).join('')}
@@ -358,7 +368,7 @@ function setView(v) {
   ['hoje', 'semana', 'tudo'].forEach(x => $('v-' + x).setAttribute('aria-pressed', String(x === v)));
   renderList();
 }
-function setCargo(c) { cargo = c; lsSet(KEY + ':cargo', c); renderAll(); }
+function setCargo(c) { cargo = c; diaSel = null; lsSet(KEY + ':cargo', c); renderAll(); }
 
 // Conta do painel: nome do login, carimbos e envio. Mesmas chaves e regra de src/lib/conta/ do painel.
 const USUARIO = lsGet('painel-concurso:usuario:v1', '');
