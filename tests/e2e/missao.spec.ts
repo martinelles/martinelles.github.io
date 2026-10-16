@@ -259,3 +259,34 @@ test('página das Missões: a régua acompanha Hoje, Esta semana e Os 61 dias', 
 	await page.locator('#v-tudo').click();
 	await expect(acesos).toHaveCount(61);
 });
+
+test('página das Missões: subitem marcado à parte, com as mesmas chaves e regras do painel', async ({ page }) => {
+	// planos/2026-10-15-topico-da-missao.md. O bloco 0 de 14/10 tem dois subitens.
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	const [a, b] = diaCd.blocos[0].itens!;
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await page.locator('#v-hoje').click();
+	const hojePagina = page.locator('.day.is-today');
+	const caixaA = hojePagina.locator(`input.sub[data-i="cd~${HOJE}~0~${a.cid}"]`);
+	const caixaB = hojePagina.locator(`input.sub[data-i="cd~${HOJE}~0~${b.cid}"]`);
+	const bolha = hojePagina.locator(`.bubble[data-k="cd~${HOJE}~0"]`);
+
+	await caixaA.click();
+	await expect(caixaA).toBeChecked();
+	await expect(bolha).not.toBeChecked();
+	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~0~${a.cid}`]: true });
+
+	await caixaB.click();
+	await expect(bolha).toBeChecked();
+
+	// O painel lê a mesma chave.
+	await page.goto('/painel');
+	await expect(missao(page).getByRole('checkbox', { name: `Marcar ${a.cod} como estudado` }).first()).toBeChecked();
+	await expect(bolhas(page).first()).toBeChecked();
+
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await page.locator(`.day.is-today .bubble[data-k="cd~${HOJE}~0"]`).click();
+	await expect(page.locator(`.day.is-today input.sub[data-b="cd~${HOJE}~0"]:checked`)).toHaveCount(0);
+	expect(await marcas(page)).toEqual({});
+});

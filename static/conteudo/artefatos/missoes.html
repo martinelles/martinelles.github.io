@@ -102,6 +102,13 @@ header{display:grid;gap:18px}
 .items li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:13.5px}
 .items .id{font-family:var(--f-mono);font-size:12px;color:var(--ink);background:color-mix(in srgb,var(--c) 14%,transparent);padding:1px 6px;border-radius:4px;white-space:nowrap;align-self:start}
 .items .tx{min-width:0;color:var(--ink)}
+.items.por-item li{grid-template-columns:auto auto 1fr;align-items:start}
+.sub{appearance:none;margin:0;width:20px;height:20px;border:2px solid var(--c);border-radius:4px;background:transparent;cursor:pointer;display:grid;place-items:center;position:relative}
+.sub::after{content:"";position:absolute;inset:-12px}
+.sub:checked{background:var(--c)}
+.sub:checked::before{content:"";width:5px;height:10px;border:solid var(--sheet);border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.sub:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.items li.feito .tx,.items li.feito .id{color:var(--done);text-decoration:line-through;text-decoration-thickness:1px}
 .items .tx em{font-style:normal;color:var(--muted);font-size:12.5px}
 .t-rev{--c:var(--rev)} .t-novo{--c:var(--novo)} .t-disc{--c:var(--disc)} .t-sim{--c:var(--sim)} .t-q{--c:var(--q)}
 .note{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px}
@@ -112,6 +119,7 @@ footer{font-size:12.5px;color:var(--muted)}
 .sync{font-size:12.5px;color:var(--muted)}
 .qc{font:500 12px var(--f-mono);color:var(--accent);white-space:nowrap;text-underline-offset:3px}
 .qcs{font-size:12px;color:var(--muted);white-space:nowrap}
+.items.por-item .qcs{white-space:normal}
 .qc-principal{font-weight:700}
 .qc-aviso{font-size:12.5px;color:var(--muted);margin:0;max-width:72ch}
 .qc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -340,6 +348,7 @@ function renderRuler() {
 
 function blockHTML(p, b, j) {
   const k = dayKey(p, j); const ck = !!done[k];
+  const porItem = (b.itens || []).length > 1;
   const itens = (b.itens || []).map(x => {
     const extra = b.tipo === 'novo' ? `<em> · ${x.prio === 'media' ? 'média' : x.prio} · ${x.min} min${x.fim ? '' : ', continua'}</em>` : (x.lab ? `<em> · ${x.lab}</em>` : '');
     const par = qcPar((/^E/.test(x.cod) ? cargo.toUpperCase() + ':' : '') + x.cod.replace(' ', '-'));
@@ -348,14 +357,17 @@ function blockHTML(p, b, j) {
     const ch = (/^E/.test(x.cod) ? cargo.toUpperCase() + ':' : '') + x.cod.replace(' ', '-');
     const l = LINKS[ch] || LINKS[paiDe(ch)];
     const e = b.tipo === 'rev' && l ? ` <a class="qc qc-erros" href="${l.erros}" target="_blank" rel="noopener" title="Qconcursos: só as questões que você errou neste subitem">erros ↗</a>` : '';
-    return `<li><span class="id">${esc(x.cid)}</span><span class="tx"><span class="mono">${esc(x.cod)}</span> ${esc(x.texto)}${extra}${q}${e}</span></li>`;
+    // Bloco com vários subitens: uma caixa por subitem, na chave `<bloco>~<cid>` (a mesma do painel).
+    const ki = k + '~' + x.cid; const oki = porItem && (ck || !!done[ki]);
+    const caixa = porItem ? `<input type="checkbox" class="sub" data-i="${esc(ki)}" data-b="${k}" ${oki ? 'checked' : ''} aria-label="Marcar ${esc(x.cod)} como estudado">` : '';
+    return `<li${oki ? ' class="feito"' : ''}>${caixa}<span class="id">${esc(x.cid)}</span><span class="tx"><span class="mono">${esc(x.cod)}</span> ${esc(x.texto)}${extra}${q}${e}</span></li>`;
   }).join('');
   const id = 'b-' + k.replace(/[^0-9a-z]/gi, '-');
   return `<div class="block t-${b.tipo}${ck ? ' done' : ''}">
     <input type="checkbox" class="bubble" id="${id}" data-k="${k}" data-l="${LET[b.tipo]}" ${ck ? 'checked' : ''} aria-label="Marcar ${esc(b.titulo)} como cumprido">
     <div class="bt"><label for="${id}" class="k">${KIND[b.tipo]}</label>
       <div class="t"><span>${esc(b.titulo)}</span>${b.min ? `<span class="min">${b.min} min</span>` : ''}</div>
-      ${itens ? `<ul class="items">${itens}</ul>` : ''}
+      ${itens ? `<ul class="items${porItem ? ' por-item' : ''}">${itens}</ul>` : ''}
       <p>${esc(b.det)}</p></div></div>`;
 }
 
@@ -415,7 +427,7 @@ const NOME_RE = /^[a-z0-9][a-z0-9-]{1,28}[a-z0-9]$/;
 const normalizarNome = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30).replace(/-+$/, '');
 const PENDENTE = KEY + ':pendente'; // a marcação que pediu o login, aplicada depois de entrar
-function pedirLogin(k, on) {
+function pedirLogin(mud) {
   let dlg = $('login');
   if (!dlg) {
     dlg = document.createElement('dialog');
@@ -457,7 +469,7 @@ function pedirLogin(k, on) {
       }
     });
   }
-  dlg.dataset.pendente = JSON.stringify({ k, on });
+  dlg.dataset.pendente = JSON.stringify({ mud });
   $('login-nome').value = ''; $('login-ajuda').textContent = ''; $('login-entrar').disabled = true;
   dlg.showModal();
   $('login-nome').focus();
@@ -466,8 +478,10 @@ function pedirLogin(k, on) {
 async function aplicarPendente() {
   let p = null;
   try { p = JSON.parse(sessionStorage.getItem(PENDENTE) || 'null'); sessionStorage.removeItem(PENDENTE); } catch (e) {}
-  if (!p || !p.k) return;
-  if (p.on) done[p.k] = true; else delete done[p.k];
+  // Formato antigo ({ k, on }) ainda pode estar na sessão de uma aba aberta antes da troca.
+  const mud = p && p.mud ? p.mud : p && p.k ? { [p.k]: !!p.on } : null;
+  if (!mud) return;
+  aplicarMud(mud);
   saveLocal();
   const anterior = (carimbos()[KEY] || {}).em || 0;
   carimbar(Math.max(Date.now(), anterior + 1), true);
@@ -475,12 +489,36 @@ async function aplicarPendente() {
   if (await enviar()) setSync(SALVO(), 'ok');
 }
 
+// Subitens marcados à parte (as mesmas regras de src/lib/missoes/calculos.ts do painel):
+// - o último subitem marcado marca o bloco, que é a chave que as contas e a régua leem;
+// - desmarcar um subitem de bloco marcado desmarca o bloco e deixa os outros marcados;
+// - desmarcar o bloco apaga os subitens dele.
+function mudBloco(k, on) {
+  const m = { [k]: on };
+  if (!on) Object.keys(done).forEach(x => { if (x.startsWith(k + '~')) m[x] = false; });
+  return m;
+}
+function mudItem(el, on) {
+  const b = el.dataset.b; const ki = el.dataset.i;
+  const irmas = [...$('list').querySelectorAll('input.sub')].filter(x => x.dataset.b === b).map(x => x.dataset.i);
+  const m = { [ki]: on };
+  if (on) { if (irmas.every(x => x === ki || done[b] || done[x])) m[b] = true; }
+  else if (done[b]) { m[b] = false; irmas.forEach(x => { if (x !== ki) m[x] = true; }); }
+  return m;
+}
+function aplicarMud(m) { for (const [x, on] of Object.entries(m)) { if (on) done[x] = true; else delete done[x]; } }
+// Bolhas e caixas na tela seguem `done`, sem refazer a lista (o foco do teclado fica onde estava).
+function refletir() {
+  $('list').querySelectorAll('input.bubble').forEach(x => { x.checked = !!done[x.dataset.k]; x.closest('.block').classList.toggle('done', x.checked); });
+  $('list').querySelectorAll('input.sub').forEach(x => { x.checked = !!(done[x.dataset.b] || done[x.dataset.i]); x.closest('li').classList.toggle('feito', x.checked); });
+}
+
 $('list').addEventListener('change', async e => {
-  const el = e.target; const k = el.dataset.k; if (!k) return;
-  const on = el.checked;
-  if (!USUARIO) { el.checked = !on; pedirLogin(k, on); return; } // sem login: pede o nome antes
-  el.closest('.block').classList.toggle('done', on);
-  if (on) done[k] = true; else delete done[k];
+  const el = e.target; const on = el.checked;
+  const mud = el.dataset.k ? mudBloco(el.dataset.k, on) : el.dataset.i ? mudItem(el, on) : null;
+  if (!mud) return;
+  if (!USUARIO) { el.checked = !on; pedirLogin(mud); return; } // sem login: pede o nome antes
+  aplicarMud(mud); refletir();
   renderStats(); renderRuler();
   saveLocal();
   const anterior = (carimbos()[KEY] || {}).em || 0;

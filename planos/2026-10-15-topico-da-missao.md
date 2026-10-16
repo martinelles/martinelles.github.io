@@ -28,3 +28,19 @@ Na Missão de hoje do `/painel`, um bloco com mais de um subitem passa a ter uma
 - `npm run check` sem erro.
 - `npx playwright test`: 237 testes passando. O teste novo em `missao.spec.ts` marca um tópico, marca o segundo e vê o bloco se marcar, e desmarca o bloco.
 - `artefatos.spec.ts:18` falha, mas falha também no `main` sem esta mudança, conferido com `git stash`.
+
+## Atualização de 2026-10-15: as caixas também na página das Missões
+
+O primeiro item das limitações deixou de valer. A página das Missões (`missoes.html`) também ganhou uma caixa por subitem nos blocos com mais de um, com a mesma chave e as mesmas regras do painel.
+
+- **No vault** (`artifacts/missoes/script.html`):
+  - a caixa é `input.sub`, com `data-i` (a chave do subitem) e `data-b` (a do bloco);
+  - `mudBloco` e `mudItem` repetem `mudancasDoBloco` e `mudancasDoItem` de `src/lib/missoes/calculos.ts`, e `aplicarMud` grava as mudanças;
+  - `refletir()` atualiza bolhas e caixas sem refazer a lista, e com isso o foco do teclado não se perde;
+  - o pedido de login guarda `{ mud }`, e `aplicarPendente` ainda lê o formato antigo `{ k, on }`.
+- **Estilo** (`template.html`):
+  - a caixa é quadrada, com 20 px e área de toque ampliada;
+  - o subitem marcado fica riscado;
+  - nos blocos com caixas, "questões: … ↗" pode quebrar linha. Sem isso, a página vazava 1 px na horizontal a 390 px.
+- **Publicação:** do mesmo jeito das outras atualizações da página, com backup em `backup/missoes-*.2026-10-15c`.
+- **Teste:** em `tests/e2e/missao.spec.ts`, marcar um subitem na página, marcar o segundo e ver o bloco marcado, abrir o painel com as mesmas marcas e desmarcar o bloco limpando os subitens. O `npx playwright test` passou com 242.
