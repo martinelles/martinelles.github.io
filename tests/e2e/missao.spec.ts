@@ -316,3 +316,35 @@ test('página das Missões: subitem marcado à parte, com as mesmas chaves e reg
 	await expect(page.locator(`.day.is-today input.sub[data-b="cd~${HOJE}~0"]:checked`)).toHaveCount(0);
 	expect(await marcas(page)).toEqual({});
 });
+
+test('página das Missões: o subitem aberto no Qconcursos fica destacado, e o painel mostra o mesmo', async ({ page, context }) => {
+	await simularApi(page);
+	await context.route('**/*qconcursos.com/**', (rota) => rota.fulfill({ body: 'Qconcursos' }));
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	const [a] = diaCd.blocos[0].itens!;
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await page.locator('#v-hoje').click();
+	const itemA = page.locator(`.day.is-today li[data-c="${a.cid}"][data-j="0"]`);
+	await expect(page.locator('li.em-andamento')).toHaveCount(0);
+
+	const [qc] = await Promise.all([context.waitForEvent('page'), itemA.locator('a.qc').first().click()]);
+	await qc.close();
+	await page.reload();
+	await expect(itemA).toHaveClass(/em-andamento/);
+	await expect(itemA).toContainText('Você parou aqui');
+
+	// O painel lê a mesma chave.
+	await page.goto('/painel');
+	await expect(missao(page).locator('li.em-andamento')).toContainText(a.cod);
+
+	await page.goto('/conteudo/artefatos/missoes.html#cd');
+	await itemA.getByRole('button', { name: 'Terminei, marcar' }).click();
+	await expect(page.locator(`.day.is-today input.sub[data-i="cd~${HOJE}~0~${a.cid}"]`)).toBeChecked();
+	await expect(page.locator('li.em-andamento')).toHaveCount(0);
+	expect(await page.evaluate(() => localStorage.getItem('painel-concurso:missoes:em-andamento:v1'))).toBeNull();
+
+	const [qc2] = await Promise.all([context.waitForEvent('page'), itemA.locator('a.qc').first().click()]);
+	await qc2.close();
+	await page.reload();
+	await expect(page.locator('li.em-andamento')).toHaveCount(0); // já marcado: não volta a destacar
+});

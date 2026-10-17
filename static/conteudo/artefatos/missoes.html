@@ -121,6 +121,14 @@ footer{font-size:12.5px;color:var(--muted)}
 .qcs{font-size:12px;color:var(--muted);white-space:nowrap}
 .items.por-item .qcs{white-space:normal}
 .qc-principal{font-weight:700}
+/* Subitem aberto no Qconcursos: marca-texto, com a borda na cor do tipo */
+.items li.em-andamento{background:color-mix(in srgb,#f5c400 26%,var(--sheet));box-shadow:inset 4px 0 0 var(--c);border-radius:6px;padding:6px 8px 8px 12px;scroll-margin:96px}
+.items li.em-andamento .tx em,.items li.em-andamento .qcs{color:var(--ink)}
+.lembrete{display:block;margin-top:6px;font-size:13px}
+.lembrete .acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.lembrete button{font:inherit;font-weight:600;min-height:44px;padding:8px 16px;border-radius:999px;cursor:pointer;border:1px solid var(--ink);background:var(--sheet);color:var(--ink)}
+.lembrete button[data-lembrete=dispensar]{background:transparent}
+.lembrete button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .qc-aviso{font-size:12.5px;color:var(--muted);margin:0;max-width:72ch}
 .qc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .irmao{font-weight:600;font-size:13.5px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:6px 14px}
@@ -285,6 +293,31 @@ function todayIdx() {
   return i >= 0 ? i : (localIso < p[0].data ? 0 : p.length - 1);
 }
 const dayKey = (p, j) => `${cargo}~${p.data}~${j}`;
+
+// Subitem aberto no Qconcursos: destacado na volta até marcar ou dispensar. Mesma chave e formato
+// do painel (src/lib/missoes/emAndamento.svelte.ts), só neste aparelho, sem subir para a conta.
+const EM_ANDAMENTO = 'painel-concurso:missoes:em-andamento:v1';
+function lerEmAndamento() {
+  try {
+    const m = JSON.parse(lsGet(EM_ANDAMENTO, 'null'));
+    return m && (m.cargo === 'cd' || m.cargo === 'aud') && typeof m.data === 'string' && Number.isInteger(m.bloco) && typeof m.cid === 'string' ? m : null;
+  } catch (e) { return null; }
+}
+let emAndamento = lerEmAndamento();
+const ehEmAndamento = (p, j, cid) => !!emAndamento && emAndamento.cargo === cargo && emAndamento.data === p.data && emAndamento.bloco === j && emAndamento.cid === cid;
+function limparEmAndamento() {
+  emAndamento = null;
+  try { localStorage.removeItem(EM_ANDAMENTO); } catch (e) {}
+  $('list').querySelectorAll('li.em-andamento').forEach(li => { li.classList.remove('em-andamento'); li.querySelector('.lembrete')?.remove(); });
+}
+// Marcado (aqui, no painel ou noutro aparelho): o lembrete cumpriu o papel.
+function emAndamentoFeito() {
+  const m = emAndamento; if (!m || !DATA[m.cargo]) return false;
+  const p = DATA[m.cargo].plan.find(d => d.data === m.data); if (!p) return false;
+  const k = `${m.cargo}~${m.data}~${m.bloco}`;
+  return !!(done[k] || done[k + '~' + m.cid]);
+}
+const mostrarEmAndamento =() => $('list').querySelector('li.em-andamento')?.scrollIntoView({ block: 'center' });
 const dayFull = p => p.blocos.every((b, j) => done[dayKey(p, j)]);
 const weekIndex = p => Math.floor((new Date(p.data + 'T12:00:00') - new Date('2026-10-12T12:00:00')) / 864e5 / 7);
 
@@ -360,7 +393,10 @@ function blockHTML(p, b, j) {
     // Bloco com vários subitens: uma caixa por subitem, na chave `<bloco>~<cid>` (a mesma do painel).
     const ki = k + '~' + x.cid; const oki = porItem && (ck || !!done[ki]);
     const caixa = porItem ? `<input type="checkbox" class="sub" data-i="${esc(ki)}" data-b="${k}" ${oki ? 'checked' : ''} aria-label="Marcar ${esc(x.cod)} como estudado">` : '';
-    return `<li${oki ? ' class="feito"' : ''}>${caixa}<span class="id">${esc(x.cid)}</span><span class="tx"><span class="mono">${esc(x.cod)}</span> ${esc(x.texto)}${extra}${q}${e}</span></li>`;
+    const aberto = !(ck || oki) && ehEmAndamento(p, j, x.cid);
+    const lembrete = aberto ? `<span class="lembrete" role="status"><strong>Você parou aqui:</strong> abriu as questões no Qconcursos.<span class="acoes"><button type="button" data-lembrete="marcar">Terminei, marcar</button><button type="button" data-lembrete="dispensar">Dispensar</button></span></span>` : '';
+    const cls = [oki ? 'feito' : '', aberto ? 'em-andamento' : ''].filter(Boolean).join(' ');
+    return `<li${cls ? ` class="${cls}"` : ''} data-d="${p.data}" data-j="${j}" data-c="${esc(x.cid)}">${caixa}<span class="id">${esc(x.cid)}</span><span class="tx"><span class="mono">${esc(x.cod)}</span> ${esc(x.texto)}${extra}${q}${e}${lembrete}</span></li>`;
   }).join('');
   const id = 'b-' + k.replace(/[^0-9a-z]/gi, '-');
   return `<div class="block t-${b.tipo}${ck ? ' done' : ''}">
@@ -372,6 +408,7 @@ function blockHTML(p, b, j) {
 }
 
 function renderList() {
+  if (emAndamentoFeito()) { emAndamento = null; try { localStorage.removeItem(EM_ANDAMENTO); } catch (e) {} }
   const t = todayIdx();
   const sel = plan().map((p, i) => [p, i]).filter(([p, i]) => naVista(p, i));
   const groups = new Map();
@@ -511,7 +548,33 @@ function aplicarMud(m) { for (const [x, on] of Object.entries(m)) { if (on) done
 function refletir() {
   $('list').querySelectorAll('input.bubble').forEach(x => { x.checked = !!done[x.dataset.k]; x.closest('.block').classList.toggle('done', x.checked); });
   $('list').querySelectorAll('input.sub').forEach(x => { x.checked = !!(done[x.dataset.b] || done[x.dataset.i]); x.closest('li').classList.toggle('feito', x.checked); });
+  if (emAndamentoFeito()) limparEmAndamento();
 }
+
+// Abrir as questões de um subitem faz dele o lembrete; os botões do lembrete marcam ou dispensam.
+$('list').addEventListener('click', e => {
+  const qc = e.target.closest('a.qc');
+  const li = e.target.closest('li[data-c]');
+  if (qc && li) {
+    emAndamento = { cargo, data: li.dataset.d, bloco: +li.dataset.j, cid: li.dataset.c };
+    lsSet(EM_ANDAMENTO, JSON.stringify(emAndamento));
+    return;
+  }
+  const acao = e.target.closest('[data-lembrete]')?.dataset.lembrete;
+  if (!acao || !li) return;
+  if (acao === 'dispensar') return limparEmAndamento();
+  // Marcar passa pela caixa do subitem (ou pela bolha do bloco), com o mesmo pedido de login.
+  const alvo = li.querySelector('input.sub') || li.closest('.block').querySelector('input.bubble');
+  alvo.checked = true;
+  alvo.dispatchEvent(new Event('change', { bubbles: true }));
+});
+// Voltar do Qconcursos para esta aba (ou de outra página que mudou o lembrete): mostra o subitem.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') return;
+  const novo = lerEmAndamento();
+  if (JSON.stringify(novo) !== JSON.stringify(emAndamento)) { emAndamento = novo; renderList(); }
+  mostrarEmAndamento();
+});
 
 $('list').addEventListener('change', async e => {
   const el = e.target; const on = el.checked;
@@ -530,6 +593,7 @@ $('list').addEventListener('change', async e => {
 ['hoje', 'semana', 'tudo'].forEach(x => $('v-' + x).onclick = () => { if (x !== 'tudo') diaSel = null; setView(x); });
 ['cd', 'aud'].forEach(x => $('c-' + x).onclick = () => setCargo(x));
 renderAll(); setView(view);
+mostrarEmAndamento();
 if (USUARIO) setSync('Carregando suas marcações…');
 else setSync('Para marcar missões, toque numa bolha e entre com seu nome.');
 

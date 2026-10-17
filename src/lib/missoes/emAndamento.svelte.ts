@@ -43,12 +43,7 @@ export function lerEmAndamento(texto: string | null): EmAndamento | null {
 	return null;
 }
 
-/** Lê o gravado só se ninguém leu ainda nesta aba (fora de `$derived`: muda estado). */
-export function garantirEmAndamento(): void {
-	if (!carregado) carregarEmAndamento();
-}
-
-/** Lê o que está gravado (idempotente). */
+/** Lê o que está gravado (idempotente; fora de `$derived`, porque muda estado). */
 export function carregarEmAndamento(arm: Storage | null = tentarLocalStorage()): void {
 	carregado = true;
 	armazenamento = arm;

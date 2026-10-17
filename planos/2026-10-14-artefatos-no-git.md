@@ -282,3 +282,19 @@ Os botões "Hoje" e "Esta semana" trocavam a lista, mas a régua continuava igua
 - **Estilo** (`template.html`): quadrado fora da visão fica com `opacity:.3`.
 - **Publicação:** do mesmo jeito da atualização anterior (`montar_artifacts.py`, `--check` com 264 links, `npm run importar` e só `missoes.html` no commit). Backup do vault em `backup/missoes-*.2026-10-15b`.
 - **Teste:** `tests/e2e/missao.spec.ts` confere a régua nas três visões: 1, 6 e 61 quadrados acesos, para 14/10. O `npx playwright test` passou com 241.
+
+## Atualização de 2026-10-17: lembrete do subitem aberto no Qconcursos
+
+Pedido dela: ao voltar do Qconcursos, saber qual tarefa estava fazendo. O painel ganhou isso em `3839a82`, e a página das Missões passou a fazer o mesmo.
+
+- **Mesma chave do painel:** `painel-concurso:missoes:em-andamento:v1`, com `{ cargo, data, bloco, cid }`, no `localStorage` e sem subir para a conta. Ela abre o link numa página e vê o destaque na outra.
+- **No vault** (`artifacts/missoes/script.html`):
+  - clicar em qualquer `a.qc` do subitem (mais cobrados, todos ou erros) grava o lembrete. O `li` passou a ter `data-d`, `data-j` e `data-c` para isso;
+  - o subitem fica com a classe `em-andamento` e mostra "Você parou aqui" e os botões "Terminei, marcar" e "Dispensar";
+  - "Terminei, marcar" dispara o `change` da caixa do subitem, ou da bolha do bloco, e assim passa pelo mesmo pedido de login;
+  - o lembrete se apaga quando o bloco ou o subitem já está marcado (`emAndamentoFeito`, checado no `renderList` e no `refletir`);
+  - ao voltar para a aba (`visibilitychange`), a página relê a chave e rola até o subitem.
+- **Estilo** (`template.html`): fundo de marca-texto (`#f5c400` a 26% sobre `--sheet`, para valer nos dois temas), com borda na cor do tipo e botões de 44 px.
+- **Painel:** `MissaoDeHoje` relê a chave a cada montagem e ao voltar para a aba, porque a página das Missões, no iframe de `/artefato/missoes`, grava nela.
+- **Publicação:** `montar_artifacts.py --check` com 264 links iguais nas duas páginas, depois `npm run importar`. Só `missoes.html` entrou; os outros artefatos voltaram com `git restore`. Backup do vault em `backup/missoes-*.2026-10-17`, no scratchpad da sessão.
+- **Teste:** um teste novo em `tests/e2e/missao.spec.ts` cobre o destaque na página, o mesmo subitem destacado no painel, a marcação pelo lembrete e que um subitem já marcado não volta a ficar destacado. `npm test` com 303, `npx playwright test` com 244.

@@ -17,7 +17,7 @@
 		progressoDoDia,
 		type Mudancas
 	} from '$lib/missoes/calculos';
-	import { emAndamento, garantirEmAndamento } from '$lib/missoes/emAndamento.svelte';
+	import { carregarEmAndamento, emAndamento } from '$lib/missoes/emAndamento.svelte';
 	import type { Cargo, Marcas, PlanoMissoes, TipoBloco } from '$lib/missoes/tipos';
 
 	let {
@@ -54,7 +54,8 @@
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
 	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
 
-	garantirEmAndamento();
+	// Relê a cada montagem: a página das Missões (no iframe de /artefato/missoes) grava na mesma chave.
+	carregarEmAndamento();
 	const lembrete = $derived(dia ? emAndamento.de(cargo, dia.data) : null);
 	const lembreteFeito = $derived(
 		!!(dia && lembrete && dia.blocos[lembrete.bloco]?.itens?.some((it) => it.cid === lembrete.cid)) &&
@@ -94,7 +95,9 @@
 
 <svelte:document
 	onvisibilitychange={() => {
-		if (document.visibilityState === 'visible' && lembrete && !lembreteFeito) mostrarLembrete();
+		if (document.visibilityState !== 'visible') return;
+		carregarEmAndamento();
+		if (lembrete && !lembreteFeito) mostrarLembrete();
 	}}
 />
 
