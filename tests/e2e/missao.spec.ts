@@ -171,6 +171,32 @@ test('nas revisões do dia, cada subitem leva também às questões que ela erro
 	}
 });
 
+test('o subitem aberto no Qconcursos fica destacado na volta, até marcar ou dispensar', async ({ page, context }) => {
+	await simularApi(page);
+	await context.route('**/*qconcursos.com/**', (rota) => rota.fulfill({ body: 'Qconcursos' }));
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	await page.goto('/painel');
+	const lembrete = missao(page).getByText('Você parou aqui');
+	await expect(lembrete).toHaveCount(0);
+
+	const [qc] = await Promise.all([context.waitForEvent('page'), missao(page).getByRole('link', { name: 'Questões no Qconcursos ↗' }).first().click()]);
+	await qc.close();
+	await page.reload();
+	await expect(lembrete).toHaveCount(1);
+	await expect(missao(page).locator('li.em-andamento')).toContainText(diaCd.blocos.flatMap((b) => (b.itens ?? []) as { cod: string }[])[0].cod);
+
+	await missao(page).getByRole('button', { name: 'Terminei, marcar' }).click();
+	await expect(lembrete).toHaveCount(0);
+	expect(Object.keys(await marcas(page)).length).toBeGreaterThan(0);
+	expect(await page.evaluate(() => localStorage.getItem('painel-concurso:missoes:em-andamento:v1'))).toBeNull();
+
+	const [qc2] = await Promise.all([context.waitForEvent('page'), missao(page).getByRole('link', { name: 'Questões no Qconcursos ↗' }).last().click()]);
+	await qc2.close();
+	await expect(lembrete).toHaveCount(1);
+	await missao(page).getByRole('button', { name: 'Dispensar' }).click();
+	await expect(lembrete).toHaveCount(0);
+});
+
 test('"Seu plano" conta dias, blocos e horas das marcações', async ({ page }) => {
 	await page.addInitScript(
 		([k, dia, n]) => {

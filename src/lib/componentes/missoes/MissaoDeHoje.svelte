@@ -4,6 +4,8 @@
 	// questões do tópico no feed, quando há, e às do Qconcursos (o mesmo link da página das
 	// Missões); nas revisões, também às que ela errou lá. Bloco com mais de um subitem tem uma caixa
 	// por subitem: com todas marcadas, o bloco se marca (planos/2026-10-15-topico-da-missao.md).
+	// O subitem aberto no Qconcursos fica destacado na volta, até ela marcar ou dispensar (emAndamento).
+	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { formatarData } from '$lib/datas';
 	import {
@@ -15,6 +17,7 @@
 		progressoDoDia,
 		type Mudancas
 	} from '$lib/missoes/calculos';
+	import { emAndamento, garantirEmAndamento } from '$lib/missoes/emAndamento.svelte';
 	import type { Cargo, Marcas, PlanoMissoes, TipoBloco } from '$lib/missoes/tipos';
 
 	let {
@@ -50,9 +53,52 @@
 	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + b.min, 0) : 0);
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
 	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
+
+	garantirEmAndamento();
+	const lembrete = $derived(dia ? emAndamento.de(cargo, dia.data) : null);
+	const lembreteFeito = $derived(
+		!!(dia && lembrete && dia.blocos[lembrete.bloco]?.itens?.some((it) => it.cid === lembrete.cid)) &&
+			itemFeito(marcas, cargo, dia!, lembrete!.bloco, lembrete!.cid)
+	);
+	// Marcado (aqui, nas Missões ou noutro aparelho): o lembrete cumpriu o papel.
+	$effect(() => {
+		if (lembreteFeito) emAndamento.limpar();
+	});
+
+	let secao = $state<HTMLElement>();
+	/** Leva o subitem destacado à vista: ao abrir o painel e ao voltar do Qconcursos para esta aba. */
+	async function mostrarLembrete() {
+		await tick();
+		secao?.querySelector('.em-andamento')?.scrollIntoView({ block: 'center' });
+	}
+	// Uma vez por carga, quando o plano chega com o lembrete; o clique no link já conta (não rola na saída).
+	let mostrado = false;
+	$effect(() => {
+		if (lembrete && !lembreteFeito && !mostrado) {
+			mostrado = true;
+			mostrarLembrete();
+		}
+	});
+
+	function abrirNoQc(i: number, cid: string) {
+		if (!dia) return;
+		mostrado = true;
+		emAndamento.abrir({ cargo, data: dia.data, bloco: i, cid });
+	}
+
+	function marcarLembrete(i: number, cid: string, porItem: boolean) {
+		if (!dia) return;
+		onmarcar(porItem ? mudancasDoItem(marcas, cargo, dia, i, cid, true) : mudancasDoBloco(marcas, cargo, dia, i, true));
+	}
 </script>
 
-<section class="missao" aria-labelledby="titulo-missao">
+<svelte:document
+	onvisibilitychange={() => {
+		if (document.visibilityState === 'visible' && lembrete && !lembreteFeito) mostrarLembrete();
+	}}
+/>
+
+<section class="missao" aria-labelledby="titulo-missao" bind:this={secao}>
 	<h2 id="titulo-missao">Missão de hoje</h2>
 	{#if !plano || !hojeNoPlano}
 		<p class="nota" role="status">Carregando a missão…</p>
@@ -98,7 +144,8 @@
 									{@const n = questoesPorTopico?.get(it.cid) ?? 0}
 									{@const erros = b.tipo === 'rev' ? plano.qcErros[it.cid] : undefined}
 									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
-									<li class:feito={itemOk}>
+									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
+									<li class:feito={itemOk} class:em-andamento={aberto}>
 										{#if porItem}
 											<label class="caixa">
 												<input
@@ -127,15 +174,40 @@
 														</a>
 													{/if}
 													{#if plano.qc[it.cid]}
-														<a class="topico" href={plano.qc[it.cid]} target="_blank" rel="noopener">
+														<a
+															class="topico"
+															href={plano.qc[it.cid]}
+															target="_blank"
+															rel="noopener"
+															onclick={() => abrirNoQc(i, it.cid)}
+														>
 															Questões no Qconcursos ↗
 														</a>
 													{/if}
 													{#if erros}
-														<a class="topico" href={erros} target="_blank" rel="noopener">
+														<a
+															class="topico"
+															href={erros}
+															target="_blank"
+															rel="noopener"
+															onclick={() => abrirNoQc(i, it.cid)}
+														>
 															Questões que errei ↗
 														</a>
 													{/if}
+												</span>
+											{/if}
+											{#if aberto}
+												<span class="lembrete" role="status">
+													<strong>Você parou aqui:</strong> abriu as questões no Qconcursos.
+													<span class="acoes">
+														<button type="button" onclick={() => marcarLembrete(i, it.cid, porItem)}>
+															Terminei, marcar
+														</button>
+														<button type="button" class="dispensar" onclick={() => emAndamento.limpar()}>
+															Dispensar
+														</button>
+													</span>
 												</span>
 											{/if}
 										</span>
@@ -400,6 +472,54 @@
 		width: fit-content;
 		color: var(--cor-primaria);
 		font-weight: 700;
+	}
+
+	/* Subitem aberto no Qconcursos: marca-texto (aviso), com a borda na cor do tipo; no Kindle, tinta. */
+	.itens li.em-andamento {
+		padding: 4px 8px 8px 0;
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-aviso-fundo);
+		color: var(--cor-aviso);
+		box-shadow: inset 4px 0 0 var(--c);
+		scroll-margin: 96px;
+	}
+
+	.itens:not(.por-item) li.em-andamento {
+		padding-left: 12px;
+	}
+
+	.itens li.em-andamento .texto em {
+		color: inherit;
+	}
+
+	.lembrete {
+		display: block;
+		margin-top: 4px;
+		font-size: 0.875rem;
+	}
+
+	.acoes {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 6px;
+	}
+
+	.acoes button {
+		min-height: 44px;
+		padding: 8px 14px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+		font: inherit;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.acoes .dispensar {
+		background: transparent;
+		color: inherit;
 	}
 
 	.det {
