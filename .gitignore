@@ -39,3 +39,6 @@ scripts/fontes/origem/
 
 # Estado local do wrangler dev (D1 local, cache)
 .wrangler/
+
+# Segredos locais do wrangler dev (chaves VAPID de teste)
+.dev.vars*

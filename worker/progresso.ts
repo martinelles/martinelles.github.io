@@ -22,13 +22,13 @@ export interface Banco {
 
 const PREFIXO = '/api/';
 
-const json = (corpo: unknown, status = 200): Response =>
+export const json = (corpo: unknown, status = 200): Response =>
 	new Response(JSON.stringify(corpo), {
 		status,
 		headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }
 	});
 
-const erro = (status: number, mensagem: string): Response => json({ erro: mensagem }, status);
+export const erro =(status: number, mensagem: string): Response => json({ erro: mensagem }, status);
 
 function segmentos(caminho: string): string[] | null {
 	try {

@@ -164,7 +164,7 @@ O `Env` ganha `VAPID_PUBLICA`, `VAPID_PRIVADA` (segredo) e `VAPID_ASSUNTO`.
 ### Critérios de aceite
 
 #### Verificação automática
-- [ ] `npm test`, com os testes novos:
+- [x] `npm test`, com os testes novos:
   - `tests/unit/conta/push.test.ts`: a cifra com a chave efêmera e o salt do apêndice A da RFC
     8291 dá exatamente o corpo do apêndice. Também confere que o JWT verifica com a chave
     pública, com `aud` = origem do endpoint e `exp` ≤ 24 h;
@@ -173,13 +173,26 @@ O `Env` ganha `VAPID_PUBLICA`, `VAPID_PRIVADA` (segredo) e `VAPID_ASSUNTO`.
     - recusa endpoint fora da lista, `hora` 5 ou 24, chaves com tamanho errado e nome inválido;
     - DELETE apaga;
     - `/api/progresso` continua igual (os testes de `worker.test.ts` passam sem mudança).
-- [ ] `npm run check`
+- [x] `npm run check`
 
 #### Verificação manual
 - [ ] `npm run build && npx wrangler dev`, depois `curl localhost:8787/api/lembrete`, que
   devolve a chave pública do `.dev.vars`.
 
 **Pausa**: terminada a verificação automática, pare e peça a confirmação manual antes da fase 2.
+
+### Execução (2026-10-17)
+
+Duas diferenças em relação ao texto acima:
+
+- **Roteamento:** o `worker/progresso.ts:69` ficou como estava. O `worker/index.ts` chama
+  `tratarLembrete` antes de `tratarApi`, do mesmo jeito que `tratarApi` devolve `null` fora da
+  rota dele. Com isso, `progresso.ts` só passou a exportar `json` e `erro`.
+- **Segredos locais:** o `.dev.vars` entrou no `.gitignore`, porque ainda não estava lá. O
+  arquivo guarda as chaves VAPID de teste do `wrangler dev`.
+
+`npm test` passou com 316 testes. O vetor do apêndice A da RFC 8291 bateu byte a byte, e os
+intermediários também.
 
 ---
 
