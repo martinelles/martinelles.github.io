@@ -106,9 +106,8 @@ de prova.
 
 ## Deploy
 
-- **Cloudflare Workers** (com servidor): a integração Git do Cloudflare roda
-  `npx wrangler deploy`, que publica `build/` e o Worker conforme [wrangler.jsonc](wrangler.jsonc)
-  e cria o D1 `cgu` no primeiro deploy.
-- **GitHub Pages** (sem servidor): cada push na `main` publica o build estático via
-  [.github/workflows/pages.yml](.github/workflows/pages.yml); lá não há `/api`, então o app
-  funciona só no modo local, sem login.
+Só no Cloudflare Workers, em `cgu.solarpunk.workers.dev`: a cada push na `main`, a integração
+Git do Cloudflare roda `npx wrangler deploy`, que publica `build/` e o Worker conforme
+[wrangler.jsonc](wrangler.jsonc) e cria o D1 `cgu` no primeiro deploy. O GitHub Pages saiu em
+2026-10-17. Endereço sem `/api` (o `npm run dev`, por exemplo) ainda abre o app, mas só no modo
+local, sem login.
