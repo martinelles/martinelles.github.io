@@ -298,3 +298,17 @@ Pedido dela: ao voltar do Qconcursos, saber qual tarefa estava fazendo. O painel
 - **Painel:** `MissaoDeHoje` relê a chave a cada montagem e ao voltar para a aba, porque a página das Missões, no iframe de `/artefato/missoes`, grava nela.
 - **Publicação:** `montar_artifacts.py --check` com 264 links iguais nas duas páginas, depois `npm run importar`. Só `missoes.html` entrou; os outros artefatos voltaram com `git restore`. Backup do vault em `backup/missoes-*.2026-10-17`, no scratchpad da sessão.
 - **Teste:** um teste novo em `tests/e2e/missao.spec.ts` cobre o destaque na página, o mesmo subitem destacado no painel, a marcação pelo lembrete e que um subitem já marcado não volta a ficar destacado. `npm test` com 303, `npx playwright test` com 244.
+
+## Atualização de 2026-10-17: o mesmo lembrete nas Prioridades
+
+As Prioridades não marcam nada, então o lembrete lá só tem "Dispensar". Ele fica até ela abrir outro subitem ou dispensar, e não vence com o dia.
+
+- **Chave própria:** `painel-concurso:prioridades:em-andamento:v1`, com `{ esp, item }` (`item` é `E1-1.1`). O formato das Missões é por dia e bloco, e não serve aqui.
+- **No vault** (`artifacts/prioridades/prioridades-edital.html`):
+  - a linha ganhou `data-item`;
+  - clicar em qualquer `a.qc` da linha grava o lembrete;
+  - `marcarEmAndamento()` roda no fim de cada `render()` e por isso acompanha a troca de especialidade;
+  - na volta à aba e ao abrir a página, a linha rola até a vista. Se a busca ou os chips a esconderem, os filtros saem, como no clique do mapa.
+- **Estilo:** `--realce` na linha, com uma faixa de `--destaque` à esquerda, que valem nos dois temas. No celular, onde a linha vira cartão, o fundo vai no `tr`. O botão tem 44 px.
+- **Publicação:** `montar_artifacts.py --check` com 264 links iguais nas duas páginas, depois `npm run importar`. Só `prioridades.html` mudou; o `missoes.html` saiu igual. Backup em `backup/prioridades-*.2026-10-17`, no scratchpad da sessão.
+- **Teste:** um teste novo em `tests/e2e/artefatos.spec.ts`. O `npx playwright test` deu 244 de 245; o que falhou foi o `offline-conteudo` SC-005, que passou sozinho.

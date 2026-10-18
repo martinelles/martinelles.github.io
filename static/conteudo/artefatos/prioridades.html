@@ -205,6 +205,15 @@ tr.foco td { background: var(--realce); }
 .qc-principal { font-weight: 700; }
 .qc-aviso { font-size: .82rem; color: var(--tinta-suave); }
 td.qcs { white-space: nowrap; }
+/* Subitem aberto no Qconcursos: realce na linha, com a faixa de destaque à esquerda */
+tr.em-andamento td { background: var(--realce); }
+tr.em-andamento td:first-child { box-shadow: inset 4px 0 0 var(--destaque); }
+.lembrete { display: block; margin-top: 6px; font-size: .84rem; }
+.lembrete button {
+  font: 600 .84rem var(--f-corpo); color: var(--tinta); background: var(--papel); cursor: pointer;
+  border: 1.5px solid var(--linha); border-radius: 999px; padding: 6px 14px; min-height: 44px; margin-top: 6px;
+}
+.lembrete button:focus-visible { outline: 3px solid var(--destaque); outline-offset: 2px; }
 .qc:focus-visible { outline: 3px solid var(--destaque); outline-offset: 2px; }
 /* Celular: a tabela vira um cartão por subitem, e os links de questões ficam à vista, sem rolar de lado. */
 @media (max-width: 680px) {
@@ -215,6 +224,8 @@ td.qcs { white-space: nowrap; }
   .tabela tr[hidden] { display: none; }
   .tabela td { display: block; padding: 0; border: 0; }
   tr.foco { background: var(--realce); }
+  tr.em-andamento { background: var(--realce); box-shadow: inset 4px 0 0 var(--destaque); padding-left: 12px; }
+  tr.em-andamento td:first-child { box-shadow: none; }
   td.item { grid-row: 1; grid-column: 1; }
   td.pg { grid-row: 1; grid-column: 3; }
   td.pg::before { content: "p. "; }
@@ -426,14 +437,58 @@ function render() {
     </div>`;
   }).join("");
 
-  corpo.innerHTML = ITENS.map(x => `<tr id="row-${x.id}">
+  corpo.innerHTML = ITENS.map(x => `<tr id="row-${x.id}" data-item="${x.d}-${x.n}">
     <td class="item">${x.d} ${x.n}</td>
     <td><span class="pill ${x.k}">${ROT[x.k]}</span></td>
     <td>${esc(x.txt)}</td>
     <td class="qcs">${qcPar((x.d[0] === "E" ? atual.toUpperCase() + ":" : "") + x.d + "-" + x.n)}</td>
     <td class="pg">${x.pg == null ? "—" : x.pg}</td></tr>`).join("");
   aplica();
+  marcarEmAndamento();
 }
+
+// Subitem aberto no Qconcursos: a linha fica destacada na volta, até abrir outro ou dispensar.
+// Só neste aparelho; a página não marca nada, então o lembrete não some sozinho.
+const EM_ANDAMENTO = "painel-concurso:prioridades:em-andamento:v1";
+function lerEmAndamento() {
+  try {
+    const m = JSON.parse(localStorage.getItem(EM_ANDAMENTO) || "null");
+    return m && ESP[m.esp] && typeof m.item === "string" ? m : null;
+  } catch (e) { return null; }
+}
+let emAndamento = lerEmAndamento();
+function marcarEmAndamento() {
+  corpo.querySelectorAll("tr.em-andamento").forEach(r => { r.classList.remove("em-andamento"); r.querySelector(".lembrete")?.remove(); });
+  if (!emAndamento || emAndamento.esp !== atual) return null;
+  const row = [...corpo.rows].find(r => r.dataset.item === emAndamento.item);
+  if (!row) return null;
+  row.classList.add("em-andamento");
+  row.cells[2].insertAdjacentHTML("beforeend", `<span class="lembrete" role="status"><strong>Você parou aqui:</strong> abriu as questões no Qconcursos. <button type="button" data-lembrete="dispensar">Dispensar</button></span>`);
+  return row;
+}
+// Leva a linha à vista; filtrada pela busca ou pelos chips, os filtros saem, como no clique do mapa.
+function mostrarEmAndamento() {
+  const row = corpo.querySelector("tr.em-andamento"); if (!row) return;
+  if (row.hidden) { filtroP.clear(); filtroB.clear(); busca.value = ""; document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", "false")); aplica(); }
+  row.scrollIntoView({ block: "center" });
+}
+corpo.addEventListener("click", e => {
+  const row = e.target.closest("tr[data-item]"); if (!row) return;
+  if (e.target.closest("a.qc")) {
+    emAndamento = { esp: atual, item: row.dataset.item };
+    try { localStorage.setItem(EM_ANDAMENTO, JSON.stringify(emAndamento)); } catch (err) {}
+    marcarEmAndamento();
+  } else if (e.target.closest('[data-lembrete="dispensar"]')) {
+    emAndamento = null;
+    try { localStorage.removeItem(EM_ANDAMENTO); } catch (err) {}
+    marcarEmAndamento();
+  }
+});
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  emAndamento = lerEmAndamento();
+  if (marcarEmAndamento()) mostrarEmAndamento();
+});
 
 function aplica() {
   const q = norm(busca.value.trim());
@@ -498,6 +553,7 @@ let inicial = "aud";
 if (location.hash === "#cd" || location.hash === "#aud") inicial = location.hash.slice(1);
 else { try { const s = localStorage.getItem("especialidade"); if (s && ESP[s]) inicial = s; } catch (err) {} }
 especialidade(inicial);
+mostrarEmAndamento();
 
 // Tema
 function tema(t) {

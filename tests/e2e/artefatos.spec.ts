@@ -297,3 +297,30 @@ test('Missões, logada e sem API (GitHub Pages): avisa e guarda no aparelho', as
 	await page.locator('.bubble').first().check();
 	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toContain('true');
 });
+
+test('Prioridades: o subitem aberto no Qconcursos fica destacado na volta, mesmo filtrado, até dispensar', async ({ page, context }) => {
+	await context.route('**/*qconcursos.com/**', (rota) => rota.fulfill({ body: 'Qconcursos' }));
+	await page.goto('/conteudo/artefatos/prioridades.html#cd');
+	const linha = page.locator('#corpo tr').nth(3);
+	const item = (await linha.getAttribute('data-item'))!;
+	await expect(page.locator('tr.em-andamento')).toHaveCount(0);
+
+	const [qc] = await Promise.all([context.waitForEvent('page'), linha.locator('a.qc').first().click()]);
+	await qc.close();
+	await page.reload();
+	const destacada = page.locator('tr.em-andamento');
+	await expect(destacada).toHaveCount(1);
+	await expect(destacada).toHaveAttribute('data-item', item);
+	await expect(destacada).toContainText('Você parou aqui');
+
+	// Na outra especialidade, nada; de volta, a linha volta destacada.
+	await page.locator('#e-aud').click();
+	await expect(destacada).toHaveCount(0);
+	await page.locator('#e-cd').click();
+	await expect(destacada).toHaveCount(1);
+
+	await destacada.getByRole('button', { name: 'Dispensar' }).click();
+	await expect(destacada).toHaveCount(0);
+	await page.reload();
+	await expect(destacada).toHaveCount(0);
+});
