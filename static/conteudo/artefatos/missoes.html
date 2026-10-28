@@ -558,6 +558,7 @@ $('list').addEventListener('click', e => {
   if (qc && li) {
     emAndamento = { cargo, data: li.dataset.d, bloco: +li.dataset.j, cid: li.dataset.c };
     lsSet(EM_ANDAMENTO, JSON.stringify(emAndamento));
+    renderList();
     return;
   }
   const acao = e.target.closest('[data-lembrete]')?.dataset.lembrete;
