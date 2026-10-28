@@ -8,8 +8,7 @@
 	let { plano, cargo, marcas }: { plano: PlanoMissoes; cargo: Cargo; marcas: Marcas } = $props();
 
 	const r = $derived(resumo(plano, marcas, cargo));
-	const pct = $derived(r.minutos ? Math.round((100 * r.minutosFeitos) / r.minutos) : 0);
-	const h = (min: number) => (min / 60).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
+	const pct = $derived(r.blocos ? Math.round((100 * r.blocosFeitos) / r.blocos) : 0);
 </script>
 
 <section class="resumo" aria-labelledby="titulo-resumo">
@@ -17,12 +16,11 @@
 	<p class="periodo">
 		De {formatarData(plano.plan[0].data)} a {formatarData(plano.plan[plano.plan.length - 1].data)}.
 	</p>
-	<div class="barra" role="progressbar" aria-label="Horas do plano cumpridas" aria-valuemin="0" aria-valuemax="100" aria-valuenow={pct}>
+	<div class="barra" role="progressbar" aria-label="Blocos do plano cumpridos" aria-valuemin="0" aria-valuemax="100" aria-valuenow={pct}>
 		<span style:width="{pct}%"></span>
 	</div>
 	<dl class="numeros">
 		<div><dt>blocos feitos</dt><dd>{r.blocosFeitos} <small>de {r.blocos}</small></dd></div>
-		<div><dt>horas feitas</dt><dd>{h(r.minutosFeitos)} <small>de {h(r.minutos)} h</small></dd></div>
 	</dl>
 	<a class="secundario" href="/artefato/missoes#{cargo}">Ver o plano nas Missões</a>
 </section>
@@ -63,7 +61,7 @@
 
 	.numeros {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: 1fr;
 		gap: 8px;
 		margin: 12px 0 0;
 	}
