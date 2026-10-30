@@ -189,7 +189,7 @@ evidência, proposta, contagem — vai para ela aprovar em lote.
       `contagem.csv` (original ou lida na 1c).
 
 #### Verificação manual
-- [ ] Ela aprova (ou ajusta) a tabela de proposta em lote.
+- [x] Ela aprova (ou ajusta) a tabela de proposta em lote. (2026-10-30: "Aprovo tudo".)
 
 **Pausa**: a auditoria para aqui; nada é corrigido sem a aprovação dela.
 
@@ -255,11 +255,17 @@ Commit único, no estilo da casa: `fix: links do Qconcursos com o tema certo por
 ### Critérios de aceite
 
 #### Verificação automática
-- [ ] `python scripts/gerar_links_qconcursos.py --check` e `python scripts/montar_artifacts.py
-      --check` sem erros no vault.
-- [ ] A comparação repo × vault da fase 0 imprime `repo == vault`.
-- [ ] `npm test` e `npm run check` verdes.
-- [ ] `npm run test:e2e` verde (inclui os testes dos artefatos e das Missões).
+- [x] `python scripts/gerar_links_qconcursos.py --check` sem erros no vault (249 por assunto,
+      15 por termo; 471 assuntos contados). O `python scripts/montar_artifacts.py --check`
+      divergiu da `referencia-v6` em **exatamente 35 chaves** — as 32 aprovadas + as 3 da
+      fase 0 — o que confirma que nada além do pretendido mudou. Rebalse para `referencia-v7`
+      ficou pendente: o extrator da ferramenta só lê o formato antigo (`const TERMOS = `), e
+      evoluir o código da ferramenta está fora do escopo deste plano.
+- [x] A comparação repo × vault da fase 0 imprime `repo == vault`.
+- [x] `npm test` (316 passaram) e `npm run check` (0 erros, 0 avisos) verdes.
+- [x] `npm run test:e2e`: 243 passaram. Duas observações: `conta.spec.ts:151` falhou na
+      suíte cheia e passou isolada (flaky); `painel.spec.ts:206` (P3 de Infraestrutura)
+      falha por causa da deriva do vault **não commitada** (abaixo), não pelos links.
 
 #### Verificação manual
 - [ ] Na Missão de hoje (ou na página das Missões), o link de E2 5.5 abre questões do tema;
@@ -267,6 +273,20 @@ Commit único, no estilo da casa: `fix: links do Qconcursos com o tema certo por
 - [ ] Abrir Prioridades num subitem corrigido: mesmo tema no link de lá.
 
 **Pausa**: verificação manual no app antes de encerrar o plano.
+
+### Nota de execução (2026-10-30)
+
+- Commit: `db8aba0` — só os 4 arquivos de links (`missoes-cd.json`, `missoes-aud.json`,
+  artefatos `missoes.html` e `prioridades.html`) e este plano. Diff conferido: `qc` mudou em
+  22 cids do plano `cd` + 17 do `aud` − 7 compartilhados = 32 chaves, exatamente a tabela
+  aprovada; `plan` idêntico; templates do vault intocados desde 27/10.
+- **Deriva do vault deixada de fora do commit** (movimento dela desde 27/10, para decidir
+  depois): o `GUIA CGU 2026 AFFC Infraestrutura P3.md` saiu da raiz do vault, e o
+  `npm run importar` removeu os 4 lotes `lote-infra-e*.json` e tirou a disciplina do
+  `indice.json`/`materias.json` — a especialidade Infraestrutura fica sem P3 no feed se isso
+  for commitado. Também ficaram fora: `raiox.html`, `indice.json`, `materias.json` (conteúdo)
+  e `dash-local.js`/`vendor/d3*` (ruído de fim de linha apenas).
+- Push pendente: o deploy no Cloudflare só acontece no push para `main`.
 
 ## Estratégia de teste
 
