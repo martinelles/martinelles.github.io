@@ -1,9 +1,9 @@
 <script lang="ts" module>
-	export type Aba = 'feed' | 'salvos' | 'painel';
+	export type Aba = 'feed' | 'erros' | 'salvos' | 'painel';
 </script>
 
 <script lang="ts">
-	// Abas fixas no rodapé: Feed, Salvos e Painel.
+	// Abas fixas no rodapé: Feed, Erros, Salvos e Painel.
 	import Icone from '$lib/componentes/Icone.svelte';
 	import type { NomeIcone } from '$lib/dados';
 
@@ -18,6 +18,7 @@
 
 	const ABAS: { id: Aba; href: string; rotulo: string; icone: NomeIcone }[] = [
 		{ id: 'feed', href: '/', rotulo: 'Feed', icone: 'casa' },
+		{ id: 'erros', href: '/erros', rotulo: 'Erros', icone: 'x' },
 		{ id: 'salvos', href: '/salvos', rotulo: 'Salvos', icone: 'marcador' },
 		{ id: 'painel', href: '/painel', rotulo: 'Painel', icone: 'grade' }
 	];
@@ -49,7 +50,7 @@
 
 	ul {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		max-width: 560px;
 		margin: 0 auto;
 		padding: 0;

@@ -67,7 +67,7 @@ test('1. "/" abre o feed com stories e posts em até 3 s, sem tela de escolha (S
 	await expect(page.getByText('Qual o concurso dos seus sonhos?')).toHaveCount(0);
 	// Barra de abas sempre visível (Cenário 5.5).
 	const abas = page.getByRole('navigation', { name: 'Seções' });
-	await expect(abas.getByRole('link')).toHaveText(['Feed', 'Salvos', 'Painel']);
+	await expect(abas.getByRole('link')).toHaveText(['Feed', 'Erros', 'Salvos', 'Painel']);
 	await expect(abas.getByRole('link', { name: 'Feed' })).toHaveAttribute('aria-current', 'page');
 });
 

@@ -14,7 +14,9 @@
 import { conta } from '$lib/conta/sessao.svelte';
 import type { Mudancas } from '$lib/missoes/calculos';
 import { marcasMissoes } from '$lib/missoes/marcas.svelte';
+import { hojeLocal } from '$lib/datas';
 import { CHAVE_INTERACOES, interacoes } from './interacoes.svelte';
+import { erros } from './erros.svelte';
 import { manterRodada } from './rodada';
 
 export const CHAVE_PENDENTE = `${CHAVE_INTERACOES}:pendente`;
@@ -48,8 +50,11 @@ function dispensado(sessao: Storage | null): boolean {
 export function aplicar(p: Pendente): void {
 	if (p.acao === 'missao') {
 		if (conta.usuario) marcasMissoes.aplicar(p.mudancas);
-	} else if (p.acao === 'responder') interacoes.responder(p.id, p.r, p.gabarito);
-	else if (p.acao === 'curtir') {
+	} else if (p.acao === 'responder') {
+		interacoes.responder(p.id, p.r, p.gabarito);
+		// Primeiro erro da questão: entra no caderno de erros (a primeira resposta é a única que conta).
+		if (p.r !== p.gabarito) erros.registrar(p.id, hojeLocal());
+	} else if (p.acao === 'curtir') {
 		if (interacoes.curtido(p.id) !== p.on) interacoes.alternarCurtida(p.id);
 	} else if (interacoes.salvo(p.id) !== p.on) interacoes.alternarSalvo(p.id);
 }

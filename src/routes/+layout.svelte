@@ -6,6 +6,7 @@
 	import BarraAbas, { type Aba } from '$lib/componentes/feed/BarraAbas.svelte';
 	import PopupEntrar from '$lib/componentes/feed/PopupEntrar.svelte';
 	import { criarRepositorio } from '$lib/feed/conteudo';
+	import { carregarErros, semearErros } from '$lib/feed/erros.svelte';
 	import { carregarFoco, garantirFoco } from '$lib/feed/foco.svelte';
 	import { carregarInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
 	import { aplicar, tomarPendente } from '$lib/feed/pedidoLogin.svelte';
@@ -18,6 +19,9 @@
 	// Uma vez por aba: o layout raiz não é refeito ao navegar. O tema chega ao mesmo valor que o
 	// script inline de app.html já pôs (sem piscar) e passa a seguir o aparelho e o seletor.
 	carregarInteracoes(armazenamentoAtual());
+	// Caderno de erros: na primeira visita nasce das questões já erradas nas interações.
+	carregarErros(armazenamentoAtual());
+	semearErros(armazenamentoAtual());
 	garantirFoco();
 	carregarTema(armazenamentoAtual());
 	carregarMarcas(armazenamentoAtual());
@@ -25,6 +29,7 @@
 	void sincronizarAoAbrir(() => {
 		const arm = armazenamentoAtual();
 		carregarInteracoes(arm);
+		carregarErros(arm);
 		carregarFoco(arm);
 		carregarTema(arm);
 		carregarMarcas(arm);
@@ -46,6 +51,7 @@
 	const aba = $derived.by((): Aba => {
 		const caminho = page.url.pathname;
 		if (caminho.startsWith('/salvos')) return 'salvos';
+		if (caminho.startsWith('/erros')) return 'erros';
 		if (
 			caminho.startsWith('/painel') ||
 			caminho.startsWith('/entrar') ||
