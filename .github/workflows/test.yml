@@ -1,0 +1,26 @@
+# Testes em todo push para a main e em todo pull request (planos/2026-10-30, item "testes antes
+# do deploy"): barra commit quebrado antes de virar deploy. Sem e2e — Playwright no CI é lento e
+# sensível; unitários + tipos + build cobrem a quebra comum em ~3 min.
+name: Testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build

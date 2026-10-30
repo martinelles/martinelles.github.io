@@ -111,3 +111,12 @@ Git do Cloudflare roda `npx wrangler deploy`, que publica `build/` e o Worker co
 [wrangler.jsonc](wrangler.jsonc) e cria o D1 `cgu` no primeiro deploy. O GitHub Pages saiu em
 2026-10-17. Endereço sem `/api` (o `npm run dev`, por exemplo) ainda abre o app, mas só no modo
 local, sem login.
+
+O GitHub Actions roda os testes em todo push para a `main` e em todo PR
+([test.yml](.github/workflows/test.yml)): tipos, unitários e build, sem e2e. O
+[deploy.yml](.github/workflows/deploy.yml) é a porta que publica só com testes verdes, no lugar
+da integração do Cloudflare — mas fica desligado (o job pula) enquanto o repositório não tiver
+os segredos `CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ACCOUNT_ID`. Para ativá-lo: criar os dois
+segredos (token do tipo "Edit Cloudflare Workers", em Settings → Secrets and variables →
+Actions) e desconectar a integração Git no Cloudflare (Workers → cgu → Settings → Builds →
+Disconnect) — senão publicam os dois.
