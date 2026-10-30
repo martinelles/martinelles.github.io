@@ -1,5 +1,5 @@
 # Deploy pela GitHub Action, e não mais pela integração Git do Cloudflare: publica só depois dos
-# testes verdes. Fica desligado (job pula) enquanto os segredos CLOUDFLARE_API_TOKEN e
+# testes verdes. Fica desligado (o passo pula) enquanto os segredos CLOUDFLARE_API_TOKEN e
 # CLOUDFLARE_ACCOUNT_ID não existirem no repositório — até lá, quem publica é a integração do
 # Cloudflare, como sempre. Para ativar: criar os segredos (token "Edit Cloudflare Workers") e
 # desconectar a integração em Workers → cgu → Settings → Builds → Disconnect.
@@ -29,9 +29,10 @@ jobs:
       - run: npm run check
       - run: npm test
 
+  # O `secrets` não vale no `if` de job: o portão dos segredos é dentro do passo.
   deploy:
     needs: testes
-    if: github.ref == 'refs/heads/main' && secrets.CLOUDFLARE_API_TOKEN != ''
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,9 +40,15 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npx wrangler deploy
+      - name: Publicar (sem os segredos, pula)
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "CLOUDFLARE_API_TOKEN ausente: nada a publicar (o deploy segue pela integração do Cloudflare)."
+            exit 0
+          fi
+          npm ci
+          npm run build
+          npx wrangler deploy
