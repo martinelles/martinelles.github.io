@@ -21,7 +21,8 @@ import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTEFATOS, montarArtefatos, montarRaiox } from './artefatos.mjs';
 import { importarBaralho } from './baralhos.mjs';
-import { CARGOS, montarMissoes } from './missoes.mjs';
+import { montarMapas } from './mapas.mjs';
+import { CARGOS, chaveLink, montarMissoes } from './missoes.mjs';
 import { lerCsv } from './csv.mjs';
 import { fatiarMateria, tamanhoGzip } from './fatiar.mjs';
 import { importarFlashcards, importarResumo } from './feed-conteudo.mjs';
@@ -53,7 +54,8 @@ export const SAIDA_PADRAO = 'static/conteudo';
  *   topicos: { questoes: number, distintos: number },
  *   convertidas: { questoes: number, itens: number },
  *   artefatos: string[],
- *   missoes: string[]
+ *   missoes: string[],
+ *   mapas: number
  * }} Relatorio
  */
 
@@ -292,7 +294,40 @@ export function importar({ vault, saida }) {
 	const arqLinks = join(vault, 'catalogo-questoes', 'qconcursos', 'links.json');
 	const temLinks = existsSync(arqLinks);
 	if (!temLinks) avisos.push('catalogo-questoes/qconcursos/links.json ausente: Missões do painel sem links do Qconcursos');
-	const missoes = montarMissoes(fontesMissoes, temLinks ? readFileSync(arqLinks, 'utf8') : undefined);
+
+	// Mapas mentais por subitem (planos/2026-10-31-mapas-mentais-nas-missoes.md): os
+	// `resumos/**/Resumo *.excalidraw.svg` do vault viram `mapas/<slug>.svg`, e o mapa
+	// chave → slug entra em missoes-<cargo>.json. Um `.excalidraw` sem SVG é auto-export pendente.
+	/** @type {{ nome: string, conteudo: string }[]} */
+	const svgsMapas = [];
+	const chavesValidas = new Set();
+	for (const [c, fonte] of Object.entries(fontesMissoes)) {
+		for (const d of JSON.parse(fonte).plan)
+			for (const b of d.blocos)
+				for (const it of b.itens ?? []) chavesValidas.add(chaveLink(c, it.cod));
+	}
+	const dirResumos = join(vault, 'resumos');
+	/** @type {Record<string, boolean>} */ const desenhoSemSvg = {};
+	if (existsSync(dirResumos)) {
+		// `listar` só cobre arquivos; aqui as subpastas (B, C, E…) é que importam.
+		const pastas = readdirSync(dirResumos).filter((p) => statSync(join(dirResumos, p)).isDirectory());
+		for (const pasta of pastas)
+			for (const arquivo of listar(join(dirResumos, pasta), /\.excalidraw(\.svg)?$/i) ?? []) {
+				const caminho = join(dirResumos, pasta, arquivo);
+				if (/\.excalidraw$/i.test(arquivo)) {
+					desenhoSemSvg[arquivo] = !existsSync(`${caminho}.svg`);
+					continue;
+				}
+				svgsMapas.push({ nome: arquivo, conteudo: ler(caminho) });
+			}
+	} else avisos.push('resumos/ ausente: nenhum mapa mental gerado');
+	const montado = montarMapas(svgsMapas, chavesValidas);
+	avisos.push(...montado.avisos);
+	for (const [desenho, pendente] of Object.entries(desenhoSemSvg))
+		if (pendente) avisos.push(`resumos/**/${desenho}: sem .excalidraw.svg (auto-export pendente no Obsidian)`);
+	arquivos.push(...montado.arquivos);
+
+	const missoes = montarMissoes(fontesMissoes, temLinks ? readFileSync(arqLinks, 'utf8') : undefined, montado.mapa);
 	arquivos.push(...missoes);
 
 	// Artefatos (Prioridades, Missões…), montados no vault por scripts/montar_artifacts.py
@@ -369,7 +404,8 @@ export function importar({ vault, saida }) {
 		topicos,
 		convertidas,
 		artefatos: artefatos.map((a) => a.arquivo),
-		missoes: missoes.map((a) => a.arquivo)
+		missoes: missoes.map((a) => a.arquivo),
+		mapas: montado.arquivos.length
 	};
 }
 
@@ -399,6 +435,7 @@ export function formatarRelatorio(r) {
 		`Lotes: ${r.lotes.length}; maior: ${maior.arquivo} com ${kb(maior.gzip)} gzip`,
 		'',
 		`Missões (plano de 61 dias): ${r.missoes.length ? r.missoes.join(', ') : 'nenhum'}`,
+		`Mapas mentais: ${r.mapas}`,
 		`Artefatos: ${r.artefatos.length ? r.artefatos.join(', ') : 'nenhum'}`,
 		'',
 		`Arquivos recusados: ${r.recusados.length}`,

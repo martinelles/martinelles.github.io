@@ -51,6 +51,8 @@ export interface PlanoMissoes {
 	qc: Record<string, string>;
 	/** Nos itens das revisões, o link só das questões que ela errou no Qconcursos, por `cid`. */
 	qcErros: Record<string, string>;
+	/** Mapa mental do subitem (`/mapa/<slug>`, SVG de `/conteudo/mapas/`), por `cid`. */
+	mapas: Record<string, string>;
 }
 
 /** Marcações: `{ "<cargo>~<AAAA-MM-DD>~<índice do bloco>": true }`, a chave `missoes-cgu-2026`. */

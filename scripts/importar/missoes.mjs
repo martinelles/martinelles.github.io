@@ -60,6 +60,26 @@ export function linksDoPlano(plano, cargo, links) {
 }
 
 /**
+ * `{ [cid]: slug}`: o mapa mental do subitem, quando a chave dele (ou a do pai) tem SVG
+ * (`mapas.mjs`). Mesmo formato do `qc`, para o atalho da Missão de hoje.
+ * @param {{ plan: { blocos: { tipo: string, itens?: { cid: string, cod: string }[] }[] }[] }} plano
+ * @param {string} cargo
+ * @param {Record<string, string>} mapa chave do edital → slug
+ */
+export function mapasDoPlano(plano, cargo, mapa) {
+	/** @type {Record<string, string>} */
+	const mapas = {};
+	for (const d of plano.plan)
+		for (const b of d.blocos)
+			for (const it of b.itens ?? []) {
+				const ch = chaveLink(cargo, it.cod);
+				const slug = mapa[ch] ?? mapa[paiDe(ch) ?? ''];
+				if (slug) mapas[it.cid] = slug;
+			}
+	return mapas;
+}
+
+/**
  * Valida e enxuga o plano de um cargo: só o que o painel usa (`plan`, `cortes`, `gerado`).
  * @param {unknown} bruto conteúdo de `plano-<cargo>.json`
  * @param {string} onde nome do arquivo, para as mensagens
@@ -96,18 +116,19 @@ export function validarMissoes(bruto, onde) {
 /**
  * @param {Record<string, string>} fontes `plano-<cargo>.json` presentes no vault, por cargo
  * @param {string} [links] conteúdo de `catalogo-questoes/qconcursos/links.json`; sem ele, sem `qc`
+ * @param {Record<string, string>} [mapa] chave → slug dos mapas mentais (`mapas.mjs`); sem ele, sem `mapas`
  * @returns {{ arquivo: string, conteudo: string }[]}
  */
-export function montarMissoes(fontes, links) {
+export function montarMissoes(fontes, links, mapa) {
 	/** @type {Record<string, unknown> | null} */
-	let mapa = null;
+	let mapaLinks = null;
 	if (links !== undefined) {
 		try {
-			mapa = JSON.parse(links);
+			mapaLinks = JSON.parse(links);
 		} catch (e) {
 			throw new Error(`catalogo-questoes/qconcursos/links.json: JSON inválido (${/** @type {Error} */ (e).message})`);
 		}
-		if (!ehObjeto(mapa)) throw new Error('catalogo-questoes/qconcursos/links.json: não é um objeto');
+		if (!ehObjeto(mapaLinks)) throw new Error('catalogo-questoes/qconcursos/links.json: não é um objeto');
 	}
 	return CARGOS.filter((c) => fontes[c] !== undefined).map((c) => {
 		const onde = `artifacts/missoes/plano-${c}.json`;
@@ -118,7 +139,11 @@ export function montarMissoes(fontes, links) {
 			throw new Error(`${onde}: JSON inválido (${/** @type {Error} */ (e).message})`);
 		}
 		const plano = validarMissoes(bruto, onde);
-		const saida = mapa ? { ...plano, ...linksDoPlano(plano, c, mapa) } : plano;
+		const saida = {
+			...plano,
+			...(mapaLinks ? linksDoPlano(plano, c, mapaLinks) : {}),
+			...(mapa ? { mapas: mapasDoPlano(plano, c, mapa) } : {})
+		};
 		return { arquivo: `missoes-${c}.json`, conteudo: `${JSON.stringify(saida)}\n` };
 	});
 }

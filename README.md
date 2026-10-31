@@ -17,7 +17,8 @@ guarda o progresso de quem entra com um nome, para seguir de um aparelho para ou
   e [src/lib/feed/ordem.ts](src/lib/feed/ordem.ts).
 - **Painel** (`/painel`) — ferramentas, progresso, missão de hoje e foco de estudo.
 - **Missões** — plano de 61 dias até a prova, o mesmo da página das Missões; o painel e o
-  feed seguem esse plano.
+  feed seguem esse plano. Subitem com mapa mental no vault ganha o atalho "Mapa mental ↗",
+  que abre a rota `/mapa/<slug>` com visor de arraste e zoom (offline).
 - **Ajustes** (`/painel/ajustes`) — especialidade (Ciência de Dados, Auditoria ou Infraestrutura, esta com a P3 vinda do guia de conteúdo programático), que decide
   o conteúdo, aparência e conta.
 - **Entrar** (`/entrar`, ou o popup) — login só por nome, sem senha: o nome é a credencial.

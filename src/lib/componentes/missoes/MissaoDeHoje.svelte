@@ -198,6 +198,9 @@
 															Questões que errei ↗
 														</a>
 													{/if}
+													{#if plano.mapas?.[it.cid]}
+														<a class="topico" href="/mapa/{plano.mapas[it.cid]}">Mapa mental ↗</a>
+													{/if}
 												</span>
 											{/if}
 											{#if aberto}

@@ -30,7 +30,8 @@ export function validarMissoes(bruto: unknown): PlanoMissoes {
 		plan: p.plan,
 		cortes: Array.isArray(p.cortes) ? p.cortes : [],
 		qc: mapa(p.qc),
-		qcErros: mapa(p.qcErros)
+		qcErros: mapa(p.qcErros),
+		mapas: mapa(p.mapas)
 	};
 }
 

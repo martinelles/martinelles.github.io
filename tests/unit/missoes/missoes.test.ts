@@ -28,6 +28,7 @@ const PLANO: PlanoMissoes = {
 	cortes: [],
 	qc: {},
 	qcErros: {},
+	mapas: {},
 	plan: [
 		{ data: '2026-10-13', dow: 'ter', fase: 'Base', blocos: [{ tipo: 'novo', titulo: 'N', min: 45, itens: [item('EPA-01')] }, { tipo: 'rev', titulo: 'R', min: 45, itens: [] }] },
 		{ data: '2026-10-14', dow: 'qua', fase: 'Base', blocos: [{ tipo: 'sim', titulo: 'S', min: 90 }, { tipo: 'rev', titulo: 'Encaixe', min: 0 }] },
