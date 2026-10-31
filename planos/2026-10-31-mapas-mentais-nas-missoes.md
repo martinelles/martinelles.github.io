@@ -210,3 +210,27 @@ normaliza para `{}`); quem já usa só recebe o atalho no próximo deploy.
 - Cache offline: `src/service-worker.ts:33` e `:90`
 - Auto-export: `.obsidian/plugins/obsidian-excalidraw-plugin/data.json`
   (`autoexportSVG: true`, vault `00. vault`)
+
+
+---
+
+## Fase 3 (2026-10-31, pedido dela) — "mapa ↗" nas páginas de artefato
+
+Prioridades e Missões até a prova ganham o mesmo atalho. Não estava no escopo original ("não
+vamos fazer"); ela pediu depois de ver o visor no ar.
+
+- **Vault**: `montar_artifacts.py` ganha `mapas_dos_resumos()` (chave → slug; regra duplicada
+  de `scripts/importar/mapas.mjs`, como `CARGO_DA_ESPECIALIDADE`) e injeta `__MAPAS__` nos dois
+  templates. O SVG exportado aceita dois nomes: `<desenho>.excalidraw.svg` (lote inicial) e
+  `Resumo <cód> <tema>.svg` (o que o auto-export do plugin grava de verdade — descoberto ao
+  ver o plugin substituir dois arquivos).
+- **Templates**: "mapa ↗" em `qcPar` (Prioridades) e no item (Missões), com `target="_parent"`:
+  a navegação acontece na janela do app desde o primeiro clique.
+- **App** (`artefato/[nome]/+page.svelte`): a ponte de cliques reconhece `/mapa/…` e trocou o
+  momento de anexar — era só no `load` do iframe, e a página já aceita clique no
+  `DOMContentLoaded`; a brecha fazia um clique rápido abrir aba nova (era o "flake" de
+  `artefatos.spec.ts:18`). Agora um `requestAnimationFrame` prende o documento assim que sai
+  de `loading`.
+- **Critérios**: `npm run check` 0/0; `npm test` 336; `test:e2e` 251 passaram — os 5 de
+  `mapa.spec.ts` (2 novos de iframe) e os 17 de `artefatos.spec.ts`; a única falha é a deriva
+  do vault de Infraestrutura, sem commit por decisão dela.

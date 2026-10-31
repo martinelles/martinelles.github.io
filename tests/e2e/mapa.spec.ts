@@ -48,3 +48,24 @@ test('endereço sem mapa mostra a página de erro', async ({ page }) => {
 	await page.goto('/mapa/nao-existe-9.9');
 	await expect(page.getByRole('heading', { name: 'Mapa não encontrado' })).toBeVisible();
 });
+
+test('nas Prioridades, o mapa ↗ do subitem abre o visor no app', async ({ page }) => {
+	await page.goto('/artefato/prioridades');
+	const quadro = page.frameLocator('iframe');
+	const mapa = quadro.getByRole('link', { name: 'mapa ↗' }).first();
+	await expect(mapa).toBeVisible();
+	await expect(mapa).toHaveAttribute('href', /^\/mapa\/[a-z0-9.-]+$/);
+	await mapa.click();
+	await expect(page).toHaveURL(/\/mapa\/[a-z0-9.-]+$/);
+	await expect(page.getByRole('heading', { name: /Mapa mental · / })).toBeVisible();
+});
+
+test('nas Missões até a prova, o mapa ↗ do subitem abre o visor no app', async ({ page }) => {
+	await page.goto('/artefato/missoes#cd');
+	const quadro = page.frameLocator('iframe');
+	const mapa = quadro.getByRole('link', { name: 'mapa ↗' }).first();
+	await expect(mapa).toBeVisible();
+	await mapa.click();
+	await expect(page).toHaveURL(/\/mapa\/[a-z0-9.-]+$/);
+	await expect(page.getByRole('heading', { name: /Mapa mental · / })).toBeVisible();
+});
