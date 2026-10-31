@@ -18,7 +18,9 @@
 
 ## Foco
 
-- **Chave**: `painel-concurso:preferencias:v2` → `{ "disciplina": "ti-ciencia-de-dados" }`.
+- **Chave**: `painel-concurso:preferencias:v2` → `{ "disciplina": "cd-e1", "especialidade": "ciencia-de-dados", "priorizarFracos": false }`.
+- `priorizarFracos` (opcional, `true` liga): o feed ordena a fila de questões pelo pior acerto de
+  tópico nas respostas gravadas ("fracos primeiro"); ausente ou falso vale falso.
 - `painel-concurso:preferencias:v1` é ignorada (não migrada, não apagada).
 
 ## Interface (`src/lib/feed/interacoes.svelte.ts`)

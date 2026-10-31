@@ -126,7 +126,9 @@ describe('foco', () => {
 
 	it('escolher grava no formato do contrato e relê', () => {
 		foco.escolherDisciplina('c3');
-		expect(arm.getItem('painel-concurso:preferencias:v2')).toBe('{"disciplina":"c3","especialidade":"ciencia-de-dados"}');
+		expect(arm.getItem('painel-concurso:preferencias:v2')).toBe(
+			'{"disciplina":"c3","especialidade":"ciencia-de-dados","priorizarFracos":false}'
+		);
 		carregarFoco(new StorageFalso());
 		expect(foco.disciplina).toBe(DISCIPLINA_PADRAO);
 		carregarFoco(arm);

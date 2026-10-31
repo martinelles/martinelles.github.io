@@ -4,7 +4,7 @@
  * Trocar de filtro = criar outra sessão; o conjunto de mostrados por filtro vive neste módulo.
  */
 import type { Repositorio } from './conteudo';
-import { ordemDoDia } from './ordem';
+import { notasPorTopico, ordemDoDia } from './ordem';
 import type { Filtro, Post } from './tipos';
 
 export const TAMANHO_PAGINA = 10;
@@ -39,8 +39,17 @@ export interface Sessao {
 	proximaPagina(): Promise<void>;
 }
 
-/** `semente` decide a ordem: o feed passa o dia e a rodada da carga, que muda a cada atualização. */
-export function criarSessao(repo: Repositorio, filtro: Filtro, semente: string): Sessao {
+/**
+ * `semente` decide a ordem: o feed passa o dia e a rodada da carga, que muda a cada atualização.
+ * `respostas` (opcional) liga o "fracos primeiro": a fila de questões fica ordenada pelo pior
+ * acerto de tópico, calculado no instante em que a ordem é construída.
+ */
+export function criarSessao(
+	repo: Repositorio,
+	filtro: Filtro,
+	semente: string,
+	respostas?: Readonly<Record<string, { ok: boolean }>> | null
+): Sessao {
 	const filtroCopia: Filtro = { ...filtro };
 	const chave = chaveFiltro(filtroCopia);
 	let mostrados = mostradosPorFiltro.get(chave);
@@ -67,7 +76,8 @@ export function criarSessao(repo: Repositorio, filtro: Filtro, semente: string):
 
 	async function carregarPagina(): Promise<void> {
 		try {
-			ordem ??= ordemDoDia(await repo.indice(), filtroCopia, semente);
+			const base = await repo.indice();
+			ordem ??= ordemDoDia(base, filtroCopia, semente, respostas ? notasPorTopico(base, respostas) : undefined);
 			avancar(ordem);
 			if (fim) {
 				erro = null;

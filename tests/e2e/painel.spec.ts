@@ -48,7 +48,8 @@ test('foco: especialidade começa em Ciência de Dados, disciplina também, e pe
 	await disciplina.selectOption({ label: 'C3 · Direito Público Aplicado, Controle e Responsabilização' });
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
 		disciplina: 'c3',
-		especialidade: 'ciencia-de-dados'
+		especialidade: 'ciencia-de-dados',
+		priorizarFracos: false
 	});
 	await page.reload();
 	await expect(page.getByLabel('Disciplina')).toHaveValue('c3');
@@ -168,7 +169,8 @@ test('o cargo troca direto no cabeçalho do painel, com o plano e os links junto
 	await expect(page.getByRole('link', { name: 'Missões até a prova' })).toHaveAttribute('href', /#aud$/);
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
 		disciplina: 'c5',
-		especialidade: 'auditoria'
+		especialidade: 'auditoria',
+		priorizarFracos: false
 	});
 
 	await cargos.getByRole('button', { name: 'TI — Ciência de Dados' }).click();
@@ -185,7 +187,8 @@ test('especialidade Auditoria: plano, feed sem a P3 de Ciência de Dados, cargo 
 	await expect(disciplina.locator('option', { hasText: 'Aprendizado de Máquina' })).toHaveCount(0);
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
 		disciplina: 'c5',
-		especialidade: 'auditoria'
+		especialidade: 'auditoria',
+		priorizarFracos: false
 	});
 
 	const plano = page.waitForRequest('**/conteudo/missoes-aud.json');
@@ -212,7 +215,8 @@ test('especialidade Infraestrutura: sem plano nas Missões, feed com P1, P2 e a 
 	await expect(page.getByRole('link', { name: 'Missões até a prova' })).not.toHaveAttribute('href', /#/);
 	expect(await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), CHAVE_FOCO)).toEqual({
 		disciplina: 'infra-e1',
-		especialidade: 'infraestrutura'
+		especialidade: 'infraestrutura',
+		priorizarFracos: false
 	});
 
 	await page.goto('/painel/ajustes');

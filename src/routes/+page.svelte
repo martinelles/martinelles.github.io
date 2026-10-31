@@ -26,7 +26,7 @@
 	import { naMateria, noTopico } from '$lib/feed/entrada';
 	import { materiaVistaHoje, ordenarStories } from '$lib/feed/estatisticas';
 	import { foco } from '$lib/feed/foco.svelte';
-	import { interacoes } from '$lib/feed/interacoes.svelte';
+	import { dadosInteracoes, interacoes } from '$lib/feed/interacoes.svelte';
 	import { alternarCurtida, alternarSalvo, responderQuestao } from '$lib/feed/pedidoLogin.svelte';
 	import { novaRodada, rodadaAtual } from '$lib/feed/rodada';
 	import { chaveFiltro, criarSessao, esquecerMostrados } from '$lib/feed/sessao.svelte';
@@ -87,12 +87,17 @@
 	const rotuloQtd = (n: number) => (n === 1 ? '1 questão' : `${n.toLocaleString('pt-BR')} questões`);
 
 	let rodada = $state(rodadaAtual());
-	const chaveSessao = $derived(`${dia}|${rodada}|${chaveFiltro(filtro)}`);
+	// O modo entra na chave da sessão: ligar ou desligar recria a ordem com o cálculo novo.
+	const chaveSessao = $derived(
+		`${dia}|${rodada}|${chaveFiltro(filtro)}${foco.priorizarFracos ? '|fracos' : ''}`
+	);
 	const sessao = $derived.by(() => {
 		const chave = chaveSessao;
 		let s = sessoes.get(chave);
 		if (!s) {
-			s = criarSessao(repo, filtro, `${dia}|${rodada}`);
+			// Fracos primeiro: a nota de acerto é a do instante em que a ordem nasce (a rodada nova
+			// recalcula; responder no feed não reordena o que já está na tela).
+			s = criarSessao(repo, filtro, `${dia}|${rodada}`, foco.priorizarFracos ? dadosInteracoes().respostas : null);
 			sessoes.set(chave, s);
 		}
 		return s;
@@ -198,6 +203,21 @@
 		</div>
 	{/if}
 
+	{#if filtro.topico === undefined && (filtro.tipo === undefined || filtro.tipo === 'questao')}
+		<!-- Fracos primeiro: ordena a fila de questões pelo pior acerto de tópico (só afeta questões). -->
+		<div class="modo-fracos">
+			<button
+				type="button"
+				class="fracos"
+				aria-pressed={foco.priorizarFracos}
+				onclick={() => foco.definirPriorizarFracos(!foco.priorizarFracos)}
+			>
+				<Icone nome="raio" tamanho={16} />
+				Fracos primeiro
+			</button>
+		</div>
+	{/if}
+
 	{#if filtro.topico !== undefined}
 		<div class="filtro-topico">
 			<h2>Questões de {filtro.topico}</h2>
@@ -296,6 +316,31 @@
 		gap: 0 12px;
 		margin: 0 0 8px;
 		font-weight: 700;
+	}
+
+	/* Fracos primeiro: pílula de alternar logo abaixo dos stories. */
+	.modo-fracos {
+		display: flex;
+		margin: 8px 0;
+	}
+
+	.fracos {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 44px;
+		padding: 0 14px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.fracos[aria-pressed='true'] {
+		border-color: var(--cor-primaria);
+		background: var(--cor-primaria);
+		color: var(--cor-primaria-texto);
 	}
 
 	.filtro-tipo a {

@@ -58,11 +58,12 @@
 	$effect(() => {
 		if (!iframe) return;
 		let viva = true;
+		const quadro = iframe;
 		const ciclo = () => {
 			if (!viva) return;
 			let doc: Document | null = null;
 			try {
-				doc = iframe.contentDocument;
+				doc = quadro.contentDocument;
 			} catch {
 				doc = null; // outra origem: não há o que interceptar
 			}

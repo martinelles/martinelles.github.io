@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { embaralhar, hashTexto, mulberry32, ordemDoDia } from '$lib/feed/ordem';
+import { embaralhar, hashTexto, mulberry32, notasPorTopico, ordemDoDia } from '$lib/feed/ordem';
 import { TIPO_POR_INICIAL, type Indice } from '$lib/feed/tipos';
 import { indiceSintetico } from './apoio';
 
@@ -138,3 +138,65 @@ describe('ordemDoDia', () => {
 		expect(ordemDoDia(so, { topico: 'FAG-01' }, '2026-09-30')).not.toEqual(ordemDoDia(so, {}, '2026-09-30'));
 	});
 });
+
+describe('fracos primeiro', () => {
+	/** Tudo de FAG-01 errado; FAG-02 metade certa, metade errada; sem tópico fica sem nota. */
+	function cenario() {
+		const ind = indiceComTopico(400);
+		const respostas: Record<string, { ok: boolean }> = {};
+		const qs = (tp: string) => ind.posts.filter((e) => e.tp === tp);
+		for (const e of qs('FAG-01')) respostas[e.id] = { ok: false };
+		const meio = Math.ceil(qs('FAG-02').length / 2);
+		qs('FAG-02').forEach((e, i) => (respostas[e.id] = { ok: i < meio }));
+		return { ind, respostas };
+	}
+
+	it('notasPorTopico: acertos ÷ respondidas, só tópicos com resposta', () => {
+		const { ind, respostas } = cenario();
+		const notas = notasPorTopico(ind, respostas);
+		const n2 = ind.posts.filter((e) => e.tp === 'FAG-02').length;
+		expect(n2 % 2).toBe(1); // 33 questões: a metade arredondada para cima é quem acerta
+		expect(notas.get('FAG-01')).toBe(0);
+		expect(notas.get('FAG-02')).toBe(Math.ceil(n2 / 2) / n2);
+		expect(notas.size).toBe(2); // sem tópico e sem resposta não entram
+	});
+
+	it('pior tópico primeiro na fila de questões; sem nota vem depois; lei/resumo/flashcard intactos', () => {
+		const { ind, respostas } = cenario();
+		const notas = notasPorTopico(ind, respostas);
+		const ordem = ordemDoDia(ind, {}, '2026-09-30', notas);
+		const questoes = ordem.filter((id) => tipoDeDo(ind, id) === 'q');
+		const notaDa = (id: string) => {
+			const e = ind.posts.find((p) => p.id === id)!;
+			return e.tp === undefined ? null : (notas.get(e.tp) ?? null);
+		};
+		// Ordenação estável por nota crescente, sem nota no fim: vale para a subsequência toda.
+		let ultima = -1;
+		for (const id of questoes) {
+			const n = notaDa(id);
+			if (n === null) continue;
+			expect(n).toBeGreaterThanOrEqual(ultima);
+			ultima = n;
+		}
+		const semNota = questoes.filter((id) => notaDa(id) === null).length;
+		expect(questoes.slice(0, questoes.length - semNota).every((id) => notaDa(id) !== null)).toBe(true);
+		// A proporção entre tipos não muda com o modo ligado.
+		expect(ordem.slice(0, 8).map((id) => tipoDeDo(ind, id)).join('')).toBe('qqqllrff');
+	});
+
+	it('mesma semente e mesmas notas ⇒ mesma ordem; notas novas mudam', () => {
+		const { ind, respostas } = cenario();
+		const notas = notasPorTopico(ind, respostas);
+		const a = ordemDoDia(ind, {}, '2026-09-30', notas);
+		expect(ordemDoDia(ind, {}, '2026-09-30', notas)).toEqual(a);
+		const todasCertas = new Map([...notas].map(([tp]) => [tp, 1]));
+		expect(ordemDoDia(ind, {}, '2026-09-30', todasCertas)).not.toEqual(a);
+	});
+
+	it('sem o mapa de notas a ordem é a de sempre', () => {
+		const ind = indiceComTopico(400);
+		expect(ordemDoDia(ind, {}, '2026-09-30', null)).toEqual(ordemDoDia(ind, {}, '2026-09-30'));
+	});
+});
+
+const tipoDeDo = (ind: Indice, id: string) => ind.posts.find((e) => e.id === id)!.t;

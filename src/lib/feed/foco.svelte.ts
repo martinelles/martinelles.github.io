@@ -76,6 +76,7 @@ export const especialidadePorId = (id: IdEspecialidade): Especialidade => ESPECI
 
 let disciplina = $state(DISCIPLINA_PADRAO);
 let especialidade = $state<IdEspecialidade>(ESPECIALIDADE_PADRAO);
+let priorizarFracos = $state(false);
 let armazenamento: Storage | null = null;
 let carregado = false;
 
@@ -89,7 +90,7 @@ function tentarLocalStorage(): Storage | null {
 
 function gravar(): void {
 	try {
-		armazenamento?.setItem(CHAVE_FOCO, JSON.stringify({ disciplina, especialidade }));
+		armazenamento?.setItem(CHAVE_FOCO, JSON.stringify({ disciplina, especialidade, priorizarFracos }));
 	} catch {
 		// Armazenamento cheio ou bloqueado: o foco segue em memória nesta sessão.
 	}
@@ -106,9 +107,11 @@ export function carregarFoco(arm: Storage | null = tentarLocalStorage()): void {
 		const atual = especialidadePorId(especialidade);
 		const d = obj.disciplina;
 		disciplina = valida(d) && !atual.fora(d) ? d : atual.disciplinaPadrao;
+		priorizarFracos = obj.priorizarFracos === true;
 	} catch {
 		especialidade = ESPECIALIDADE_PADRAO;
 		disciplina = DISCIPLINA_PADRAO;
+		priorizarFracos = false;
 	}
 }
 
@@ -123,6 +126,14 @@ export const foco = {
 	},
 	get especialidade(): Especialidade {
 		return especialidadePorId(especialidade);
+	},
+	/** "Fracos primeiro": a fila de questões do feed abre pelo pior acerto de tópico. */
+	get priorizarFracos(): boolean {
+		return priorizarFracos;
+	},
+	definirPriorizarFracos(on: boolean): void {
+		priorizarFracos = on;
+		gravar();
 	},
 	/** Id de disciplina do edital. Valor que não é disciplina ou que está fora da especialidade é ignorado. */
 	escolherDisciplina(id: string): void {
