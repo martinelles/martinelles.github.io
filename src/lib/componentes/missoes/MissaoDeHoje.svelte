@@ -48,7 +48,11 @@
 		q: 'Questões'
 	};
 
-	const hojeNoPlano = $derived(plano ? diaDeHoje(plano, hoje) : null);
+	/** Dia em vista: começa em `hoje`; o seletor da seção troca para qualquer dia do plano. */
+	// svelte-ignore state_referenced_locally
+	let escolhida = $state(hoje);
+
+	const hojeNoPlano = $derived(plano ? diaDeHoje(plano, escolhida) : null);
 	const dia = $derived(hojeNoPlano?.dia ?? null);
 	const progresso = $derived(dia ? progressoDoDia(marcas, cargo, dia) : null);
 	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + b.min, 0) : 0);
@@ -117,6 +121,19 @@
 			{dia.dow} {formatarData(dia.data)} · {dia.fase} · {horas(minutosDoDia)}.
 			<span class="contagem">{progresso.feitos} de {progresso.total} blocos feitos.</span>
 		</p>
+		<div class="quando">
+			<input
+				class="dia"
+				type="date"
+				bind:value={escolhida}
+				min={plano.plan[0].data}
+				max={plano.plan.at(-1)?.data}
+				aria-label="Ver a missão de outro dia"
+			/>
+			{#if escolhida !== hoje}
+				<button type="button" class="voltar-hoje" onclick={() => (escolhida = hoje)}>Hoje</button>
+			{/if}
+		</div>
 		<ol class="blocos">
 			{#each dia.blocos as b, i (i)}
 				{@const feito = blocoFeito(marcas, cargo, dia, i)}
@@ -262,6 +279,37 @@
 	.sumario {
 		margin: 4px 0 0;
 		color: var(--cor-texto-suave);
+	}
+
+	/* Seletor de dia: ver a missão de qualquer data do plano, com o botão de volta para hoje
+	   aparecendo só quando o dia em vista não é o de hoje. */
+	.quando {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 8px;
+	}
+
+	.quando .dia {
+		min-height: 44px;
+		padding: 8px 14px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+		font: inherit;
+	}
+
+	.quando .voltar-hoje {
+		min-height: 44px;
+		padding: 8px 14px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+		font: inherit;
+		font-weight: 700;
+		cursor: pointer;
 	}
 
 	.contagem {

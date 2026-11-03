@@ -360,3 +360,20 @@ test('subitem com aula da mentoria mostra o atalho da playlist da disciplina', a
 		/playlists\/a73ca465/
 	);
 });
+
+test('o seletor de dia mostra a missão de qualquer data e volta para hoje', async ({ page }) => {
+	await page.goto('/painel');
+	const secao = missao(page);
+	const seletor = secao.getByLabel('Ver a missão de outro dia');
+	await expect(secao).toContainText('14/10/2026');
+	await expect(secao).not.toContainText('E2 1.2');
+
+	await seletor.fill('2026-10-16');
+	await expect(secao).toContainText('16/10/2026');
+	await expect(secao).toContainText('E2 1.2');
+	await expect(secao.getByRole('button', { name: 'Hoje' })).toBeVisible();
+
+	await secao.getByRole('button', { name: 'Hoje' }).click();
+	await expect(secao).toContainText('14/10/2026');
+	await expect(secao).not.toContainText('E2 1.2');
+});
