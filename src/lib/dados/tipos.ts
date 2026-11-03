@@ -94,8 +94,16 @@ export interface Config {
 	limiteEmAlta: number;
 }
 
+/** Aulas da mentoria (planos/2026-11-03-aulas-da-mentoria-no-painel.md): playlist por disciplina
+ *  do edital, na plataforma do curso que ela faz. Chave `B1`…`C5` (comum) e `CD:E1`… (P3 do cargo). */
+export interface Mentoria {
+	curso: string;
+	playlists: Record<string, string>;
+}
+
 export interface Dados {
 	concursos: Concurso[];
 	ferramentas: Ferramenta[];
 	config: Config;
+	mentoria?: Mentoria;
 }

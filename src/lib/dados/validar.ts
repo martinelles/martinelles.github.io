@@ -162,9 +162,29 @@ function validarConfig(c: Coletor, v: unknown, caminho: string) {
 	c.inteiro(v, 'limiteEmAlta', caminho, 1);
 }
 
+/** Chave de disciplina das playlists da mentoria: `B1`…`C5` (comum) e `CD:E1`… (P3 do cargo). */
+const CHAVE_MENTORIA = /^(B[1-4]|C[1-5]|(CD|AUD|INFRA):E[1-5])$/;
+
+function validarMentoria(c: Coletor, v: unknown, caminho: string) {
+	if (!c.objeto(v, caminho, ['curso', 'playlists'])) return;
+	c.texto(v, 'curso', caminho);
+	if (!ehObjeto(v.playlists)) {
+		c.add(`${caminho}.playlists`, 'deveria ser objeto');
+		return;
+	}
+	for (const [chave, url] of Object.entries(v.playlists)) {
+		if (!CHAVE_MENTORIA.test(chave)) {
+			c.add(`${caminho}.playlists`, `chave "${chave}" fora do padrão (B1–B4, C1–C5, CD:AUD:INFRA:E1–E5)`);
+			continue;
+		}
+		if (typeof url !== 'string' || !/^https:\/\/mentoria\.plataformatutory\.com\.br\//.test(url))
+			c.add(`${caminho}.playlists.${chave}`, 'deveria ser URL https da plataforma da mentoria');
+	}
+}
+
 export function validarDados(bruto: unknown): Dados {
 	const c = new Coletor();
-	if (c.objeto(bruto, 'dados', ['concursos', 'ferramentas', 'config'])) {
+	if (c.objeto(bruto, 'dados', ['concursos', 'ferramentas', 'config'], ['mentoria'])) {
 		const concursos = c.lista(bruto, 'concursos', 'concursos');
 		if (concursos) {
 			// O app atende só à CGU (FR-001): exatamente um concurso.
@@ -179,6 +199,7 @@ export function validarDados(bruto: unknown): Dados {
 			c.unico(ids, (i) => `ferramentas[${i}].id`);
 		}
 		if ('config' in bruto) validarConfig(c, bruto.config, 'config');
+		if ('mentoria' in bruto) validarMentoria(c, bruto.mentoria, 'mentoria');
 	}
 	if (c.falhas.length > 0) {
 		throw new Error(`Dados inválidos (${c.falhas.length} falha(s)):\n${c.falhas.join('\n')}`);

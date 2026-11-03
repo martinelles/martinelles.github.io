@@ -7,6 +7,7 @@
 	// O subitem aberto no Qconcursos fica destacado na volta, até ela marcar ou dispensar (emAndamento).
 	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
+	import { aulaDaMentoria } from '$lib/dados';
 	import { formatarData } from '$lib/datas';
 	import {
 		blocoFeito,
@@ -146,6 +147,7 @@
 								{#each b.itens as it (it.cid)}
 									{@const n = questoesPorTopico?.get(it.cid) ?? 0}
 									{@const erros = b.tipo === 'rev' ? plano.qcErros[it.cid] : undefined}
+									{@const aula = aulaDaMentoria(cargo, it.cod)}
 									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li class:feito={itemOk} class:em-andamento={aberto}>
@@ -200,6 +202,9 @@
 													{/if}
 													{#if plano.mapas?.[it.cid]}
 														<a class="topico" href="/mapa/{plano.mapas[it.cid]}">Mapa mental ↗</a>
+													{/if}
+													{#if aula}
+														<a class="topico" href={aula} target="_blank" rel="noopener">Aula da mentoria ↗</a>
 													{/if}
 												</span>
 											{/if}

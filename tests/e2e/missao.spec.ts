@@ -345,3 +345,18 @@ test('página das Missões: o subitem aberto no Qconcursos fica destacado, e o p
 	await page.reload();
 	await expect(page.locator('li.em-andamento')).toHaveCount(0); // já marcado: não volta a destacar
 });
+
+test('subitem com aula da mentoria mostra o atalho da playlist da disciplina', async ({ page }) => {
+	// Dia com C1 1.1 e E2 1.2 na missão (o padrão do arquivo é 14/10, sem eles).
+	await page.clock.setFixedTime(new Date('2026-10-16T09:00:00-03:00'));
+	await page.goto('/painel');
+	const item = (cod: string) => missao(page).locator('li:not(.bloco)', { hasText: cod }).first();
+	await expect(item('C1 1.1').getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute(
+		'href',
+		/playlists\/bd1a8d94/
+	);
+	await expect(item('E2 1.2').getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute(
+		'href',
+		/playlists\/a73ca465/
+	);
+});
