@@ -291,36 +291,31 @@ test('página das Missões: subitem marcado à parte, com as mesmas chaves e reg
 	expect(await marcas(page)).toEqual({});
 });
 
-test('página das Missões: o subitem aberto no Qconcursos fica destacado, e o painel mostra o mesmo', async ({ page, context }) => {
+test('página das Missões: o lembrete gravado pelo painel destaca o subitem, e marcar aqui vale no painel', async ({ page }) => {
 	await simularApi(page);
-	await context.route('**/*qconcursos.com/**', (rota) => rota.fulfill({ body: 'Qconcursos' }));
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
 	const [a] = diaCd.blocos[0].itens!;
+	// O "Você parou aqui" agora nasce no painel, ao abrir a aula da mentoria do subitem; a página
+	// só consome a mesma chave (o gatilho era o clique no link do Qconcursos, que saiu).
+	await page.addInitScript(
+		([k, cargo, dia, cid]) => localStorage.setItem(k, JSON.stringify({ cargo, data: dia, bloco: 0, cid })),
+		['painel-concurso:missoes:em-andamento:v1', 'cd', HOJE, a.cid] as const
+	);
 	await page.goto('/conteudo/artefatos/missoes.html#cd');
 	await page.locator('#v-hoje').click();
 	const itemA = page.locator(`.day.is-today li[data-c="${a.cid}"][data-j="0"]`);
-	await expect(page.locator('li.em-andamento')).toHaveCount(0);
-
-	const [qc] = await Promise.all([context.waitForEvent('page'), itemA.locator('a.qc').first().click()]);
-	await qc.close();
-	await page.reload();
 	await expect(itemA).toHaveClass(/em-andamento/);
 	await expect(itemA).toContainText('Você parou aqui');
 
-	// O painel lê a mesma chave.
-	await page.goto('/painel');
-	await expect(missao(page).locator('li.em-andamento')).toContainText(a.cod);
-
-	await page.goto('/conteudo/artefatos/missoes.html#cd');
 	await itemA.getByRole('button', { name: 'Terminei, marcar' }).click();
 	await expect(page.locator(`.day.is-today input.sub[data-i="cd~${HOJE}~0~${a.cid}"]`)).toBeChecked();
 	await expect(page.locator('li.em-andamento')).toHaveCount(0);
 	expect(await page.evaluate(() => localStorage.getItem('painel-concurso:missoes:em-andamento:v1'))).toBeNull();
 
-	const [qc2] = await Promise.all([context.waitForEvent('page'), itemA.locator('a.qc').first().click()]);
-	await qc2.close();
+	// Recarregar não traz o lembrete de volta: o subitem já está marcado.
 	await page.reload();
-	await expect(page.locator('li.em-andamento')).toHaveCount(0); // já marcado: não volta a destacar
+	await page.locator('#v-hoje').click();
+	await expect(page.locator('li.em-andamento')).toHaveCount(0);
 });
 
 test('subitem com aula da mentoria mostra o atalho da aula que o cobre', async ({ page }) => {

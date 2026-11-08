@@ -160,14 +160,30 @@ deriva conhecida).
 ### Critérios de aceite
 
 #### Verificação automática
-- [ ] `grep -ril qconcursos static/conteudo` devolve apenas os arquivos do Raio-X
+- [x] `grep -ril qconcursos static/conteudo` devolve apenas os arquivos do Raio-X
       (`artefatos/raiox*`).
-- [ ] `npm run importar` duas vezes seguidas: `git diff static/conteudo` vazio na segunda.
-- [ ] `npm run check`, `npm test`, `npm run test:e2e` verdes.
+- [x] `npm run importar` duas vezes seguidas: o diff dos arquivos gerados é idêntico nas duas
+      (idempotente). `missoes-<cargo>.json` sai com as chaves `gerado, plan, cortes, mapas`.
+- [x] `npm run check` (0/0), `npm test` (350), `npm run test:e2e` (252 passaram; a única falha
+      é a deriva de Infra do vault, sem commit por decisão dela, alheia a este plano).
 
 #### Verificação manual
 - [ ] Nas Missões e nas Prioridades (dentro do app), nenhum "questões ↗"/"erros ↗" de
       Qconcursos; o resto da página igual (plano, marcas, mapas).
+
+### Nota de execução (2026-11-08)
+
+- Fase 1 commitada como `fix: qconcursos fora da missão de hoje; parou-aqui dispara na aula`.
+- Na página das Missões (script.html), o lembrete "Você parou aqui" passou a ser só consumo: o
+  painel grava ao abrir a aula da mentoria; o clique em `a.qc` da página saiu junto com os
+  links. Na página das Prioridades, o mecanismo próprio de destaque (linha ao voltar do
+  Qconcursos, chave própria `prioridades:em-andamento`) saiu inteiro: era só gatilho de link de
+  questões. O aviso do rodapé sobre "link com 0 questões" virou a indicação de onde ficaram os
+  cadernos (aula da mentoria); a coluna "Questões" da tabela virou "Mapa".
+- O `--check` do `montar_artifacts.py` perdeu a comparação com a `referencia-v6` (era só dos
+  links) e mantém o `node --check` dos scripts montados.
+- `montarMissoes` perdeu o parâmetro `links`; `linksDoPlano` saiu (as fontes de
+  `catalogo-questoes/qconcursos/` continuam intactas no vault, desativadas).
 
 ## Estratégia de teste
 

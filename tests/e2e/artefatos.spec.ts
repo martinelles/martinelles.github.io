@@ -117,12 +117,12 @@ test('Prioridades, no celular: tocar num subitem leva à linha da lista, sem dic
 	await contexto.close();
 });
 
-test('Prioridades, no celular: os links de questões de cada subitem ficam à vista, sem rolar de lado', async ({ browser }) => {
+test('Prioridades, no celular: os atalhos de cada subitem ficam à vista, sem rolar de lado', async ({ browser }) => {
 	const contexto = await browser.newContext({ hasTouch: true, isMobile: true, viewport: { width: 360, height: 780 } });
 	const page = await contexto.newPage();
 	await page.goto('/conteudo/artefatos/prioridades.html#cd');
-	const linha = page.locator('#corpo tr:not([hidden])').first();
-	const links = linha.locator('a.qc');
+	// Os atalhos que sobraram são os mapas mentais ("mapa ↗"); nem toda linha tem.
+	const links = page.locator('#corpo tr:not([hidden]) a.qc');
 	expect(await links.count()).toBeGreaterThan(0);
 	for (const a of await links.all()) {
 		await expect(a).toBeVisible();
@@ -296,31 +296,4 @@ test('Missões, logada e sem API (GitHub Pages): avisa e guarda no aparelho', as
 	await expect(page.locator('#sync')).toHaveText('Sem conexão com a conta: as marcações ficam neste aparelho por enquanto.');
 	await page.locator('.bubble').first().check();
 	expect(await page.evaluate((k) => localStorage.getItem(k), CHAVE)).toContain('true');
-});
-
-test('Prioridades: o subitem aberto no Qconcursos fica destacado na volta, mesmo filtrado, até dispensar', async ({ page, context }) => {
-	await context.route('**/*qconcursos.com/**', (rota) => rota.fulfill({ body: 'Qconcursos' }));
-	await page.goto('/conteudo/artefatos/prioridades.html#cd');
-	const linha = page.locator('#corpo tr').nth(3);
-	const item = (await linha.getAttribute('data-item'))!;
-	await expect(page.locator('tr.em-andamento')).toHaveCount(0);
-
-	const [qc] = await Promise.all([context.waitForEvent('page'), linha.locator('a.qc').first().click()]);
-	await qc.close();
-	await page.reload();
-	const destacada = page.locator('tr.em-andamento');
-	await expect(destacada).toHaveCount(1);
-	await expect(destacada).toHaveAttribute('data-item', item);
-	await expect(destacada).toContainText('Você parou aqui');
-
-	// Na outra especialidade, nada; de volta, a linha volta destacada.
-	await page.locator('#e-aud').click();
-	await expect(destacada).toHaveCount(0);
-	await page.locator('#e-cd').click();
-	await expect(destacada).toHaveCount(1);
-
-	await destacada.getByRole('button', { name: 'Dispensar' }).click();
-	await expect(destacada).toHaveCount(0);
-	await page.reload();
-	await expect(destacada).toHaveCount(0);
 });
