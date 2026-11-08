@@ -164,9 +164,11 @@ function validarConfig(c: Coletor, v: unknown, caminho: string) {
 
 /** Chave de disciplina das playlists da mentoria: `B1`…`C5` (comum) e `CD:E1`… (P3 do cargo). */
 const CHAVE_MENTORIA = /^(B[1-4]|C[1-5]|(CD|AUD|INFRA):E[1-5])$/;
+/** UUID das aulas/playlists da plataforma. */
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 function validarMentoria(c: Coletor, v: unknown, caminho: string) {
-	if (!c.objeto(v, caminho, ['curso', 'playlists'])) return;
+	if (!c.objeto(v, caminho, ['curso', 'playlists'], ['aulas'])) return;
 	c.texto(v, 'curso', caminho);
 	if (!ehObjeto(v.playlists)) {
 		c.add(`${caminho}.playlists`, 'deveria ser objeto');
@@ -180,6 +182,43 @@ function validarMentoria(c: Coletor, v: unknown, caminho: string) {
 		if (typeof url !== 'string' || !/^https:\/\/mentoria\.plataformatutory\.com\.br\//.test(url))
 			c.add(`${caminho}.playlists.${chave}`, 'deveria ser URL https da plataforma da mentoria');
 	}
+	if (!('aulas' in v) || v.aulas === undefined) return;
+	if (!Array.isArray(v.aulas)) {
+		c.add(`${caminho}.aulas`, 'deveria ser lista');
+		return;
+	}
+	const ids: string[] = [];
+	v.aulas.forEach((a, i) => {
+		const onde = `mentoria.aulas[${i}]`;
+		if (!c.objeto(a, onde, ['id', 'disciplina', 'titulo', 'url', 'subitens'], ['tec', 'tecExtras'])) return;
+		const id = c.texto(a, 'id', onde);
+		if (id !== undefined) {
+			if (!UUID.test(id)) c.add(`${onde}.id`, 'deveria ser o UUID da aula na plataforma');
+			ids.push(id);
+		}
+		const disciplina = c.texto(a, 'disciplina', onde);
+		if (disciplina !== undefined && !CHAVE_MENTORIA.test(disciplina))
+			c.add(`${onde}.disciplina`, `fora do padrão das playlists`);
+		c.texto(a, 'titulo', onde);
+		const url = c.texto(a, 'url', onde);
+		if (url !== undefined && !/^https:\/\/mentoria\.plataformatutory\.com\.br\/.+\/aulas\//.test(url))
+			c.add(`${onde}.url`, 'deveria ser URL de aula da plataforma da mentoria');
+		const tec = c.texto(a, 'tec', onde);
+		if (tec !== undefined && !/^https:\/\/www\.tecconcursos\.com\.br\//.test(tec))
+			c.add(`${onde}.tec`, 'deveria ser URL https do TEC Concursos');
+		if ('tecExtras' in a) {
+			const extras = a.tecExtras;
+			if (!Array.isArray(extras) || extras.some((u) => typeof u !== 'string' || !/^https:\/\/www\.tecconcursos\.com\.br\//.test(u)))
+				c.add(`${onde}.tecExtras`, 'deveria ser lista de URLs https do TEC Concursos');
+		}
+		if (!Array.isArray(a.subitens) || a.subitens.some((s) => typeof s !== 'string'))
+			c.add(`${onde}.subitens`, 'deveria ser lista de chaves de subitem');
+		else if (disciplina !== undefined)
+			for (const s of a.subitens)
+				if (!new RegExp(`^${disciplina}-\\d+\\.\\d+(\\.\\d+)?$`).test(s))
+					c.add(`${onde}.subitens`, `"${s}" não é subitem da disciplina ${disciplina}`);
+	});
+	c.unico(ids, (i) => `mentoria.aulas[${i}].id`);
 }
 
 export function validarDados(bruto: unknown): Dados {

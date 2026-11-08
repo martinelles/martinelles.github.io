@@ -1,0 +1,3032 @@
+{
+	"playlists": [
+		{
+			"aulas": 9,
+			"bloco": "Bloco 1. Conhecimentos Básicos (P1)",
+			"titulo": "Estado, Democracia, Direitos e Ciência Política",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 1. Conhecimentos Básicos (P1)",
+			"titulo": "Sociedade Brasileira, Desigualdades, Diversidade e Desenvolvimento",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ebf1a293-b2c5-42cc-bc73-85ad0963074d"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 1. Conhecimentos Básicos (P1)",
+			"titulo": "Ética Pública e Responsabilidade Profissional",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/c8df5ed3-1252-4e30-8f31-1f15e88d22ed"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 1. Conhecimentos Básicos (P1)",
+			"titulo": "Administração Pública e Fundamentos de Políticas Públicas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 2. Conhecimentos Complementares (P2)",
+			"titulo": "Fundamentos de Governança, Riscos e Integridade Pública e Privada",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/bd1a8d94-4f2a-404b-be1b-84014cb520d6"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 2. Conhecimentos Complementares (P2)",
+			"titulo": "Fundamentos de Transparência, Ouvidoria e Participação Social",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7ba666fd-4f52-458e-8d12-e27d7367f159"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 2. Conhecimentos Complementares (P2)",
+			"titulo": "Fundamentos de Direito Público Aplicado, Controle e Responsabilização",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 2. Conhecimentos Complementares (P2)",
+			"titulo": "Fundamentos de Evidências, Dados e Inteligência Artificial",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6a7dba3a-3d54-4cec-b81a-bd1ce443a47e"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 2. Conhecimentos Complementares (P2)",
+			"titulo": "Fundamentos de Auditoria Governamental e Atuação Integrada da CGU",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d"
+		},
+		{
+			"aulas": 6,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), Auditoria",
+			"titulo": "Auditoria Governamental: Avaliação, Consultoria e Apuração",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8"
+		},
+		{
+			"aulas": 7,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), Auditoria",
+			"titulo": "Finanças Públicas, Orçamento e Contabilidade Pública",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb"
+		},
+		{
+			"aulas": 7,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), Auditoria",
+			"titulo": "Políticas Públicas e Métodos de Investigação e Avaliação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), Auditoria",
+			"titulo": "Auditoria de Contratações, Transferências e Execução de Recursos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190"
+		},
+		{
+			"aulas": 7,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), Auditoria",
+			"titulo": "Integridade, Transparência e Responsabilização Aplicadas ao Controle Público",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca"
+		},
+		{
+			"aulas": 1,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), Auditoria",
+			"titulo": "Curadoria de Discursivas (Auditoria)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a24405ea-7144-4fab-a757-fd41f74b8f3b"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Ciência de Dados",
+			"titulo": "Estatística, Programação e Análise de Dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549"
+		},
+		{
+			"aulas": 6,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Ciência de Dados",
+			"titulo": "Engenharia, Arquitetura e Governança de Dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434"
+		},
+		{
+			"aulas": 6,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Ciência de Dados",
+			"titulo": "Aprendizado de Máquina e Inteligência Artificial",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Ciência de Dados",
+			"titulo": "Operação, Governança e Gestão de Soluções de Dados e IA",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb"
+		},
+		{
+			"aulas": 1,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Ciência de Dados",
+			"titulo": "Curadoria de Discursivas (TI Ciência de Dados)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ee5d181b-5f77-4304-8c69-a77e8caaf088"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Infraestrutura de TI",
+			"titulo": "Redes, Sistemas e Plataformas de Dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Infraestrutura de TI",
+			"titulo": "Computação em Nuvem, Virtualização e Automação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374"
+		},
+		{
+			"aulas": 6,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Infraestrutura de TI",
+			"titulo": "Cibersegurança, Privacidade e Continuidade de Serviços",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Infraestrutura de TI",
+			"titulo": "Operação, Governança e Gestão de Serviços Digitais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e"
+		},
+		{
+			"aulas": 1,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Infraestrutura de TI",
+			"titulo": "Curadoria de Discursivas (TI Infraestrutura de TI)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/55670438-b8c8-4a2f-b079-b3bf3c711c3d"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Desenvolvimento de Sistemas",
+			"titulo": "Engenharia de Software e Programação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/d8d19518-d430-4a4f-bee2-8220e230e604"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Desenvolvimento de Sistemas",
+			"titulo": "Arquitetura e Integração de Sistemas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/01b7630f-9b91-40d5-ba73-bdbf0acc2832"
+		},
+		{
+			"aulas": 4,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Desenvolvimento de Sistemas",
+			"titulo": "Persistência, Integração e Proteção de Dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/5d4c171c-3d3a-46e9-bf3f-13260c04fbe2"
+		},
+		{
+			"aulas": 5,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Desenvolvimento de Sistemas",
+			"titulo": "Desenvolvimento Seguro, Qualidade e Gestão da Entrega",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/b9cd2cb5-85e7-4b8a-b318-372e769a146f"
+		},
+		{
+			"aulas": 1,
+			"bloco": "Bloco 3. Conhecimentos Específicos (P3), TI Desenvolvimento de Sistemas",
+			"titulo": "Curadoria de Discursivas (TI Desenvolvimento de Sistemas)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/b213b9b0-9d51-40cf-ab2a-f3811ca7f5c1"
+		}
+	],
+	"aulas": [
+		{
+			"agendada": null,
+			"titulo": "1. Fundamentos sociológicos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ebf1a293-b2c5-42cc-bc73-85ad0963074d/aulas/329c831f-21ca-4851-8cd2-31f58a87b911",
+			"playlist": "ebf1a293-b2c5-42cc-bc73-85ad0963074d",
+			"disciplina": "B2",
+			"coletado": true,
+			"total": null,
+			"tecs": [],
+			"contexto": {},
+			"erro": "leitor não montou",
+			"paginas": 20,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Formação social e cidadania no Brasil",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ebf1a293-b2c5-42cc-bc73-85ad0963074d/aulas/004cd919-0712-4d96-881c-4b1477d49132",
+			"playlist": "ebf1a293-b2c5-42cc-bc73-85ad0963074d",
+			"disciplina": "B2",
+			"coletado": true,
+			"total": null,
+			"tecs": [],
+			"contexto": {},
+			"erro": "leitor não montou",
+			"paginas": 20,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. População, território e trabalho",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ebf1a293-b2c5-42cc-bc73-85ad0963074d/aulas/7e90dd26-5cb7-4f2f-a53f-9e347989d059",
+			"playlist": "ebf1a293-b2c5-42cc-bc73-85ad0963074d",
+			"disciplina": "B2",
+			"tecs": [],
+			"paginas": 17,
+			"bytes": 2385505,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Diversidade e acesso a direitos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ebf1a293-b2c5-42cc-bc73-85ad0963074d/aulas/f7cb2a04-b3bf-4ba0-8c7b-6f538b2d8198",
+			"playlist": "ebf1a293-b2c5-42cc-bc73-85ad0963074d",
+			"disciplina": "B2",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2437365,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Desenvolvimento e realidade brasileira",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ebf1a293-b2c5-42cc-bc73-85ad0963074d/aulas/1e129759-9a85-4e43-aa58-d78920059b3a",
+			"playlist": "ebf1a293-b2c5-42cc-bc73-85ad0963074d",
+			"disciplina": "B2",
+			"tecs": [],
+			"paginas": 17,
+			"bytes": 2427726,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Fundamentos da ética pública",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/c8df5ed3-1252-4e30-8f31-1f15e88d22ed/aulas/4ae0d937-55df-4c3b-9e44-f24d1eb3f691",
+			"playlist": "c8df5ed3-1252-4e30-8f31-1f15e88d22ed",
+			"disciplina": "B3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q71Fz9"
+			],
+			"paginas": 18,
+			"bytes": 2436992,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q71Fz9",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Deveres profissionais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/c8df5ed3-1252-4e30-8f31-1f15e88d22ed/aulas/a9176ae5-3d96-4932-8ecc-2b1d416c8432",
+			"playlist": "c8df5ed3-1252-4e30-8f31-1f15e88d22ed",
+			"disciplina": "B3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q71FzB"
+			],
+			"paginas": 21,
+			"bytes": 2565385,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q71FzB",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Conflitos de interesses e imparcialidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/c8df5ed3-1252-4e30-8f31-1f15e88d22ed/aulas/c564fbe2-da31-4bd9-a1ee-3fb59ae480ee",
+			"playlist": "c8df5ed3-1252-4e30-8f31-1f15e88d22ed",
+			"disciplina": "B3",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2466595,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Relações de trabalho e atendimento",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/c8df5ed3-1252-4e30-8f31-1f15e88d22ed/aulas/5542acf9-bd80-42bc-9265-33f3b3af98b8",
+			"playlist": "c8df5ed3-1252-4e30-8f31-1f15e88d22ed",
+			"disciplina": "B3",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2445888,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Integridade como responsabilidade institucional",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/c8df5ed3-1252-4e30-8f31-1f15e88d22ed/aulas/0fd55953-13af-4e6c-bcfb-0553c3ba522e",
+			"playlist": "c8df5ed3-1252-4e30-8f31-1f15e88d22ed",
+			"disciplina": "B3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6j8hJ"
+			],
+			"paginas": 16,
+			"bytes": 2388690,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6j8hJ",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Organização administrativa",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/c010df39-2d13-4d0b-89e2-f309f7c35675",
+			"playlist": "f7cae9e9-2ac6-41e9-bceb-bc9d0d461735",
+			"disciplina": "B4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6li0m",
+				"https://www.tecconcursos.com.br/s/Q6li1Q",
+				"https://www.tecconcursos.com.br/s/Q6li2L",
+				"https://www.tecconcursos.com.br/s/Q6li34",
+				"https://www.tecconcursos.com.br/s/Q6li5N",
+				"https://www.tecconcursos.com.br/s/Q4pAeF"
+			],
+			"paginas": 21,
+			"bytes": 2575905,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6li0m",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6li1Q",
+						"rotulo": "Caderno do tópico, 186 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6li2L",
+						"rotulo": "Caderno do tópico, 186 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6li34",
+						"rotulo": "Caderno do tópico, 186 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6li5N",
+						"rotulo": "Caderno do tópico, 186 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pAeF",
+						"rotulo": "Caderno do tópico, 186 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Modelos de administração",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/705854f2-6543-4c90-a1a4-1058f9b017ec",
+			"playlist": "f7cae9e9-2ac6-41e9-bceb-bc9d0d461735",
+			"disciplina": "B4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pByb"
+			],
+			"paginas": 19,
+			"bytes": 2505975,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pByb",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Políticas públicas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/f5f4b449-cdf5-4b35-8d4d-6350a0f55936",
+			"playlist": "f7cae9e9-2ac6-41e9-bceb-bc9d0d461735",
+			"disciplina": "B4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pByL"
+			],
+			"paginas": 19,
+			"bytes": 2501948,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pByL",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Planejamento e recursos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/557c878b-8373-42c3-afbc-792c490c609d",
+			"playlist": "f7cae9e9-2ac6-41e9-bceb-bc9d0d461735",
+			"disciplina": "B4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KTR",
+				"https://www.tecconcursos.com.br/s/Q76KTW"
+			],
+			"paginas": 18,
+			"bytes": 2499274,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KTR",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTW",
+						"rotulo": "Caderno do tópico, 290 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Serviços e transformação digital",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/4d2103ce-5aae-4b31-8829-a5cc56da7863",
+			"playlist": "f7cae9e9-2ac6-41e9-bceb-bc9d0d461735",
+			"disciplina": "B4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pC2N",
+				"https://www.tecconcursos.com.br/s/Q4pAnE"
+			],
+			"paginas": 17,
+			"bytes": 2450340,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pC2N",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pAnE",
+						"rotulo": "Caderno do tópico, 34 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Governança e responsabilidades",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/bd1a8d94-4f2a-404b-be1b-84014cb520d6/aulas/94343c95-037e-496c-9536-7c20ad4789db",
+			"playlist": "bd1a8d94-4f2a-404b-be1b-84014cb520d6",
+			"disciplina": "C1",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2457637,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Riscos e controles essenciais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/bd1a8d94-4f2a-404b-be1b-84014cb520d6/aulas/84433923-a53e-4584-b6bd-81e872d11099",
+			"playlist": "bd1a8d94-4f2a-404b-be1b-84014cb520d6",
+			"disciplina": "C1",
+			"tecs": [],
+			"paginas": 24,
+			"bytes": 2614598,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Integridade pública",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/bd1a8d94-4f2a-404b-be1b-84014cb520d6/aulas/292113de-32ac-4db1-9089-c4fbdc696f5f",
+			"playlist": "bd1a8d94-4f2a-404b-be1b-84014cb520d6",
+			"disciplina": "C1",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2513999,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Integridade privada",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/bd1a8d94-4f2a-404b-be1b-84014cb520d6/aulas/df96e71e-80a1-4a1e-bec1-090db5cf8355",
+			"playlist": "bd1a8d94-4f2a-404b-be1b-84014cb520d6",
+			"disciplina": "C1",
+			"tecs": [],
+			"paginas": 16,
+			"bytes": 2354374,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Prevenção e melhoria institucional",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/bd1a8d94-4f2a-404b-be1b-84014cb520d6/aulas/df15fa2c-eaad-43a7-b4ed-e86f7d851ea0",
+			"playlist": "bd1a8d94-4f2a-404b-be1b-84014cb520d6",
+			"disciplina": "C1",
+			"tecs": [],
+			"paginas": 14,
+			"bytes": 2277811,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Acesso à informação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7ba666fd-4f52-458e-8d12-e27d7367f159/aulas/301ad507-de5a-4974-a671-aec72c37489e",
+			"playlist": "7ba666fd-4f52-458e-8d12-e27d7367f159",
+			"disciplina": "C2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Bm69"
+			],
+			"paginas": 22,
+			"bytes": 2580039,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Bm69",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Transparência e proteção de dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7ba666fd-4f52-458e-8d12-e27d7367f159/aulas/20da6da0-d1f0-49d7-b6db-300bbb9d60d0",
+			"playlist": "7ba666fd-4f52-458e-8d12-e27d7367f159",
+			"disciplina": "C2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KVB"
+			],
+			"paginas": 23,
+			"bytes": 2569737,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KVB",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Ouvidoria e proteção das pessoas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7ba666fd-4f52-458e-8d12-e27d7367f159/aulas/caf2052c-7259-4622-9cb7-b9702481ac9f",
+			"playlist": "7ba666fd-4f52-458e-8d12-e27d7367f159",
+			"disciplina": "C2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6j8fN"
+			],
+			"paginas": 19,
+			"bytes": 2519408,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6j8fN",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Participação e melhoria de serviços",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7ba666fd-4f52-458e-8d12-e27d7367f159/aulas/8fa4c3ef-ac03-4da3-baaa-a0f526e0b577",
+			"playlist": "7ba666fd-4f52-458e-8d12-e27d7367f159",
+			"disciplina": "C2",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2509085,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Integridade da informação e comunicação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7ba666fd-4f52-458e-8d12-e27d7367f159/aulas/3d270ccb-4764-47ee-a061-2954e5f3d556",
+			"playlist": "7ba666fd-4f52-458e-8d12-e27d7367f159",
+			"disciplina": "C2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4p9ro"
+			],
+			"paginas": 16,
+			"bytes": 2407635,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4p9ro",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Decisão administrativa",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/9974c415-a81d-4096-b89c-f9a51eff953e",
+			"playlist": "698c480a-1085-4978-ac7f-0c63ce25fefe",
+			"disciplina": "C3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pAla",
+				"https://www.tecconcursos.com.br/s/Q4pAkx",
+				"https://www.tecconcursos.com.br/s/Q76KV0",
+				"https://www.tecconcursos.com.br/s/Q76KVE"
+			],
+			"paginas": 21,
+			"bytes": 2559969,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pAkx",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pAla",
+						"rotulo": "Caderno extra 1",
+						"questoes": 117
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KV0",
+						"rotulo": "Caderno extra 2, 99 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KVE",
+						"rotulo": "Caderno extra 2, 99 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Processo e garantias",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/86f4aaef-37f3-4308-b7a9-98162e9052e9",
+			"playlist": "698c480a-1085-4978-ac7f-0c63ce25fefe",
+			"disciplina": "C3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pAfd"
+			],
+			"paginas": 20,
+			"bytes": 2512141,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pAfd",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Funções de controle e melhoria da gestão",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/a96b9dad-6b84-498e-8bd6-e9db65cfc691",
+			"playlist": "698c480a-1085-4978-ac7f-0c63ce25fefe",
+			"disciplina": "C3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q71Fk8",
+				"https://www.tecconcursos.com.br/s/Q4p9bb",
+				"https://www.tecconcursos.com.br/s/Q4p9dX",
+				"https://www.tecconcursos.com.br/s/Q4pAd3"
+			],
+			"paginas": 21,
+			"bytes": 2564887,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4p9dX",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q71Fk8",
+						"rotulo": "Caderno extra 3",
+						"questoes": 210
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4p9bb",
+						"rotulo": "Caderno extra 3",
+						"questoes": 210
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pAd3",
+						"rotulo": "Caderno do tópico, 40 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Responsabilização em nível introdutório",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/4e721c11-956c-4f11-8e34-3ce3c288ae82",
+			"playlist": "698c480a-1085-4978-ac7f-0c63ce25fefe",
+			"disciplina": "C3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KUy"
+			],
+			"paginas": 17,
+			"bytes": 2469104,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KUy",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Proteção e encaminhamento",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/17ba738c-3bab-4d3b-b802-4ff29f8cc4f1",
+			"playlist": "698c480a-1085-4978-ac7f-0c63ce25fefe",
+			"disciplina": "C3",
+			"tecs": [],
+			"paginas": 15,
+			"bytes": 2329814,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Perguntas e fontes",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6a7dba3a-3d54-4cec-b81a-bd1ce443a47e/aulas/553ee9ed-b71b-41ba-92d0-7439dccfecfd",
+			"playlist": "6a7dba3a-3d54-4cec-b81a-bd1ce443a47e",
+			"disciplina": "C4",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2384818,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Leitura de dados e indicadores",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6a7dba3a-3d54-4cec-b81a-bd1ce443a47e/aulas/111e0c68-3ccb-429e-b522-2259f4127ca9",
+			"playlist": "6a7dba3a-3d54-4cec-b81a-bd1ce443a47e",
+			"disciplina": "C4",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2447397,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Inferências e erros de raciocínio",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6a7dba3a-3d54-4cec-b81a-bd1ce443a47e/aulas/8853ed35-f8fc-4ed9-be56-ad5052403d38",
+			"playlist": "6a7dba3a-3d54-4cec-b81a-bd1ce443a47e",
+			"disciplina": "C4",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2417294,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Integridade da evidência e proteção",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6a7dba3a-3d54-4cec-b81a-bd1ce443a47e/aulas/a16bbdff-49a9-47eb-b3d7-df5b66103cbd",
+			"playlist": "6a7dba3a-3d54-4cec-b81a-bd1ce443a47e",
+			"disciplina": "C4",
+			"tecs": [],
+			"paginas": 17,
+			"bytes": 2372620,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Uso responsável de inteligência artificial",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6a7dba3a-3d54-4cec-b81a-bd1ce443a47e/aulas/25c5bc57-9d91-4893-9aa5-30dd59e0e873",
+			"playlist": "6a7dba3a-3d54-4cec-b81a-bd1ce443a47e",
+			"disciplina": "C4",
+			"tecs": [],
+			"paginas": 17,
+			"bytes": 2408938,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Propósito, serviços e papéis",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d/aulas/72f0e332-9d09-41cf-a759-3b4d83957f29",
+			"playlist": "0bc7a2e5-67f9-455e-8277-896845c33f7d",
+			"disciplina": "C5",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q71FkN",
+				"https://www.tecconcursos.com.br/s/Q71Fmr",
+				"https://www.tecconcursos.com.br/s/Q71FnE"
+			],
+			"paginas": 20,
+			"bytes": 2520200,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q71FkN",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q71Fmr",
+						"rotulo": "Caderno do tópico, 61 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q71FnE",
+						"rotulo": "Caderno do tópico, 61 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Ciclo do trabalho",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d/aulas/4617b363-479e-4234-9d56-2a00f6ea33ed",
+			"playlist": "0bc7a2e5-67f9-455e-8277-896845c33f7d",
+			"disciplina": "C5",
+			"tecs": [],
+			"paginas": 20,
+			"bytes": 2474966,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Evidência e conclusão",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d/aulas/4ed9e0ba-8826-4e4e-92c3-ea7c523e4bcf",
+			"playlist": "0bc7a2e5-67f9-455e-8277-896845c33f7d",
+			"disciplina": "C5",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2428038,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Comunicação e acompanhamento",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d/aulas/b0228549-d150-4fc3-b8bb-735f77475f7e",
+			"playlist": "0bc7a2e5-67f9-455e-8277-896845c33f7d",
+			"disciplina": "C5",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q71Fll"
+			],
+			"paginas": 19,
+			"bytes": 2506327,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q71Fll",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Integração entre funções da CGU",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d/aulas/a7b5a4ca-0f61-4fd8-bba9-c4bc3a27a899",
+			"playlist": "0bc7a2e5-67f9-455e-8277-896845c33f7d",
+			"disciplina": "C5",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6j8XT"
+			],
+			"paginas": 17,
+			"bytes": 2474756,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6j8XT",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Avaliação, consultoria e apuração",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/1c68971d-5ad6-4a21-a243-ea748020930d",
+			"playlist": "dee8b627-1894-4988-81a3-05d1d43da3f8",
+			"disciplina": "AUD:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q71FkN",
+				"https://www.tecconcursos.com.br/s/Q71FlR",
+				"https://www.tecconcursos.com.br/s/Q6j8dT"
+			],
+			"paginas": 25,
+			"bytes": 2572313,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q71FkN",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q71FlR",
+						"rotulo": null,
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q71FlR",
+						"rotulo": null,
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6j8dT",
+						"rotulo": null,
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Planejamento técnico do trabalho",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/fc985c2a-e232-4961-9309-7a74901ee6c3",
+			"playlist": "dee8b627-1894-4988-81a3-05d1d43da3f8",
+			"disciplina": "AUD:E1",
+			"tecs": [],
+			"paginas": 22,
+			"bytes": 2545366,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Testes e amostragem",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/ef675c65-1b54-4379-abf3-54f9ce641068",
+			"playlist": "dee8b627-1894-4988-81a3-05d1d43da3f8",
+			"disciplina": "AUD:E1",
+			"tecs": [],
+			"paginas": 20,
+			"bytes": 2508871,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Achados documentação e revisão",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/4d67d1d4-d61b-4f27-b7ac-498d4f2300f7",
+			"playlist": "dee8b627-1894-4988-81a3-05d1d43da3f8",
+			"disciplina": "AUD:E1",
+			"tecs": [],
+			"paginas": 17,
+			"bytes": 2400342,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Auditoria de dados e IA",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/be0a502b-0828-4cf3-ac91-5dcbf865d70e",
+			"playlist": "dee8b627-1894-4988-81a3-05d1d43da3f8",
+			"disciplina": "AUD:E1",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2451512,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Comunicação monitoramento e qualidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/e847315a-78e5-4beb-878f-4cce9bb79295",
+			"playlist": "dee8b627-1894-4988-81a3-05d1d43da3f8",
+			"disciplina": "AUD:E1",
+			"tecs": [],
+			"paginas": 16,
+			"bytes": 2420264,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Economia e finanças do setor público",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/cb9ffda5-9103-4c6a-81cd-667e659d9254",
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pT33",
+				"https://www.tecconcursos.com.br/s/Q4pT53",
+				"https://www.tecconcursos.com.br/s/Q4pT3a"
+			],
+			"paginas": 25,
+			"bytes": 2722733,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pT33",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pT53",
+						"rotulo": "Caderno do tópico, 127 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pT3a",
+						"rotulo": "Caderno do tópico, 127 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Orçamento e planejamento",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/11a8d7b7-2c7f-4d54-beb6-811b9a46bc8e",
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KTb",
+				"https://www.tecconcursos.com.br/s/Q76KTU",
+				"https://www.tecconcursos.com.br/s/Q76KTY",
+				"https://www.tecconcursos.com.br/s/Q76KTr",
+				"https://www.tecconcursos.com.br/s/Q76KTv"
+			],
+			"paginas": 24,
+			"bytes": 2673987,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KTb",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTU",
+						"rotulo": "Caderno do tópico, 160 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTY",
+						"rotulo": "Caderno do tópico, 160 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTr",
+						"rotulo": "Caderno do tópico, 160 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTv",
+						"rotulo": "Caderno do tópico, 160 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Execução e responsabilidade fiscal",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/becfd77d-863a-4f1d-ac78-6068b8a778e6",
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KTe",
+				"https://www.tecconcursos.com.br/s/Q76KTg",
+				"https://www.tecconcursos.com.br/s/Q76KTi",
+				"https://www.tecconcursos.com.br/s/Q76KTs",
+				"https://www.tecconcursos.com.br/s/Q4pBC2",
+				"https://www.tecconcursos.com.br/s/Q4pB18",
+				"https://www.tecconcursos.com.br/s/Q76KU1",
+				"https://www.tecconcursos.com.br/s/Q76KU5",
+				"https://www.tecconcursos.com.br/s/Q76KU8",
+				"https://www.tecconcursos.com.br/s/Q76KUC"
+			],
+			"paginas": 21,
+			"bytes": 2647396,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KTe",
+				"questoes": 96,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTg",
+						"rotulo": "Caderno do tópico, 76 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTi",
+						"rotulo": "Caderno do tópico, 76 quest",
+						"questoes": 39
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KTs",
+						"rotulo": "Caderno extra 9",
+						"questoes": 39
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pBC2",
+						"rotulo": "Caderno extra 9",
+						"questoes": 39
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pB18",
+						"rotulo": "Caderno extra 9",
+						"questoes": 39
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KU1",
+						"rotulo": "Caderno do tópico, 76 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KU5",
+						"rotulo": "Caderno do tópico, 76 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KU8",
+						"rotulo": "Caderno do tópico, 76 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KUC",
+						"rotulo": "Caderno do tópico, 76 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Informação contábil aplicada ao controle",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/dc5ed74b-98c0-4007-a6f2-696d20718989",
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pJvV",
+				"https://www.tecconcursos.com.br/s/Q4pJxZ",
+				"https://www.tecconcursos.com.br/s/Q4pJxr",
+				"https://www.tecconcursos.com.br/s/Q4pJy6",
+				"https://www.tecconcursos.com.br/s/Q4pJzb",
+				"https://www.tecconcursos.com.br/s/Q4pJzu"
+			],
+			"paginas": 21,
+			"bytes": 2570567,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pJvV",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pJxZ",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pJxr",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pJy6",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pJzb",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pJzu",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Custos e análise da execução",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/1ba2da2a-5d00-4568-901d-70a94467cc4c",
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pK29"
+			],
+			"paginas": 18,
+			"bytes": 2519262,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pK29",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Informação societária de empresas estatais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/f464d44a-7ae3-4952-b2bb-aede0fb6758a",
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KUd",
+				"https://www.tecconcursos.com.br/s/Q76KUg",
+				"https://www.tecconcursos.com.br/s/Q76KUl",
+				"https://www.tecconcursos.com.br/s/Q76KUn",
+				"https://www.tecconcursos.com.br/s/Q4pK2k",
+				"https://www.tecconcursos.com.br/s/Q76KUr",
+				"https://www.tecconcursos.com.br/s/Q4pJx0",
+				"https://www.tecconcursos.com.br/s/Q4pKlt"
+			],
+			"paginas": 21,
+			"bytes": 2604038,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KUl",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KUd",
+						"rotulo": "Caderno extra 7",
+						"questoes": 28
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KUg",
+						"rotulo": "Caderno extra 7",
+						"questoes": 28
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KUn",
+						"rotulo": "Caderno do tópico, 8 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pK2k",
+						"rotulo": "Caderno do tópico, 8 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KUr",
+						"rotulo": "Caderno do tópico, 8 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pJx0",
+						"rotulo": "Caderno do tópico, 8 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pKlt",
+						"rotulo": "Caderno do tópico, 8 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": "08/11/2026",
+			"titulo": "7. Governança e finalidade pública de empresas estatais",
+			"url": null,
+			"playlist": "e15a302e-39e6-4e2a-8f41-197c2c8189cb",
+			"disciplina": "AUD:E2"
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Problema, desenho e avaliabilidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb/aulas/31083702-4730-4067-9dbc-102dec2bc346",
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q76KVM"
+			],
+			"paginas": 24,
+			"bytes": 2585032,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q76KVM",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Implementação gestão e coordenação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb/aulas/359dc91c-4ceb-4add-b568-3076ebffb28b",
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3",
+			"tecs": [],
+			"paginas": 20,
+			"bytes": 2555268,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Monitoramento e desenhos de avaliação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb/aulas/0eb75fd7-4abe-4a87-9bc6-a2f684f27b43",
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2475702,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Estratégias qualitativas e mistas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb/aulas/1f691557-88b6-4dcd-a558-7e96d41814e8",
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2437160,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Identificação causal e análise econômica",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb/aulas/e21d4a16-094d-4216-8d6a-e9c00134afdf",
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2451450,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Conclusões, recomendações e uso dos resultados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/fa522028-e078-4e57-b370-889644adccbb/aulas/6140e097-977e-4db1-958b-6fe897eb76b8",
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3",
+			"tecs": [],
+			"paginas": 14,
+			"bytes": 2339998,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": "08/11/2026",
+			"titulo": "7. Ética da investigação",
+			"url": null,
+			"playlist": "fa522028-e078-4e57-b370-889644adccbb",
+			"disciplina": "AUD:E3"
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Direito público aplicado às respostas de controle",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca/aulas/b2941ecf-58fb-4028-810e-178ba7a694b0",
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5",
+			"tecs": [],
+			"paginas": 18,
+			"bytes": 2463790,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Informação, participação e qualidade dos serviços",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca/aulas/d62a91dc-d62c-44b6-a334-c25b1505a0d4",
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pTl8"
+			],
+			"paginas": 23,
+			"bytes": 2695444,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pTl8",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Proteção do denunciante e tratamento seguro dos relatos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca/aulas/49b93860-1711-4e57-9dd5-38cc64584868",
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2493454,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Avaliação e aperfeiçoamento da integridade pública e privada",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca/aulas/68e81725-c6a7-42de-8d4f-3e3fe2319b34",
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5",
+			"tecs": [],
+			"paginas": 26,
+			"bytes": 2699248,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Admissibilidade, prova e requisitos da responsabilização",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca/aulas/bdb08bca-e7cf-4bf0-96de-09b82b07707d",
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2517861,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Instrumentos de responsabilização e soluções consensuais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/6fad600c-f14f-4055-af64-41ac0e941dca/aulas/1c1c01b3-c646-4fe3-9778-63162555df60",
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5",
+			"tecs": [],
+			"paginas": 28,
+			"bytes": 2741297,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": "08/11/2026",
+			"titulo": "7. Resultados, comunicação e aprendizagem institucional",
+			"url": null,
+			"playlist": "6fad600c-f14f-4055-af64-41ac0e941dca",
+			"disciplina": "AUD:E5"
+		},
+		{
+			"agendada": null,
+			"titulo": "Curadoria de Discursivas (Auditoria)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a24405ea-7144-4fab-a757-fd41f74b8f3b/aulas/531f24e1-62f4-47b1-9639-6facd3071dc7",
+			"playlist": "a24405ea-7144-4fab-a757-fd41f74b8f3b",
+			"disciplina": "AUD:DISC"
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Exploração e descrição",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/9d250484-e1d2-42c9-81a9-2cf38dc53b76",
+			"playlist": "2b107e3e-8317-49ff-9cd3-d810c8190549",
+			"disciplina": "CD:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pSoh",
+				"https://www.tecconcursos.com.br/s/Q4pSp4",
+				"https://www.tecconcursos.com.br/s/Q4pSpd",
+				"https://www.tecconcursos.com.br/s/Q4pSq2",
+				"https://www.tecconcursos.com.br/s/Q4pSqO",
+				"https://www.tecconcursos.com.br/s/Q4pSxb"
+			],
+			"paginas": 33,
+			"bytes": 2721617,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pSoh",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSp4",
+						"rotulo": "Caderno do tópico, 52 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSpd",
+						"rotulo": "Caderno extra 4",
+						"questoes": 86
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSq2",
+						"rotulo": "Caderno extra 5",
+						"questoes": 73
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSqO",
+						"rotulo": "Caderno extra 2, 160 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSxb",
+						"rotulo": "Caderno extra 2, 160 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Probabilidade e inferência",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/72287eb6-0ff5-4f0c-a5b5-4bff6375c9b2",
+			"playlist": "2b107e3e-8317-49ff-9cd3-d810c8190549",
+			"disciplina": "CD:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pSr2",
+				"https://www.tecconcursos.com.br/s/Q4pSrl",
+				"https://www.tecconcursos.com.br/s/Q4pSsB",
+				"https://www.tecconcursos.com.br/s/Q4pSsq",
+				"https://www.tecconcursos.com.br/s/Q4pSuX",
+				"https://www.tecconcursos.com.br/s/Q7BauO"
+			],
+			"paginas": 32,
+			"bytes": 2761589,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pSr2",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSrl",
+						"rotulo": "Caderno extra 1, 152 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSsB",
+						"rotulo": "Caderno extra 1, 152 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSsq",
+						"rotulo": "Caderno extra 1, 152 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSuX",
+						"rotulo": "Caderno extra 4, 72 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BauO",
+						"rotulo": "Caderno extra 4, 72 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Relações entre variáveis",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/dffe2a30-790e-40e1-9565-88bfce8395fb",
+			"playlist": "2b107e3e-8317-49ff-9cd3-d810c8190549",
+			"disciplina": "CD:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pSvD",
+				"https://www.tecconcursos.com.br/s/Q4pT17",
+				"https://www.tecconcursos.com.br/s/Q4pSvp",
+				"https://www.tecconcursos.com.br/s/Q7Bax2"
+			],
+			"paginas": 30,
+			"bytes": 2658765,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pSvD",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pT17",
+						"rotulo": "Caderno do tópico, 137 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSvp",
+						"rotulo": "Caderno do tópico, 137 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bax2",
+						"rotulo": "Caderno do tópico, 137 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Programação para análise",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/7eb9dd64-07bd-4922-a54d-30172662df85",
+			"playlist": "2b107e3e-8317-49ff-9cd3-d810c8190549",
+			"disciplina": "CD:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFIz"
+			],
+			"paginas": 33,
+			"bytes": 3073484,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFIz",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Preparação e transformação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/b0b0e90b-c3ca-4357-bf05-c13bc87daffe",
+			"playlist": "2b107e3e-8317-49ff-9cd3-d810c8190549",
+			"disciplina": "CD:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFH2",
+				"https://www.tecconcursos.com.br/s/Q4pFJP"
+			],
+			"paginas": 35,
+			"bytes": 2822678,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFH2",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pFJP",
+						"rotulo": "Caderno do tópico, 86 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Modelagem e arquiteturas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/659837d3-14c0-48e3-8ae4-6aaa5bc2ff49",
+			"playlist": "a73ca465-f4f2-49df-b4fe-ff669d670434",
+			"disciplina": "CD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFFV",
+				"https://www.tecconcursos.com.br/s/Q4pFG1",
+				"https://www.tecconcursos.com.br/s/Q4pFKA",
+				"https://www.tecconcursos.com.br/s/Q4pFGL",
+				"https://www.tecconcursos.com.br/s/Q6MSQr",
+				"https://www.tecconcursos.com.br/s/Q7Bcgq"
+			],
+			"paginas": 38,
+			"bytes": 2973982,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFFV",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pFG1",
+						"rotulo": "Caderno do tópico, 127 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pFKA",
+						"rotulo": "Caderno do tópico, 127 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pFGL",
+						"rotulo": "Caderno do tópico, 127 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6MSQr",
+						"rotulo": "Caderno do tópico, 127 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bcgq",
+						"rotulo": "Caderno extra 5, 48 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. SQL e consultas analíticas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/b2d3273c-3041-4085-bf17-7c9919b8135c",
+			"playlist": "a73ca465-f4f2-49df-b4fe-ff669d670434",
+			"disciplina": "CD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFGE",
+				"https://www.tecconcursos.com.br/s/Q7Bax6",
+				"https://www.tecconcursos.com.br/s/Q7Bax8"
+			],
+			"paginas": 42,
+			"bytes": 3273117,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFGE",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bax6",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bax8",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Ingestão e integração",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/78abb037-89d4-48ec-8116-a021668d0d3f",
+			"playlist": "a73ca465-f4f2-49df-b4fe-ff669d670434",
+			"disciplina": "CD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pEGQ",
+				"https://www.tecconcursos.com.br/s/Q4pEDR",
+				"https://www.tecconcursos.com.br/s/Q7BaxC"
+			],
+			"paginas": 34,
+			"bytes": 2870835,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pEGQ",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pEDR",
+						"rotulo": "Caderno do tópico, 91 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxC",
+						"rotulo": "Caderno do tópico, 91 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Processamento distribuído",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/23cfffb2-51fa-4000-b96c-c2787e8fbd08",
+			"playlist": "a73ca465-f4f2-49df-b4fe-ff669d670434",
+			"disciplina": "CD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFIV",
+				"https://www.tecconcursos.com.br/s/Q4pFKr",
+				"https://www.tecconcursos.com.br/s/Q6bLwD"
+			],
+			"paginas": 31,
+			"bytes": 2645323,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFIV",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pFKr",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6bLwD",
+						"rotulo": "Caderno do tópico, 147 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Qualidade e rastreabilidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/5e202dbd-f4b9-4fef-8361-a549e3825c8c",
+			"playlist": "a73ca465-f4f2-49df-b4fe-ff669d670434",
+			"disciplina": "CD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6bLx8",
+				"https://www.tecconcursos.com.br/s/Q4pFE3"
+			],
+			"paginas": 30,
+			"bytes": 2764966,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6bLx8",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pFE3",
+						"rotulo": "Caderno do tópico, 59 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Compartilhamento e proteção",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/b33bd424-d062-4ac3-8dd2-c3a04d20ce5e",
+			"playlist": "a73ca465-f4f2-49df-b4fe-ff669d670434",
+			"disciplina": "CD:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFJv",
+				"https://www.tecconcursos.com.br/s/Q6lhbw"
+			],
+			"paginas": 34,
+			"bytes": 2847231,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFJv",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6lhbw",
+						"rotulo": "Caderno do tópico, 183 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Seleção e construção de modelos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/eb39643e-c14d-4b7d-a999-fa0fcb6a952f",
+			"playlist": "eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb",
+			"disciplina": "CD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6bLxK",
+				"https://www.tecconcursos.com.br/s/Q4pSx8"
+			],
+			"paginas": 36,
+			"bytes": 2781206,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6bLxK",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSx8",
+						"rotulo": "Caderno extra 1, 36 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Validação e generalização",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/7ba0d06b-a9a5-4a83-9077-ee6b5987f14b",
+			"playlist": "eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb",
+			"disciplina": "CD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BcgR"
+			],
+			"paginas": 31,
+			"bytes": 2644062,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BcgR",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Métricas e efeitos das decisões",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/e31f9e35-312a-4b18-8438-4c6bc2f59634",
+			"playlist": "eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb",
+			"disciplina": "CD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BcgR"
+			],
+			"paginas": 31,
+			"bytes": 2672476,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BcgR",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Redes neurais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/cd4ce925-f8a7-42d6-9565-c6cc2090f44f",
+			"playlist": "eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb",
+			"disciplina": "CD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BcgT"
+			],
+			"paginas": 33,
+			"bytes": 2702076,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BcgT",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Linguagem natural e modelos generativos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/42e6c0a3-cb53-4c20-8bdb-5437f38c8335",
+			"playlist": "eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb",
+			"disciplina": "CD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFHX",
+				"https://www.tecconcursos.com.br/s/Q7BcgY"
+			],
+			"paginas": 33,
+			"bytes": 2706782,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFHX",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BcgY",
+						"rotulo": "Caderno do tópico, 35 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Agentes e uso seguro de ferramentas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/effa9cc6-73f9-4c60-b811-8d78409256d1",
+			"playlist": "eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb",
+			"disciplina": "CD:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BcgY"
+			],
+			"paginas": 28,
+			"bytes": 2556677,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BcgY",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Ciclo de vida e MLOps",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/a9802db4-3741-4b2d-b49a-77a050f7c64f",
+			"playlist": "68877e22-b021-4869-9e97-23ed3feee2eb",
+			"disciplina": "CD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BaxG",
+				"https://www.tecconcursos.com.br/s/Q7BcgZ"
+			],
+			"paginas": 33,
+			"bytes": 2734774,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BaxG",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BcgZ",
+						"rotulo": "Caderno do tópico, 74 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Sustentação de soluções analíticas",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/ae8f3025-828d-488f-9bce-7dea61f45742",
+			"playlist": "68877e22-b021-4869-9e97-23ed3feee2eb",
+			"disciplina": "CD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFIh",
+				"https://www.tecconcursos.com.br/s/Q7BaxL"
+			],
+			"paginas": 31,
+			"bytes": 2683829,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFIh",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxL",
+						"rotulo": "Caderno do tópico, 302 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Governança e responsabilidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/8b3ccdf6-3b57-4397-9059-2c8f1338b49d",
+			"playlist": "68877e22-b021-4869-9e97-23ed3feee2eb",
+			"disciplina": "CD:E4",
+			"tecs": [],
+			"paginas": 30,
+			"bytes": 2556503,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Gestão de produtos de dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/d4ee2a4e-77d3-405c-80dd-8c510382d36e",
+			"playlist": "68877e22-b021-4869-9e97-23ed3feee2eb",
+			"disciplina": "CD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pEBc",
+				"https://www.tecconcursos.com.br/s/Q4pE2r",
+				"https://www.tecconcursos.com.br/s/Q7BaxU",
+				"https://www.tecconcursos.com.br/s/Q7Bcge",
+				"https://www.tecconcursos.com.br/s/Q4pEB2"
+			],
+			"paginas": 33,
+			"bytes": 2840633,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pEBc",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pE2r",
+						"rotulo": "Caderno do tópico, 162 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxU",
+						"rotulo": "Caderno do tópico, 162 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bcge",
+						"rotulo": "Caderno do tópico, 162 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pEB2",
+						"rotulo": "Caderno do tópico, 162 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Contratação e controle de soluções",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/50df59b9-bb7e-4dd3-b723-0f95dbbdb76c",
+			"playlist": "68877e22-b021-4869-9e97-23ed3feee2eb",
+			"disciplina": "CD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6bLxX",
+				"https://www.tecconcursos.com.br/s/Q7BaxZ"
+			],
+			"paginas": 33,
+			"bytes": 2852394,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6bLxX",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxZ",
+						"rotulo": "Caderno do tópico, 130 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "Curadoria de Discursivas (TI Ciência de Dados)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ee5d181b-5f77-4304-8c69-a77e8caaf088/aulas/0582edf3-de34-4a71-9ba3-b5b6a277d445",
+			"playlist": "ee5d181b-5f77-4304-8c69-a77e8caaf088",
+			"disciplina": "CD:DISC"
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Redes e comunicação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/6b583167-f70f-4991-8f0b-773f97b3c098",
+			"playlist": "2f8e9e0b-c6f1-4305-a742-20cfaef4d667",
+			"disciplina": "INFRA:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BlxD",
+				"https://www.tecconcursos.com.br/s/Q7BlxJ",
+				"https://www.tecconcursos.com.br/s/Q7BlxQ",
+				"https://www.tecconcursos.com.br/s/Q7BlxV",
+				"https://www.tecconcursos.com.br/s/Q7Blxb",
+				"https://www.tecconcursos.com.br/s/Q7Blxj",
+				"https://www.tecconcursos.com.br/s/Q6MS9B"
+			],
+			"paginas": 38,
+			"bytes": 3050418,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BlxJ",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlxD",
+						"rotulo": "Caderno extra 2",
+						"questoes": 45
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlxQ",
+						"rotulo": "Caderno do tópico, 196 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlxV",
+						"rotulo": "Caderno extra 3, 42 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Blxb",
+						"rotulo": "Caderno extra 3, 42 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Blxj",
+						"rotulo": "Caderno extra 3, 42 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6MS9B",
+						"rotulo": "Caderno extra 3, 42 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Sistemas e diretórios",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/d2b1ddf1-cd8f-4160-a98a-1907fc8f0b22",
+			"playlist": "2f8e9e0b-c6f1-4305-a742-20cfaef4d667",
+			"disciplina": "INFRA:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Blxq",
+				"https://www.tecconcursos.com.br/s/Q7Blxy",
+				"https://www.tecconcursos.com.br/s/Q7Bly4",
+				"https://www.tecconcursos.com.br/s/Q7BlyF"
+			],
+			"paginas": 36,
+			"bytes": 2989300,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Blxq",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Blxy",
+						"rotulo": "Caderno do tópico, 85 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bly4",
+						"rotulo": "Caderno do tópico, 85 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlyF",
+						"rotulo": "Caderno do tópico, 85 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Armazenamento",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/8f562cfc-3894-4612-a963-d1393dc7114d",
+			"playlist": "2f8e9e0b-c6f1-4305-a742-20cfaef4d667",
+			"disciplina": "INFRA:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Blyd",
+				"https://www.tecconcursos.com.br/s/Q7Blyp"
+			],
+			"paginas": 34,
+			"bytes": 2872440,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Blyd",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Blyp",
+						"rotulo": "Caderno do tópico, 65 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Plataformas de bancos de dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/0f2dfc5e-eced-4684-a601-6fdaf6e6a465",
+			"playlist": "2f8e9e0b-c6f1-4305-a742-20cfaef4d667",
+			"disciplina": "INFRA:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6MSQr",
+				"https://www.tecconcursos.com.br/s/Q7BlzC",
+				"https://www.tecconcursos.com.br/s/Q7Bcgq",
+				"https://www.tecconcursos.com.br/s/Q7Bax8"
+			],
+			"paginas": 43,
+			"bytes": 3080027,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6MSQr",
+				"questoes": 44,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlzC",
+						"rotulo": "Caderno do tópico, 125 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bcgq",
+						"rotulo": "Caderno extra 2, 48 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bax8",
+						"rotulo": "Caderno extra 2, 48 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. SQL e sustentação de dados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/cc98455c-e76e-4397-bd86-37e16a0fbbd5",
+			"playlist": "2f8e9e0b-c6f1-4305-a742-20cfaef4d667",
+			"disciplina": "INFRA:E1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFGE",
+				"https://www.tecconcursos.com.br/s/Q7Bax6",
+				"https://www.tecconcursos.com.br/s/Q7BlzI"
+			],
+			"paginas": 41,
+			"bytes": 3210076,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFGE",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bax6",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlzI",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Modelos e arquitetura de nuvem",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/512ce1db-7c5d-4df3-a8e7-0701df571e36",
+			"playlist": "de97bae9-6162-4a63-a9e5-e01fd1f75374",
+			"disciplina": "INFRA:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFIh"
+			],
+			"paginas": 33,
+			"bytes": 2760375,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFIh",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Virtualização e contêineres",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/4a228ed6-55b7-44b9-b07d-5d49cfbbab85",
+			"playlist": "de97bae9-6162-4a63-a9e5-e01fd1f75374",
+			"disciplina": "INFRA:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BaxL",
+				"https://www.tecconcursos.com.br/s/Q7BlzR"
+			],
+			"paginas": 37,
+			"bytes": 2851330,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BaxL",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlzR",
+						"rotulo": "Caderno do tópico, 173 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Arquiteturas de serviços",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/4ae4663b-d70f-4922-bf6c-0eee9d32a180",
+			"playlist": "de97bae9-6162-4a63-a9e5-e01fd1f75374",
+			"disciplina": "INFRA:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BlzV",
+				"https://www.tecconcursos.com.br/s/Q6bLwD"
+			],
+			"paginas": 35,
+			"bytes": 2838142,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BlzV",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6bLwD",
+						"rotulo": "Caderno do tópico, 25 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Infraestrutura como código",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/99d3184c-de82-43a2-be07-b8c7d2caca6d",
+			"playlist": "de97bae9-6162-4a63-a9e5-e01fd1f75374",
+			"disciplina": "INFRA:E2",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7BcgZ",
+				"https://www.tecconcursos.com.br/s/Q7BaxG",
+				"https://www.tecconcursos.com.br/s/Q7Blze"
+			],
+			"paginas": 32,
+			"bytes": 2754986,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7BcgZ",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxG",
+						"rotulo": "Caderno do tópico, 123 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Blze",
+						"rotulo": "Caderno do tópico, 123 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Migração e modernização",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/dfe548ae-ec94-4526-8dff-480d5d23ff22",
+			"playlist": "de97bae9-6162-4a63-a9e5-e01fd1f75374",
+			"disciplina": "INFRA:E2",
+			"tecs": [],
+			"paginas": 29,
+			"bytes": 2566612,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Riscos e arquitetura de segurança",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/67c2f649-9a3d-4c52-b16c-a15f200a17b7",
+			"playlist": "ef103b63-d85c-470b-863a-48a897899827",
+			"disciplina": "INFRA:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Blzo",
+				"https://www.tecconcursos.com.br/s/Q7Blzy",
+				"https://www.tecconcursos.com.br/s/Q7Bm09",
+				"https://www.tecconcursos.com.br/s/Q7Bm0N",
+				"https://www.tecconcursos.com.br/s/Q7Bm0W",
+				"https://www.tecconcursos.com.br/s/Q7Bm0b"
+			],
+			"paginas": 37,
+			"bytes": 2897537,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Blzo",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Blzy",
+						"rotulo": "Caderno do tópico, 83 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm09",
+						"rotulo": "Caderno do tópico, 83 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm0N",
+						"rotulo": "Caderno do tópico, 83 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm0W",
+						"rotulo": "Caderno extra 4, 93 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm0b",
+						"rotulo": "Caderno extra 4, 93 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Identidades e proteção criptográfica",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/2aed1aa0-0365-4c5b-8ae4-8bdc3faf87be",
+			"playlist": "ef103b63-d85c-470b-863a-48a897899827",
+			"disciplina": "INFRA:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Bm0h",
+				"https://www.tecconcursos.com.br/s/Q7Bm0l",
+				"https://www.tecconcursos.com.br/s/Q7Bm19",
+				"https://www.tecconcursos.com.br/s/Q7Bm1I",
+				"https://www.tecconcursos.com.br/s/Q7Bm1V"
+			],
+			"paginas": 42,
+			"bytes": 3046787,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Bm0h",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm0l",
+						"rotulo": "Caderno do tópico, 103 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm19",
+						"rotulo": "Caderno do tópico, 103 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm1I",
+						"rotulo": "Caderno do tópico, 103 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm1V",
+						"rotulo": "Caderno do tópico, 103 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Vulnerabilidades e operação de segurança",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/c9c8b24f-9af1-4a87-b8ef-acb480900f03",
+			"playlist": "ef103b63-d85c-470b-863a-48a897899827",
+			"disciplina": "INFRA:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Bm1f",
+				"https://www.tecconcursos.com.br/s/Q7Bm1k",
+				"https://www.tecconcursos.com.br/s/Q7Bm1r"
+			],
+			"paginas": 33,
+			"bytes": 2812608,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Bm1f",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm1k",
+						"rotulo": "Caderno do tópico, 34 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm1r",
+						"rotulo": "Caderno do tópico, 34 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Resposta a incidentes",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/a5563d0a-97d7-4b6c-8c0b-ec6f511bb258",
+			"playlist": "ef103b63-d85c-470b-863a-48a897899827",
+			"disciplina": "INFRA:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Bm24",
+				"https://www.tecconcursos.com.br/s/Q7Bm29"
+			],
+			"paginas": 38,
+			"bytes": 2930769,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Bm24",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm29",
+						"rotulo": "Caderno do tópico, 35 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Privacidade e proteção operacional",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/751d7c61-7671-4cb2-9b1a-44ccb14a27e1",
+			"playlist": "ef103b63-d85c-470b-863a-48a897899827",
+			"disciplina": "INFRA:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pFJv"
+			],
+			"paginas": 33,
+			"bytes": 2812666,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pFJv",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Continuidade e recuperação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/e60e2584-e1b9-46db-8b13-f8c41332eebf",
+			"playlist": "ef103b63-d85c-470b-863a-48a897899827",
+			"disciplina": "INFRA:E3",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6Jy6Y",
+				"https://www.tecconcursos.com.br/s/Q7Bm2H"
+			],
+			"paginas": 32,
+			"bytes": 2786765,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6Jy6Y",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm2H",
+						"rotulo": "Caderno do tópico, 54 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Confiabilidade e observabilidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/4b418818-1247-4b89-bf0e-94e00a5f0098",
+			"playlist": "7026a164-675a-49b2-a9c0-93c41418810e",
+			"disciplina": "INFRA:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6Jy8l",
+				"https://www.tecconcursos.com.br/s/Q7Bm2O"
+			],
+			"paginas": 36,
+			"bytes": 3127049,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6Jy8l",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm2O",
+						"rotulo": "Caderno do tópico, 16 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Capacidade, custos e infraestrutura de IA",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/d6ea1336-3446-459c-b44b-1ffd8455b3d1",
+			"playlist": "7026a164-675a-49b2-a9c0-93c41418810e",
+			"disciplina": "INFRA:E4",
+			"tecs": [],
+			"paginas": 30,
+			"bytes": 2555777,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Gestão de serviços e mudanças",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/508da821-ae11-4ff3-88cf-0bd322c59b6a",
+			"playlist": "7026a164-675a-49b2-a9c0-93c41418810e",
+			"disciplina": "INFRA:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pE0V",
+				"https://www.tecconcursos.com.br/s/Q7Bm2Z",
+				"https://www.tecconcursos.com.br/s/Q4pEBc",
+				"https://www.tecconcursos.com.br/s/Q7Bcge"
+			],
+			"paginas": 43,
+			"bytes": 3077184,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pE0V",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm2Z",
+						"rotulo": "Caderno do tópico, 181 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pEBc",
+						"rotulo": "Caderno do tópico, 181 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bcge",
+						"rotulo": "Caderno do tópico, 181 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Governança e controle",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/286e2f4c-12f3-4216-89cd-956d9e35a547",
+			"playlist": "7026a164-675a-49b2-a9c0-93c41418810e",
+			"disciplina": "INFRA:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q7Bm2l",
+				"https://www.tecconcursos.com.br/s/Q4pDzx",
+				"https://www.tecconcursos.com.br/s/Q4pE2r",
+				"https://www.tecconcursos.com.br/s/Q7BaxU",
+				"https://www.tecconcursos.com.br/s/Q6lhbw",
+				"https://www.tecconcursos.com.br/s/Q6Jy4w",
+				"https://www.tecconcursos.com.br/s/Q7Bm2q",
+				"https://www.tecconcursos.com.br/s/Q7Bm3E"
+			],
+			"paginas": 36,
+			"bytes": 2945360,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q7Bm2l",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pDzx",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pE2r",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxU",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6lhbw",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6Jy4w",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm2q",
+						"rotulo": "Caderno do tópico, 33 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7Bm3E",
+						"rotulo": "Caderno extra 7, 13 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Contratações e gestão de fornecedores",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/6f4bbe22-f5cc-4cfd-a176-68efd6b3859f",
+			"playlist": "7026a164-675a-49b2-a9c0-93c41418810e",
+			"disciplina": "INFRA:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q6bLxX",
+				"https://www.tecconcursos.com.br/s/Q7BaxZ"
+			],
+			"paginas": 44,
+			"bytes": 3135296,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q6bLxX",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BaxZ",
+						"rotulo": "Caderno extra 1, 55 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "Curadoria de Discursivas (TI Infraestrutura de TI)",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/55670438-b8c8-4a2f-b079-b3bf3c711c3d/aulas/29f54f3b-e33b-4b28-800e-d8a85aba58cb",
+			"playlist": "55670438-b8c8-4a2f-b079-b3bf3c711c3d",
+			"disciplina": "INFRA:DISC"
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Estado e legitimidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/cdb30a51-f9d8-4901-8e28-06316c41b35a",
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pAiW"
+			],
+			"paginas": 19,
+			"bytes": 2509424,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pAiW",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Democracia e representação",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/0dc27037-4df3-47ce-9861-43c0299ab331",
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pDVz",
+				"https://www.tecconcursos.com.br/s/Q4pBxb"
+			],
+			"paginas": 23,
+			"bytes": 2592056,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pDVz",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pBxb",
+						"rotulo": "Caderno do tópico, 379 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Federalismo e capacidades estatais",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/82bc6d3e-6ae4-44d1-865d-8f34a015f4a1",
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4p9tw",
+				"https://www.tecconcursos.com.br/s/Q4p9ud",
+				"https://www.tecconcursos.com.br/s/Q4pT5h"
+			],
+			"paginas": 20,
+			"bytes": 2589580,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4p9tw",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4p9ud",
+						"rotulo": "Caderno do tópico, 193 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pT5h",
+						"rotulo": "Caderno do tópico, 193 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Ordem constitucional e direitos",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/638df406-97ff-482e-9877-9b0f2df9c7de",
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4p9ov",
+				"https://www.tecconcursos.com.br/s/Q4p9sR",
+				"https://www.tecconcursos.com.br/s/Q4p9tV",
+				"https://www.tecconcursos.com.br/s/Q4p9sD",
+				"https://www.tecconcursos.com.br/s/Q4p9bA"
+			],
+			"paginas": 20,
+			"bytes": 2537002,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4p9ov",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4p9sR",
+						"rotulo": "Caderno extra 1, 61 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4p9tV",
+						"rotulo": "Caderno extra 1, 61 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4p9sD",
+						"rotulo": "Caderno extra 1, 61 quest",
+						"questoes": null
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4p9bA",
+						"rotulo": "Caderno extra 1, 61 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Valor público e controle",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/d998d901-ecf7-48bc-b916-bd1cebb9750e",
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pBxr",
+				"https://www.tecconcursos.com.br/s/Q76KUE"
+			],
+			"paginas": 16,
+			"bytes": 2377034,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pBxr",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q76KUE",
+						"rotulo": "Caderno do tópico, 45 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "6. Corrupção como fenômeno político e social",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/f0f7b5ee-bab9-4399-825c-b8c6ac8ac339",
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1",
+			"tecs": [],
+			"paginas": 16,
+			"bytes": 2406598,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": "08/11/2026",
+			"titulo": "7. Mecanismos de reprodução e captura",
+			"url": null,
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1"
+		},
+		{
+			"agendada": "09/11/2026",
+			"titulo": "8. Consequências e respostas à corrupção",
+			"url": null,
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1"
+		},
+		{
+			"agendada": "09/11/2026",
+			"titulo": "9. Estado e modelos de desenvolvimento econômico",
+			"url": null,
+			"playlist": "e491375c-92aa-41f4-a703-f9a93528958c",
+			"disciplina": "B1"
+		},
+		{
+			"agendada": null,
+			"titulo": "1. Planejamento e seleção",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190/aulas/e2d8966b-f86a-4d3d-837d-197571e5d7e2",
+			"playlist": "8c6078bc-fc11-4cb6-a6b8-7b16dbee1190",
+			"disciplina": "AUD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pTjf",
+				"https://www.tecconcursos.com.br/s/Q6liKs"
+			],
+			"paginas": 22,
+			"bytes": 2561814,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pTjf",
+				"questoes": null,
+				"extras": [
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q6liKs",
+						"rotulo": "Caderno do tópico, 356 quest",
+						"questoes": null
+					}
+				]
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "2. Execução contratual",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190/aulas/273b58c7-a9be-4212-b5f3-ffc2ff1663fd",
+			"playlist": "8c6078bc-fc11-4cb6-a6b8-7b16dbee1190",
+			"disciplina": "AUD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pTk4"
+			],
+			"paginas": 25,
+			"bytes": 2597614,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pTk4",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "3. Transferências e parcerias",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190/aulas/ecf64884-352e-424e-9f88-1d14ff4647ee",
+			"playlist": "8c6078bc-fc11-4cb6-a6b8-7b16dbee1190",
+			"disciplina": "AUD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pB0i"
+			],
+			"paginas": 20,
+			"bytes": 2539610,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pB0i",
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "4. Testes e sinais de irregularidade",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190/aulas/521416ea-9e57-4ab6-8006-7d7cf8ce1808",
+			"playlist": "8c6078bc-fc11-4cb6-a6b8-7b16dbee1190",
+			"disciplina": "AUD:E4",
+			"tecs": [],
+			"paginas": 19,
+			"bytes": 2488443,
+			"tecDetalhe": {
+				"principal": null,
+				"questoes": null,
+				"extras": []
+			}
+		},
+		{
+			"agendada": null,
+			"titulo": "5. Encaminhamentos e resultados",
+			"url": "/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190/aulas/1a11beb6-ae9b-4393-b541-fc0abf8e7300",
+			"playlist": "8c6078bc-fc11-4cb6-a6b8-7b16dbee1190",
+			"disciplina": "AUD:E4",
+			"tecs": [
+				"https://www.tecconcursos.com.br/s/Q4pAfD"
+			],
+			"paginas": 18,
+			"bytes": 2498789,
+			"tecDetalhe": {
+				"principal": "https://www.tecconcursos.com.br/s/Q4pAfD",
+				"questoes": null,
+				"extras": []
+			}
+		}
+	]
+}

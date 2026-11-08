@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import missoesCd from '../../static/conteudo/missoes-cd.json' with { type: 'json' };
 import missoesAud from '../../static/conteudo/missoes-aud.json' with { type: 'json' };
+import mentoria from '../../src/lib/dados/mentoria.json' with { type: 'json' };
 
 // Missão única (planos/2026-10-14-missao-unica.md, fase 2): o painel mostra o dia do plano de 61 dias
 // das Missões, com as mesmas marcações (chave missoes-cgu-2026) e o mesmo login. A API é simulada.
@@ -346,18 +347,20 @@ test('página das Missões: o subitem aberto no Qconcursos fica destacado, e o p
 	await expect(page.locator('li.em-andamento')).toHaveCount(0); // já marcado: não volta a destacar
 });
 
-test('subitem com aula da mentoria mostra o atalho da playlist da disciplina', async ({ page }) => {
-	// Dia com C1 1.1 e E2 1.2 na missão (o padrão do arquivo é 14/10, sem eles).
+test('subitem com aula da mentoria mostra o atalho da aula que o cobre', async ({ page }) => {
+	// Dia com C1 1.1 e E2 1.2 na missão (o padrão do arquivo é 14/10, sem eles). O atalho abre
+	// a aula específica do catálogo (planos/2026-11-08-catalogo-de-aulas-da-mentoria.md).
 	await page.clock.setFixedTime(new Date('2026-10-16T09:00:00-03:00'));
 	await page.goto('/painel');
 	const item = (cod: string) => missao(page).locator('li:not(.bloco)', { hasText: cod }).first();
+	const aulaDe = (chave: string) => mentoria.aulas!.find((a) => a.subitens.includes(chave))!;
 	await expect(item('C1 1.1').getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute(
 		'href',
-		/playlists\/bd1a8d94/
+		aulaDe('C1-1.1').url
 	);
 	await expect(item('E2 1.2').getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute(
 		'href',
-		/playlists\/a73ca465/
+		aulaDe('CD:E2-1.2').url
 	);
 });
 

@@ -94,11 +94,29 @@ export interface Config {
 	limiteEmAlta: number;
 }
 
-/** Aulas da mentoria (planos/2026-11-03-aulas-da-mentoria-no-painel.md): playlist por disciplina
- *  do edital, na plataforma do curso que ela faz. Chave `B1`…`C5` (comum) e `CD:E1`… (P3 do cargo). */
+/** Aulas da mentoria na plataforma do curso que ela faz (planos/2026-11-03 e
+ *  2026-11-08-catalogo-de-aulas-da-mentoria.md): playlist por disciplina do edital, chave
+ *  `B1`…`C5` (comum) e `CD:E1`… (P3 do cargo), e o catálogo das aulas, com o subitem do edital
+ *  que cada uma cobre e o caderno de questões do TEC Concursos do fim do PDF da aula. */
+export interface AulaMentoria {
+	/** UUID da aula na plataforma (o mesmo do fim da URL). */
+	id: string;
+	/** Chave de disciplina, igual às de `playlists`. */
+	disciplina: string;
+	titulo: string;
+	url: string;
+	/** Caderno do tópico (TEC Concursos), quando a aula tem. */
+	tec?: string;
+	/** Cadernos extras da mesma aula. */
+	tecExtras?: string[];
+	/** Subitens cobertos (chave `B1-4.1`/`CD:E2-1.1`); aula sem mapeamento fica vazia. */
+	subitens: string[];
+}
+
 export interface Mentoria {
 	curso: string;
 	playlists: Record<string, string>;
+	aulas?: AulaMentoria[];
 }
 
 export interface Dados {
