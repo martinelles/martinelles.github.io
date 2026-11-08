@@ -42,7 +42,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/0dc27037-4df3-47ce-9861-43c0299ab331",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pDVz",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pBxb"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pBxb",
+					"rotulo": "Caderno extra 1",
+					"questoes": 29
+				}
 			],
 			"subitens": [
 				"B1-2.1"
@@ -55,8 +59,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/82bc6d3e-6ae4-44d1-865d-8f34a015f4a1",
 			"tec": "https://www.tecconcursos.com.br/s/Q4p9tw",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4p9ud",
-				"https://www.tecconcursos.com.br/s/Q4pT5h"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9ud",
+					"rotulo": "Caderno extra 1",
+					"questoes": 28
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pT5h",
+					"rotulo": "Caderno extra 2",
+					"questoes": 9
+				}
 			],
 			"subitens": [
 				"B1-3.1"
@@ -69,10 +81,26 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/638df406-97ff-482e-9877-9b0f2df9c7de",
 			"tec": "https://www.tecconcursos.com.br/s/Q4p9ov",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4p9sR",
-				"https://www.tecconcursos.com.br/s/Q4p9tV",
-				"https://www.tecconcursos.com.br/s/Q4p9sD",
-				"https://www.tecconcursos.com.br/s/Q4p9bA"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9sR",
+					"rotulo": "Caderno extra 1",
+					"questoes": 61
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9tV",
+					"rotulo": "Caderno extra 2",
+					"questoes": 62
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9sD",
+					"rotulo": "Caderno extra 3",
+					"questoes": 71
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9bA",
+					"rotulo": "Caderno extra 4",
+					"questoes": 157
+				}
 			],
 			"subitens": [
 				"B1-4.1"
@@ -85,7 +113,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e491375c-92aa-41f4-a703-f9a93528958c/aulas/d998d901-ecf7-48bc-b916-bd1cebb9750e",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pBxr",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q76KUE"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KUE",
+					"rotulo": "Caderno extra 1",
+					"questoes": 10
+				}
 			],
 			"subitens": [
 				"B1-5.1"
@@ -204,11 +236,31 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/c010df39-2d13-4d0b-89e2-f309f7c35675",
 			"tec": "https://www.tecconcursos.com.br/s/Q6li0m",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q6li1Q",
-				"https://www.tecconcursos.com.br/s/Q6li2L",
-				"https://www.tecconcursos.com.br/s/Q6li34",
-				"https://www.tecconcursos.com.br/s/Q6li5N",
-				"https://www.tecconcursos.com.br/s/Q4pAeF"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6li1Q",
+					"rotulo": "Caderno extra 1",
+					"questoes": 71
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6li2L",
+					"rotulo": "Caderno extra 2",
+					"questoes": 48
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6li34",
+					"rotulo": "Caderno extra 3",
+					"questoes": 45
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6li5N",
+					"rotulo": "Caderno extra 4",
+					"questoes": 63
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pAeF",
+					"rotulo": "Caderno extra 5",
+					"questoes": 127
+				}
 			],
 			"subitens": [
 				"B4-1.1"
@@ -241,7 +293,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/557c878b-8373-42c3-afbc-792c490c609d",
 			"tec": "https://www.tecconcursos.com.br/s/Q76KTR",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q76KTW"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTW",
+					"rotulo": "Caderno extra 1",
+					"questoes": 84
+				}
 			],
 			"subitens": [
 				"B4-4.1"
@@ -254,7 +310,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/f7cae9e9-2ac6-41e9-bceb-bc9d0d461735/aulas/4d2103ce-5aae-4b31-8829-a5cc56da7863",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pC2N",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pAnE"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pAnE",
+					"rotulo": "Caderno extra 1",
+					"questoes": 102
+				}
 			],
 			"subitens": [
 				"B4-5.1"
@@ -373,11 +433,23 @@
 			"disciplina": "C3",
 			"titulo": "1. Decisão administrativa",
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/9974c415-a81d-4096-b89c-f9a51eff953e",
-			"tec": "https://www.tecconcursos.com.br/s/Q4pAkx",
+			"tec": "https://www.tecconcursos.com.br/s/Q4pAla",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pAla",
-				"https://www.tecconcursos.com.br/s/Q76KV0",
-				"https://www.tecconcursos.com.br/s/Q76KVE"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pAkx",
+					"rotulo": "Caderno extra 1",
+					"questoes": 117
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KV0",
+					"rotulo": "Caderno extra 2",
+					"questoes": 99
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KVE",
+					"rotulo": "Caderno extra 3",
+					"questoes": 3
+				}
 			],
 			"subitens": [
 				"C3-1.1",
@@ -400,11 +472,23 @@
 			"disciplina": "C3",
 			"titulo": "3. Funções de controle e melhoria da gestão",
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/698c480a-1085-4978-ac7f-0c63ce25fefe/aulas/a96b9dad-6b84-498e-8bd6-e9db65cfc691",
-			"tec": "https://www.tecconcursos.com.br/s/Q4p9dX",
+			"tec": "https://www.tecconcursos.com.br/s/Q71Fk8",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q71Fk8",
-				"https://www.tecconcursos.com.br/s/Q4p9bb",
-				"https://www.tecconcursos.com.br/s/Q4pAd3"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9bb",
+					"rotulo": "Caderno extra 1",
+					"questoes": 91
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4p9dX",
+					"rotulo": "Caderno extra 2",
+					"questoes": 72
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pAd3",
+					"rotulo": "Caderno extra 3",
+					"questoes": 210
+				}
 			],
 			"subitens": [
 				"C3-3.1",
@@ -492,8 +576,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/0bc7a2e5-67f9-455e-8277-896845c33f7d/aulas/72f0e332-9d09-41cf-a759-3b4d83957f29",
 			"tec": "https://www.tecconcursos.com.br/s/Q71FkN",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q71Fmr",
-				"https://www.tecconcursos.com.br/s/Q71FnE"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q71Fmr",
+					"rotulo": "Caderno extra 1",
+					"questoes": 10
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q71FnE",
+					"rotulo": "Caderno extra 2",
+					"questoes": 32
+				}
 			],
 			"subitens": [
 				"C5-1.1",
@@ -552,11 +644,31 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/9d250484-e1d2-42c9-81a9-2cf38dc53b76",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pSoh",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pSp4",
-				"https://www.tecconcursos.com.br/s/Q4pSpd",
-				"https://www.tecconcursos.com.br/s/Q4pSq2",
-				"https://www.tecconcursos.com.br/s/Q4pSqO",
-				"https://www.tecconcursos.com.br/s/Q4pSxb"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSp4",
+					"rotulo": "Caderno extra 1",
+					"questoes": 113
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSpd",
+					"rotulo": "Caderno extra 2",
+					"questoes": 160
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSq2",
+					"rotulo": "Caderno extra 3",
+					"questoes": 163
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSqO",
+					"rotulo": "Caderno extra 4",
+					"questoes": 86
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSxb",
+					"rotulo": "Caderno extra 5",
+					"questoes": 73
+				}
 			],
 			"subitens": [
 				"CD:E1-1.1"
@@ -569,11 +681,31 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/72287eb6-0ff5-4f0c-a5b5-4bff6375c9b2",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pSr2",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pSrl",
-				"https://www.tecconcursos.com.br/s/Q4pSsB",
-				"https://www.tecconcursos.com.br/s/Q4pSsq",
-				"https://www.tecconcursos.com.br/s/Q4pSuX",
-				"https://www.tecconcursos.com.br/s/Q7BauO"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSrl",
+					"rotulo": "Caderno extra 1",
+					"questoes": 152
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSsB",
+					"rotulo": "Caderno extra 2",
+					"questoes": 162
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSsq",
+					"rotulo": "Caderno extra 3",
+					"questoes": 257
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSuX",
+					"rotulo": "Caderno extra 4",
+					"questoes": 72
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BauO",
+					"rotulo": "Caderno extra 5",
+					"questoes": 84
+				}
 			],
 			"subitens": [
 				"CD:E1-2.1",
@@ -587,9 +719,21 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/dffe2a30-790e-40e1-9565-88bfce8395fb",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pSvD",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pT17",
-				"https://www.tecconcursos.com.br/s/Q4pSvp",
-				"https://www.tecconcursos.com.br/s/Q7Bax2"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pT17",
+					"rotulo": "Caderno extra 1",
+					"questoes": 48
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSvp",
+					"rotulo": "Caderno extra 2",
+					"questoes": 7
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bax2",
+					"rotulo": "Caderno extra 3",
+					"questoes": 23
+				}
 			],
 			"subitens": [
 				"CD:E1-3.1",
@@ -613,7 +757,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2b107e3e-8317-49ff-9cd3-d810c8190549/aulas/b0b0e90b-c3ca-4357-bf05-c13bc87daffe",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFH2",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pFJP"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pFJP",
+					"rotulo": "Caderno extra 1",
+					"questoes": 68
+				}
 			],
 			"subitens": [
 				"CD:E1-5.1"
@@ -626,11 +774,31 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/659837d3-14c0-48e3-8ae4-6aaa5bc2ff49",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFFV",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pFG1",
-				"https://www.tecconcursos.com.br/s/Q4pFKA",
-				"https://www.tecconcursos.com.br/s/Q4pFGL",
-				"https://www.tecconcursos.com.br/s/Q6MSQr",
-				"https://www.tecconcursos.com.br/s/Q7Bcgq"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pFG1",
+					"rotulo": "Caderno extra 1",
+					"questoes": 78
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pFKA",
+					"rotulo": "Caderno extra 2",
+					"questoes": 98
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pFGL",
+					"rotulo": "Caderno extra 3",
+					"questoes": 287
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6MSQr",
+					"rotulo": "Caderno extra 4",
+					"questoes": 125
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bcgq",
+					"rotulo": "Caderno extra 5",
+					"questoes": 48
+				}
 			],
 			"subitens": [
 				"CD:E2-1.1",
@@ -644,8 +812,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/b2d3273c-3041-4085-bf17-7c9919b8135c",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFGE",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bax6",
-				"https://www.tecconcursos.com.br/s/Q7Bax8"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bax6",
+					"rotulo": "Caderno extra 1",
+					"questoes": 204
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bax8",
+					"rotulo": "Caderno extra 2",
+					"questoes": 85
+				}
 			],
 			"subitens": [
 				"CD:E2-2.1",
@@ -659,8 +835,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/78abb037-89d4-48ec-8116-a021668d0d3f",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pEGQ",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pEDR",
-				"https://www.tecconcursos.com.br/s/Q7BaxC"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pEDR",
+					"rotulo": "Caderno extra 1",
+					"questoes": 92
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxC",
+					"rotulo": "Caderno extra 2",
+					"questoes": 16
+				}
 			],
 			"subitens": [
 				"CD:E2-3.1"
@@ -673,8 +857,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/23cfffb2-51fa-4000-b96c-c2787e8fbd08",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFIV",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pFKr",
-				"https://www.tecconcursos.com.br/s/Q6bLwD"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pFKr",
+					"rotulo": "Caderno extra 1",
+					"questoes": 62
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6bLwD",
+					"rotulo": "Caderno extra 2",
+					"questoes": 45
+				}
 			],
 			"subitens": [
 				"CD:E2-4.1",
@@ -690,7 +882,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/5e202dbd-f4b9-4fef-8361-a549e3825c8c",
 			"tec": "https://www.tecconcursos.com.br/s/Q6bLx8",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pFE3"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pFE3",
+					"rotulo": "Caderno extra 1",
+					"questoes": 20
+				}
 			],
 			"subitens": [
 				"CD:E2-5.1",
@@ -707,7 +903,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/b33bd424-d062-4ac3-8dd2-c3a04d20ce5e",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFJv",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q6lhbw"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6lhbw",
+					"rotulo": "Caderno extra 1",
+					"questoes": 12
+				}
 			],
 			"subitens": [
 				"CD:E2-6.1",
@@ -724,7 +924,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/eb39643e-c14d-4b7d-a999-fa0fcb6a952f",
 			"tec": "https://www.tecconcursos.com.br/s/Q6bLxK",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pSx8"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pSx8",
+					"rotulo": "Caderno extra 1",
+					"questoes": 36
+				}
 			],
 			"subitens": [
 				"CD:E3-1.1",
@@ -781,7 +985,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb/aulas/42e6c0a3-cb53-4c20-8bdb-5437f38c8335",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFHX",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BcgY"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BcgY",
+					"rotulo": "Caderno extra 1",
+					"questoes": 18
+				}
 			],
 			"subitens": [
 				"CD:E3-5.1",
@@ -811,7 +1019,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/a9802db4-3741-4b2d-b49a-77a050f7c64f",
 			"tec": "https://www.tecconcursos.com.br/s/Q7BaxG",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BcgZ"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BcgZ",
+					"rotulo": "Caderno extra 1",
+					"questoes": 123
+				}
 			],
 			"subitens": [
 				"CD:E4-1.1",
@@ -829,7 +1041,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/ae8f3025-828d-488f-9bce-7dea61f45742",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFIh",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BaxL"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxL",
+					"rotulo": "Caderno extra 1",
+					"questoes": 173
+				}
 			],
 			"subitens": [
 				"CD:E4-2.1",
@@ -858,10 +1074,26 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/d4ee2a4e-77d3-405c-80dd-8c510382d36e",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pEBc",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pE2r",
-				"https://www.tecconcursos.com.br/s/Q7BaxU",
-				"https://www.tecconcursos.com.br/s/Q7Bcge",
-				"https://www.tecconcursos.com.br/s/Q4pEB2"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pE2r",
+					"rotulo": "Caderno extra 1",
+					"questoes": 49
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxU",
+					"rotulo": "Caderno extra 2",
+					"questoes": 14
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bcge",
+					"rotulo": "Caderno extra 3",
+					"questoes": 43
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pEB2",
+					"rotulo": "Caderno extra 4",
+					"questoes": 267
+				}
 			],
 			"subitens": [
 				"CD:E4-4.1",
@@ -879,7 +1111,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/68877e22-b021-4869-9e97-23ed3feee2eb/aulas/50df59b9-bb7e-4dd3-b723-0f95dbbdb76c",
 			"tec": "https://www.tecconcursos.com.br/s/Q6bLxX",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BaxZ"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxZ",
+					"rotulo": "Caderno extra 1",
+					"questoes": 55
+				}
 			],
 			"subitens": [
 				"CD:E4-5.1",
@@ -898,9 +1134,15 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/dee8b627-1894-4988-81a3-05d1d43da3f8/aulas/1c68971d-5ad6-4a21-a243-ea748020930d",
 			"tec": "https://www.tecconcursos.com.br/s/Q71FkN",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q71FlR",
-				"https://www.tecconcursos.com.br/s/Q71FlR",
-				"https://www.tecconcursos.com.br/s/Q6j8dT"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q71FlR"
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q71FlR"
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6j8dT"
+				}
 			],
 			"subitens": [
 				"AUD:E1-1.1",
@@ -965,8 +1207,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/cb9ffda5-9103-4c6a-81cd-667e659d9254",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pT33",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pT53",
-				"https://www.tecconcursos.com.br/s/Q4pT3a"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pT53",
+					"rotulo": "Caderno extra 1",
+					"questoes": 85
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pT3a",
+					"rotulo": "Caderno extra 2",
+					"questoes": 19
+				}
 			],
 			"subitens": [
 				"AUD:E2-1.1",
@@ -980,10 +1230,26 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/11a8d7b7-2c7f-4d54-beb6-811b9a46bc8e",
 			"tec": "https://www.tecconcursos.com.br/s/Q76KTb",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q76KTU",
-				"https://www.tecconcursos.com.br/s/Q76KTY",
-				"https://www.tecconcursos.com.br/s/Q76KTr",
-				"https://www.tecconcursos.com.br/s/Q76KTv"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTU",
+					"rotulo": "Caderno extra 1",
+					"questoes": 48
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTY",
+					"rotulo": "Caderno extra 2",
+					"questoes": 68
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTr",
+					"rotulo": "Caderno extra 3",
+					"questoes": 136
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTv",
+					"rotulo": "Caderno extra 4",
+					"questoes": 144
+				}
 			],
 			"subitens": [
 				"AUD:E2-2.1",
@@ -997,15 +1263,51 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/becfd77d-863a-4f1d-ac78-6068b8a778e6",
 			"tec": "https://www.tecconcursos.com.br/s/Q76KTe",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q76KTg",
-				"https://www.tecconcursos.com.br/s/Q76KTi",
-				"https://www.tecconcursos.com.br/s/Q76KTs",
-				"https://www.tecconcursos.com.br/s/Q4pBC2",
-				"https://www.tecconcursos.com.br/s/Q4pB18",
-				"https://www.tecconcursos.com.br/s/Q76KU1",
-				"https://www.tecconcursos.com.br/s/Q76KU5",
-				"https://www.tecconcursos.com.br/s/Q76KU8",
-				"https://www.tecconcursos.com.br/s/Q76KUC"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTg",
+					"rotulo": "Caderno extra 1",
+					"questoes": 131
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTi",
+					"rotulo": "Caderno extra 2",
+					"questoes": 61
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KTs",
+					"rotulo": "Caderno extra 3",
+					"questoes": 182
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pBC2",
+					"rotulo": "Caderno extra 4",
+					"questoes": 180
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pB18",
+					"rotulo": "Caderno extra 5",
+					"questoes": 40
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KU1",
+					"rotulo": "Caderno extra 6",
+					"questoes": 117
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KU5",
+					"rotulo": "Caderno extra 7",
+					"questoes": 53
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KU8",
+					"rotulo": "Caderno extra 8",
+					"questoes": 96
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KUC",
+					"rotulo": "Caderno extra 9",
+					"questoes": 39
+				}
 			],
 			"subitens": [
 				"AUD:E2-3.1",
@@ -1019,11 +1321,31 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/dc5ed74b-98c0-4007-a6f2-696d20718989",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pJvV",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pJxZ",
-				"https://www.tecconcursos.com.br/s/Q4pJxr",
-				"https://www.tecconcursos.com.br/s/Q4pJy6",
-				"https://www.tecconcursos.com.br/s/Q4pJzb",
-				"https://www.tecconcursos.com.br/s/Q4pJzu"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pJxZ",
+					"rotulo": "Caderno extra 1",
+					"questoes": 88
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pJxr",
+					"rotulo": "Caderno extra 2",
+					"questoes": 47
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pJy6",
+					"rotulo": "Caderno extra 3",
+					"questoes": 49
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pJzb",
+					"rotulo": "Caderno extra 4",
+					"questoes": 56
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pJzu",
+					"rotulo": "Caderno extra 5",
+					"questoes": 43
+				}
 			],
 			"subitens": [
 				"AUD:E2-4.1",
@@ -1047,15 +1369,43 @@
 			"disciplina": "AUD:E2",
 			"titulo": "6. Informação societária de empresas estatais",
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/e15a302e-39e6-4e2a-8f41-197c2c8189cb/aulas/f464d44a-7ae3-4952-b2bb-aede0fb6758a",
-			"tec": "https://www.tecconcursos.com.br/s/Q76KUl",
+			"tec": "https://www.tecconcursos.com.br/s/Q76KUd",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q76KUd",
-				"https://www.tecconcursos.com.br/s/Q76KUg",
-				"https://www.tecconcursos.com.br/s/Q76KUn",
-				"https://www.tecconcursos.com.br/s/Q4pK2k",
-				"https://www.tecconcursos.com.br/s/Q76KUr",
-				"https://www.tecconcursos.com.br/s/Q4pJx0",
-				"https://www.tecconcursos.com.br/s/Q4pKlt"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KUg",
+					"rotulo": "Caderno extra 1",
+					"questoes": 27
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KUl",
+					"rotulo": "Caderno extra 2",
+					"questoes": 19
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KUn",
+					"rotulo": "Caderno extra 3",
+					"questoes": 9
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pK2k",
+					"rotulo": "Caderno extra 4",
+					"questoes": 1
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q76KUr",
+					"rotulo": "Caderno extra 5",
+					"questoes": 12
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pJx0",
+					"rotulo": "Caderno extra 6",
+					"questoes": 97
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pKlt",
+					"rotulo": "Caderno extra 7",
+					"questoes": 28
+				}
 			],
 			"subitens": [
 				"AUD:E2-6.1",
@@ -1137,7 +1487,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/8c6078bc-fc11-4cb6-a6b8-7b16dbee1190/aulas/e2d8966b-f86a-4d3d-837d-197571e5d7e2",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pTjf",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q6liKs"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6liKs",
+					"rotulo": "Caderno extra 1",
+					"questoes": 297
+				}
 			],
 			"subitens": [
 				"AUD:E4-1.1"
@@ -1263,14 +1617,38 @@
 			"disciplina": "INFRA:E1",
 			"titulo": "1. Redes e comunicação",
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/6b583167-f70f-4991-8f0b-773f97b3c098",
-			"tec": "https://www.tecconcursos.com.br/s/Q7BlxJ",
+			"tec": "https://www.tecconcursos.com.br/s/Q7BlxD",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BlxD",
-				"https://www.tecconcursos.com.br/s/Q7BlxQ",
-				"https://www.tecconcursos.com.br/s/Q7BlxV",
-				"https://www.tecconcursos.com.br/s/Q7Blxb",
-				"https://www.tecconcursos.com.br/s/Q7Blxj",
-				"https://www.tecconcursos.com.br/s/Q6MS9B"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlxJ",
+					"rotulo": "Caderno extra 1",
+					"questoes": 93
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlxQ",
+					"rotulo": "Caderno extra 2",
+					"questoes": 45
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlxV",
+					"rotulo": "Caderno extra 3",
+					"questoes": 42
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Blxb",
+					"rotulo": "Caderno extra 4",
+					"questoes": 167
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Blxj",
+					"rotulo": "Caderno extra 5",
+					"questoes": 9
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6MS9B",
+					"rotulo": "Caderno extra 6",
+					"questoes": 16
+				}
 			],
 			"subitens": []
 		},
@@ -1281,9 +1659,21 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/d2b1ddf1-cd8f-4160-a98a-1907fc8f0b22",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Blxq",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Blxy",
-				"https://www.tecconcursos.com.br/s/Q7Bly4",
-				"https://www.tecconcursos.com.br/s/Q7BlyF"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Blxy",
+					"rotulo": "Caderno extra 1",
+					"questoes": 78
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bly4",
+					"rotulo": "Caderno extra 2",
+					"questoes": 86
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlyF",
+					"rotulo": "Caderno extra 3",
+					"questoes": 106
+				}
 			],
 			"subitens": []
 		},
@@ -1294,7 +1684,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/8f562cfc-3894-4612-a963-d1393dc7114d",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Blyd",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Blyp"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Blyp",
+					"rotulo": "Caderno extra 1",
+					"questoes": 14
+				}
 			],
 			"subitens": []
 		},
@@ -1305,9 +1699,21 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/0f2dfc5e-eced-4684-a601-6fdaf6e6a465",
 			"tec": "https://www.tecconcursos.com.br/s/Q6MSQr",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BlzC",
-				"https://www.tecconcursos.com.br/s/Q7Bcgq",
-				"https://www.tecconcursos.com.br/s/Q7Bax8"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlzC",
+					"rotulo": "Caderno extra 1",
+					"questoes": 44
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bcgq",
+					"rotulo": "Caderno extra 2",
+					"questoes": 48
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bax8",
+					"rotulo": "Caderno extra 3",
+					"questoes": 85
+				}
 			],
 			"subitens": []
 		},
@@ -1318,8 +1724,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/2f8e9e0b-c6f1-4305-a742-20cfaef4d667/aulas/cc98455c-e76e-4397-bd86-37e16a0fbbd5",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pFGE",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bax6",
-				"https://www.tecconcursos.com.br/s/Q7BlzI"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bax6",
+					"rotulo": "Caderno extra 1",
+					"questoes": 204
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlzI",
+					"rotulo": "Caderno extra 2",
+					"questoes": 45
+				}
 			],
 			"subitens": []
 		},
@@ -1338,7 +1752,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/4a228ed6-55b7-44b9-b07d-5d49cfbbab85",
 			"tec": "https://www.tecconcursos.com.br/s/Q7BaxL",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BlzR"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BlzR",
+					"rotulo": "Caderno extra 1",
+					"questoes": 25
+				}
 			],
 			"subitens": []
 		},
@@ -1349,7 +1767,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/4ae4663b-d70f-4922-bf6c-0eee9d32a180",
 			"tec": "https://www.tecconcursos.com.br/s/Q7BlzV",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q6bLwD"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6bLwD",
+					"rotulo": "Caderno extra 1",
+					"questoes": 45
+				}
 			],
 			"subitens": []
 		},
@@ -1360,8 +1782,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/de97bae9-6162-4a63-a9e5-e01fd1f75374/aulas/99d3184c-de82-43a2-be07-b8c7d2caca6d",
 			"tec": "https://www.tecconcursos.com.br/s/Q7BcgZ",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BaxG",
-				"https://www.tecconcursos.com.br/s/Q7Blze"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxG",
+					"rotulo": "Caderno extra 1",
+					"questoes": 74
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Blze",
+					"rotulo": "Caderno extra 2",
+					"questoes": 21
+				}
 			],
 			"subitens": []
 		},
@@ -1379,11 +1809,31 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/67c2f649-9a3d-4c52-b16c-a15f200a17b7",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Blzo",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Blzy",
-				"https://www.tecconcursos.com.br/s/Q7Bm09",
-				"https://www.tecconcursos.com.br/s/Q7Bm0N",
-				"https://www.tecconcursos.com.br/s/Q7Bm0W",
-				"https://www.tecconcursos.com.br/s/Q7Bm0b"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Blzy",
+					"rotulo": "Caderno extra 1",
+					"questoes": 180
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm09",
+					"rotulo": "Caderno extra 2",
+					"questoes": 49
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm0N",
+					"rotulo": "Caderno extra 3",
+					"questoes": 106
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm0W",
+					"rotulo": "Caderno extra 4",
+					"questoes": 93
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm0b",
+					"rotulo": "Caderno extra 5",
+					"questoes": 46
+				}
 			],
 			"subitens": []
 		},
@@ -1394,10 +1844,26 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/2aed1aa0-0365-4c5b-8ae4-8bdc3faf87be",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Bm0h",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bm0l",
-				"https://www.tecconcursos.com.br/s/Q7Bm19",
-				"https://www.tecconcursos.com.br/s/Q7Bm1I",
-				"https://www.tecconcursos.com.br/s/Q7Bm1V"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm0l",
+					"rotulo": "Caderno extra 1",
+					"questoes": 70
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm19",
+					"rotulo": "Caderno extra 2",
+					"questoes": 178
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm1I",
+					"rotulo": "Caderno extra 3",
+					"questoes": 108
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm1V",
+					"rotulo": "Caderno extra 4",
+					"questoes": 33
+				}
 			],
 			"subitens": []
 		},
@@ -1408,8 +1874,16 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/c9c8b24f-9af1-4a87-b8ef-acb480900f03",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Bm1f",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bm1k",
-				"https://www.tecconcursos.com.br/s/Q7Bm1r"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm1k",
+					"rotulo": "Caderno extra 1",
+					"questoes": 23
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm1r",
+					"rotulo": "Caderno extra 2",
+					"questoes": 8
+				}
 			],
 			"subitens": []
 		},
@@ -1420,7 +1894,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/a5563d0a-97d7-4b6c-8c0b-ec6f511bb258",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Bm24",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bm29"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm29",
+					"rotulo": "Caderno extra 1",
+					"questoes": 24
+				}
 			],
 			"subitens": []
 		},
@@ -1439,7 +1917,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/ef103b63-d85c-470b-863a-48a897899827/aulas/e60e2584-e1b9-46db-8b13-f8c41332eebf",
 			"tec": "https://www.tecconcursos.com.br/s/Q6Jy6Y",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bm2H"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm2H",
+					"rotulo": "Caderno extra 1",
+					"questoes": 67
+				}
 			],
 			"subitens": []
 		},
@@ -1450,7 +1932,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/4b418818-1247-4b89-bf0e-94e00a5f0098",
 			"tec": "https://www.tecconcursos.com.br/s/Q6Jy8l",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bm2O"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm2O",
+					"rotulo": "Caderno extra 1",
+					"questoes": 24
+				}
 			],
 			"subitens": []
 		},
@@ -1468,9 +1954,21 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/508da821-ae11-4ff3-88cf-0bd322c59b6a",
 			"tec": "https://www.tecconcursos.com.br/s/Q4pE0V",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7Bm2Z",
-				"https://www.tecconcursos.com.br/s/Q4pEBc",
-				"https://www.tecconcursos.com.br/s/Q7Bcge"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm2Z",
+					"rotulo": "Caderno extra 1",
+					"questoes": 16
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pEBc",
+					"rotulo": "Caderno extra 2",
+					"questoes": 162
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bcge",
+					"rotulo": "Caderno extra 3",
+					"questoes": 43
+				}
 			],
 			"subitens": []
 		},
@@ -1481,13 +1979,41 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/286e2f4c-12f3-4216-89cd-956d9e35a547",
 			"tec": "https://www.tecconcursos.com.br/s/Q7Bm2l",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q4pDzx",
-				"https://www.tecconcursos.com.br/s/Q4pE2r",
-				"https://www.tecconcursos.com.br/s/Q7BaxU",
-				"https://www.tecconcursos.com.br/s/Q6lhbw",
-				"https://www.tecconcursos.com.br/s/Q6Jy4w",
-				"https://www.tecconcursos.com.br/s/Q7Bm2q",
-				"https://www.tecconcursos.com.br/s/Q7Bm3E"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pDzx",
+					"rotulo": "Caderno extra 1",
+					"questoes": 116
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q4pE2r",
+					"rotulo": "Caderno extra 2",
+					"questoes": 49
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxU",
+					"rotulo": "Caderno extra 3",
+					"questoes": 14
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6lhbw",
+					"rotulo": "Caderno extra 4",
+					"questoes": 12
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q6Jy4w",
+					"rotulo": "Caderno extra 5",
+					"questoes": 129
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm2q",
+					"rotulo": "Caderno extra 6",
+					"questoes": 151
+				},
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7Bm3E",
+					"rotulo": "Caderno extra 7",
+					"questoes": 13
+				}
 			],
 			"subitens": []
 		},
@@ -1498,7 +2024,11 @@
 			"url": "https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/7026a164-675a-49b2-a9c0-93c41418810e/aulas/6f4bbe22-f5cc-4cfd-a176-68efd6b3859f",
 			"tec": "https://www.tecconcursos.com.br/s/Q6bLxX",
 			"tecExtras": [
-				"https://www.tecconcursos.com.br/s/Q7BaxZ"
+				{
+					"url": "https://www.tecconcursos.com.br/s/Q7BaxZ",
+					"rotulo": "Caderno extra 1",
+					"questoes": 55
+				}
 			],
 			"subitens": []
 		}

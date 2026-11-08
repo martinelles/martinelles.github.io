@@ -92,6 +92,16 @@ export function validarMissoes(bruto, onde) {
 							throw erro(`${ondeBloco}.itens[${k}].subitens[${j}]: sem cid ou cod`);
 					});
 				}
+				// item-aula maior que o dia: posição do pedaço e o total
+				if (it.parte !== undefined || it.partes !== undefined) {
+					if (
+						!Number.isInteger(it.parte) ||
+						!Number.isInteger(it.partes) ||
+						/** @type {number} */ (it.parte) < 1 ||
+						/** @type {number} */ (it.parte) > /** @type {number} */ (it.partes)
+					)
+						throw erro(`${ondeBloco}.itens[${k}]: parte/partes deveriam ser inteiros com parte ≤ partes`);
+				}
 			});
 		});
 	});

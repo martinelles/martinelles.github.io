@@ -132,6 +132,29 @@ python artifacts/missoes/plano.py catalogo-questoes/qconcursos/subitens ESTUDO.c
   regerar o plano (`plano_aulas.py --oficial`), `montar_artifacts.py`, `npm run importar` e
   publicar de novo: os placeholders `ag-` viram aulas de verdade.
 
+### Nota de execução (2026-11-08, melhorias pós-publicação)
+
+- **1 tarefa = 1 aula** (repartição do mesmo dia, commit `36e03d5`).
+- **"parte k de n"**: o gerador numera os pedaços da aula que atravessa dias (`parte`/`partes`
+  no item, só nos blocos "novo"); a Missão de hoje e a página das Missões mostram "parte 2 de 3"
+  junto do "continua". O validador do importador confere `parte ≤ partes`.
+- **Cadernos extras do TEC** no atalho da aula ("Caderno extra N (questões) ↗"): `tecExtras`
+  virou `{ url, rotulo?, questoes? }` com rótulo pareado por ordem na página de cadernos do PDF
+  (o rect da âncora cobre a célula toda, então o pareamento por posição falhava; validado
+  contra a leitura real da aula 4 de B1).
+- **"A seguir"**: linha no fim da Missão de hoje com as próximas 4 aulas depois do dia em vista.
+- **TEC também grava o lembrete** "Você parou aqui" (antes só o atalho da aula).
+- **Atualizador**: `scripts/coleta-mentoria/atualizar-mentoria.mjs` roda a cadeia inteira
+  (coletar → enriquecer → gerar → plano `--oficial` → montar artefatos → importar → check/teste);
+  reprocessa sempre as aulas ainda sem caderno (o professor adiciona aos poucos). Descoberta de
+  aula nova segue no navegador logado.
+- **Constantes compartilhadas**: `artifacts/missoes/constantes.py` (custos, simulados, cenários,
+  Q1/FOCO/Q2DET) usada pelo `plano_aulas.py` e pelo `plano_subitem.py` (ex `plano.py`, renomeado
+  para não regerar o plano antigo por engano).
+- Importador: as chaves válidas dos mapas passam a contar os subitens de dentro do item-aula
+  (o mapa de E2 4.1-4.2 tinha caído fora do plano). Verificado: 355 testes, e2e 257 + a falha
+  conhecida da deriva de Infra.
+
 ### Nota de execução (2026-11-08, repartição: 1 tarefa = 1 aula)
 
 Ela pediu no mesmo dia, depois de ver o plano no ar: com a aula como unidade, a tarefa do dia

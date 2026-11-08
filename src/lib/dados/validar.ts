@@ -208,8 +208,17 @@ function validarMentoria(c: Coletor, v: unknown, caminho: string) {
 			c.add(`${onde}.tec`, 'deveria ser URL https do TEC Concursos');
 		if ('tecExtras' in a) {
 			const extras = a.tecExtras;
-			if (!Array.isArray(extras) || extras.some((u) => typeof u !== 'string' || !/^https:\/\/www\.tecconcursos\.com\.br\//.test(u)))
-				c.add(`${onde}.tecExtras`, 'deveria ser lista de URLs https do TEC Concursos');
+			if (
+				!Array.isArray(extras) ||
+				extras.some(
+					(e) =>
+						!ehObjeto(e) ||
+						typeof e.url !== 'string' ||
+						!/^https:\/\/www\.tecconcursos\.com\.br\//.test(e.url) ||
+						(e.questoes !== undefined && !Number.isInteger(e.questoes))
+				)
+			)
+				c.add(`${onde}.tecExtras`, 'deveria ser lista de { url https do TEC Concursos, rotulo?, questoes? }');
 		}
 		if (!Array.isArray(a.subitens) || a.subitens.some((s) => typeof s !== 'string'))
 			c.add(`${onde}.subitens`, 'deveria ser lista de chaves de subitem');

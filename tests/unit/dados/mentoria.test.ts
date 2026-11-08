@@ -73,6 +73,17 @@ describe('validarMentoria', () => {
 		expect(validar).toThrow(/aulas\[1\].id.*repetido/);
 	});
 
+	it('caderno extra precisa de URL do TEC e de contagem inteira', () => {
+		const boa = dados.mentoria?.aulas?.find((a) => a.tecExtras?.length)!;
+		const torto = mentoria({
+			...base().mentoria!,
+			aulas: [
+				{ ...boa, tecExtras: [{ url: 'https://qconcursos.com/x' }, { url: boa.tecExtras![0].url, questoes: 'muitas' }] }
+			]
+		});
+		expect(() => validarDados(torto)).toThrow(/tecExtras.*TEC Concursos/);
+	});
+
 	it('mentoria ausente continua válida (o campo é opcional como o config)', () => {
 		const semMentoria = base();
 		delete semMentoria.mentoria;

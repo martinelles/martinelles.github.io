@@ -37,7 +37,8 @@ function analisar(latin) {
 	return { tecs: [...tecs], paginas: counts.length ? Math.max(...counts) : null };
 }
 
-const pendentes = dados.aulas.filter((a) => a.url && !a.tecs);
+// Reprocessa sempre as aulas ainda sem caderno (o professor adiciona aos poucos) e as novas.
+const pendentes = dados.aulas.filter((a) => a.url && !(a.tecs ?? []).length);
 let ok = 0;
 let falhas = [];
 for (const aula of pendentes) {

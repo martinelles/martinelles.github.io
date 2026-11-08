@@ -348,6 +348,60 @@ test('a partir de 09/11 o estudo novo é por aula da mentoria, com atalho de aul
 	if (aula.tec) await expect(item.getByRole('link', { name: 'Questões no TEC ↗' })).toHaveAttribute('href', aula.tec);
 });
 
+test('aula maior que o dia mostra "parte k de n" e continua no dia seguinte', async ({ page }) => {
+	const aulaLonga = missoesCd.plan
+		.flatMap((d) => d.blocos.flatMap((b) => (b.itens ?? []) as { partes?: number }[]))
+		.find((i) => (i.partes ?? 0) > 1) as unknown as { cid: string; cod: string; partes: number; parte: number };
+	expect(aulaLonga).toBeTruthy();
+	const primeiroDia = missoesCd.plan.find((d) =>
+		d.blocos.some((b) => (b.itens ?? []).some((i) => i.cid === aulaLonga.cid && i.parte === 1))
+	)!;
+	await page.clock.setFixedTime(new Date(`${primeiroDia.data}T09:00:00-03:00`));
+	await page.goto('/painel');
+	const item = missao(page).locator('li:not(.bloco)', { hasText: aulaLonga.cod }).first();
+	await expect(item).toContainText(`parte 1 de ${aulaLonga.partes}`);
+	await expect(item).toContainText('continua');
+});
+
+test('aula com cadernos extras mostra os extras do TEC com a contagem', async ({ page }) => {
+	const alvo = missoesCd.plan
+		.map((d) => ({ d, it: d.blocos.flatMap((b) => b.itens ?? []).find((i) => i.subitens && mentoria.aulas!.find((a) => a.id === i.cid)?.tecExtras?.length) }))
+		.find((x) => x.it)!;
+	await page.clock.setFixedTime(new Date(`${alvo.d.data}T09:00:00-03:00`));
+	await page.goto('/painel');
+	const extras = mentoria.aulas!.find((a) => a.id === alvo.it!.cid)!.tecExtras!;
+	const item = missao(page).locator('li:not(.bloco)').filter({ hasText: alvo.it!.texto.slice(0, 20) }).first();
+	await expect(item.getByRole('link', { name: `${extras[0].rotulo} (${extras[0].questoes}) ↗` })).toHaveAttribute('href', extras[0].url);
+});
+
+test('abrir o caderno do TEC também vira o lembrete "Você parou aqui"', async ({ page, context }) => {
+	await simularApi(page);
+	await context.route('**/*tecconcursos.com.br/**', (rota) => rota.fulfill({ body: 'TEC' }));
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	const alvo = missoesCd.plan
+		.map((d) => ({ d, it: d.blocos.flatMap((b) => b.itens ?? []).find((i) => i.subitens && mentoria.aulas!.find((a) => a.id === i.cid)?.tec) }))
+		.find((x) => x.it)!;
+	await page.clock.setFixedTime(new Date(`${alvo.d.data}T09:00:00-03:00`));
+	await page.goto('/painel');
+	const item = missao(page).locator('li:not(.bloco)').filter({ hasText: alvo.it!.texto.slice(0, 20) }).first();
+	const [aba] = await Promise.all([context.waitForEvent('page'), item.getByRole('link', { name: 'Questões no TEC ↗' }).click()]);
+	await aba.close();
+	await page.reload();
+	await expect(missao(page).locator('li.em-andamento')).toHaveCount(1);
+	await expect(missao(page).locator('li.em-andamento')).toContainText('Você parou aqui');
+});
+
+test('a linha "A seguir" mostra as próximas aulas depois do dia em vista', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-11-09T09:00:00-03:00'));
+	await page.goto('/painel');
+	const aSeguir = missao(page).locator('p.a-seguir');
+	await expect(aSeguir).toBeVisible();
+	const proxima = missoesCd.plan
+		.flatMap((d) => d.blocos.flatMap((b) => (b.itens ?? []) as { cod: string; subitens?: unknown[] }[]).map((i) => ({ d, i })))
+		.find((x) => x.d.data > '2026-11-09' && x.i.subitens)!;
+	await expect(aSeguir).toContainText(proxima.i.cod);
+});
+
 test('o seletor de dia mostra a missão de qualquer data e volta para hoje', async ({ page }) => {
 	await page.goto('/painel');
 	const secao = missao(page);

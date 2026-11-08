@@ -1,6 +1,9 @@
 // Reprocessa os PDFs com o pdf.js local e enriquece o catálogo: para cada aula, páginas
 // exatas e cadernos do TEC na ordem, com rótulo ("Caderno do tópico, N questões" ou
 // "Caderno extra k, N questões") e link. O primeiro "Caderno do tópico" é o principal.
+// Aulas com caderno ficam; sem caderno reprocessam a cada execução (o professor adiciona
+// aos poucos). Para reprocessar tudo (por exemplo, depois de mexer aqui), apague
+// `tecDetalhe` das aulas em aulas.json.
 // Requer pdfjs-dist fora do package.json: `npm install pdfjs-dist --no-save` antes de rodar.
 // Uso: node enriquecer-tecs.mjs            (lê/escreve scripts/coleta-mentoria/aulas.json)
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -13,7 +16,8 @@ let feitas = 0;
 let semCaderno = 0;
 const falhas = [];
 for (const aula of cat.aulas) {
-	if (!aula.url || aula.tecDetalhe) continue;
+	const d = aula.tecDetalhe;
+	if (!aula.url || (d && (d.principal || d.extras.length))) continue;
 	const uuid = aula.url.split('/').at(-1);
 	try {
 		const doc = await pdfjs.getDocument({ url: S3 + uuid, isEvalSupported: false }).promise;
@@ -23,7 +27,7 @@ for (const aula of cat.aulas) {
 			const page = await doc.getPage(n);
 			const anots = (await page.getAnnotations())
 				.filter((a) => /tecconcursos/i.test(a.url ?? a.unsafeUrl ?? ''))
-				.sort((x, y) => y.rect[1] - x.rect[1]);
+				.sort((x, y) => y.rect[3] - x.rect[3]); // pelo topo do rect: ordem de leitura
 			if (!anots.length) continue;
 			const texto = await page.getTextContent();
 			const linhas = new Map();
@@ -32,40 +36,37 @@ for (const aula of cat.aulas) {
 				const y = Math.round(it.transform[5] / 3) * 3;
 				linhas.set(y, (linhas.get(y) ?? '') + it.str);
 			}
-			const ordenadas = [...linhas.entries()].sort((a, b) => b[0] - a[0]).map(([, t]) => t);
-			for (const a of anots) {
-				const url = a.url ?? a.unsafeUrl;
-				const yPdf = a.rect[1] / 3;
-				const perto = ordenadas.filter(([y]) => Math.abs(y - yPdf) < 16).join(' ');
-				const rotulo = /Caderno (do tópico|extra \d+)[^\d]*(\d+)?\s*quest/i.exec(
-					ordenadas.join(' ').slice(0, 4000)
-				);
-				// rótulo pela linha vizinha à altura do link (a URL impressa está na linha do caderno)
-				let rot = null;
-				for (const [y, t] of [...linhas.entries()].sort((a, b) => b[0] - a[0])) {
-					if (Math.abs(y - yPdf) < 30) {
-						const m = /Caderno (do tópico|extra \d+)/i.exec(t);
-						if (m) {
-							rot = m[0];
-							break;
-						}
-					}
-				}
-				const mQ = /(\d+)\s*quest/i.exec(
-					[...linhas.entries()]
-						.filter(([y]) => Math.abs(y - yPdf) < 40)
-						.map(([, t]) => t)
-						.join(' ')
-				);
-				cadernos.push({ url, rotulo: rot ?? rotulo?.[0] ?? null, questoes: mQ ? Number(mQ[1]) : null });
+			// cabeçalhos "Caderno do tópico/extra N" com a contagem do próprio bloco (título +
+			// linhas logo abaixo). O rect da âncora cobre a célula inteira da tabela, então o
+			// pareamento confiável é por ordem: k-ésimo link ↔ k-ésimo cabeçalho da página.
+			const ordenadas = [...linhas.entries()].sort((a, b) => b[0] - a[0]);
+			const cabecalhos = [];
+			for (const [y, t] of ordenadas) {
+				const m = /Caderno (do tópico|extra \d+)/i.exec(t);
+				if (!m) continue;
+				const bloco = ordenadas
+					.filter(([yy]) => yy <= y && yy > y - 16)
+					.map(([, tt]) => tt)
+					.join(' ');
+				const mq = /(\d+)\s*quest/i.exec(bloco);
+				cabecalhos.push({ y, rotulo: m[0], questoes: mq ? Number(mq[1]) : null });
 			}
+			const porOrdem = anots.length === cabecalhos.length;
+			anots.forEach((a, idx) => {
+				const url = a.url ?? a.unsafeUrl;
+				const cab = porOrdem
+					? cabecalhos[idx]
+					: (cabecalhos.filter((c) => c.y >= a.rect[3] / 3 - 6).sort((p, q) => p.y - q.y)[0] ?? null);
+				cadernos.push({ url, rotulo: cab?.rotulo ?? null, questoes: cab?.questoes ?? null });
+			});
 		}
-		// principal: o primeiro com rótulo "Caderno do tópico"; sem rótulo, o primeiro
 		const principal = cadernos.find((c) => /do tópico/i.test(c.rotulo ?? '')) ?? cadernos[0] ?? null;
 		aula.tecDetalhe = {
 			principal: principal?.url ?? null,
 			questoes: principal?.questoes ?? null,
-			extras: cadernos.filter((c) => c !== principal).map((c) => ({ url: c.url, rotulo: c.rotulo, questoes: c.questoes }))
+			extras: cadernos
+				.filter((c) => c !== principal)
+				.map((c) => ({ url: c.url, rotulo: c.rotulo, questoes: c.questoes }))
 		};
 		if (!cadernos.length) semCaderno++;
 		feitas++;

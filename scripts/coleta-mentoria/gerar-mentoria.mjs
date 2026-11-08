@@ -57,7 +57,12 @@ for (const disc of ORDEM) {
 			url: BASE + a.url
 		};
 		if (a.tecDetalhe.principal) entrada.tec = a.tecDetalhe.principal;
-		if (a.tecDetalhe.extras.length) entrada.tecExtras = a.tecDetalhe.extras.map((e) => e.url);
+		if (a.tecDetalhe.extras.length)
+			entrada.tecExtras = a.tecDetalhe.extras.map((e) => ({
+				url: e.url,
+				...(e.rotulo ? { rotulo: e.rotulo } : {}),
+				...(Number.isInteger(e.questoes) ? { questoes: e.questoes } : {})
+			}));
 		entrada.subitens = subitensDaAula(a);
 		aulas.push(entrada);
 	}

@@ -302,7 +302,10 @@ export function importar({ vault, saida }) {
 	for (const [c, fonte] of Object.entries(fontesMissoes)) {
 		for (const d of JSON.parse(fonte).plan)
 			for (const b of d.blocos)
-				for (const it of b.itens ?? []) chavesValidas.add(chaveLink(c, it.cod));
+				for (const it of b.itens ?? []) {
+					// item-aula: a chave vem dos subitens de dentro, não do código da aula
+					for (const alvo of it.subitens ?? [it]) chavesValidas.add(chaveLink(c, alvo.cod));
+				}
 	}
 	const dirResumos = join(vault, 'resumos');
 	/** @type {string[]} */

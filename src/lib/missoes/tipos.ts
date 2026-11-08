@@ -25,6 +25,9 @@ export interface ItemBloco {
 	lab?: string;
 	/** Item-aula: subitens do edital cobertos pela aula, como referência (mapas, questões do feed). */
 	subitens?: { cid: string; cod: string }[];
+	/** Item-aula maior que o dia: posição do pedaço de hoje e o total de pedaços. */
+	parte?: number;
+	partes?: number;
 }
 
 export interface Bloco {

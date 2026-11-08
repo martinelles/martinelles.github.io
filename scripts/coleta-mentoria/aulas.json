@@ -276,7 +276,7 @@
 			"bytes": 2436992,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q71Fz9",
-				"questoes": null,
+				"questoes": 70,
 				"extras": []
 			}
 		},
@@ -293,7 +293,7 @@
 			"bytes": 2565385,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q71FzB",
-				"questoes": null,
+				"questoes": 13,
 				"extras": []
 			}
 		},
@@ -340,7 +340,7 @@
 			"bytes": 2388690,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6j8hJ",
-				"questoes": null,
+				"questoes": 22,
 				"extras": []
 			}
 		},
@@ -362,32 +362,32 @@
 			"bytes": 2575905,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6li0m",
-				"questoes": null,
+				"questoes": 186,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6li1Q",
-						"rotulo": "Caderno do tópico, 186 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 71
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6li2L",
-						"rotulo": "Caderno do tópico, 186 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 48
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6li34",
-						"rotulo": "Caderno do tópico, 186 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 45
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6li5N",
-						"rotulo": "Caderno do tópico, 186 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 63
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pAeF",
-						"rotulo": "Caderno do tópico, 186 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 127
 					}
 				]
 			}
@@ -405,7 +405,7 @@
 			"bytes": 2505975,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pByb",
-				"questoes": null,
+				"questoes": 70,
 				"extras": []
 			}
 		},
@@ -422,7 +422,7 @@
 			"bytes": 2501948,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pByL",
-				"questoes": null,
+				"questoes": 128,
 				"extras": []
 			}
 		},
@@ -440,12 +440,12 @@
 			"bytes": 2499274,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q76KTR",
-				"questoes": null,
+				"questoes": 290,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTW",
-						"rotulo": "Caderno do tópico, 290 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 84
 					}
 				]
 			}
@@ -464,12 +464,12 @@
 			"bytes": 2450340,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pC2N",
-				"questoes": null,
+				"questoes": 34,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pAnE",
-						"rotulo": "Caderno do tópico, 34 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 102
 					}
 				]
 			}
@@ -562,7 +562,7 @@
 			"bytes": 2580039,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Bm69",
-				"questoes": null,
+				"questoes": 280,
 				"extras": []
 			}
 		},
@@ -579,7 +579,7 @@
 			"bytes": 2569737,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q76KVB",
-				"questoes": null,
+				"questoes": 111,
 				"extras": []
 			}
 		},
@@ -596,7 +596,7 @@
 			"bytes": 2519408,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6j8fN",
-				"questoes": null,
+				"questoes": 33,
 				"extras": []
 			}
 		},
@@ -628,7 +628,7 @@
 			"bytes": 2407635,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4p9ro",
-				"questoes": null,
+				"questoes": 226,
 				"extras": []
 			}
 		},
@@ -647,23 +647,23 @@
 			"paginas": 21,
 			"bytes": 2559969,
 			"tecDetalhe": {
-				"principal": "https://www.tecconcursos.com.br/s/Q4pAkx",
-				"questoes": null,
+				"principal": "https://www.tecconcursos.com.br/s/Q4pAla",
+				"questoes": 260,
 				"extras": [
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q4pAla",
+						"url": "https://www.tecconcursos.com.br/s/Q4pAkx",
 						"rotulo": "Caderno extra 1",
 						"questoes": 117
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KV0",
-						"rotulo": "Caderno extra 2, 99 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 99
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KVE",
-						"rotulo": "Caderno extra 2, 99 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 3
 					}
 				]
 			}
@@ -681,7 +681,7 @@
 			"bytes": 2512141,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pAfd",
-				"questoes": null,
+				"questoes": 214,
 				"extras": []
 			}
 		},
@@ -700,23 +700,23 @@
 			"paginas": 21,
 			"bytes": 2564887,
 			"tecDetalhe": {
-				"principal": "https://www.tecconcursos.com.br/s/Q4p9dX",
-				"questoes": null,
+				"principal": "https://www.tecconcursos.com.br/s/Q71Fk8",
+				"questoes": 40,
 				"extras": [
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q71Fk8",
-						"rotulo": "Caderno extra 3",
-						"questoes": 210
+						"url": "https://www.tecconcursos.com.br/s/Q4p9bb",
+						"rotulo": "Caderno extra 1",
+						"questoes": 91
 					},
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q4p9bb",
-						"rotulo": "Caderno extra 3",
-						"questoes": 210
+						"url": "https://www.tecconcursos.com.br/s/Q4p9dX",
+						"rotulo": "Caderno extra 2",
+						"questoes": 72
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pAd3",
-						"rotulo": "Caderno do tópico, 40 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 210
 					}
 				]
 			}
@@ -734,7 +734,7 @@
 			"bytes": 2469104,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q76KUy",
-				"questoes": null,
+				"questoes": 94,
 				"extras": []
 			}
 		},
@@ -843,17 +843,17 @@
 			"bytes": 2520200,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q71FkN",
-				"questoes": null,
+				"questoes": 61,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q71Fmr",
-						"rotulo": "Caderno do tópico, 61 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 10
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q71FnE",
-						"rotulo": "Caderno do tópico, 61 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 32
 					}
 				]
 			}
@@ -901,7 +901,7 @@
 			"bytes": 2506327,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q71Fll",
-				"questoes": null,
+				"questoes": 58,
 				"extras": []
 			}
 		},
@@ -918,7 +918,7 @@
 			"bytes": 2474756,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6j8XT",
-				"questoes": null,
+				"questoes": 19,
 				"extras": []
 			}
 		},
@@ -1047,17 +1047,17 @@
 			"bytes": 2722733,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pT33",
-				"questoes": null,
+				"questoes": 127,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pT53",
-						"rotulo": "Caderno do tópico, 127 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 85
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pT3a",
-						"rotulo": "Caderno do tópico, 127 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 19
 					}
 				]
 			}
@@ -1079,27 +1079,27 @@
 			"bytes": 2673987,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q76KTb",
-				"questoes": null,
+				"questoes": 160,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTU",
-						"rotulo": "Caderno do tópico, 160 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 48
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTY",
-						"rotulo": "Caderno do tópico, 160 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 68
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTr",
-						"rotulo": "Caderno do tópico, 160 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 136
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTv",
-						"rotulo": "Caderno do tópico, 160 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 144
 					}
 				]
 			}
@@ -1126,52 +1126,52 @@
 			"bytes": 2647396,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q76KTe",
-				"questoes": 96,
+				"questoes": 76,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTg",
-						"rotulo": "Caderno do tópico, 76 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 131
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTi",
-						"rotulo": "Caderno do tópico, 76 quest",
-						"questoes": 39
+						"rotulo": "Caderno extra 2",
+						"questoes": 61
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KTs",
-						"rotulo": "Caderno extra 9",
-						"questoes": 39
+						"rotulo": "Caderno extra 3",
+						"questoes": 182
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pBC2",
-						"rotulo": "Caderno extra 9",
-						"questoes": 39
+						"rotulo": "Caderno extra 4",
+						"questoes": 180
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pB18",
-						"rotulo": "Caderno extra 9",
-						"questoes": 39
+						"rotulo": "Caderno extra 5",
+						"questoes": 40
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KU1",
-						"rotulo": "Caderno do tópico, 76 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 6",
+						"questoes": 117
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KU5",
-						"rotulo": "Caderno do tópico, 76 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 7",
+						"questoes": 53
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KU8",
-						"rotulo": "Caderno do tópico, 76 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 8",
+						"questoes": 96
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KUC",
-						"rotulo": "Caderno do tópico, 76 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 9",
+						"questoes": 39
 					}
 				]
 			}
@@ -1194,32 +1194,32 @@
 			"bytes": 2570567,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pJvV",
-				"questoes": null,
+				"questoes": 147,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pJxZ",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 88
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pJxr",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 47
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pJy6",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 49
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pJzb",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 56
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pJzu",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 43
 					}
 				]
 			}
@@ -1237,7 +1237,7 @@
 			"bytes": 2519262,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pK29",
-				"questoes": null,
+				"questoes": 30,
 				"extras": []
 			}
 		},
@@ -1260,43 +1260,43 @@
 			"paginas": 21,
 			"bytes": 2604038,
 			"tecDetalhe": {
-				"principal": "https://www.tecconcursos.com.br/s/Q76KUl",
-				"questoes": null,
+				"principal": "https://www.tecconcursos.com.br/s/Q76KUd",
+				"questoes": 8,
 				"extras": [
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q76KUd",
-						"rotulo": "Caderno extra 7",
-						"questoes": 28
+						"url": "https://www.tecconcursos.com.br/s/Q76KUg",
+						"rotulo": "Caderno extra 1",
+						"questoes": 27
 					},
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q76KUg",
-						"rotulo": "Caderno extra 7",
-						"questoes": 28
+						"url": "https://www.tecconcursos.com.br/s/Q76KUl",
+						"rotulo": "Caderno extra 2",
+						"questoes": 19
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KUn",
-						"rotulo": "Caderno do tópico, 8 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 9
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pK2k",
-						"rotulo": "Caderno do tópico, 8 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 1
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KUr",
-						"rotulo": "Caderno do tópico, 8 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 12
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pJx0",
-						"rotulo": "Caderno do tópico, 8 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 6",
+						"questoes": 97
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pKlt",
-						"rotulo": "Caderno do tópico, 8 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 7",
+						"questoes": 28
 					}
 				]
 			}
@@ -1321,7 +1321,7 @@
 			"bytes": 2585032,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q76KVM",
-				"questoes": null,
+				"questoes": 10,
 				"extras": []
 			}
 		},
@@ -1435,7 +1435,7 @@
 			"bytes": 2695444,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pTl8",
-				"questoes": null,
+				"questoes": 260,
 				"extras": []
 			}
 		},
@@ -1531,32 +1531,32 @@
 			"bytes": 2721617,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pSoh",
-				"questoes": null,
+				"questoes": 52,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSp4",
-						"rotulo": "Caderno do tópico, 52 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 113
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSpd",
+						"rotulo": "Caderno extra 2",
+						"questoes": 160
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSq2",
+						"rotulo": "Caderno extra 3",
+						"questoes": 163
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q4pSqO",
 						"rotulo": "Caderno extra 4",
 						"questoes": 86
 					},
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q4pSq2",
+						"url": "https://www.tecconcursos.com.br/s/Q4pSxb",
 						"rotulo": "Caderno extra 5",
 						"questoes": 73
-					},
-					{
-						"url": "https://www.tecconcursos.com.br/s/Q4pSqO",
-						"rotulo": "Caderno extra 2, 160 quest",
-						"questoes": null
-					},
-					{
-						"url": "https://www.tecconcursos.com.br/s/Q4pSxb",
-						"rotulo": "Caderno extra 2, 160 quest",
-						"questoes": null
 					}
 				]
 			}
@@ -1579,32 +1579,32 @@
 			"bytes": 2761589,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pSr2",
-				"questoes": null,
+				"questoes": 254,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSrl",
-						"rotulo": "Caderno extra 1, 152 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 152
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSsB",
-						"rotulo": "Caderno extra 1, 152 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 162
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSsq",
-						"rotulo": "Caderno extra 1, 152 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 257
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSuX",
-						"rotulo": "Caderno extra 4, 72 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 72
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BauO",
-						"rotulo": "Caderno extra 4, 72 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 84
 					}
 				]
 			}
@@ -1625,22 +1625,22 @@
 			"bytes": 2658765,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pSvD",
-				"questoes": null,
+				"questoes": 137,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pT17",
-						"rotulo": "Caderno do tópico, 137 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 48
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSvp",
-						"rotulo": "Caderno do tópico, 137 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 7
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bax2",
-						"rotulo": "Caderno do tópico, 137 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 23
 					}
 				]
 			}
@@ -1658,7 +1658,7 @@
 			"bytes": 3073484,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFIz",
-				"questoes": null,
+				"questoes": 108,
 				"extras": []
 			}
 		},
@@ -1676,12 +1676,12 @@
 			"bytes": 2822678,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFH2",
-				"questoes": null,
+				"questoes": 86,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pFJP",
-						"rotulo": "Caderno do tópico, 86 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 68
 					}
 				]
 			}
@@ -1704,32 +1704,32 @@
 			"bytes": 2973982,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFFV",
-				"questoes": null,
+				"questoes": 127,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pFG1",
-						"rotulo": "Caderno do tópico, 127 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 78
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pFKA",
-						"rotulo": "Caderno do tópico, 127 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 98
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pFGL",
-						"rotulo": "Caderno do tópico, 127 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 287
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6MSQr",
-						"rotulo": "Caderno do tópico, 127 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 125
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bcgq",
-						"rotulo": "Caderno extra 5, 48 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 48
 					}
 				]
 			}
@@ -1749,17 +1749,17 @@
 			"bytes": 3273117,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFGE",
-				"questoes": null,
+				"questoes": 33,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bax6",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 204
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bax8",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 85
 					}
 				]
 			}
@@ -1779,17 +1779,17 @@
 			"bytes": 2870835,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pEGQ",
-				"questoes": null,
+				"questoes": 91,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pEDR",
-						"rotulo": "Caderno do tópico, 91 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 92
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxC",
-						"rotulo": "Caderno do tópico, 91 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 16
 					}
 				]
 			}
@@ -1809,17 +1809,17 @@
 			"bytes": 2645323,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFIV",
-				"questoes": null,
+				"questoes": 147,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pFKr",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 62
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6bLwD",
-						"rotulo": "Caderno do tópico, 147 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 45
 					}
 				]
 			}
@@ -1838,12 +1838,12 @@
 			"bytes": 2764966,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6bLx8",
-				"questoes": null,
+				"questoes": 59,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pFE3",
-						"rotulo": "Caderno do tópico, 59 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 20
 					}
 				]
 			}
@@ -1862,12 +1862,12 @@
 			"bytes": 2847231,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFJv",
-				"questoes": null,
+				"questoes": 183,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6lhbw",
-						"rotulo": "Caderno do tópico, 183 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 12
 					}
 				]
 			}
@@ -1886,12 +1886,12 @@
 			"bytes": 2781206,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6bLxK",
-				"questoes": null,
+				"questoes": 233,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pSx8",
-						"rotulo": "Caderno extra 1, 36 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 36
 					}
 				]
 			}
@@ -1909,7 +1909,7 @@
 			"bytes": 2644062,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BcgR",
-				"questoes": null,
+				"questoes": 44,
 				"extras": []
 			}
 		},
@@ -1926,7 +1926,7 @@
 			"bytes": 2672476,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BcgR",
-				"questoes": null,
+				"questoes": 44,
 				"extras": []
 			}
 		},
@@ -1943,7 +1943,7 @@
 			"bytes": 2702076,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BcgT",
-				"questoes": null,
+				"questoes": 72,
 				"extras": []
 			}
 		},
@@ -1961,12 +1961,12 @@
 			"bytes": 2706782,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFHX",
-				"questoes": null,
+				"questoes": 35,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BcgY",
-						"rotulo": "Caderno do tópico, 35 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 18
 					}
 				]
 			}
@@ -1984,7 +1984,7 @@
 			"bytes": 2556677,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BcgY",
-				"questoes": null,
+				"questoes": 18,
 				"extras": []
 			}
 		},
@@ -2002,12 +2002,12 @@
 			"bytes": 2734774,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BaxG",
-				"questoes": null,
+				"questoes": 74,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BcgZ",
-						"rotulo": "Caderno do tópico, 74 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 123
 					}
 				]
 			}
@@ -2026,12 +2026,12 @@
 			"bytes": 2683829,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFIh",
-				"questoes": null,
+				"questoes": 302,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxL",
-						"rotulo": "Caderno do tópico, 302 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 173
 					}
 				]
 			}
@@ -2068,27 +2068,27 @@
 			"bytes": 2840633,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pEBc",
-				"questoes": null,
+				"questoes": 162,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pE2r",
-						"rotulo": "Caderno do tópico, 162 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 49
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxU",
-						"rotulo": "Caderno do tópico, 162 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 14
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bcge",
-						"rotulo": "Caderno do tópico, 162 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 43
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pEB2",
-						"rotulo": "Caderno do tópico, 162 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 267
 					}
 				]
 			}
@@ -2107,12 +2107,12 @@
 			"bytes": 2852394,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6bLxX",
-				"questoes": null,
+				"questoes": 130,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxZ",
-						"rotulo": "Caderno do tópico, 130 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 55
 					}
 				]
 			}
@@ -2142,38 +2142,38 @@
 			"paginas": 38,
 			"bytes": 3050418,
 			"tecDetalhe": {
-				"principal": "https://www.tecconcursos.com.br/s/Q7BlxJ",
-				"questoes": null,
+				"principal": "https://www.tecconcursos.com.br/s/Q7BlxD",
+				"questoes": 196,
 				"extras": [
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q7BlxD",
+						"url": "https://www.tecconcursos.com.br/s/Q7BlxJ",
+						"rotulo": "Caderno extra 1",
+						"questoes": 93
+					},
+					{
+						"url": "https://www.tecconcursos.com.br/s/Q7BlxQ",
 						"rotulo": "Caderno extra 2",
 						"questoes": 45
 					},
 					{
-						"url": "https://www.tecconcursos.com.br/s/Q7BlxQ",
-						"rotulo": "Caderno do tópico, 196 quest",
-						"questoes": null
-					},
-					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BlxV",
-						"rotulo": "Caderno extra 3, 42 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 42
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Blxb",
-						"rotulo": "Caderno extra 3, 42 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 167
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Blxj",
-						"rotulo": "Caderno extra 3, 42 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 9
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6MS9B",
-						"rotulo": "Caderno extra 3, 42 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 6",
+						"questoes": 16
 					}
 				]
 			}
@@ -2194,22 +2194,22 @@
 			"bytes": 2989300,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Blxq",
-				"questoes": null,
+				"questoes": 85,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Blxy",
-						"rotulo": "Caderno do tópico, 85 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 78
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bly4",
-						"rotulo": "Caderno do tópico, 85 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 86
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BlyF",
-						"rotulo": "Caderno do tópico, 85 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 106
 					}
 				]
 			}
@@ -2228,12 +2228,12 @@
 			"bytes": 2872440,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Blyd",
-				"questoes": null,
+				"questoes": 65,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Blyp",
-						"rotulo": "Caderno do tópico, 65 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 14
 					}
 				]
 			}
@@ -2254,22 +2254,22 @@
 			"bytes": 3080027,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6MSQr",
-				"questoes": 44,
+				"questoes": 125,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BlzC",
-						"rotulo": "Caderno do tópico, 125 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 44
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bcgq",
-						"rotulo": "Caderno extra 2, 48 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 48
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bax8",
-						"rotulo": "Caderno extra 2, 48 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 85
 					}
 				]
 			}
@@ -2289,17 +2289,17 @@
 			"bytes": 3210076,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFGE",
-				"questoes": null,
+				"questoes": 33,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bax6",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 204
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BlzI",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 45
 					}
 				]
 			}
@@ -2317,7 +2317,7 @@
 			"bytes": 2760375,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFIh",
-				"questoes": null,
+				"questoes": 302,
 				"extras": []
 			}
 		},
@@ -2335,12 +2335,12 @@
 			"bytes": 2851330,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BaxL",
-				"questoes": null,
+				"questoes": 173,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BlzR",
-						"rotulo": "Caderno do tópico, 173 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 25
 					}
 				]
 			}
@@ -2359,12 +2359,12 @@
 			"bytes": 2838142,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BlzV",
-				"questoes": null,
+				"questoes": 25,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6bLwD",
-						"rotulo": "Caderno do tópico, 25 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 45
 					}
 				]
 			}
@@ -2384,17 +2384,17 @@
 			"bytes": 2754986,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7BcgZ",
-				"questoes": null,
+				"questoes": 123,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxG",
-						"rotulo": "Caderno do tópico, 123 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 74
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Blze",
-						"rotulo": "Caderno do tópico, 123 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 21
 					}
 				]
 			}
@@ -2432,32 +2432,32 @@
 			"bytes": 2897537,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Blzo",
-				"questoes": null,
+				"questoes": 83,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Blzy",
-						"rotulo": "Caderno do tópico, 83 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 180
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm09",
-						"rotulo": "Caderno do tópico, 83 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 49
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm0N",
-						"rotulo": "Caderno do tópico, 83 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 106
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm0W",
-						"rotulo": "Caderno extra 4, 93 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 93
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm0b",
-						"rotulo": "Caderno extra 4, 93 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 46
 					}
 				]
 			}
@@ -2479,27 +2479,27 @@
 			"bytes": 3046787,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Bm0h",
-				"questoes": null,
+				"questoes": 103,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm0l",
-						"rotulo": "Caderno do tópico, 103 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 70
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm19",
-						"rotulo": "Caderno do tópico, 103 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 178
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm1I",
-						"rotulo": "Caderno do tópico, 103 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 108
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm1V",
-						"rotulo": "Caderno do tópico, 103 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 33
 					}
 				]
 			}
@@ -2519,17 +2519,17 @@
 			"bytes": 2812608,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Bm1f",
-				"questoes": null,
+				"questoes": 34,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm1k",
-						"rotulo": "Caderno do tópico, 34 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 23
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm1r",
-						"rotulo": "Caderno do tópico, 34 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 8
 					}
 				]
 			}
@@ -2548,12 +2548,12 @@
 			"bytes": 2930769,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Bm24",
-				"questoes": null,
+				"questoes": 35,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm29",
-						"rotulo": "Caderno do tópico, 35 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 24
 					}
 				]
 			}
@@ -2571,7 +2571,7 @@
 			"bytes": 2812666,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pFJv",
-				"questoes": null,
+				"questoes": 183,
 				"extras": []
 			}
 		},
@@ -2589,12 +2589,12 @@
 			"bytes": 2786765,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6Jy6Y",
-				"questoes": null,
+				"questoes": 54,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm2H",
-						"rotulo": "Caderno do tópico, 54 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 67
 					}
 				]
 			}
@@ -2613,12 +2613,12 @@
 			"bytes": 3127049,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6Jy8l",
-				"questoes": null,
+				"questoes": 16,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm2O",
-						"rotulo": "Caderno do tópico, 16 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 24
 					}
 				]
 			}
@@ -2654,22 +2654,22 @@
 			"bytes": 3077184,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pE0V",
-				"questoes": null,
+				"questoes": 181,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm2Z",
-						"rotulo": "Caderno do tópico, 181 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 16
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pEBc",
-						"rotulo": "Caderno do tópico, 181 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 162
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bcge",
-						"rotulo": "Caderno do tópico, 181 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 43
 					}
 				]
 			}
@@ -2694,42 +2694,42 @@
 			"bytes": 2945360,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q7Bm2l",
-				"questoes": null,
+				"questoes": 33,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pDzx",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 116
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pE2r",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 49
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxU",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 14
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6lhbw",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 12
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6Jy4w",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 5",
+						"questoes": 129
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm2q",
-						"rotulo": "Caderno do tópico, 33 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 6",
+						"questoes": 151
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7Bm3E",
-						"rotulo": "Caderno extra 7, 13 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 7",
+						"questoes": 13
 					}
 				]
 			}
@@ -2748,12 +2748,12 @@
 			"bytes": 3135296,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q6bLxX",
-				"questoes": null,
+				"questoes": 130,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q7BaxZ",
-						"rotulo": "Caderno extra 1, 55 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 55
 					}
 				]
 			}
@@ -2778,7 +2778,7 @@
 			"bytes": 2509424,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pAiW",
-				"questoes": null,
+				"questoes": 46,
 				"extras": []
 			}
 		},
@@ -2796,12 +2796,12 @@
 			"bytes": 2592056,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pDVz",
-				"questoes": null,
+				"questoes": 379,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pBxb",
-						"rotulo": "Caderno do tópico, 379 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 29
 					}
 				]
 			}
@@ -2821,17 +2821,17 @@
 			"bytes": 2589580,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4p9tw",
-				"questoes": null,
+				"questoes": 193,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4p9ud",
-						"rotulo": "Caderno do tópico, 193 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 28
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4pT5h",
-						"rotulo": "Caderno do tópico, 193 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 9
 					}
 				]
 			}
@@ -2853,27 +2853,27 @@
 			"bytes": 2537002,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4p9ov",
-				"questoes": null,
+				"questoes": 66,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4p9sR",
-						"rotulo": "Caderno extra 1, 61 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 61
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4p9tV",
-						"rotulo": "Caderno extra 1, 61 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 2",
+						"questoes": 62
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4p9sD",
-						"rotulo": "Caderno extra 1, 61 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 3",
+						"questoes": 71
 					},
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q4p9bA",
-						"rotulo": "Caderno extra 1, 61 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 4",
+						"questoes": 157
 					}
 				]
 			}
@@ -2892,12 +2892,12 @@
 			"bytes": 2377034,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pBxr",
-				"questoes": null,
+				"questoes": 45,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q76KUE",
-						"rotulo": "Caderno do tópico, 45 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 10
 					}
 				]
 			}
@@ -2952,12 +2952,12 @@
 			"bytes": 2561814,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pTjf",
-				"questoes": null,
+				"questoes": 356,
 				"extras": [
 					{
 						"url": "https://www.tecconcursos.com.br/s/Q6liKs",
-						"rotulo": "Caderno do tópico, 356 quest",
-						"questoes": null
+						"rotulo": "Caderno extra 1",
+						"questoes": 297
 					}
 				]
 			}
@@ -2975,7 +2975,7 @@
 			"bytes": 2597614,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pTk4",
-				"questoes": null,
+				"questoes": 473,
 				"extras": []
 			}
 		},
@@ -2992,7 +2992,7 @@
 			"bytes": 2539610,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pB0i",
-				"questoes": null,
+				"questoes": 68,
 				"extras": []
 			}
 		},
@@ -3024,7 +3024,7 @@
 			"bytes": 2498789,
 			"tecDetalhe": {
 				"principal": "https://www.tecconcursos.com.br/s/Q4pAfD",
-				"questoes": null,
+				"questoes": 311,
 				"extras": []
 			}
 		}

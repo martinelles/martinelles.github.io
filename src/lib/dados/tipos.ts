@@ -107,8 +107,8 @@ export interface AulaMentoria {
 	url: string;
 	/** Caderno do tópico (TEC Concursos), quando a aula tem. */
 	tec?: string;
-	/** Cadernos extras da mesma aula. */
-	tecExtras?: string[];
+	/** Cadernos extras da mesma aula, com rótulo e nº de questões. */
+	tecExtras?: { url: string; rotulo?: string; questoes?: number }[];
 	/** Subitens cobertos (chave `B1-4.1`/`CD:E2-1.1`); aula sem mapeamento fica vazia. */
 	subitens: string[];
 }

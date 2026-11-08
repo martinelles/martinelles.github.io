@@ -60,6 +60,26 @@
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
 	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
 
+	/** As próximas aulas que vêm depois do dia em vista (item-aula), para a linha "A seguir". */
+	const aSeguir = $derived.by(() => {
+		if (!plano) return [];
+		const fora: { data: string; dow: string; cod: string; titulo: string }[] = [];
+		const vistos = new Set<string>();
+		for (const d of plano.plan) {
+			if (d.data <= escolhida) continue;
+			for (const b of d.blocos) {
+				if (b.tipo !== 'novo') continue;
+				for (const it of b.itens ?? []) {
+					if (!it.subitens || vistos.has(it.cid)) continue;
+					vistos.add(it.cid);
+					fora.push({ data: d.data, dow: d.dow, cod: it.cod, titulo: it.texto });
+				}
+			}
+			if (fora.length >= 4) break;
+		}
+		return fora.slice(0, 4);
+	});
+
 	// Relê a cada montagem: a página das Missões (no iframe de /artefato/missoes) grava na mesma chave.
 	carregarEmAndamento();
 	const lembrete = $derived(dia ? emAndamento.de(cargo, dia.data) : null);
@@ -166,6 +186,7 @@
 									{@const aulaInfo = it.subitens?.length ? aulaPorId(it.cid) : null}
 									{@const aula = aulaInfo?.url ?? aulaDaMentoria(cargo, it.cod)}
 									{@const tec = aulaInfo?.tec}
+									{@const extras = aulaInfo?.tecExtras ?? []}
 									{@const subs = it.subitens ?? []}
 									{@const nSub = (s: { cid: string }) => questoesPorTopico?.get(s.cid) ?? 0}
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
@@ -192,10 +213,11 @@
 										<span class="texto">
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
+											{#if it.partes && it.partes > 1}<em> · parte {it.parte} de {it.partes}</em>{/if}
 											{#if it.subitens?.length}
 												<em> · aula da mentoria, subitens {it.subitens.map((s) => s.cod).join(' · ')}</em>
 											{/if}
-											{#if aula || tec || temAtalhoSub || (!it.subitens && (nSub(it) > 0 || plano.mapas?.[it.cid]))}
+											{#if aula || tec || extras.length || temAtalhoSub || (!it.subitens && (nSub(it) > 0 || plano.mapas?.[it.cid]))}
 												<span class="atalhos">
 													{#if !it.subitens && nSub(it) > 0}
 														<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
@@ -227,15 +249,26 @@
 														</a>
 													{/if}
 													{#if tec}
-														<a class="topico" href={tec} target="_blank" rel="noopener">
+														<a
+															class="topico"
+															href={tec}
+															target="_blank"
+															rel="noopener"
+															onclick={() => abrirAula(i, it.cid)}
+														>
 															Questões no TEC ↗
 														</a>
 													{/if}
+													{#each extras as e (e.url)}
+														<a class="topico" href={e.url} target="_blank" rel="noopener">
+															{e.rotulo ?? 'caderno extra'}{e.questoes ? ` (${e.questoes})` : ''} ↗
+														</a>
+													{/each}
 												</span>
 											{/if}
 											{#if aberto}
 												<span class="lembrete" role="status">
-													<strong>Você parou aqui:</strong> abriu a aula da mentoria.
+													<strong>Você parou aqui:</strong> abriu a aula da mentoria ou as questões do TEC.
 													<span class="acoes">
 														<button type="button" onclick={() => marcarLembrete(i, it.cid, porItem)}>
 															Terminei, marcar
@@ -256,6 +289,14 @@
 				</li>
 			{/each}
 		</ol>
+		{#if aSeguir.length}
+			<p class="a-seguir">
+				<strong>A seguir:</strong>
+				{#each aSeguir as a, k (a.data + a.cod)}
+					<span>{k ? '·' : ''} {a.dow} {formatarData(a.data).slice(0, 5)} · {a.cod} {a.titulo}</span>
+				{/each}
+			</p>
+		{/if}
 		{#if progresso.feitos === progresso.total}
 			<p class="cumprida" role="status">
 				<span class="marca" aria-hidden="true"><Icone nome="check" tamanho={20} /></span>
@@ -601,6 +642,20 @@
 		gap: 8px;
 		margin: 8px 0 0;
 		font-weight: 700;
+	}
+
+	/* Próximas aulas depois do dia em vista: linha compacta, sem roubar o foco do dia. */
+	.a-seguir {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 6px;
+		margin: 8px 0 0;
+		color: var(--cor-texto-suave);
+		font-size: 0.875rem;
+	}
+
+	.a-seguir strong {
+		color: var(--cor-texto);
 	}
 
 	.marca {
