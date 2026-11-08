@@ -132,6 +132,17 @@ python artifacts/missoes/plano.py catalogo-questoes/qconcursos/subitens ESTUDO.c
   regerar o plano (`plano_aulas.py --oficial`), `montar_artifacts.py`, `npm run importar` e
   publicar de novo: os placeholders `ag-` viram aulas de verdade.
 
+### Nota de execução (2026-11-08, repartição: 1 tarefa = 1 aula)
+
+Ela pediu no mesmo dia, depois de ver o plano no ar: com a aula como unidade, a tarefa do dia
+deve ser a aula inteira, não fatias de 45 min da mesma aula "continuando" num dia só. O gerador
+mudou: cada bloco de estudo novo é **1 aula** (bloco "Aula da mentoria · P3/P2/P1", com o min
+da aula no dia); aula maior que o espaço do dia fica sozinha no dia e continua no seguinte
+("a aula é maior que o dia"); aulas pequenas se acumulam (2–6 por dia conforme o custo); sobra
+de estudo < 15 min não vira bloco. Vantagem extra: a revisão D+1 de uma aula concluída agora
+aponta a própria aula. Regrado nos dois cargos sem sobra (5.985/5.990 min), revalidado
+(check 0/0, 354 testes, e2e de missão e artefatos verdes) e publicado.
+
 ### Nota de execução (2026-11-08, fase 1: proposta)
 
 - Gerador escrito no vault como `artifacts/missoes/plano_aulas.py` (o `plano.py` segue intacto
