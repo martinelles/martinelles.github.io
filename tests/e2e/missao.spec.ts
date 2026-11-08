@@ -335,6 +335,19 @@ test('subitem com aula da mentoria mostra o atalho da aula que o cobre', async (
 	);
 });
 
+test('a partir de 09/11 o estudo novo é por aula da mentoria, com atalho de aula e do TEC', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-11-09T09:00:00-03:00'));
+	await page.goto('/painel');
+	const dia = missoesCd.plan.find((d) => d.data === '2026-11-09')!;
+	const itemAula = dia.blocos.flatMap((b) => (b.itens ?? []) as { cid: string; subitens?: unknown[] }[]).find((i) => i.subitens)!;
+	const aula = mentoria.aulas!.find((a) => a.id === itemAula.cid)!;
+	const item = missao(page).locator('li:not(.bloco)').filter({ hasText: aula.titulo }).first();
+	await expect(item).toBeVisible();
+	await expect(item).toContainText(`subitens ${(itemAula as { subitens: { cod: string }[] }).subitens.map((s) => s.cod).join(' · ')}`);
+	await expect(item.getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute('href', aula.url);
+	if (aula.tec) await expect(item.getByRole('link', { name: 'Questões no TEC ↗' })).toHaveAttribute('href', aula.tec);
+});
+
 test('o seletor de dia mostra a missão de qualquer data e volta para hoje', async ({ page }) => {
 	await page.goto('/painel');
 	const secao = missao(page);

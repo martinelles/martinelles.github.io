@@ -97,6 +97,20 @@ describe('mapasDoPlano', () => {
 		expect(mapasDoPlano(plano, 'aud', mapa)).toEqual({ 'GRI-01': 'c1-1.1' });
 	});
 
+	it('item-aula mapeia os mapas pelos subitens de dentro, não pelo código da aula', () => {
+		const porAula = PLANO([
+			{
+				cid: 'eb8c9f6c-8af8-44d6-b826-fa6cc0ee8cdb',
+				cod: 'E2·1',
+				subitens: [
+					{ cid: 'EAG-02', cod: 'E2 1.2' },
+					{ cid: 'GRI-01', cod: 'C1 1.1' }
+				]
+			} as never
+		]);
+		expect(mapasDoPlano(porAula, 'cd', mapa)).toEqual({ 'EAG-02': 'cd-e2-1.2', 'GRI-01': 'c1-1.1' });
+	});
+
 	it('entra em missoes-<cargo>.json junto com o plano', () => {
 		const fontes = { cd: JSON.stringify(plano) };
 		const r = montarMissoes(fontes, mapa);

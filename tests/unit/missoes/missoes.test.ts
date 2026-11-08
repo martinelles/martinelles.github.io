@@ -48,11 +48,21 @@ describe('importador das Missões', () => {
 		['tipo desconhecido', (p: any) => (p.plan[0].blocos[0].tipo = 'x'), 'tipo fora de novo|rev|disc|sim|q'],
 		['minutos negativos', (p: any) => (p.plan[0].blocos[0].min = -5), 'min deveria ser inteiro ≥ 0'],
 		['item sem cid', (p: any) => delete p.plan[0].blocos[0].itens[0].cid, 'item sem cid, cod ou texto'],
-		['dia sem blocos', (p: any) => (p.plan[2].blocos = []), 'plan[2]: sem blocos']
+		['dia sem blocos', (p: any) => (p.plan[2].blocos = []), 'plan[2]: sem blocos'],
+		['item-aula com subitens vazio', (p: any) => (p.plan[0].blocos[0].itens[0].subitens = []), 'subitens: deveria ser lista não vazia'],
+		['item-aula com subitem sem cod', (p: any) => (p.plan[0].blocos[0].itens[0].subitens = [{ cid: 'x' }]), 'subitens[0]: sem cid ou cod']
 	])('%s é erro com o lugar', (_, estragar, msg) => {
 		const p = bruto();
+		p.plan[0].blocos[0].itens[0].subitens = [{ cid: 'EAG-02', cod: 'E1 2.1' }];
 		estragar(p);
 		expect(() => validarNoImportador(p, 'plano-cd.json')).toThrow(msg);
+	});
+
+	it('item-aula com subitens de referência passa na validação', () => {
+		const p = bruto();
+		p.plan[0].blocos[0].itens[0].subitens = [{ cid: 'EAG-02', cod: 'E1 2.1' }];
+		const [cd] = montarMissoes({ cd: JSON.stringify(p) });
+		expect(JSON.parse(cd.conteudo).plan[0].blocos[0].itens[0].subitens).toEqual([{ cid: 'EAG-02', cod: 'E1 2.1' }]);
 	});
 
 	it('a chave de link do edital leva o cargo só na P3', () => {

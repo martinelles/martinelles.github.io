@@ -33,8 +33,9 @@ const paiDe = (/** @type {string} */ k) => /^(.*-\d+\.\d+)\.\d+$/.exec(k)?.[1] ?
 
 /**
  * `{ [cid]: slug}`: o mapa mental do subitem, quando a chave dele (ou a do pai) tem SVG
- * (`mapas.mjs`), para o atalho da Missão de hoje.
- * @param {{ plan: { blocos: { tipo: string, itens?: { cid: string, cod: string }[] }[] }[] }} plano
+ * (`mapas.mjs`), para o atalho da Missão de hoje. Item-aula (com `subitens`) mapeia os
+ * subitens de dentro: o atalho aparece na lista de referência de cada um.
+ * @param {{ plan: { blocos: { tipo: string, itens?: { cid: string, cod: string, subitens?: { cid: string, cod: string }[] }[] }[] }[] }} plano
  * @param {string} cargo
  * @param {Record<string, string>} mapa chave do edital → slug
  */
@@ -44,9 +45,12 @@ export function mapasDoPlano(plano, cargo, mapa) {
 	for (const d of plano.plan)
 		for (const b of d.blocos)
 			for (const it of b.itens ?? []) {
-				const ch = chaveLink(cargo, it.cod);
-				const slug = mapa[ch] ?? mapa[paiDe(ch) ?? ''];
-				if (slug) mapas[it.cid] = slug;
+				const alvos = it.subitens?.length ? it.subitens : [it];
+				for (const alvo of alvos) {
+					const ch = chaveLink(cargo, alvo.cod);
+					const slug = mapa[ch] ?? mapa[paiDe(ch) ?? ''];
+					if (slug) mapas[alvo.cid] = slug;
+				}
 			}
 	return mapas;
 }
@@ -79,6 +83,15 @@ export function validarMissoes(bruto, onde) {
 			(/** @type {unknown[]} */ (b.itens ?? [])).forEach((it, k) => {
 				if (!ehObjeto(it) || !texto(it.cid) || !texto(it.cod) || !texto(it.texto))
 					throw erro(`${ondeBloco}.itens[${k}]: item sem cid, cod ou texto`);
+				// item-aula (planos/2026-11-08-missoes-por-aula-da-mentoria.md): subitens de referência
+				if (it.subitens !== undefined) {
+					if (!Array.isArray(it.subitens) || !it.subitens.length)
+						throw erro(`${ondeBloco}.itens[${k}].subitens: deveria ser lista não vazia quando presente`);
+					it.subitens.forEach((/** @type {unknown} */ sb, j) => {
+						if (!ehObjeto(sb) || !texto(sb.cid) || !texto(sb.cod))
+							throw erro(`${ondeBloco}.itens[${k}].subitens[${j}]: sem cid ou cod`);
+					});
+				}
 			});
 		});
 	});

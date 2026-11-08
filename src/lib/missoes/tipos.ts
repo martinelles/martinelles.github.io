@@ -9,9 +9,10 @@ export type Cargo = 'cd' | 'aud';
 export type TipoBloco = 'novo' | 'rev' | 'disc' | 'sim' | 'q';
 
 export interface ItemBloco {
-	/** Id do tópico: o do `ESTUDO.csv` (que é o `tp` das questões do feed) ou `AUD-E<n>-<x.y>`. */
+	/** Id do tópico: o do `ESTUDO.csv` (que é o `tp` das questões do feed) ou `AUD-E<n>-<x.y>`.
+	 *  Item-aula (plano por aula, de 2026-11-09 em diante): o UUID da aula na plataforma. */
 	cid: string;
-	/** Código do guia, como `E1 1.1`. */
+	/** Código do guia, como `E1 1.1`; item-aula: `E2·1` (aula 1 da disciplina). */
 	cod: string;
 	texto: string;
 	prova?: string;
@@ -22,6 +23,8 @@ export interface ItemBloco {
 	fim?: boolean;
 	/** Intervalo da revisão: `D+1`, `D+7`, `D+30`. */
 	lab?: string;
+	/** Item-aula: subitens do edital cobertos pela aula, como referência (mapas, questões do feed). */
+	subitens?: { cid: string; cod: string }[];
 }
 
 export interface Bloco {

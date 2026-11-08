@@ -8,7 +8,7 @@
 	// (emAndamento; antes o gatilho era o link do Qconcursos, que saiu em 2026-11-08).
 	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
-	import { aulaDaMentoria } from '$lib/dados';
+	import { aulaDaMentoria, aulaPorId } from '$lib/dados';
 	import { formatarData } from '$lib/datas';
 	import {
 		blocoFeito,
@@ -162,9 +162,13 @@
 						{#if b.itens?.length}
 							{@const porItem = b.itens.length > 1}
 							<ul class="itens" class:por-item={porItem}>
-									{#each b.itens as it (it.cid)}
-										{@const n = questoesPorTopico?.get(it.cid) ?? 0}
-										{@const aula = aulaDaMentoria(cargo, it.cod)}
+								{#each b.itens as it (it.cid)}
+									{@const aulaInfo = it.subitens?.length ? aulaPorId(it.cid) : null}
+									{@const aula = aulaInfo?.url ?? aulaDaMentoria(cargo, it.cod)}
+									{@const tec = aulaInfo?.tec}
+									{@const subs = it.subitens ?? []}
+									{@const nSub = (s: { cid: string }) => questoesPorTopico?.get(s.cid) ?? 0}
+									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
 									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li class:feito={itemOk} class:em-andamento={aberto}>
@@ -188,16 +192,29 @@
 										<span class="texto">
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
-											{#if n > 0 || aula || plano.mapas?.[it.cid]}
+											{#if it.subitens?.length}
+												<em> · aula da mentoria, subitens {it.subitens.map((s) => s.cod).join(' · ')}</em>
+											{/if}
+											{#if aula || tec || temAtalhoSub || (!it.subitens && (nSub(it) > 0 || plano.mapas?.[it.cid]))}
 												<span class="atalhos">
-													{#if n > 0}
+													{#if !it.subitens && nSub(it) > 0}
 														<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
-															{n} {n === 1 ? 'questão' : 'questões'} deste tópico
+															{nSub(it)} {nSub(it) === 1 ? 'questão' : 'questões'} deste tópico
 														</a>
 													{/if}
-													{#if plano.mapas?.[it.cid]}
+													{#if !it.subitens && plano.mapas?.[it.cid]}
 														<a class="topico" href="/mapa/{plano.mapas[it.cid]}">Mapa mental ↗</a>
 													{/if}
+													{#each subs as s (s.cid)}
+														{#if nSub(s) > 0}
+															<a class="topico" href="/?topico={encodeURIComponent(s.cid)}&tipo=questao">
+																{nSub(s)} questões de {s.cod}
+															</a>
+														{/if}
+														{#if plano.mapas?.[s.cid]}
+															<a class="topico" href="/mapa/{plano.mapas[s.cid]}">Mapa de {s.cod} ↗</a>
+														{/if}
+													{/each}
 													{#if aula}
 														<a
 															class="topico"
@@ -207,6 +224,11 @@
 															onclick={() => abrirAula(i, it.cid)}
 														>
 															Aula da mentoria ↗
+														</a>
+													{/if}
+													{#if tec}
+														<a class="topico" href={tec} target="_blank" rel="noopener">
+															Questões no TEC ↗
 														</a>
 													{/if}
 												</span>
