@@ -148,40 +148,16 @@ test('o atalho do subitem abre o feed só com as questões do tópico', async ({
 	await expect(page.locator('[data-post-id]').first()).toBeVisible();
 });
 
-test('todo subitem do dia tem link do Qconcursos, mesmo sem questão no feed', async ({ page }) => {
-	await page.goto('/painel');
-	const itens = diaCd.blocos.flatMap((b) => (b.itens ?? []) as { cid: string }[]);
-	const links = missao(page).getByRole('link', { name: 'Questões no Qconcursos ↗' });
-	await expect(links).toHaveCount(itens.length);
-	for (const [i, it] of itens.entries()) {
-		await expect(links.nth(i)).toHaveAttribute('href', (missoesCd.qc as Record<string, string>)[it.cid]);
-		await expect(links.nth(i)).toHaveAttribute('target', '_blank');
-	}
-});
-
-test('nas revisões do dia, cada subitem leva também às questões que ela errou no Qconcursos', async ({ page }) => {
-	await page.goto('/painel');
-	const itensRev = diaCd.blocos.filter((b) => b.tipo === 'rev').flatMap((b) => (b.itens ?? []) as { cid: string }[]);
-	expect(itensRev.length).toBeGreaterThan(0);
-	const erros = missao(page).getByRole('link', { name: 'Questões que errei ↗' });
-	await expect(erros).toHaveCount(itensRev.length);
-	for (const [i, it] of itensRev.entries()) {
-		const href = (missoesCd.qcErros as Record<string, string>)[it.cid];
-		expect(href).toContain('my_questions=wrong');
-		await expect(erros.nth(i)).toHaveAttribute('href', href);
-	}
-});
-
-test('o subitem aberto no Qconcursos fica destacado na volta, até marcar ou dispensar', async ({ page, context }) => {
+test('o subitem aberto na aula da mentoria fica destacado na volta, até marcar ou dispensar', async ({ page, context }) => {
 	await simularApi(page);
-	await context.route('**/*qconcursos.com/**', (rota) => rota.fulfill({ body: 'Qconcursos' }));
+	await context.route('**/*plataformatutory.com.br/**', (rota) => rota.fulfill({ body: 'Mentoria' }));
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
 	await page.goto('/painel');
 	const lembrete = missao(page).getByText('Você parou aqui');
 	await expect(lembrete).toHaveCount(0);
 
-	const [qc] = await Promise.all([context.waitForEvent('page'), missao(page).getByRole('link', { name: 'Questões no Qconcursos ↗' }).first().click()]);
-	await qc.close();
+	const [aula] = await Promise.all([context.waitForEvent('page'), missao(page).getByRole('link', { name: 'Aula da mentoria ↗' }).first().click()]);
+	await aula.close();
 	await page.reload();
 	await expect(lembrete).toHaveCount(1);
 	await expect(missao(page).locator('li.em-andamento')).toContainText(diaCd.blocos.flatMap((b) => (b.itens ?? []) as { cod: string }[])[0].cod);
@@ -191,8 +167,8 @@ test('o subitem aberto no Qconcursos fica destacado na volta, até marcar ou dis
 	expect(Object.keys(await marcas(page)).length).toBeGreaterThan(0);
 	expect(await page.evaluate(() => localStorage.getItem('painel-concurso:missoes:em-andamento:v1'))).toBeNull();
 
-	const [qc2] = await Promise.all([context.waitForEvent('page'), missao(page).getByRole('link', { name: 'Questões no Qconcursos ↗' }).last().click()]);
-	await qc2.close();
+	const [aula2] = await Promise.all([context.waitForEvent('page'), missao(page).getByRole('link', { name: 'Aula da mentoria ↗' }).last().click()]);
+	await aula2.close();
 	await expect(lembrete).toHaveCount(1);
 	await missao(page).getByRole('button', { name: 'Dispensar' }).click();
 	await expect(lembrete).toHaveCount(0);

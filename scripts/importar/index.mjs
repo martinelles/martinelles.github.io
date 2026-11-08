@@ -291,13 +291,11 @@ export function importar({ vault, saida }) {
 		if (existsSync(f)) fontesMissoes[c] = readFileSync(f, 'utf8');
 		else avisos.push(`artifacts/missoes/plano-${c}.json ausente: missoes-${c}.json não gerado`);
 	}
-	const arqLinks = join(vault, 'catalogo-questoes', 'qconcursos', 'links.json');
-	const temLinks = existsSync(arqLinks);
-	if (!temLinks) avisos.push('catalogo-questoes/qconcursos/links.json ausente: Missões do painel sem links do Qconcursos');
-
 	// Mapas mentais por subitem (planos/2026-10-31-mapas-mentais-nas-missoes.md): os
 	// `resumos/**/Resumo *.excalidraw.svg` do vault viram `mapas/<slug>.svg`, e o mapa
-	// chave → slug entra em missoes-<cargo>.json. Um `.excalidraw` sem SVG é auto-export pendente.
+	// chave → slug entra em missoes-<cargo>.json. O auto-export do Obsidian grava
+	// `Resumo ….svg` (sem o `.excalidraw`); aceitamos os dois nomes, um por desenho —
+	// e desenho sem SVG nenhum é auto-export pendente.
 	/** @type {{ nome: string, conteudo: string }[]} */
 	const svgsMapas = [];
 	const chavesValidas = new Set();
@@ -307,27 +305,29 @@ export function importar({ vault, saida }) {
 				for (const it of b.itens ?? []) chavesValidas.add(chaveLink(c, it.cod));
 	}
 	const dirResumos = join(vault, 'resumos');
-	/** @type {Record<string, boolean>} */ const desenhoSemSvg = {};
+	/** @type {string[]} */
+	const pendentes = [];
 	if (existsSync(dirResumos)) {
 		// `listar` só cobre arquivos; aqui as subpastas (B, C, E…) é que importam.
 		const pastas = readdirSync(dirResumos).filter((p) => statSync(join(dirResumos, p)).isDirectory());
 		for (const pasta of pastas)
-			for (const arquivo of listar(join(dirResumos, pasta), /\.excalidraw(\.svg)?$/i) ?? []) {
-				const caminho = join(dirResumos, pasta, arquivo);
-				if (/\.excalidraw$/i.test(arquivo)) {
-					desenhoSemSvg[arquivo] = !existsSync(`${caminho}.svg`);
+			for (const desenho of listar(join(dirResumos, pasta), /\.excalidraw$/i) ?? []) {
+				const base = join(dirResumos, pasta, desenho);
+				const exportado = [`${base}.svg`, base.replace(/\.excalidraw$/i, '') + '.svg'].find((c) => existsSync(c));
+				if (!exportado) {
+					pendentes.push(desenho);
 					continue;
 				}
-				svgsMapas.push({ nome: arquivo, conteudo: ler(caminho) });
+				svgsMapas.push({ nome: desenho.replace(/\.excalidraw$/i, '') + '.excalidraw.svg', conteudo: ler(exportado) });
 			}
 	} else avisos.push('resumos/ ausente: nenhum mapa mental gerado');
 	const montado = montarMapas(svgsMapas, chavesValidas);
 	avisos.push(...montado.avisos);
-	for (const [desenho, pendente] of Object.entries(desenhoSemSvg))
-		if (pendente) avisos.push(`resumos/**/${desenho}: sem .excalidraw.svg (auto-export pendente no Obsidian)`);
+	for (const desenho of pendentes)
+		avisos.push(`resumos/**/${desenho}: sem SVG (auto-export pendente no Obsidian)`);
 	arquivos.push(...montado.arquivos);
 
-	const missoes = montarMissoes(fontesMissoes, temLinks ? readFileSync(arqLinks, 'utf8') : undefined, montado.mapa);
+	const missoes = montarMissoes(fontesMissoes, montado.mapa);
 	arquivos.push(...missoes);
 
 	// Artefatos (Prioridades, Missões…), montados no vault por scripts/montar_artifacts.py

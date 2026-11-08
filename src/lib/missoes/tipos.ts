@@ -47,10 +47,6 @@ export interface PlanoMissoes {
 	gerado: string;
 	plan: DiaMissao[];
 	cortes: unknown[];
-	/** Link do Qconcursos de cada subitem, por `cid` (o padrão da página das Missões). */
-	qc: Record<string, string>;
-	/** Nos itens das revisões, o link só das questões que ela errou no Qconcursos, por `cid`. */
-	qcErros: Record<string, string>;
 	/** Mapa mental do subitem (`/mapa/<slug>`, SVG de `/conteudo/mapas/`), por `cid`. */
 	mapas: Record<string, string>;
 }

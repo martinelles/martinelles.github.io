@@ -1,10 +1,11 @@
 <script lang="ts">
 	// Missão de hoje no painel (planos/2026-10-14-missao-unica.md): o dia do plano de 61 dias das
 	// Missões, com as mesmas bolhas da página (mesma chave e mesma conta). Cada subitem leva às
-	// questões do tópico no feed, quando há, e às do Qconcursos (o mesmo link da página das
-	// Missões); nas revisões, também às que ela errou lá. Bloco com mais de um subitem tem uma caixa
+	// questões do tópico no feed, quando há, e à aula da mentoria que o cobre (o mesmo link da
+	// disciplina na página das Missões). Bloco com mais de um subitem tem uma caixa
 	// por subitem: com todas marcadas, o bloco se marca (planos/2026-10-15-topico-da-missao.md).
-	// O subitem aberto no Qconcursos fica destacado na volta, até ela marcar ou dispensar (emAndamento).
+	// O subitem aberto na aula da mentoria fica destacado na volta, até ela marcar ou dispensar
+	// (emAndamento; antes o gatilho era o link do Qconcursos, que saiu em 2026-11-08).
 	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { aulaDaMentoria } from '$lib/dados';
@@ -72,7 +73,7 @@
 	});
 
 	let secao = $state<HTMLElement>();
-	/** Leva o subitem destacado à vista: ao abrir o painel e ao voltar do Qconcursos para esta aba. */
+	/** Leva o subitem destacado à vista: ao abrir o painel e ao voltar da aula da mentoria para esta aba. */
 	async function mostrarLembrete() {
 		await tick();
 		secao?.querySelector('.em-andamento')?.scrollIntoView({ block: 'center' });
@@ -86,7 +87,7 @@
 		}
 	});
 
-	function abrirNoQc(i: number, cid: string) {
+	function abrirAula(i: number, cid: string) {
 		if (!dia) return;
 		mostrado = true;
 		emAndamento.abrir({ cargo, data: dia.data, bloco: i, cid });
@@ -135,8 +136,8 @@
 			{/if}
 		</div>
 		<ol class="blocos">
-			{#each dia.blocos as b, i (i)}
-				{@const feito = blocoFeito(marcas, cargo, dia, i)}
+								{#each dia.blocos as b, i (i)}
+									{@const feito = blocoFeito(marcas, cargo, dia, i)}
 				<li class="bloco t-{b.tipo}" class:feito>
 					<label class="bolha">
 						<input
@@ -161,10 +162,9 @@
 						{#if b.itens?.length}
 							{@const porItem = b.itens.length > 1}
 							<ul class="itens" class:por-item={porItem}>
-								{#each b.itens as it (it.cid)}
-									{@const n = questoesPorTopico?.get(it.cid) ?? 0}
-									{@const erros = b.tipo === 'rev' ? plano.qcErros[it.cid] : undefined}
-									{@const aula = aulaDaMentoria(cargo, it.cod)}
+									{#each b.itens as it (it.cid)}
+										{@const n = questoesPorTopico?.get(it.cid) ?? 0}
+										{@const aula = aulaDaMentoria(cargo, it.cod)}
 									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li class:feito={itemOk} class:em-andamento={aberto}>
@@ -188,46 +188,32 @@
 										<span class="texto">
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
-											{#if n > 0 || plano.qc[it.cid] || erros}
+											{#if n > 0 || aula || plano.mapas?.[it.cid]}
 												<span class="atalhos">
 													{#if n > 0}
 														<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
 															{n} {n === 1 ? 'questão' : 'questões'} deste tópico
 														</a>
 													{/if}
-													{#if plano.qc[it.cid]}
-														<a
-															class="topico"
-															href={plano.qc[it.cid]}
-															target="_blank"
-															rel="noopener"
-															onclick={() => abrirNoQc(i, it.cid)}
-														>
-															Questões no Qconcursos ↗
-														</a>
-													{/if}
-													{#if erros}
-														<a
-															class="topico"
-															href={erros}
-															target="_blank"
-															rel="noopener"
-															onclick={() => abrirNoQc(i, it.cid)}
-														>
-															Questões que errei ↗
-														</a>
-													{/if}
 													{#if plano.mapas?.[it.cid]}
 														<a class="topico" href="/mapa/{plano.mapas[it.cid]}">Mapa mental ↗</a>
 													{/if}
 													{#if aula}
-														<a class="topico" href={aula} target="_blank" rel="noopener">Aula da mentoria ↗</a>
+														<a
+															class="topico"
+															href={aula}
+															target="_blank"
+															rel="noopener"
+															onclick={() => abrirAula(i, it.cid)}
+														>
+															Aula da mentoria ↗
+														</a>
 													{/if}
 												</span>
 											{/if}
 											{#if aberto}
 												<span class="lembrete" role="status">
-													<strong>Você parou aqui:</strong> abriu as questões no Qconcursos.
+													<strong>Você parou aqui:</strong> abriu a aula da mentoria.
 													<span class="acoes">
 														<button type="button" onclick={() => marcarLembrete(i, it.cid, porItem)}>
 															Terminei, marcar
@@ -254,7 +240,7 @@
 				Missão cumprida
 			</p>
 		{/if}
-		<a class="secundario" href={linkMissoes}>Abrir nas Missões, com os links de questões</a>
+		<a class="secundario" href={linkMissoes}>Abrir nas Missões</a>
 	{/if}
 </section>
 
@@ -533,7 +519,7 @@
 		font-weight: 700;
 	}
 
-	/* Subitem aberto no Qconcursos: marca-texto (aviso), com a borda na cor do tipo; no Kindle, tinta. */
+	/* Subitem aberto na aula da mentoria: marca-texto (aviso), com a borda na cor do tipo; no Kindle, tinta. */
 	.itens li.em-andamento {
 		padding: 4px 8px 8px 0;
 		border-radius: calc(var(--raio) / 2);

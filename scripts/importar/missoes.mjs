@@ -5,11 +5,10 @@
  *
  * Formato fora do esperado é erro fatal: o painel confiaria em datas e blocos que não existem.
  *
- * Link do Qconcursos de cada subitem (`qc`, por `cid`): o padrão do par que a página das Missões
- * mostra, de `catalogo-questoes/qconcursos/links.json`. Assim todo subitem da "Missão de hoje" tem
- * onde treinar, mesmo sem questão no feed. A chave é a da página: `<CARGO>:` nos itens `E…`, o código
- * com hífen (`CD:E4-1.1`), e o subitem pai quando o próprio não tem link. Nos itens das revisões, também
- * o link só das questões que ela errou (`qcErros`), como o "erros ↗" da página.
+ * Os links de questões eram do Qconcursos (`qc`/`qcErros`, de
+ * `catalogo-questoes/qconcursos/links.json`) e saíram em 2026-11-08: o caderno de questões de cada
+ * aula da mentoria mora no próprio PDF dela (`src/lib/dados/mentoria.json`). As fontes ficam no
+ * vault, desativadas.
  */
 
 export const CARGOS = ['cd', 'aud'];
@@ -32,36 +31,9 @@ export const chaveLink = (/** @type {string} */ cargo, /** @type {string} */ cod
 	(/^E/.test(cod) ? `${cargo.toUpperCase()}:` : '') + cod.replace(' ', '-');
 const paiDe = (/** @type {string} */ k) => /^(.*-\d+\.\d+)\.\d+$/.exec(k)?.[1] ?? null;
 
-const ehQc = (/** @type {unknown} */ u) => typeof u === 'string' && u.startsWith('https://www.qconcursos.com/');
-
-/**
- * `{ qc, qcErros }`, cada um `{ cid: url }`: o link padrão de todo item que tem link e, nos itens
- * das revisões, o das questões erradas.
- * @param {{ plan: { blocos: { tipo: string, itens?: { cid: string, cod: string }[] }[] }[] }} plano
- * @param {string} cargo
- * @param {Record<string, unknown>} links conteúdo de links.json
- */
-export function linksDoPlano(plano, cargo, links) {
-	/** @type {Record<string, string>} */
-	const qc = {};
-	/** @type {Record<string, string>} */
-	const qcErros = {};
-	for (const d of plano.plan)
-		for (const b of d.blocos)
-			for (const it of b.itens ?? []) {
-				const ch = chaveLink(cargo, it.cod);
-				const l = /** @type {Record<string, unknown> | undefined} */ (links[ch] ?? links[paiDe(ch) ?? '']);
-				if (!l) continue;
-				const url = typeof l.padrao === 'string' ? l[l.padrao] : undefined;
-				if (ehQc(url)) qc[it.cid] = /** @type {string} */ (url);
-				if (b.tipo === 'rev' && ehQc(l.erros)) qcErros[it.cid] = /** @type {string} */ (l.erros);
-			}
-	return { qc, qcErros };
-}
-
 /**
  * `{ [cid]: slug}`: o mapa mental do subitem, quando a chave dele (ou a do pai) tem SVG
- * (`mapas.mjs`). Mesmo formato do `qc`, para o atalho da Missão de hoje.
+ * (`mapas.mjs`), para o atalho da Missão de hoje.
  * @param {{ plan: { blocos: { tipo: string, itens?: { cid: string, cod: string }[] }[] }[] }} plano
  * @param {string} cargo
  * @param {Record<string, string>} mapa chave do edital → slug
@@ -115,21 +87,10 @@ export function validarMissoes(bruto, onde) {
 
 /**
  * @param {Record<string, string>} fontes `plano-<cargo>.json` presentes no vault, por cargo
- * @param {string} [links] conteúdo de `catalogo-questoes/qconcursos/links.json`; sem ele, sem `qc`
  * @param {Record<string, string>} [mapa] chave → slug dos mapas mentais (`mapas.mjs`); sem ele, sem `mapas`
  * @returns {{ arquivo: string, conteudo: string }[]}
  */
-export function montarMissoes(fontes, links, mapa) {
-	/** @type {Record<string, unknown> | null} */
-	let mapaLinks = null;
-	if (links !== undefined) {
-		try {
-			mapaLinks = JSON.parse(links);
-		} catch (e) {
-			throw new Error(`catalogo-questoes/qconcursos/links.json: JSON inválido (${/** @type {Error} */ (e).message})`);
-		}
-		if (!ehObjeto(mapaLinks)) throw new Error('catalogo-questoes/qconcursos/links.json: não é um objeto');
-	}
+export function montarMissoes(fontes, mapa) {
 	return CARGOS.filter((c) => fontes[c] !== undefined).map((c) => {
 		const onde = `artifacts/missoes/plano-${c}.json`;
 		let bruto;
@@ -141,7 +102,6 @@ export function montarMissoes(fontes, links, mapa) {
 		const plano = validarMissoes(bruto, onde);
 		const saida = {
 			...plano,
-			...(mapaLinks ? linksDoPlano(plano, c, mapaLinks) : {}),
 			...(mapa ? { mapas: mapasDoPlano(plano, c, mapa) } : {})
 		};
 		return { arquivo: `missoes-${c}.json`, conteudo: `${JSON.stringify(saida)}\n` };

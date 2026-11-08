@@ -97,12 +97,10 @@ describe('mapasDoPlano', () => {
 		expect(mapasDoPlano(plano, 'aud', mapa)).toEqual({ 'GRI-01': 'c1-1.1' });
 	});
 
-	it('entra em missoes-<cargo>.json junto com qc', () => {
+	it('entra em missoes-<cargo>.json junto com o plano', () => {
 		const fontes = { cd: JSON.stringify(plano) };
-		const links = JSON.stringify({ 'CD:E2-1.2': { padrao: 'amplo', amplo: 'https://www.qconcursos.com/x' } });
-		const r = montarMissoes(fontes, links, mapa);
+		const r = montarMissoes(fontes, mapa);
 		const saida = JSON.parse(r[0].conteudo);
-		expect(saida.qc).toEqual({ 'EAG-02': 'https://www.qconcursos.com/x' });
 		expect(saida.mapas).toEqual({ 'EAG-02': 'cd-e2-1.2', 'GRI-01': 'c1-1.1' });
 	});
 
