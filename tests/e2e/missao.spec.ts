@@ -1,7 +1,15 @@
 import { expect, test, type Page } from '@playwright/test';
-import missoesCd from '../../static/conteudo/missoes-cd.json' with { type: 'json' };
-import missoesAud from '../../static/conteudo/missoes-aud.json' with { type: 'json' };
-import mentoria from '../../src/lib/dados/mentoria.json' with { type: 'json' };
+import missoesCdBruto from '../../static/conteudo/missoes-cd.json' with { type: 'json' };
+import missoesAudBruto from '../../static/conteudo/missoes-aud.json' with { type: 'json' };
+import mentoriaBruto from '../../src/lib/dados/mentoria.json' with { type: 'json' };
+import type { PlanoMissoes } from '../../src/lib/missoes/tipos';
+import type { Mentoria } from '../../src/lib/dados/tipos';
+
+// O tipo inferido do JSON é a união dos formatos de item de todos os dias do plano; os tipos
+// do app (ItemBloco, AulaMentoria) já cobrem item-aula (subitens), parte/partes e tecExtras.
+const missoesCd = missoesCdBruto as unknown as PlanoMissoes;
+const missoesAud = missoesAudBruto as unknown as PlanoMissoes;
+const mentoria = mentoriaBruto as unknown as Mentoria;
 
 // Missão única (planos/2026-10-14-missao-unica.md, fase 2): o painel mostra o dia do plano de 61 dias
 // das Missões, com as mesmas marcações (chave missoes-cgu-2026) e o mesmo login. A API é simulada.
