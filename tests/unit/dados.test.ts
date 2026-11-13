@@ -58,14 +58,15 @@ describe('dados reais', () => {
 		expect(buscarFerramenta('nada')).toBeNull();
 	});
 
-	it('quatro atalhos abrem o feed filtrado por tipo; os demais vão para "em breve" (FR-015)', () => {
+	it('quatro atalhos abrem o feed filtrado por tipo; discursivas tem tela própria; os demais vão para "em breve" (FR-015)', () => {
 		const rotas = Object.fromEntries(dados.ferramentas.map((f) => [f.id, rotaDaFerramenta(f)]));
 		expect(rotas['questoes-objetivas']).toBe('/?tipo=questao');
 		expect(rotas.resumos).toBe('/?tipo=resumo');
 		expect(rotas.flashcards).toBe('/?tipo=flashcard');
 		expect(rotas.jurisprudencia).toBe('/?tipo=lei');
+		expect(rotas['questoes-discursivas']).toBe('/discursivas');
 		const emBreve = dados.ferramentas.filter((f) => rotas[f.id].startsWith('/ferramenta/'));
-		expect(emBreve).toHaveLength(8);
+		expect(emBreve).toHaveLength(7);
 		for (const f of emBreve) expect(rotas[f.id]).toBe(`/ferramenta/${f.id}`);
 	});
 });

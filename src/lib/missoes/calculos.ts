@@ -2,7 +2,7 @@
  * Contas do plano das Missões, puras (o dia e as marcações vêm por parâmetro). As mesmas regras
  * da página das Missões: o dia de hoje, a chave da marcação e o que conta como dia cumprido.
  */
-import type { Cargo, DiaMissao, Marcas, PlanoMissoes } from './tipos';
+import type { Bloco, Cargo, DiaMissao, Marcas, PlanoMissoes } from './tipos';
 
 export type FaseMissoes = 'antes' | 'durante' | 'depois';
 
@@ -50,6 +50,23 @@ export function resumo(plano: PlanoMissoes, marcas: Marcas, cargo: Cargo): Resum
 /** Blocos do dia: quantos há e quantos estão marcados. */
 export function progressoDoDia(marcas: Marcas, cargo: Cargo, dia: DiaMissao): { feitos: number; total: number } {
 	return { feitos: dia.blocos.filter((_, i) => blocoFeito(marcas, cargo, dia, i)).length, total: dia.blocos.length };
+}
+
+/** Discursiva do plano na lista de todas (blocos `disc`), na ordem dos dias. */
+export interface DiscursivaDoPlano {
+	dia: DiaMissao;
+	/** Índice do bloco no dia, o mesmo da chave da marcação. */
+	indice: number;
+	bloco: Bloco;
+}
+
+export function discursivasDoPlano(plano: PlanoMissoes): DiscursivaDoPlano[] {
+	const lista: DiscursivaDoPlano[] = [];
+	for (const dia of plano.plan)
+		dia.blocos.forEach((bloco, indice) => {
+			if (bloco.tipo === 'disc') lista.push({ dia, indice, bloco });
+		});
+	return lista;
 }
 
 /**

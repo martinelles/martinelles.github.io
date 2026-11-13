@@ -105,10 +105,12 @@ const TELAS: { nome: string; abrir: (page: Page) => Promise<void> }[] = [
 		}
 	},
 	{
-		nome: '/ferramenta/questoes-discursivas',
+		nome: '/discursivas (lista de discursivas)',
 		abrir: async (page) => {
-			await page.goto('/ferramenta/questoes-discursivas');
-			await expect(page.getByRole('heading', { level: 1, name: 'Questões Discursivas' })).toBeVisible();
+			await page.clock.setFixedTime(DIA_DO_PLANO);
+			await page.goto('/discursivas');
+			await expect(page.getByRole('heading', { level: 1, name: 'Discursivas' })).toBeVisible();
+			await expect(page.locator('.item').first()).toBeAttached();
 		}
 	}
 ];

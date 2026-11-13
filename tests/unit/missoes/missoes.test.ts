@@ -10,6 +10,7 @@ import {
 	chaveItem,
 	diaCumprido,
 	diaDeHoje,
+	discursivasDoPlano,
 	itemFeito,
 	mudancasDoBloco,
 	mudancasDoItem,
@@ -128,6 +129,12 @@ describe('contas das Missões', () => {
 		expect(progressoDoDia(marcas, 'cd', PLANO.plan[0])).toEqual({ feitos: 1, total: 2 });
 		// A marcação de outro cargo não conta.
 		expect(resumo(PLANO, marcas, 'aud').blocosFeitos).toBe(1);
+	});
+
+	it('discursivas do plano: só os blocos disc, com o dia e o índice da chave', () => {
+		expect(discursivasDoPlano(PLANO)).toEqual([
+			{ dia: PLANO.plan[2], indice: 0, bloco: PLANO.plan[2].blocos[0] }
+		]);
 	});
 });
 

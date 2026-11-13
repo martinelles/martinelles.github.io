@@ -10,7 +10,9 @@ const ATALHOS_FEED: Record<string, string> = {
 	flashcards: '/?tipo=flashcard',
 	jurisprudencia: '/?tipo=lei'
 };
-const emBreve = ferramentas.filter((f) => !(f.id in ATALHOS_FEED));
+// A lista de discursivas tem tela própria (rotaDaFerramenta); as demais vão para "em breve".
+const TELAS_PROPRIAS: Record<string, string> = { 'questoes-discursivas': '/discursivas' };
+const emBreve = ferramentas.filter((f) => !(f.id in ATALHOS_FEED) && !(f.id in TELAS_PROPRIAS));
 
 test.beforeEach(async ({ page, context }) => {
 	await context.clearCookies();
@@ -98,13 +100,14 @@ test('estatísticas são calculadas e mudam ao responder e salvar no feed (SC-00
 	await expect(porMateria).toContainText(acertou ? '1 de 1' : '0 de 1');
 });
 
-test('grade tem as 12 ferramentas: 4 atalhos do feed e 8 "em breve"', async ({ page }) => {
+test('grade tem as 12 ferramentas: 4 atalhos do feed, a lista de discursivas e 7 "em breve"', async ({ page }) => {
 	await page.goto('/painel');
 	expect(ferramentas).toHaveLength(12);
 	await expect(page.getByRole('heading', { level: 2, name: 'Material Teórico' })).toBeVisible();
 	await expect(page.getByRole('heading', { level: 2, name: 'Prática & Revisão' })).toBeVisible();
-	await expect(page.locator('a[href^="/ferramenta/"]')).toHaveCount(8);
+	await expect(page.locator('a[href^="/ferramenta/"]')).toHaveCount(7);
 	await expect(page.locator('a[href^="/?tipo="]')).toHaveCount(4);
+	await expect(page.getByRole('link', { name: /^Questões Discursivas/ })).toHaveAttribute('href', '/discursivas');
 	await expect(page.getByRole('link', { name: /^Lei seca/ })).toHaveAttribute('href', '/?tipo=lei');
 	await expect(page.getByRole('link', { name: /^Jurisprudência/ })).toHaveCount(0);
 });
@@ -149,7 +152,7 @@ test('/ferramenta/nao-existe mostra "não encontrada" com link', async ({ page }
 test('em 360 px nenhum cartão da grade estoura a coluna', async ({ page }) => {
 	await page.setViewportSize({ width: 360, height: 780 });
 	await page.goto('/painel');
-	const cartoes = page.locator('a[href^="/ferramenta/"], a[href^="/?tipo="]');
+	const cartoes = page.locator('a[href^="/ferramenta/"], a[href^="/?tipo="], a[href="/discursivas"]');
 	await expect(cartoes).toHaveCount(12);
 	const estouros = await cartoes.evaluateAll((els) =>
 		els.filter((el) => el.scrollWidth > el.clientWidth + 1).map((el) => el.getAttribute('href'))

@@ -56,6 +56,7 @@
 			caminho.startsWith('/painel') ||
 			caminho.startsWith('/entrar') ||
 			caminho.startsWith('/ferramenta') ||
+			caminho.startsWith('/discursivas') ||
 			caminho.startsWith('/artefato')
 		)
 			return 'painel';

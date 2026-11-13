@@ -38,7 +38,7 @@ export function aulaPorId(id: string) {
 	return dados.mentoria?.aulas?.find((a) => a.id === id) ?? null;
 }
 
-/** Atalhos que abrem o feed filtrado por tipo de post (FR-015); os demais seguem para "em breve". */
+/** Atalhos que abrem o feed filtrado por tipo de post (FR-015). */
 const TIPO_NO_FEED: Readonly<Record<string, 'questao' | 'resumo' | 'flashcard' | 'lei'>> = {
 	'questoes-objetivas': 'questao',
 	resumos: 'resumo',
@@ -46,10 +46,16 @@ const TIPO_NO_FEED: Readonly<Record<string, 'questao' | 'resumo' | 'flashcard' |
 	jurisprudencia: 'lei'
 };
 
-/** Endereço aberto pelo cartão da ferramenta: o feed filtrado ou a tela "em breve". */
+/** Ferramentas que já têm tela própria; as demais seguem para a tela "em breve". */
+const ROTA_PROPRIA: Readonly<Record<string, string>> = {
+	'questoes-discursivas': '/discursivas'
+};
+
+/** Endereço aberto pelo cartão da ferramenta: o feed filtrado, a tela própria ou a "em breve". */
 export function rotaDaFerramenta(f: Pick<Ferramenta, 'id'>): string {
 	const tipo = TIPO_NO_FEED[f.id];
-	return tipo ? `/?tipo=${tipo}` : `/ferramenta/${f.id}`;
+	if (tipo) return `/?tipo=${tipo}`;
+	return ROTA_PROPRIA[f.id] ?? `/ferramenta/${f.id}`;
 }
 
 export { validarDados } from './validar';
