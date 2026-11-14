@@ -2,7 +2,7 @@
  * Contas do plano das Missões, puras (o dia e as marcações vêm por parâmetro). As mesmas regras
  * da página das Missões: o dia de hoje, a chave da marcação e o que conta como dia cumprido.
  */
-import type { Bloco, Cargo, DiaMissao, Marcas, PlanoMissoes } from './tipos';
+import type { Bloco, Cargo, DiaMissao, ItemBloco, Marcas, PlanoMissoes, TipoBloco } from './tipos';
 
 export type FaseMissoes = 'antes' | 'durante' | 'depois';
 
@@ -106,6 +106,45 @@ export function mudancasDoItem(marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: 
 	} else if (marcas[bloco]) {
 		m[bloco] = false;
 		for (const it of itens) if (it.cid !== cid) m[chaveItem(cargo, dia.data, i, it.cid)] = true;
+	}
+	return m;
+}
+
+/** Onde a aula aparece no plano (item-aula pelo `cid`), na ordem dos dias. */
+export interface OcorrenciaDaAula {
+	dia: DiaMissao;
+	/** Índice do bloco no dia, o mesmo da chave da marcação. */
+	bloco: number;
+	tipo: TipoBloco;
+	item: ItemBloco;
+}
+
+export function ocorrenciasDaAula(plano: PlanoMissoes, cid: string): OcorrenciaDaAula[] {
+	const lista: OcorrenciaDaAula[] = [];
+	for (const dia of plano.plan)
+		dia.blocos.forEach((bloco, i) => {
+			for (const item of bloco.itens ?? [])
+				if (item.cid === cid) lista.push({ dia, bloco: i, tipo: bloco.tipo, item });
+		});
+	return lista;
+}
+
+/**
+ * Aula nova feita fora da missão do dia: conclui a aula onde o plano a traz como estudo novo,
+ * sem mexer nas revisões dela (D+1, D+7, D+30 seguem por conta própria). Aula já concluída em
+ * outro dia não gera marcação.
+ */
+export function mudancasDaAulaNova(marcas: Marcas, cargo: Cargo, plano: PlanoMissoes, cid: string): Mudancas {
+	const m: Mudancas = {};
+	const simuladas = { ...marcas };
+	for (const o of ocorrenciasDaAula(plano, cid)) {
+		if (o.tipo !== 'novo' || itemFeito(simuladas, cargo, o.dia, o.bloco, cid)) continue;
+		const um = mudancasDoItem(simuladas, cargo, o.dia, o.bloco, cid, true);
+		Object.assign(m, um);
+		for (const [k, feito] of Object.entries(um)) {
+			if (feito) simuladas[k] = true;
+			else delete simuladas[k];
+		}
 	}
 	return m;
 }

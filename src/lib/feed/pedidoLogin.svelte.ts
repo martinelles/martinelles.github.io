@@ -14,6 +14,8 @@
 import { conta } from '$lib/conta/sessao.svelte';
 import type { Mudancas } from '$lib/missoes/calculos';
 import { marcasMissoes } from '$lib/missoes/marcas.svelte';
+import { extrasMissoes } from '$lib/missoes/extras.svelte';
+import type { Cargo, TarefaExtra } from '$lib/missoes/tipos';
 import { hojeLocal } from '$lib/datas';
 import { CHAVE_INTERACOES, interacoes } from './interacoes.svelte';
 import { erros } from './erros.svelte';
@@ -22,11 +24,20 @@ import { manterRodada } from './rodada';
 export const CHAVE_PENDENTE = `${CHAVE_INTERACOES}:pendente`;
 export const CHAVE_DISPENSADO = `${CHAVE_INTERACOES}:sem-login`;
 
+/** A aula feita fora da missão do dia, para gravar junto com as marcações dela. */
+export interface ExtraDaMissao {
+	cargo: Cargo;
+	/** O dia visto no painel, não necessariamente hoje. */
+	data: string;
+	tarefa: TarefaExtra;
+}
+
 export type Pendente =
 	| { acao: 'responder'; id: string; r: string; gabarito: string }
 	| { acao: 'curtir' | 'salvar'; id: string; on: boolean }
-	/** Marcações do bloco ou do subitem, já calculadas no toque (`mudancasDoBloco`, `mudancasDoItem`). */
-	| { acao: 'missao'; mudancas: Mudancas };
+	/** Marcações do bloco ou do subitem, já calculadas no toque (`mudancasDoBloco`, `mudancasDoItem`),
+	 *  com a aula feita fora da missão, quando é o caso (`mudancasDaAulaNova`). */
+	| { acao: 'missao'; mudancas: Mudancas; extra?: ExtraDaMissao };
 
 let pedido = $state<Pendente | null>(null);
 
@@ -49,7 +60,10 @@ function dispensado(sessao: Storage | null): boolean {
 /** Faz a interação; curtir e salvar só alternam se o estado ainda não é o pedido. Missão só com login. */
 export function aplicar(p: Pendente): void {
 	if (p.acao === 'missao') {
-		if (conta.usuario) marcasMissoes.aplicar(p.mudancas);
+		if (conta.usuario) {
+			marcasMissoes.aplicar(p.mudancas);
+			if (p.extra) extrasMissoes.adicionar(p.extra.cargo, p.extra.data, p.extra.tarefa);
+		}
 	} else if (p.acao === 'responder') {
 		interacoes.responder(p.id, p.r, p.gabarito);
 		// Primeiro erro da questão: entra no caderno de erros (a primeira resposta é a única que conta).
@@ -85,11 +99,23 @@ export function alternarSalvo(id: string, sessao = tentarSessao()): void {
 }
 
 /** Chaves do bloco (`cd~2026-10-13~0`, a mesma da página das Missões) e dos subitens dele. */
-export function marcarMissao(mudancas: Mudancas, sessao = tentarSessao()): void {
-	pedir({ acao: 'missao', mudancas }, sessao);
+export function marcarMissao(mudancas: Mudancas, extra?: ExtraDaMissao, sessao = tentarSessao()): void {
+	pedir({ acao: 'missao', mudancas, extra }, sessao);
 }
 
-function lerMudancas(m: unknown): Pendente | null {
+const tarefaValida = (t: unknown): t is TarefaExtra => {
+	const x = t as TarefaExtra | undefined;
+	return (
+		!!x &&
+		(x.tipo === 'novo' || x.tipo === 'rev') &&
+		typeof x.cid === 'string' &&
+		!!x.cid &&
+		typeof x.cod === 'string' &&
+		typeof x.texto === 'string'
+	);
+};
+
+function lerMudancas(m: unknown): { acao: 'missao'; mudancas: Mudancas } | null {
 	if (!m || typeof m !== 'object' || Array.isArray(m)) return null;
 	const v = Object.entries(m);
 	if (!v.length || !v.every(([k, f]) => k.includes('~') && typeof f === 'boolean')) return null;
@@ -102,8 +128,17 @@ export function tomarPendente(sessao = tentarSessao()): Pendente | null {
 		const p: unknown = JSON.parse(sessao?.getItem(CHAVE_PENDENTE) ?? 'null');
 		sessao?.removeItem(CHAVE_PENDENTE);
 		if (p && typeof p === 'object') {
-			const { acao, id, r, gabarito, on, mudancas } = p as Record<string, unknown>;
-			if (acao === 'missao') return lerMudancas(mudancas);
+			const { acao, id, r, gabarito, on, mudancas, extra } = p as Record<string, unknown>;
+			if (acao === 'missao') {
+				const pend = lerMudancas(mudancas);
+				if (!pend) return null;
+				const x = extra as { cargo?: unknown; data?: unknown; tarefa?: unknown } | undefined;
+				if (x === undefined) return pend;
+				// Extra inválida (sessão corrompida): vale a marcação sem ela.
+				if ((x.cargo === 'cd' || x.cargo === 'aud') && typeof x.data === 'string' && tarefaValida(x.tarefa))
+					return { acao: 'missao', mudancas: pend.mudancas, extra: { cargo: x.cargo, data: x.data, tarefa: x.tarefa } };
+				return pend;
+			}
 			if (typeof id !== 'string') return null;
 			if (acao === 'responder' && typeof r === 'string' && typeof gabarito === 'string')
 				return { acao, id, r, gabarito };

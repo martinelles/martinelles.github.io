@@ -13,6 +13,7 @@
 	import { carregarTema } from '$lib/tema.svelte';
 	import { armazenamentoAtual, sincronizarAoAbrir } from '$lib/conta/sessao.svelte';
 	import { carregarMarcas } from '$lib/missoes/marcas.svelte';
+	import { carregarExtras } from '$lib/missoes/extras.svelte';
 
 	let { children }: { children: Snippet } = $props();
 
@@ -25,6 +26,7 @@
 	garantirFoco();
 	carregarTema(armazenamentoAtual());
 	carregarMarcas(armazenamentoAtual());
+	carregarExtras(armazenamentoAtual());
 	// Logado: traz do servidor o que lá é mais novo e, se algo mudou, os stores leem de novo.
 	void sincronizarAoAbrir(() => {
 		const arm = armazenamentoAtual();
@@ -33,6 +35,7 @@
 		carregarFoco(arm);
 		carregarTema(arm);
 		carregarMarcas(arm);
+		carregarExtras(arm);
 	}).then(() => {
 		// Voltando do popup de login: a interação que o pediu entra depois da sincronização, para ser a mais nova.
 		const p = tomarPendente();

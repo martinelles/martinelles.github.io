@@ -59,3 +59,21 @@ export interface PlanoMissoes {
 
 /** Marcações: `{ "<cargo>~<AAAA-MM-DD>~<índice do bloco>": true }`, a chave `missoes-cgu-2026`. */
 export type Marcas = Record<string, true>;
+
+/**
+ * Aula feita fora da missão do dia, escolhida na hora: aula nova ou revisão de uma aula do
+ * catálogo da mentoria. Gravada na chave `missoes-extras-cgu-2026`, por `<cargo>~<data>`.
+ */
+export interface TarefaExtra {
+	/** `novo` (aula nova) ou `rev` (revisão). */
+	tipo: 'novo' | 'rev';
+	/** Id da aula na plataforma (o `cid` do item-aula do plano, quando a aula está no plano). */
+	cid: string;
+	/** Código da aula, como `B1·1`; aula fora do plano: derivado do título (`B2·3`). */
+	cod: string;
+	/** Título da aula, como `1. Estado e legitimidade`. */
+	texto: string;
+}
+
+/** Extras gravadas: `{ "<cargo>~<AAAA-MM-DD>": [tarefas na ordem em que entraram] }`. */
+export type Extras = Record<string, TarefaExtra[]>;

@@ -12,13 +12,16 @@ import {
 	diaDeHoje,
 	discursivasDoPlano,
 	itemFeito,
+	mudancasDaAulaNova,
 	mudancasDoBloco,
 	mudancasDoItem,
+	ocorrenciasDaAula,
 	progressoDoDia,
 	resumo
 } from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
 import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
+import { carregarExtras, extrasMissoes, lerExtras } from '$lib/missoes/extras.svelte';
 import type { PlanoMissoes } from '$lib/missoes/tipos';
 import { StorageFalso } from '../feed/apoio';
 
@@ -217,5 +220,68 @@ describe('marcações', () => {
 		// Subitem e bloco numa gravação só.
 		marcasMissoes.aplicar({ 'cd~2026-10-13~1': false, 'cd~2026-10-13~1~EPA-01': true });
 		expect(JSON.parse(arm.getItem('missoes-cgu-2026')!)).toEqual({ 'cd~2026-10-13~1~EPA-01': true });
+	});
+});
+
+describe('aula nova feita fora da missão', () => {
+	const aula = (cid: string, cod: string) => ({ cid, cod, texto: `Aula ${cod}` });
+	// Aula 4e7: estudo novo em 16/10 junto de outro subitem e revisão em 17/10; aula 5f5: sozinha no bloco de 18/10.
+	const planoAulas: PlanoMissoes = {
+		...PLANO,
+		plan: [
+			{ data: '2026-10-16', dow: 'sex', fase: 'Base', blocos: [{ tipo: 'novo', titulo: 'N1', min: 90, itens: [aula('4e7', 'E1·1'), item('EPA-02')] }] },
+			{ data: '2026-10-17', dow: 'sáb', fase: 'Base', blocos: [{ tipo: 'rev', titulo: 'R', min: 30, itens: [aula('4e7', 'E1·1')] }] },
+			{ data: '2026-10-18', dow: 'dom', fase: 'Base', blocos: [{ tipo: 'novo', titulo: 'N2', min: 90, itens: [aula('5f5', 'E1·2')] }] }
+		]
+	};
+
+	it('ocorrências da aula: todos os blocos em que o cid aparece, na ordem dos dias', () => {
+		expect(ocorrenciasDaAula(planoAulas, '4e7').map((o) => [o.dia.data, o.tipo, o.item.cod])).toEqual([
+			['2026-10-16', 'novo', 'E1·1'],
+			['2026-10-17', 'rev', 'E1·1']
+		]);
+		expect(ocorrenciasDaAula(planoAulas, 'e-pa')).toEqual([]);
+	});
+
+	it('conclui o estudo novo da aula; a revisão do plano não se marca', () => {
+		expect(mudancasDaAulaNova({}, 'cd', planoAulas, '4e7')).toEqual({ 'cd~2026-10-16~0~4e7': true });
+		// Aula sozinha no bloco: o bloco junto, como o último subitem.
+		expect(mudancasDaAulaNova({}, 'cd', planoAulas, '5f5')).toEqual({ 'cd~2026-10-18~0~5f5': true, 'cd~2026-10-18~0': true });
+	});
+
+	it('aula já concluída em outro dia não gera marcação', () => {
+		expect(mudancasDaAulaNova({ 'cd~2026-10-16~0': true }, 'cd', planoAulas, '4e7')).toEqual({});
+		expect(mudancasDaAulaNova({ 'cd~2026-10-16~0~4e7': true }, 'cd', planoAulas, '4e7')).toEqual({});
+	});
+});
+
+describe('aulas fora da missão gravadas', () => {
+	const T1 = { tipo: 'novo' as const, cid: '4e7', cod: 'E1·1', texto: 'Aula E1·1' };
+
+	it('lê o gravado e descarta o inválido', () => {
+		expect(lerExtras('{"cd~2026-10-16":[{"tipo":"rev","cid":"4e7","cod":"E1·1","texto":"Aula"}]}')).toEqual({
+			'cd~2026-10-16': [{ tipo: 'rev', cid: '4e7', cod: 'E1·1', texto: 'Aula' }]
+		});
+		expect(lerExtras('{"cd~2026-10-16":["x",{"tipo":"nova","cid":"","cod":1}]}')).toEqual({});
+		expect(lerExtras(null)).toEqual({});
+		expect(lerExtras('lixo')).toEqual({});
+	});
+
+	it('adicionar acumula por dia sem repetir; remover apaga', () => {
+		const arm = new StorageFalso();
+		carregarExtras(arm);
+		extrasMissoes.adicionar('cd', '2026-10-16', T1);
+		extrasMissoes.adicionar('cd', '2026-10-16', T1);
+		extrasMissoes.adicionar('cd', '2026-10-16', { ...T1, tipo: 'rev' });
+		extrasMissoes.adicionar('aud', '2026-10-16', T1);
+		expect(JSON.parse(arm.getItem('missoes-extras-cgu-2026')!)).toEqual({
+			'cd~2026-10-16': [T1, { ...T1, tipo: 'rev' }],
+			'aud~2026-10-16': [T1]
+		});
+		expect(extrasMissoes.doDia('cd', '2026-10-16')).toHaveLength(2);
+		extrasMissoes.remover('cd', '2026-10-16', T1);
+		expect(extrasMissoes.doDia('cd', '2026-10-16')).toEqual([{ ...T1, tipo: 'rev' }]);
+		extrasMissoes.remover('cd', '2026-10-16', { ...T1, tipo: 'rev' });
+		expect('cd~2026-10-16' in extrasMissoes.todas()).toBe(false);
 	});
 });

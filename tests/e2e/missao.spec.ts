@@ -134,6 +134,52 @@ test('fora da janela: antes de 13/10 e depois de 12/12', async ({ page }) => {
 	await expect(missao(page)).toContainText('O plano terminou em 12/12/2026.');
 });
 
+test('aula feita fora da missão: a nova conclui o dia do plano em que ela estava; a revisão não mexe nele', async ({ page }) => {
+	const dados = await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	await page.goto('/painel');
+
+	// B1·1: estudo novo em 22/11 (bloco 2, sozinha) e revisão em 23/11.
+	const aula = mentoria.aulas.find((a) => a.disciplina === 'B1' && a.titulo.startsWith('1.'))!;
+	await missao(page).getByRole('button', { name: 'Registrar aula feita fora da missão' }).click();
+	await missao(page).getByRole('button', { name: 'Aula nova' }).click();
+	await missao(page).getByRole('button', { name: 'B1', exact: true }).click();
+	await missao(page).getByLabel('Escolha a aula').selectOption({ label: aula.titulo });
+	await expect(missao(page).getByText('O plano traz esta aula em 22/11/2026')).toBeVisible();
+	await missao(page).getByRole('button', { name: 'Adicionar' }).click();
+
+	await expect(missao(page).getByText('Também estudado neste dia, fora da missão')).toBeVisible();
+	await expect(missao(page).getByText('B1·1')).toBeVisible();
+	const extras = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), 'missoes-extras-cgu-2026');
+	expect(extras).toEqual({ [`cd~${HOJE}`]: [{ tipo: 'novo', cid: aula.id, cod: 'B1·1', texto: aula.titulo }] });
+
+	// Aula nova concluída em 22/11; a revisão de 23/11 segue por conta própria.
+	const m = await marcas(page);
+	expect(m['cd~2026-11-22~2']).toBe(true);
+	expect(Object.keys(m).some((k) => k.startsWith('cd~2026-11-23'))).toBe(false);
+
+	await missao(page).getByLabel('Ver a missão de outro dia').fill('2026-11-22');
+	await expect(missao(page)).toContainText('1 de 5 blocos feitos');
+	await expect(missao(page)).not.toContainText('Também estudado neste dia');
+
+	// De volta a hoje: a mesma aula como revisão só entra na lista, sem novas marcações.
+	await missao(page).getByRole('button', { name: 'Hoje' }).click();
+	await missao(page).getByRole('button', { name: 'Registrar aula feita fora da missão' }).click();
+	await missao(page).getByRole('button', { name: 'Revisão' }).click();
+	await missao(page).getByRole('button', { name: 'B1', exact: true }).click();
+	await missao(page).getByLabel('Escolha a aula').selectOption({ label: aula.titulo });
+	await missao(page).getByRole('button', { name: 'Adicionar' }).click();
+	expect(await marcas(page)).toEqual(m);
+	await expect
+		.poll(() => page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}')['cd~2026-10-14'].length, 'missoes-extras-cgu-2026'))
+		.toBe(2);
+
+	// Remover tira da lista e sobe a chave nova para a conta.
+	await missao(page).getByRole('button', { name: 'Remover' }).first().click();
+	await expect(missao(page).getByText(aula.titulo)).toHaveCount(1);
+	await expect.poll(() => dados['missoes-extras-cgu-2026']?.valor, { timeout: 8000 }).toContain('"tipo":"rev"');
+});
+
 test('Auditoria troca o plano do dia', async ({ page }) => {
 	await page.addInitScript(() =>
 		localStorage.setItem('painel-concurso:preferencias:v2', JSON.stringify({ especialidade: 'auditoria' }))

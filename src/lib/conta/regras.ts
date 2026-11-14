@@ -6,12 +6,16 @@
 /** Chave das marcações da página das Missões (`KEY` no script dela, no vault). */
 export const CHAVE_MISSOES = 'missoes-cgu-2026';
 
+/** Chave das aulas feitas fora da missão do dia, gravadas pelo painel. */
+export const CHAVE_EXTRAS = 'missoes-extras-cgu-2026';
+
 /**
  * As chaves de progresso; qualquer outra não sobe. As quatro primeiras são dos stores do app,
  * escritas por extenso porque o Worker importa este arquivo e não pode puxar os stores (runas do
  * Svelte); `tests/unit/conta` confere que batem com `CHAVE_INTERACOES`, `CHAVE_ERROS`,
- * `CHAVE_FOCO` e `CHAVE_TEMA`. A última é das marcações das Missões, gravada pela página
- * (`/conteudo/artefatos/missoes.html`) e pelo painel (planos/2026-10-14-missao-unica.md).
+ * `CHAVE_FOCO` e `CHAVE_TEMA`. As duas últimas são das Missões: as marcações, gravadas pela
+ * página (`/conteudo/artefatos/missoes.html`) e pelo painel (planos/2026-10-14-missao-unica.md),
+ * e as aulas fora da missão do dia, gravadas só pelo painel.
  * `painel-concurso:plano:v1` (o registro do cronômetro antigo) saiu em 2026-10-14: o que já
  * subiu fica no D1, sem uso.
  */
@@ -20,7 +24,8 @@ export const CHAVES_SINCRONIZADAS: readonly string[] = [
 	'painel-concurso:erros:v1',
 	'painel-concurso:preferencias:v2',
 	'painel-concurso:tema:v1',
-	CHAVE_MISSOES
+	CHAVE_MISSOES,
+	CHAVE_EXTRAS
 ];
 
 /** 3 a 30 caracteres, `a-z`, `0-9` e `-`, sem hífen nas pontas (decisão 2). */

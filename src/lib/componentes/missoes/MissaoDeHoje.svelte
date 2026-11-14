@@ -6,20 +6,27 @@
 	// por subitem: com todas marcadas, o bloco se marca (planos/2026-10-15-topico-da-missao.md).
 	// O subitem aberto na aula da mentoria fica destacado na volta, até ela marcar ou dispensar
 	// (emAndamento; antes o gatilho era o link do Qconcursos, que saiu em 2026-11-08).
+	// Aula feita fora da missão do dia também entra aqui: aula nova ou revisão, do catálogo da
+	// mentoria; aula nova conclui o dia do plano em que ela estava (chave `missoes-extras-cgu-2026`).
 	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
-	import { aulaDaMentoria, aulaPorId } from '$lib/dados';
+	import { aulaDaMentoria, aulaPorId, dados } from '$lib/dados';
 	import { formatarData } from '$lib/datas';
+	import type { ExtraDaMissao } from '$lib/feed/pedidoLogin.svelte';
 	import {
 		blocoFeito,
 		diaDeHoje,
 		itemFeito,
+		mudancasDaAulaNova,
 		mudancasDoBloco,
 		mudancasDoItem,
+		ocorrenciasDaAula,
 		progressoDoDia,
-		type Mudancas
+		type Mudancas,
+		type OcorrenciaDaAula
 	} from '$lib/missoes/calculos';
 	import { carregarEmAndamento, emAndamento } from '$lib/missoes/emAndamento.svelte';
+	import { extrasMissoes } from '$lib/missoes/extras.svelte';
 	import type { Cargo, Marcas, PlanoMissoes, TipoBloco } from '$lib/missoes/tipos';
 
 	let {
@@ -37,7 +44,7 @@
 		marcas: Marcas;
 		/** Questões do feed por tópico (`tp`); `null` enquanto o índice carrega. */
 		questoesPorTopico: Map<string, number> | null;
-		onmarcar: (mudancas: Mudancas) => void;
+		onmarcar: (mudancas: Mudancas, extra?: ExtraDaMissao) => void;
 	} = $props();
 
 	const LETRA: Record<TipoBloco, string> = { rev: 'R', novo: 'N', disc: 'D', sim: 'S', q: 'Q' };
@@ -116,6 +123,62 @@
 	function marcarLembrete(i: number, cid: string, porItem: boolean) {
 		if (!dia) return;
 		onmarcar(porItem ? mudancasDoItem(marcas, cargo, dia, i, cid, true) : mudancasDoBloco(marcas, cargo, dia, i, true));
+	}
+
+	/** Aula feita fora da missão do dia: escolha em três passos (tipo, disciplina, aula). */
+	const AULAS = dados.mentoria?.aulas ?? [];
+
+	/** Disciplinas das aulas que o plano traz (o catálogo pode ter mais), na ordem do catálogo. */
+	const disciplinas = $derived.by(() => {
+		if (!plano) return [] as { chave: string; rotulo: string }[];
+		const noPlano = new Set<string>();
+		for (const d of plano.plan)
+			for (const b of d.blocos) for (const it of b.itens ?? []) if (aulaPorId(it.cid)) noPlano.add(it.cid);
+		const chaves: string[] = [];
+		for (const a of AULAS) if (noPlano.has(a.id) && !chaves.includes(a.disciplina)) chaves.push(a.disciplina);
+		const pref = `${cargo.toUpperCase()}:`;
+		return chaves.map((chave) => ({ chave, rotulo: chave === pref ? chave : chave.replace(pref, '') }));
+	});
+
+	let extraAberta = $state(false);
+	let tipoExtra = $state<'novo' | 'rev' | ''>('');
+	let discExtra = $state('');
+	let aulaExtra = $state('');
+
+	function fecharExtra() {
+		extraAberta = false;
+		tipoExtra = '';
+		discExtra = '';
+		aulaExtra = '';
+	}
+
+	const aulasDaDisc = $derived(discExtra ? AULAS.filter((a) => a.disciplina === discExtra) : []);
+	const aulaEscolhida = $derived(aulaExtra ? aulaPorId(aulaExtra) : null);
+
+	/** Onde o plano traz a aula escolhida como estudo novo, para o aviso antes de registrar. */
+	const novasDaAula = $derived.by(() => {
+		if (!plano || !aulaEscolhida) return [] as OcorrenciaDaAula[];
+		return ocorrenciasDaAula(plano, aulaEscolhida.id).filter((o) => o.tipo === 'novo');
+	});
+	const datasNovas = $derived([...new Set(novasDaAula.map((o) => o.dia.data))].map(formatarData).join(' e '));
+
+	/** Código da aula: o do item no plano (`B1·1`); fora dele, o número do título com a disciplina. */
+	const codDaAula = $derived.by(() => {
+		if (!aulaEscolhida) return '';
+		if (novasDaAula.length) return novasDaAula[0].item.cod;
+		const rotulo = discExtra.replace(`${cargo.toUpperCase()}:`, '');
+		return `${rotulo}·${aulaEscolhida.titulo.match(/^\d+/)?.[0] ?? aulaEscolhida.titulo}`;
+	});
+
+	const extrasDoDia = $derived(extrasMissoes.doDia(cargo, escolhida));
+
+	function adicionarExtra() {
+		if (!dia || !tipoExtra || !aulaEscolhida) return;
+		onmarcar(
+			tipoExtra === 'novo' && plano ? mudancasDaAulaNova(marcas, cargo, plano, aulaEscolhida.id) : {},
+			{ cargo, data: dia.data, tarefa: { tipo: tipoExtra, cid: aulaEscolhida.id, cod: codDaAula, texto: aulaEscolhida.titulo } }
+		);
+		fecharExtra();
 	}
 </script>
 
@@ -289,6 +352,94 @@
 				</li>
 			{/each}
 		</ol>
+		{#if extrasDoDia.length}
+			<div class="extras">
+				<p class="titulo-extras">Também estudado neste dia, fora da missão</p>
+				<ul>
+					{#each extrasDoDia as t (`${t.tipo}~${t.cid}`)}
+						<li class="t-{t.tipo}">
+							<span class="selo" aria-hidden="true">{LETRA[t.tipo]}</span>
+							<span class="cod">{t.cod}</span>
+							<span class="texto-extra">{t.texto}</span>
+							<button
+								type="button"
+								class="remover"
+								onclick={() => extrasMissoes.remover(cargo, escolhida, t)}
+							>
+								Remover
+							</button>
+						</li>
+					{/each}
+				</ul>
+			</div>
+		{/if}
+		{#if extraAberta}
+			<form class="form-extra" onsubmit={(e) => {
+				e.preventDefault();
+				adicionarExtra();
+			}}>
+				<p class="pergunta">Aula feita fora da missão</p>
+				<div class="passo">
+					<p class="rotulo-passo">1. Aula nova ou revisão?</p>
+					<div class="opcoes">
+						<button type="button" class="opcao" aria-pressed={tipoExtra === 'novo'} onclick={() => (tipoExtra = 'novo')}>
+							Aula nova
+						</button>
+						<button type="button" class="opcao" aria-pressed={tipoExtra === 'rev'} onclick={() => (tipoExtra = 'rev')}>
+							Revisão
+						</button>
+					</div>
+				</div>
+				{#if tipoExtra}
+					<div class="passo">
+						<p class="rotulo-passo">2. Qual disciplina?</p>
+						<div class="opcoes">
+							{#each disciplinas as d (d.chave)}
+								<button
+									type="button"
+									class="opcao"
+									aria-pressed={discExtra === d.chave}
+									onclick={() => {
+										discExtra = d.chave;
+										aulaExtra = '';
+									}}
+								>
+									{d.rotulo}
+								</button>
+							{/each}
+						</div>
+					</div>
+				{/if}
+				{#if tipoExtra && discExtra}
+					<div class="passo">
+						<p class="rotulo-passo">3. Qual aula?</p>
+						<select class="aula" bind:value={aulaExtra} required aria-label="Escolha a aula">
+							<option value="" disabled>Escolha a aula</option>
+							{#each aulasDaDisc as a (a.id)}
+								<option value={a.id}>{a.titulo}</option>
+							{/each}
+						</select>
+						{#if aulaEscolhida && tipoExtra === 'novo'}
+							<p class="aviso-extra" role="status">
+								{#if novasDaAula.length}
+									O plano traz esta aula em {datasNovas}; o que lá ainda não está concluído fica marcado.
+								{:else}
+									Esta aula não está no plano; ela entra só na lista deste dia.
+								{/if}
+							</p>
+						{/if}
+					</div>
+				{/if}
+				<div class="acoes-extra">
+					<button type="submit" disabled={!aulaEscolhida}>Adicionar</button>
+					<button type="button" class="cancelar" onclick={fecharExtra}>Cancelar</button>
+				</div>
+			</form>
+		{:else}
+			<button type="button" class="abrir-extra" onclick={() => (extraAberta = true)}>
+				Registrar aula feita fora da missão
+			</button>
+		{/if}
 		{#if aSeguir.length}
 			<p class="a-seguir">
 				<strong>A seguir:</strong>
@@ -634,6 +785,180 @@
 		margin: 6px 0 0;
 		color: var(--cor-texto-suave);
 		font-size: 0.875rem;
+	}
+
+	/* Aula feita fora da missão: o que já foi registrado no dia e o formulário em três passos. */
+	.extras {
+		margin: 12px 0 0;
+		padding: 10px 12px;
+		border: var(--linha-peso) dashed var(--cor-divisor);
+		border-radius: calc(var(--raio) / 2);
+	}
+
+	.titulo-extras {
+		margin: 0;
+		color: var(--cor-texto-suave);
+		font-size: 0.875rem;
+		font-weight: 700;
+	}
+
+	.extras ul {
+		margin: 6px 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 8px;
+		font-size: 0.9375rem;
+	}
+
+	.extras li {
+		display: grid;
+		grid-template-columns: 28px auto minmax(0, 1fr) auto;
+		gap: 8px;
+		align-items: center;
+	}
+
+	.extras li.t-novo {
+		--c: var(--cor-acerto);
+	}
+
+	.extras li.t-rev {
+		--c: var(--cor-primaria);
+	}
+
+	:global([data-tema^='kindle']) .extras li {
+		--c: var(--cor-texto);
+	}
+
+	.selo {
+		display: grid;
+		place-items: center;
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: var(--c);
+		color: var(--cor-superficie);
+		font-weight: 700;
+		font-size: 0.75rem;
+	}
+
+	.remover {
+		min-height: 44px;
+		padding: 8px 12px;
+		border: 0;
+		background: none;
+		color: var(--cor-texto-suave);
+		font: inherit;
+		font-size: 0.875rem;
+		font-weight: 700;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	.abrir-extra {
+		min-height: 44px;
+		margin-top: 12px;
+		padding: 8px 16px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+		font: inherit;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.form-extra {
+		margin-top: 12px;
+		padding: 12px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+	}
+
+	.pergunta {
+		margin: 0;
+		font-weight: 700;
+	}
+
+	.passo {
+		margin-top: 10px;
+	}
+
+	.rotulo-passo {
+		margin: 0 0 6px;
+		color: var(--cor-texto-suave);
+		font-size: 0.875rem;
+		font-weight: 700;
+	}
+
+	.opcoes {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.opcao {
+		min-height: 44px;
+		padding: 8px 14px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+		font: inherit;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.opcao[aria-pressed='true'] {
+		border-color: var(--cor-primaria);
+		background: var(--cor-primaria);
+		color: var(--cor-superficie);
+	}
+
+	.form-extra .aula {
+		min-height: 44px;
+		width: 100%;
+		padding: 8px 14px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
+		font: inherit;
+	}
+
+	.aviso-extra {
+		margin: 6px 0 0;
+		color: var(--cor-texto-suave);
+		font-size: 0.875rem;
+	}
+
+	.acoes-extra {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 12px;
+	}
+
+	.acoes-extra button {
+		min-height: 44px;
+		padding: 8px 16px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-primaria);
+		color: var(--cor-superficie);
+		font: inherit;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.acoes-extra button:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.acoes-extra .cancelar {
+		background: var(--cor-superficie);
+		color: var(--cor-texto);
 	}
 
 	.cumprida {
