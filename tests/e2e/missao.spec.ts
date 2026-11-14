@@ -140,7 +140,7 @@ test('aula feita fora da missão: a nova conclui o dia do plano em que ela estav
 	await page.goto('/painel');
 
 	// B1·1: estudo novo em 22/11 (bloco 2, sozinha) e revisão em 23/11.
-	const aula = mentoria.aulas.find((a) => a.disciplina === 'B1' && a.titulo.startsWith('1.'))!;
+	const aula = mentoria.aulas!.find((a) => a.disciplina === 'B1' && a.titulo.startsWith('1.'))!;
 	await missao(page).getByRole('button', { name: 'Registrar aula feita fora da missão' }).click();
 	await missao(page).getByRole('button', { name: 'Aula nova' }).click();
 	await missao(page).getByRole('button', { name: 'B1', exact: true }).click();
