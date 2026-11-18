@@ -180,6 +180,45 @@ test('aula feita fora da missão: a nova conclui o dia do plano em que ela estav
 	await expect.poll(() => dados['missoes-extras-cgu-2026']?.valor, { timeout: 8000 }).toContain('"tipo":"rev"');
 });
 
+test('aula nova fora da data: as revisões contam do dia em que ela foi feita', async ({ page }) => {
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	await page.goto('/painel');
+
+	// B1·1: nova em 22/11, revisões previstas em 23/11 (D+1) e 29/11 (D+7), sem D+30 no plano.
+	const aula = mentoria.aulas!.find((a) => a.disciplina === 'B1' && a.titulo.startsWith('1.'))!;
+	await missao(page).getByRole('button', { name: 'Registrar aula feita fora da missão' }).click();
+	await missao(page).getByRole('button', { name: 'Aula nova' }).click();
+	await missao(page).getByRole('button', { name: 'B1', exact: true }).click();
+	await missao(page).getByLabel('Escolha a aula').selectOption({ label: aula.titulo });
+	await missao(page).getByRole('button', { name: 'Adicionar' }).click();
+	await expect(missao(page).getByText('Também estudado neste dia, fora da missão')).toBeVisible();
+
+	// O dia previsto vira ponteiro para o dia novo.
+	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
+	const itemB1 = () => missao(page).locator('li:not(.bloco)', { hasText: 'B1·1' }).first();
+	await seletor.fill('2026-11-23');
+	await expect(itemB1()).toContainText('revisão movida para 15/10/2026');
+	await seletor.fill('2026-11-29');
+	await expect(itemB1()).toContainText('revisão movida para 21/10/2026');
+
+	// D+1 no dia seguinte ao real, marcável como qualquer subitem, na chave do dia novo (a
+	// marcação do estudo previsto em 22/11 veio do próprio registro da aula).
+	await seletor.fill('2026-10-15');
+	await expect(itemB1()).toContainText('aula feita em 14/10/2026');
+	await itemB1().getByRole('checkbox', { name: 'Marcar B1·1 como estudado' }).click();
+	expect(await marcas(page)).toEqual({
+		'cd~2026-11-22~2': true,
+		[`cd~2026-11-22~2~${aula.id}`]: true,
+		[`cd~2026-10-15~0~${aula.id}`]: true
+	});
+
+	// O D+30, que o plano nem trazia (caía após 12/12), volta em 13/11 com a data real.
+	await seletor.fill('2026-11-13');
+	await expect(itemB1()).toContainText('D+30');
+	await expect(itemB1()).toContainText('aula feita em 14/10/2026');
+});
+
 test('Auditoria troca o plano do dia', async ({ page }) => {
 	await page.addInitScript(() =>
 		localStorage.setItem('painel-concurso:preferencias:v2', JSON.stringify({ especialidade: 'auditoria' }))

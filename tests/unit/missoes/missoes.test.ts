@@ -16,8 +16,10 @@ import {
 	mudancasDoBloco,
 	mudancasDoItem,
 	ocorrenciasDaAula,
+	planoAjustado,
 	progressoDoDia,
-	resumo
+	resumo,
+	soMovidas
 } from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
 import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
@@ -283,5 +285,100 @@ describe('aulas fora da missão gravadas', () => {
 		expect(extrasMissoes.doDia('cd', '2026-10-16')).toEqual([{ ...T1, tipo: 'rev' }]);
 		extrasMissoes.remover('cd', '2026-10-16', { ...T1, tipo: 'rev' });
 		expect('cd~2026-10-16' in extrasMissoes.todas()).toBe(false);
+	});
+});
+
+describe('revisões na data real da aula nova', () => {
+	// Aula 4e7 nova em 16/10, com D+1 em 17/10 (junto de outra), D+7 em 23/10 (sozinha) e D+30 em
+	// 15/11, o fim do plano; aula 5f5 nova em 18/10, só com D+1 em 19/10. Dias 21/10 e 25/10
+	// recebem as remarcadas.
+	const dia = (data: string, dow: string, blocos: any[]) => ({ data, dow, fase: 'Base', blocos });
+	const aula = (cid: string) => ({ cid, cod: 'E1·1', texto: `Aula ${cid}` });
+	const rev = (...itens: [string, string][]) => ({
+		tipo: 'rev' as const,
+		titulo: 'R',
+		min: 30,
+		itens: itens.map(([cid, lab]) => ({ ...aula(cid), lab }))
+	});
+	const planoRevs: PlanoMissoes = {
+		...PLANO,
+		plan: [
+			dia('2026-10-16', 'sex', [{ tipo: 'novo', titulo: 'N', min: 90, itens: [aula('4e7')] }]),
+			dia('2026-10-17', 'sáb', [rev(['4e7', 'D+1'], ['zz', 'D+1'])]),
+			dia('2026-10-18', 'dom', [{ tipo: 'novo', titulo: 'N', min: 90, itens: [aula('5f5')] }]),
+			dia('2026-10-19', 'seg', [rev(['qq', 'D+1'], ['5f5', 'D+1'])]),
+			dia('2026-10-21', 'qua', [rev(['w', 'D+1'])]),
+			dia('2026-10-23', 'sex', [rev(['4e7', 'D+7'])]),
+			dia('2026-10-25', 'dom', [{ tipo: 'disc', titulo: 'D', min: 90 }]),
+			dia('2026-11-15', 'dom', [rev(['4e7', 'D+30'])])
+		]
+	};
+	const extra = (data: string, cid = '4e7') => ({ [`cd~${data}`]: [{ tipo: 'novo' as const, cid, cod: 'E1·1', texto: `Aula ${cid}` }] });
+
+	const itemDa = (p: PlanoMissoes, data: string, cid: string) =>
+		p.plan.find((d) => d.data === data)!.blocos.flatMap((b) => b.itens ?? []).find((it) => it.cid === cid)!;
+
+	it('sem aula nova registrada (ou só de outro cargo), o plano volta igual', () => {
+		expect(planoAjustado(planoRevs, {}, 'cd')).toBe(planoRevs);
+		expect(planoAjustado(planoRevs, { 'cd~2026-10-18': [{ tipo: 'rev', cid: '4e7', cod: 'E1·1', texto: 'Aula' }] }, 'cd')).toBe(planoRevs);
+		expect(planoAjustado(planoRevs, extra('2026-10-18'), 'aud')).toBe(planoRevs);
+	});
+
+	it('aula feita em outro dia: D+1, D+7 e D+30 contam da data real', () => {
+		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd');
+		// No lugar previsto, o ponteiro; a revisão junto fica.
+		expect(itemDa(p, '2026-10-17', '4e7')).toMatchObject({ lab: 'D+1', movida: '2026-10-19' });
+		expect(itemDa(p, '2026-10-17', 'zz').movida).toBeUndefined();
+		// No dia novo, ela entra no bloco de revisão que já existe.
+		expect(itemDa(p, '2026-10-19', '4e7')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 18/10/2026' });
+		// Dia sem bloco de revisão: um no fim do dia.
+		expect(itemDa(p, '2026-10-25', '4e7')?.lab).toBe('D+7');
+		expect(itemDa(p, '2026-10-25', '4e7')?.movida).toBeUndefined();
+		const blocoNovo = p.plan.find((d) => d.data === '2026-10-25')!.blocos.at(-1)!;
+		expect(blocoNovo.tipo).toBe('rev');
+		// D+30 além do fim do plano (15/11): só o ponteiro, sem dia novo.
+		expect(itemDa(p, '2026-11-15', '4e7')).toMatchObject({ lab: 'D+30', movida: null });
+		expect(p.plan.some((d) => d.data === '2026-11-17')).toBe(false);
+	});
+
+	it('aula registrada duas vezes: vale a data mais recente', () => {
+		const p = planoAjustado(planoRevs, { ...extra('2026-10-17'), ...extra('2026-10-20') }, 'cd');
+		expect(itemDa(p, '2026-10-17', '4e7').movida).toBe('2026-10-21');
+		expect(itemDa(p, '2026-10-21', '4e7').nota).toBe('aula feita em 20/10/2026');
+	});
+
+	it('aula feita na própria data do plano: nada se move', () => {
+		const p = planoAjustado(planoRevs, extra('2026-10-16'), 'cd');
+		expect(itemDa(p, '2026-10-17', '4e7').movida).toBeUndefined();
+		expect(itemDa(p, '2026-10-19', '4e7')).toBeUndefined();
+	});
+
+	it('intervalo que o plano não trazia volta quando a data real o traz para dentro', () => {
+		// Aula 5f5: prevista em 18/10 só com D+1; feita em 16/10, a D+7 e a D+30 cabem no plano.
+		const p = planoAjustado(planoRevs, extra('2026-10-16', '5f5'), 'cd');
+		expect(itemDa(p, '2026-10-19', '5f5')).toMatchObject({ lab: 'D+1', movida: '2026-10-17' });
+		expect(itemDa(p, '2026-10-17', '5f5')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 16/10/2026' });
+		expect(itemDa(p, '2026-10-23', '5f5')).toMatchObject({ lab: 'D+7' });
+		expect(itemDa(p, '2026-11-15', '5f5')).toMatchObject({ lab: 'D+30' });
+	});
+
+	it('bloco que só tem ponteiros não conta no dia nem trava o cumprido', () => {
+		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd');
+		const dia23 = p.plan.find((d) => d.data === '2026-10-23')!;
+		expect(soMovidas(dia23.blocos[0])).toBe(true);
+		expect(progressoDoDia({}, 'cd', dia23)).toEqual({ feitos: 0, total: 0 });
+		expect(diaCumprido({}, 'cd', dia23)).toBe(true);
+		// O dia que recebe a revisão conta o bloco de revisão como sempre.
+		const dia19 = p.plan.find((d) => d.data === '2026-10-19')!;
+		expect(progressoDoDia({}, 'cd', dia19)).toEqual({ feitos: 0, total: 1 });
+	});
+
+	it('a revisão remarcada marca como qualquer subitem, na chave do dia novo', () => {
+		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd');
+		const dia19 = p.plan.find((d) => d.data === '2026-10-19')!;
+		const chave = chaveItem('cd', '2026-10-19', 0, '4e7');
+		expect(itemFeito({ [chave]: true }, 'cd', dia19, 0, '4e7')).toBe(true);
+		// O índice dos blocos previstos não muda: a marcação antiga continua valendo.
+		expect(chaveBloco('cd', '2026-10-16', 0) in { 'cd~2026-10-16~0': true }).toBe(true);
 	});
 });

@@ -7,7 +7,8 @@
 	// O subitem aberto na aula da mentoria fica destacado na volta, até ela marcar ou dispensar
 	// (emAndamento; antes o gatilho era o link do Qconcursos, que saiu em 2026-11-08).
 	// Aula feita fora da missão do dia também entra aqui: aula nova ou revisão, do catálogo da
-	// mentoria; aula nova conclui o dia do plano em que ela estava (chave `missoes-extras-cgu-2026`).
+	// mentoria; aula nova conclui o dia do plano em que ela estava (chave `missoes-extras-cgu-2026`)
+	// e as revisões dela contam da data real (D+1, D+7, D+30), como a repetição espaçada pede.
 	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { aulaDaMentoria, aulaPorId, dados } from '$lib/dados';
@@ -22,6 +23,7 @@
 		mudancasDoItem,
 		ocorrenciasDaAula,
 		progressoDoDia,
+		soMovidas,
 		type Mudancas,
 		type OcorrenciaDaAula
 	} from '$lib/missoes/calculos';
@@ -63,7 +65,7 @@
 	const hojeNoPlano = $derived(plano ? diaDeHoje(plano, escolhida) : null);
 	const dia = $derived(hojeNoPlano?.dia ?? null);
 	const progresso = $derived(dia ? progressoDoDia(marcas, cargo, dia) : null);
-	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + b.min, 0) : 0);
+	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + (soMovidas(b) ? 0 : b.min), 0) : 0);
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
 	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
 
@@ -221,21 +223,26 @@
 		<ol class="blocos">
 								{#each dia.blocos as b, i (i)}
 									{@const feito = blocoFeito(marcas, cargo, dia, i)}
-				<li class="bloco t-{b.tipo}" class:feito>
-					<label class="bolha">
-						<input
-							type="checkbox"
-							checked={feito}
-							onchange={(e) => {
-								const alvo = e.currentTarget;
-								const marcar = alvo.checked;
-								alvo.checked = feito; // quem decide é o onmarcar (pode pedir login antes)
-								onmarcar(mudancasDoBloco(marcas, cargo, dia, i, marcar));
-							}}
-							aria-label="Marcar {b.titulo} como cumprido"
-						/>
-						<span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span>
-					</label>
+									{@const ponteiros = soMovidas(b)}
+									<li class="bloco t-{b.tipo}" class:feito>
+									{#if ponteiros}
+										<span class="bolha"><span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span></span>
+									{:else}
+										<label class="bolha">
+											<input
+												type="checkbox"
+												checked={feito}
+												onchange={(e) => {
+													const alvo = e.currentTarget;
+													const marcar = alvo.checked;
+													alvo.checked = feito; // quem decide é o onmarcar (pode pedir login antes)
+													onmarcar(mudancasDoBloco(marcas, cargo, dia, i, marcar));
+												}}
+												aria-label="Marcar {b.titulo} como cumprido"
+											/>
+											<span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span>
+										</label>
+									{/if}
 					<div class="corpo">
 						<span class="tipo">{TIPO[b.tipo]}</span>
 						<p class="titulo">
@@ -255,8 +262,8 @@
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
 									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
-									<li class:feito={itemOk} class:em-andamento={aberto}>
-										{#if porItem}
+									<li class:feito={itemOk} class:em-andamento={aberto} class:movida={it.movida !== undefined}>
+										{#if porItem && it.movida === undefined}
 											<label class="caixa">
 												<input
 													type="checkbox"
@@ -276,6 +283,10 @@
 										<span class="texto">
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
+											{#if it.nota}<em> · {it.nota}</em>{/if}
+											{#if it.movida !== undefined}
+												<em> · {it.movida ? `revisão movida para ${formatarData(it.movida)}` : 'revisão além do fim do plano'}</em>
+											{/if}
 											{#if it.partes && it.partes > 1}<em> · parte {it.parte} de {it.partes}</em>{/if}
 											{#if it.subitens?.length}
 												<em> · aula da mentoria, subitens {it.subitens.map((s) => s.cod).join(' · ')}</em>
@@ -419,15 +430,16 @@
 								<option value={a.id}>{a.titulo}</option>
 							{/each}
 						</select>
-						{#if aulaEscolhida && tipoExtra === 'novo'}
-							<p class="aviso-extra" role="status">
-								{#if novasDaAula.length}
-									O plano traz esta aula em {datasNovas}; o que lá ainda não está concluído fica marcado.
-								{:else}
-									Esta aula não está no plano; ela entra só na lista deste dia.
-								{/if}
-							</p>
-						{/if}
+							{#if aulaEscolhida && tipoExtra === 'novo'}
+								<p class="aviso-extra" role="status">
+									{#if novasDaAula.length}
+										O plano traz esta aula em {datasNovas}; o que lá ainda não está concluído fica marcado, e as
+										revisões dela (D+1, D+7, D+30) passam a contar deste dia.
+									{:else}
+										Esta aula não está no plano; ela entra só na lista deste dia.
+									{/if}
+								</p>
+							{/if}
 					</div>
 				{/if}
 				<div class="acoes-extra">
@@ -699,12 +711,18 @@
 		padding-top: 11px;
 	}
 
-	.itens li.feito .cod,
-	.itens li.feito .texto {
-		color: var(--cor-texto-suave);
-		text-decoration: line-through;
-		text-decoration-thickness: 1px;
-	}
+									.itens li.feito .cod,
+									.itens li.feito .texto {
+										color: var(--cor-texto-suave);
+										text-decoration: line-through;
+										text-decoration-thickness: 1px;
+									}
+
+									/* Revisão remarcada para outro dia: só o ponteiro fica, sem marcação. */
+									.itens li.movida .cod,
+									.itens li.movida .texto {
+										color: var(--cor-texto-suave);
+									}
 
 	.cod {
 		font-variant-numeric: tabular-nums;

@@ -28,6 +28,11 @@ export interface ItemBloco {
 	/** Item-aula maior que o dia: posição do pedaço de hoje e o total de pedaços. */
 	parte?: number;
 	partes?: number;
+	/** Revisão remarcada porque a aula foi feita em outro dia: para onde foi (`null`: caiu além do
+	 *  fim do plano). No lugar dela fica só este ponteiro, sem marcação. */
+	movida?: string | null;
+	/** Nota exibida junto ao item, como "aula feita em 14/11/2026" na revisão remarcada. */
+	nota?: string;
 }
 
 export interface Bloco {

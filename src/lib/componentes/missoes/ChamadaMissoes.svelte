@@ -3,14 +3,16 @@
 	// stories, com os blocos de hoje do plano das Missões, que leva ao painel. Fora da janela do
 	// plano, ou enquanto ele carrega, some.
 	import Icone from '$lib/componentes/Icone.svelte';
-	import { diaDeHoje, progressoDoDia } from '$lib/missoes/calculos';
+	import { diaDeHoje, progressoDoDia, soMovidas } from '$lib/missoes/calculos';
 	import type { Cargo, Marcas, PlanoMissoes } from '$lib/missoes/tipos';
 
 	let { plano, cargo, hoje, marcas }: { plano: PlanoMissoes | null; cargo: Cargo; hoje: string; marcas: Marcas } = $props();
 
 	const dia = $derived(plano ? diaDeHoje(plano, hoje).dia : null);
 	const p = $derived(dia ? progressoDoDia(marcas, cargo, dia) : null);
-	const falta = $derived(dia ? dia.blocos.reduce((s, b, i) => s + (marcas[`${cargo}~${dia.data}~${i}`] ? 0 : b.min), 0) : 0);
+	const falta = $derived(
+		dia ? dia.blocos.reduce((s, b, i) => s + (soMovidas(b) || marcas[`${cargo}~${dia.data}~${i}`] ? 0 : b.min), 0) : 0
+	);
 	const duracao = (min: number) => (min >= 60 ? `${Math.floor(min / 60)} h${min % 60 ? ` ${min % 60} min` : ''}` : `${min} min`);
 </script>
 
