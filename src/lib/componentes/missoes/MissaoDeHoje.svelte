@@ -17,8 +17,9 @@
 	import { formatarData } from '$lib/datas';
 	import type { ExtraDaMissao } from '$lib/feed/pedidoLogin.svelte';
 	import {
-		blocoFeito,
+		blocoCumprido,
 		diaDeHoje,
+		itemCumprido,
 		itemFeito,
 		mudancasDaAulaNova,
 		mudancasDoBloco,
@@ -225,7 +226,7 @@
 		</div>
 		<ol class="blocos">
 								{#each dia.blocos as b, i (i)}
-									{@const feito = blocoFeito(marcas, cargo, dia, i)}
+									{@const feito = blocoCumprido(marcas, cargo, dia, i, b)}
 									{@const ponteiros = soPonteiros(b)}
 									<li class="bloco t-{b.tipo}" class:feito>
 									{#if ponteiros}
@@ -267,14 +268,14 @@
 									{@const subs = it.subitens ?? []}
 									{@const nSub = (s: { cid: string }) => questoesPorTopico?.get(s.cid) ?? 0}
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
-									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
+									{@const itemOk = porItem && itemCumprido(marcas, cargo, dia, i, it)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li
 										class:feito={itemOk}
 										class:em-andamento={aberto}
 										class:ponteiro={it.movida !== undefined || it.suspensa === true}
 									>
-										{#if porItem && it.movida === undefined && it.suspensa !== true}
+										{#if porItem && it.movida === undefined && it.suspensa !== true && it.feitaEm === undefined}
 											<label class="caixa">
 												<input
 													type="checkbox"
@@ -295,6 +296,7 @@
 											{it.texto}
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
 											{#if it.nota}<em> · {it.nota}</em>{/if}
+											{#if it.feitaEm}<em> · aula feita em {formatarData(it.feitaEm)}</em>{/if}
 											{#if it.movida !== undefined}
 												<em>
 													· {it.movida

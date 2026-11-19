@@ -470,10 +470,19 @@ describe('aula nova que passou o dia sem ser feita', () => {
 	it('marcada no dia em que chegou: para de deslizar e as revisões contam daquele dia', () => {
 		const p = planoAjustado(planoAtraso, {}, 'cd', { 'cd~2026-10-18~2~4e7': true }, '2026-10-18');
 		expect(itemDe(p, '2026-10-16', '4e7').movida).toBeUndefined();
-		expect(itemDe(p, '2026-10-16', '4e7').nota).toBe('aula feita em 18/10/2026');
+		expect(itemDe(p, '2026-10-16', '4e7').feitaEm).toBe('2026-10-18');
 		// D+1 previsto em 17/10: conta de 18/10 e vai para 19/10.
 		expect(itemDe(p, '2026-10-17', '4e7').movida).toBe('2026-10-19');
 		expect(itemDe(p, '2026-10-19', '4e7')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 18/10/2026' });
+	});
+
+	it('marcada na chegada conta como feita no dia previsto (missão e resumo)', () => {
+		const marcas = { 'cd~2026-10-18~2~4e7': true as const };
+		const p = planoAjustado(planoAtraso, {}, 'cd', marcas, '2026-10-18');
+		const dia16 = p.plan.find((d) => d.data === '2026-10-16')!;
+		expect(diaCumprido(marcas, 'cd', dia16)).toBe(true);
+		expect(progressoDoDia(marcas, 'cd', dia16)).toEqual({ feitos: 1, total: 1 });
+		expect(resumo(p, marcas, 'cd').blocosFeitos).toBe(1);
 	});
 
 	it('hoje além do fim do plano: só o ponteiro, sem aula adiada', () => {

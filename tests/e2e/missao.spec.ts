@@ -287,9 +287,10 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
 	await seletor.fill('2026-11-20');
 	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
-	// No dia previsto, a nota do dia em que a aula acabou sendo feita.
+	// No dia previsto, a nota do dia em que a aula acabou sendo feita, e o bloco conta como cumprido.
 	await seletor.fill('2026-11-18');
 	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
+	await expect(missao(page).locator('li.bloco', { hasText: 'C1·5' }).getByRole('checkbox')).toBeChecked();
 });
 
 test('Auditoria troca o plano do dia', async ({ page }) => {

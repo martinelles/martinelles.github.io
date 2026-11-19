@@ -34,6 +34,9 @@ export interface ItemBloco {
 	/** Revisão suspensa: o estudo dela não foi concluído e o último dia previsto já passou. Só o
 	 *  ponteiro, sem marcação; concluído o estudo, a revisão volta. */
 	suspensa?: boolean;
+	/** Aula concluída em outro dia (registrada fora da missão ou marcada na chegada de atrasada):
+	 *  a data real. Conta como feita no dia previsto, para a missão e para o resumo. */
+	feitaEm?: string;
 	/** Nota exibida junto ao item, como "aula feita em 14/11/2026" na revisão remarcada. */
 	nota?: string;
 }

@@ -22,7 +22,7 @@ export const blocoFeito = (marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: numb
 
 /** Dia cumprido: todos os blocos marcados (a regra da régua da página). */
 export const diaCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao): boolean =>
-	dia.blocos.every((b, i) => soPonteiros(b) || blocoFeito(marcas, cargo, dia, i));
+	dia.blocos.every((b, i) => soPonteiros(b) || blocoCumprido(marcas, cargo, dia, i, b));
 
 export interface ResumoMissoes {
 	dias: number;
@@ -40,7 +40,7 @@ export function resumo(plano: PlanoMissoes, marcas: Marcas, cargo: Cargo): Resum
 			if (soPonteiros(b)) return;
 			r.blocos++;
 			r.minutos += b.min;
-			if (blocoFeito(marcas, cargo, dia, i)) {
+			if (blocoCumprido(marcas, cargo, dia, i, b)) {
 				r.blocosFeitos++;
 				r.minutosFeitos += b.min;
 			}
@@ -56,7 +56,7 @@ export function progressoDoDia(marcas: Marcas, cargo: Cargo, dia: DiaMissao): { 
 	dia.blocos.forEach((b, i) => {
 		if (soPonteiros(b)) return;
 		total++;
-		if (blocoFeito(marcas, cargo, dia, i)) feitos++;
+		if (blocoCumprido(marcas, cargo, dia, i, b)) feitos++;
 	});
 	return { feitos, total };
 }
@@ -64,6 +64,15 @@ export function progressoDoDia(marcas: Marcas, cargo: Cargo, dia: DiaMissao): { 
 /** Bloco que só tem ponteiros (revisão movida ou suspensa): nada a fazer neste dia. */
 export const soPonteiros = (b: Bloco): boolean =>
 	!!b.itens?.length && b.itens.every((it) => it.movida !== undefined || it.suspensa === true);
+
+/** Item de estudo cumprido: marcado no dia, ou aula feita em outro dia (`feitaEm`). */
+export const itemCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: number, it: ItemBloco): boolean =>
+	it.feitaEm !== undefined || itemFeito(marcas, cargo, dia, i, it.cid);
+
+/** Bloco cumprido para as contas: marcado, ou de estudo novo com todos os subitens cumpridos. */
+export const blocoCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: number, b: Bloco): boolean =>
+	blocoFeito(marcas, cargo, dia, i) ||
+	(b.tipo === 'novo' && !!b.itens?.length && b.itens.every((it) => itemCumprido(marcas, cargo, dia, i, it)));
 
 /** Discursiva do plano na lista de todas (blocos `disc`), na ordem dos dias. */
 export interface DiscursivaDoPlano {
@@ -295,11 +304,11 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 				let mudou = false;
 				const itens = b.itens.map((it) => {
 					if (!it.subitens || itemFeito(marcas, cargo, dia, i, it.cid)) return it;
-					// Feita em outro dia (registrada ou marcada na chegada): só fica a nota.
+					// Feita em outro dia (registrada ou marcada na chegada): vale como feita aqui.
 					const diaReal = real.get(it.cid);
 					if (diaReal) {
 						mudou = true;
-						return { ...it, nota: `aula feita em ${formatarData(diaReal)}` };
+						return { ...it, feitaEm: diaReal };
 					}
 					mudou = true;
 					// A primeira parte em aberto é a que chega; as outras só apontam.
