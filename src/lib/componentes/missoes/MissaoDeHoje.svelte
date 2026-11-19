@@ -252,9 +252,9 @@
 						{#if b.itens?.length}
 							{@const porItem = b.itens.length > 1}
 							<ul class="itens" class:por-item={porItem}>
-								{#each b.itens as it (it.cid)}
-									{@const aulaInfo = it.subitens?.length ? aulaPorId(it.cid) : null}
-									{@const aula = aulaInfo?.url ?? aulaDaMentoria(cargo, it.cod)}
+									{#each b.itens as it (it.cid)}
+										{@const aulaInfo = aulaPorId(it.cid)}
+										{@const aula = aulaInfo?.url ?? aulaDaMentoria(cargo, it.cod)}
 									{@const tec = aulaInfo?.tec}
 									{@const extras = aulaInfo?.tecExtras ?? []}
 									{@const subs = it.subitens ?? []}

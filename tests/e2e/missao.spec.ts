@@ -202,10 +202,11 @@ test('aula nova fora da data: as revisões contam do dia em que ela foi feita', 
 	await seletor.fill('2026-11-29');
 	await expect(itemB1()).toContainText('revisão movida para 21/10/2026');
 
-	// D+1 no dia seguinte ao real, marcável como qualquer subitem, na chave do dia novo (a
-	// marcação do estudo previsto em 22/11 veio do próprio registro da aula).
+	// D+1 no dia seguinte ao real, com o atalho da aula da mentoria, marcável como qualquer
+	// subitem, na chave do dia novo (a marcação do estudo previsto em 22/11 veio do registro).
 	await seletor.fill('2026-10-15');
 	await expect(itemB1()).toContainText('aula feita em 14/10/2026');
+	await expect(itemB1().getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute('href', aula.url);
 	await itemB1().getByRole('checkbox', { name: 'Marcar B1·1 como estudado' }).click();
 	expect(await marcas(page)).toEqual({
 		'cd~2026-11-22~2': true,
