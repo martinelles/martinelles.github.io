@@ -23,6 +23,7 @@ import {
 	soPonteiros
 } from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
+import { aulasPorCod, type AulaDoCatalogo } from '$lib/missoes/catalogo';
 import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
 import { carregarExtras, extrasMissoes, lerExtras } from '$lib/missoes/extras.svelte';
 import type { PlanoMissoes } from '$lib/missoes/tipos';
@@ -446,7 +447,7 @@ describe('aula nova que passou o dia sem ser feita', () => {
 		expect(itemDe(p, '2026-10-18', 'qq').movida).toBeUndefined();
 		const dia18 = p.plan.find((d) => d.data === '2026-10-18')!;
 		const adiadas = dia18.blocos.at(-1)!;
-		expect(adiadas).toMatchObject({ tipo: 'novo', titulo: 'Aula adiada', min: 110, atrasado: true });
+		expect(adiadas).toMatchObject({ tipo: 'novo', titulo: 'Aulas atrasadas', min: 110, atrasado: true });
 		expect(adiadas.itens!.map((it) => it.cid)).toEqual(['pp', '4e7', 'zz']);
 		expect(progressoDoDia({}, 'cd', dia18)).toEqual({ feitos: 0, total: 3 });
 	});
@@ -503,5 +504,70 @@ describe('aula nova que passou o dia sem ser feita', () => {
 		expect(mudancasDoBlocoAtrasado({ 'cd~2026-10-18~2': true }, 'cd', dia18, i, false)).toEqual({
 			'cd~2026-10-18~2': false
 		});
+	});
+});
+
+describe('conteúdo em aberto cuja aula não está no plano', () => {
+	// Tópicos E1 1.1 (fim 16/10) e E1 2.1 (fim 17/10) sem marcação; E1 3.1 (fim 16/10) em aberto,
+	// mas coberto pela aula do plano de hoje. O catálogo traz aula para E1 1.1 e E1 2.1.
+	const dia = (data: string, dow: string, blocos: any[]) => ({ data, dow, fase: 'Base', blocos });
+	const topico = (cid: string, cod: string, min: number) => ({ cid, cod, texto: `Tópico ${cod}`, min });
+	const planoAberto: PlanoMissoes = {
+		...PLANO,
+		plan: [
+			dia('2026-10-16', 'sex', [
+				{ tipo: 'novo', titulo: 'N', min: 45, itens: [topico('EAG-01', 'E1 1.1', 45)] },
+				{ tipo: 'novo', titulo: 'N', min: 30, itens: [topico('EAG-03', 'E1 3.1', 30)] }
+			]),
+			dia('2026-10-17', 'sáb', [
+				{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: 'EAG-01', cod: 'E1 1.1', texto: 'Tópico', lab: 'D+1' }] },
+				{ tipo: 'novo', titulo: 'N', min: 30, itens: [topico('EAG-02', 'E1 2.1', 30)] }
+			]),
+			dia('2026-10-18', 'dom', [
+				{ tipo: 'novo', titulo: 'N', min: 50, itens: [{ cid: 'al', cod: 'E1·4', texto: 'Aula do plano', min: 50, subitens: [{ cid: 'EAG-03', cod: 'E1 3.1' }] }] }
+			]),
+			dia('2026-10-19', 'seg', [{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: 'x', cod: 'E1 9.9', texto: 'Tópico', lab: 'D+1' }] }])
+		]
+	};
+	const catalogo = aulasPorCod(
+		[
+			{ id: 'x1', disciplina: 'CD:E1', titulo: '1. Modelagem e arquiteturas', subitens: ['CD:E1-1.1'] },
+			{ id: 'x2', disciplina: 'CD:E1', titulo: '2. SQL e consultas analíticas', subitens: ['CD:E1-2.1'] }
+		],
+		'cd'
+	);
+	const itemDe = (p: PlanoMissoes, data: string, cid: string) =>
+		p.plan.find((d) => d.data === data)!.blocos.flatMap((b) => b.itens ?? []).find((it) => it.cid === cid)!;
+
+	it('tópico em aberto com fim passado vira aula do catálogo no bloco de atrasadas', () => {
+		const p = planoAjustado(planoAberto, {}, 'cd', {}, '2026-10-18', catalogo);
+		const atraso = p.plan.find((d) => d.data === '2026-10-18')!.blocos.at(-1)!;
+		expect(atraso).toMatchObject({ tipo: 'novo', titulo: 'Aulas atrasadas', atrasado: true });
+		expect(atraso.itens!.map((i) => [i.cid, i.cod, i.min])).toEqual([
+			['x1', 'E1·1', 45],
+			['x2', 'E1·2', 30]
+		]);
+		expect(atraso.itens![0]).toMatchObject({ texto: '1. Modelagem e arquiteturas', subitens: [{ cid: 'EAG-01', cod: 'E1 1.1' }], nota: 'conteúdo que passou em aberto' });
+		// E1 3.1 é coberto pela aula do plano: não sintetiza.
+		expect(atraso.itens!.some((i) => i.subitens?.some((s) => s.cid === 'EAG-03'))).toBe(false);
+	});
+
+	it('sem catálogo, nada se sintetiza (a revisão segue suspensa)', () => {
+		const p = planoAjustado(planoAberto, {}, 'cd', {}, '2026-10-18');
+		expect(itemDe(p, '2026-10-17', 'EAG-01').suspensa).toBe(true);
+		expect(p.plan.find((d) => d.data === '2026-10-18')!.blocos.some((b) => b.atrasado)).toBe(false);
+	});
+
+	it('marcada a aula de recuperação, os tópicos contam concluídos e a revisão conta da data real', () => {
+		// A aula do plano de hoje (que cobre E1 3.1) também marcada, no lugar previsto dela.
+		const marcas = { 'cd~2026-10-18~1~x1': true as const, 'cd~2026-10-18~0': true as const };
+		const p = planoAjustado(planoAberto, {}, 'cd', marcas, '2026-10-18', catalogo);
+		// O dia do tópico cumpre e a ocorrência mostra a data real.
+		const dia16 = p.plan.find((d) => d.data === '2026-10-16')!;
+		expect(diaCumprido(marcas, 'cd', dia16)).toBe(true);
+		expect(itemDe(p, '2026-10-16', 'EAG-01').feitaEm).toBe('2026-10-18');
+		// A D+1 prevista para 17/10 conta de 18/10 e vai para 19/10.
+		expect(itemDe(p, '2026-10-17', 'EAG-01')).toMatchObject({ movida: '2026-10-19' });
+		expect(itemDe(p, '2026-10-19', 'EAG-01')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 18/10/2026' });
 	});
 });

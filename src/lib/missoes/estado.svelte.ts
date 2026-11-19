@@ -7,8 +7,10 @@
  * Chamar na inicialização de um componente (usa `$effect`).
  */
 import { foco } from '$lib/feed/foco.svelte';
+import { dados } from '$lib/dados';
 import { hojeLocal } from '$lib/datas';
 import { planoAjustado } from './calculos';
+import { aulasPorCod } from './catalogo';
 import { carregarMissoes } from './carregar';
 import { extrasMissoes } from './extras.svelte';
 import { marcasMissoes } from './marcas.svelte';
@@ -33,7 +35,9 @@ export function usarPlanoMissoes() {
 		);
 	});
 	const plano = $derived(
-		bruto && cargo ? planoAjustado(bruto, extrasMissoes.todas(), cargo, marcasMissoes.todas(), hojeLocal()) : bruto
+		bruto && cargo
+			? planoAjustado(bruto, extrasMissoes.todas(), cargo, marcasMissoes.todas(), hojeLocal(), aulasPorCod(dados.mentoria?.aulas ?? [], cargo))
+			: bruto
 	);
 	return {
 		get plano() {

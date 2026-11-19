@@ -266,7 +266,7 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 
 	const aulaC15 = mentoria.aulas!.find((a) => a.disciplina === 'C1' && a.titulo.startsWith('5.'))!;
 	const itemC15 = () => missao(page).locator('li:not(.bloco)', { hasText: 'C1·5' }).first();
-	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aula adiada' });
+	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aulas atrasadas' });
 
 	// As aulas de 18/11 chegam hoje, no bloco Aula adiada; a missão de hoje conta ele. A D+1 da
 	// C1·5, cuja aula não foi concluída, suspende (fica só o ponteiro, fora da conta).
@@ -291,6 +291,55 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	await seletor.fill('2026-11-18');
 	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
 	await expect(missao(page).locator('li.bloco', { hasText: 'C1·5' }).getByRole('checkbox')).toBeChecked();
+});
+
+test('conteúdo em aberto cuja aula não está no plano vira tarefa de recuperação', async ({ page }) => {
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	// Tudo cumprido até 17/11, menos o estudo de E2 1.1 (13-14/10): fica em aberto, e a aula que o
+	// cobre (E2·1) nem está no plano — o gerador a tirou porque o tópico "já tinha passado".
+	await page.addInitScript(
+		([k, fim]) => {
+			const m: Record<string, boolean> = {};
+			for (const d = new Date('2026-10-13T12:00'); d <= new Date(`${fim}T12:00`); d.setDate(d.getDate() + 1)) {
+				const dia = d.toISOString().slice(0, 10);
+				for (let i = 0; i < 8; i++) m[`cd~${dia}~${i}`] = true;
+			}
+			// O estudo novo de E2 1.1 fica em aberto (13/10 blocos 1 e 3; 14/10 bloco 1).
+			delete m['cd~2026-10-13~1'];
+			delete m['cd~2026-10-13~3'];
+			delete m['cd~2026-10-14~1'];
+			localStorage.setItem(k, JSON.stringify(m));
+		},
+		[CHAVE, '2026-11-17'] as const
+	);
+	await page.clock.setFixedTime(new Date('2026-11-19T09:00:00-03:00'));
+	await page.goto('/painel');
+
+	const aulaE21 = mentoria.aulas!.find((a) => a.disciplina === 'CD:E2' && a.titulo.startsWith('1.'))!;
+	const itemE21 = () => missao(page).locator('li:not(.bloco)', { hasText: 'E2·1' }).first();
+	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aulas atrasadas' });
+
+	// A aula do catálogo chega como recuperação, cobrindo o tópico em aberto, com o link dela.
+	await expect(adiadas()).toBeVisible();
+	await expect(itemE21()).toContainText('1. Modelagem e arquiteturas');
+	await expect(itemE21()).toContainText('conteúdo que passou em aberto');
+	await expect(itemE21()).toContainText('subitens E2 1.1');
+	await expect(itemE21().getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute('href', aulaE21.url);
+
+	// A D+30 de E2 1.1 (13/11) está suspensa com o estudo em aberto; marcada a recuperação hoje,
+	// a revisão conta de hoje e vai para 20/11.
+	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
+	await seletor.fill('2026-11-13');
+	await expect(missao(page).locator('li:not(.bloco)', { hasText: 'E2 1.1' })).toContainText('revisão suspensa: estudo não concluído');
+	await missao(page).getByRole('button', { name: 'Hoje' }).click();
+	await itemE21().getByRole('checkbox', { name: 'Marcar E2·1 como estudado' }).click();
+	const m = await marcas(page);
+	expect(m[`cd~2026-11-19~5~${aulaE21.id}`]).toBe(true);
+	await seletor.fill('2026-10-15');
+	await expect(missao(page).locator('li:not(.bloco)', { hasText: 'E2 1.1' })).toContainText('revisão movida para 20/11/2026');
+	await seletor.fill('2026-11-20');
+	await expect(missao(page).locator('li:not(.bloco)', { hasText: 'E2 1.1' })).toContainText('aula feita em 19/11/2026');
 });
 
 test('Auditoria troca o plano do dia', async ({ page }) => {
@@ -365,8 +414,7 @@ test('feed: a chamada fica acima dos stories, leva ao painel e não tira o 1º p
 	await page.addInitScript(
 		([k, ontem, dia]) => {
 			const m: Record<string, boolean> = JSON.parse(localStorage.getItem(k) ?? '{}');
-			m[`cd~${ontem}~0`] = true;
-			m[`cd~${ontem}~1`] = true;
+			for (let i = 0; i < 8; i++) m[`cd~${ontem}~${i}`] = true;
 			m[`cd~${dia}~0`] = true;
 			localStorage.setItem(k, JSON.stringify(m));
 		},
@@ -388,12 +436,13 @@ test('feed: a chamada fica acima dos stories, leva ao painel e não tira o 1º p
 
 test('feed: missão cumprida vira um aviso discreto; fora da janela, sem chamada', async ({ page }) => {
 	await page.addInitScript(
-		([k, dia, n]) => {
+		([k, ontem, dia, n]) => {
 			const m: Record<string, boolean> = {};
+			for (let i = 0; i < n + 4; i++) m[`cd~${ontem}~${i}`] = true;
 			for (let i = 0; i < n; i++) m[`cd~${dia}~${i}`] = true;
 			localStorage.setItem(k, JSON.stringify(m));
 		},
-		[CHAVE, HOJE, diaCd.blocos.length] as const
+		[CHAVE, '2026-10-13', HOJE, diaCd.blocos.length] as const
 	);
 	await page.goto('/');
 	await expect(page.getByRole('region', { name: 'Missão de hoje' }).getByRole('link', { name: 'Missão cumprida' })).toBeVisible();
