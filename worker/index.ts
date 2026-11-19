@@ -5,6 +5,10 @@
  */
 import { tratarLembrete, type BancoLembretes, type InscricaoGravada } from './lembrete';
 import { tratarApi, type Banco, type Gravado } from './progresso';
+import { CARGO_DA_ESPECIALIDADE, agoraEmSaoPaulo, lerEspecialidade, lerExtras, lerMarcas, lembreteDoDia } from './agenda';
+import { montarEnvio } from './push';
+import { CHAVE_EXTRAS, CHAVE_MISSOES } from '../src/lib/conta/regras';
+import type { Cargo, PlanoMissoes } from '../src/lib/missoes/tipos';
 
 interface D1Resultado<T> {
 	results: T[];
@@ -29,6 +33,63 @@ interface Env {
 	VAPID_PRIVADA?: string;
 	/** `sub` do JWT VAPID. */
 	VAPID_ASSUNTO?: string;
+}
+
+interface ControladorAgendado {
+	scheduledTime: number;
+}
+
+interface Contexto {
+	waitUntil(promessa: Promise<unknown>): void;
+}
+
+/** O que o cron usa: injetável para o teste (planos/2026-10-17-notificacoes-de-estudo.md, fase 2). */
+export interface DependenciasCron {
+	inscritosDaHora(hora: number, data: string): Promise<InscricaoGravada[]>;
+	marcarEnvio(endpoint: string, data: string): Promise<void>;
+	apagarInscricao(endpoint: string): Promise<void>;
+	/** As chaves de progresso da conta: `{ chave: valor }`. */
+	progresso(usuario: string): Promise<Record<string, string>>;
+	/** O plano do cargo, lido dos assets (`/conteudo/missoes-<cargo>.json`). */
+	plano(cargo: Cargo): Promise<PlanoMissoes | null>;
+	enviar(inscricao: InscricaoGravada, lembrete: { titulo: string; corpo: string; url: string }): Promise<number>;
+}
+
+/**
+ * O cron da hora: para cada inscrição da hora, monta o lembrete do dia da conta (nulo com o dia
+ * cumprido, fora da janela ou sem plano) e envia. Enviado (201) ou sem lembrete, marca o
+ * `ultimo_envio` para não repetir no dia; inscrição morta (404/410) sai do banco.
+ */
+export async function cronDoDia(d: DependenciasCron, data: string, hora: number): Promise<void> {
+	const inscritos = await d.inscritosDaHora(hora, data);
+	const porUsuario = new Map<string, InscricaoGravada[]>();
+	for (const i of inscritos) porUsuario.set(i.usuario, [...(porUsuario.get(i.usuario) ?? []), i]);
+	for (const [usuario, lista] of porUsuario) {
+		const registro = await d.progresso(usuario);
+		const cargo = CARGO_DA_ESPECIALIDADE[lerEspecialidade(registro['painel-concurso:preferencias:v2'] ?? null)];
+		let lembrete: Awaited<ReturnType<typeof lembreteDoDia>> = null;
+		if (cargo) {
+			const plano = await d.plano(cargo);
+			if (plano)
+				lembrete = lembreteDoDia(
+					plano,
+					lerMarcas(registro[CHAVE_MISSOES] ?? null),
+					lerExtras(registro[CHAVE_EXTRAS] ?? null),
+					cargo,
+					data
+				);
+		}
+		for (const inscricao of lista) {
+			if (!lembrete) {
+				await d.marcarEnvio(inscricao.endpoint, data);
+				continue;
+			}
+			const status = await d.enviar(inscricao, lembrete);
+			if (status === 201 || status === 202) await d.marcarEnvio(inscricao.endpoint, data);
+			else if (status === 404 || status === 410) await d.apagarInscricao(inscricao.endpoint);
+			// Outro código: só o log; a hora já passou, não há reenvio no mesmo dia.
+		}
+	}
 }
 
 /**
@@ -125,5 +186,39 @@ export default {
 			(await tratarApi(req, bancoD1(env.DB))) ??
 			env.ASSETS.fetch(req)
 		);
+	},
+	async scheduled(controle: ControladorAgendado, env: Env, ctx: Contexto): Promise<void> {
+		const { data, hora } = agoraEmSaoPaulo(new Date(controle.scheduledTime));
+		if (!env.VAPID_PUBLICA || !env.VAPID_PRIVADA) return; // sem as chaves da fase 4, nada a enviar
+		const banco = bancoD1(env.DB);
+		const lembretes = lembretesD1(env.DB);
+		const planos = new Map<string, PlanoMissoes | null>();
+		const vapid = {
+			publica: env.VAPID_PUBLICA,
+			privada: JSON.parse(env.VAPID_PRIVADA) as JsonWebKey,
+			assunto: env.VAPID_ASSUNTO ?? 'https://cgu.solarpunk.workers.dev'
+		};
+		const deps: DependenciasCron = {
+			inscritosDaHora: (h, dia) => lembretes.daHora(h, dia),
+			marcarEnvio: (endpoint, dia) => lembretes.marcarEnvio(endpoint, dia),
+			apagarInscricao: (endpoint) => lembretes.apagar(endpoint),
+			progresso: async (usuario) => {
+				const registro = await banco.ler(usuario);
+				return Object.fromEntries(Object.entries(registro).map(([chave, { valor }]) => [chave, valor]));
+			},
+			plano: async (cargo) => {
+				if (!planos.has(cargo)) {
+					try {
+						const r = await env.ASSETS.fetch(new Request(`https://assets/conteudo/missoes-${cargo}.json`));
+						planos.set(cargo, r.ok ? ((await r.json()) as PlanoMissoes) : null);
+					} catch {
+						planos.set(cargo, null);
+					}
+				}
+				return planos.get(cargo) ?? null;
+			},
+			enviar: async (inscricao, lembrete) => (await fetch(await montarEnvio(inscricao, JSON.stringify(lembrete), vapid))).status
+		};
+		ctx.waitUntil(cronDoDia(deps, data, hora));
 	}
 };

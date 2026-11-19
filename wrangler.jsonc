@@ -15,5 +15,11 @@
 		"run_worker_first": ["/api/*"]
 	},
 	// Sem database_id: o wrangler cria o banco "cgu" no primeiro deploy e o reaproveita depois.
-	"d1_databases": [{ "binding": "DB", "database_name": "cgu" }]
+	"d1_databases": [{ "binding": "DB", "database_name": "cgu" }],
+	// O cron do lembrete de estudo (planos/2026-10-17-notificacoes-de-estudo.md, fase 2): roda à
+	// hora cheia e trata as inscrições da hora de Brasília.
+	"triggers": { "crons": ["0 * * * *"] },
+	// VAPID_PUBLICA vazia até a fase 4 (chaves de produção): o GET /api/lembrete responde 503 e o
+	// cron não envia. O assunto é URL (não mailto:) para não pôr e-mail no repositório.
+	"vars": { "VAPID_PUBLICA": "", "VAPID_ASSUNTO": "https://cgu.solarpunk.workers.dev" }
 }

@@ -2,7 +2,9 @@
  * Contas do plano das Missões, puras (o dia e as marcações vêm por parâmetro). As mesmas regras
  * da página das Missões: o dia de hoje, a chave da marcação e o que conta como dia cumprido.
  */
-import { formatarData } from '$lib/datas';
+// Caminho relativo (e não `$lib/datas`): o Worker importa este arquivo para decidir o lembrete.
+import { formatarData } from '../datas';
+import type { AulaDoCatalogo } from './catalogo';
 import type { Bloco, Cargo, DiaMissao, Extras, ItemBloco, Marcas, PlanoMissoes, TipoBloco } from './tipos';
 
 export type FaseMissoes = 'antes' | 'durante' | 'depois';
@@ -197,12 +199,24 @@ const diasDoLab = (lab: string | undefined): number | undefined => (lab?.startsW
  *   marcação vale a data do dia em que foi feita (e as revisões contam dela).
  * - Revisão de estudo que não foi concluído: suspensa (só o ponteiro, sem marcação) quando o
  *   último dia previsto do estudo já passou; estudo ainda por vir mantém a revisão no lugar.
+ * - Conteúdo em aberto cuja aula nem está no plano (o gerador a tirou porque o tópico "já passou",
+ *   sem saber da conclusão): a aula do catálogo chega como tarefa de recuperação no bloco de
+ *   atrasadas de hoje, cobrindo os tópicos em aberto. Marcada, os tópicos ligados contam como
+ *   concluídos e as revisões deles passam a contar da data real.
  *
  * Sem extras e sem aula atrasada, o plano volta igual. Só a vista muda: os blocos previstos
  * mantêm os índices, as marcações do plano original continuam valendo; o que cai além do fim do
  * plano some (como o próprio plano faz com os D+30 do fim).
  */
-export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo, marcas: Marcas, hoje: string): PlanoMissoes {
+export function planoAjustado(
+	plano: PlanoMissoes,
+	extras: Extras,
+	cargo: Cargo,
+	marcas: Marcas,
+	hoje: string,
+	/** Aulas do catálogo da mentoria por código do guia; sem ele, nada se sintetiza. */
+	catalogo?: Map<string, AulaDoCatalogo>
+): PlanoMissoes {
 	/** Data real de cada aula nova registrada: a mais recente, se entrou mais de uma vez. */
 	const real = new Map<string, string>();
 	for (const [chave, tarefas] of Object.entries(extras)) {
@@ -215,14 +229,31 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 	const previstos = plano.plan.map((d) => d.blocos.length);
 	/** Estudo (tópico ou aula) com ocorrência de estudo novo sem marcação no lugar previsto. */
 	const abertas = new Set<string>();
+	/** Minutos em aberto de cada estudo, para o custo da aula de recuperação. */
+	const minAberto = new Map<string, number>();
 	/** Último dia previsto de cada estudo: suspender a revisão é para o que ficou para trás. */
 	const fimDe = new Map<string, string>();
+	/** Código do guia de cada estudo, para achar a aula do catálogo. */
+	const codDe = new Map<string, string>();
+	/** Aulas do plano e o tópico que cada uma cobre. */
+	const aulasNoPlano = new Set<string>();
+	const aulaDoTopico = new Map<string, string>();
+	const topicosDaAula = new Map<string, { cid: string; cod: string }[]>();
 	plano.plan.forEach((dia) =>
 		dia.blocos.forEach((b, i) => {
 			for (const it of b.itens ?? []) {
 				if (b.tipo !== 'novo') continue;
-				if (!itemFeito(marcas, cargo, dia, i, it.cid)) abertas.add(it.cid);
+				codDe.set(it.cid, it.cod);
 				if (!fimDe.has(it.cid) || dia.data > fimDe.get(it.cid)!) fimDe.set(it.cid, dia.data);
+				if (!itemFeito(marcas, cargo, dia, i, it.cid)) {
+					abertas.add(it.cid);
+					minAberto.set(it.cid, (minAberto.get(it.cid) ?? 0) + (it.min ?? 0));
+				}
+				if (it.subitens?.length) {
+					aulasNoPlano.add(it.cid);
+					topicosDaAula.set(it.cid, it.subitens);
+					for (const s of it.subitens) aulaDoTopico.set(s.cid, it.cid);
+				}
 			}
 		})
 	);
@@ -239,7 +270,44 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 		if (!real.has(cid) || partes[1] > real.get(cid)!) real.set(cid, partes[1]);
 		concluidas.add(cid);
 	}
-	const feita = (cid: string): boolean => concluidas.has(cid) || !abertas.has(cid);
+	/** Concluída: registrada (extras) ou marcada na chegada; aula do plano, com as partes fechadas. */
+	const aulaConcluida = (cid: string): boolean => concluidas.has(cid) || (aulasNoPlano.has(cid) && !abertas.has(cid));
+	/** Tópicos em aberto cuja aula do catálogo nem está no plano: viram tarefa de recuperação. */
+	const sintetizadas: ItemBloco[] = [];
+	if (catalogo) {
+		const grupos = new Map<string, { cid: string; cod: string; min: number }[]>();
+		for (const cid of abertas) {
+			if ((fimDe.get(cid) ?? '') >= hoje || aulaDoTopico.has(cid)) continue;
+			const aula = catalogo.get(codDe.get(cid) ?? '');
+			if (!aula || aulasNoPlano.has(aula.id)) continue;
+			const g = grupos.get(aula.id) ?? [];
+			g.push({ cid, cod: codDe.get(cid)!, min: minAberto.get(cid) ?? 0 });
+			grupos.set(aula.id, g);
+		}
+		for (const [id, topicos] of grupos) {
+			const aula = catalogo.get(topicos[0].cod)!;
+			topicosDaAula.set(id, topicos);
+			for (const t of topicos) aulaDoTopico.set(t.cid, id);
+			// Concluída (registrada ou marcada na chegada): só o mapeamento importa, para valer
+			// aos tópicos; sem tarefa nova.
+			if (aulaConcluida(id)) continue;
+			sintetizadas.push({
+				cid: id,
+				cod: aula.cod,
+				texto: aula.titulo,
+				min: topicos.reduce((s, t) => s + t.min, 0),
+				subitens: topicos.map(({ cid, cod }) => ({ cid, cod })),
+				nota: 'conteúdo que passou em aberto'
+			});
+		}
+	}
+	// A data real da aula vale para os tópicos que ela cobre (revisões e conclusão contam dela).
+	for (const [aula, topicos] of topicosDaAula) {
+		const data = real.get(aula);
+		if (data) for (const t of topicos) if (!real.has(t.cid)) real.set(t.cid, data);
+	}
+	const feita = (cid: string): boolean =>
+		concluidas.has(cid) || !abertas.has(cid) || (aulaDoTopico.has(cid) && aulaConcluida(aulaDoTopico.get(cid)!));
 	const fim = plano.plan[plano.plan.length - 1].data;
 	const atrasou = plano.plan.some(
 		(d) => d.data < hoje && d.blocos.some((b) => b.tipo === 'novo' && b.itens?.some((it) => it.subitens && !feita(it.cid)))
@@ -253,7 +321,7 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 			)
 		)
 	);
-	if (!real.size && !atrasou && !suspendeu) return plano;
+	if (!real.size && !atrasou && !suspendeu && !sintetizadas.length) return plano;
 	const chegou = hoje >= plano.plan[0].data && hoje <= fim;
 	/** Item do estudo novo da aula (código e texto para a revisão criada). */
 	const aulaNova = new Map<string, ItemBloco>();
@@ -262,6 +330,7 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 			if (b.tipo !== 'novo') continue;
 			for (const it of b.itens ?? []) if (!aulaNova.has(it.cid)) aulaNova.set(it.cid, it);
 		}
+	for (const s of sintetizadas) aulaNova.set(s.cid, s);
 	/** Itens de revisão que entram em cada dia, pela data real da aula. */
 	const entram = new Map<string, ItemBloco[]>();
 	/** Atrasadas que chegam no dia de hoje, na ordem dos dias previstos. */
@@ -303,13 +372,17 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 			if (b.tipo === 'novo' && b.itens && dia.data < hoje) {
 				let mudou = false;
 				const itens = b.itens.map((it) => {
-					if (!it.subitens || itemFeito(marcas, cargo, dia, i, it.cid)) return it;
-					// Feita em outro dia (registrada ou marcada na chegada): vale como feita aqui.
-					const diaReal = real.get(it.cid);
+					if (itemFeito(marcas, cargo, dia, i, it.cid)) return it;
+					// Feita em outro dia (registrada ou marcada na chegada) — ou o tópico, pela aula
+					// que o cobre já concluída no dia previsto dela: vale como feita aqui.
+					let diaReal = real.get(it.cid);
+					const aula = aulaDoTopico.get(it.cid);
+					if (!diaReal && aula && aulaConcluida(aula)) diaReal = fimDe.get(aula) ?? dia.data;
 					if (diaReal) {
 						mudou = true;
 						return { ...it, feitaEm: diaReal };
 					}
+					if (!it.subitens) return it;
 					mudou = true;
 					// A primeira parte em aberto é a que chega; as outras só apontam.
 					if (!encabeça.has(it.cid)) {
@@ -351,15 +424,16 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 							]
 						: blocos.map((b, i) => (i === rev ? { ...b, itens: [...(b.itens ?? []), ...novos] } : b));
 			}
-			if (atrasadas.length && dia.data === hoje)
+			const atraso = [...atrasadas, ...sintetizadas];
+			if (atraso.length && dia.data === hoje)
 				blocos = [
 					...blocos,
 					{
 						tipo: 'novo',
-						titulo: 'Aula adiada',
-						min: atrasadas.reduce((s, it) => s + (it.min ?? 0), 0),
-						itens: atrasadas,
-						det: 'Aula de um dia que passou sem ela; fica no dia até ser feita.',
+						titulo: 'Aulas atrasadas',
+						min: atraso.reduce((s, it) => s + (it.min ?? 0), 0),
+						itens: atraso,
+						det: 'Aula que passou do dia, ou conteúdo em aberto cuja aula o plano não trouxe; fica até ser feita.',
 						atrasado: true
 					}
 				];
