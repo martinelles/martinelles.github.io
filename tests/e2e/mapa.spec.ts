@@ -19,6 +19,15 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('o subitem com mapa ganha o atalho que abre o visor', async ({ page }) => {
+	// Estudos de 13-15/10 cumpridos: sem isso, as revisões de hoje suspendem e somem da vista.
+	await page.addInitScript(
+		(k) => {
+			const m: Record<string, boolean> = {};
+			for (const d of ['2026-10-13', '2026-10-14', '2026-10-15']) for (let i = 0; i < 8; i++) m[`cd~${d}~${i}`] = true;
+			localStorage.setItem(k, JSON.stringify(m));
+		},
+		'missoes-cgu-2026'
+	);
 	await page.goto('/painel');
 	const atalho = missao(page).getByRole('link', { name: 'Mapa mental ↗' }).first();
 	await expect(atalho).toBeVisible();

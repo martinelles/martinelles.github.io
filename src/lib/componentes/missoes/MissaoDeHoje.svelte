@@ -228,6 +228,8 @@
 								{#each dia.blocos as b, i (i)}
 									{@const feito = blocoCumprido(marcas, cargo, dia, i, b)}
 									{@const ponteiros = soPonteiros(b)}
+									{@const oculto = !!b.itens?.length && b.itens.every((it) => it.suspensa === true)}
+									{#if !oculto}
 									<li class="bloco t-{b.tipo}" class:feito>
 									{#if ponteiros}
 										<span class="bolha"><span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span></span>
@@ -258,9 +260,10 @@
 							{#if b.min}<span class="min">{b.min} min</span>{/if}
 						</p>
 						{#if b.itens?.length}
-							{@const porItem = b.itens.length > 1}
+							{@const visiveis = b.itens.filter((it) => it.suspensa !== true)}
+							{@const porItem = visiveis.length > 1}
 							<ul class="itens" class:por-item={porItem}>
-									{#each b.itens as it (it.cid)}
+									{#each visiveis as it (it.cid)}
 										{@const aulaInfo = aulaPorId(it.cid)}
 										{@const aula = aulaInfo?.url ?? aulaDaMentoria(cargo, it.cod)}
 									{@const tec = aulaInfo?.tec}
@@ -273,9 +276,9 @@
 									<li
 										class:feito={itemOk}
 										class:em-andamento={aberto}
-										class:ponteiro={it.movida !== undefined || it.suspensa === true}
+										class:ponteiro={it.movida !== undefined}
 									>
-										{#if porItem && it.movida === undefined && it.suspensa !== true && it.feitaEm === undefined}
+										{#if porItem && it.movida === undefined && it.feitaEm === undefined}
 											<label class="caixa">
 												<input
 													type="checkbox"
@@ -380,6 +383,7 @@
 						{#if b.det}<p class="det">{b.det}</p>{/if}
 					</div>
 				</li>
+				{/if}
 			{/each}
 		</ol>
 		{#if extrasDoDia.length}

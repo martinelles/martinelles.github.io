@@ -268,10 +268,10 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	const itemC15 = () => missao(page).locator('li:not(.bloco)', { hasText: 'C1·5' }).first();
 	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aulas atrasadas' });
 
-	// As aulas de 18/11 chegam hoje, no bloco Aula adiada; a missão de hoje conta ele. A D+1 da
-	// C1·5, cuja aula não foi concluída, suspende (fica só o ponteiro, fora da conta).
+	// As aulas de 18/11 chegam hoje, no bloco Aulas atrasadas; a missão de hoje conta ele. A D+1
+	// da C1·5, cuja aula não foi concluída, suspende: não aparece e não conta.
 	await expect(missao(page)).toContainText('0 de 6 blocos feitos');
-	await expect(itemC15()).toContainText('revisão suspensa: estudo não concluído');
+	await expect(missao(page).getByText('revisão suspensa')).toHaveCount(0);
 	await expect(adiadas()).toBeVisible();
 	await expect(adiadas().locator('li', { hasText: 'C1·5' })).toContainText('parte 2 de 2');
 	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toContainText('parte 1 de 2');
@@ -327,11 +327,11 @@ test('conteúdo em aberto cuja aula não está no plano vira tarefa de recupera�
 	await expect(itemE21()).toContainText('subitens E2 1.1');
 	await expect(itemE21().getByRole('link', { name: 'Aula da mentoria ↗' })).toHaveAttribute('href', aulaE21.url);
 
-	// A D+30 de E2 1.1 (13/11) está suspensa com o estudo em aberto; marcada a recuperação hoje,
-	// a revisão conta de hoje e vai para 20/11.
+	// A D+30 de E2 1.1 (13/11) está suspensa com o estudo em aberto: não aparece. Marcada a
+	// recuperação hoje, a D+1 conta de hoje e vai para 20/11.
 	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
 	await seletor.fill('2026-11-13');
-	await expect(missao(page).locator('li:not(.bloco)', { hasText: 'E2 1.1' })).toContainText('revisão suspensa: estudo não concluído');
+	await expect(missao(page).getByText('E2 1.1')).toHaveCount(0);
 	await missao(page).getByRole('button', { name: 'Hoje' }).click();
 	await itemE21().getByRole('checkbox', { name: 'Marcar E2·1 como estudado' }).click();
 	const m = await marcas(page);
@@ -366,6 +366,7 @@ test('o atalho do subitem abre o feed só com as questões do tópico', async ({
 });
 
 test('o subitem aberto na aula da mentoria fica destacado na volta, até marcar ou dispensar', async ({ page, context }) => {
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	await simularApi(page);
 	await context.route('**/*plataformatutory.com.br/**', (rota) => rota.fulfill({ body: 'Mentoria' }));
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
