@@ -5,8 +5,9 @@ aqui foi copiado de outro aplicativo. O conteúdo de estudo do feed não mora aq
 `static/conteudo/`, gerado por `npm run importar`.
 
 - `concursos.json` — **exatamente um** concurso: `cgu-affc-ti-cd`, CGU — Auditor Federal de
-  Finanças e Controle, cargo único TI — Ciência de Dados, banca Cebraspe. Sem `dataProva` nem
-  `edital` enquanto o edital de 2026 não sai: o painel mostra "Data a definir". `prioridades`
+  Finanças e Controle, cargo único TI — Ciência de Dados, banca Cebraspe. `dataProva` é 13/12/2026 (prova
+  objetiva e discursiva do Cebraspe) e alimenta a contagem de dias do cabeçalho; `edital` segue sem
+  URL. `prioridades`
   (opcional) vira o botão "Prioridades do edital" no cabeçalho: o mapa de prioridades subitem
   a subitem. `missoes` (opcional) vira o botão "Missões até a prova": o plano diário de 3 h até
   a prova. Os dois aceitam `https://…` ou uma página servida pelo painel

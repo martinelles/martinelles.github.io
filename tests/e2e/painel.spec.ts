@@ -23,7 +23,8 @@ const numero = (page: Page, rotulo: string) =>
 	page.locator('dt', { hasText: rotulo }).locator('xpath=following-sibling::dd[1]');
 const abas = (page: Page) => page.getByRole('navigation', { name: 'Seções' });
 
-test('cabeçalho mostra a CGU, a banca e "Data a definir", sem trocar concurso', async ({ page }) => {
+test('cabeçalho mostra a CGU, a banca e a contagem para a prova, sem trocar concurso', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-11-19T09:00:00-03:00'));
 	await page.goto('/painel');
 	await expect(page).toHaveTitle('Painel · Painel de Concurso');
 	await expect(page.getByRole('heading', { level: 1, name: 'Seu Painel de Estudos' })).toBeVisible();
@@ -32,7 +33,8 @@ test('cabeçalho mostra a CGU, a banca e "Data a definir", sem trocar concurso',
 	await expect(cargos.getByRole('button', { name: 'TI — Ciência de Dados' })).toHaveAttribute('aria-pressed', 'true');
 	await expect(cargos.getByRole('button', { name: 'Auditoria' })).toHaveAttribute('aria-pressed', 'false');
 	await expect(page.getByText(/banca Cebraspe/)).toBeVisible();
-	await expect(page.getByText('Data a definir')).toBeVisible();
+	await expect(page.getByText('Faltam 24 dias')).toBeVisible();
+	await expect(page.getByText('prova em 13/12/2026')).toBeVisible();
 	await expect(page.getByRole('button', { name: 'Trocar concurso' })).toHaveCount(0);
 	await expect(page.getByRole('link', { name: 'Ver edital' })).toHaveCount(0);
 	await expect(abas(page).getByRole('link', { name: 'Painel' })).toHaveAttribute('aria-current', 'page');

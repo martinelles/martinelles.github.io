@@ -27,13 +27,13 @@ describe('dados reais', () => {
 		expect(dados.config).toEqual({ whatsapp: null, limiteEmAlta: 5 });
 	});
 
-	it('o concurso é o da CGU, sem data nem edital (FR-001, FR-014)', () => {
+	it('o concurso é o da CGU, com a data da prova e sem edital (FR-001, FR-014)', () => {
 		expect(concursoCgu).toBe(dados.concursos[0]);
 		expect(concursoCgu.id).toBe('cgu-affc-ti-cd');
 		expect(concursoCgu.nome).toBe('CGU — Auditor Federal de Finanças e Controle');
 		expect(concursoCgu.banca).toBe('Cebraspe');
 		expect(concursoCgu.situacao).toBe('previsto');
-		expect(concursoCgu.dataProva).toBeUndefined();
+		expect(concursoCgu.dataProva).toBe('2026-12-13');
 		expect(concursoCgu.edital).toBeUndefined();
 		expect(concursoCgu.cargos.map((c) => c.nome)).toEqual(['TI — Ciência de Dados', 'Auditoria']);
 	});
