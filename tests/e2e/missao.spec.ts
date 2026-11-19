@@ -220,6 +220,50 @@ test('aula nova fora da data: as revisões contam do dia em que ela foi feita', 
 	await expect(itemB1()).toContainText('aula feita em 14/10/2026');
 });
 
+test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', async ({ page }) => {
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	// Dias até 17/11 cumpridos; 18/11 ficou em aberto (C1·5 parte 2 e E1·2 parte 1).
+	await page.addInitScript(
+		([k, fim]) => {
+			const m: Record<string, boolean> = {};
+			for (const d = new Date('2026-10-13T12:00'); d <= new Date(`${fim}T12:00`); d.setDate(d.getDate() + 1)) {
+				const dia = d.toISOString().slice(0, 10);
+				for (let i = 0; i < 6; i++) m[`cd~${dia}~${i}`] = true;
+			}
+			localStorage.setItem(k, JSON.stringify(m));
+		},
+		[CHAVE, '2026-11-17'] as const
+	);
+	await page.clock.setFixedTime(new Date('2026-11-19T09:00:00-03:00'));
+	await page.goto('/painel');
+
+	const aulaC15 = mentoria.aulas!.find((a) => a.disciplina === 'C1' && a.titulo.startsWith('5.'))!;
+	const itemC15 = () => missao(page).locator('li:not(.bloco)', { hasText: 'C1·5' }).first();
+	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aula adiada' });
+
+	// As aulas de 18/11 chegam hoje, no bloco Aula adiada; a missão de hoje conta ele.
+	await expect(missao(page)).toContainText('0 de 6 blocos feitos');
+	await expect(adiadas()).toBeVisible();
+	await expect(adiadas().locator('li', { hasText: 'C1·5' })).toContainText('parte 2 de 2');
+	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toContainText('parte 1 de 2');
+
+	// Marcar a C1·5 na chave do dia em que chegou.
+	await adiadas().getByRole('checkbox', { name: 'Marcar C1·5 como estudado' }).click();
+	const m = await marcas(page);
+	expect(m[`cd~2026-11-19~5~${aulaC15.id}`]).toBe(true);
+	// A E1·2 segue atrasada e a D+1 da C1·5 conta do dia de hoje (19/11, previsto era o próprio 19).
+	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toBeVisible();
+	await expect(itemC15()).toContainText('revisão movida para 20/11/2026');
+
+	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
+	await seletor.fill('2026-11-20');
+	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
+	// No dia previsto, a nota do dia em que a aula acabou sendo feita.
+	await seletor.fill('2026-11-18');
+	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
+});
+
 test('Auditoria troca o plano do dia', async ({ page }) => {
 	await page.addInitScript(() =>
 		localStorage.setItem('painel-concurso:preferencias:v2', JSON.stringify({ especialidade: 'auditoria' }))

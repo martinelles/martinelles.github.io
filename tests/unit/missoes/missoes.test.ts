@@ -14,6 +14,7 @@ import {
 	itemFeito,
 	mudancasDaAulaNova,
 	mudancasDoBloco,
+	mudancasDoBlocoAtrasado,
 	mudancasDoItem,
 	ocorrenciasDaAula,
 	planoAjustado,
@@ -319,13 +320,13 @@ describe('revisões na data real da aula nova', () => {
 		p.plan.find((d) => d.data === data)!.blocos.flatMap((b) => b.itens ?? []).find((it) => it.cid === cid)!;
 
 	it('sem aula nova registrada (ou só de outro cargo), o plano volta igual', () => {
-		expect(planoAjustado(planoRevs, {}, 'cd')).toBe(planoRevs);
-		expect(planoAjustado(planoRevs, { 'cd~2026-10-18': [{ tipo: 'rev', cid: '4e7', cod: 'E1·1', texto: 'Aula' }] }, 'cd')).toBe(planoRevs);
-		expect(planoAjustado(planoRevs, extra('2026-10-18'), 'aud')).toBe(planoRevs);
+		expect(planoAjustado(planoRevs, {}, 'cd', {}, '2026-10-15')).toBe(planoRevs);
+		expect(planoAjustado(planoRevs, { 'cd~2026-10-18': [{ tipo: 'rev', cid: '4e7', cod: 'E1·1', texto: 'Aula' }] }, 'cd', {}, '2026-10-15')).toBe(planoRevs);
+		expect(planoAjustado(planoRevs, extra('2026-10-18'), 'aud', {}, '2026-10-15')).toBe(planoRevs);
 	});
 
 	it('aula feita em outro dia: D+1, D+7 e D+30 contam da data real', () => {
-		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd');
+		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd', {}, '2026-10-15');
 		// No lugar previsto, o ponteiro; a revisão junto fica.
 		expect(itemDa(p, '2026-10-17', '4e7')).toMatchObject({ lab: 'D+1', movida: '2026-10-19' });
 		expect(itemDa(p, '2026-10-17', 'zz').movida).toBeUndefined();
@@ -342,20 +343,20 @@ describe('revisões na data real da aula nova', () => {
 	});
 
 	it('aula registrada duas vezes: vale a data mais recente', () => {
-		const p = planoAjustado(planoRevs, { ...extra('2026-10-17'), ...extra('2026-10-20') }, 'cd');
+		const p = planoAjustado(planoRevs, { ...extra('2026-10-17'), ...extra('2026-10-20') }, 'cd', {}, '2026-10-15');
 		expect(itemDa(p, '2026-10-17', '4e7').movida).toBe('2026-10-21');
 		expect(itemDa(p, '2026-10-21', '4e7').nota).toBe('aula feita em 20/10/2026');
 	});
 
 	it('aula feita na própria data do plano: nada se move', () => {
-		const p = planoAjustado(planoRevs, extra('2026-10-16'), 'cd');
+		const p = planoAjustado(planoRevs, extra('2026-10-16'), 'cd', {}, '2026-10-15');
 		expect(itemDa(p, '2026-10-17', '4e7').movida).toBeUndefined();
 		expect(itemDa(p, '2026-10-19', '4e7')).toBeUndefined();
 	});
 
 	it('intervalo que o plano não trazia volta quando a data real o traz para dentro', () => {
 		// Aula 5f5: prevista em 18/10 só com D+1; feita em 16/10, a D+7 e a D+30 cabem no plano.
-		const p = planoAjustado(planoRevs, extra('2026-10-16', '5f5'), 'cd');
+		const p = planoAjustado(planoRevs, extra('2026-10-16', '5f5'), 'cd', {}, '2026-10-15');
 		expect(itemDa(p, '2026-10-19', '5f5')).toMatchObject({ lab: 'D+1', movida: '2026-10-17' });
 		expect(itemDa(p, '2026-10-17', '5f5')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 16/10/2026' });
 		expect(itemDa(p, '2026-10-23', '5f5')).toMatchObject({ lab: 'D+7' });
@@ -363,7 +364,7 @@ describe('revisões na data real da aula nova', () => {
 	});
 
 	it('bloco que só tem ponteiros não conta no dia nem trava o cumprido', () => {
-		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd');
+		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd', {}, '2026-10-15');
 		const dia23 = p.plan.find((d) => d.data === '2026-10-23')!;
 		expect(soMovidas(dia23.blocos[0])).toBe(true);
 		expect(progressoDoDia({}, 'cd', dia23)).toEqual({ feitos: 0, total: 0 });
@@ -374,11 +375,107 @@ describe('revisões na data real da aula nova', () => {
 	});
 
 	it('a revisão remarcada marca como qualquer subitem, na chave do dia novo', () => {
-		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd');
+		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd', {}, '2026-10-15');
 		const dia19 = p.plan.find((d) => d.data === '2026-10-19')!;
 		const chave = chaveItem('cd', '2026-10-19', 0, '4e7');
 		expect(itemFeito({ [chave]: true }, 'cd', dia19, 0, '4e7')).toBe(true);
 		// O índice dos blocos previstos não muda: a marcação antiga continua valendo.
 		expect(chaveBloco('cd', '2026-10-16', 0) in { 'cd~2026-10-16~0': true }).toBe(true);
+	});
+});
+
+describe('aula nova que passou o dia sem ser feita', () => {
+	// Aulas (item-aula, com subitens): 4e7 nova em 16/10 com D+1 em 17/10; zz nova em 17/10; qq
+	// nova em 18/10, o dia de hoje do teste, com rev [w D+1]; 19/10 só com rev, destino do D+1
+	// remarcado de quem foi feita em 18/10.
+	const dia = (data: string, dow: string, blocos: any[]) => ({ data, dow, fase: 'Base', blocos });
+	const aula = (cid: string, min = 40, parte?: number, partes?: number) => ({
+		cid,
+		cod: 'E1·1',
+		texto: `Aula ${cid}`,
+		min,
+		subitens: [{ cid: 'EAG-02', cod: 'E1 2.1' }],
+		...(parte ? { parte, partes } : {})
+	});
+	const planoAtraso: PlanoMissoes = {
+		...PLANO,
+		plan: [
+			dia('2026-10-15', 'qui', [{ tipo: 'novo', titulo: 'N', min: 30, itens: [aula('pp', 30, 1, 2)] }]),
+			dia('2026-10-16', 'sex', [{ tipo: 'novo', titulo: 'N', min: 40, itens: [aula('4e7')] }]),
+			dia('2026-10-17', 'sáb', [
+				{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: '4e7', cod: 'E1·1', texto: 'Aula 4e7', lab: 'D+1' }] },
+				{ tipo: 'novo', titulo: 'N', min: 40, itens: [aula('zz')] },
+				{ tipo: 'novo', titulo: 'N', min: 30, itens: [aula('pp', 30, 2, 2)] }
+			]),
+			dia('2026-10-18', 'dom', [
+				{ tipo: 'novo', titulo: 'N', min: 40, itens: [aula('qq')] },
+				{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: 'w', cod: 'E1·1', texto: 'Aula w', lab: 'D+1' }] }
+			]),
+			dia('2026-10-19', 'seg', [{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: 'x', cod: 'E1·1', texto: 'Aula x', lab: 'D+1' }] }])
+		]
+	};
+	const itemDe = (p: PlanoMissoes, data: string, cid: string) =>
+		p.plan.find((d) => d.data === data)!.blocos.flatMap((b) => b.itens ?? []).find((it) => it.cid === cid)!;
+
+	it('sem dia passado em aberto, o plano volta igual', () => {
+		expect(planoAjustado(planoAtraso, {}, 'cd', {}, '2026-10-15')).toBe(planoAtraso);
+	});
+
+	it('aula de dia que passou desliza para o dia de hoje, no bloco Aula adiada', () => {
+		const p = planoAjustado(planoAtraso, {}, 'cd', {}, '2026-10-18');
+		expect(itemDe(p, '2026-10-16', '4e7').movida).toBe('2026-10-18');
+		expect(itemDe(p, '2026-10-17', 'zz').movida).toBe('2026-10-18');
+		// A do dia de hoje fica no lugar.
+		expect(itemDe(p, '2026-10-18', 'qq').movida).toBeUndefined();
+		const dia18 = p.plan.find((d) => d.data === '2026-10-18')!;
+		const adiadas = dia18.blocos.at(-1)!;
+		expect(adiadas).toMatchObject({ tipo: 'novo', titulo: 'Aula adiada', min: 110, atrasado: true });
+		expect(adiadas.itens!.map((it) => it.cid)).toEqual(['pp', '4e7', 'zz']);
+		expect(progressoDoDia({}, 'cd', dia18)).toEqual({ feitos: 0, total: 3 });
+	});
+
+	it('aula em partes: a parte feita fica, a que abriu é a que chega', () => {
+		const p = planoAjustado(planoAtraso, {}, 'cd', { 'cd~2026-10-15~0': true }, '2026-10-18');
+		expect(itemDe(p, '2026-10-15', 'pp').movida).toBeUndefined();
+		const adiadas = p.plan.find((d) => d.data === '2026-10-18')!.blocos.at(-1)!;
+		expect(adiadas.itens!.map((it) => it.cid)).toEqual(['4e7', 'zz', 'pp']);
+		expect(adiadas.itens!.at(-1)).toMatchObject({ parte: 2, partes: 2 });
+	});
+
+	it('feita no dia previsto, não desliza', () => {
+		const p = planoAjustado(planoAtraso, {}, 'cd', { 'cd~2026-10-16~0': true }, '2026-10-18');
+		expect(itemDe(p, '2026-10-16', '4e7').movida).toBeUndefined();
+		// As outras seguem atrasadas.
+		const adiadas = p.plan.find((d) => d.data === '2026-10-18')!.blocos.at(-1)!;
+		expect(adiadas.itens!.map((it) => it.cid)).toEqual(['pp', 'zz']);
+	});
+
+	it('marcada no dia em que chegou: para de deslizar e as revisões contam daquele dia', () => {
+		const p = planoAjustado(planoAtraso, {}, 'cd', { 'cd~2026-10-18~2~4e7': true }, '2026-10-18');
+		expect(itemDe(p, '2026-10-16', '4e7').movida).toBeUndefined();
+		expect(itemDe(p, '2026-10-16', '4e7').nota).toBe('aula feita em 18/10/2026');
+		// D+1 previsto em 17/10: conta de 18/10 e vai para 19/10.
+		expect(itemDe(p, '2026-10-17', '4e7').movida).toBe('2026-10-19');
+		expect(itemDe(p, '2026-10-19', '4e7')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 18/10/2026' });
+	});
+
+	it('hoje além do fim do plano: só o ponteiro, sem aula adiada', () => {
+		const p = planoAjustado(planoAtraso, {}, 'cd', {}, '2026-10-20');
+		expect(itemDe(p, '2026-10-16', '4e7').movida).toBeNull();
+		expect(p.plan.some((d) => d.blocos.some((b) => b.atrasado))).toBe(false);
+	});
+
+	it('a bolha do bloco adiadas marca cada aula na chave do dia em que chegou', () => {
+		const dia18 = planoAjustado(planoAtraso, {}, 'cd', {}, '2026-10-18').plan.find((d) => d.data === '2026-10-18')!;
+		const i = dia18.blocos.length - 1;
+		expect(mudancasDoBlocoAtrasado({}, 'cd', dia18, i, true)).toEqual({
+			'cd~2026-10-18~2~pp': true,
+			'cd~2026-10-18~2~4e7': true,
+			'cd~2026-10-18~2~zz': true,
+			'cd~2026-10-18~2': true
+		});
+		expect(mudancasDoBlocoAtrasado({ 'cd~2026-10-18~2': true }, 'cd', dia18, i, false)).toEqual({
+			'cd~2026-10-18~2': false
+		});
 	});
 });

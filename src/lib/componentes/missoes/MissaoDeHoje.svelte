@@ -9,6 +9,8 @@
 	// Aula feita fora da missão do dia também entra aqui: aula nova ou revisão, do catálogo da
 	// mentoria; aula nova conclui o dia do plano em que ela estava (chave `missoes-extras-cgu-2026`)
 	// e as revisões dela contam da data real (D+1, D+7, D+30), como a repetição espaçada pede.
+	// Aula nova de dia que passou sem ser feita desliza para o dia seguinte, no bloco "Aula
+	// adiada", até ser marcada (a bolha dele marca cada aula na chave do dia em que chegou).
 	import { tick } from 'svelte';
 	import Icone from '$lib/componentes/Icone.svelte';
 	import { aulaDaMentoria, aulaPorId, dados } from '$lib/dados';
@@ -20,6 +22,7 @@
 		itemFeito,
 		mudancasDaAulaNova,
 		mudancasDoBloco,
+		mudancasDoBlocoAtrasado,
 		mudancasDoItem,
 		ocorrenciasDaAula,
 		progressoDoDia,
@@ -229,17 +232,21 @@
 										<span class="bolha"><span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span></span>
 									{:else}
 										<label class="bolha">
-											<input
-												type="checkbox"
-												checked={feito}
-												onchange={(e) => {
-													const alvo = e.currentTarget;
-													const marcar = alvo.checked;
-													alvo.checked = feito; // quem decide é o onmarcar (pode pedir login antes)
-													onmarcar(mudancasDoBloco(marcas, cargo, dia, i, marcar));
-												}}
-												aria-label="Marcar {b.titulo} como cumprido"
-											/>
+										<input
+											type="checkbox"
+											checked={feito}
+											onchange={(e) => {
+												const alvo = e.currentTarget;
+												const marcar = alvo.checked;
+												alvo.checked = feito; // quem decide é o onmarcar (pode pedir login antes)
+												onmarcar(
+													b.atrasado
+														? mudancasDoBlocoAtrasado(marcas, cargo, dia, i, marcar)
+														: mudancasDoBloco(marcas, cargo, dia, i, marcar)
+												);
+											}}
+											aria-label="Marcar {b.titulo} como cumprido"
+										/>
 											<span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span>
 										</label>
 									{/if}
@@ -285,7 +292,11 @@
 											{#if it.lab || it.min}<em> · {it.lab ?? `${it.min} min`}{it.fim === false ? ', continua' : ''}</em>{/if}
 											{#if it.nota}<em> · {it.nota}</em>{/if}
 											{#if it.movida !== undefined}
-												<em> · {it.movida ? `revisão movida para ${formatarData(it.movida)}` : 'revisão além do fim do plano'}</em>
+												<em>
+													· {it.movida
+														? `${b.tipo === 'novo' ? 'aula adiada para' : 'revisão movida para'} ${formatarData(it.movida)}`
+														: `${b.tipo === 'novo' ? 'aula' : 'revisão'} além do fim do plano`}
+												</em>
 											{/if}
 											{#if it.partes && it.partes > 1}<em> · parte {it.parte} de {it.partes}</em>{/if}
 											{#if it.subitens?.length}

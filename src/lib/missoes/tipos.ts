@@ -43,6 +43,8 @@ export interface Bloco {
 	itens?: ItemBloco[];
 	/** Instrução do bloco. */
 	det?: string;
+	/** Bloco das aulas novas que deslizaram para o dia: a bolha marca cada aula na chave dela. */
+	atrasado?: boolean;
 }
 
 export interface DiaMissao {

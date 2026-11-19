@@ -173,16 +173,24 @@ function somarDias(iso: string, n: number): string {
 const diasDoLab = (lab: string | undefined): number | undefined => (lab?.startsWith('D+') ? +lab.slice(2) : undefined);
 
 /**
- * Plano com as revisões na data que a repetição espaçada pede: aula nova feita em outro dia, as
- * revisões dela (D+1, D+7, D+30) contam da data em que a aula foi feita de verdade (a última
- * registrada nas extras), não da data que o plano tinha. No dia previsto fica um ponteiro
- * (`movida`) e a revisão entra no bloco de revisão do dia novo (ou num bloco no fim do dia, quando
- * o dia não tem); intervalo que o plano nem trazia (o D+30 cortado por cair após o fim) volta a
- * existir quando a data real o traz de volta para dentro. Sem extras de aula nova, o plano volta
- * igual. Só a vista muda: os blocos mantêm os índices, as marcações do plano original continuam
- * valendo; o que cai além do fim do plano some (como o próprio plano faz com os D+30 do fim).
+ * Plano com as revisões na data que a repetição espaçada pede e as aulas que ficaram para trás:
+ *
+ * - Aula nova feita em outro dia: as revisões dela (D+1, D+7, D+30) contam da data em que a aula
+ *   foi feita de verdade (a última registrada nas extras, ou o dia em que a aula deslizante foi
+ *   marcada), não da data que o plano tinha. No dia previsto fica um ponteiro (`movida`) e a
+ *   revisão entra no bloco de revisão do dia novo (ou num bloco no fim do dia, quando o dia não
+ *   tem); intervalo que o plano nem trazia (o D+30 cortado por cair após o fim) volta a existir
+ *   quando a data real o traz de volta para dentro.
+ * - Aula nova de um dia que passou sem marcação: ela desliza para o dia seguinte, e segue
+ *   deslizando enquanto o dia passa e ela não é feita, até parar no dia de hoje. O dia previsto
+ *   fica um ponteiro e a aula entra num bloco "Aula adiada" no fim do dia de hoje. Marcada lá, a
+ *   marcação vale a data do dia em que foi feita (e as revisões contam dela).
+ *
+ * Sem extras e sem aula atrasada, o plano volta igual. Só a vista muda: os blocos previstos
+ * mantêm os índices, as marcações do plano original continuam valendo; o que cai além do fim do
+ * plano some (como o próprio plano faz com os D+30 do fim).
  */
-export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo): PlanoMissoes {
+export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo, marcas: Marcas, hoje: string): PlanoMissoes {
 	/** Data real de cada aula nova registrada: a mais recente, se entrou mais de uma vez. */
 	const real = new Map<string, string>();
 	for (const [chave, tarefas] of Object.entries(extras)) {
@@ -191,43 +199,95 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo)
 		for (const t of tarefas)
 			if (t.tipo === 'novo' && (!real.has(t.cid) || dia > real.get(t.cid)!)) real.set(t.cid, dia);
 	}
-	if (!real.size) return plano;
+	/** Blocos previstos por dia: marcação de item além deles é de aula que deslizou para o dia. */
+	const previstos = plano.plan.map((d) => d.blocos.length);
+	/** Aula com parte (ocorrência de estudo novo) sem marcação no lugar previsto. */
+	const abertas = new Set<string>();
+	plano.plan.forEach((dia) =>
+		dia.blocos.forEach((b, i) => {
+			for (const it of b.itens ?? []) if (it.subitens && !itemFeito(marcas, cargo, dia, i, it.cid)) abertas.add(it.cid);
+		})
+	);
+	/** Concluída: registrada (extras) ou marcada no dia em que chegou atrasada. */
+	const concluidas = new Set(real.keys());
+	for (const [chave, valor] of Object.entries(marcas)) {
+		if (!valor) continue;
+		const partes = chave.split('~');
+		if (partes.length < 4 || partes[0] !== cargo) continue;
+		const d = plano.plan.findIndex((x) => x.data === partes[1]);
+		if (d < 0 || +partes[partes.length - 2] < previstos[d]) continue;
+		// Chegou atrasada e foi marcada neste dia: a data real da aula é esta.
+		const cid = partes.slice(3).join('~');
+		if (!real.has(cid) || partes[1] > real.get(cid)!) real.set(cid, partes[1]);
+		concluidas.add(cid);
+	}
+	const feita = (cid: string): boolean => concluidas.has(cid) || !abertas.has(cid);
 	const fim = plano.plan[plano.plan.length - 1].data;
+	const atrasou = plano.plan.some(
+		(d) => d.data < hoje && d.blocos.some((b) => b.tipo === 'novo' && b.itens?.some((it) => it.subitens && !feita(it.cid)))
+	);
+	if (!real.size && !atrasou) return plano;
+	const chegou = hoje >= plano.plan[0].data && hoje <= fim;
 	/** Item do estudo novo da aula (código e texto para a revisão criada). */
 	const aulaNova = new Map<string, ItemBloco>();
 	for (const dia of plano.plan)
 		for (const b of dia.blocos) {
 			if (b.tipo !== 'novo') continue;
-			for (const it of b.itens ?? []) if (real.has(it.cid) && !aulaNova.has(it.cid)) aulaNova.set(it.cid, it);
+			for (const it of b.itens ?? []) if (!aulaNova.has(it.cid)) aulaNova.set(it.cid, it);
 		}
-	/** Itens que entram em cada dia, pela data real da aula. */
+	/** Itens de revisão que entram em cada dia, pela data real da aula. */
 	const entram = new Map<string, ItemBloco[]>();
+	/** Atrasadas que chegam no dia de hoje, na ordem dos dias previstos. */
+	const atrasadas: ItemBloco[] = [];
+	const encabeça = new Set<string>();
 	/** Intervalos que o plano já traz para a aula; os outros são criados quando cabem no fim. */
-	const previstos = new Map<string, Set<string>>();
+	const labs = new Map<string, Set<string>>();
 	const plan = plano.plan.map((dia) => ({
 		...dia,
-		blocos: dia.blocos.map((b) => {
-			if (b.tipo !== 'rev' || !b.itens) return b;
-			let mudou = false;
-			const itens = b.itens.map((it) => {
-				const diaReal = real.get(it.cid);
-				const n = diasDoLab(it.lab);
-				if (!diaReal || n === undefined) return it;
-				const labs = previstos.get(it.cid) ?? new Set();
-				labs.add(it.lab!);
-				previstos.set(it.cid, labs);
-				const alvo = somarDias(diaReal, n);
-				if (alvo === dia.data) return it;
-				mudou = true;
-				const fica = alvo <= fim;
-				if (fica) {
-					const lista = entram.get(alvo) ?? [];
-					lista.push({ ...it, nota: `aula feita em ${formatarData(diaReal)}` });
-					entram.set(alvo, lista);
-				}
-				return { ...it, movida: fica ? alvo : null };
-			});
-			return mudou ? { ...b, itens } : b;
+		blocos: dia.blocos.map((b, i) => {
+			if (b.tipo === 'rev' && b.itens) {
+				let mudou = false;
+				const itens = b.itens.map((it) => {
+					const diaReal = real.get(it.cid);
+					const n = diasDoLab(it.lab);
+					if (!diaReal || n === undefined) return it;
+					const doPlano = labs.get(it.cid) ?? new Set();
+					doPlano.add(it.lab!);
+					labs.set(it.cid, doPlano);
+					const alvo = somarDias(diaReal, n);
+					if (alvo === dia.data) return it;
+					mudou = true;
+					const fica = alvo <= fim;
+					if (fica) {
+						const lista = entram.get(alvo) ?? [];
+						lista.push({ ...it, nota: `aula feita em ${formatarData(diaReal)}` });
+						entram.set(alvo, lista);
+					}
+					return { ...it, movida: fica ? alvo : null };
+				});
+				return mudou ? { ...b, itens } : b;
+			}
+			if (b.tipo === 'novo' && b.itens && dia.data < hoje) {
+				let mudou = false;
+				const itens = b.itens.map((it) => {
+					if (!it.subitens || itemFeito(marcas, cargo, dia, i, it.cid)) return it;
+					// Feita em outro dia (registrada ou marcada na chegada): só fica a nota.
+					const diaReal = real.get(it.cid);
+					if (diaReal) {
+						mudou = true;
+						return { ...it, nota: `aula feita em ${formatarData(diaReal)}` };
+					}
+					mudou = true;
+					// A primeira parte em aberto é a que chega; as outras só apontam.
+					if (!encabeça.has(it.cid)) {
+						encabeça.add(it.cid);
+						atrasadas.push(it);
+					}
+					return { ...it, movida: chegou ? hoje : null };
+				});
+				return mudou ? { ...b, itens } : b;
+			}
+			return b;
 		})
 	}));
 	for (const [cid, diaReal] of real) {
@@ -235,7 +295,7 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo)
 		if (!it) continue; // aula fora do plano: sem revisão para remarcar
 		for (const n of [1, 7, 30]) {
 			const lab = `D+${n}`;
-			if (previstos.get(cid)?.has(lab)) continue;
+			if (labs.get(cid)?.has(lab)) continue;
 			const alvo = somarDias(diaReal, n);
 			if (alvo > fim) continue;
 			const lista = entram.get(alvo) ?? [];
@@ -247,17 +307,46 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo)
 		...plano,
 		plan: plan.map((dia) => {
 			const novos = entram.get(dia.data);
-			if (!novos?.length) return dia;
-			const rev = dia.blocos.findIndex((b) => b.tipo === 'rev');
-			if (rev < 0)
-				return {
-					...dia,
-					blocos: [
-						...dia.blocos,
-						{ tipo: 'rev', titulo: 'Revisão remarcada', min: 15, itens: novos, det: 'Aula feita em outro dia; a revisão segue a data real.' }
-					]
-				};
-			return { ...dia, blocos: dia.blocos.map((b, i) => (i === rev ? { ...b, itens: [...(b.itens ?? []), ...novos] } : b)) };
+			let blocos = dia.blocos;
+			if (novos?.length) {
+				const rev = blocos.findIndex((b) => b.tipo === 'rev');
+				blocos =
+					rev < 0
+						? [
+								...blocos,
+								{ tipo: 'rev', titulo: 'Revisão remarcada', min: 15, itens: novos, det: 'Aula feita em outro dia; a revisão segue a data real.' }
+							]
+						: blocos.map((b, i) => (i === rev ? { ...b, itens: [...(b.itens ?? []), ...novos] } : b));
+			}
+			if (atrasadas.length && dia.data === hoje)
+				blocos = [
+					...blocos,
+					{
+						tipo: 'novo',
+						titulo: 'Aula adiada',
+						min: atrasadas.reduce((s, it) => s + (it.min ?? 0), 0),
+						itens: atrasadas,
+						det: 'Aula de um dia que passou sem ela; fica no dia até ser feita.',
+						atrasado: true
+					}
+				];
+			return blocos === dia.blocos ? dia : { ...dia, blocos };
 		})
 	};
+}
+
+/** Marcar o bloco de aulas adiadas: cada aula na chave dela (e o bloco com a última). */
+export function mudancasDoBlocoAtrasado(marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: number, feito: boolean): Mudancas {
+	if (!feito) return mudancasDoBloco(marcas, cargo, dia, i, false);
+	const m: Mudancas = {};
+	const simuladas = { ...marcas };
+	for (const it of dia.blocos[i].itens ?? []) {
+		const um = mudancasDoItem(simuladas, cargo, dia, i, it.cid, true);
+		Object.assign(m, um);
+		for (const [k, f] of Object.entries(um)) {
+			if (f) simuladas[k] = true;
+			else delete simuladas[k];
+		}
+	}
+	return m;
 }
