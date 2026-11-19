@@ -20,7 +20,7 @@ import {
 	planoAjustado,
 	progressoDoDia,
 	resumo,
-	soMovidas
+	soPonteiros
 } from '$lib/missoes/calculos';
 import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/carregar';
 import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
@@ -366,7 +366,7 @@ describe('revisões na data real da aula nova', () => {
 	it('bloco que só tem ponteiros não conta no dia nem trava o cumprido', () => {
 		const p = planoAjustado(planoRevs, extra('2026-10-18'), 'cd', {}, '2026-10-15');
 		const dia23 = p.plan.find((d) => d.data === '2026-10-23')!;
-		expect(soMovidas(dia23.blocos[0])).toBe(true);
+		expect(soPonteiros(dia23.blocos[0])).toBe(true);
 		expect(progressoDoDia({}, 'cd', dia23)).toEqual({ feitos: 0, total: 0 });
 		expect(diaCumprido({}, 'cd', dia23)).toBe(true);
 		// O dia que recebe a revisão conta o bloco de revisão como sempre.
@@ -381,6 +381,23 @@ describe('revisões na data real da aula nova', () => {
 		expect(itemFeito({ [chave]: true }, 'cd', dia19, 0, '4e7')).toBe(true);
 		// O índice dos blocos previstos não muda: a marcação antiga continua valendo.
 		expect(chaveBloco('cd', '2026-10-16', 0) in { 'cd~2026-10-16~0': true }).toBe(true);
+	});
+
+	it('revisão de estudo que passou sem conclusão fica suspensa; concluído o estudo, volta', () => {
+		// 4e7 termina em 16/10; em 17/10 sem marcação, as revisões dela suspendem.
+		const p = planoAjustado(planoRevs, {}, 'cd', {}, '2026-10-17');
+		expect(itemDa(p, '2026-10-17', '4e7')).toMatchObject({ lab: 'D+1', suspensa: true });
+		// Item sem estudo no plano (zz): segue como sempre.
+		expect(itemDa(p, '2026-10-17', 'zz').suspensa).toBeUndefined();
+		// Bloco que só tem suspensas não conta no dia nem trava o cumprido.
+		const dia23 = p.plan.find((d) => d.data === '2026-10-23')!;
+		expect(itemDa(p, '2026-10-23', '4e7').suspensa).toBe(true);
+		expect(soPonteiros(dia23.blocos[0])).toBe(true);
+		expect(progressoDoDia({}, 'cd', dia23)).toEqual({ feitos: 0, total: 0 });
+		// Com o estudo marcado, a revisão volta ao normal.
+		const ok = planoAjustado(planoRevs, {}, 'cd', { 'cd~2026-10-16~0': true }, '2026-10-17');
+		expect(itemDa(ok, '2026-10-17', '4e7').suspensa).toBeUndefined();
+		expect(soPonteiros(ok.plan.find((d) => d.data === '2026-10-23')!.blocos[0])).toBe(false);
 	});
 });
 

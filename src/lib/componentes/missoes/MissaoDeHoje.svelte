@@ -26,7 +26,7 @@
 		mudancasDoItem,
 		ocorrenciasDaAula,
 		progressoDoDia,
-		soMovidas,
+		soPonteiros,
 		type Mudancas,
 		type OcorrenciaDaAula
 	} from '$lib/missoes/calculos';
@@ -68,7 +68,7 @@
 	const hojeNoPlano = $derived(plano ? diaDeHoje(plano, escolhida) : null);
 	const dia = $derived(hojeNoPlano?.dia ?? null);
 	const progresso = $derived(dia ? progressoDoDia(marcas, cargo, dia) : null);
-	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + (soMovidas(b) ? 0 : b.min), 0) : 0);
+	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + (soPonteiros(b) ? 0 : b.min), 0) : 0);
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
 	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
 
@@ -226,7 +226,7 @@
 		<ol class="blocos">
 								{#each dia.blocos as b, i (i)}
 									{@const feito = blocoFeito(marcas, cargo, dia, i)}
-									{@const ponteiros = soMovidas(b)}
+									{@const ponteiros = soPonteiros(b)}
 									<li class="bloco t-{b.tipo}" class:feito>
 									{#if ponteiros}
 										<span class="bolha"><span class="circulo" aria-hidden="true">{LETRA[b.tipo]}</span></span>
@@ -269,8 +269,12 @@
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
 									{@const itemOk = porItem && itemFeito(marcas, cargo, dia, i, it.cid)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
-									<li class:feito={itemOk} class:em-andamento={aberto} class:movida={it.movida !== undefined}>
-										{#if porItem && it.movida === undefined}
+									<li
+										class:feito={itemOk}
+										class:em-andamento={aberto}
+										class:ponteiro={it.movida !== undefined || it.suspensa === true}
+									>
+										{#if porItem && it.movida === undefined && it.suspensa !== true}
 											<label class="caixa">
 												<input
 													type="checkbox"
@@ -297,6 +301,8 @@
 														? `${b.tipo === 'novo' ? 'aula adiada para' : 'revisão movida para'} ${formatarData(it.movida)}`
 														: `${b.tipo === 'novo' ? 'aula' : 'revisão'} além do fim do plano`}
 												</em>
+											{:else if it.suspensa === true}
+												<em> · revisão suspensa: estudo não concluído</em>
 											{/if}
 											{#if it.partes && it.partes > 1}<em> · parte {it.parte} de {it.partes}</em>{/if}
 											{#if it.subitens?.length}
@@ -729,9 +735,9 @@
 										text-decoration-thickness: 1px;
 									}
 
-									/* Revisão remarcada para outro dia: só o ponteiro fica, sem marcação. */
-									.itens li.movida .cod,
-									.itens li.movida .texto {
+									/* Ponteiro (revisão movida ou suspensa, aula adiada): sem marcação. */
+									.itens li.ponteiro .cod,
+									.itens li.ponteiro .texto {
 										color: var(--cor-texto-suave);
 									}
 

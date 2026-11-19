@@ -36,6 +36,23 @@ async function simularApi(page: Page) {
 	return dados;
 }
 
+/** Marca todos os blocos dos dias como cumpridos: o estudo concluído mantém as revisões ativas. */
+async function marcarDias(page: Page, cargo: 'cd' | 'aud', datas: string[]) {
+	// Mescla (roda a cada navegação: não pode apagar o que o teste marcou).
+	await page.addInitScript(
+		([k, c, ds]) => {
+			const m: Record<string, boolean> = JSON.parse(localStorage.getItem(k) ?? '{}');
+			for (const d of ds) for (let i = 0; i < 8; i++) m[`${c}~${d}~${i}`] = true;
+			localStorage.setItem(k, JSON.stringify(m));
+		},
+		[CHAVE, cargo, datas] as const
+	);
+}
+
+/** Marcações só do dia de hoje: o 13/10 marcado de antemão não entra nas comparações exatas. */
+const marcasDeHoje = async (page: Page) =>
+	Object.fromEntries(Object.entries(await marcas(page)).filter(([k]) => k.startsWith(`cd~${HOJE}`)));
+
 const missao = (page: Page) => page.getByRole('region', { name: 'Missão de hoje' });
 const bolhas = (page: Page) => missao(page).getByRole('checkbox', { name: /como cumprido$/ });
 const caixas = (page: Page) => missao(page).getByRole('checkbox', { name: /como estudado$/ });
@@ -46,6 +63,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('o painel mostra os mesmos blocos e subitens do dia que a página das Missões', async ({ page }) => {
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	await page.goto('/painel');
 	await expect(missao(page)).toContainText(`0 de ${diaCd.blocos.length} blocos feitos`);
 	await expect(bolhas(page)).toHaveCount(diaCd.blocos.length);
@@ -61,14 +79,20 @@ test('o painel mostra os mesmos blocos e subitens do dia que a página das Miss�
 });
 
 test('logada: marcar no painel aparece na página das Missões, e o contrário também', async ({ page }) => {
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	const dados = await simularApi(page);
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
 
 	await page.goto('/painel');
 	await bolhas(page).first().click();
 	await expect(bolhas(page).first()).toBeChecked();
-	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~0`]: true });
-	await expect.poll(() => dados[CHAVE]?.valor, { timeout: 8000 }).toBe(JSON.stringify({ [`cd~${HOJE}~0`]: true }));
+	expect(await marcasDeHoje(page)).toEqual({ [`cd~${HOJE}~0`]: true });
+	await expect
+		.poll(
+			() => Object.entries(JSON.parse(dados[CHAVE]?.valor ?? '{}')).filter(([k]) => k.startsWith(`cd~${HOJE}`)),
+			{ timeout: 8000 }
+		)
+		.toEqual([[`cd~${HOJE}~0`, true]]);
 
 	await page.goto('/conteudo/artefatos/missoes.html#cd');
 	await expect(page.locator(`.bubble[data-k="cd~${HOJE}~0"]`)).toBeChecked();
@@ -80,6 +104,7 @@ test('logada: marcar no painel aparece na página das Missões, e o contrário t
 });
 
 test('sem login: a bolha abre o popup; "Agora não" não marca e, depois de entrar, o bloco tocado está marcado', async ({ page }) => {
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	await simularApi(page);
 	await page.goto('/painel');
 	const popup = page.getByRole('dialog', { name: 'Entre para marcar' });
@@ -88,7 +113,7 @@ test('sem login: a bolha abre o popup; "Agora não" não marca e, depois de entr
 	await popup.getByRole('button', { name: 'Agora não' }).click();
 	await expect(popup).toBeHidden();
 	await expect(bolhas(page).nth(2)).not.toBeChecked();
-	expect(await marcas(page)).toEqual({});
+	expect(await marcasDeHoje(page)).toEqual({});
 
 	// Marcar exige login: o popup volta no próximo toque.
 	await bolhas(page).nth(2).click();
@@ -97,11 +122,12 @@ test('sem login: a bolha abre o popup; "Agora não" não marca e, depois de entr
 	await popup.getByRole('button', { name: 'Entrar' }).click();
 	await expect(page).toHaveURL(/\/painel$/);
 	await expect(bolhas(page).nth(2)).toBeChecked();
-	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~2`]: true });
+	expect(await marcasDeHoje(page)).toEqual({ [`cd~${HOJE}~2`]: true });
 });
 
 test('subitem marcado à parte: o último marca o bloco, e desmarcar o bloco limpa os subitens', async ({ page }) => {
 	// planos/2026-10-15-topico-da-missao.md. O bloco 0 de 14/10 tem dois subitens.
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	await simularApi(page);
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
 	const [a, b] = diaCd.blocos[0].itens!;
@@ -113,7 +139,7 @@ test('subitem marcado à parte: o último marca o bloco, e desmarcar o bloco lim
 	await caixaA.click();
 	await expect(caixaA).toBeChecked();
 	await expect(bolhas(page).first()).not.toBeChecked();
-	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~0~${a.cid}`]: true });
+	expect(await marcasDeHoje(page)).toEqual({ [`cd~${HOJE}~0~${a.cid}`]: true });
 
 	await caixaB.click();
 	await expect(bolhas(page).first()).toBeChecked();
@@ -122,7 +148,7 @@ test('subitem marcado à parte: o último marca o bloco, e desmarcar o bloco lim
 	await bolhas(page).first().click();
 	await expect(caixaA).not.toBeChecked();
 	await expect(caixaB).not.toBeChecked();
-	expect(await marcas(page)).toEqual({});
+	expect(await marcasDeHoje(page)).toEqual({});
 });
 
 test('fora da janela: antes de 13/10 e depois de 12/12', async ({ page }) => {
@@ -242,8 +268,10 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	const itemC15 = () => missao(page).locator('li:not(.bloco)', { hasText: 'C1·5' }).first();
 	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aula adiada' });
 
-	// As aulas de 18/11 chegam hoje, no bloco Aula adiada; a missão de hoje conta ele.
+	// As aulas de 18/11 chegam hoje, no bloco Aula adiada; a missão de hoje conta ele. A D+1 da
+	// C1·5, cuja aula não foi concluída, suspende (fica só o ponteiro, fora da conta).
 	await expect(missao(page)).toContainText('0 de 6 blocos feitos');
+	await expect(itemC15()).toContainText('revisão suspensa: estudo não concluído');
 	await expect(adiadas()).toBeVisible();
 	await expect(adiadas().locator('li', { hasText: 'C1·5' })).toContainText('parte 2 de 2');
 	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toContainText('parte 1 de 2');
@@ -265,6 +293,7 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 });
 
 test('Auditoria troca o plano do dia', async ({ page }) => {
+	await marcarDias(page, 'aud', ['2026-10-13']);
 	await page.addInitScript(() =>
 		localStorage.setItem('painel-concurso:preferencias:v2', JSON.stringify({ especialidade: 'auditoria' }))
 	);
@@ -314,25 +343,34 @@ test('o subitem aberto na aula da mentoria fica destacado na volta, até marcar 
 
 test('"Seu plano" conta dias, blocos e horas das marcações', async ({ page }) => {
 	await page.addInitScript(
-		([k, dia, n]) => {
-			const m: Record<string, boolean> = {};
-			for (let i = 0; i < n; i++) m[`cd~${dia}~${i}`] = true;
+		([k, dias]) => {
+			const m: Record<string, boolean> = JSON.parse(localStorage.getItem(k) ?? '{}');
+			for (const dia of dias) for (let i = 0; i < 8; i++) m[`cd~${dia}~${i}`] = true;
 			localStorage.setItem(k, JSON.stringify(m));
 		},
-		[CHAVE, HOJE, diaCd.blocos.length] as const
+		[CHAVE, ['2026-10-13', HOJE]] as const
 	);
 	await page.goto('/painel');
 	const resumo = page.getByRole('region', { name: 'Seu plano' });
 	const blocos = missoesCd.plan.reduce((n, d) => n + d.blocos.length, 0);
 	await expect(resumo).not.toContainText('dias cumpridos');
-	await expect(resumo).toContainText(`blocos feitos${diaCd.blocos.length} de ${blocos}`);
+	await expect(resumo).toContainText(`blocos feitos${missoesCd.plan[0].blocos.length + diaCd.blocos.length} de ${blocos}`);
 	await expect(resumo).not.toContainText('horas feitas');
 	await expect(missao(page)).toContainText('Missão cumprida');
 });
 
 test('feed: a chamada fica acima dos stories, leva ao painel e não tira o 1º post da tela em 360 px', async ({ page }) => {
 	await page.setViewportSize({ width: 360, height: 780 });
-	await page.addInitScript(([k, dia]) => localStorage.setItem(k, JSON.stringify({ [`cd~${dia}~0`]: true })), [CHAVE, HOJE] as const);
+	await page.addInitScript(
+		([k, ontem, dia]) => {
+			const m: Record<string, boolean> = JSON.parse(localStorage.getItem(k) ?? '{}');
+			m[`cd~${ontem}~0`] = true;
+			m[`cd~${ontem}~1`] = true;
+			m[`cd~${dia}~0`] = true;
+			localStorage.setItem(k, JSON.stringify(m));
+		},
+		[CHAVE, '2026-10-13', HOJE] as const
+	);
 	await page.goto('/');
 	const chamada = page.getByRole('region', { name: 'Missão de hoje' });
 	await expect(chamada).toContainText(`1 de ${diaCd.blocos.length} blocos feitos`);
@@ -400,6 +438,7 @@ test('página das Missões: a régua acompanha Hoje, Esta semana e Os 61 dias', 
 
 test('página das Missões: subitem marcado à parte, com as mesmas chaves e regras do painel', async ({ page }) => {
 	// planos/2026-10-15-topico-da-missao.md. O bloco 0 de 14/10 tem dois subitens.
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	await simularApi(page);
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
 	const [a, b] = diaCd.blocos[0].itens!;
@@ -413,7 +452,7 @@ test('página das Missões: subitem marcado à parte, com as mesmas chaves e reg
 	await caixaA.click();
 	await expect(caixaA).toBeChecked();
 	await expect(bolha).not.toBeChecked();
-	expect(await marcas(page)).toEqual({ [`cd~${HOJE}~0~${a.cid}`]: true });
+	expect(await marcasDeHoje(page)).toEqual({ [`cd~${HOJE}~0~${a.cid}`]: true });
 
 	await caixaB.click();
 	await expect(bolha).toBeChecked();
@@ -426,7 +465,7 @@ test('página das Missões: subitem marcado à parte, com as mesmas chaves e reg
 	await page.goto('/conteudo/artefatos/missoes.html#cd');
 	await page.locator(`.day.is-today .bubble[data-k="cd~${HOJE}~0"]`).click();
 	await expect(page.locator(`.day.is-today input.sub[data-b="cd~${HOJE}~0"]:checked`)).toHaveCount(0);
-	expect(await marcas(page)).toEqual({});
+	expect(await marcasDeHoje(page)).toEqual({});
 });
 
 test('página das Missões: o lembrete gravado pelo painel destaca o subitem, e marcar aqui vale no painel', async ({ page }) => {

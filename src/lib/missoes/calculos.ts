@@ -22,7 +22,7 @@ export const blocoFeito = (marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: numb
 
 /** Dia cumprido: todos os blocos marcados (a regra da régua da página). */
 export const diaCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao): boolean =>
-	dia.blocos.every((b, i) => soMovidas(b) || blocoFeito(marcas, cargo, dia, i));
+	dia.blocos.every((b, i) => soPonteiros(b) || blocoFeito(marcas, cargo, dia, i));
 
 export interface ResumoMissoes {
 	dias: number;
@@ -37,7 +37,7 @@ export function resumo(plano: PlanoMissoes, marcas: Marcas, cargo: Cargo): Resum
 	const r: ResumoMissoes = { dias: plano.plan.length, blocos: 0, blocosFeitos: 0, minutos: 0, minutosFeitos: 0 };
 	for (const dia of plano.plan) {
 		dia.blocos.forEach((b, i) => {
-			if (soMovidas(b)) return;
+			if (soPonteiros(b)) return;
 			r.blocos++;
 			r.minutos += b.min;
 			if (blocoFeito(marcas, cargo, dia, i)) {
@@ -54,15 +54,16 @@ export function progressoDoDia(marcas: Marcas, cargo: Cargo, dia: DiaMissao): { 
 	let feitos = 0;
 	let total = 0;
 	dia.blocos.forEach((b, i) => {
-		if (soMovidas(b)) return;
+		if (soPonteiros(b)) return;
 		total++;
 		if (blocoFeito(marcas, cargo, dia, i)) feitos++;
 	});
 	return { feitos, total };
 }
 
-/** Bloco que só tem ponteiros de revisão remarcada para outro dia: nada a fazer neste dia. */
-export const soMovidas = (b: Bloco): boolean => !!b.itens?.length && b.itens.every((it) => it.movida !== undefined);
+/** Bloco que só tem ponteiros (revisão movida ou suspensa): nada a fazer neste dia. */
+export const soPonteiros = (b: Bloco): boolean =>
+	!!b.itens?.length && b.itens.every((it) => it.movida !== undefined || it.suspensa === true);
 
 /** Discursiva do plano na lista de todas (blocos `disc`), na ordem dos dias. */
 export interface DiscursivaDoPlano {
@@ -185,6 +186,8 @@ const diasDoLab = (lab: string | undefined): number | undefined => (lab?.startsW
  *   deslizando enquanto o dia passa e ela não é feita, até parar no dia de hoje. O dia previsto
  *   fica um ponteiro e a aula entra num bloco "Aula adiada" no fim do dia de hoje. Marcada lá, a
  *   marcação vale a data do dia em que foi feita (e as revisões contam dela).
+ * - Revisão de estudo que não foi concluído: suspensa (só o ponteiro, sem marcação) quando o
+ *   último dia previsto do estudo já passou; estudo ainda por vir mantém a revisão no lugar.
  *
  * Sem extras e sem aula atrasada, o plano volta igual. Só a vista muda: os blocos previstos
  * mantêm os índices, as marcações do plano original continuam valendo; o que cai além do fim do
@@ -201,11 +204,17 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 	}
 	/** Blocos previstos por dia: marcação de item além deles é de aula que deslizou para o dia. */
 	const previstos = plano.plan.map((d) => d.blocos.length);
-	/** Aula com parte (ocorrência de estudo novo) sem marcação no lugar previsto. */
+	/** Estudo (tópico ou aula) com ocorrência de estudo novo sem marcação no lugar previsto. */
 	const abertas = new Set<string>();
+	/** Último dia previsto de cada estudo: suspender a revisão é para o que ficou para trás. */
+	const fimDe = new Map<string, string>();
 	plano.plan.forEach((dia) =>
 		dia.blocos.forEach((b, i) => {
-			for (const it of b.itens ?? []) if (it.subitens && !itemFeito(marcas, cargo, dia, i, it.cid)) abertas.add(it.cid);
+			for (const it of b.itens ?? []) {
+				if (b.tipo !== 'novo') continue;
+				if (!itemFeito(marcas, cargo, dia, i, it.cid)) abertas.add(it.cid);
+				if (!fimDe.has(it.cid) || dia.data > fimDe.get(it.cid)!) fimDe.set(it.cid, dia.data);
+			}
 		})
 	);
 	/** Concluída: registrada (extras) ou marcada no dia em que chegou atrasada. */
@@ -226,7 +235,16 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 	const atrasou = plano.plan.some(
 		(d) => d.data < hoje && d.blocos.some((b) => b.tipo === 'novo' && b.itens?.some((it) => it.subitens && !feita(it.cid)))
 	);
-	if (!real.size && !atrasou) return plano;
+	/** Revisão suspensa: o estudo dela não foi concluído e o último dia previsto já passou. */
+	const suspendeu = plano.plan.some((d) =>
+		d.blocos.some((b) =>
+			b.tipo === 'rev' &&
+			b.itens?.some(
+				(it) => diasDoLab(it.lab) !== undefined && !feita(it.cid) && (fimDe.get(it.cid) ?? '') < hoje
+			)
+		)
+	);
+	if (!real.size && !atrasou && !suspendeu) return plano;
 	const chegou = hoje >= plano.plan[0].data && hoje <= fim;
 	/** Item do estudo novo da aula (código e texto para a revisão criada). */
 	const aulaNova = new Map<string, ItemBloco>();
@@ -248,9 +266,15 @@ export function planoAjustado(plano: PlanoMissoes, extras: Extras, cargo: Cargo,
 			if (b.tipo === 'rev' && b.itens) {
 				let mudou = false;
 				const itens = b.itens.map((it) => {
-					const diaReal = real.get(it.cid);
 					const n = diasDoLab(it.lab);
-					if (!diaReal || n === undefined) return it;
+					if (n === undefined) return it;
+					// Estudo que passou sem ser concluído: a revisão dele fica suspensa, sem marcação.
+					if (!feita(it.cid) && (fimDe.get(it.cid) ?? '') < hoje) {
+						mudou = true;
+						return { ...it, suspensa: true };
+					}
+					const diaReal = real.get(it.cid);
+					if (!diaReal) return it;
 					const doPlano = labs.get(it.cid) ?? new Set();
 					doPlano.add(it.lab!);
 					labs.set(it.cid, doPlano);
