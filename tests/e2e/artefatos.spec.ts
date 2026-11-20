@@ -15,6 +15,42 @@ const linksClaude = (page: Page) =>
 		[...document.querySelectorAll('a[href]')].map((a) => (a as HTMLAnchorElement).href).filter((h) => h.includes('claude.ai/artifact/'))
 	);
 
+test('Prioridades: a lista agrupa os subitens pela aula da mentoria, marcada quando feita', async ({ page }) => {
+	// Dias do plano até 17/11 cumpridos: as aulas desse período vêm marcadas; as demais, não.
+	await page.addInitScript(
+		(k) => {
+			const m: Record<string, boolean> = {};
+			for (const d = new Date('2026-10-13T12:00'); d <= new Date('2026-11-17T12:00'); d.setDate(d.getDate() + 1)) {
+				const dia = d.toISOString().slice(0, 10);
+				for (let i = 0; i < 8; i++) m[`cd~${dia}~${i}`] = true;
+			}
+			localStorage.setItem(k, JSON.stringify(m));
+		},
+		'missoes-cgu-2026'
+	);
+	await page.goto('/conteudo/artefatos/prioridades.html#cd');
+
+	// A aula E2·1 (fora do plano, estudo antigo em aberto) vem com o link e sem marca.
+	const e21 = page.locator('tr.aula[data-aula="659837d3-14c0-48e3-8ae4-6aaa5bc2ff49"]');
+	await expect(e21).toBeVisible();
+	await expect(e21).toContainText('E2·1');
+	await expect(e21).toContainText('1. Modelagem e arquiteturas');
+	await expect(e21.getByRole('link', { name: 'aula da mentoria ↗' })).toHaveAttribute(
+		'href',
+		'https://mentoria.plataformatutory.com.br/dash/cursos/d3ef2108-f695-41a3-bd84-8b95d35c60b3/playlists/a73ca465-f4f2-49df-b4fe-ff669d670434/aulas/659837d3-14c0-48e3-8ae4-6aaa5bc2ff49'
+	);
+	await expect(e21).not.toHaveClass(/feita/);
+	// Os subitens dela vêm aninhados embaixo.
+	await expect(e21.locator('+ tr.filho')).toHaveAttribute('data-aula', '659837d3-14c0-48e3-8ae4-6aaa5bc2ff49');
+	await expect(e21.locator('+ tr.filho')).toContainText('E2 1.1');
+
+	// A aula C2·3 (11/11, cumprida) vem marcada, com os subitens esmaecidos.
+	const c23 = page.locator('tr.aula[data-aula="caf2052c-7259-4622-9cb7-b9702481ac9f"]');
+	await expect(c23).toHaveClass(/feita/);
+	await expect(c23.locator('.marca')).toHaveText('✓');
+	await expect(c23.locator('+ tr.filho')).toHaveClass(/da-feita/);
+});
+
 test('os botões do cabeçalho abrem as páginas dentro do app, com as abas, e uma liga à outra', async ({ page }) => {
 	await page.goto('/painel');
 	const prioridades = page.getByRole('link', { name: 'Prioridades do edital' });

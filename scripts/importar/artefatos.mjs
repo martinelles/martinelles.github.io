@@ -1,11 +1,14 @@
 /**
  * Artefatos do vault servidos pelo painel (plano planos/2026-10-14-artefatos-no-git.md).
+ * A lista de prioridades ganha aqui as aulas da mentoria por subitem (do catálogo do app), no
+ * marcador __AULAS__ da página: o vault não conhece o catálogo.
  *
  * Fonte: `artifacts/_publicar/*.html`, gerados no vault por `scripts/montar_artifacts.py`. Lá
  * eles são fragmentos (`<title>`, `<style>`, corpo, `<script>`), porque o claude.ai acrescenta o
  * esqueleto ao publicar; aqui ganham o esqueleto e os links `claude.ai/artifact/<id>` entre eles
  * viram caminhos do painel, com a âncora (`#cd`, `#aud`) mantida.
  */
+import mentoria from '../../src/lib/dados/mentoria.json' with { type: 'json' };
 
 /** Onde cada artefato fica no painel: `static/conteudo/` + `arquivo`. */
 export const ARTEFATOS = [
@@ -88,9 +91,41 @@ export function montarArtefatos(fontes, comRaiox = false) {
 	if (comRaiox) gerados.add('Q4MYW9Fpk7eg4oKnv36H12');
 	return presentes.map((a) => ({
 		arquivo: a.arquivo,
-		conteudo: envolver(trocarLinks(/** @type {string} */ (fontes[/** @type {string} */ (a.fonte)]), gerados, a.fonte ?? a.arquivo))
+		conteudo: envolver(trocarLinks(/** @type {string} */ (fontes[/** @type {string} */ (a.fonte)]), gerados, a.fonte ?? a.arquivo)).replaceAll(
+			MARCA_AULAS,
+			JSON.stringify(AULAS_MENTORIA)
+		)
 	}));
 }
+
+/** Marcador na página das Prioridades que recebe as aulas do catálogo (o literal inteiro). */
+const MARCA_AULAS = '/*__AULAS__*/ { cd: [], aud: [] }';
+
+/** As aulas da mentoria por cargo, com as chaves dos subitens que cada uma cobre. */
+/** @typedef {{ id: string, cod: string, titulo: string, url: string, subs: string[] }} AulaMentoria */
+
+const AULAS_MENTORIA = (() => {
+	/** @type {Record<'cd' | 'aud', AulaMentoria[]>} */
+	const porCargo = { cd: [], aud: [] };
+	for (const a of mentoria.aulas ?? []) {
+		if (a.disciplina.endsWith(':DISC')) continue; // placeholder de disciplina sem aula
+		for (const cargo of /** @type {('cd' | 'aud')[]} */ (['cd', 'aud'])) {
+			const pref = `${cargo.toUpperCase()}:`;
+			if (a.disciplina.includes(':') && !a.disciplina.startsWith(pref)) continue;
+			const disc = a.disciplina.split(':')[1] ?? a.disciplina;
+			const n = a.titulo.match(/^\d+/)?.[0];
+			if (!n) continue;
+			porCargo[cargo].push({
+				id: a.id,
+				cod: `${disc}·${n}`,
+				titulo: a.titulo,
+				url: a.url,
+				subs: a.subitens.filter((c) => !c.includes(':') || c.startsWith(pref))
+			});
+		}
+	}
+	return porCargo;
+})();
 
 /**
  * Tokens que a página do Raio-X espera do tipo "dashboard" do claude.ai, com a paleta e as
