@@ -27,7 +27,7 @@ import { carregarMissoes, esquecerMissoes, validarMissoes } from '$lib/missoes/c
 import { aulasPorCod, type AulaDoCatalogo } from '$lib/missoes/catalogo';
 import { carregarMarcas, lerMarcas, marcasMissoes } from '$lib/missoes/marcas.svelte';
 import { carregarExtras, extrasMissoes, lerExtras } from '$lib/missoes/extras.svelte';
-import type { PlanoMissoes } from '$lib/missoes/tipos';
+import type { Extras, Marcas, PlanoMissoes } from '$lib/missoes/tipos';
 import { StorageFalso } from '../feed/apoio';
 
 const item = (cid: string) => ({ cid, cod: 'E1 1.1', texto: 'Tópico' });
