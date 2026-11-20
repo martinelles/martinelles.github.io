@@ -6,6 +6,7 @@ import { afterAll, describe, expect, it } from 'vitest';
 import { chaveLink, montarMissoes, validarMissoes as validarNoImportador } from '../../../scripts/importar/missoes.mjs';
 import { importar } from '../../../scripts/importar/index.mjs';
 import {
+	aulasConcluidas,
 	chaveBloco,
 	chaveItem,
 	diaCumprido,
@@ -569,5 +570,39 @@ describe('conteúdo em aberto cuja aula não está no plano', () => {
 		// A D+1 prevista para 17/10 conta de 18/10 e vai para 19/10.
 		expect(itemDe(p, '2026-10-17', 'EAG-01')).toMatchObject({ movida: '2026-10-19' });
 		expect(itemDe(p, '2026-10-19', 'EAG-01')).toMatchObject({ lab: 'D+1', nota: 'aula feita em 18/10/2026' });
+	});
+});
+
+describe('aulas da mentoria concluídas (cabeçalho)', () => {
+	const dia = (data: string, dow: string, blocos: any[]) => ({ data, dow, fase: 'Base', blocos });
+	const aula = (cid: string) => ({ cid, cod: 'E1·1', texto: 'Aula', min: 40, subitens: [{ cid: 'EAG-02', cod: 'E1 2.1' }] });
+	const catalogo = aulasPorCod(
+		[
+			{ id: 'x1', disciplina: 'CD:E1', titulo: '1. Modelo', subitens: ['CD:E1-1.1'] },
+			{ id: 'x2', disciplina: 'CD:E1', titulo: '2. SQL', subitens: ['CD:E1-2.1'] },
+			{ id: 'al', disciplina: 'CD:E1', titulo: '4. Distribuído', subitens: ['CD:E1-4.1'] }
+		],
+		'cd'
+	);
+	const base: PlanoMissoes = {
+		...PLANO,
+		plan: [
+			dia('2026-10-16', 'sex', [{ tipo: 'novo', titulo: 'N', min: 40, itens: [aula('al')] }]),
+			dia('2026-10-17', 'sáb', [{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: 'zz', cod: 'E1 1.1', texto: 'T', lab: 'D+1' }] }])
+		]
+	};
+	const ajustado = (marcas: Marcas, extras: Extras = {}) => planoAjustado(base, extras, 'cd', marcas, '2026-10-16', catalogo);
+
+	it('sem marcação nenhuma, zero; aula do plano marcada conta; a de fora do plano, só registrada', () => {
+		expect(aulasConcluidas(ajustado({}), {}, 'cd', {}, catalogo)).toEqual({ feitas: 0, total: 3 });
+		const marcada = ajustado({ 'cd~2026-10-16~0': true });
+		expect(aulasConcluidas(marcada, {}, 'cd', { 'cd~2026-10-16~0': true }, catalogo)).toEqual({ feitas: 1, total: 3 });
+		const registrada = ajustado({}, { 'cd~2026-10-15': [{ tipo: 'novo', cid: 'x2', cod: 'E1·2', texto: 'Aula' }] });
+		expect(aulasConcluidas(registrada, { 'cd~2026-10-15': [{ tipo: 'novo', cid: 'x2', cod: 'E1·2', texto: 'Aula' }] }, 'cd', {}, catalogo)).toEqual({ feitas: 1, total: 3 });
+	});
+
+	it('aula que desliza (passou o dia sem marcação) segue em aberto', () => {
+		const p = planoAjustado(base, {}, 'cd', {}, '2026-10-17', catalogo); // 16/10 passou em aberto
+		expect(aulasConcluidas(p, {}, 'cd', {}, catalogo)).toEqual({ feitas: 0, total: 3 });
 	});
 });

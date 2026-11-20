@@ -173,6 +173,49 @@ export function mudancasDaAulaNova(marcas: Marcas, cargo: Cargo, plano: PlanoMis
 	return m;
 }
 
+/** Aulas do catálogo concluídas, para o cabeçalho: no plano (o ajustado), com as ocorrências
+ *  cumpridas (`feitaEm` ou marcação); fora do plano, só registrada ou marcada na chegada. A aula
+ *  que desliza (ponteiro no dia previsto) conta como em aberto. */
+export function aulasConcluidas(
+	plano: PlanoMissoes,
+	extras: Extras,
+	cargo: Cargo,
+	marcas: Marcas,
+	catalogo?: Map<string, AulaDoCatalogo>
+): { feitas: number; total: number } | null {
+	if (!catalogo) return null;
+	const ids = new Set([...catalogo.values()].map((a) => a.id));
+	const feitas = new Set<string>();
+	for (const [chave, tarefas] of Object.entries(extras)) {
+		if (!chave.startsWith(`${cargo}~`)) continue;
+		for (const t of tarefas) if (t.tipo === 'novo' && ids.has(t.cid)) feitas.add(t.cid);
+	}
+	const previstos = plano.plan.map((d) => d.blocos.length);
+	for (const [chave, valor] of Object.entries(marcas)) {
+		if (!valor) continue;
+		const partes = chave.split('~');
+		if (partes.length < 4 || partes[0] !== cargo) continue;
+		const d = plano.plan.findIndex((x) => x.data === partes[1]);
+		if (d < 0 || +partes[partes.length - 2] < previstos[d]) continue;
+		const cid = partes.slice(3).join('~');
+		if (ids.has(cid)) feitas.add(cid);
+	}
+	const abertas = new Set<string>();
+	const noPlano = new Set<string>();
+	plano.plan.forEach((dia) =>
+		dia.blocos.forEach((b, i) => {
+			if (b.tipo !== 'novo' || b.atrasado) return;
+			for (const it of b.itens ?? []) {
+				if (!ids.has(it.cid)) continue;
+				noPlano.add(it.cid);
+				if (it.movida !== undefined || (it.feitaEm === undefined && !itemFeito(marcas, cargo, dia, i, it.cid))) abertas.add(it.cid);
+			}
+		})
+	);
+	for (const id of noPlano) if (!abertas.has(id)) feitas.add(id);
+	return { feitas: feitas.size, total: ids.size };
+}
+
 /** 'AAAA-MM-DD' + n dias, em data de calendário (meia-noite UTC, sem relógio nem fuso). */
 function somarDias(iso: string, n: number): string {
 	const [a, m, d] = iso.split('-').map(Number);

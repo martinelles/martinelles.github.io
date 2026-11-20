@@ -18,6 +18,9 @@
 	import { dadosInteracoes } from '$lib/feed/interacoes.svelte';
 	import { marcarMissao } from '$lib/feed/pedidoLogin.svelte';
 	import type { Indice, Materia } from '$lib/feed/tipos';
+	import { aulasConcluidas } from '$lib/missoes/calculos';
+	import { extrasMissoes } from '$lib/missoes/extras.svelte';
+	import { aulasPorCod } from '$lib/missoes/catalogo';
 	import { usarPlanoMissoes } from '$lib/missoes/estado.svelte';
 	import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 
@@ -47,6 +50,10 @@
 	const plano = $derived(missoes.plano);
 	const erroPlano = $derived(missoes.erro);
 	const marcas = $derived(marcasMissoes.todas());
+	/** X/Y aulas da mentoria concluídas, no lugar da data da prova no cabeçalho. */
+	const aulasCabecalho = $derived(
+		plano && cargo ? aulasConcluidas(plano, extrasMissoes.todas(), cargo, marcas, aulasPorCod(dados.mentoria?.aulas ?? [], cargo)) : null
+	);
 
 	/** Questões do feed por tópico (`tp`), para o atalho de cada subitem. */
 	const questoesPorTopico = $derived.by(() => {

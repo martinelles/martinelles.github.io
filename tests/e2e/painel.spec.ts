@@ -34,7 +34,7 @@ test('cabeçalho mostra a CGU, a banca e a contagem para a prova, sem trocar con
 	await expect(cargos.getByRole('button', { name: 'Auditoria' })).toHaveAttribute('aria-pressed', 'false');
 	await expect(page.getByText(/banca Cebraspe/)).toBeVisible();
 	await expect(page.getByText('Faltam 24 dias')).toBeVisible();
-	await expect(page.getByText('prova em 13/12/2026')).toBeVisible();
+	await expect(page.getByText('0/68 aulas da mentoria')).toBeVisible();
 	await expect(page.getByRole('button', { name: 'Trocar concurso' })).toHaveCount(0);
 	await expect(page.getByRole('link', { name: 'Ver edital' })).toHaveCount(0);
 	await expect(abas(page).getByRole('link', { name: 'Painel' })).toHaveAttribute('aria-current', 'page');

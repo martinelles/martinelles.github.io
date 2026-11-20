@@ -11,14 +11,17 @@
 	let {
 		concurso,
 		prazo,
+		aulas,
 		foco,
 		especialidades = [],
 		especialidade,
 		onescolherEspecialidade,
 		ancora
-	}: {
+}: {
 		concurso: Concurso;
 		prazo: Prazo;
+		/** Aulas do catálogo concluídas (o pequeno do cabeçalho, no lugar da data da prova). */
+		aulas?: { feitas: number; total: number } | null;
 		/** Nome da matéria de foco, já resolvido por quem monta o painel. */
 		foco?: string;
 		/** Cargos que dá para escolher; o rótulo é o cargo do edital. */
@@ -80,7 +83,9 @@
 			<Icone nome="relogio" tamanho={20} />
 			<span class="prazo">
 				<span>{prazo.texto}</span>
-				{#if prazo.tipo === 'dias' && concurso.dataProva}
+				{#if aulas}
+					<small>{aulas.feitas}/{aulas.total} aulas da mentoria</small>
+				{:else if prazo.tipo === 'dias' && concurso.dataProva}
 					<small>prova em {formatarData(concurso.dataProva)}</small>
 				{/if}
 			</span>
