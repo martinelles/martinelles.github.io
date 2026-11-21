@@ -487,6 +487,26 @@ describe('aula nova que passou o dia sem ser feita', () => {
 		expect(resumo(p, marcas, 'cd').blocosFeitos).toBe(1);
 	});
 
+	it('marcada hoje, fica no bloco de atrasadas riscada, em vez de sumir da lista', () => {
+		const marcas = { 'cd~2026-10-18~2~4e7': true as const };
+		const p = planoAjustado(planoAtraso, {}, 'cd', marcas, '2026-10-18');
+		const adiadas = p.plan.find((d) => d.data === '2026-10-18')!.blocos.at(-1)!;
+		expect(adiadas.atrasado).toBe(true);
+		// A 4e7 concluída segue no bloco, riscada com a data; as outras atrasadas continuam abertas.
+		expect(adiadas.itens!.map((i) => [i.cid, i.feitaEm])).toContainEqual(['4e7', '2026-10-18']);
+		expect(adiadas.itens!.map((i) => i.cid)).toEqual(['pp', 'zz', '4e7']);
+		// Registrada por fora hoje (sem marcação de chegada): o mesmo eco riscado no bloco.
+		const porExtra = planoAjustado(
+			planoAtraso,
+			{ 'cd~2026-10-18': [{ tipo: 'novo', cid: '4e7', cod: 'E1·1', texto: 'Aula 4e7' }] },
+			'cd',
+			{},
+			'2026-10-18'
+		);
+		const blocoExtra = porExtra.plan.find((d) => d.data === '2026-10-18')!.blocos.at(-1)!;
+		expect(blocoExtra.itens!.map((i) => [i.cid, i.feitaEm])).toContainEqual(['4e7', '2026-10-18']);
+	});
+
 	it('hoje além do fim do plano: só o ponteiro, sem aula adiada', () => {
 		const p = planoAjustado(planoAtraso, {}, 'cd', {}, '2026-10-20');
 		expect(itemDe(p, '2026-10-16', '4e7').movida).toBeNull();
@@ -591,18 +611,21 @@ describe('aulas da mentoria concluídas (cabeçalho)', () => {
 			dia('2026-10-17', 'sáb', [{ tipo: 'rev', titulo: 'R', min: 30, itens: [{ cid: 'zz', cod: 'E1 1.1', texto: 'T', lab: 'D+1' }] }])
 		]
 	};
-	const ajustado = (marcas: Marcas, extras: Extras = {}) => planoAjustado(base, extras, 'cd', marcas, '2026-10-16', catalogo);
-
+	// A conta lê o plano bruto (o ajustado acrescenta blocos e esconderia a chegada atrasada).
 	it('sem marcação nenhuma, zero; aula do plano marcada conta; a de fora do plano, só registrada', () => {
-		expect(aulasConcluidas(ajustado({}), {}, 'cd', {}, catalogo)).toEqual({ feitas: 0, total: 3 });
-		const marcada = ajustado({ 'cd~2026-10-16~0': true });
-		expect(aulasConcluidas(marcada, {}, 'cd', { 'cd~2026-10-16~0': true }, catalogo)).toEqual({ feitas: 1, total: 3 });
-		const registrada = ajustado({}, { 'cd~2026-10-15': [{ tipo: 'novo', cid: 'x2', cod: 'E1·2', texto: 'Aula' }] });
-		expect(aulasConcluidas(registrada, { 'cd~2026-10-15': [{ tipo: 'novo', cid: 'x2', cod: 'E1·2', texto: 'Aula' }] }, 'cd', {}, catalogo)).toEqual({ feitas: 1, total: 3 });
+		expect(aulasConcluidas(base, {}, 'cd', {}, catalogo)).toEqual({ feitas: 0, total: 3 });
+		expect(aulasConcluidas(base, {}, 'cd', { 'cd~2026-10-16~0': true }, catalogo)).toEqual({ feitas: 1, total: 3 });
+		const extra: Extras = { 'cd~2026-10-15': [{ tipo: 'novo', cid: 'x2', cod: 'E1·2', texto: 'Aula' }] };
+		expect(aulasConcluidas(base, extra, 'cd', {}, catalogo)).toEqual({ feitas: 1, total: 3 });
 	});
 
 	it('aula que desliza (passou o dia sem marcação) segue em aberto', () => {
-		const p = planoAjustado(base, {}, 'cd', {}, '2026-10-17', catalogo); // 16/10 passou em aberto
-		expect(aulasConcluidas(p, {}, 'cd', {}, catalogo)).toEqual({ feitas: 0, total: 3 });
+		expect(aulasConcluidas(base, {}, 'cd', {}, catalogo)).toEqual({ feitas: 0, total: 3 });
+	});
+
+	it('regressão: marcar a aula atrasada na chegada hoje conta no cabeçalho', () => {
+		// 17/10: 16/10 passou em aberto, a aula desliza para 17/10 (índice além dos 1 blocos previstos).
+		const marcas = { 'cd~2026-10-17~1~al': true as const };
+		expect(aulasConcluidas(base, {}, 'cd', marcas, catalogo)).toEqual({ feitas: 1, total: 3 });
 	});
 });

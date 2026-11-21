@@ -50,9 +50,12 @@
 	const plano = $derived(missoes.plano);
 	const erroPlano = $derived(missoes.erro);
 	const marcas = $derived(marcasMissoes.todas());
-	/** X/Y aulas da mentoria concluídas, no lugar da data da prova no cabeçalho. */
+	/** X/Y aulas da mentoria concluídas, no lugar da data da prova no cabeçalho. No plano bruto:
+	 *  o ajustado acrescenta blocos e esconderia a marcação de chegada atrasada. */
 	const aulasCabecalho = $derived(
-		plano && cargo ? aulasConcluidas(plano, extrasMissoes.todas(), cargo, marcas, aulasPorCod(dados.mentoria?.aulas ?? [], cargo)) : null
+		missoes.bruto && cargo
+			? aulasConcluidas(missoes.bruto, extrasMissoes.todas(), cargo, marcas, aulasPorCod(dados.mentoria?.aulas ?? [], cargo))
+			: null
 	);
 
 	/** Questões do feed por tópico (`tp`), para o atalho de cada subitem. */

@@ -173,9 +173,10 @@ export function mudancasDaAulaNova(marcas: Marcas, cargo: Cargo, plano: PlanoMis
 	return m;
 }
 
-/** Aulas do catálogo concluídas, para o cabeçalho: no plano (o ajustado), com as ocorrências
- *  cumpridas (`feitaEm` ou marcação); fora do plano, só registrada ou marcada na chegada. A aula
- *  que desliza (ponteiro no dia previsto) conta como em aberto. */
+/** Aulas do catálogo concluídas, para o cabeçalho. Recebe o plano BRUTO (o arquivo carregado):
+ *  marcação de chegada atrasada é a de item em índice além dos blocos previstos do dia, e o plano
+ *  ajustado acrescenta blocos — o índice deixaria de estar "além". No plano, concluída com as
+ *  ocorrências marcadas; fora dele, só registrada ou marcada na chegada. */
 export function aulasConcluidas(
 	plano: PlanoMissoes,
 	extras: Extras,
@@ -204,11 +205,11 @@ export function aulasConcluidas(
 	const noPlano = new Set<string>();
 	plano.plan.forEach((dia) =>
 		dia.blocos.forEach((b, i) => {
-			if (b.tipo !== 'novo' || b.atrasado) return;
+			if (b.tipo !== 'novo') return;
 			for (const it of b.itens ?? []) {
 				if (!ids.has(it.cid)) continue;
 				noPlano.add(it.cid);
-				if (it.movida !== undefined || (it.feitaEm === undefined && !itemFeito(marcas, cargo, dia, i, it.cid))) abertas.add(it.cid);
+				if (!itemFeito(marcas, cargo, dia, i, it.cid)) abertas.add(it.cid);
 			}
 		})
 	);
@@ -452,6 +453,16 @@ export function planoAjustado(
 			entram.set(alvo, lista);
 		}
 	}
+	/** Atrasada concluída hoje (marcada na chegada ou registrada): fica no bloco de hoje,
+	 *  riscada com a data, em vez de sumir da lista no mesmo toque. */
+	const concluidasHoje: ItemBloco[] = [];
+	for (const [cid, data] of real) {
+		if (data !== hoje) continue;
+		const item = aulaNova.get(cid);
+		// Só a que estava atrasada hoje: a de fim previsto depois de hoje já tem o lugar dela.
+		if (!item || (fimDe.get(cid) ?? '') >= hoje) continue;
+		concluidasHoje.push({ ...item, feitaEm: data });
+	}
 	return {
 		...plano,
 		plan: plan.map((dia) => {
@@ -467,7 +478,7 @@ export function planoAjustado(
 							]
 						: blocos.map((b, i) => (i === rev ? { ...b, itens: [...(b.itens ?? []), ...novos] } : b));
 			}
-			const atraso = [...atrasadas, ...sintetizadas];
+			const atraso = [...atrasadas, ...concluidasHoje, ...sintetizadas];
 			if (atraso.length && dia.data === hoje)
 				blocos = [
 					...blocos,

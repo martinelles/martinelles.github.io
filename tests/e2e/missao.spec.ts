@@ -269,17 +269,21 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	const adiadas = () => missao(page).locator('li.bloco', { hasText: 'Aulas atrasadas' });
 
 	// As aulas de 18/11 chegam hoje, no bloco Aulas atrasadas; a missão de hoje conta ele. A D+1
-	// da C1·5, cuja aula não foi concluída, suspende: não aparece e não conta.
+	// da C1·5, cuja aula não foi concluída, suspende: não aparece e não conta. O contador do
+	// cabeçalho acompanha a marcação da chegada.
 	await expect(missao(page)).toContainText('0 de 6 blocos feitos');
+	await expect(page.locator('.prazo small')).toHaveText('8/68 aulas da mentoria · 3 aulas por dia até a prova');
 	await expect(missao(page).getByText('revisão suspensa')).toHaveCount(0);
 	await expect(adiadas()).toBeVisible();
 	await expect(adiadas().locator('li', { hasText: 'C1·5' })).toContainText('parte 2 de 2');
 	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toContainText('parte 1 de 2');
 
-	// Marcar a C1·5 na chave do dia em que chegou.
+	// Marcar a C1·5 na chave do dia em que chegou: ela continua no bloco, riscada com a data.
 	await adiadas().getByRole('checkbox', { name: 'Marcar C1·5 como estudado' }).click();
 	const m = await marcas(page);
 	expect(m[`cd~2026-11-19~5~${aulaC15.id}`]).toBe(true);
+	await expect(adiadas().locator('li', { hasText: 'C1·5' })).toContainText('aula feita em 19/11/2026');
+	await expect(page.locator('.prazo small')).toHaveText('9/68 aulas da mentoria · 3 aulas por dia até a prova');
 	// A E1·2 segue atrasada e a D+1 da C1·5 conta do dia de hoje (19/11, previsto era o próprio 19).
 	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toBeVisible();
 	await expect(itemC15()).toContainText('revisão movida para 20/11/2026');

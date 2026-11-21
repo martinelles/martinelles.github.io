@@ -43,6 +43,11 @@ export function usarPlanoMissoes() {
 		get plano() {
 			return plano;
 		},
+		/** O plano sem ajuste (o arquivo carregado): as contas que só olham marcações, como o
+		 *  contador de aulas do cabeçalho, precisam dos índices de blocos crus. */
+		get bruto() {
+			return bruto;
+		},
 		get erro() {
 			return erro;
 		},
