@@ -211,7 +211,7 @@ test('especialidade Auditoria: plano, feed sem a P3 de Ciência de Dados, cargo 
 	await expect(stories.getByRole('link', { name: /Aprendizado de Máquina/ })).toHaveCount(0);
 });
 
-test('especialidade Infraestrutura: sem plano nas Missões, feed com P1, P2 e a P3 do guia, foco em E1', async ({ page }) => {
+test('especialidade Infraestrutura: sem plano nas Missões e sem matéria própria no feed', async ({ page }) => {
 	await page.goto('/painel');
 	const cargos = page.getByRole('group', { name: 'Cargo' });
 	await cargos.getByRole('button', { name: 'TI — Infraestrutura' }).click();
@@ -226,12 +226,13 @@ test('especialidade Infraestrutura: sem plano nas Missões, feed com P1, P2 e a 
 
 	await page.goto('/painel/ajustes');
 	await expect(page.getByRole('radio', { name: 'Infraestrutura' })).toBeChecked();
-	await expect(page.getByLabel('Disciplina')).toHaveValue('infra-e1');
+	// Sem matérias de infra no conteúdo: a disciplina padrão não tem opção no seletor.
+	await expect(page.getByLabel('Disciplina')).toHaveValue('');
 
 	await page.goto('/');
 	await expect(page.getByRole('region', { name: 'Missão de hoje' })).toHaveCount(0);
 	const stories = page.getByRole('navigation', { name: 'Matérias' });
-	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/E1 · Redes, Sistemas e Plataformas de Dados/);
-	await expect(stories.getByRole('link', { name: /Cibersegurança, Privacidade e Continuidade/ })).toHaveCount(1);
-	await expect(stories.getByRole('link', { name: /Aprendizado de Máquina|Finanças Públicas/ })).toHaveCount(0);
+	// Só restam as matérias comuns (P1 e P2): nada de infra, nem das P3 dos outros cargos.
+	await expect(stories.getByRole('link', { name: /Redes, Sistemas e Plataformas|Cibersegurança|Aprendizado de Máquina|Finanças Públicas/ })).toHaveCount(0);
+	await expect(stories.getByRole('link').nth(1)).toHaveAccessibleName(/B1/);
 });
