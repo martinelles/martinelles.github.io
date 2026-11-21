@@ -72,7 +72,8 @@ describe('artefatos no importador', () => {
 		writeFileSync(join(vault, 'artifacts', '_publicar', 'missoes-cgu-2026.html'), fragmento('M', `<a href="${PRIOR}"></a>`));
 		const saida = join(raiz, 'com');
 		const rel = importar({ vault, saida });
-		expect(rel.artefatos).toEqual(['artefatos/missoes.html']);
+		// A página das Missões vem com o pacote da derivação (mesmas regras do painel na régua).
+		expect(rel.artefatos).toEqual(['artefatos/missoes.html', 'artefatos/vendor/derivacao-missoes.js']);
 		expect(rel.avisos).toContain('artifacts/_publicar/prioridades-edital.html ausente: artefatos/prioridades.html não gerado');
 		expect(readFileSync(join(saida, 'artefatos', 'missoes.html'), 'utf8')).toContain('<title>M</title>');
 	});

@@ -19,7 +19,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ARTEFATOS, montarArtefatos, montarRaiox } from './artefatos.mjs';
+import { ARTEFATOS, montarArtefatos, montarDerivacao, montarRaiox } from './artefatos.mjs';
 import { importarBaralho } from './baralhos.mjs';
 import { montarMapas } from './mapas.mjs';
 import { CARGOS, chaveLink, montarMissoes } from './missoes.mjs';
@@ -353,6 +353,8 @@ export function importar({ vault, saida }) {
 	const comRaiox = fontesRaiox.every((f) => existsSync(f));
 	if (!comRaiox) avisos.push('artifacts/raiox incompleto (index.html, subitens.json, assuntos.json): Raio-X não gerado');
 	const artefatos = montarArtefatos(fontesArtefatos, comRaiox);
+	// A página das Missões usa o pacote da derivação (mesmas regras do painel na régua).
+	if (fontesArtefatos['missoes-cgu-2026.html'] !== undefined) artefatos.push(montarDerivacao());
 	if (comRaiox) {
 		const [pagina, subitens, assuntos] = fontesRaiox.map((f) => readFileSync(f, 'utf8'));
 		const daqui = (/** @type {string} */ f) => readFileSync(fileURLToPath(new URL(`./raiox/${f}`, import.meta.url)), 'utf8');

@@ -8,6 +8,8 @@
  * esqueleto ao publicar; aqui ganham o esqueleto e os links `claude.ai/artifact/<id>` entre eles
  * viram caminhos do painel, com a âncora (`#cd`, `#aud`) mantida.
  */
+import { fileURLToPath } from 'node:url';
+import { buildSync } from 'esbuild';
 import mentoria from '../../src/lib/dados/mentoria.json' with { type: 'json' };
 
 /** Onde cada artefato fica no painel: `static/conteudo/` + `arquivo`. */
@@ -91,11 +93,29 @@ export function montarArtefatos(fontes, comRaiox = false) {
 	if (comRaiox) gerados.add('Q4MYW9Fpk7eg4oKnv36H12');
 	return presentes.map((a) => ({
 		arquivo: a.arquivo,
-		conteudo: envolver(trocarLinks(/** @type {string} */ (fontes[/** @type {string} */ (a.fonte)]), gerados, a.fonte ?? a.arquivo)).replaceAll(
-			MARCA_AULAS,
-			JSON.stringify(AULAS_MENTORIA)
-		)
+		conteudo: envolver(trocarLinks(/** @type {string} */ (fontes[/** @type {string} */ (a.fonte)]), gerados, a.fonte ?? a.arquivo))
+			.replaceAll(MARCA_AULAS, JSON.stringify(AULAS_MENTORIA))
+			.replaceAll(MARCA_DERIVACAO, TAG_DERIVACAO)
 	}));
+}
+
+/**
+ * Pacote da derivação (`derivacao-missoes.ts`) para a página das Missões: as mesmas regras do
+ * painel, empacotadas com o esbuild. Só entra quando a página das Missões vem no import.
+ */
+const MARCA_DERIVACAO = '<!--__DERIVACAO__-->';
+const TAG_DERIVACAO = '<script src="/conteudo/artefatos/vendor/derivacao-missoes.js"></script>';
+
+export function montarDerivacao() {
+	const r = buildSync({
+		entryPoints: [fileURLToPath(new URL('./derivacao-missoes.ts', import.meta.url))],
+		bundle: true,
+		format: 'iife',
+		target: 'es2020',
+		write: false,
+		legalComments: 'none'
+	});
+	return { arquivo: 'artefatos/vendor/derivacao-missoes.js', conteudo: r.outputFiles[0].text };
 }
 
 /** Marcador na página das Prioridades que recebe as aulas do catálogo (o literal inteiro). */

@@ -520,6 +520,7 @@ test('página das Missões: subitem marcado à parte, com as mesmas chaves e reg
 });
 
 test('página das Missões: o lembrete gravado pelo painel destaca o subitem, e marcar aqui vale no painel', async ({ page }) => {
+	await marcarDias(page, 'cd', ['2026-10-13']);
 	await simularApi(page);
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
 	const [a] = diaCd.blocos[0].itens!;
