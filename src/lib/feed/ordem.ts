@@ -87,17 +87,22 @@ export function ordemDoDia(
 	indice: Pick<Indice, 'posts'>,
 	filtro: Filtro,
 	dia: string,
-	fracos?: NotasPorTopico | null
+	fracos?: NotasPorTopico | null,
+	/** Ids com resposta registrada; com `semResposta`, as questões respondidas ficam de fora. */
+	respondidas?: ReadonlySet<string> | null
 ): string[] {
 	const filas = new Map<TipoPost, string[]>(PROPORCAO.map(([tipo]) => [tipo, []]));
 	const fora = filtro.especialidade ? especialidadePorId(filtro.especialidade).fora : () => false;
+	// "Só não respondidas" implica questões, mesmo que o parâmetro de tipo diga outra coisa.
+	const tipoFiltro = filtro.semResposta ? 'questao' : filtro.tipo;
 	for (const e of indice.posts) {
 		const tipo = TIPO_POR_INICIAL[e.t];
 		if (!tipo) continue;
 		if (filtro.materia !== undefined && !naMateria(e, filtro.materia)) continue;
 		if (fora(e.m)) continue;
-		if (filtro.tipo !== undefined && tipo !== filtro.tipo) continue;
+		if (tipoFiltro !== undefined && tipo !== tipoFiltro) continue;
 		if (filtro.topico !== undefined && !noTopico(e, filtro.topico)) continue;
+		if (filtro.semResposta && tipo === 'questao' && respondidas?.has(e.id)) continue;
 		filas.get(tipo)!.push(e.id);
 	}
 

@@ -119,4 +119,6 @@ export interface Filtro {
 	topico?: string;
 	/** Especialidade que tira matérias do feed (ex.: TI em Auditoria); ausente = nenhuma sai. */
 	especialidade?: IdEspecialidade;
+	/** Só questões ainda sem resposta registrada (implica tipo questão; `?sem-resposta=1`). */
+	semResposta?: boolean;
 }

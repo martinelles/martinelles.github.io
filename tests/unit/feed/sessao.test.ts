@@ -129,6 +129,8 @@ describe('criarSessao', () => {
 
 	it('chaveFiltro: sem tópico igual à de antes; com tópico, chave própria', () => {
 		expect(chaveFiltro({})).toBe('*|*');
+		// Só não respondidas: chave própria, para não misturar com o feed comum.
+		expect(chaveFiltro({ tipo: 'questao', semResposta: true })).toBe('*|questao|novas');
 		expect(chaveFiltro({ materia: 'auditoria', tipo: 'questao' })).toBe('auditoria|questao');
 		expect(chaveFiltro({ topico: 'FAG-02', tipo: 'questao' })).toBe('*|questao|FAG-02');
 		expect(chaveFiltro({ topico: 'FAG-02' })).not.toBe(chaveFiltro({ topico: 'FAG-01' }));

@@ -200,3 +200,25 @@ describe('fracos primeiro', () => {
 });
 
 const tipoDeDo = (ind: Indice, id: string) => ind.posts.find((e) => e.id === id)!.t;
+
+describe('só questões não respondidas', () => {
+	const posts = [
+		{ id: 'q1', t: 'q', m: 'b1', l: 1 },
+		{ id: 'q2', t: 'q', m: 'b1', l: 1 },
+		{ id: 'r1', t: 'r', m: 'b1', l: 1 }
+	];
+	const indice = { posts: posts as never };
+
+	it('com semResposta, a questão respondida fica de fora e o resto não entra', () => {
+		const ordem = ordemDoDia(indice, { semResposta: true }, '2026-09-30', null, new Set(['q2']));
+		expect(ordem).toContain('q1');
+		expect(ordem).not.toContain('q2');
+		// Implica o tipo questão, mesmo sem filtrar por tipo.
+		expect(ordem).not.toContain('r1');
+	});
+
+	it('sem a flag, a questão respondida segue no feed', () => {
+		const ordem = ordemDoDia(indice, {}, '2026-09-30', null, new Set(['q2']));
+		expect(ordem).toContain('q2');
+	});
+});

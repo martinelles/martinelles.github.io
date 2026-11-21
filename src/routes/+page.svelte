@@ -73,7 +73,9 @@
 		const topico = p.get('topico') || undefined;
 		// A P3 do outro cargo não entra no "Tudo" nem nos stories.
 		const especialidade = foco.especialidade.id;
-		return { materia, tipo: ehTipo(tipo) ? tipo : undefined, topico, especialidade };
+		// Só questões sem resposta registrada (`?sem-resposta=1`): implica o tipo questão.
+		const semResposta = p.get('sem-resposta') === '1';
+		return { materia, tipo: semResposta ? 'questao' : ehTipo(tipo) ? tipo : undefined, topico, especialidade, semResposta };
 	});
 
 	/** Quantos posts o filtro de tópico tem, contados no índice (FR-004); null enquanto o índice carrega. */
@@ -97,7 +99,12 @@
 		if (!s) {
 			// Fracos primeiro: a nota de acerto é a do instante em que a ordem nasce (a rodada nova
 			// recalcula; responder no feed não reordena o que já está na tela).
-			s = criarSessao(repo, filtro, `${dia}|${rodada}`, foco.priorizarFracos ? dadosInteracoes().respostas : null);
+			s = criarSessao(
+				repo,
+				filtro,
+				`${dia}|${rodada}`,
+				foco.priorizarFracos || filtro.semResposta ? dadosInteracoes().respostas : null
+			);
 			sessoes.set(chave, s);
 		}
 		return s;
@@ -116,6 +123,7 @@
 	const titulo = $derived(
 		[
 			filtro.topico === undefined ? materiaFiltrada?.abrev : `Questões de ${filtro.topico}`,
+			filtro.semResposta ? 'não respondidas' : undefined,
 			filtro.topico === undefined && filtro.tipo && ROTULO_TIPO[filtro.tipo],
 			'Feed',
 			'Painel de Concurso'
@@ -230,6 +238,13 @@
 		<p class="filtro-tipo">
 			Só {ROTULO_TIPO[filtro.tipo].toLocaleLowerCase('pt-BR')}
 			<a href={filtro.materia ? `/?materia=${encodeURIComponent(filtro.materia)}` : '/'}>Mostrar todos os tipos</a>
+			{#if filtro.tipo === 'questao'}
+				{#if filtro.semResposta}
+					<a href={`/?tipo=questao${filtro.materia ? `&materia=${encodeURIComponent(filtro.materia)}` : ''}`}>Mostrar respondidas também</a>
+				{:else}
+					<a href={`/?tipo=questao&sem-resposta=1${filtro.materia ? `&materia=${encodeURIComponent(filtro.materia)}` : ''}`}>Só não respondidas</a>
+				{/if}
+			{/if}
 		</p>
 	{/if}
 

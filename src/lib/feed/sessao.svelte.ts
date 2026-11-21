@@ -17,7 +17,8 @@ const mostradosPorFiltro = new Map<string, Set<string>>();
 export function chaveFiltro(filtro: Filtro): string {
 	const base = `${filtro.materia ?? '*'}|${filtro.tipo ?? '*'}`;
 	const comTopico = filtro.topico === undefined ? base : `${base}|${filtro.topico}`;
-	return filtro.especialidade ? `${comTopico}|@${filtro.especialidade}` : comTopico;
+	const comEstado = filtro.semResposta ? `${comTopico}|novas` : comTopico;
+	return filtro.especialidade ? `${comEstado}|@${filtro.especialidade}` : comEstado;
 }
 
 /** Esquece o que já foi mostrado num filtro (`chave`, ao atualizar o feed) ou em todos (testes). */
@@ -77,7 +78,13 @@ export function criarSessao(
 	async function carregarPagina(): Promise<void> {
 		try {
 			const base = await repo.indice();
-			ordem ??= ordemDoDia(base, filtroCopia, semente, respostas ? notasPorTopico(base, respostas) : undefined);
+			ordem ??= ordemDoDia(
+				base,
+				filtroCopia,
+				semente,
+				respostas ? notasPorTopico(base, respostas) : undefined,
+				respostas ? new Set(Object.keys(respostas)) : null
+			);
 			avancar(ordem);
 			if (fim) {
 				erro = null;

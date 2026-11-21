@@ -317,3 +317,23 @@ test('tocar na aba Feed no feed: longe do topo, sobe; no topo, atualiza', async 
 	expect(ordens.size).toBeGreaterThan(1);
 	await expect(page).toHaveURL('/');
 });
+
+test('só questões não respondidas: a respondida fica de fora e o botão traz de volta', async ({ page }) => {
+	// Uma questão do índice já respondida nesta conta.
+	const questao = indice.posts.find((e) => e.t === 'q')!;
+	await page.addInitScript(
+		([k, id]) => localStorage.setItem(k, JSON.stringify({ respostas: { [id]: { r: 'C', ok: true } } })),
+		[CHAVE_INTERACOES, questao.id] as const
+	);
+	await page.goto('/?tipo=questao&sem-resposta=1');
+
+	// O modo entra no título da aba e a respondida não aparece.
+	await expect(page).toHaveTitle(/não respondidas/);
+	await expect(page.locator(`[data-post-id="${questao.id}"]`)).toHaveCount(0);
+	await expect(page.getByRole('link', { name: 'Mostrar respondidas também' })).toBeVisible();
+
+	// Voltar traz a respondida de volta.
+	await page.getByRole('link', { name: 'Mostrar respondidas também' }).click();
+	await expect(page).toHaveURL(/\/\?tipo=questao$/);
+	await expect(page.getByRole('link', { name: 'Só não respondidas' })).toBeVisible();
+});
