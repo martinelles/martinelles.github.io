@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>window.DASH_LOCAL = { datasets: { subitens: "/conteudo/artefatos/raiox-subitens.json", assuntos: "/conteudo/artefatos/raiox-assuntos.json" } };</script>
+<script src="/conteudo/artefatos/vendor/d3-7.9.0.min.js"></script>
+<script src="/conteudo/artefatos/dash-local.js"></script>
 <script>
 (function () {
   function aplicar() {
@@ -210,9 +213,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-fami
   </div>
 </div>
 
-<script>window.DASH_LOCAL = { datasets: { subitens: "/conteudo/artefatos/raiox-subitens.json", assuntos: "/conteudo/artefatos/raiox-assuntos.json" } };</script>
-<script src="/conteudo/artefatos/vendor/d3-7.9.0.min.js"></script>
-<script src="/conteudo/artefatos/dash-local.js"></script>
 <script>
 dash.calc('resumo', {
   inputs: ['subitens', 'assuntos'],
