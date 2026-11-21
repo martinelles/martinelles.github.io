@@ -73,6 +73,7 @@
 	<CabecalhoPainel
 		concurso={concursoCgu}
 		{prazo}
+		aulas={aulasCabecalho}
 		foco={nomeFoco}
 		especialidades={ESPECIALIDADES}
 		especialidade={foco.especialidade.id}
