@@ -84,7 +84,11 @@
 			<span class="prazo">
 				<span>{prazo.texto}</span>
 				{#if aulas}
-					<small>{aulas.feitas}/{aulas.total} aulas da mentoria</small>
+					{@const restam = Math.max(0, aulas.total - aulas.feitas)}
+					{@const porDia = prazo.tipo === 'dias' && prazo.dias > 0 ? Math.ceil(restam / prazo.dias) : 0}
+					<small>
+						{aulas.feitas}/{aulas.total} aulas da mentoria{porDia && restam ? ` · ${porDia} aulas por dia até a prova` : ''}
+					</small>
 				{:else if prazo.tipo === 'dias' && concurso.dataProva}
 					<small>prova em {formatarData(concurso.dataProva)}</small>
 				{/if}
