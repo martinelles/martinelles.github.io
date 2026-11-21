@@ -146,13 +146,42 @@ export function romanosDaAlternativa(texto) {
 	return romanos.length ? romanos : null;
 }
 
+/** Assertativas `( )` do enunciado, na ordem em que aparecem, com onde cada uma está no texto. */
+export function assertivasDoEnunciado(/** @type {string} */ enunciado) {
+	const achadas = [];
+	let pos = 0;
+	for (const l of enunciado.split('\n')) {
+		const m = /^\(\s*\)\s*(.*)$/.exec(l.trim());
+		if (m) achadas.push({ texto: m[1].trim(), inicio: pos, fim: pos + l.length });
+		pos += l.length + 1;
+	}
+	return achadas;
+}
+
+/** Separador entre os valores de uma sequência: vírgula, ponto e vírgula, travessões ou barra. */
+const SEPARADOR_VF = /\s*[,;\u2013\u2014/-]+\s*/;
+
+/**
+ * Sequência V/F (ou T/F) de uma alternativa: `F, V, F, F, V, V` ou `F – T – F` →
+ * `['F', 'V', …]` (T conta como verdadeira). Null fora do padrão — inclusive a numérica da
+ * ESAF (`1 / 1 / 2 / 2`), que é relação entre colunas, não certo/errado.
+ */
+export function sequenciaDaAlternativa(/** @type {string} */ texto) {
+	const t = texto.trim().replace(/[.;]+$/, '');
+	if (!/^[VFT](?:\s*[,;\u2013\u2014/-]+\s*[VFT])*$/.test(t)) return null;
+	return t.split(SEPARADOR_VF);
+}
+
 /**
  * Questão de múltipla escolha → itens Certo/Errado, sem adivinhar se o comando pedia a
  * correta ou a incorreta:
  * - quando toda alternativa é combinação de afirmativas romanas (`somente I e II`), um item
  *   por afirmativa: Certo se ela está na alternativa do gabarito;
+ * - quando o enunciado traz assertativas `( )` e toda alternativa é uma sequência V/F do mesmo
+ *   tamanho, um item por assertativa: Certo se a posição dela é V na alternativa do gabarito
+ *   (o comando fica; a lista de assertativas e o "Escolha a opção correta." saem do item);
  * - nos demais casos, um item por alternativa: Certo se é a alternativa do gabarito.
- * Id do item: `q:<id>:<letra>` ou `q:<id>:<romano>`.
+ * Id do item: `q:<id>:<letra>`, `q:<id>:<romano>` ou `q:<id>:<n>`.
  * @param {any} post questão já montada, com `alternativas` e `gabarito` letra
  * @returns {any[]}
  */
@@ -160,10 +189,15 @@ export function converterEmItens(post) {
 	const { alternativas, gabarito, enunciado, formato, ...resto } = post;
 	const certa = alternativas.find((/** @type {{ letra: string }} */ a) => a.letra === gabarito);
 	if (!certa) throw new Error(`${post.id}: gabarito "${gabarito}" não é letra de alternativa`);
-	const item = (/** @type {string} */ sufixo, /** @type {string} */ texto, /** @type {boolean} */ ok) => ({
+	const item = (
+		/** @type {string} */ sufixo,
+		/** @type {string} */ texto,
+		/** @type {boolean} */ ok,
+		/** @type {string} */ base = enunciado
+	) => ({
 		...resto,
 		id: `${post.id}:${sufixo}`,
-		enunciado: `${enunciado}\n\n${texto}`,
+		enunciado: `${base}\n\n${texto}`,
 		formato: 'ce',
 		gabarito: ok ? 'C' : 'E'
 	});
@@ -177,6 +211,18 @@ export function converterEmItens(post) {
 			return universo.map((r) =>
 				item(r, `Item ${r}: Certo se ele está entre os que atendem ao comando.`, verdadeiras.includes(r))
 			);
+	}
+	// "Assinale V ou F": assertativas `( )` no enunciado e alternativas de sequência V/F (ou T/F).
+	const assertivas = assertivasDoEnunciado(enunciado);
+	if (assertivas.length >= 2) {
+		const sequencias = alternativas.map((/** @type {{ texto: string }} */ a) => sequenciaDaAlternativa(a.texto));
+		if (sequencias.every((/** @type {string[] | null} */ q) => q !== null && q.length === assertivas.length)) {
+			const doGabarito = sequencias[alternativas.indexOf(certa)];
+			const base = (enunciado.slice(0, assertivas[0].inicio) + enunciado.slice(assertivas[assertivas.length - 1].fim))
+				.replace(/\n\s*Escolha a opção correta\.?\s*$/i, '')
+				.trim();
+			return assertivas.map((a, i) => item(String(i + 1), a.texto, doGabarito[i] === 'V' || doGabarito[i] === 'T', base));
+		}
 	}
 	return alternativas.map((/** @type {{ letra: string, texto: string }} */ a) =>
 		item(a.letra, `Alternativa ${a.letra}: ${a.texto}\n\nCerto se esta alternativa responde ao comando.`, a === certa)

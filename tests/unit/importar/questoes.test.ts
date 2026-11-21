@@ -7,8 +7,10 @@ import {
 	lerProva,
 	importarQuestoes,
 	lerTopicoEstudo,
+	assertivasDoEnunciado,
 	converterEmItens,
 	romanosDaAlternativa,
+	sequenciaDaAlternativa,
 	separarTextoBase
 } from '../../../scripts/importar/questoes.mjs';
 
@@ -125,6 +127,53 @@ describe('importarQuestoes (fixture com linhas reais)', () => {
 		const misto = converterEmItens({ ...base, gabarito: 'B', alternativas: alts('somente I', 'outra coisa') });
 		expect(misto.map((p: { id: string; gabarito: string }) => `${p.id}=${p.gabarito}`)).toEqual(['q:X:A=E', 'q:X:B=C']);
 		expect(() => converterEmItens({ ...base, gabarito: 'D', alternativas: alts('a', 'b') })).toThrow(/não é letra/);
+	});
+
+	it('assertativas "( )" com alternativas de sequência V/F viram um item por assertativa', () => {
+		const enunciado = [
+			'Assinale se as frases a seguir são verdadeiras (V) ou falsas (F).',
+			'',
+			'( ) Os conceitos de governabilidade e governança estão relacionados.',
+			'',
+			'( ) Por governança se entende a capacidade técnica de implementar políticas.',
+			'',
+			'( ) Por accountability se entende a capacidade do Estado de atingir metas.',
+			'',
+			'Escolha a opção correta.'
+		].join('\n');
+		const alts = (...t: string[]) => t.map((texto, i) => ({ letra: 'ABCDE'[i], texto }));
+		const base = { id: 'q:X', tipo: 'questao', materia: 'm', formato: 'me', situacao: 'valida' };
+		// Gabarito C = "F, V, F": primeira falsa, segunda certa, terceira falsa.
+		const itens = converterEmItens({
+			...base,
+			enunciado,
+			gabarito: 'C',
+			alternativas: alts('V, V, V', 'F, F, F', 'F, V, F', 'V, F, V')
+		});
+		expect(itens.map((p: { id: string; gabarito: string }) => `${p.id}=${p.gabarito}`)).toEqual([
+			'q:X:1=E',
+			'q:X:2=C',
+			'q:X:3=E'
+		]);
+		// O item traz o comando e só a assertativa dele, sem a lista e sem o fechamento.
+		expect(itens[1].enunciado).toBe(
+			[
+				'Assinale se as frases a seguir são verdadeiras (V) ou falsas (F).',
+				'',
+				'Por governança se entende a capacidade técnica de implementar políticas.'
+			].join('\n')
+		);
+		expect(sequenciaDaAlternativa('F, V, F, F, V, V')).toEqual(['F', 'V', 'F', 'F', 'V', 'V']);
+		expect(sequenciaDaAlternativa('F, V, X')).toBeNull();
+		expect(assertivasDoEnunciado(enunciado)).toHaveLength(3);
+		// Sequência de outro tamanho (ou alternativa fora do padrão) ⇒ volta ao item por alternativa.
+		const tamanhoErrado = converterEmItens({
+			...base,
+			enunciado,
+			gabarito: 'A',
+			alternativas: alts('V, V', 'F, F, F', 'V, F, V', 'V, V, V')
+		});
+		expect(tamanhoErrado[0].id).toBe('q:X:A');
 	});
 
 	it('texto-base, matéria, prova, número e situação', () => {
