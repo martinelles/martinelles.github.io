@@ -1,0 +1,116 @@
+{
+ "aula": "E4·1",
+ "titulo": "1. Ciclo de vida e MLOps",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Em MLOps, o controle de versão alcança dados, modelos e código, o que contribui para a reprodutibilidade e para a auditabilidade dos treinamentos."
+  },
+  {
+   "n": 2,
+   "texto": "Em sistemas de aprendizado de máquina, a integração contínua pode incluir a validação de dados, de esquemas e de modelos, além dos testes de código."
+  },
+  {
+   "n": 3,
+   "texto": "A integração contínua corresponde à liberação automática das alterações feitas pelos desenvolvedores, do repositório até o ambiente de produção."
+  },
+  {
+   "n": 4,
+   "texto": "Na infraestrutura como código declarativa, o desenvolvedor descreve a sequência de comandos que leva a infraestrutura ao estado desejado."
+  },
+  {
+   "n": 5,
+   "texto": "Dois arquivos de dados com o mesmo resumo SHA-256 podem ser considerados idênticos, e qualquer alteração no conteúdo gera resumo diferente."
+  },
+  {
+   "n": 6,
+   "texto": "O registro de experimentos deve guardar apenas a execução de melhor desempenho, para não confundir a escolha do modelo."
+  },
+  {
+   "n": 7,
+   "texto": "Fixar a semente aleatória garante a reprodutibilidade do treinamento, ainda que os dados sejam consultados na origem a cada execução."
+  },
+  {
+   "n": 8,
+   "texto": "Na implantação em sombra, a nova versão do modelo recebe cópia do tráfego real, mas suas respostas não são entregues aos usuários."
+  },
+  {
+   "n": 9,
+   "texto": "No lançamento canário, a nova versão é entregue simultaneamente a todos os usuários, e a anterior fica só como cópia de segurança."
+  },
+  {
+   "n": 10,
+   "texto": "A mudança de conceito pode ocorrer sem que a distribuição dos atributos de entrada se altere."
+  },
+  {
+   "n": 11,
+   "texto": "No monitoramento de modelos, um índice de estabilidade populacional superior a 0,25 indica, por convenção, população estável."
+  },
+  {
+   "n": 12,
+   "texto": "Com amostras muito grandes, o teste de Kolmogorov-Smirnov tende a apontar diferenças estatisticamente significativas mesmo quando a mudança na distribuição é pequena."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "Em MLOps, o controle de versão alcança dados, modelos e código, o que contribui para a reprodutibilidade e para a auditabilidade dos treinamentos. Só o código versionado não permite refazer o treino, porque os dados e o modelo também mudam."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Em sistemas de aprendizado de máquina, a integração contínua pode incluir a validação de dados, de esquemas e de modelos, além dos testes de código. É uma das diferenças em relação ao DevOps de software tradicional."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A integração contínua corresponde à liberação automática das alterações feitas pelos desenvolvedores, do repositório até o ambiente de produção. Essa é a implantação contínua; a CI integra e testa, sem levar à produção."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Na infraestrutura como código declarativa, o desenvolvedor descreve a sequência de comandos que leva a infraestrutura ao estado desejado. Na declarativa, descreve-se o estado final; os comandos em ordem são a abordagem imperativa."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Dois arquivos de dados com o mesmo resumo SHA-256 podem ser considerados idênticos, e qualquer alteração no conteúdo gera resumo diferente. É o que permite usar o hash como identificador da versão dos dados."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O registro de experimentos deve guardar apenas a execução de melhor desempenho, para não confundir a escolha do modelo. Registram-se todas as execuções; relatar só a melhor esconde a instabilidade do modelo."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Fixar a semente aleatória garante a reprodutibilidade do treinamento, ainda que os dados sejam consultados na origem a cada execução. Se os dados mudam na origem, o resultado muda; é preciso treinar sobre cópia imutável."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Na implantação em sombra, a nova versão do modelo recebe cópia do tráfego real, mas suas respostas não são entregues aos usuários. Por isso a sombra não expõe nenhum usuário à versão nova."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "No lançamento canário, a nova versão é entregue simultaneamente a todos os usuários, e a anterior fica só como cópia de segurança. O canário expõe apenas uma fração pequena do tráfego antes de ampliar. Resumo Completo CGU página 28 de 33 Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "A mudança de conceito pode ocorrer sem que a distribuição dos atributos de entrada se altere. Muda a relação entre as entradas e o alvo, e só o desempenho e as correlações revelam essa mudança."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "No monitoramento de modelos, um índice de estabilidade populacional superior a 0,25 indica, por convenção, população estável. O PSI acima de 0,25 indica mudança significativa; abaixo de 0,1, estabilidade."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "Com amostras muito grandes, o teste de Kolmogorov-Smirnov tende a apontar diferenças estatisticamente significativas mesmo quando a mudança na distribuição é pequena. Por isso se combina o teste com uma medida de magnitude, como o PSI."
+  }
+ ]
+}

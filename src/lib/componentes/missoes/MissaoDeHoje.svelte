@@ -33,6 +33,7 @@
 	} from '$lib/missoes/calculos';
 	import { carregarEmAndamento, emAndamento } from '$lib/missoes/emAndamento.svelte';
 	import { audiosMissoes, carregarAudios } from '$lib/missoes/audios.svelte';
+	import { carregarIndiceQuestoes, questoesDaAula } from '$lib/missoes/questoes-aula.svelte';
 	import { extrasMissoes } from '$lib/missoes/extras.svelte';
 	import type { Cargo, Marcas, PlanoMissoes, TipoBloco } from '$lib/missoes/tipos';
 
@@ -110,6 +111,8 @@
 	carregarEmAndamento();
 	// Catálogo de podcasts das aulas (aparece o atalho nas aulas que têm).
 	void carregarAudios();
+	// Questões C/E do material da aula, no mesmo esquema.
+	void carregarIndiceQuestoes();
 	const lembrete = $derived(dia ? emAndamento.de(cargo, dia.data) : null);
 	const lembreteFeito = $derived(
 		!!(dia && lembrete && dia.blocos[lembrete.bloco]?.itens?.some((it) => it.cid === lembrete.cid)) &&
@@ -287,6 +290,7 @@
 									{@const nSub = (s: { cid: string }) => questoesPorTopico?.get(s.cid) ?? 0}
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
 									{@const podcasts = aulaInfo ? audiosMissoes.daAula(aulaInfo.id) : null}
+									{@const questoes = questoesDaAula.slug(it.cod)}
 									{@const itemOk = porItem && itemCumprido(marcas, cargo, dia, i, it)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li
@@ -349,6 +353,9 @@
 															<a class="topico" href="/mapa/{plano.mapas[s.cid]}">Mapa de {s.cod} ↗</a>
 														{/if}
 													{/each}
+													{#if questoes}
+														<a class="topico" href="/questoes/{questoes}">Questões C/E ↗</a>
+													{/if}
 													{#if podcasts?.audios?.length}
 														<a class="topico" href="/podcast/{slugDaAula(aulaInfo!.disciplina, aulaInfo!.titulo)}">
 															Podcasts da aula ↗
