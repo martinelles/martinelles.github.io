@@ -1,0 +1,116 @@
+{
+ "aula": "E4·3",
+ "titulo": "3. Governança e responsabilidade",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Pela Resolução CD/ANPD 18/2024, o encarregado responde perante a ANPD pela conformidade do tratamento de dados pessoais realizado pelo controlador."
+  },
+  {
+   "n": 2,
+   "texto": "Nos órgãos federais, o encarregado pelo tratamento de dados pessoais não deve estar lotado nas unidades de tecnologia da informação."
+  },
+  {
+   "n": 3,
+   "texto": "O risco residual é aquele a que a organização está exposta sem considerar as medidas de controle."
+  },
+  {
+   "n": 4,
+   "texto": "Caso o controlador implemente o programa de governança em privacidade previsto na LGPD, esse programa deve ser aplicável a todo o conjunto de dados pessoais sob seu controle, independentemente do modo como se realizou a coleta."
+  },
+  {
+   "n": 5,
+   "texto": "O relatório de impacto à proteção de dados pessoais deve conter, no mínimo, os tipos de dados coletados, a metodologia de coleta e de garantia da segurança e a análise do controlador sobre as medidas de mitigação de risco."
+  },
+  {
+   "n": 6,
+   "texto": "Pela Resolução CD/ANPD 2/2022, o uso de tecnologia emergente basta, por si, para caracterizar o tratamento de alto risco."
+  },
+  {
+   "n": 7,
+   "texto": "O direito de revisão do art. 20 da LGPD alcança decisões tomadas unicamente com base em tratamento automatizado de dados pessoais que afetem os interesses do titular."
+  },
+  {
+   "n": 8,
+   "texto": "O texto em vigor da LGPD exige expressamente que a revisão de decisões automatizadas seja realizada por pessoa natural."
+  },
+  {
+   "n": 9,
+   "texto": "Na política de governança de IA do MGI, a supervisão humana deve ser proporcional ao risco identificado sobre direitos e bens públicos."
+  },
+  {
+   "n": 10,
+   "texto": "A comunicação de incidente de segurança com risco relevante aos titulares deve ser feita à ANPD em até 72 horas contadas do conhecimento do incidente."
+  },
+  {
+   "n": 11,
+   "texto": "Excluir do modelo o atributo sensível, como raça ou sexo, é suficiente para impedir resultados discriminatórios."
+  },
+  {
+   "n": 12,
+   "texto": "Avaliar um modelo de seleção apenas nos casos que ele próprio indicou para auditoria tende a superestimar o desempenho e não mostra quantas irregularidades ele deixa de apontar."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Pela Resolução CD/ANPD 18/2024, o encarregado responde perante a ANPD pela conformidade do tratamento de dados pessoais realizado pelo controlador. O art. 17 do regulamento diz o contrário: a conformidade é responsabilidade do agente de tratamento."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Nos órgãos federais, o encarregado pelo tratamento de dados pessoais não deve estar lotado nas unidades de tecnologia da informação. É a regra da IN SGD/ME 117/2020, art. 1º, § 1º, II."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O risco residual é aquele a que a organização está exposta sem considerar as medidas de controle. Esse é o risco inerente; o residual considera os controles implantados."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Caso o controlador implemente o programa de governança em privacidade previsto na LGPD, esse programa deve ser aplicável a todo o conjunto de dados pessoais sob seu controle, independentemente do modo como se realizou a coleta. É o que diz a LGPD, art. 50, § 2º, I, b."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "O relatório de impacto à proteção de dados pessoais deve conter, no mínimo, os tipos de dados coletados, a metodologia de coleta e de garantia da segurança e a análise do controlador sobre as medidas de mitigação de risco. É o conteúdo mínimo do art. 38, parágrafo único, da LGPD."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Pela Resolução CD/ANPD 2/2022, o uso de tecnologia emergente basta, por si, para caracterizar o tratamento de alto risco. É preciso somar um critério geral e um específico."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "O direito de revisão do art. 20 da LGPD alcança decisões tomadas unicamente com base em tratamento automatizado de dados pessoais que afetem os interesses do titular. É o recorte do caput."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O texto em vigor da LGPD exige expressamente que a revisão de decisões automatizadas seja realizada por pessoa natural. A exigência saiu com a Medida Provisória 869/2018, e o § 3º que a recolocaria foi vetado."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Na política de governança de IA do MGI, a supervisão humana deve ser proporcional ao risco identificado sobre direitos e bens públicos. É o que diz a Portaria MGI 3.485/2026, art. 6º."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A comunicação de incidente de segurança com risco relevante aos titulares deve ser feita à ANPD em até 72 horas contadas do conhecimento do incidente. O prazo da Resolução CD/ANPD 15/2024 é de três dias úteis."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Excluir do modelo o atributo sensível, como raça ou sexo, é suficiente para impedir resultados discriminatórios. Os atributos substitutos carregam a informação do grupo."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "Avaliar um modelo de seleção apenas nos casos que ele próprio indicou para auditoria tende a superestimar o desempenho e não mostra quantas irregularidades ele deixa de apontar. Por isso se reserva uma amostra aleatória de casos verificados. ≡"
+  }
+ ]
+}

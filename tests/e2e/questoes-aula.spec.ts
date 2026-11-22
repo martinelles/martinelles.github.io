@@ -38,3 +38,15 @@ test('a missão traz o atalho de questões na aula que tem', async ({ page }) =>
 	await atalho.click();
 	await expect(page).toHaveURL(/\/questoes\/e4-1$/);
 });
+
+test('a página da aula E4·3 lista os itens, corrige e comenta o gabarito', async ({ page }) => {
+	await page.goto('/questoes/e4-3');
+	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 3\. Governança e responsabilidade/ })).toBeVisible();
+	await expect(page.locator('ol li')).toHaveCount(12);
+
+	// Questão 1 (gabarito E): acertar mostra o comentário com a referência da norma.
+	const item = page.locator('ol li').nth(0);
+	await item.getByRole('button', { name: 'Errado' }).click();
+	await expect(item).toContainText('Gabarito: errado');
+	await expect(item.locator('.gabarito p')).toContainText('Resolução CD/ANPD 18/2024');
+});
