@@ -4,22 +4,36 @@
 	// Enter também avança. As respostas vivem só nesta visita — é um treino rápido.
 	import Icone from '$lib/componentes/Icone.svelte';
 	import type { PageProps } from './$types';
+	import { armazenamentoAtual, conta } from '$lib/conta/sessao.svelte';
+	import { pedirQuestaoAula } from '$lib/feed/pedidoLogin.svelte';
+	import { carregarRespostas, respostasQuestoes } from '$lib/missoes/questoes-respostas.svelte';
 
 	let { data }: PageProps = $props();
 
-	let respostas = $state<Record<number, 'C' | 'E'>>({});
+	let slug = $state('');
 	let atual = $state(0);
+
+	// As respostas vivem na conta (chave sincronizada): recarregar e trocar de aparelho mantém.
+	$effect(() => {
+		slug = data.slug ?? '';
+		carregarRespostas(armazenamentoAtual());
+	});
 
 	const total = $derived(data.questoes.length);
 	const questao = $derived(data.questoes[atual] ?? null);
-	const resposta = $derived(questao ? respostas[questao.n] : undefined);
+	const resposta = $derived(questao ? respostasQuestoes.da(slug, questao.n) : undefined);
 	const gab = $derived(questao ? data.gabarito.find((g) => g.n === questao.n) : undefined);
-	const acertos = $derived(data.gabarito.filter((g) => respostas[g.n] === g.r).length);
-	const respondidas = $derived(Object.keys(respostas).length);
+	const acertos = $derived(data.gabarito.filter((g) => respostasQuestoes.da(slug, g.n) === g.r).length);
+	const respondidas = $derived(data.gabarito.filter((g) => respostasQuestoes.da(slug, g.n) !== undefined).length);
 
 	function responder(r: 'C' | 'E') {
-		if (!questao || respostas[questao.n] !== undefined) return;
-		respostas[questao.n] = r;
+		if (!questao || resposta !== undefined) return;
+		if (!conta.usuario) {
+			// Sem login: o treino não guarda; com login, a resposta sobe para a conta.
+			pedirQuestaoAula(slug, questao.n, r);
+			return;
+		}
+		respostasQuestoes.registrar(slug, questao.n, r);
 	}
 
 	function avancar() {
@@ -36,10 +50,10 @@
 		if (alvo && (alvo.tagName === 'INPUT' || alvo.tagName === 'TEXTAREA' || alvo.isContentEditable)) return;
 		if (e.key === 'c' || e.key === 'C') {
 			responder('C');
-			if (respostas[questao?.n ?? -1] !== undefined) avancar();
+			if (resposta !== undefined) avancar();
 		} else if (e.key === 'e' || e.key === 'E') {
 			responder('E');
-			if (respostas[questao?.n ?? -1] !== undefined) avancar();
+			if (resposta !== undefined) avancar();
 		} else if (e.key === 'Enter') {
 			if (resposta !== undefined) avancar();
 		} else if (e.key === 'ArrowRight') avancar();
@@ -106,7 +120,9 @@
 				</p>
 				<div class="gabarito">
 					<p>{gab.comentario}</p>
-					<button type="button" class="refazer" onclick={() => delete respostas[questao.n]}>Refazer</button>
+					<button type="button" class="refazer" onclick={() => respostasQuestoes.registrar(slug, questao.n, undefined)}>
+						Refazer
+					</button>
 				</div>
 			{/if}
 		</div>
@@ -116,11 +132,10 @@
 			<div class="pontos" aria-hidden="true">
 				{#each data.questoes as q, i (q.n)}
 					<span
-						class="ponto {respostas[q.n]
-							? data.gabarito.find((g) => g.n === q.n)?.r === respostas[q.n]
-								? 'certo'
-								: 'errado'
-							: ''} {i === atual ? 'atual' : ''}"
+						class="ponto {(() => {
+							const r = respostasQuestoes.da(slug, q.n);
+							return r ? (data.gabarito.find((g) => g.n === q.n)?.r === r ? 'certo' : 'errado') : '';
+						})()} {i === atual ? 'atual' : ''}"
 					></span>
 				{/each}
 			</div>

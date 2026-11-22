@@ -22,5 +22,5 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	if (!r.ok) error(404, 'Questões não encontradas');
 	const dados = (await r.json()) as { titulo: string; questoes: QuestaoDaAula[]; gabarito: GabaritoDaAula[] };
 	if (!dados?.questoes?.length) error(404, 'Questões não encontradas');
-	return { titulo: dados.titulo, questoes: dados.questoes, gabarito: dados.gabarito };
+	return { slug: params.aula, titulo: dados.titulo, questoes: dados.questoes, gabarito: dados.gabarito };
 };

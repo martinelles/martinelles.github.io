@@ -13,10 +13,12 @@
 		responder: 'Entre para guardar sua resposta',
 		curtir: 'Entre para guardar sua curtida',
 		salvar: 'Entre para guardar seus salvos',
-		missao: 'Entre para marcar'
+		missao: 'Entre para marcar',
+		questoes: 'Entre para guardar suas respostas'
 	} as const;
 	const titulo = $derived(TITULOS[pedidoLogin.pedido?.acao ?? 'responder']);
 	const missao = $derived(pedidoLogin.pedido?.acao === 'missao');
+	const questoes = $derived(pedidoLogin.pedido?.acao === 'questoes');
 
 	$effect(() => {
 		if (aberto && !dialogo.open) dialogo.showModal();
@@ -33,6 +35,8 @@
 	<h2 id="popup-entrar-titulo">{titulo}</h2>
 	{#if missao}
 		<p>Sem login, as Missões ficam só para leitura. Com login, as marcações aparecem em qualquer aparelho.</p>
+	{:else if questoes}
+		<p>Sem login, o treino das questões da aula não guarda o progresso. Com login, as respostas aparecem em qualquer aparelho.</p>
 	{:else}
 		<p>Com login, o que você responde, curte e salva fica na sua conta e aparece em qualquer aparelho.</p>
 	{/if}

@@ -12,6 +12,7 @@
  * nome, "Agora não" não marca, e o popup volta no próximo toque.
  */
 import { conta } from '$lib/conta/sessao.svelte';
+import { respostasQuestoes, type RespostaQuestao } from '$lib/missoes/questoes-respostas.svelte';
 import type { Mudancas } from '$lib/missoes/calculos';
 import { marcasMissoes } from '$lib/missoes/marcas.svelte';
 import { extrasMissoes } from '$lib/missoes/extras.svelte';
@@ -37,7 +38,9 @@ export type Pendente =
 	| { acao: 'curtir' | 'salvar'; id: string; on: boolean }
 	/** Marcações do bloco ou do subitem, já calculadas no toque (`mudancasDoBloco`, `mudancasDoItem`),
 	 *  com a aula feita fora da missão, quando é o caso (`mudancasDaAulaNova`). */
-	| { acao: 'missao'; mudancas: Mudancas; extra?: ExtraDaMissao };
+	| { acao: 'missao'; mudancas: Mudancas; extra?: ExtraDaMissao }
+	/** Resposta de questão C/E do material da aula (rota /questoes), guardada na conta. */
+	| { acao: 'questoes'; slug: string; n: number; r: RespostaQuestao };
 
 let pedido = $state<Pendente | null>(null);
 
@@ -64,6 +67,8 @@ export function aplicar(p: Pendente): void {
 			marcasMissoes.aplicar(p.mudancas);
 			if (p.extra) extrasMissoes.adicionar(p.extra.cargo, p.extra.data, p.extra.tarefa);
 		}
+	} else if (p.acao === 'questoes') {
+		if (conta.usuario) respostasQuestoes.registrar(p.slug, p.n, p.r);
 	} else if (p.acao === 'responder') {
 		interacoes.responder(p.id, p.r, p.gabarito);
 		// Primeiro erro da questão: entra no caderno de erros (a primeira resposta é a única que conta).
@@ -103,6 +108,11 @@ export function marcarMissao(mudancas: Mudancas, extra?: ExtraDaMissao, sessao =
 	pedir({ acao: 'missao', mudancas, extra }, sessao);
 }
 
+/** Responder questão C/E do material da aula sem login: o popup abre e a resposta entra depois. */
+export function pedirQuestaoAula(slug: string, n: number, r: RespostaQuestao, sessao = tentarSessao()): void {
+	pedir({ acao: 'questoes', slug, n, r }, sessao);
+}
+
 const tarefaValida = (t: unknown): t is TarefaExtra => {
 	const x = t as TarefaExtra | undefined;
 	return (
@@ -128,7 +138,7 @@ export function tomarPendente(sessao = tentarSessao()): Pendente | null {
 		const p: unknown = JSON.parse(sessao?.getItem(CHAVE_PENDENTE) ?? 'null');
 		sessao?.removeItem(CHAVE_PENDENTE);
 		if (p && typeof p === 'object') {
-			const { acao, id, r, gabarito, on, mudancas, extra } = p as Record<string, unknown>;
+			const { acao, id, r, gabarito, on, mudancas, extra, slug, n } = p as Record<string, unknown>;
 			if (acao === 'missao') {
 				const pend = lerMudancas(mudancas);
 				if (!pend) return null;
@@ -138,6 +148,11 @@ export function tomarPendente(sessao = tentarSessao()): Pendente | null {
 				if ((x.cargo === 'cd' || x.cargo === 'aud') && typeof x.data === 'string' && tarefaValida(x.tarefa))
 					return { acao: 'missao', mudancas: pend.mudancas, extra: { cargo: x.cargo, data: x.data, tarefa: x.tarefa } };
 				return pend;
+			}
+			if (acao === 'questoes') {
+				if (typeof slug === 'string' && Number.isInteger(n) && (r === 'C' || r === 'E'))
+					return { acao, slug, n: n as number, r: r as RespostaQuestao };
+				return null;
 			}
 			if (typeof id !== 'string') return null;
 			if (acao === 'responder' && typeof r === 'string' && typeof gabarito === 'string')
