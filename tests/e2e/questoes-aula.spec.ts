@@ -3,25 +3,39 @@ import { expect, test } from '@playwright/test';
 // Questões de certo/errado extraídas do material da aula (PDF do vault →
 // /conteudo/questoes-aula/e4-1.json), com gabarito comentado abrindo ao responder.
 
-test('a página da aula lista os itens, corrige e comenta o gabarito', async ({ page }) => {
+test('uma questão por vez, com teclas C, E, Enter e setas', async ({ page }) => {
 	await page.goto('/questoes/e4-1');
 	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 1\. Ciclo de vida e MLOps/ })).toBeVisible();
 
-	const itens = page.locator('ol li');
-	await expect(itens).toHaveCount(12);
-	await expect(page.getByText('12 itens — marque Certo ou Errado', { exact: false })).toBeVisible();
+	// Uma por vez: só o cartão da atual, com a contagem no topo.
+	const cartao = page.locator('.cartao');
+	await expect(page.locator('.ponto')).toHaveCount(12);
+	await expect(cartao).toContainText('Questão 1 de 12');
+	await expect(page.getByRole('button', { name: /Certo/ })).toHaveCount(1);
 
-	// Questão 1 (gabarito C): acertar mostra o comentário e o placar.
-	await itens.nth(0).getByRole('button', { name: 'Certo' }).click();
-	await expect(itens.nth(0)).toContainText('Gabarito: certo');
-	await expect(itens.nth(0).locator('.gabarito p')).toContainText('reprodutibilidade');
+	// Tecla C responde (gabarito da 1 é C) e avança para a 2.
+	await page.keyboard.press('c');
 	await expect(page.getByText('1 de 1 certos', { exact: false })).toBeVisible();
+	await expect(cartao).toContainText('Questão 2 de 12');
 
-	// Questão 3 (gabarito E): errar marca a borda de erro e permite refazer.
-	await itens.nth(2).getByRole('button', { name: 'Certo' }).click();
-	await expect(itens.nth(2)).toContainText('Gabarito: errado');
-	await itens.nth(2).getByRole('button', { name: 'Refazer' }).click();
-	await expect(itens.nth(2).getByText('Gabarito:')).toHaveCount(0);
+	// Tecla E na 2 (gabarito C): erra e avança; voltar mostra o gabarito aberto.
+	await page.keyboard.press('e');
+	await expect(cartao).toContainText('Questão 3 de 12');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao).toContainText('Gabarito: certo');
+	await expect(page.getByRole('button', { name: /Refazer/ })).toHaveCount(1);
+
+	// Enter, na respondida em vista, avança de novo.
+	await page.keyboard.press('Enter');
+	await expect(cartao).toContainText('Questão 3 de 12');
+	await expect(page.getByRole('button', { name: /Refazer/ })).toHaveCount(0);
+
+	// Refazer limpa a resposta da questão em vista (a 1, navegando de volta).
+	await page.keyboard.press('ArrowLeft');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao).toContainText('Questão 1 de 12');
+	await page.getByRole('button', { name: /Refazer/ }).click();
+	await expect(page.getByText('Gabarito:')).toHaveCount(0);
 });
 
 test('slug desconhecido mostra a página de não encontrado', async ({ page }) => {
@@ -39,14 +53,16 @@ test('a missão traz o atalho de questões na aula que tem', async ({ page }) =>
 	await expect(page).toHaveURL(/\/questoes\/e4-1$/);
 });
 
-test('a página da aula E4·3 lista os itens, corrige e comenta o gabarito', async ({ page }) => {
+test('a página da aula E4·3 corrige e comenta o gabarito', async ({ page }) => {
 	await page.goto('/questoes/e4-3');
 	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 3\. Governança e responsabilidade/ })).toBeVisible();
-	await expect(page.locator('ol li')).toHaveCount(12);
+	await expect(page.locator('.ponto')).toHaveCount(12);
 
-	// Questão 1 (gabarito E): acertar mostra o comentário com a referência da norma.
-	const item = page.locator('ol li').nth(0);
-	await item.getByRole('button', { name: 'Errado' }).click();
-	await expect(item).toContainText('Gabarito: errado');
-	await expect(item.locator('.gabarito p')).toContainText('Resolução CD/ANPD 18/2024');
+	// Questão 1 (gabarito E): a tecla responde e avança; voltar mostra o comentário da norma.
+	await page.keyboard.press('e');
+	const cartao = page.locator('.cartao');
+	await expect(cartao).toContainText('Questão 2 de 12');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao).toContainText('Gabarito: errado');
+	await expect(cartao.locator('.gabarito p')).toContainText('Resolução CD/ANPD 18/2024');
 });
