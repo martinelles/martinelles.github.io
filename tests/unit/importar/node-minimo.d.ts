@@ -24,10 +24,19 @@ declare module 'node:fs' {
 }
 
 declare module 'node:path' {
+	export function basename(caminho: string): string;
 	export function dirname(caminho: string): string;
 	export function join(...partes: string[]): string;
 	export function resolve(...partes: string[]): string;
 	export const sep: string;
+}
+
+declare module 'node:child_process' {
+	export function spawnSync(
+		comando: string,
+		args: readonly string[],
+		opcoes?: { encoding?: string }
+	): { status: number | null; stdout?: string; stderr?: string };
 }
 
 declare module 'node:url' {

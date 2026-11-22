@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -16,11 +17,17 @@ describe('importador dos podcasts', () => {
 	it('copia os MP3 da pasta da aula e os lista em audios.json pelo id da aula', () => {
 		const pasta = join(raiz, '01/P3. Conhecimentos Específicos/E1. Estatística, programação e analise de dados');
 		mkdirSync(pasta, { recursive: true });
-		writeFileSync(join(pasta, 'Podcast Cap 1 - Probabilidade.mp3'), 'audio');
+		// MP3 de verdade (2 s de tom): é o que o ffmpeg comprime. Sem ffmpeg na máquina, o texto
+		// falso segue sem comprimir e com o aviso — as duas saídas estão cobertas.
+		const gerado = spawnSync(
+			'ffmpeg',
+			['-y', '-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=2', '-b:a', '96k', join(pasta, 'Podcast Cap 1 - Probabilidade.mp3')]
+		);
+		if (gerado.status !== 0) writeFileSync(join(pasta, 'Podcast Cap 1 - Probabilidade.mp3'), 'audio');
 		writeFileSync(join(pasta, 'Notas de leitura.pdf'), 'ignorado');
-		writeFileSync(join(pasta, 'leitura.pdf'), 'ignorado');
 		const r = montarAudios(raiz, mentoria);
-		expect(r.avisos).toEqual([]);
+		if (gerado.status === 0) expect(r.avisos).toEqual([]);
+		else expect(r.avisos[0]).toContain('ffmpeg não comprimiu');
 		const id = (mentoria.aulas ?? []).find(
 			(a) => (a.disciplina.split(':')[1] ?? a.disciplina) === 'E1' && a.titulo.startsWith('2.')
 		)!.id;
@@ -30,7 +37,7 @@ describe('importador dos podcasts', () => {
 				arquivo: '/conteudo/audios/e1-2/podcast-cap-1-probabilidade.mp3'
 			}
 		]);
-		// MP3 binário segue como bytes, e o índice fecha a lista.
+		// O MP3 segue como bytes, e o índice fecha a lista.
 		expect(r.arquivos.map((a) => [a.arquivo, typeof a.conteudo])).toContainEqual([
 			'audios/e1-2/podcast-cap-1-probabilidade.mp3',
 			'object'

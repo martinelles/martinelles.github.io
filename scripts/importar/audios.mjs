@@ -3,8 +3,10 @@
  * `static/conteudo/audios/<aula>/` e listados em `audios.json`, que a rota /podcast/<aula> lê.
  * A pasta de cada aula é declarada em PODCASTS; sem ela no vault, só fica o aviso.
  */
-import { readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
+import { basename, join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 
 /** @typedef {{ id: string, disciplina: string, titulo: string }} AulaMentoria */
 
@@ -15,6 +17,29 @@ export const PODCASTS = [
 		pasta: '01/P3. Conhecimentos Específicos/E1. Estatística, programação e analise de dados'
 	}
 ];
+
+/** Recria o MP3 em mono de 48 kbps (é fala): cerca de metade do tamanho, no mesmo formato que
+ * toca em qualquer aparelho. Sem ffmpeg (ou se ele recusar o arquivo), o original segue inteiro.
+ * @param {string} caminho
+ * @param {string[]} avisos
+ * @returns {Uint8Array}
+ */
+function lerComprimido(caminho, avisos) {
+	const pasta = mkdtempSync(join(tmpdir(), 'painel-audio-'));
+	try {
+		const destino = join(pasta, 'a.mp3');
+		const r = spawnSync(
+			'ffmpeg',
+			['-y', '-v', 'error', '-i', caminho, '-ac', '1', '-ar', '44100', '-b:a', '48k', destino],
+			{ encoding: 'utf8' }
+		);
+		if (r.status === 0) return readFileSync(destino);
+		avisos.push(`audios: ffmpeg não comprimiu ${basename(caminho)}; o MP3 seguiu como está no vault`);
+		return readFileSync(caminho);
+	} finally {
+		rmSync(pasta, { recursive: true, force: true });
+	}
+}
 
 /** `Podcast Cap 1 - Probabilidade` → `podcast-cap-1-probabilidade`. */
 export function slugificar(/** @type {string} */ s) {
@@ -46,6 +71,7 @@ export function montarAudios(vault, mentoria) {
 	const arquivos = [];
 	/** @type {Record<string, { titulo: string, arquivo: string }[]>} */
 	const indice = {};
+	/** @type {string[]} */
 	const avisos = [];
 	for (const { aula, pasta } of PODCASTS) {
 		const id = idDaAula(mentoria, aula);
@@ -64,7 +90,7 @@ export function montarAudios(vault, mentoria) {
 		const slugAula = slugificar(aula);
 		indice[id] = nomes.map((nome) => {
 			const destino = `audios/${slugAula}/${slugificar(nome.replace(/\.mp3$/i, ''))}.mp3`;
-			arquivos.push({ arquivo: destino, conteudo: readFileSync(join(vault, pasta, nome)) });
+			arquivos.push({ arquivo: destino, conteudo: lerComprimido(join(vault, pasta, nome), avisos) });
 			return { titulo: nome.replace(/\.mp3$/i, ''), arquivo: `/conteudo/${destino}` };
 		});
 	}
