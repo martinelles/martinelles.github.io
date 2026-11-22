@@ -32,7 +32,17 @@ export function carregarAudios(buscar: typeof fetch = fetch): Promise<void> {
 			() => ({}) as Record<string, AudiosDaAula>
 		)
 		.then((d) => {
-			catalogo = d && typeof d === 'object' ? d : {};
+			if (!d || typeof d !== 'object') {
+				catalogo = {};
+				return;
+			}
+			// Formato antigo (lista de audios, sem capa/infográfico) entra como { audios }.
+			const normalizado: Record<string, AudiosDaAula> = {};
+			for (const [id, valor] of Object.entries(d)) {
+				if (Array.isArray(valor)) normalizado[id] = { audios: valor };
+				else if (valor && typeof valor === 'object' && Array.isArray(valor.audios)) normalizado[id] = valor;
+			}
+			catalogo = normalizado;
 		});
 	return carregar;
 }

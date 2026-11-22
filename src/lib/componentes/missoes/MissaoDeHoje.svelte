@@ -349,7 +349,7 @@
 															<a class="topico" href="/mapa/{plano.mapas[s.cid]}">Mapa de {s.cod} ↗</a>
 														{/if}
 													{/each}
-													{#if podcasts?.audios.length}
+													{#if podcasts?.audios?.length}
 														<a class="topico" href="/podcast/{slugDaAula(aulaInfo!.disciplina, aulaInfo!.titulo)}">
 															Podcasts da aula ↗
 														</a>
