@@ -1,0 +1,116 @@
+{
+ "aula": "E2·5",
+ "titulo": "5. Qualidade e rastreabilidade",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Os metadados de negócio descrevem a estrutura física das tabelas, como os tipos das colunas e os índices, enquanto os metadados técnicos registram o significado dos dados para os gestores."
+  },
+  {
+   "n": 2,
+   "texto": "A análise de impacto feita a partir da linhagem identifica as fontes de onde um dado se originou."
+  },
+  {
+   "n": 3,
+   "texto": "Um CPF cujos dígitos verificadores conferem atende à dimensão de validade, ainda que pertença a pessoa diferente da cadastrada, situação que caracteriza falha de acurácia."
+  },
+  {
+   "n": 4,
+   "texto": "A consistência entre duas bases que registram o mesmo atributo assegura a acurácia desse atributo."
+  },
+  {
+   "n": 5,
+   "texto": "A unicidade é violada quando a mesma entidade do mundo real está representada por mais de um registro no conjunto de dados."
+  },
+  {
+   "n": 6,
+   "texto": "Diz-se que a falta de dados é do tipo MCAR quando a chance de um campo ficar vazio é a mesma para todos os registros, sem relação com os demais atributos nem com o valor que deixou de ser registrado."
+  },
+  {
+   "n": 7,
+   "texto": "O objetivo da limpeza de dados é eliminar ou modificar registros corretos e completos, de modo a reduzir o volume armazenado."
+  },
+  {
+   "n": 8,
+   "texto": "Na vinculação de registros, a blocagem restringe a comparação aos pares que coincidem numa chave de bloco, o que reduz o custo, mas pode esconder vínculos verdadeiros se a chave for mal escolhida."
+  },
+  {
+   "n": 9,
+   "texto": "Na conciliação de duas fontes, a igualdade da quantidade de registros e da soma dos valores comprova que todos os registros conferem."
+  },
+  {
+   "n": 10,
+   "texto": "Na vinculação baseada em similaridade, elevar o limiar de aceitação tende a reduzir os falsos positivos e a aumentar os falsos negativos."
+  },
+  {
+   "n": 11,
+   "texto": "A Lei 14.534/2023 estabeleceu o número de inscrição no CPF como número único e suficiente para a identificação do cidadão nos bancos de dados de serviços públicos."
+  },
+  {
+   "n": 12,
+   "texto": "O enriquecimento de dados pessoais com informações de bases externas dispensa a observância do princípio da finalidade, por não envolver nova coleta junto ao titular."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Os metadados de negócio descrevem a estrutura física das tabelas, como os tipos das colunas e os índices, enquanto os metadados técnicos registram o significado dos dados para os gestores. É o contrário: os de negócio trazem significado, regras e responsáveis; os técnicos, a estrutura e os processos."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A análise de impacto feita a partir da linhagem identifica as fontes de onde um dado se originou. Buscar a origem é ler para trás; a análise de impacto lê para frente, o que depende do dado."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Um CPF cujos dígitos verificadores conferem atende à dimensão de validade, ainda que pertença a pessoa diferente da cadastrada, situação que caracteriza falha de acurácia. A validade confere a forma; a acurácia, a correspondência com a realidade."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A consistência entre duas bases que registram o mesmo atributo assegura a acurácia desse atributo. As duas bases podem concordar no mesmo erro."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A unicidade é violada quando a mesma entidade do mundo real está representada por mais de um registro no conjunto de dados. É o que a deduplicação procura eliminar. Enap, Governança de dados, módulo 4 (2021), p. 15 (exclusividade é a unicidade) “Exclusividade: nenhuma instância de entidade será registrada mais de uma vez após identificada.”"
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Diz-se que a falta de dados é do tipo MCAR quando a chance de um campo ficar vazio é a mesma para todos os registros, sem relação com os demais atributos nem com o valor que deixou de ser registrado. Se dependesse de outro atributo observado, seria MAR; se dependesse do próprio valor ausente, MNAR."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O objetivo da limpeza de dados é eliminar ou modificar registros corretos e completos, de modo a reduzir o volume armazenado. A limpeza trata os dados incorretos, incompletos, inconsistentes ou fora do padrão."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Na vinculação de registros, a blocagem restringe a comparação aos pares que coincidem numa chave de bloco, o que reduz o custo, mas pode esconder vínculos verdadeiros se a chave for mal escolhida. Quem se mudou e foi blocado pelo município atual, por exemplo, nunca é comparado com o próprio registro antigo."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Na conciliação de duas fontes, a igualdade da quantidade de registros e da soma dos valores comprova que todos os registros conferem. Um registro faltando e outro sobrando com o mesmo valor se compensam nos totais."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "Na vinculação baseada em similaridade, elevar o limiar de aceitação tende a reduzir os falsos positivos e a aumentar os falsos negativos. A precisão sobe e a revocação cai."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "A Lei 14.534/2023 estabeleceu o número de inscrição no CPF como número único e suficiente para a identificação do cidadão nos bancos de dados de serviços públicos. A lei também deu prazo de 24 meses para a interoperabilidade entre os cadastros a partir do CPF. Lei 14.534/2023, art. 1º “Fica estabelecido o número de inscrição no Cadastro de Pessoas Físicas (CPF) como número único e suficiente para identificação do cidadão nos bancos de dados de serviços públicos.”"
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O enriquecimento de dados pessoais com informações de bases externas dispensa a observância do princípio da finalidade, por não envolver nova coleta junto ao titular. Enriquecer é tratar dado pessoal, e valem a finalidade, a adequação e a necessidade da LGPD. ≡"
+  }
+ ]
+}
