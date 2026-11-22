@@ -1,6 +1,8 @@
 /**
- * Podcasts das aulas (vault → painel): os MP3 da pasta da disciplina são copiados para
+ * Podcasts e infográficos das aulas (vault → painel): da pasta NotebookLM da aula saem os MP3
+ * (comprimidos em mono de 48 kbps) e os PNG "Infografico …", copiados para
  * `static/conteudo/audios/<aula>/` e listados em `audios.json`, que a rota /podcast/<aula> lê.
+ * O infográfico do capítulo (mesmo "Cap N") acompanha o podcast; o geral (sem "Cap") é a capa.
  * A pasta de cada aula é declarada em PODCASTS; sem ela no vault, só fica o aviso.
  */
 import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
@@ -10,13 +12,23 @@ import { tmpdir } from 'node:os';
 
 /** @typedef {{ id: string, disciplina: string, titulo: string }} AulaMentoria */
 
-/** Onde estão os podcasts de cada aula, relativo à raiz do vault. */
+/** Onde estão os podcasts e infográficos de cada aula, relativo à raiz do vault. */
 export const PODCASTS = [
 	{
 		aula: 'E1·2',
-		pasta: '01/P3. Conhecimentos Específicos/E1. Estatística, programação e analise de dados'
+		pasta: '01/P3. Conhecimentos Específicos/E1. Estatística, programação e analise de dados/NotebookLM/2. Probabilidade e inferência'
 	}
 ];
+
+/** `Podcast Cap 1 - Probabilidade` → `podcast-cap-1-probabilidade`. */
+export function slugificar(/** @type {string} */ s) {
+	return s
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}
 
 /** Recria o MP3 em mono de 48 kbps (é fala): cerca de metade do tamanho, no mesmo formato que
  * toca em qualquer aparelho. Sem ffmpeg (ou se ele recusar o arquivo), o original segue inteiro.
@@ -41,16 +53,6 @@ function lerComprimido(caminho, avisos) {
 	}
 }
 
-/** `Podcast Cap 1 - Probabilidade` → `podcast-cap-1-probabilidade`. */
-export function slugificar(/** @type {string} */ s) {
-	return s
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.toLowerCase()
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/^-+|-+$/g, '');
-}
-
 /** Id da aula no catálogo da mentoria, pelo código (`E1·2` → UUID de "2. …" em CD:E1). */
 function idDaAula(/** @type {{ aulas?: AulaMentoria[] }} */ mentoria, /** @type {string} */ cod) {
 	const [disc, n] = cod.split('·');
@@ -61,15 +63,18 @@ function idDaAula(/** @type {{ aulas?: AulaMentoria[] }} */ mentoria, /** @type 
 	return aula.id;
 }
 
+/** O capítulo do nome (`Cap 3` → `'3'`); sem "Cap", null (é o infográfico geral da aula). */
+const capDe = (/** @type {string} */ nome) => nome.match(/cap (\d+)/i)?.[1] ?? null;
+
 /**
  * @param {string} vault raiz do vault
  * @param {{ aulas?: AulaMentoria[] }} mentoria catálogo do app
- * @returns {{ arquivos: { arquivo: string, conteudo: string | Uint8Array }[], indice: Record<string, { titulo: string, arquivo: string }[]>, avisos: string[] }}
+ * @returns {{ arquivos: { arquivo: string, conteudo: string | Uint8Array }[], indice: Record<string, { capa?: string, audios: { titulo: string, arquivo: string, infografico?: string }[] }>, avisos: string[] }}
  */
 export function montarAudios(vault, mentoria) {
 	/** @type {{ arquivo: string, conteudo: string | Uint8Array }[]} */
 	const arquivos = [];
-	/** @type {Record<string, { titulo: string, arquivo: string }[]>} */
+	/** @type {Record<string, { capa?: string, audios: { titulo: string, arquivo: string, infografico?: string }[] }>} */
 	const indice = {};
 	/** @type {string[]} */
 	const avisos = [];
@@ -78,21 +83,39 @@ export function montarAudios(vault, mentoria) {
 		/** @type {string[]} */
 		let nomes;
 		try {
-			nomes = readdirSync(join(vault, pasta)).filter((/** @type {string} */ f) => /^podcast .+\.mp3$/i.test(f)).sort();
+			nomes = readdirSync(join(vault, pasta)).sort();
 		} catch {
-			avisos.push(`audios: pasta dos podcasts de ${aula} ausente no vault (${pasta})`);
-			continue;
-		}
-		if (!nomes.length) {
-			avisos.push(`audios: nenhum MP3 de "Podcast …" em ${pasta}`);
+			avisos.push(`audios: pasta da aula ${aula} ausente no vault (${pasta})`);
 			continue;
 		}
 		const slugAula = slugificar(aula);
-		indice[id] = nomes.map((nome) => {
-			const destino = `audios/${slugAula}/${slugificar(nome.replace(/\.mp3$/i, ''))}.mp3`;
-			arquivos.push({ arquivo: destino, conteudo: lerComprimido(join(vault, pasta, nome), avisos) });
-			return { titulo: nome.replace(/\.mp3$/i, ''), arquivo: `/conteudo/${destino}` };
-		});
+		const mp3s = nomes.filter((f) => /^podcast .+\.mp3$/i.test(f));
+		if (!mp3s.length) {
+			avisos.push(`audios: nenhum MP3 de "Podcast …" em ${pasta}`);
+			continue;
+		}
+		// Infográficos por capítulo; o que não tem "Cap" vira a capa da aula.
+		const porCap = new Map(
+			nomes
+				.filter((f) => /^infografico .+\.png$/i.test(f))
+				.map((nome) => {
+					const destino = `audios/${slugAula}/${slugificar(nome.replace(/\.png$/i, ''))}.png`;
+					arquivos.push({ arquivo: destino, conteudo: readFileSync(join(vault, pasta, nome)) });
+					return [capDe(nome), `/conteudo/${destino}`];
+				})
+		);
+		indice[id] = {
+			capa: porCap.get(null) ?? undefined,
+			audios: mp3s.map((nome) => {
+				const destino = `audios/${slugAula}/${slugificar(nome.replace(/\.mp3$/i, ''))}.mp3`;
+				arquivos.push({ arquivo: destino, conteudo: lerComprimido(join(vault, pasta, nome), avisos) });
+				return {
+					titulo: nome.replace(/\.mp3$/i, ''),
+					arquivo: `/conteudo/${destino}`,
+					infografico: porCap.get(capDe(nome))
+				};
+			})
+		};
 	}
 	arquivos.push({ arquivo: 'audios.json', conteudo: JSON.stringify(indice) });
 	return { arquivos, indice, avisos };

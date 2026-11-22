@@ -15,7 +15,7 @@ describe('importador dos podcasts', () => {
 	});
 
 	it('copia os MP3 da pasta da aula e os lista em audios.json pelo id da aula', () => {
-		const pasta = join(raiz, '01/P3. Conhecimentos Específicos/E1. Estatística, programação e analise de dados');
+		const pasta = join(raiz, '01/P3. Conhecimentos Específicos/E1. Estatística, programação e analise de dados/NotebookLM/2. Probabilidade e inferência');
 		mkdirSync(pasta, { recursive: true });
 		// MP3 de verdade (2 s de tom): é o que o ffmpeg comprime. Sem ffmpeg na máquina, o texto
 		// falso segue sem comprimir e com o aviso — as duas saídas estão cobertas.
@@ -25,18 +25,25 @@ describe('importador dos podcasts', () => {
 		);
 		if (gerado.status !== 0) writeFileSync(join(pasta, 'Podcast Cap 1 - Probabilidade.mp3'), 'audio');
 		writeFileSync(join(pasta, 'Notas de leitura.pdf'), 'ignorado');
+		// O infográfico do capítulo acompanha o podcast; o geral, sem "Cap", vira a capa.
+		writeFileSync(join(pasta, 'Infografico Cap 1 - Probabilidade.png'), 'png');
+		writeFileSync(join(pasta, 'Infografico - Aula inteira.png'), 'png');
 		const r = montarAudios(raiz, mentoria);
 		if (gerado.status === 0) expect(r.avisos).toEqual([]);
 		else expect(r.avisos[0]).toContain('ffmpeg não comprimiu');
 		const id = (mentoria.aulas ?? []).find(
 			(a) => (a.disciplina.split(':')[1] ?? a.disciplina) === 'E1' && a.titulo.startsWith('2.')
 		)!.id;
-		expect(r.indice[id]).toEqual([
-			{
-				titulo: 'Podcast Cap 1 - Probabilidade',
-				arquivo: '/conteudo/audios/e1-2/podcast-cap-1-probabilidade.mp3'
-			}
-		]);
+		expect(r.indice[id]).toEqual({
+			capa: '/conteudo/audios/e1-2/infografico-aula-inteira.png',
+			audios: [
+				{
+					titulo: 'Podcast Cap 1 - Probabilidade',
+					arquivo: '/conteudo/audios/e1-2/podcast-cap-1-probabilidade.mp3',
+					infografico: '/conteudo/audios/e1-2/infografico-cap-1-probabilidade.png'
+				}
+			]
+		});
 		// O MP3 segue como bytes, e o índice fecha a lista.
 		expect(r.arquivos.map((a) => [a.arquivo, typeof a.conteudo])).toContainEqual([
 			'audios/e1-2/podcast-cap-1-probabilidade.mp3',

@@ -13,7 +13,8 @@
 	// svelte-ignore state_referenced_locally
 	if (!audiosMissoes.daAula(data.id)) void carregarAudios();
 
-	const audios = $derived(audiosMissoes.daAula(data.id) ?? []);
+	const daAula = $derived(audiosMissoes.daAula(data.id));
+	const audios = $derived(daAula?.audios ?? []);
 	const ouvidos = $derived(audios.filter((a) => audiosMissoes.ouvido(a.arquivo)).length);
 </script>
 
@@ -33,6 +34,15 @@
 		<p class="nota">Esta aula ainda não tem podcasts no painel.</p>
 	{:else}
 		<p class="sumario">{ouvidos} de {audios.length} ouvidos</p>
+		{#if daAula?.capa}
+			<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+			<figure class="capa">
+				<a href={daAula.capa} target="_blank" rel="noopener" title="Abrir o infográfico da aula em tamanho cheio">
+					<img src={daAula.capa} alt="Infográfico da aula {data.titulo}" loading="lazy" />
+				</a>
+				<figcaption>Infográfico da aula — toque para abrir em tamanho cheio</figcaption>
+			</figure>
+		{/if}
 		<ol>
 			{#each audios as a (a.arquivo)}
 				{@const ouvido = audiosMissoes.ouvido(a.arquivo)}
@@ -56,6 +66,11 @@
 					</div>
 					<!-- svelte-ignore a11y_media_has_caption -->
 					<audio controls preload="none" src={a.arquivo} onended={() => audiosMissoes.marcar(a.arquivo, true)}></audio>
+					{#if a.infografico}
+						<a class="infografico" href={a.infografico} target="_blank" rel="noopener" title="Abrir o infográfico de {a.titulo} em tamanho cheio">
+							<img src={a.infografico} alt="Infográfico de {a.titulo}" loading="lazy" />
+						</a>
+					{/if}
 				</li>
 			{/each}
 		</ol>
@@ -179,5 +194,40 @@
 
 	audio {
 		width: 100%;
+	}
+
+	.capa {
+		margin: 0;
+	}
+
+	.capa figcaption,
+	.infografico::after {
+		display: block;
+		margin-top: 4px;
+		color: var(--cor-texto-suave);
+		font-size: 0.8125rem;
+	}
+
+	.capa img,
+	.infografico img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: calc(var(--raio) / 2);
+		background: var(--cor-superficie);
+	}
+
+	.capa a,
+	.infografico {
+		display: block;
+	}
+
+	.infografico::after {
+		content: 'Toque para abrir em tamanho cheio';
+	}
+
+	.infografico {
+		margin-top: 4px;
 	}
 </style>

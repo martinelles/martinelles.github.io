@@ -19,6 +19,17 @@ test('a página da aula lista os audios, toca e marca como ouvido', async ({ pag
 	await expect(primeiro).toHaveAttribute('src', '/conteudo/audios/e1-2/podcast-cap-1-probabilidade.mp3');
 	await expect(primeiro).toHaveAttribute('preload', 'none');
 
+	// O infográfico da aula (capa) e o de cada capítulo acompanham o podcast.
+	await expect(page.locator('figure.capa img')).toHaveAttribute(
+		'src',
+		'/conteudo/audios/e1-2/infografico-probabilidade-e-inferencia-kawaii.png'
+	);
+	await expect(page.locator('li').first().locator('a.infografico img')).toHaveAttribute(
+		'src',
+		'/conteudo/audios/e1-2/infografico-cap-1-probabilidade.png'
+	);
+	await expect(page.locator('a.infografico')).toHaveCount(7);
+
 	// Marcar como ouvido grava na chave; recarregar mantém.
 	await expect(page.getByText('0 de 7 ouvidos')).toBeVisible();
 	await page.getByRole('checkbox', { name: 'Marcar Podcast Cap 1 - Probabilidade como ouvido' }).click();

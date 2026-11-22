@@ -9,18 +9,27 @@ export interface AudioDaAula {
 	titulo: string;
 	/** Caminho do MP3 em `/conteudo/audios/…`, servido pelo próprio painel. */
 	arquivo: string;
+	/** Infográfico do capítulo (PNG do vault), para ouvir olhando. */
+	infografico?: string;
+}
+
+/** O que cada aula tem na pasta do NotebookLM: a capa geral e os podcasts por capítulo. */
+export interface AudiosDaAula {
+	/** Infográfico geral da aula (sem "Cap"). */
+	capa?: string;
+	audios: AudioDaAula[];
 }
 
 /** Catálogo: id da aula → audios. `null` enquanto carrega; `{}` sem catálogo. */
-let catalogo = $state<Record<string, AudioDaAula[]> | null>(null);
+let catalogo = $state<Record<string, AudiosDaAula> | null>(null);
 let carregar: Promise<void> | null = null;
 
 /** Lê o catálogo uma vez por carga do app (idempotente; falha de rede deixa como está). */
 export function carregarAudios(buscar: typeof fetch = fetch): Promise<void> {
 	carregar ??= buscar('/conteudo/audios.json', { cache: 'force-cache' })
 		.then(
-			(r) => r.ok ? (r.json() as Promise<Record<string, AudioDaAula[]>>) : ({} as Record<string, AudioDaAula[]>),
-			() => ({}) as Record<string, AudioDaAula[]>
+			(r) => r.ok ? (r.json() as Promise<Record<string, AudiosDaAula>>) : ({} as Record<string, AudiosDaAula>),
+			() => ({}) as Record<string, AudiosDaAula>
 		)
 		.then((d) => {
 			catalogo = d && typeof d === 'object' ? d : {};
@@ -66,7 +75,7 @@ function gravar(novos: Record<string, true>): void {
 
 export const audiosMissoes = {
 	/** Os audios da aula, quando o catálogo já carregou e ela tem. */
-	daAula(id: string): AudioDaAula[] | null {
+	daAula(id: string): AudiosDaAula | null {
 		return catalogo?.[id] ?? null;
 	},
 	ouvido(arquivo: string): boolean {
