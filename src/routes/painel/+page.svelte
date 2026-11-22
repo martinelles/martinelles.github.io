@@ -52,11 +52,14 @@
 	const marcas = $derived(marcasMissoes.todas());
 	/** X/Y aulas da mentoria concluídas, no lugar da data da prova no cabeçalho. No plano bruto:
 	 *  o ajustado acrescenta blocos e esconderia a marcação de chegada atrasada. */
-	const aulasCabecalho = $derived(
-		missoes.bruto && cargo
-			? aulasConcluidas(missoes.bruto, extrasMissoes.todas(), cargo, marcas, aulasPorCod(dados.mentoria?.aulas ?? [], cargo))
-			: null
-	);
+	const aulasCabecalho = $derived.by(() => {
+		if (!missoes.bruto || !cargo) return null;
+		try {
+			return aulasConcluidas(missoes.bruto, extrasMissoes.todas(), cargo, marcas, aulasPorCod(dados.mentoria?.aulas ?? [], cargo));
+		} catch {
+			return null;
+		}
+	});
 
 	/** Questões do feed por tópico (`tp`), para o atalho de cada subitem. */
 	const questoesPorTopico = $derived.by(() => {

@@ -34,11 +34,24 @@ export function usarPlanoMissoes() {
 			}
 		);
 	});
-	const plano = $derived(
-		bruto && cargo
-			? planoAjustado(bruto, extrasMissoes.todas(), cargo, marcasMissoes.todas(), hojeLocal(), aulasPorCod(dados.mentoria?.aulas ?? [], cargo))
-			: bruto
-	);
+	// A derivação nunca pode travar a missão: qualquer erro nela (dado local inesperado) derruba
+	// o ajuste no console e segue com o plano como está no arquivo.
+	const plano = $derived.by(() => {
+		if (!bruto || !cargo) return bruto;
+		try {
+			return planoAjustado(
+				bruto,
+				extrasMissoes.todas(),
+				cargo,
+				marcasMissoes.todas(),
+				hojeLocal(),
+				aulasPorCod(dados.mentoria?.aulas ?? [], cargo)
+			);
+		} catch (e) {
+			console.error('planoAjustado falhou; a missão segue sem os ajustes', e);
+			return bruto;
+		}
+	});
 	return {
 		get plano() {
 			return plano;
