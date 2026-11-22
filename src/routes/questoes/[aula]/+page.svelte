@@ -93,7 +93,7 @@
 			<div class="acoes">
 				<button
 					type="button"
-					class="c {resposta === 'C' ? (acertou ? 'acertou' : 'errou') : ''} {resposta === undefined && gab?.r === 'C' ? 'correta' : ''}"
+					class="c {resposta === 'C' ? (acertou ? 'acertou' : 'errou') : ''} {resposta !== undefined && gab?.r === 'C' ? 'correta' : ''}"
 					aria-pressed={resposta === 'C'}
 					onclick={() => responder('C')}
 					disabled={resposta !== undefined}
@@ -102,7 +102,7 @@
 				</button>
 				<button
 					type="button"
-					class="e {resposta === 'E' ? (acertou ? 'acertou' : 'errou') : ''} {resposta === undefined && gab?.r === 'E' ? 'correta' : ''}"
+					class="e {resposta === 'E' ? (acertou ? 'acertou' : 'errou') : ''} {resposta !== undefined && gab?.r === 'E' ? 'correta' : ''}"
 					aria-pressed={resposta === 'E'}
 					onclick={() => responder('E')}
 					disabled={resposta !== undefined}

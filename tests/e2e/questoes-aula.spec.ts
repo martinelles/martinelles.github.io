@@ -9,11 +9,12 @@ test('uma questão por vez, com teclas C, E, Enter e setas; respostas ficam na c
 	await page.goto('/questoes/e4-1');
 	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 1\. Ciclo de vida e MLOps/ })).toBeVisible();
 
-	// Uma por vez: só o cartão da atual, com a contagem no topo.
+	// Uma por vez: só o cartão da atual, com a contagem no topo — e sem entregar o gabarito.
 	const cartao = page.locator('.cartao');
 	await expect(page.locator('.ponto')).toHaveCount(12);
 	await expect(cartao).toContainText('Questão 1 de 12');
 	await expect(page.getByRole('button', { name: /Certo/ })).toHaveCount(1);
+	await expect(page.locator('button.correta')).toHaveCount(0);
 
 	// Tecla C responde (gabarito da 1 é C): veredito explícito e avança para a 2.
 	await page.keyboard.press('c');
@@ -30,6 +31,8 @@ test('uma questão por vez, com teclas C, E, Enter e setas; respostas ficam na c
 	await page.keyboard.press('ArrowLeft');
 	await expect(cartao.locator('.veredito')).toHaveText('Você errou — o certo era Certo');
 	await expect(page.getByRole('button', { name: /Refazer/ })).toHaveCount(1);
+	// Depois de errar, o botão do gabarito certo fica contornado em verde.
+	await expect(cartao.locator('button.correta')).toHaveCount(1);
 
 	// Enter, na respondida em vista, avança de novo.
 	await page.keyboard.press('Enter');
