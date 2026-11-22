@@ -13,16 +13,20 @@ test('uma questão por vez, com teclas C, E, Enter e setas', async ({ page }) =>
 	await expect(cartao).toContainText('Questão 1 de 12');
 	await expect(page.getByRole('button', { name: /Certo/ })).toHaveCount(1);
 
-	// Tecla C responde (gabarito da 1 é C) e avança para a 2.
+	// Tecla C responde (gabarito da 1 é C): veredito explícito e avança para a 2.
 	await page.keyboard.press('c');
 	await expect(page.getByText('1 de 1 certos', { exact: false })).toBeVisible();
 	await expect(cartao).toContainText('Questão 2 de 12');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao.locator('.veredito')).toHaveText('Você acertou');
+	await expect(cartao.locator('button.acertou')).toHaveCount(1);
 
-	// Tecla E na 2 (gabarito C): erra e avança; voltar mostra o gabarito aberto.
+	// Volta para a 2 e erra por tecla (gabarito C): veredito de erro com o certo indicado.
+	await page.keyboard.press('ArrowRight');
 	await page.keyboard.press('e');
 	await expect(cartao).toContainText('Questão 3 de 12');
 	await page.keyboard.press('ArrowLeft');
-	await expect(cartao).toContainText('Gabarito: certo');
+	await expect(cartao.locator('.veredito')).toHaveText('Você errou — o certo era Certo');
 	await expect(page.getByRole('button', { name: /Refazer/ })).toHaveCount(1);
 
 	// Enter, na respondida em vista, avança de novo.
@@ -63,6 +67,6 @@ test('a página da aula E4·3 corrige e comenta o gabarito', async ({ page }) =>
 	const cartao = page.locator('.cartao');
 	await expect(cartao).toContainText('Questão 2 de 12');
 	await page.keyboard.press('ArrowLeft');
-	await expect(cartao).toContainText('Gabarito: errado');
+	await expect(cartao.locator('.veredito')).toHaveText('Você acertou');
 	await expect(cartao.locator('.gabarito p')).toContainText('Resolução CD/ANPD 18/2024');
 });

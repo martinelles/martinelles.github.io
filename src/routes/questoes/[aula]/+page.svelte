@@ -72,20 +72,39 @@
 	</p>
 
 	{#if questao}
-		<div class="cartao" class:certo={resposta && gab && resposta === gab.r} class:errado={resposta && gab && resposta !== gab.r}>
+		{@const acertou = resposta !== undefined && gab !== undefined && resposta === gab.r}
+		<div class="cartao" class:certo={resposta !== undefined && acertou} class:errado={resposta !== undefined && !acertou}>
 			<p class="numero">Questão {atual + 1} de {total}</p>
 			<p class="enunciado">{questao.texto}</p>
 			<div class="acoes">
-				<button type="button" class="c" aria-pressed={resposta === 'C'} onclick={() => responder('C')} disabled={resposta !== undefined}>
+				<button
+					type="button"
+					class="c {resposta === 'C' ? (acertou ? 'acertou' : 'errou') : ''} {resposta === undefined && gab?.r === 'C' ? 'correta' : ''}"
+					aria-pressed={resposta === 'C'}
+					onclick={() => responder('C')}
+					disabled={resposta !== undefined}
+				>
 					Certo <kbd>C</kbd>
 				</button>
-				<button type="button" class="e" aria-pressed={resposta === 'E'} onclick={() => responder('E')} disabled={resposta !== undefined}>
+				<button
+					type="button"
+					class="e {resposta === 'E' ? (acertou ? 'acertou' : 'errou') : ''} {resposta === undefined && gab?.r === 'E' ? 'correta' : ''}"
+					aria-pressed={resposta === 'E'}
+					onclick={() => responder('E')}
+					disabled={resposta !== undefined}
+				>
 					Errado <kbd>E</kbd>
 				</button>
 			</div>
 			{#if resposta !== undefined && gab}
+				<p class="veredito {acertou ? 'certo' : 'errado'}" role="status">
+					{#if acertou}
+						<Icone nome="check" tamanho={20} /> Você acertou
+					{:else}
+						<Icone nome="x" tamanho={20} /> Você errou — o certo era {gab.r === 'C' ? 'Certo' : 'Errado'}
+					{/if}
+				</p>
 				<div class="gabarito">
-					<span class="selo {gab.r === 'C' ? 'certo' : 'errado'}">Gabarito: {gab.r === 'C' ? 'certo' : 'errado'}</span>
 					<p>{gab.comentario}</p>
 					<button type="button" class="refazer" onclick={() => delete respostas[questao.n]}>Refazer</button>
 				</div>
@@ -205,16 +224,39 @@
 		cursor: default;
 	}
 
-	.acoes .c[aria-pressed='true'] {
+	/* Respondida: o botão escolhido pinta pela CORREÇÃO (verde acertou, vermelho errou), e o
+	   gabarito certo fica contornado em verde. */
+	.acoes button.acertou {
 		background: var(--cor-acerto);
 		border-color: var(--cor-acerto);
 		color: var(--cor-superficie);
 	}
 
-	.acoes .e[aria-pressed='true'] {
+	.acoes button.errou {
 		background: var(--cor-erro);
 		border-color: var(--cor-erro);
 		color: var(--cor-superficie);
+	}
+
+	.acoes button.correta {
+		border-color: var(--cor-acerto);
+		box-shadow: inset 0 0 0 2px var(--cor-acerto);
+	}
+
+	.veredito {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		font-weight: 800;
+	}
+
+	.veredito.certo {
+		color: var(--cor-acerto);
+	}
+
+	.veredito.errado {
+		color: var(--cor-erro);
 	}
 
 	kbd {
@@ -236,18 +278,6 @@
 
 	.gabarito p {
 		margin: 0;
-	}
-
-	.selo {
-		font-weight: 700;
-	}
-
-	.selo.certo {
-		color: var(--cor-acerto);
-	}
-
-	.selo.errado {
-		color: var(--cor-erro);
 	}
 
 	.gabarito .refazer {
