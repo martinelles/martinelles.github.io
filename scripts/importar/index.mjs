@@ -20,6 +20,8 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, s
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTEFATOS, montarArtefatos, montarDerivacao, montarRaiox } from './artefatos.mjs';
+import { montarAudios } from './audios.mjs';
+import mentoria from '../../src/lib/dados/mentoria.json' with { type: 'json' };
 import { importarBaralho } from './baralhos.mjs';
 import { montarMapas } from './mapas.mjs';
 import { CARGOS, chaveLink, montarMissoes } from './missoes.mjs';
@@ -245,7 +247,7 @@ export function importar({ vault, saida }) {
 	const entradas = [];
 	/** @type {Record<string, string>} */
 	const mapaLotes = {};
-	/** @type {{ arquivo: string, conteudo: string }[]} */
+	/** @type {{ arquivo: string, conteudo: string | Uint8Array }[]} */
 	const arquivos = [];
 	/** @type {Relatorio['lotes']} */
 	const lotesRel = [];
@@ -355,6 +357,12 @@ export function importar({ vault, saida }) {
 	const artefatos = montarArtefatos(fontesArtefatos, comRaiox);
 	// A página das Missões usa o pacote da derivação (mesmas regras do painel na régua).
 	if (fontesArtefatos['missoes-cgu-2026.html'] !== undefined) artefatos.push(montarDerivacao());
+
+	// Podcasts das aulas: MP3 do vault copiados para /conteudo/audios, com o índice audios.json.
+	const audios = montarAudios(vault, mentoria);
+	// MP3 é binário: o Buffer segue como está (o writeFileSync ignora o encoding para Buffer).
+	arquivos.push(...audios.arquivos);
+	avisos.push(...audios.avisos);
 	if (comRaiox) {
 		const [pagina, subitens, assuntos] = fontesRaiox.map((f) => readFileSync(f, 'utf8'));
 		const daqui = (/** @type {string} */ f) => readFileSync(fileURLToPath(new URL(`./raiox/${f}`, import.meta.url)), 'utf8');

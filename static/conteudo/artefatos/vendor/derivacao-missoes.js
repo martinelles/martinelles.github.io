@@ -249,6 +249,13 @@
         entram.set(alvo, lista);
       }
     }
+    const concluidasHoje = [];
+    for (const [cid, data] of real) {
+      if (data !== hoje) continue;
+      const item = aulaNova.get(cid);
+      if (!item || (fimDe.get(cid) ?? "") >= hoje) continue;
+      concluidasHoje.push({ ...item, feitaEm: data });
+    }
     return {
       ...plano,
       plan: plan.map((dia) => {
@@ -261,7 +268,7 @@
             { tipo: "rev", titulo: "Revis\xE3o remarcada", min: 15, itens: novos, det: "Aula feita em outro dia; a revis\xE3o segue a data real." }
           ] : blocos.map((b, i) => i === rev ? { ...b, itens: [...b.itens ?? [], ...novos] } : b);
         }
-        const atraso = [...atrasadas, ...sintetizadas];
+        const atraso = [...atrasadas, ...concluidasHoje, ...sintetizadas];
         if (atraso.length && dia.data === hoje)
           blocos = [
             ...blocos,

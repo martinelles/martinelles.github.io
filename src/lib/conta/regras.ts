@@ -9,6 +9,9 @@ export const CHAVE_MISSOES = 'missoes-cgu-2026';
 /** Chave das aulas feitas fora da missão do dia, gravadas pelo painel. */
 export const CHAVE_EXTRAS = 'missoes-extras-cgu-2026';
 
+/** Chave dos podcasts marcados como ouvidos, por aula (rota /podcast). */
+export const CHAVE_AUDIOS = 'painel-concurso:audios:v1';
+
 /**
  * As chaves de progresso; qualquer outra não sobe. As quatro primeiras são dos stores do app,
  * escritas por extenso porque o Worker importa este arquivo e não pode puxar os stores (runas do
@@ -25,7 +28,8 @@ export const CHAVES_SINCRONIZADAS: readonly string[] = [
 	'painel-concurso:preferencias:v2',
 	'painel-concurso:tema:v1',
 	CHAVE_MISSOES,
-	CHAVE_EXTRAS
+	CHAVE_EXTRAS,
+	CHAVE_AUDIOS
 ];
 
 /** 3 a 30 caracteres, `a-z`, `0-9` e `-`, sem hífen nas pontas (decisão 2). */

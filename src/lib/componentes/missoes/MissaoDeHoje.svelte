@@ -32,6 +32,7 @@
 		type OcorrenciaDaAula
 	} from '$lib/missoes/calculos';
 	import { carregarEmAndamento, emAndamento } from '$lib/missoes/emAndamento.svelte';
+	import { audiosMissoes, carregarAudios } from '$lib/missoes/audios.svelte';
 	import { extrasMissoes } from '$lib/missoes/extras.svelte';
 	import type { Cargo, Marcas, PlanoMissoes, TipoBloco } from '$lib/missoes/tipos';
 
@@ -71,6 +72,18 @@
 	const progresso = $derived(dia ? progressoDoDia(marcas, cargo, dia) : null);
 	const minutosDoDia = $derived(dia ? dia.blocos.reduce((s, b) => s + (soPonteiros(b) ? 0 : b.min), 0) : 0);
 	const horas = (min: number) => (min % 60 ? `${Math.floor(min / 60)} h ${min % 60} min` : `${min / 60} h`);
+
+	/** `/podcast/e1-2`: o código da aula (`E1·2`) em slug, o mesmo que o importador nomeia. */
+	function slugDaAula(disciplina: string, titulo: string): string {
+		const disc = disciplina.split(':')[1] ?? disciplina;
+		const n = titulo.match(/^\d+/)?.[0] ?? '';
+		return `${disc}·${n}`
+			.normalize('NFD')
+			.replace(/[̀-ͯ]/g, '')
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-+|-+$/g, '');
+	}
 	const linkMissoes = $derived(`/artefato/missoes#${cargo}`);
 
 	/** As próximas aulas que vêm depois do dia em vista (item-aula), para a linha "A seguir". */
@@ -95,6 +108,8 @@
 
 	// Relê a cada montagem: a página das Missões (no iframe de /artefato/missoes) grava na mesma chave.
 	carregarEmAndamento();
+	// Catálogo de podcasts das aulas (aparece o atalho nas aulas que têm).
+	void carregarAudios();
 	const lembrete = $derived(dia ? emAndamento.de(cargo, dia.data) : null);
 	const lembreteFeito = $derived(
 		!!(dia && lembrete && dia.blocos[lembrete.bloco]?.itens?.some((it) => it.cid === lembrete.cid)) &&
@@ -271,6 +286,7 @@
 									{@const subs = it.subitens ?? []}
 									{@const nSub = (s: { cid: string }) => questoesPorTopico?.get(s.cid) ?? 0}
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
+									{@const podcasts = aulaInfo ? audiosMissoes.daAula(aulaInfo.id) : null}
 									{@const itemOk = porItem && itemCumprido(marcas, cargo, dia, i, it)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li
@@ -333,6 +349,11 @@
 															<a class="topico" href="/mapa/{plano.mapas[s.cid]}">Mapa de {s.cod} ↗</a>
 														{/if}
 													{/each}
+													{#if podcasts?.length}
+														<a class="topico" href="/podcast/{slugDaAula(aulaInfo!.disciplina, aulaInfo!.titulo)}">
+															Podcasts da aula ↗
+														</a>
+													{/if}
 													{#if aula}
 														<a
 															class="topico"
