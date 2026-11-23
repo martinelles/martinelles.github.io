@@ -1,0 +1,143 @@
+{
+ "aula": "E2·4",
+ "titulo": "4. Processamento distribuído",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na escalabilidade horizontal, a capacidade do sistema aumenta pela adição de memória e processador a um mesmo servidor."
+  },
+  {
+   "n": 2,
+   "texto": "No HDFS, cada arquivo é dividido em blocos, replicados em nós diferentes do cluster, com três réplicas por padrão."
+  },
+  {
+   "n": 3,
+   "texto": "O particionamento por hash favorece consultas por intervalo de valores da chave, pois as chaves vizinhas ficam na mesma partição."
+  },
+  {
+   "n": 4,
+   "texto": "Com particionamento por faixa e chave sempre crescente, como a data de inclusão, as gravações novas tendem a se concentrar na última partição."
+  },
+  {
+   "n": 5,
+   "texto": "No Spark, as transformações são avaliadas de forma preguiçosa e só executam quando uma ação, como count ou collect, exige o resultado."
+  },
+  {
+   "n": 6,
+   "texto": "As operações groupByKey e join são transformações estreitas, que não exigem movimentação de dados entre partições."
+  },
+  {
+   "n": 7,
+   "texto": "No MapReduce, a função de combinação agrega localmente a saída do mapeamento antes do embaralhamento, o que reduz o tráfego de rede."
+  },
+  {
+   "n": 8,
+   "texto": "Na junção por broadcast, a tabela menor é copiada para todos os executores, o que evita embaralhar a tabela maior."
+  },
+  {
+   "n": 9,
+   "texto": "Por padrão, o Spark SQL difunde automaticamente numa junção a tabela de até 10 MB."
+  },
+  {
+   "n": 10,
+   "texto": "Pela lei de Amdahl, se 5% do trabalho for necessariamente serial, a aceleração máxima obtida com o aumento do número de nós é de 20 vezes."
+  },
+  {
+   "n": 11,
+   "texto": "O Spark recupera partições perdidas de um RDD recalculando-as a partir da linhagem, sem precisar replicar os dados em memória."
+  },
+  {
+   "n": 12,
+   "texto": "O comando EXPLAIN do Spark SQL executa a consulta e devolve o tempo gasto em cada operador."
+  },
+  {
+   "n": 13,
+   "texto": "Num plano físico do Spark, o operador Exchange indica redistribuição de dados entre partições, isto é, embaralhamento."
+  },
+  {
+   "n": 14,
+   "texto": "Aumentar o número de partições resolve a assimetria provocada por uma única chave que concentra boa parte das linhas."
+  },
+  {
+   "n": 15,
+   "texto": "Somas de valores em ponto flutuante podem variar nas últimas casas conforme o número de partições, porque a adição em ponto flutuante não é associativa."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Na escalabilidade horizontal, a capacidade do sistema aumenta pela adição de memória e processador a um mesmo servidor. Isso é escalabilidade vertical; a horizontal acrescenta servidores."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "No HDFS, cada arquivo é dividido em blocos, replicados em nós diferentes do cluster, com três réplicas por padrão. As réplicas em nós diferentes dão a tolerância a falhas."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O particionamento por hash favorece consultas por intervalo de valores da chave, pois as chaves vizinhas ficam na mesma partição. O hash espalha chaves vizinhas; quem favorece o intervalo é a faixa."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Com particionamento por faixa e chave sempre crescente, como a data de inclusão, as gravações novas tendem a se concentrar na última partição. É o ponto quente de gravação da faixa."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "No Spark, as transformações são avaliadas de forma preguiçosa e só executam quando uma ação, como count ou collect, exige o resultado. A ação dispara o job."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "As operações groupByKey e join são transformações estreitas, que não exigem movimentação de dados entre partições. São amplas: exigem embaralhamento."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "No MapReduce, a função de combinação agrega localmente a saída do mapeamento antes do embaralhamento, o que reduz o tráfego de rede. É uma redução local, opcional."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Na junção por broadcast, a tabela menor é copiada para todos os executores, o que evita embaralhar a tabela maior. Por isso ela só compensa quando a tabela difundida é pequena."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Por padrão, o Spark SQL difunde automaticamente numa junção a tabela de até 10 MB. É o valor padrão de spark.sql.autoBroadcastJoinThreshold."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "Pela lei de Amdahl, se 5% do trabalho for necessariamente serial, a aceleração máxima obtida com o aumento do número de nós é de 20 vezes. O teto é o inverso da fração serial: 1 dividido por 0,05."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "O Spark recupera partições perdidas de um RDD recalculando-as a partir da linhagem, sem precisar replicar os dados em memória. A linhagem registra as transformações que geraram cada partição."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O comando EXPLAIN do Spark SQL executa a consulta e devolve o tempo gasto em cada operador. Ele mostra o plano sem executar; o tempo real aparece na interface web do driver."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "Num plano físico do Spark, o operador Exchange indica redistribuição de dados entre partições, isto é, embaralhamento. Cada Exchange marca também um limite de estágio."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Aumentar o número de partições resolve a assimetria provocada por uma única chave que concentra boa parte das linhas. A chave quente continua inteira numa partição; resolve-se com sal, broadcast ou divisão adaptativa."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "Somas de valores em ponto flutuante podem variar nas últimas casas conforme o número de partições, porque a adição em ponto flutuante não é associativa. Para dinheiro, usa-se decimal ou inteiros. ≡"
+  }
+ ]
+}
