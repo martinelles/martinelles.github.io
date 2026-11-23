@@ -19,14 +19,14 @@ test('a página da aula lista os audios, toca e marca como ouvido', async ({ pag
 	await expect(primeiro).toHaveAttribute('src', '/conteudo/audios/e1-2/podcast-cap-1-probabilidade.mp3');
 	await expect(primeiro).toHaveAttribute('preload', 'none');
 
-	// O infográfico da aula (capa) e o de cada capítulo acompanham o podcast.
+	// O infográfico da aula (capa) e o de cada capítulo acompanham o podcast (WebP do importador).
 	await expect(page.locator('figure.capa img')).toHaveAttribute(
 		'src',
-		'/conteudo/audios/e1-2/infografico-probabilidade-e-inferencia-kawaii.png'
+		'/conteudo/audios/e1-2/infografico-probabilidade-e-inferencia-kawaii.webp'
 	);
 	await expect(page.locator('li').first().locator('a.infografico img')).toHaveAttribute(
 		'src',
-		'/conteudo/audios/e1-2/infografico-cap-1-probabilidade.png'
+		'/conteudo/audios/e1-2/infografico-cap-1-probabilidade.webp'
 	);
 	await expect(page.locator('a.infografico')).toHaveCount(7);
 

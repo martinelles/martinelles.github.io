@@ -89,11 +89,16 @@ async function resolverChaveConteudo(): Promise<string> {
 let chaveConteudo = '';
 let revalidarTudo = false;
 let preparo: Promise<Cache> | null = null;
+/** Caminhos que o build atual conhece: só eles migram e só eles ficam no cache de conteúdo. */
+const listaConteudo = new Set(CONTEUDO);
+const caminhoDe = (req: Request) => new URL(req.url).pathname;
 
 /**
  * Abre (criando, se for o caso) o cache de conteúdo da geração atual. Na primeira geração de uma
  * chave nova, herda os arquivos da geração anterior: o app segue offline enquanto a fase 2
- * revalida arquivo por arquivo. Chamadas concorrentes dividem a mesma execução.
+ * revalida arquivo por arquivo. Só migram caminhos que o build atual lista: arquivo que saiu do
+ * conteúdo (por exemplo, um PNG trocado por WebP) vira lixo, não herança. Chamadas concorrentes
+ * dividem a mesma execução.
  */
 function prepararConteudo(): Promise<Cache> {
 	preparo ??= (async () => {
@@ -107,9 +112,10 @@ function prepararConteudo(): Promise<Cache> {
 			for (const nome of anteriores) {
 				const anterior = await caches.open(nome);
 				for (const req of await anterior.keys()) {
-					if (await cache.match(req)) continue;
-					const resposta = await anterior.match(req);
-					if (resposta) await cache.put(req, resposta);
+					const caminho = caminhoDe(req);
+					if (!listaConteudo.has(caminho) || (await cache.match(caminho))) continue;
+					const resposta = await anterior.match(caminho);
+					if (resposta) await cache.put(caminho, resposta);
 				}
 			}
 		}
@@ -190,11 +196,16 @@ sw.addEventListener('activate', (e) => {
 			// então as versões antigas podem sair. O cache de conteúdo da geração atual fica;
 			// sem chave resolvida (rede fora no preparo), todo cache de conteúdo fica, senão o
 			// app perde o offline por causa de um índice que não respondeu.
-			await prepararConteudo();
+			const cache = await prepararConteudo();
 			for (const k of await caches.keys()) {
 				if (k === CACHE || k === chaveConteudo) continue;
 				if (k.startsWith(PREFIXO_CACHE_CONTEUDO) && chaveConteudo === CACHE_SEM_INDICE) continue;
 				await caches.delete(k);
+			}
+			// Órfãos do cache atual (arquivo que saiu do conteúdo, ex.: PNG trocado por WebP)
+			// saem também; a chave não muda quando só a lista de arquivos muda.
+			for (const req of await cache.keys()) {
+				if (!listaConteudo.has(caminhoDe(req))) await cache.delete(req);
 			}
 			await sw.clients.claim();
 		})()

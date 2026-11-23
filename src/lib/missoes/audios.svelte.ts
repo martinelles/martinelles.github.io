@@ -9,7 +9,7 @@ export interface AudioDaAula {
 	titulo: string;
 	/** Caminho do MP3 em `/conteudo/audios/…`, servido pelo próprio painel. */
 	arquivo: string;
-	/** Infográfico do capítulo (PNG do vault), para ouvir olhando. */
+	/** Infográfico do capítulo (WebP gerado do PNG do vault), para ouvir olhando. */
 	infografico?: string;
 }
 

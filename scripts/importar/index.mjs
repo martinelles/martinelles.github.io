@@ -74,9 +74,9 @@ function listar(dir, filtro) {
 
 /**
  * @param {{ vault: string, saida: string }} opcoes
- * @returns {Relatorio}
+ * @returns {Promise<Relatorio>}
  */
-export function importar({ vault, saida }) {
+export async function importar({ vault, saida }) {
 	vault = resolve(vault);
 	saida = resolve(saida);
 	if (!existsSync(vault) || !statSync(vault).isDirectory()) {
@@ -375,7 +375,7 @@ export function importar({ vault, saida }) {
 	if (prioridades) prioridades.conteudo = prioridades.conteudo.replace('/*__QUESTOES__*/ {}', JSON.stringify(questoesAula));
 
 	// Podcasts das aulas: MP3 do vault copiados para /conteudo/audios, com o índice audios.json.
-	const audios = montarAudios(vault, mentoria);
+	const audios = await montarAudios(vault, mentoria);
 	// MP3 é binário: o Buffer segue como está (o writeFileSync ignora o encoding para Buffer).
 	arquivos.push(...audios.arquivos);
 	avisos.push(...audios.avisos);
@@ -491,7 +491,7 @@ export function lerArgumentos(args) {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
 	try {
-		const relatorio = importar(lerArgumentos(process.argv.slice(2)));
+		const relatorio = await importar(lerArgumentos(process.argv.slice(2)));
 		console.log(formatarRelatorio(relatorio));
 	} catch (e) {
 		console.error(`Erro fatal: ${/** @type {Error} */ (e).message}`);

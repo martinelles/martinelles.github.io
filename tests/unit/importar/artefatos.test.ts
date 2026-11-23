@@ -59,19 +59,19 @@ describe('artefatos no importador', () => {
 	const raiz = mkdtempSync(join(tmpdir(), 'painel-artefatos-'));
 	afterAll(() => rmSync(raiz, { recursive: true, force: true }));
 
-	it('sem artifacts/_publicar: aviso e nenhum artefato', () => {
-		const rel = importar({ vault: VAULT, saida: join(raiz, 'sem') });
+	it('sem artifacts/_publicar: aviso e nenhum artefato', async () => {
+		const rel = await importar({ vault: VAULT, saida: join(raiz, 'sem') });
 		expect(rel.artefatos).toEqual([]);
 		expect(rel.avisos).toContain('artifacts/_publicar ausente: nenhum artefato gerado');
 	});
 
-	it('com artifacts/_publicar: grava em artefatos/', () => {
+	it('com artifacts/_publicar: grava em artefatos/', async () => {
 		const vault = join(raiz, 'vault');
 		cpSync(VAULT, vault, { recursive: true });
 		mkdirSync(join(vault, 'artifacts', '_publicar'), { recursive: true });
 		writeFileSync(join(vault, 'artifacts', '_publicar', 'missoes-cgu-2026.html'), fragmento('M', `<a href="${PRIOR}"></a>`));
 		const saida = join(raiz, 'com');
-		const rel = importar({ vault, saida });
+		const rel = await importar({ vault, saida });
 		// A página das Missões vem com o pacote da derivação (mesmas regras do painel na régua).
 		expect(rel.artefatos).toEqual(['artefatos/missoes.html', 'artefatos/vendor/derivacao-missoes.js']);
 		expect(rel.avisos).toContain('artifacts/_publicar/prioridades-edital.html ausente: artefatos/prioridades.html não gerado');

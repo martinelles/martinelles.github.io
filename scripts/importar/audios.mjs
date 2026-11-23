@@ -1,14 +1,16 @@
 /**
  * Podcasts e infográficos das aulas (vault → painel): da pasta NotebookLM da aula saem os MP3
- * (comprimidos em mono de 48 kbps) e os PNG "Infografico …", copiados para
- * `static/conteudo/audios/<aula>/` e listados em `audios.json`, que a rota /podcast/<aula> lê.
- * O infográfico do capítulo (mesmo "Cap N") acompanha o podcast; o geral (sem "Cap") é a capa.
- * A pasta de cada aula é declarada em PODCASTS; sem ela no vault, só fica o aviso.
+ * (comprimidos em mono de 48 kbps) e os PNG "Infografico …", recriados em WebP de até 1600px de
+ * largura, gravados em `static/conteudo/audios/<aula>/` e listados em `audios.json`, que a rota
+ * /podcast/<aula> lê. O infográfico do capítulo (mesmo "Cap N") acompanha o podcast; o geral
+ * (sem "Cap") é a capa. A pasta de cada aula é declarada em PODCASTS; sem ela no vault, só fica
+ * o aviso.
  */
 import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
+import sharp from 'sharp';
 
 /** @typedef {{ id: string, disciplina: string, titulo: string }} AulaMentoria */
 
@@ -53,6 +55,27 @@ function lerComprimido(caminho, avisos) {
 	}
 }
 
+/** Recria o infográfico em WebP de largura até 1600px (na tela do painel ele aparece a ~400px e
+ * abre em tamanho cheio em outra aba): o PNG do vault tem 5-6 MB, o WebP fica em poucas centenas
+ * de KB. Sem sharp (ou se ele recusar o arquivo), o PNG segue como está.
+ * @param {string} caminho
+ * @param {string[]} avisos
+ * @returns {Promise<{ conteudo: Uint8Array, ext: string }>}
+ */
+async function lerInfografico(caminho, avisos) {
+	try {
+		const conteudo = await sharp(caminho)
+			.rotate()
+			.resize({ width: 1600, withoutEnlargement: true })
+			.webp({ quality: 85 })
+			.toBuffer();
+		return { conteudo, ext: '.webp' };
+	} catch {
+		avisos.push(`audios: sharp não converteu ${basename(caminho)}; o PNG seguiu como está no vault`);
+		return { conteudo: readFileSync(caminho), ext: '.png' };
+	}
+}
+
 /** Id da aula no catálogo da mentoria, pelo código (`E1·2` → UUID de "2. …" em CD:E1). */
 function idDaAula(/** @type {{ aulas?: AulaMentoria[] }} */ mentoria, /** @type {string} */ cod) {
 	const [disc, n] = cod.split('·');
@@ -69,9 +92,9 @@ const capDe = (/** @type {string} */ nome) => nome.match(/cap (\d+)/i)?.[1] ?? n
 /**
  * @param {string} vault raiz do vault
  * @param {{ aulas?: AulaMentoria[] }} mentoria catálogo do app
- * @returns {{ arquivos: { arquivo: string, conteudo: string | Uint8Array }[], indice: Record<string, { capa?: string, audios: { titulo: string, arquivo: string, infografico?: string }[] }>, avisos: string[] }}
+ * @returns {Promise<{ arquivos: { arquivo: string, conteudo: string | Uint8Array }[], indice: Record<string, { capa?: string, audios: { titulo: string, arquivo: string, infografico?: string }[] }>, avisos: string[] }>}
  */
-export function montarAudios(vault, mentoria) {
+export async function montarAudios(vault, mentoria) {
 	/** @type {{ arquivo: string, conteudo: string | Uint8Array }[]} */
 	const arquivos = [];
 	/** @type {Record<string, { capa?: string, audios: { titulo: string, arquivo: string, infografico?: string }[] }>} */
@@ -95,15 +118,13 @@ export function montarAudios(vault, mentoria) {
 			continue;
 		}
 		// Infográficos por capítulo; o que não tem "Cap" vira a capa da aula.
-		const porCap = new Map(
-			nomes
-				.filter((f) => /^infografico .+\.png$/i.test(f))
-				.map((nome) => {
-					const destino = `audios/${slugAula}/${slugificar(nome.replace(/\.png$/i, ''))}.png`;
-					arquivos.push({ arquivo: destino, conteudo: readFileSync(join(vault, pasta, nome)) });
-					return [capDe(nome), `/conteudo/${destino}`];
-				})
-		);
+		const porCap = new Map();
+		for (const nome of nomes.filter((f) => /^infografico .+\.png$/i.test(f))) {
+			const { conteudo, ext } = await lerInfografico(join(vault, pasta, nome), avisos);
+			const destino = `audios/${slugAula}/${slugificar(nome.replace(/\.png$/i, ''))}${ext}`;
+			arquivos.push({ arquivo: destino, conteudo });
+			porCap.set(capDe(nome), `/conteudo/${destino}`);
+		}
 		indice[id] = {
 			capa: porCap.get(null) ?? undefined,
 			audios: mp3s.map((nome) => {

@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
-import { afterAll, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { formatarRelatorio, importar, lerArgumentos } from '../../../scripts/importar/index.mjs';
 import { violacoes } from './esquema';
 
@@ -18,11 +18,18 @@ const bytes = (dir: string) =>
 
 describe('importação de ponta a ponta (vault de fixture)', () => {
 	const saida = join(raiz, 'a');
-	const rel = importar({ vault: VAULT, saida });
-	const indice = lerJson(saida, 'indice.json');
-	const materias = lerJson(saida, 'materias.json');
-	const lotes = Object.values(indice.lotes as Record<string, string>);
-	const posts = lotes.flatMap((arq) => lerJson(saida, arq));
+	let rel: Awaited<ReturnType<typeof importar>>;
+	let indice: ReturnType<typeof lerJson>;
+	let materias: ReturnType<typeof lerJson>;
+	let lotes: string[];
+	let posts: ReturnType<typeof lerJson>[];
+	beforeAll(async () => {
+		rel = await importar({ vault: VAULT, saida });
+		indice = lerJson(saida, 'indice.json');
+		materias = lerJson(saida, 'materias.json');
+		lotes = Object.values(indice.lotes as Record<string, string>);
+		posts = lotes.flatMap((arq) => lerJson(saida, arq));
+	});
 
 	it('totais por tipo: 8 questões (4 de múltipla escolha viram 18 itens C/E ⇒ 22 posts), 7+12 artigos (Art. 9º da 12.813 em 3 redações vira 1), 1 resumo, 2+5 flashcards', () => {
 		expect(rel.totais).toEqual({ questao: 22, lei: 19, resumo: 1, flashcard: 7 });
@@ -94,9 +101,9 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 		}
 	});
 
-	it('duas execuções geram bytes idênticos', () => {
+	it('duas execuções geram bytes idênticos', async () => {
 		const outra = join(raiz, 'b');
-		importar({ vault: VAULT, saida: outra });
+		await importar({ vault: VAULT, saida: outra });
 		expect(bytes(outra)).toEqual(bytes(saida));
 	});
 
@@ -111,40 +118,40 @@ describe('importação de ponta a ponta (vault de fixture)', () => {
 });
 
 describe('importação: falhas', () => {
-	it('arquivo inválido é recusado e listado; os demais seguem', () => {
+	it('arquivo inválido é recusado e listado; os demais seguem', async () => {
 		const vault = join(raiz, 'vault-ruim');
 		cpSync(VAULT, vault, { recursive: true });
 		writeFileSync(
 			join(vault, 'feed-conteudo', 'resumos', 'inventado.md'),
 			'---\ntipo: resumo\nmateria: Outros Ramos do Direito\nfonte: "leis-secas/06-Lei-12527-2011-LAI.md"\nconferido: false\n---\n# T\n## A\nArt. 300 diz x.\n## B\ny\n## C\nz\n'
 		);
-		const rel = importar({ vault, saida: join(raiz, 'c') });
+		const rel = await importar({ vault, saida: join(raiz, 'c') });
 		expect(rel.recusados).toEqual([
 			{ arquivo: 'feed-conteudo/resumos/inventado.md', motivo: expect.stringContaining('Art. 300') }
 		]);
 		expect(rel.totais.resumo).toBe(1);
 	});
 
-	it('sem feed-conteudo/ segue com aviso', () => {
+	it('sem feed-conteudo/ segue com aviso', async () => {
 		const vault = join(raiz, 'vault-sem-feed');
 		cpSync(VAULT, vault, { recursive: true });
 		rmSync(join(vault, 'feed-conteudo'), { recursive: true });
-		const rel = importar({ vault, saida: join(raiz, 'd') });
+		const rel = await importar({ vault, saida: join(raiz, 'd') });
 		expect(rel.totais).toMatchObject({ resumo: 0, flashcard: 5 });
 		expect(rel.avisos.join('\n')).toContain('feed-conteudo/ ainda não existe');
 	});
 
-	it('sem vault: erro fatal e a saída anterior fica intacta', () => {
+	it('sem vault: erro fatal e a saída anterior fica intacta', async () => {
 		const saida = join(raiz, 'e');
-		importar({ vault: VAULT, saida });
+		await importar({ vault: VAULT, saida });
 		const antes = bytes(saida);
-		expect(() => importar({ vault: join(raiz, 'nao-existe'), saida })).toThrow(/vault não encontrado/);
+		await expect(importar({ vault: join(raiz, 'nao-existe'), saida })).rejects.toThrow(/vault não encontrado/);
 		expect(bytes(saida)).toEqual(antes);
 		expect(readdirSync(raiz).some((f) => f.includes('.tmp-'))).toBe(false);
 	});
 
-	it('saída dentro do vault é recusada', () => {
-		expect(() => importar({ vault: VAULT, saida: join(VAULT, 'saida') })).toThrow(/dentro do vault/);
+	it('saída dentro do vault é recusada', async () => {
+		await expect(importar({ vault: VAULT, saida: join(VAULT, 'saida') })).rejects.toThrow(/dentro do vault/);
 		expect(existsSync(join(VAULT, 'saida'))).toBe(false);
 	});
 

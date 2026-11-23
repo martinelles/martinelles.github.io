@@ -88,19 +88,19 @@ describe('importador das Missões', () => {
 		const raiz = mkdtempSync(join(tmpdir(), 'painel-missoes-'));
 		afterAll(() => rmSync(raiz, { recursive: true, force: true }));
 
-		it('sem os planos: aviso por cargo e nada gerado', () => {
-			const rel = importar({ vault: VAULT, saida: join(raiz, 'sem') });
+		it('sem os planos: aviso por cargo e nada gerado', async () => {
+			const rel = await importar({ vault: VAULT, saida: join(raiz, 'sem') });
 			expect(rel.missoes).toEqual([]);
 			expect(rel.avisos).toContain('artifacts/missoes/plano-cd.json ausente: missoes-cd.json não gerado');
 		});
 
-		it('com o plano de um cargo: grava missoes-<cargo>.json', () => {
+		it('com o plano de um cargo: grava missoes-<cargo>.json', async () => {
 			const vault = join(raiz, 'vault');
 			cpSync(VAULT, vault, { recursive: true });
 			mkdirSync(join(vault, 'artifacts', 'missoes'), { recursive: true });
 			writeFileSync(join(vault, 'artifacts', 'missoes', 'plano-aud.json'), JSON.stringify(bruto()));
 			const saida = join(raiz, 'com');
-			const rel = importar({ vault, saida });
+			const rel = await importar({ vault, saida });
 			expect(rel.missoes).toEqual(['missoes-aud.json']);
 			expect(JSON.parse(readFileSync(join(saida, 'missoes-aud.json'), 'utf8')).plan).toHaveLength(3);
 		});
