@@ -358,6 +358,22 @@ export function importar({ vault, saida }) {
 	// A página das Missões usa o pacote da derivação (mesmas regras do painel na régua).
 	if (fontesArtefatos['missoes-cgu-2026.html'] !== undefined) artefatos.push(montarDerivacao());
 
+	// Questões C/E das aulas (skill extrair-questoes-aula): ficam em static/conteudo/questoes-aula,
+	// fora do import; o que já está lá é preservado e o índice alimenta a página das Prioridades.
+	/** @type {Record<string, string>} */
+	const questoesAula = {};
+	const pastaQuestoes = join(saida, 'questoes-aula');
+	if (existsSync(pastaQuestoes)) {
+		for (const f of readdirSync(pastaQuestoes)) {
+			if (!f.endsWith('.json')) continue;
+			const conteudo = readFileSync(join(pastaQuestoes, f), 'utf8');
+			arquivos.push({ arquivo: `questoes-aula/${f}`, conteudo });
+			if (f === 'indice.json') Object.assign(questoesAula, JSON.parse(conteudo));
+		}
+	}
+	const prioridades = artefatos.find((a) => a.arquivo === 'artefatos/prioridades.html');
+	if (prioridades) prioridades.conteudo = prioridades.conteudo.replace('/*__QUESTOES__*/ {}', JSON.stringify(questoesAula));
+
 	// Podcasts das aulas: MP3 do vault copiados para /conteudo/audios, com o índice audios.json.
 	const audios = montarAudios(vault, mentoria);
 	// MP3 é binário: o Buffer segue como está (o writeFileSync ignora o encoding para Buffer).

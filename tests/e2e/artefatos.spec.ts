@@ -49,6 +49,11 @@ test('Prioridades: a lista agrupa os subitens pela aula da mentoria, marcada qua
 	await expect(c23).toHaveClass(/feita/);
 	await expect(c23.locator('.marca')).toHaveText('✓');
 	await expect(c23.locator('+ tr.filho')).toHaveClass(/da-feita/);
+	// A aula com questões C/E no painel traz o atalho; a sem, não.
+	const e25 = page.locator('tr.aula[data-aula="5e202dbd-f4b9-4fef-8361-a549e3825c8c"]');
+	await expect(e25).toBeVisible();
+	await expect(e25.getByRole('link', { name: 'questões C/E ↗' })).toHaveAttribute('href', '/questoes/e2-5');
+	await expect(c23.getByRole('link', { name: 'questões C/E ↗' })).toHaveCount(0);
 });
 
 test('os botões do cabeçalho abrem as páginas dentro do app, com as abas, e uma liga à outra', async ({ page }) => {
