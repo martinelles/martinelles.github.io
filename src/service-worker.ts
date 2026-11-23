@@ -13,7 +13,8 @@
  *    passa pelo SW). O gatilho é do próprio SW, e não uma mensagem da página: toda abertura do
  *    app é uma navegação, e o `FetchEvent.waitUntil` da navegação mantém o SW vivo até a
  *    gravação terminar sem atrasar a resposta. Nenhum código de página precisa saber do
- *    pré-cache.
+ *    pré-cache. Exceção: MP3 de podcast não é pré-cacheado (são dezenas de MB); o handler de
+ *    fetch grava no primeiro play, e offline vale o que já foi ouvido.
  *
  * Dois caches: a casca muda a cada build; o conteúdo não tem fingerprint nos nomes de arquivo,
  * então mora em cache próprio cujo nome deriva do `geradoEm` do `indice.json`. Deploy de código
@@ -37,10 +38,14 @@ const CACHE_SEM_INDICE = `${PREFIXO_CACHE_CONTEUDO}sem-indice`;
 const CASCA = '/';
 const PREFIXO_CONTEUDO = '/conteudo/';
 const PREFIXO_ARTEFATOS = '/conteudo/artefatos/';
+const PREFIXO_AUDIOS = '/conteudo/audios/';
 const TODOS = [...new Set([...build, ...files])];
 const SHELL = TODOS.filter((f) => !f.startsWith(PREFIXO_CONTEUDO));
-// Índice e matérias primeiro: sem eles o feed não abre.
-const CONTEUDO = TODOS.filter((f) => f.startsWith(PREFIXO_CONTEUDO)).sort(
+// Índice e matérias primeiro: sem eles o feed não abre. MP3 de podcast fica fora do pré-cache
+// (dezenas de MB por aparelho na instalação): o handler de fetch grava no primeiro play. Os
+// infográficos WebP da mesma pasta continuam (poucos MB, e a página do podcast abre completa).
+const ehMp3DeAula = (f: string) => f.startsWith(PREFIXO_AUDIOS) && f.endsWith('.mp3');
+const CONTEUDO = TODOS.filter((f) => f.startsWith(PREFIXO_CONTEUDO) && !ehMp3DeAula(f)).sort(
 	(a, b) => Number(a.includes('/lote-')) - Number(b.includes('/lote-')) || a.localeCompare(b)
 );
 
@@ -89,8 +94,9 @@ async function resolverChaveConteudo(): Promise<string> {
 let chaveConteudo = '';
 let revalidarTudo = false;
 let preparo: Promise<Cache> | null = null;
-/** Caminhos que o build atual conhece: só eles migram e só eles ficam no cache de conteúdo. */
-const listaConteudo = new Set(CONTEUDO);
+/** Caminhos que o build atual conhece: só eles migram e só eles ficam no cache de conteúdo.
+ * Cobre também o MP3 (que existe no build, só não é pré-cacheado): quem já baixou não perde. */
+const listaConteudo = new Set(TODOS.filter((f) => f.startsWith(PREFIXO_CONTEUDO)));
 const caminhoDe = (req: Request) => new URL(req.url).pathname;
 
 /**

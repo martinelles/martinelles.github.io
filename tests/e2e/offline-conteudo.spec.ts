@@ -54,6 +54,10 @@ test('SC-005: todo o conteúdo fica no cache e o feed funciona offline', async (
 	await expect
 		.poll(() => conteudoNoCache(page), { timeout: 60_000 })
 		.toEqual(expect.arrayContaining([...ESSENCIAIS, ...LOTES]));
+	// MP3 de podcast não é pré-cacheado (o handler grava no primeiro play): a instalação não
+	// baixa dezenas de MB de áudio.
+	const noCache = await conteudoNoCache(page);
+	expect(noCache.filter((c) => c.startsWith('/conteudo/audios/') && c.endsWith('.mp3'))).toEqual([]);
 
 	await context.setOffline(true);
 
