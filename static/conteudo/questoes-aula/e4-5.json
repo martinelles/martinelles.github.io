@@ -1,0 +1,134 @@
+{
+ "aula": "E4·5",
+ "titulo": "5. Contratação e controle de soluções",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Pela IN SGD/ME 94/2022, a contratação de soluções de TIC começa pela seleção do fornecedor, seguida do planejamento e da gestão do contrato."
+  },
+  {
+   "n": 2,
+   "texto": "O estudo técnico preliminar de TIC é elaborado pelos integrantes técnico e requisitante e aprovado também pela autoridade máxima da área de TIC."
+  },
+  {
+   "n": 3,
+   "texto": "A gestão de segurança da informação do órgão pode ser contratada, desde que o contrato preveja níveis mínimos de serviço."
+  },
+  {
+   "n": 4,
+   "texto": "O mapa de gerenciamento de riscos deve ser juntado aos autos ao final do TR, ao final da seleção do fornecedor, uma vez ao ano durante a gestão do contrato e após eventos relevantes."
+  },
+  {
+   "n": 5,
+   "texto": "Contratação de TIC com valor global estimado de R$ 15 milhões depende de aprovação prévia da Secretaria de Governo Digital."
+  },
+  {
+   "n": 6,
+   "texto": "O custo total de propriedade deve ser calculado para todas as soluções levantadas no ETP, inclusive as inviáveis."
+  },
+  {
+   "n": 7,
+   "texto": "Órgão que precise renovar seu centro de dados deve contratar serviços de computação em nuvem, salvo se o ETP demonstrar a inviabilidade."
+  },
+  {
+   "n": 8,
+   "texto": "Na pesquisa de preços de TIC, a estimativa baseada exclusivamente em propostas de fornecedores só é admitida mediante justificativa."
+  },
+  {
+   "n": 9,
+   "texto": "Para item de catálogo de soluções de TIC, o preço estimado é o PMC-TIC, ainda que a pesquisa encontre valor inferior."
+  },
+  {
+   "n": 10,
+   "texto": "É vedada a especificação de bens e serviços de informática que não explicite métodos objetivos de mensuração do desempenho."
+  },
+  {
+   "n": 11,
+   "texto": "Nos contratos de TIC, o termo de recebimento definitivo é assinado pelo fiscal administrativo."
+  },
+  {
+   "n": 12,
+   "texto": "A métrica homem-hora pode ser adotada mediante justificativa, sempre vinculada à entrega de produtos com prazos e qualidade definidos."
+  },
+  {
+   "n": 13,
+   "texto": "Salvo justificativa, os direitos de propriedade intelectual sobre o código-fonte e as bases de dados produzidos no contrato pertencem à contratada."
+  },
+  {
+   "n": 14,
+   "texto": "Os contratos de serviços em nuvem devem assegurar a portabilidade de dados e softwares e a disponibilidade das informações para transferência em prazo adequado."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Pela IN SGD/ME 94/2022, a contratação de soluções de TIC começa pela seleção do fornecedor, seguida do planejamento e da gestão do contrato. A ordem é planejamento, seleção do fornecedor e gestão do contrato."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "O estudo técnico preliminar de TIC é elaborado pelos integrantes técnico e requisitante e aprovado também pela autoridade máxima da área de TIC. IN 94, art. 11, caput e § 2º."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A gestão de segurança da informação do órgão pode ser contratada, desde que o contrato preveja níveis mínimos de serviço. É vedada; só o apoio técnico, sob supervisão exclusiva de servidores, pode ser contratado."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "O mapa de gerenciamento de riscos deve ser juntado aos autos ao final do TR, ao final da seleção do fornecedor, uma vez ao ano durante a gestão do contrato e após eventos relevantes. IN 94, art. 38, § 4º."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Contratação de TIC com valor global estimado de R$ 15 milhões depende de aprovação prévia da Secretaria de Governo Digital. O piso é de R$ 20 milhões, salvo ata de registro de preços aberta a adesões."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O custo total de propriedade deve ser calculado para todas as soluções levantadas no ETP, inclusive as inviáveis. Só para as viáveis; as inviáveis ficam registradas sem cálculo."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Órgão que precise renovar seu centro de dados deve contratar serviços de computação em nuvem, salvo se o ETP demonstrar a inviabilidade. IN 94, Anexo I, item 4.1."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Na pesquisa de preços de TIC, a estimativa baseada exclusivamente em propostas de fornecedores só é admitida mediante justificativa. IN 94, art. 20, § 1º: quando não houver preços de contratações similares ou do Painel de Preços."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Para item de catálogo de soluções de TIC, o preço estimado é o PMC-TIC, ainda que a pesquisa encontre valor inferior. Prevalece o valor menor da pesquisa."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "É vedada a especificação de bens e serviços de informática que não explicite métodos objetivos de mensuração do desempenho. Decreto 7.174/2010, art. 2º, III."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Nos contratos de TIC, o termo de recebimento definitivo é assinado pelo fiscal administrativo. É assinado pelo gestor do contrato."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "A métrica homem-hora pode ser adotada mediante justificativa, sempre vinculada à entrega de produtos com prazos e qualidade definidos. IN 94, art. 5º, VIII."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Salvo justificativa, os direitos de propriedade intelectual sobre o código-fonte e as bases de dados produzidos no contrato pertencem à contratada. Pertencem à Administração (IN 94, art. 17, I, h)."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Os contratos de serviços em nuvem devem assegurar a portabilidade de dados e softwares e a disponibilidade das informações para transferência em prazo adequado. IN 94, Anexo I, item 4.2.2; a Portaria 5.950/2023 acrescenta que sem custo adicional. ≡"
+  }
+ ]
+}

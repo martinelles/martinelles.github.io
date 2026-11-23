@@ -1,0 +1,152 @@
+{
+ "aula": "E3·3",
+ "titulo": "3. Métricas e efeitos das decisões",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na matriz de confusão, a revocação é obtida dividindo-se os verdadeiros positivos pela soma dos verdadeiros positivos com os falsos positivos."
+  },
+  {
+   "n": 2,
+   "texto": "A especificidade corresponde à proporção de negativos reais classificados corretamente, e seu complemento é a taxa de falsos positivos."
+  },
+  {
+   "n": 3,
+   "texto": "Em uma base em que apenas 2% dos pagamentos são fraudulentos, a acurácia é a métrica mais adequada para avaliar um detector de fraudes, por considerar todos os acertos."
+  },
+  {
+   "n": 4,
+   "texto": "O falso negativo corresponde ao erro do tipo II."
+  },
+  {
+   "n": 5,
+   "texto": "A curva ROC relaciona a taxa de verdadeiros positivos, no eixo vertical, com a taxa de falsos positivos, no eixo horizontal, para diferentes limiares."
+  },
+  {
+   "n": 6,
+   "texto": "Uma AUC igual a 0,5 indica um classificador capaz de separar perfeitamente as classes."
+  },
+  {
+   "n": 7,
+   "texto": "Reduzir o limiar de decisão de um classificador tende a aumentar a revocação e a reduzir a precisão."
+  },
+  {
+   "n": 8,
+   "texto": "Um modelo com AUC elevada produz, necessariamente, probabilidades bem calibradas."
+  },
+  {
+   "n": 9,
+   "texto": "O escore de Brier é o erro quadrático médio entre a probabilidade prevista e o desfecho observado, e valores menores indicam previsões melhores."
+  },
+  {
+   "n": 10,
+   "texto": "O RMSE, por elevar os erros ao quadrado antes da média, é mais sensível a erros grandes que o MAE."
+  },
+  {
+   "n": 11,
+   "texto": "O coeficiente de determinação R² varia sempre entre zero e um, inclusive quando calculado em dados de teste."
+  },
+  {
+   "n": 12,
+   "texto": "Se o falso negativo custa quatro vezes mais que o falso positivo e as probabilidades estão calibradas, o limiar que minimiza o custo esperado é 0,2."
+  },
+  {
+   "n": 13,
+   "texto": "Excluir do treino o atributo que indica o grupo sensível é suficiente para impedir que o modelo trate os grupos de forma desigual."
+  },
+  {
+   "n": 14,
+   "texto": "A importância por permutação mede quanto o desempenho do modelo piora quando os valores de um atributo são embaralhados."
+  },
+  {
+   "n": 15,
+   "texto": "A taxa de irregularidades observada entre os contratos selecionados para auditoria pelos maiores escores de risco estima, sem viés, a taxa de irregularidades da carteira inteira."
+  },
+  {
+   "n": 16,
+   "texto": "Pela LGPD, o titular pode solicitar a revisão de decisão tomada unicamente com base em tratamento automatizado de seus dados pessoais que afete seus interesses."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Na matriz de confusão, a revocação é obtida dividindo-se os verdadeiros positivos pela soma dos verdadeiros positivos com os falsos positivos. Essa é a precisão; a revocação divide os verdadeiros positivos pela soma deles com os falsos negativos."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A especificidade corresponde à proporção de negativos reais classificados corretamente, e seu complemento é a taxa de falsos positivos. A TFP, eixo horizontal da curva ROC, é 1 menos a especificidade."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Em uma base em que apenas 2% dos pagamentos são fraudulentos, a acurácia é a métrica mais adequada para avaliar um detector de fraudes, por considerar todos os acertos. Prever sempre \"não fraude\" já daria 98%; com classe rara, usam-se revocação, precisão, F1 ou AUC."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "O falso negativo corresponde ao erro do tipo II. O falso positivo é o erro do tipo I."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A curva ROC relaciona a taxa de verdadeiros positivos, no eixo vertical, com a taxa de falsos positivos, no eixo horizontal, para diferentes limiares. A diagonal corresponde ao classificador aleatório."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Uma AUC igual a 0,5 indica um classificador capaz de separar perfeitamente as classes. AUC de 0,5 é o acaso; a separação perfeita dá AUC igual a 1."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Reduzir o limiar de decisão de um classificador tende a aumentar a revocação e a reduzir a precisão. Mais casos são apontados: acham-se mais positivos, mas entram mais falsos positivos."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Um modelo com AUC elevada produz, necessariamente, probabilidades bem calibradas. A AUC mede a ordenação; qualquer transformação crescente das probabilidades mantém a AUC e pode estragar a calibração."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "O escore de Brier é o erro quadrático médio entre a probabilidade prevista e o desfecho observado, e valores menores indicam previsões melhores. É uma das medidas de calibração."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "O RMSE, por elevar os erros ao quadrado antes da média, é mais sensível a erros grandes que o MAE. Por isso o RMSE é sempre maior ou igual ao MAE."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O coeficiente de determinação R² varia sempre entre zero e um, inclusive quando calculado em dados de teste. Em dados novos, o R² fica negativo quando o modelo erra mais que a previsão pela média."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "Se o falso negativo custa quatro vezes mais que o falso positivo e as probabilidades estão calibradas, o limiar que minimiza o custo esperado é 0,2. O limiar é 1 dividido por 1 mais 4."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Excluir do treino o atributo que indica o grupo sensível é suficiente para impedir que o modelo trate os grupos de forma desigual. Atributos correlacionados funcionam como substitutos do atributo excluído."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "A importância por permutação mede quanto o desempenho do modelo piora quando os valores de um atributo são embaralhados. Medida no teste, ela não dá importância a colunas sem relação com o alvo."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "A taxa de irregularidades observada entre os contratos selecionados para auditoria pelos maiores escores de risco estima, sem viés, a taxa de irregularidades da carteira inteira. A seleção pelo escore concentra os irregulares; só uma amostra aleatória estima a taxa da carteira."
+  },
+  {
+   "n": 16,
+   "r": "C",
+   "comentario": "Pela LGPD, o titular pode solicitar a revisão de decisão tomada unicamente com base em tratamento automatizado de seus dados pessoais que afete seus interesses. É o direito do art. 20 da Lei 13.709/2018. ≡"
+  }
+ ]
+}

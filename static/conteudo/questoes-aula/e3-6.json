@@ -1,0 +1,134 @@
+{
+ "aula": "E3·6",
+ "titulo": "6. Agentes e uso seguro de ferramentas",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Em uma aplicação com chamada de função, o modelo de linguagem devolve um pedido estruturado de uso da ferramenta, e a execução cabe à aplicação que o cerca."
+  },
+  {
+   "n": 2,
+   "texto": "Em um fluxo de trabalho fixo, o modelo de linguagem decide, durante a execução, quais etapas seguir e em que ordem, o que caracteriza um agente autônomo."
+  },
+  {
+   "n": 3,
+   "texto": "No Model Context Protocol, os servidores oferecem recursos, prompts e ferramentas, e as descrições de ferramentas obtidas de servidores não confiáveis devem ser tratadas como não confiáveis."
+  },
+  {
+   "n": 4,
+   "texto": "Para respeitar as permissões dos usuários, basta incluir no prompt de sistema a instrução de que o agente não acesse dados de terceiros."
+  },
+  {
+   "n": 5,
+   "texto": "Pela Portaria SGD/MGI 1.070/2023, o uso de ferramentas de inteligência artificial pela contratada deve ser expressamente autorizado no termo de referência ou em política de governança de IA do órgão referenciada no instrumento convocatório."
+  },
+  {
+   "n": 6,
+   "texto": "A rastreabilidade das ações de um agente se satisfaz com o registro da resposta final entregue ao usuário."
+  },
+  {
+   "n": 7,
+   "texto": "Para a Portaria MGI 3.485/2026, supervisão humana é a capacidade humana de monitorar e anular operações ou decisões de uma aplicação de IA, mantendo a responsabilidade humana final."
+  },
+  {
+   "n": 8,
+   "texto": "Na Portaria MGI 3.485/2026, a supervisão humana tem intensidade única para todas as aplicações de IA, independentemente do risco."
+  },
+  {
+   "n": 9,
+   "texto": "Na injeção indireta de instruções, a instrução maliciosa chega ao modelo por meio de conteúdo externo processado pela aplicação, como uma página da web ou um documento, sem que o atacante interaja diretamente com ela. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 10,
+   "texto": "A técnica de geração aumentada por recuperação elimina a vulnerabilidade à injeção de instruções, pois restringe o modelo a fontes selecionadas."
+  },
+  {
+   "n": 11,
+   "texto": "A saída de um modelo de linguagem deve ser tratada como entrada não confiável antes de ser usada em consultas a banco de dados ou em comandos do sistema."
+  },
+  {
+   "n": 12,
+   "texto": "A Portaria MGI 3.485/2026 permite o compartilhamento de dados pessoais com plataformas públicas de IA generativa, desde que para uso interno do ministério."
+  },
+  {
+   "n": 13,
+   "texto": "O OWASP Top 10 para aplicações de LLM é norma de cumprimento obrigatório para órgãos que desenvolvem soluções com IA generativa."
+  },
+  {
+   "n": 14,
+   "texto": "Se cada passo de um agente tem 95% de chance de acerto e os erros são independentes, uma tarefa de dez passos tem cerca de 60% de chance de ser concluída sem erro. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "Em uma aplicação com chamada de função, o modelo de linguagem devolve um pedido estruturado de uso da ferramenta, e a execução cabe à aplicação que o cerca. O modelo só produz texto; os controles ficam na aplicação."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Em um fluxo de trabalho fixo, o modelo de linguagem decide, durante a execução, quais etapas seguir e em que ordem, o que caracteriza um agente autônomo. No fluxo fixo, as etapas estão no código; quem as escolhe durante a execução é o agente."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "No Model Context Protocol, os servidores oferecem recursos, prompts e ferramentas, e as descrições de ferramentas obtidas de servidores não confiáveis devem ser tratadas como não confiáveis. A especificação também exige consentimento do usuário antes de invocar ferramentas."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Para respeitar as permissões dos usuários, basta incluir no prompt de sistema a instrução de que o agente não acesse dados de terceiros. A autorização é aplicada fora do modelo, a cada pedido."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Pela Portaria SGD/MGI 1.070/2023, o uso de ferramentas de inteligência artificial pela contratada deve ser expressamente autorizado no termo de referência ou em política de governança de IA do órgão referenciada no instrumento convocatório. É o item 8.7, incluído em 2026."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A rastreabilidade das ações de um agente se satisfaz com o registro da resposta final entregue ao usuário. A trilha registra cada passo: ferramenta, argumentos, resultado, versão, fontes e aprovação."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Para a Portaria MGI 3.485/2026, supervisão humana é a capacidade humana de monitorar e anular operações ou decisões de uma aplicação de IA, mantendo a responsabilidade humana final. É a definição do art. 5º, III."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Na Portaria MGI 3.485/2026, a supervisão humana tem intensidade única para todas as aplicações de IA, independentemente do risco. O art. 6º manda que seja proporcional ao risco sobre direitos e bens públicos. Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Na injeção indireta de instruções, a instrução maliciosa chega ao modelo por meio de conteúdo externo processado pela aplicação, como uma página da web ou um documento, sem que o atacante interaja diretamente com ela. O atacante só precisa controlar um conteúdo que o agente vai ler."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A técnica de geração aumentada por recuperação elimina a vulnerabilidade à injeção de instruções, pois restringe o modelo a fontes selecionadas. O próprio documento recuperado pode carregar a instrução maliciosa."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "A saída de um modelo de linguagem deve ser tratada como entrada não confiável antes de ser usada em consultas a banco de dados ou em comandos do sistema. É o controle do risco de tratamento inadequado da saída (LLM05)."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A Portaria MGI 3.485/2026 permite o compartilhamento de dados pessoais com plataformas públicas de IA generativa, desde que para uso interno do ministério. O art. 16 limita essas plataformas a informações públicas; dado não público depende de avaliação prévia de riscos e garantias."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O OWASP Top 10 para aplicações de LLM é norma de cumprimento obrigatório para órgãos que desenvolvem soluções com IA generativa. É referencial de conscientização, não norma obrigatória."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Se cada passo de um agente tem 95% de chance de acerto e os erros são independentes, uma tarefa de dez passos tem cerca de 60% de chance de ser concluída sem erro. 0,95 elevado a 10 dá 0,60. ≡"
+  }
+ ]
+}

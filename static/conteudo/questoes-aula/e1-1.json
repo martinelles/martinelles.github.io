@@ -1,0 +1,152 @@
+{
+ "aula": "E1·1",
+ "titulo": "1. Exploração e descrição",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O número do CNPJ de um fornecedor, por ser registrado em algarismos, é uma variável quantitativa discreta."
+  },
+  {
+   "n": 2,
+   "texto": "A altura de uma pessoa e o valor de um contrato são exemplos de variáveis quantitativas contínuas."
+  },
+  {
+   "n": 3,
+   "texto": "Para uma variável medida em escala de razão, como o valor em reais, apenas a moda e a mediana podem ser usadas como medidas de posição."
+  },
+  {
+   "n": 4,
+   "texto": "Se uma variável dicotômica for codificada com 0 e 1, a média aritmética dos códigos será igual à proporção de observações codificadas com 1."
+  },
+  {
+   "n": 5,
+   "texto": "Em uma tabela de distribuição de frequências, o tamanho da amostra é igual à soma das frequências absolutas acumuladas de todas as classes."
+  },
+  {
+   "n": 6,
+   "texto": "Em uma distribuição com forte assimetria à direita, a média tende a superar a mediana."
+  },
+  {
+   "n": 7,
+   "texto": "A soma dos desvios dos dados em relação à média aritmética é igual a zero. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 8,
+   "texto": "Somar R$ 1.000,00 a todos os valores de um conjunto aumenta o desvio padrão do conjunto em R$ 1.000,00."
+  },
+  {
+   "n": 9,
+   "texto": "Multiplicando-se todos os valores de um conjunto por 3, a variância fica multiplicada por 3."
+  },
+  {
+   "n": 10,
+   "texto": "O coeficiente de variação é uma medida adimensional, adequada para comparar a dispersão de variáveis expressas em unidades diferentes."
+  },
+  {
+   "n": 11,
+   "texto": "No box plot, a caixa central contém aproximadamente 75% das observações."
+  },
+  {
+   "n": 12,
+   "texto": "O diagrama de dispersão é adequado para representar a relação entre a área construída e o valor de contratos de obras."
+  },
+  {
+   "n": 13,
+   "texto": "Dois conjuntos de dados com a mesma média, a mesma variância e o mesmo coeficiente de correlação apresentam, necessariamente, o mesmo padrão no diagrama de dispersão."
+  },
+  {
+   "n": 14,
+   "texto": "Se a taxa de pedidos atendidos no prazo aumentou em cada tipo de pedido, a taxa geral do órgão também aumentou, necessariamente."
+  },
+  {
+   "n": 15,
+   "texto": "Uma taxa que passa de 5% para 7% tem aumento de 2 pontos percentuais, o que corresponde a uma variação de 40%."
+  },
+  {
+   "n": 16,
+   "texto": "Em um conjunto de dez observações, nenhuma delas pode ter escore z, calculado com a média e o desvio padrão amostrais, maior que 3 em valor absoluto. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O número do CNPJ de um fornecedor, por ser registrado em algarismos, é uma variável quantitativa discreta. O CNPJ é um rótulo: variável qualitativa nominal."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A altura de uma pessoa e o valor de um contrato são exemplos de variáveis quantitativas contínuas. As duas são medidas em escala real."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Para uma variável medida em escala de razão, como o valor em reais, apenas a moda e a mediana podem ser usadas como medidas de posição. Na escala de razão valem todas as estatísticas descritivas."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Se uma variável dicotômica for codificada com 0 e 1, a média aritmética dos códigos será igual à proporção de observações codificadas com 1. A soma dos códigos é o número de uns, e a média divide esse número por n."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Em uma tabela de distribuição de frequências, o tamanho da amostra é igual à soma das frequências absolutas acumuladas de todas as classes. O tamanho da amostra é a última frequência acumulada."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Em uma distribuição com forte assimetria à direita, a média tende a superar a mediana. A cauda de valores altos puxa a média para cima."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "A soma dos desvios dos dados em relação à média aritmética é igual a zero. É uma propriedade da média."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Somar R$ 1.000,00 a todos os valores de um conjunto aumenta o desvio padrão do conjunto em R$ 1.000,00. A soma de uma constante não altera o desvio padrão."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Multiplicando-se todos os valores de um conjunto por 3, a variância fica multiplicada por 3. A variância fica multiplicada por 9; o desvio padrão, por 3."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "O coeficiente de variação é uma medida adimensional, adequada para comparar a dispersão de variáveis expressas em unidades diferentes. É o desvio padrão dividido pela média, e as unidades se cancelam. Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "No box plot, a caixa central contém aproximadamente 75% das observações. A caixa vai de Q1 a Q3 e contém os 50% centrais."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "O diagrama de dispersão é adequado para representar a relação entre a área construída e o valor de contratos de obras. É o gráfico para a relação entre duas variáveis quantitativas."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Dois conjuntos de dados com a mesma média, a mesma variância e o mesmo coeficiente de correlação apresentam, necessariamente, o mesmo padrão no diagrama de dispersão. O quarteto de Anscombe mostra padrões diferentes com as mesmas estatísticas."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Se a taxa de pedidos atendidos no prazo aumentou em cada tipo de pedido, a taxa geral do órgão também aumentou, necessariamente. A mudança de composição pode fazer a taxa geral cair (paradoxo de Simpson)."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "Uma taxa que passa de 5% para 7% tem aumento de 2 pontos percentuais, o que corresponde a uma variação de 40%. A diferença é de 2 pontos percentuais, e 2 dividido por 5 é 40%."
+  },
+  {
+   "n": 16,
+   "r": "C",
+   "comentario": "Em um conjunto de dez observações, nenhuma delas pode ter escore z, calculado com a média e o desvio padrão amostrais, maior que 3 em valor absoluto. O teto é (n - 1)/ √ n, cerca de 2,85 para dez observações. ≡"
+  }
+ ]
+}

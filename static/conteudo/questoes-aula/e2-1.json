@@ -1,0 +1,134 @@
+{
+ "aula": "E2·1",
+ "titulo": "1. Modelagem e arquiteturas",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O esquema de uma relação descreve a sua estrutura, isto é, o seu nome e os seus atributos, e não as tuplas armazenadas."
+  },
+  {
+   "n": 2,
+   "texto": "Em um banco orientado a documentos, a coleção equivale a uma linha do modelo relacional, e o documento equivale a uma tabela."
+  },
+  {
+   "n": 3,
+   "texto": "No esquema floco de neve, as tabelas de dimensão são normalizadas, o que reduz a redundância e aumenta o número de junções nas consultas."
+  },
+  {
+   "n": 4,
+   "texto": "Na dimensão de mudança lenta do tipo 2, o valor antigo do atributo é sobrescrito pelo novo, sem preservação do histórico."
+  },
+  {
+   "n": 5,
+   "texto": "A operação slice fixa um valor de uma dimensão do cubo, enquanto a operação dice restringe valores de duas ou mais dimensões."
+  },
+  {
+   "n": 6,
+   "texto": "A similaridade de cosseno entre dois vetores aumenta quando um deles é multiplicado por um número positivo."
+  },
+  {
+   "n": 7,
+   "texto": "Uma tabela que está na primeira forma normal e cuja única chave candidata tem um só atributo está também na segunda forma normal."
+  },
+  {
+   "n": 8,
+   "texto": "Uma tabela na terceira forma normal está necessariamente na forma normal de Boyce-Codd."
+  },
+  {
+   "n": 9,
+   "texto": "A restrição de integridade referencial é violada sempre que a chave estrangeira recebe valor nulo."
+  },
+  {
+   "n": 10,
+   "texto": "No protocolo de bloqueio em duas fases, depois que a transação libera o primeiro bloqueio, ela não pode obter nenhum bloqueio novo. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 11,
+   "texto": "Segundo o teorema CAP, um sistema distribuído pode garantir consistência e disponibilidade ao mesmo tempo durante uma partição de rede."
+  },
+  {
+   "n": 12,
+   "texto": "Na consistência eventual, se não houver novas atualizações, todas as réplicas acabam devolvendo o último valor gravado."
+  },
+  {
+   "n": 13,
+   "texto": "O data lake adota o esquema na escrita, de modo que os dados só são armazenados depois de estruturados e limpos."
+  },
+  {
+   "n": 14,
+   "texto": "No data mesh, a governança é centralizada em uma equipe de dados, que responde pela qualidade de todos os produtos de dados. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "O esquema de uma relação descreve a sua estrutura, isto é, o seu nome e os seus atributos, e não as tuplas armazenadas. O conjunto das tuplas num momento é a instância da relação."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Em um banco orientado a documentos, a coleção equivale a uma linha do modelo relacional, e o documento equivale a uma tabela. É o contrário: a coleção equivale à tabela, e o documento, à linha."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "No esquema floco de neve, as tabelas de dimensão são normalizadas, o que reduz a redundância e aumenta o número de junções nas consultas. No esquema estrela, as dimensões são desnormalizadas."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Na dimensão de mudança lenta do tipo 2, o valor antigo do atributo é sobrescrito pelo novo, sem preservação do histórico. Isso descreve o tipo 1; o tipo 2 cria nova linha, com nova chave substituta e vigência."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A operação slice fixa um valor de uma dimensão do cubo, enquanto a operação dice restringe valores de duas ou mais dimensões. O resultado do dice é um subcubo."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A similaridade de cosseno entre dois vetores aumenta quando um deles é multiplicado por um número positivo. O cosseno depende só do ângulo: multiplicar o vetor por um número positivo não altera a similaridade."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Uma tabela que está na primeira forma normal e cuja única chave candidata tem um só atributo está também na segunda forma normal. Sem chave composta, não existe dependência parcial."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Uma tabela na terceira forma normal está necessariamente na forma normal de Boyce-Codd. Vale o contrário: a FNBC é mais rígida e implica a 3FN."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A restrição de integridade referencial é violada sempre que a chave estrangeira recebe valor nulo. O nulo é permitido, salvo se a coluna for NOT NULL; a violação é o valor inexistente na tabela referenciada. Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "No protocolo de bloqueio em duas fases, depois que a transação libera o primeiro bloqueio, ela não pode obter nenhum bloqueio novo. É a passagem da fase de crescimento para a de encolhimento."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Segundo o teorema CAP, um sistema distribuído pode garantir consistência e disponibilidade ao mesmo tempo durante uma partição de rede. Durante a partição, é preciso escolher uma das duas."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "Na consistência eventual, se não houver novas atualizações, todas as réplicas acabam devolvendo o último valor gravado. Até a convergência, uma leitura pode devolver valor antigo."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O data lake adota o esquema na escrita, de modo que os dados só são armazenados depois de estruturados e limpos. O data lake usa esquema na leitura; o esquema na escrita é do data warehouse."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "No data mesh, a governança é centralizada em uma equipe de dados, que responde pela qualidade de todos os produtos de dados. A governança é federada, e a qualidade de cada produto é responsabilidade do domínio que o publica. ≡"
+  }
+ ]
+}

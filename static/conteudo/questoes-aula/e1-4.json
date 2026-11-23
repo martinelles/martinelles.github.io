@@ -1,0 +1,134 @@
+{
+ "aula": "E1·4",
+ "titulo": "4. Programação para análise",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Em Python, os blocos de código são delimitados por chaves, e a indentação serve apenas para facilitar a leitura."
+  },
+  {
+   "n": 2,
+   "texto": "A expressão -7 // 2 resulta em -4 ."
+  },
+  {
+   "n": 3,
+   "texto": "Por ter tipagem dinâmica, o Python avalia 3 + '2' como 5 ."
+  },
+  {
+   "n": 4,
+   "texto": "Listas são imutáveis e, por isso, podem ser usadas como chaves de dicionário."
+  },
+  {
+   "n": 5,
+   "texto": "Depois de a = [1, 2] e a.append([3, 4]) , a lista a tem quatro elementos."
+  },
+  {
+   "n": 6,
+   "texto": "Se b = a e a é uma lista, alterar um elemento de a altera também o que se vê por b ."
+  },
+  {
+   "n": 7,
+   "texto": "A cláusula else de um laço for é executada quando o laço é interrompido por break."
+  },
+  {
+   "n": 8,
+   "texto": "O comando print(list(range(10, 0, -3))) exibe [10, 7, 4, 1] ."
+  },
+  {
+   "n": 9,
+   "texto": "O valor padrão de um parâmetro é avaliado uma única vez, na definição da função, de modo que uma lista usada como valor padrão é compartilhada entre as chamadas."
+  },
+  {
+   "n": 10,
+   "texto": "Na definição def f(*args, **kwargs) , args recebe um dicionário com os argumentos nomeados, e kwargs , uma tupla com os posicionais."
+  },
+  {
+   "n": 11,
+   "texto": "O bloco subordinado a if __name__ == '__main__': é executado quando o módulo é importado por outro módulo."
+  },
+  {
+   "n": 12,
+   "texto": "Abrir um arquivo existente no modo 'w' apaga o conteúdo anterior; para acrescentar ao final, usa-se o modo 'a'."
+  },
+  {
+   "n": 13,
+   "texto": "Na estrutura try, a cláusula finally é executada mesmo quando nenhuma exceção ocorre."
+  },
+  {
+   "n": 14,
+   "texto": "No pandas, df.loc[1:3] e df.iloc[1:3] devolvem sempre as mesmas linhas."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Em Python, os blocos de código são delimitados por chaves, e a indentação serve apenas para facilitar a leitura. Os blocos são definidos pela indentação; as chaves delimitam dicionários e conjuntos."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A expressão -7 // 2 resulta em -4 . A divisão inteira arredonda para baixo, em direção a menos infinito."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Por ter tipagem dinâmica, o Python avalia 3 + '2' como 5 . A tipagem também é forte: a soma de inteiro com texto gera TypeError."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Listas são imutáveis e, por isso, podem ser usadas como chaves de dicionário. As listas são mutáveis e não são hasheáveis; a tentativa gera TypeError. Tuplas de valores imutáveis podem ser chaves."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Depois de a = [1, 2] e a.append([3, 4]) , a lista a tem quatro elementos. O append acrescenta um elemento só, a lista [3, 4]; a lista fica com três elementos. O extend acrescentaria dois."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Se b = a e a é uma lista, alterar um elemento de a altera também o que se vê por b . Os dois nomes referenciam o mesmo objeto."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A cláusula else de um laço for é executada quando o laço é interrompido por break. É o contrário: o else roda quando o laço termina sem break."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "O comando print(list(range(10, 0, -3))) exibe [10, 7, 4, 1] . O passo negativo conta para baixo, e o fim (0) não entra."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "O valor padrão de um parâmetro é avaliado uma única vez, na definição da função, de modo que uma lista usada como valor padrão é compartilhada entre as chamadas. É a armadilha do valor padrão mutável; usa-se None e cria-se a lista dentro da função."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Na definição def f(*args, **kwargs) , args recebe um dicionário com os argumentos nomeados, e kwargs , uma tupla com os posicionais. É o inverso: args é uma tupla de posicionais, e kwargs, um dicionário de nomeados."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O bloco subordinado a if __name__ == '__main__': é executado quando o módulo é importado por outro módulo. Na importação, __name__ vale o nome do módulo; o bloco roda só quando o arquivo é executado como programa."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "Abrir um arquivo existente no modo 'w' apaga o conteúdo anterior; para acrescentar ao final, usa-se o modo 'a'. O modo 'w' trunca o arquivo; o 'a' escreve no fim."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "Na estrutura try, a cláusula finally é executada mesmo quando nenhuma exceção ocorre. O finally roda sempre, com ou sem exceção, e mesmo diante de return."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "No pandas, df.loc[1:3] e df.iloc[1:3] devolvem sempre as mesmas linhas. O loc trabalha com rótulos e inclui o 3; o iloc trabalha com posições e exclui a posição 3. ≡"
+  }
+ ]
+}

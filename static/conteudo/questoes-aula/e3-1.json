@@ -1,0 +1,152 @@
+{
+ "aula": "E3·1",
+ "titulo": "1. Seleção e construção de modelos",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Em um modelo supervisionado para identificar contratos irregulares, os dados de treino dispensam a informação sobre quais contratos foram considerados irregulares, pois o algoritmo descobre sozinho as classes."
+  },
+  {
+   "n": 2,
+   "texto": "A regressão logística, por produzir uma probabilidade entre zero e um, é empregada em problemas de classificação."
+  },
+  {
+   "n": 3,
+   "texto": "A análise de agrupamentos é técnica supervisionada adequada para atribuir cada fornecedor a uma das classes de risco previamente definidas pela auditoria."
+  },
+  {
+   "n": 4,
+   "texto": "No autotreinamento, as previsões mais confiantes do modelo sobre os dados sem rótulo passam a ser usadas como rótulos em novas rodadas de treino, o que pode propagar erros do próprio modelo."
+  },
+  {
+   "n": 5,
+   "texto": "No aprendizado por reforço, o agente ajusta sua política com base em recompensas, que podem chegar com atraso, e busca maximizar o retorno acumulado."
+  },
+  {
+   "n": 6,
+   "texto": "Em uma análise de componentes principais feita sobre a matriz de correlação de 8 variáveis, a soma dos autovalores é igual a 8."
+  },
+  {
+   "n": 7,
+   "texto": "Na análise de componentes principais, a proporção da variância explicada por um componente é dada pelo seu autovalor dividido pela soma de todos os autovalores."
+  },
+  {
+   "n": 8,
+   "texto": "A análise de componentes principais reduz o número de observações da base, eliminando os registros redundantes."
+  },
+  {
+   "n": 9,
+   "texto": "No k-means, o número de grupos é definido antes da execução, e cada objeto é atribuído ao centroide mais próximo."
+  },
+  {
+   "n": 10,
+   "texto": "No Isolation Forest, são considerados anômalos os registros que exigem mais divisões aleatórias para serem isolados."
+  },
+  {
+   "n": 11,
+   "texto": "Um modelo com desempenho muito superior nos dados de treino em relação aos dados de validação apresenta indício de subajuste."
+  },
+  {
+   "n": 12,
+   "texto": "A regularização L1 pode zerar coeficientes, razão pela qual também funciona como método de seleção de atributos."
+  },
+  {
+   "n": 13,
+   "texto": "No bagging, os modelos são treinados de forma independente, em amostras obtidas por reamostragem com reposição, e suas previsões são combinadas por votação ou média."
+  },
+  {
+   "n": 14,
+   "texto": "No boosting, os modelos são treinados em paralelo e de forma independente, o que o torna essencialmente uma técnica de redução de variância."
+  },
+  {
+   "n": 15,
+   "texto": "Na random forest, além da amostra bootstrap, cada divisão de cada árvore considera apenas um subconjunto sorteado dos atributos."
+  },
+  {
+   "n": 16,
+   "texto": "Se 90% dos contratos de uma base são regulares, um classificador que sempre prevê a classe regular obtém acurácia próxima de 90% sem identificar nenhum contrato irregular."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Em um modelo supervisionado para identificar contratos irregulares, os dados de treino dispensam a informação sobre quais contratos foram considerados irregulares, pois o algoritmo descobre sozinho as classes. O supervisionado exige o rótulo de cada exemplo de treino; descobrir estrutura sem rótulo é o não supervisionado."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A regressão logística, por produzir uma probabilidade entre zero e um, é empregada em problemas de classificação. A classe sai da comparação da probabilidade com um limiar."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A análise de agrupamentos é técnica supervisionada adequada para atribuir cada fornecedor a uma das classes de risco previamente definidas pela auditoria. Atribuir classes já definidas é classificação; o agrupamento forma grupos sem rótulo."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "No autotreinamento, as previsões mais confiantes do modelo sobre os dados sem rótulo passam a ser usadas como rótulos em novas rodadas de treino, o que pode propagar erros do próprio modelo. É o viés de confirmação dos pseudo-rótulos."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "No aprendizado por reforço, o agente ajusta sua política com base em recompensas, que podem chegar com atraso, e busca maximizar o retorno acumulado. Não há rótulo da ação certa; há o sinal de recompensa ao longo do tempo."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Em uma análise de componentes principais feita sobre a matriz de correlação de 8 variáveis, a soma dos autovalores é igual a 8. Cada variável padronizada tem variância 1, e a soma dos autovalores é a variância total."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Na análise de componentes principais, a proporção da variância explicada por um componente é dada pelo seu autovalor dividido pela soma de todos os autovalores. Não é a razão entre número de componentes e número de variáveis."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A análise de componentes principais reduz o número de observações da base, eliminando os registros redundantes. Ela reduz o número de variáveis; as observações continuam as mesmas."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "No k-means, o número de grupos é definido antes da execução, e cada objeto é atribuído ao centroide mais próximo. O k é hiperparâmetro informado; o DBSCAN é que dispensa o número de grupos."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "No Isolation Forest, são considerados anômalos os registros que exigem mais divisões aleatórias para serem isolados. O anômalo é isolado com poucas divisões, porque está longe dos demais."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Um modelo com desempenho muito superior nos dados de treino em relação aos dados de validação apresenta indício de subajuste. Esse é o sinal de sobreajuste; no subajuste, o desempenho é ruim nos dois."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "A regularização L1 pode zerar coeficientes, razão pela qual também funciona como método de seleção de atributos. A L2 encolhe os coeficientes, mas raramente os zera."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "No bagging, os modelos são treinados de forma independente, em amostras obtidas por reamostragem com reposição, e suas previsões são combinadas por votação ou média. É o bootstrap aggregating, que reduz a variância."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "No boosting, os modelos são treinados em paralelo e de forma independente, o que o torna essencialmente uma técnica de redução de variância. O boosting é sequencial, cada modelo corrigindo os anteriores, e reduz principalmente o viés."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "Na random forest, além da amostra bootstrap, cada divisão de cada árvore considera apenas um subconjunto sorteado dos atributos. O sorteio de atributos torna as árvores mais diferentes entre si."
+  },
+  {
+   "n": 16,
+   "r": "C",
+   "comentario": "Se 90% dos contratos de uma base são regulares, um classificador que sempre prevê a classe regular obtém acurácia próxima de 90% sem identificar nenhum contrato irregular. É o ZeroR, referência mínima a ser superada. ≡"
+  }
+ ]
+}

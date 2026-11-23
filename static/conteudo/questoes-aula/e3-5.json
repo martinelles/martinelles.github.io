@@ -1,0 +1,143 @@
+{
+ "aula": "E3·5",
+ "titulo": "5. Linguagem natural e modelos generativos",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Em um pipeline de pré-processamento, a lematização deve necessariamente preceder a tokenização, pois a segmentação do texto depende das formas canônicas das palavras."
+  },
+  {
+   "n": 2,
+   "texto": "A stemização reduz as palavras a um radical por remoção de afixos, e o resultado nem sempre é uma palavra válida do idioma."
+  },
+  {
+   "n": 3,
+   "texto": "O reconhecimento de entidades nomeadas é tipicamente resolvido por agrupamento com k-means, que separa nomes de pessoas e de lugares em clusters."
+  },
+  {
+   "n": 4,
+   "texto": "No TF-IDF, um termo que aparece muitas vezes em um documento e em poucos outros documentos do conjunto recebe peso elevado."
+  },
+  {
+   "n": 5,
+   "texto": "O modelo saco de palavras é capaz de capturar relações de sinonímia entre palavras."
+  },
+  {
+   "n": 6,
+   "texto": "Embeddings são representações vetoriais densas, nas quais palavras usadas em contextos semelhantes tendem a ficar próximas."
+  },
+  {
+   "n": 7,
+   "texto": "O word2vec gera vetores distintos para a mesma palavra conforme a frase em que ela aparece."
+  },
+  {
+   "n": 8,
+   "texto": "A similaridade de cosseno entre dois vetores não se altera quando um deles é multiplicado por um número positivo."
+  },
+  {
+   "n": 9,
+   "texto": "A IA generativa baseia-se prioritariamente em aprendizado supervisionado para criar novas amostras semelhantes às de treinamento. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 10,
+   "texto": "Na geração de texto, temperaturas mais altas achatam a distribuição de probabilidade dos tokens e tornam as respostas mais variadas."
+  },
+  {
+   "n": 11,
+   "texto": "O RAG permite incorporar documentos normativos ao processo de geração de respostas, com rastreabilidade das fontes e sem necessidade de retreinar o modelo-base."
+  },
+  {
+   "n": 12,
+   "texto": "A engenharia de prompts ajusta os pesos do modelo a cada interação, o que explica a melhora das respostas com exemplos no prompt."
+  },
+  {
+   "n": 13,
+   "texto": "O ajuste fino de um LLM reduz o número de parâmetros do modelo, o que barateia a inferência."
+  },
+  {
+   "n": 14,
+   "texto": "Ferramentas de IA generativa treinadas com grandes volumes de dados não reproduzem tendências discriminatórias presentes na sociedade."
+  },
+  {
+   "n": 15,
+   "texto": "Métricas como BLEU e ROUGE medem a sobreposição de palavras entre a resposta e uma referência, e não a veracidade do conteúdo. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Em um pipeline de pré-processamento, a lematização deve necessariamente preceder a tokenização, pois a segmentação do texto depende das formas canônicas das palavras. É o contrário: a lematização opera sobre tokens já separados."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A stemização reduz as palavras a um radical por remoção de afixos, e o resultado nem sempre é uma palavra válida do idioma. Fiscalização, fiscalizar e fiscalizou viram \"fiscaliz\"."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O reconhecimento de entidades nomeadas é tipicamente resolvido por agrupamento com k-means, que separa nomes de pessoas e de lugares em clusters. O NER é rotulagem de sequência, em geral supervisionada."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "No TF-IDF, um termo que aparece muitas vezes em um documento e em poucos outros documentos do conjunto recebe peso elevado. É a combinação de TF alto com IDF alto."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "O modelo saco de palavras é capaz de capturar relações de sinonímia entre palavras. Cada palavra é uma coluna independente; sinônimos ficam tão distantes quanto palavras sem relação."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Embeddings são representações vetoriais densas, nas quais palavras usadas em contextos semelhantes tendem a ficar próximas. É a hipótese distribucional."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O word2vec gera vetores distintos para a mesma palavra conforme a frase em que ela aparece. O word2vec é estático; vetores que mudam com o contexto são os dos transformers, como o BERT."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "A similaridade de cosseno entre dois vetores não se altera quando um deles é multiplicado por um número positivo. Ela depende só do ângulo, e não do comprimento."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A IA generativa baseia-se prioritariamente em aprendizado supervisionado para criar novas amostras semelhantes às de treinamento. Predomina o aprendizado autossupervisionado ou não supervisionado, por falta de rótulos em escala. Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "Na geração de texto, temperaturas mais altas achatam a distribuição de probabilidade dos tokens e tornam as respostas mais variadas. Temperaturas baixas concentram a escolha no token mais provável."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "O RAG permite incorporar documentos normativos ao processo de geração de respostas, com rastreabilidade das fontes e sem necessidade de retreinar o modelo-base. Os trechos recuperados entram no prompt; os pesos não mudam."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A engenharia de prompts ajusta os pesos do modelo a cada interação, o que explica a melhora das respostas com exemplos no prompt. O few-shot aprende no contexto, sem alterar parâmetros."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O ajuste fino de um LLM reduz o número de parâmetros do modelo, o que barateia a inferência. O modelo ajustado mantém o número de parâmetros; quem o reduz é a destilação (a quantização reduz a memória por parâmetro)."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ferramentas de IA generativa treinadas com grandes volumes de dados não reproduzem tendências discriminatórias presentes na sociedade. Volume não elimina viés; os dados podem sub-representar grupos ou carregar preconceitos."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "Métricas como BLEU e ROUGE medem a sobreposição de palavras entre a resposta e uma referência, e não a veracidade do conteúdo. No exemplo da seção 8, a frase com prazo errado ainda teve sobreposição alta. ≡"
+  }
+ ]
+}

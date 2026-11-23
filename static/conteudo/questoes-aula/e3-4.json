@@ -1,0 +1,143 @@
+{
+ "aula": "E3·4",
+ "titulo": "4. Redes neurais",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O perceptron de uma única camada classifica corretamente os quatro casos da função OU exclusivo, desde que a taxa de aprendizado seja suficientemente pequena."
+  },
+  {
+   "n": 2,
+   "texto": "Em uma rede neural de alimentação direta, a informação flui da camada de entrada para a de saída, passando pelas camadas ocultas, sem ciclos."
+  },
+  {
+   "n": 3,
+   "texto": "Se todas as funções de ativação de uma rede multicamadas forem lineares, a rede representará fronteiras de decisão não lineares, desde que tenha camadas ocultas suficientes."
+  },
+  {
+   "n": 4,
+   "texto": "A sigmoide é adequada à saída de uma classificação binária, mas, nas camadas ocultas de redes profundas, contribui para o problema do gradiente que desaparece."
+  },
+  {
+   "n": 5,
+   "texto": "A retropropagação atualiza os pesos sorteando um único exemplo por iteração, ao passo que o gradiente descendente estocástico calcula os gradientes camada por camada, da saída para a entrada."
+  },
+  {
+   "n": 6,
+   "texto": "Uma taxa de aprendizado excessivamente alta pode fazer a perda oscilar ou divergir durante o treinamento."
+  },
+  {
+   "n": 7,
+   "texto": "Na camada de entrada de uma rede multicamadas, os nós aplicam funções de ativação aos atributos antes de repassá-los à primeira camada oculta."
+  },
+  {
+   "n": 8,
+   "texto": "O dropout desativa aleatoriamente neurônios no treinamento e também na inferência, para que as previsões variem."
+  },
+  {
+   "n": 9,
+   "texto": "Quando a perda de treinamento continua caindo e a de validação passa a subir, há indício de sobreajuste, e a parada antecipada interromperia o treino perto do mínimo da perda de validação."
+  },
+  {
+   "n": 10,
+   "texto": "Nas redes convolucionais, o mesmo filtro é aplicado em diferentes posições da imagem, o que reduz o número de parâmetros em relação a uma camada totalmente conectada."
+  },
+  {
+   "n": 11,
+   "texto": "A camada de pooling possui pesos próprios, ajustados pela retropropagação para selecionar as características mais relevantes."
+  },
+  {
+   "n": 12,
+   "texto": "A LSTM usa portas para controlar o que é mantido, gravado e exposto em sua célula de memória, o que reduz o problema do gradiente que desaparece em sequências longas."
+  },
+  {
+   "n": 13,
+   "texto": "O transformer processa os tokens um de cada vez, na ordem em que aparecem, porque seu mecanismo de atenção depende de conexões recorrentes."
+  },
+  {
+   "n": 14,
+   "texto": "Os transformers superaram as redes recorrentes em textos longos porque o custo da atenção cresce de forma linear com o comprimento da sequência, abaixo do custo das RNNs."
+  },
+  {
+   "n": 15,
+   "texto": "Na transferência de aprendizado por extração de atributos, as camadas da rede pré-treinada permanecem congeladas e apenas a nova camada de saída é treinada com os dados da tarefa-alvo."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O perceptron de uma única camada classifica corretamente os quatro casos da função OU exclusivo, desde que a taxa de aprendizado seja suficientemente pequena. Nenhuma taxa resolve: o OU exclusivo não é linearmente separável, e o perceptron é um classificador linear."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Em uma rede neural de alimentação direta, a informação flui da camada de entrada para a de saída, passando pelas camadas ocultas, sem ciclos. É a definição de rede feedforward."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Se todas as funções de ativação de uma rede multicamadas forem lineares, a rede representará fronteiras de decisão não lineares, desde que tenha camadas ocultas suficientes. A composição de funções lineares é linear: a rede equivale a uma única camada."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "A sigmoide é adequada à saída de uma classificação binária, mas, nas camadas ocultas de redes profundas, contribui para o problema do gradiente que desaparece. Sua derivada é no máximo 0,25 e quase zera nas pontas."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A retropropagação atualiza os pesos sorteando um único exemplo por iteração, ao passo que o gradiente descendente estocástico calcula os gradientes camada por camada, da saída para a entrada. Os papéis estão trocados: a retropropagação calcula os gradientes; o SGD atualiza os pesos com um exemplo sorteado."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Uma taxa de aprendizado excessivamente alta pode fazer a perda oscilar ou divergir durante o treinamento. Os passos ultrapassam o mínimo, como no exemplo da seção 3."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Na camada de entrada de uma rede multicamadas, os nós aplicam funções de ativação aos atributos antes de repassá-los à primeira camada oculta. Os nós de entrada só entregam o vetor de entrada; o processamento começa na primeira camada oculta."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O dropout desativa aleatoriamente neurônios no treinamento e também na inferência, para que as previsões variem. Na inferência, todos os neurônios ficam ativos."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Quando a perda de treinamento continua caindo e a de validação passa a subir, há indício de sobreajuste, e a parada antecipada interromperia o treino perto do mínimo da perda de validação. É a leitura clássica das curvas de perda."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "Nas redes convolucionais, o mesmo filtro é aplicado em diferentes posições da imagem, o que reduz o número de parâmetros em relação a uma camada totalmente conectada. É o compartilhamento de pesos, com conectividade local."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A camada de pooling possui pesos próprios, ajustados pela retropropagação para selecionar as características mais relevantes. O pooling aplica uma operação fixa, como o máximo ou a média, sem parâmetros."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "A LSTM usa portas para controlar o que é mantido, gravado e exposto em sua célula de memória, o que reduz o problema do gradiente que desaparece em sequências longas. São as portas de esquecimento, de entrada e de saída."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O transformer processa os tokens um de cada vez, na ordem em que aparecem, porque seu mecanismo de atenção depende de conexões recorrentes. O transformer dispensa a recorrência e processa a sequência em paralelo; a ordem entra pela codificação de posição."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Os transformers superaram as redes recorrentes em textos longos porque o custo da atenção cresce de forma linear com o comprimento da sequência, abaixo do custo das RNNs. O custo da atenção cresce com o quadrado do comprimento; a vantagem é o paralelismo e a captura de dependências distantes."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "Na transferência de aprendizado por extração de atributos, as camadas da rede pré-treinada permanecem congeladas e apenas a nova camada de saída é treinada com os dados da tarefa-alvo. No ajuste fino, ao contrário, parte da base volta a treinar. ≡"
+  }
+ ]
+}

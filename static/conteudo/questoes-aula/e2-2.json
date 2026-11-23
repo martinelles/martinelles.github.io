@@ -1,0 +1,152 @@
+{
+ "aula": "E2·2",
+ "titulo": "2. SQL e consultas analíticas",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na ordem lógica de processamento de uma consulta SQL, o WHERE é avaliado depois do SELECT, razão pela qual pode usar os apelidos de coluna definidos na lista de seleção."
+  },
+  {
+   "n": 2,
+   "texto": "O comando TRUNCATE remove todas as linhas de uma tabela, mas admite cláusula WHERE para restringir as linhas removidas."
+  },
+  {
+   "n": 3,
+   "texto": "O usuário que recebe um privilégio com a cláusula WITH GRANT OPTION pode concedê-lo a outros usuários."
+  },
+  {
+   "n": 4,
+   "texto": "No nível de isolamento READ COMMITTED, a leitura suja é evitada, mas a leitura não repetível pode ocorrer."
+  },
+  {
+   "n": 5,
+   "texto": "Em uma junção externa à esquerda, as linhas da tabela da esquerda que não têm correspondência na tabela da direita são descartadas."
+  },
+  {
+   "n": 6,
+   "texto": "A cláusula HAVING filtra grupos e pode conter funções de agregação, o que não se admite na cláusula WHERE."
+  },
+  {
+   "n": 7,
+   "texto": "A expressão COUNT(coluna) conta inclusive as linhas em que a coluna é nula."
+  },
+  {
+   "n": 8,
+   "texto": "Se a lista usada com NOT IN contiver um valor nulo, a consulta não retorna nenhuma linha."
+  },
+  {
+   "n": 9,
+   "texto": "A função DENSE_RANK atribui a mesma posição a valores empatados e não deixa lacunas na sequência."
+  },
+  {
+   "n": 10,
+   "texto": "As funções de janela reduzem o resultado a uma linha por partição, como ocorre com o GROUP BY."
+  },
+  {
+   "n": 11,
+   "texto": "A criação de um índice acelera as consultas sem impacto nas operações de inserção e de atualização da tabela."
+  },
+  {
+   "n": 12,
+   "texto": "No PostgreSQL, o EXPLAIN ANALYZE executa o comando analisado, de modo que, aplicado a um UPDATE, altera os dados."
+  },
+  {
+   "n": 13,
+   "texto": "O operador UNION elimina as linhas repetidas do resultado, enquanto o UNION ALL as mantém."
+  },
+  {
+   "n": 14,
+   "texto": "A comparação coluna = NULL retorna verdadeiro para as linhas em que a coluna não tem valor."
+  },
+  {
+   "n": 15,
+   "texto": "Sem a cláusula ORDER BY, o SGBD devolve as linhas do resultado ordenadas pela chave primária da tabela."
+  },
+  {
+   "n": 16,
+   "texto": "A cláusula GROUP BY pode ser usada sem nenhuma função de agregação; nesse caso, devolve uma linha para cada combinação de valores das colunas agrupadas."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Na ordem lógica de processamento de uma consulta SQL, o WHERE é avaliado depois do SELECT, razão pela qual pode usar os apelidos de coluna definidos na lista de seleção. O WHERE vem antes do SELECT; o apelido só pode ser usado no ORDER BY."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O comando TRUNCATE remove todas as linhas de uma tabela, mas admite cláusula WHERE para restringir as linhas removidas. O TRUNCATE não aceita WHERE; para remover parte das linhas, usa-se DELETE."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "O usuário que recebe um privilégio com a cláusula WITH GRANT OPTION pode concedê-lo a outros usuários. É exatamente o que a cláusula permite."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "No nível de isolamento READ COMMITTED, a leitura suja é evitada, mas a leitura não repetível pode ocorrer. Só o REPEATABLE READ e o SERIALIZABLE evitam a leitura não repetível."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Em uma junção externa à esquerda, as linhas da tabela da esquerda que não têm correspondência na tabela da direita são descartadas. Elas são mantidas, com as colunas da direita nulas."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "A cláusula HAVING filtra grupos e pode conter funções de agregação, o que não se admite na cláusula WHERE. O WHERE filtra linhas antes do agrupamento."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A expressão COUNT(coluna) conta inclusive as linhas em que a coluna é nula. COUNT(coluna) ignora os nulos; quem conta todas as linhas é COUNT(*)."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Se a lista usada com NOT IN contiver um valor nulo, a consulta não retorna nenhuma linha. A diferença em relação ao nulo é desconhecida, e a condição nunca é verdadeira."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "A função DENSE_RANK atribui a mesma posição a valores empatados e não deixa lacunas na sequência. Com dois empatados em 3, o próximo fica em 4; no RANK, ficaria em 5."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "As funções de janela reduzem o resultado a uma linha por partição, como ocorre com o GROUP BY. A função de janela mantém todas as linhas de entrada."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A criação de um índice acelera as consultas sem impacto nas operações de inserção e de atualização da tabela. O índice precisa ser mantido a cada INSERT, UPDATE e DELETE, o que encarece a escrita."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "No PostgreSQL, o EXPLAIN ANALYZE executa o comando analisado, de modo que, aplicado a um UPDATE, altera os dados. A documentação recomenda envolvê-lo em BEGIN e ROLLBACK quando o comando altera dados."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "O operador UNION elimina as linhas repetidas do resultado, enquanto o UNION ALL as mantém. Por não comparar linhas, o UNION ALL também costuma ser mais barato."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A comparação coluna = NULL retorna verdadeiro para as linhas em que a coluna não tem valor. A comparação com nulo é desconhecida; o teste correto é IS NULL."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Sem a cláusula ORDER BY, o SGBD devolve as linhas do resultado ordenadas pela chave primária da tabela. Sem ORDER BY, a ordem não é garantida."
+  },
+  {
+   "n": 16,
+   "r": "C",
+   "comentario": "A cláusula GROUP BY pode ser usada sem nenhuma função de agregação; nesse caso, devolve uma linha para cada combinação de valores das colunas agrupadas. Funciona como um DISTINCT sobre as colunas agrupadas. ≡"
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "aula": "E3·2",
+ "titulo": "2. Validação e generalização",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O conjunto de teste deve ser consultado a cada ajuste de hiperparâmetro, para que o modelo final seja o de melhor desempenho em dados não vistos."
+  },
+  {
+   "n": 2,
+   "texto": "Na validação cruzada k-fold, cada registro é usado para teste exatamente uma vez e para treino nas demais rodadas."
+  },
+  {
+   "n": 3,
+   "texto": "Na validação cruzada com k igual a 10, cada rodada usa uma parte para treino e as outras nove para teste."
+  },
+  {
+   "n": 4,
+   "texto": "O leave-one-out é a validação cruzada em que k é igual ao número de registros."
+  },
+  {
+   "n": 5,
+   "texto": "A validação cruzada estratificada garante que os contratos de um mesmo fornecedor fiquem todos na mesma parte."
+  },
+  {
+   "n": 6,
+   "texto": "A validação cruzada aninhada dispensa o laço externo, porque a mesma divisão serve para escolher hiperparâmetros e para estimar o desempenho."
+  },
+  {
+   "n": 7,
+   "texto": "Em dados ordenados no tempo, a validação que treina com períodos anteriores e testa no período seguinte evita que o modelo use informação do futuro."
+  },
+  {
+   "n": 8,
+   "texto": "Padronizar os atributos com a média e o desvio-padrão da base inteira antes da validação cruzada é prática que evita vazamento de informação."
+  },
+  {
+   "n": 9,
+   "texto": "Um atributo que só é preenchido depois da conclusão da auditoria pode causar vazamento do alvo em um modelo que pretende prever irregularidades antes da auditoria."
+  },
+  {
+   "n": 10,
+   "texto": "O erro esperado de um modelo pode ser decomposto em viés ao quadrado, variância e ruído irredutível."
+  },
+  {
+   "n": 11,
+   "texto": "Modelos com alta variância tendem ao subajuste, porque suas previsões pouco mudam quando muda a amostra de treino."
+  },
+  {
+   "n": 12,
+   "texto": "Quando treino e validação apresentam desempenho igualmente ruim e próximo, acrescentar mais dados de treino tende a resolver o problema."
+  },
+  {
+   "n": 13,
+   "texto": "A repetição da avaliação com diferentes divisões aleatórias permite estimar a variabilidade da métrica de desempenho."
+  },
+  {
+   "n": 14,
+   "texto": "Na comparação de dois modelos por validação cruzada, ambos devem ser avaliados nas mesmas partições."
+  },
+  {
+   "n": 15,
+   "texto": "Se um modelo será aplicado a fornecedores que nunca contrataram com a administração, a validação deve separar os registros por fornecedor."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O conjunto de teste deve ser consultado a cada ajuste de hiperparâmetro, para que o modelo final seja o de melhor desempenho em dados não vistos. Usado para escolher, o teste vira validação e a estimativa fica otimista; escolhe-se na validação."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Na validação cruzada k-fold, cada registro é usado para teste exatamente uma vez e para treino nas demais rodadas. É o que garante que todos os dados treinem e testem."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Na validação cruzada com k igual a 10, cada rodada usa uma parte para treino e as outras nove para teste. É o contrário: nove partes treinam e uma testa."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "O leave-one-out é a validação cruzada em que k é igual ao número de registros. Cada rodada testa um único registro."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A validação cruzada estratificada garante que os contratos de um mesmo fornecedor fiquem todos na mesma parte. A estratificada mantém a proporção das classes; manter o grupo junto é papel da validação por grupos."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A validação cruzada aninhada dispensa o laço externo, porque a mesma divisão serve para escolher hiperparâmetros e para estimar o desempenho. Ela tem dois laços: o interno escolhe e o externo mede."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Em dados ordenados no tempo, a validação que treina com períodos anteriores e testa no período seguinte evita que o modelo use informação do futuro. É a validação temporal, como a do TimeSeriesSplit."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Padronizar os atributos com a média e o desvio-padrão da base inteira antes da validação cruzada é prática que evita vazamento de informação. É justamente uma forma de vazamento; a padronização se ajusta só no treino, dentro de um pipeline."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Um atributo que só é preenchido depois da conclusão da auditoria pode causar vazamento do alvo em um modelo que pretende prever irregularidades antes da auditoria. A informação não existirá no momento da previsão."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "O erro esperado de um modelo pode ser decomposto em viés ao quadrado, variância e ruído irredutível. O ruído é a parte que nenhum modelo elimina."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Modelos com alta variância tendem ao subajuste, porque suas previsões pouco mudam quando muda a amostra de treino. Alta variância é previsão que muda muito com a amostra, e leva ao sobreajuste."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Quando treino e validação apresentam desempenho igualmente ruim e próximo, acrescentar mais dados de treino tende a resolver o problema. É alto viés: o remédio é um modelo mais flexível ou atributos melhores."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "A repetição da avaliação com diferentes divisões aleatórias permite estimar a variabilidade da métrica de desempenho. É a forma direta de medir a estabilidade do resultado."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Na comparação de dois modelos por validação cruzada, ambos devem ser avaliados nas mesmas partições. A comparação pareada isola o efeito do modelo da sorte da divisão."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "Se um modelo será aplicado a fornecedores que nunca contrataram com a administração, a validação deve separar os registros por fornecedor. Sem isso, o modelo reconhece o fornecedor e a nota fica otimista para o uso pretendido. ≡"
+  }
+ ]
+}

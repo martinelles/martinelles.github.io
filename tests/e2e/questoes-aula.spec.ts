@@ -116,8 +116,7 @@ test('a página da aula E2·5 corrige e comenta o gabarito', async ({ page }) =>
 test('a missão de 23/11 traz o atalho de questões da E2·5', async ({ page }) => {
 	await page.clock.setFixedTime(new Date('2026-11-23T09:00:00-03:00'));
 	await page.goto('/painel');
-	const atalho = page.getByRole('link', { name: 'Questões C/E ↗' }).first();
-	await expect(atalho).toHaveAttribute('href', '/questoes/e2-5');
+	await expect(page.locator('a.topico[href="/questoes/e2-5"]')).toHaveCount(1);
 });
 
 test('a página da aula E2·6 corrige e comenta o gabarito', async ({ page }) => {
@@ -138,8 +137,7 @@ test('a página da aula E2·6 corrige e comenta o gabarito', async ({ page }) =>
 test('a missão de 30/11 traz o atalho de questões da E2·6', async ({ page }) => {
 	await page.clock.setFixedTime(new Date('2026-11-30T09:00:00-03:00'));
 	await page.goto('/painel');
-	const atalho = page.getByRole('link', { name: 'Questões C/E ↗' }).first();
-	await expect(atalho).toHaveAttribute('href', '/questoes/e2-6');
+	await expect(page.locator('a.topico[href="/questoes/e2-6"]')).toHaveCount(1);
 });
 
 test('a página da aula E2·4 corrige e comenta o gabarito', async ({ page }) => {
@@ -160,6 +158,40 @@ test('a página da aula E2·4 corrige e comenta o gabarito', async ({ page }) =>
 test('a missão de 19/11 traz o atalho de questões da E2·4', async ({ page }) => {
 	await page.clock.setFixedTime(new Date('2026-11-19T09:00:00-03:00'));
 	await page.goto('/painel');
-	const atalho = page.getByRole('link', { name: 'Questões C/E ↗' }).first();
-	await expect(atalho).toHaveAttribute('href', '/questoes/e2-4');
+	// No dia em vista há aulas com o atalho (E1·2 em atrasadas, E2·4 no estudo novo).
+	await expect(page.locator('a.topico[href="/questoes/e2-4"]')).toHaveCount(1);
+});
+
+test('todas as aulas extraídas abrem com a contagem certa', async ({ page }) => {
+	const aulas = [
+	['E1·1', '1. Exploração e descrição', 16],
+	['E1·2', '2. Probabilidade e inferência', 16],
+	['E1·3', '3. Relações entre variáveis', 16],
+	['E1·4', '4. Programação para análise', 14],
+	['E1·5', '5. Preparação e transformação', 14],
+	['E2·1', '1. Modelagem e arquiteturas', 14],
+	['E2·2', '2. SQL e consultas analíticas', 16],
+	['E2·3', '3. Ingestão e integração', 14],
+	['E2·4', '4. Processamento distribuído', 15],
+	['E2·5', '5. Qualidade e rastreabilidade', 12],
+	['E2·6', '6. Compartilhamento e proteção', 13],
+	['E3·1', '1. Seleção e construção de modelos', 16],
+	['E3·2', '2. Validação e generalização', 15],
+	['E3·3', '3. Métricas e efeitos das decisões', 16],
+	['E3·4', '4. Redes neurais', 15],
+	['E3·5', '5. Linguagem natural e modelos generativos', 15],
+	['E3·6', '6. Agentes e uso seguro de ferramentas', 14],
+	['E4·1', '1. Ciclo de vida e MLOps', 12],
+	['E4·2', '2. Sustentação de soluções analíticas', 12],
+	['E4·3', '3. Governança e responsabilidade', 12],
+	['E4·4', '4. Gestão de produtos de dados', 14],
+	['E4·5', '5. Contratação e controle de soluções', 14]
+	] as const;
+	for (const [cod, titulo, n] of aulas) {
+		const slug = cod.replace('·', '-').toLowerCase();
+		await page.goto(`/questoes/${slug}`);
+		const h1 = page.getByRole('heading', { level: 1 });
+		await expect(h1).toContainText(titulo);
+		await expect(page.locator('.ponto')).toHaveCount(n);
+	}
 });

@@ -1,0 +1,152 @@
+{
+ "aula": "E1·3",
+ "titulo": "3. Relações entre variáveis",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O coeficiente de correlação linear de Pearson entre duas variáveis pode ser igual a 1,2 quando a inclinação da reta de regressão de mínimos quadrados for 1,2."
+  },
+  {
+   "n": 2,
+   "texto": "Se Var(X) = 16, Var(Y) = 9 e Cov(X, Y) = 6, então Var(X - Y) = 13, e a correlação entre X e Y é 0,5."
+  },
+  {
+   "n": 3,
+   "texto": "Se a correlação de Pearson entre duas variáveis é zero, as variáveis são independentes."
+  },
+  {
+   "n": 4,
+   "texto": "Em uma regressão linear simples com intercepto, estimada por mínimos quadrados, a soma dos resíduos é igual a zero."
+  },
+  {
+   "n": 5,
+   "texto": "Na regressão linear simples, o coeficiente de determinação é igual ao quadrado do coeficiente de correlação entre X e Y."
+  },
+  {
+   "n": 6,
+   "texto": "O método de mínimos quadrados ordinários exige erros com distribuição normal para que a soma dos quadrados dos resíduos seja minimizada."
+  },
+  {
+   "n": 7,
+   "texto": "Se a reta de mínimos quadrados é y = 4 + 2x e os desvios padrão amostrais de x e de y são 3 e 10, então a correlação entre x e y é 0,6."
+  },
+  {
+   "n": 8,
+   "texto": "Na regressão linear simples com n observações, a variância do erro é estimada pela soma dos quadrados dos resíduos dividida por n - 1."
+  },
+  {
+   "n": 9,
+   "texto": "O intervalo de predição para uma nova observação é mais estreito que o intervalo de confiança para a resposta média no mesmo valor de X."
+  },
+  {
+   "n": 10,
+   "texto": "Na ANOVA de um fator, a hipótese nula afirma que pelo menos uma das médias difere das demais."
+  },
+  {
+   "n": 11,
+   "texto": "Na ANOVA de um fator com 4 grupos e 24 observações, a estatística F tem 3 graus de liberdade no numerador e 20 no denominador."
+  },
+  {
+   "n": 12,
+   "texto": "O teste de Kruskal-Wallis, baseado em postos, é alternativa à ANOVA de um fator quando a normalidade dos resíduos não se sustenta."
+  },
+  {
+   "n": 13,
+   "texto": "Um coeficiente de determinação elevado demonstra que a variável explicativa é causa da variável resposta."
+  },
+  {
+   "n": 14,
+   "texto": "Uma variável que influencia tanto a adesão a um programa quanto o resultado medido pode gerar associação entre adesão e resultado mesmo sem efeito do programa."
+  },
+  {
+   "n": 15,
+   "texto": "A taxa de irregularidade observada nos municípios escolhidos por uma matriz de risco é estimativa não viesada da taxa de todos os municípios."
+  },
+  {
+   "n": 16,
+   "texto": "Unidades escolhidas por terem apresentado os piores resultados em um ano tendem a apresentar resultados menos extremos no ano seguinte, mesmo sem intervenção."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O coeficiente de correlação linear de Pearson entre duas variáveis pode ser igual a 1,2 quando a inclinação da reta de regressão de mínimos quadrados for 1,2. A correlação está sempre entre -1 e 1, e a inclinação é r vezes a razão entre os desvios padrão."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Se Var(X) = 16, Var(Y) = 9 e Cov(X, Y) = 6, então Var(X - Y) = 13, e a correlação entre X e Y é 0,5. 16 mais 9 menos duas vezes 6 dá 13; a correlação é 6 dividido pelo produto dos desvios padrão, 4 e 3, isto é, 0,5."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Se a correlação de Pearson entre duas variáveis é zero, as variáveis são independentes. Pode haver relação não linear, como y igual a x ao quadrado."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Em uma regressão linear simples com intercepto, estimada por mínimos quadrados, a soma dos resíduos é igual a zero. É uma propriedade do MQO com intercepto."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Na regressão linear simples, o coeficiente de determinação é igual ao quadrado do coeficiente de correlação entre X e Y. Na múltipla, o R² é o quadrado da correlação entre Y e os valores previstos."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O método de mínimos quadrados ordinários exige erros com distribuição normal para que a soma dos quadrados dos resíduos seja minimizada. A minimização não depende da distribuição; a normalidade importa para os testes e intervalos e faz o MQO coincidir com a máxima verossimilhança."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Se a reta de mínimos quadrados é y = 4 + 2x e os desvios padrão amostrais de x e de y são 3 e 10, então a correlação entre x e y é 0,6. r é a inclinação vezes o desvio padrão de x, dividido pelo de y: 2 vezes 3, dividido por 10, dá 0,6."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Na regressão linear simples com n observações, a variância do erro é estimada pela soma dos quadrados dos resíduos dividida por n - 1. O divisor é n - 2, porque dois parâmetros foram estimados."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O intervalo de predição para uma nova observação é mais estreito que o intervalo de confiança para a resposta média no mesmo valor de X. É mais largo, porque inclui a variação individual em torno da reta."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Na ANOVA de um fator, a hipótese nula afirma que pelo menos uma das médias difere das demais. Essa é a alternativa; a hipótese nula é a igualdade de todas as médias."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "Na ANOVA de um fator com 4 grupos e 24 observações, a estatística F tem 3 graus de liberdade no numerador e 20 no denominador. k - 1 é 3 e N - k é 20."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "O teste de Kruskal-Wallis, baseado em postos, é alternativa à ANOVA de um fator quando a normalidade dos resíduos não se sustenta. Testes de permutação são outra alternativa."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Um coeficiente de determinação elevado demonstra que a variável explicativa é causa da variável resposta. R² mede ajuste, e não causalidade."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Uma variável que influencia tanto a adesão a um programa quanto o resultado medido pode gerar associação entre adesão e resultado mesmo sem efeito do programa. É a variável de confusão."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "A taxa de irregularidade observada nos municípios escolhidos por uma matriz de risco é estimativa não viesada da taxa de todos os municípios. A seleção por risco superestima a taxa da população."
+  },
+  {
+   "n": 16,
+   "r": "C",
+   "comentario": "Unidades escolhidas por terem apresentado os piores resultados em um ano tendem a apresentar resultados menos extremos no ano seguinte, mesmo sem intervenção. É a regressão à média. ≡"
+  }
+ ]
+}

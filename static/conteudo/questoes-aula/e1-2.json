@@ -1,0 +1,152 @@
+{
+ "aula": "E1·2",
+ "titulo": "2. Probabilidade e inferência",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Se A e B são eventos mutuamente exclusivos com probabilidades positivas, então A e B são independentes."
+  },
+  {
+   "n": 2,
+   "texto": "Se P(A) = 0,5, P(B) = 0,4 e P(B | A) = 0,3, então P(A ∩ B) = 0,20."
+  },
+  {
+   "n": 3,
+   "texto": "Em um espaço amostral com quatro resultados possíveis, podem ser definidos dezesseis eventos, contados o evento vazio e o próprio espaço amostral."
+  },
+  {
+   "n": 4,
+   "texto": "Pela lei dos grandes números, a frequência relativa de um evento em repetições independentes do experimento tende à sua probabilidade à medida que o número de repetições cresce."
+  },
+  {
+   "n": 5,
+   "texto": "Na distribuição de Poisson, a média e a variância são iguais."
+  },
+  {
+   "n": 6,
+   "texto": "A distribuição t de Student tem caudas mais leves que a normal padrão e dela se afasta à medida que os graus de liberdade aumentam. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 7,
+   "texto": "Na amostragem por conglomerados, os grupos devem ser internamente homogêneos, e todos os grupos participam da amostra."
+  },
+  {
+   "n": 8,
+   "texto": "Para reduzir à metade a margem de erro de uma estimativa, mantidos o nível de confiança e a variabilidade, é necessário quadruplicar o tamanho da amostra."
+  },
+  {
+   "n": 9,
+   "texto": "A variância amostral calculada com divisor n - 1 é um estimador não viesado da variância populacional."
+  },
+  {
+   "n": 10,
+   "texto": "Um intervalo de 95% de confiança para a média, já calculado, contém a média populacional com probabilidade de 95%."
+  },
+  {
+   "n": 11,
+   "texto": "Mantidos os dados, o intervalo de 99% de confiança é mais largo que o de 95%."
+  },
+  {
+   "n": 12,
+   "texto": "O erro do tipo I consiste em não rejeitar a hipótese nula quando ela é falsa."
+  },
+  {
+   "n": 13,
+   "texto": "O poder de um teste é a probabilidade de rejeitar a hipótese nula quando ela é falsa."
+  },
+  {
+   "n": 14,
+   "texto": "Se o p-valor de um teste for 0,03, a hipótese nula será rejeitada ao nível de significância de 5%, mas não ao de 1%."
+  },
+  {
+   "n": 15,
+   "texto": "Ao testar vinte hipóteses nulas verdadeiras e independentes, cada uma ao nível de 5%, a probabilidade de ao menos uma rejeição indevida é de 5%."
+  },
+  {
+   "n": 16,
+   "texto": "Com amostras muito grandes, diferenças pequenas e sem relevância prática podem resultar estatisticamente significativas. ( ) Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Se A e B são eventos mutuamente exclusivos com probabilidades positivas, então A e B são independentes. Exclusivos com probabilidades positivas são dependentes: a ocorrência de um zera a probabilidade do outro."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Se P(A) = 0,5, P(B) = 0,4 e P(B | A) = 0,3, então P(A ∩ B) = 0,20. P(A ∩ B) é P(A) vezes P(B | A), isto é, 0,15. O produto 0,5 vezes 0,4 só valeria com independência, que não ocorre, porque P(B | A) difere de P(B)."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Em um espaço amostral com quatro resultados possíveis, podem ser definidos dezesseis eventos, contados o evento vazio e o próprio espaço amostral. São os 2 elevado a 4 subconjuntos."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Pela lei dos grandes números, a frequência relativa de um evento em repetições independentes do experimento tende à sua probabilidade à medida que o número de repetições cresce. É a base da leitura frequentista da probabilidade."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Na distribuição de Poisson, a média e a variância são iguais. As duas valem λ ."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A distribuição t de Student tem caudas mais leves que a normal padrão e dela se afasta à medida que os graus de liberdade aumentam. A t tem caudas mais pesadas e tende à normal quando os graus de liberdade crescem."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Na amostragem por conglomerados, os grupos devem ser internamente homogêneos, e todos os grupos participam da amostra. Isso descreve a amostragem estratificada; nos conglomerados, sorteiam-se grupos inteiros, heterogêneos por dentro."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Para reduzir à metade a margem de erro de uma estimativa, mantidos o nível de confiança e a variabilidade, é necessário quadruplicar o tamanho da amostra. A margem de erro é proporcional a 1 dividido pela raiz de n."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "A variância amostral calculada com divisor n - 1 é um estimador não viesado da variância populacional. Com divisor n, o estimador seria viesado. Licenciado para Martinelle Santos, e-mail martinelle17@gmail.com, cpf: 11486995624, celular: 38998698542 Direitos Autorais reservados Pietro Viecili"
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Um intervalo de 95% de confiança para a média, já calculado, contém a média populacional com probabilidade de 95%. Os 95% se referem ao procedimento repetido; o intervalo calculado contém ou não a média."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "Mantidos os dados, o intervalo de 99% de confiança é mais largo que o de 95%. Mais confiança exige valor crítico maior."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O erro do tipo I consiste em não rejeitar a hipótese nula quando ela é falsa. Esse é o erro do tipo II; o do tipo I é rejeitar a hipótese nula verdadeira."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "O poder de um teste é a probabilidade de rejeitar a hipótese nula quando ela é falsa. O poder é 1 - β ."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Se o p-valor de um teste for 0,03, a hipótese nula será rejeitada ao nível de significância de 5%, mas não ao de 1%. 0,03 é menor que 0,05 e maior que 0,01."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Ao testar vinte hipóteses nulas verdadeiras e independentes, cada uma ao nível de 5%, a probabilidade de ao menos uma rejeição indevida é de 5%. É 1 - 0,95 elevado a 20, cerca de 64%."
+  },
+  {
+   "n": 16,
+   "r": "C",
+   "comentario": "Com amostras muito grandes, diferenças pequenas e sem relevância prática podem resultar estatisticamente significativas. Para o mesmo efeito, o p-valor diminui quando a amostra cresce. ≡"
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "aula": "E4·2",
+ "titulo": "2. Sustentação de soluções analíticas",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Segundo o NIST, no autoatendimento sob demanda o consumidor provisiona recursos computacionais sem necessidade de interação humana com o provedor."
+  },
+  {
+   "n": 2,
+   "texto": "No modelo IaaS, o sistema operacional e as aplicações instaladas ficam sob controle do cliente, e a infraestrutura física, sob controle do provedor."
+  },
+  {
+   "n": 3,
+   "texto": "No modelo PaaS, as camadas de aplicação e de dados do cliente são gerenciadas pelo provedor."
+  },
+  {
+   "n": 4,
+   "texto": "Pela IN GSI/PR 5/2021, sistemas estruturantes podem ser hospedados em nuvem pública, desde que haja cópia de segurança no Brasil."
+  },
+  {
+   "n": 5,
+   "texto": "Em pipelines de aprendizado de máquina executados em nuvem, a gestão de CPU e de memória deixa de ser relevante, pois os recursos são alocados dinamicamente."
+  },
+  {
+   "n": 6,
+   "texto": "Um objetivo de 99,9% de disponibilidade em um mês de 30 dias admite cerca de 43 minutos de indisponibilidade."
+  },
+  {
+   "n": 7,
+   "texto": "A disponibilidade de três componentes ligados em série é igual à disponibilidade do componente mais confiável do conjunto."
+  },
+  {
+   "n": 8,
+   "texto": "No Prometheus, a métrica do tipo gauge representa um valor que pode subir e descer, enquanto o counter só aumenta ou é zerado na reinicialização."
+  },
+  {
+   "n": 9,
+   "texto": "O Grafana tem como função principal coletar métricas diretamente dos sistemas monitorados, dispensando ferramentas de coleta."
+  },
+  {
+   "n": 10,
+   "texto": "Manter credenciais de produção em arquivo de texto nos scripts de um pipeline de CI/CD é aceitável quando o repositório é privado."
+  },
+  {
+   "n": 11,
+   "texto": "O RPO indica o tempo máximo para restabelecer o serviço após uma interrupção."
+  },
+  {
+   "n": 12,
+   "texto": "Pela IN GSI/PR 3/2021, o plano de continuidade de negócios em segurança da informação deve ser testado regularmente e revisado, no mínimo, uma vez ao ano."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "Segundo o NIST, no autoatendimento sob demanda o consumidor provisiona recursos computacionais sem necessidade de interação humana com o provedor. É a primeira das cinco características essenciais."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "No modelo IaaS, o sistema operacional e as aplicações instaladas ficam sob controle do cliente, e a infraestrutura física, sob controle do provedor. O cliente não controla a infraestrutura subjacente, mas controla o sistema operacional e as aplicações."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "No modelo PaaS, as camadas de aplicação e de dados do cliente são gerenciadas pelo provedor. No PaaS o cliente controla as aplicações e os dados; o provedor gerencia a plataforma e a infraestrutura."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Pela IN GSI/PR 5/2021, sistemas estruturantes podem ser hospedados em nuvem pública, desde que haja cópia de segurança no Brasil. Os sistemas estruturantes só podem ficar em nuvem privada ou comunitária, restritas a infraestruturas de órgãos ou entidades."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Em pipelines de aprendizado de máquina executados em nuvem, a gestão de CPU e de memória deixa de ser relevante, pois os recursos são alocados dinamicamente. O recurso alocado é recurso pago, e o dimensionamento continua afetando o custo e o desempenho."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Um objetivo de 99,9% de disponibilidade em um mês de 30 dias admite cerca de 43 minutos de indisponibilidade. 0,1% de 43.200 minutos são 43,2 minutos."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A disponibilidade de três componentes ligados em série é igual à disponibilidade do componente mais confiável do conjunto. Em série, as disponibilidades se multiplicam, e o conjunto fica abaixo do pior componente."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "No Prometheus, a métrica do tipo gauge representa um valor que pode subir e descer, enquanto o counter só aumenta ou é zerado na reinicialização. O total de requisições é um counter, e a memória em uso é um gauge."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O Grafana tem como função principal coletar métricas diretamente dos sistemas monitorados, dispensando ferramentas de coleta. O Grafana consulta fontes de dados e visualiza; a coleta é de ferramentas como o Prometheus."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Manter credenciais de produção em arquivo de texto nos scripts de um pipeline de CI/CD é aceitável quando o repositório é privado. As credenciais ficam num cofre de segredos ou em variáveis secretas da ferramenta, nunca em arquivo do repositório."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O RPO indica o tempo máximo para restabelecer o serviço após uma interrupção. Esse é o RTO; o RPO é a perda máxima de dados aceitável, medida em tempo."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "Pela IN GSI/PR 3/2021, o plano de continuidade de negócios em segurança da informação deve ser testado regularmente e revisado, no mínimo, uma vez ao ano. É o que dizem o art. 23, parágrafo único, e o art. 24, I. ≡"
+  }
+ ]
+}

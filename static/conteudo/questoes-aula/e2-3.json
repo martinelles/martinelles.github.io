@@ -1,0 +1,134 @@
+{
+ "aula": "E2·3",
+ "titulo": "3. Ingestão e integração",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "No processo ELT, os dados são transformados antes de serem carregados no repositório de destino, o que reduz o espaço ocupado nesse repositório."
+  },
+  {
+   "n": 2,
+   "texto": "Na ingestão em fluxo, os dados são processados à medida que chegam, sem esperar a formação de um lote completo, o que obriga o sistema a tratar eventos atrasados e fora de ordem."
+  },
+  {
+   "n": 3,
+   "texto": "No Apache Kafka, a ordem dos eventos é garantida em todo o tópico, qualquer que seja o número de partições."
+  },
+  {
+   "n": 4,
+   "texto": "A arquitetura Kappa se distingue da Lambda por dispensar a camada de lote e reprocessar o histórico pela releitura do log de eventos."
+  },
+  {
+   "n": 5,
+   "texto": "Uma carga incremental baseada exclusivamente na coluna de data de atualização identifica as exclusões físicas realizadas na origem."
+  },
+  {
+   "n": 6,
+   "texto": "Se a segunda execução de uma requisição DELETE devolve código de status diferente do da primeira, o método deixa de ser idempotente."
+  },
+  {
+   "n": 7,
+   "texto": "Acrescentar a um esquema um campo opcional com valor padrão é, em regra, mudança compatível, ao passo que renomear um campo usado quebra os consumidores existentes."
+  },
+  {
+   "n": 8,
+   "texto": "Segundo a RFC 4180, a aspa dupla que aparece dentro de um campo delimitado por aspas deve ser precedida de barra invertida."
+  },
+  {
+   "n": 9,
+   "texto": "Em JSON, os nomes dos membros de um objeto são cadeias de caracteres entre aspas duplas, separadas de seus valores por dois-pontos, e os membros se separam uns dos outros por vírgulas."
+  },
+  {
+   "n": 10,
+   "texto": "Todo documento XML bem formado é válido, pois a boa formação já garante a conformidade com o esquema."
+  },
+  {
+   "n": 11,
+   "texto": "No formato Parquet, os metadados com o esquema e as estatísticas das colunas ficam no rodapé do arquivo, o que permite descartar grupos de linhas que não atendem ao filtro da consulta."
+  },
+  {
+   "n": 12,
+   "texto": "A interoperabilidade semântica está assegurada sempre que dois sistemas adotam o mesmo formato de arquivo e o mesmo protocolo de comunicação."
+  },
+  {
+   "n": 13,
+   "texto": "O Decreto 10.046/2019 classifica o compartilhamento de dados entre órgãos em amplo, restrito e específico, de acordo com a confidencialidade dos dados."
+  },
+  {
+   "n": 14,
+   "texto": "Na garantia de entrega pelo menos uma vez, uma mensagem pode ser processada mais de uma vez, e o efeito de exatamente uma vez depende de processamento idempotente ou transacional no destino."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "No processo ELT, os dados são transformados antes de serem carregados no repositório de destino, o que reduz o espaço ocupado nesse repositório. No ELT, a carga vem antes da transformação, e o destino guarda também o dado bruto."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Na ingestão em fluxo, os dados são processados à medida que chegam, sem esperar a formação de um lote completo, o que obriga o sistema a tratar eventos atrasados e fora de ordem. É a definição de fluxo; janelas e marca d'água tratam os atrasos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "No Apache Kafka, a ordem dos eventos é garantida em todo o tópico, qualquer que seja o número de partições. A ordem só é garantida dentro de cada partição."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "A arquitetura Kappa se distingue da Lambda por dispensar a camada de lote e reprocessar o histórico pela releitura do log de eventos. A Lambda mantém as camadas de lote e de velocidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Uma carga incremental baseada exclusivamente na coluna de data de atualização identifica as exclusões físicas realizadas na origem. A linha excluída deixa de existir e não aparece no filtro; é preciso exclusão lógica, CDC por log ou conciliação."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Se a segunda execução de uma requisição DELETE devolve código de status diferente do da primeira, o método deixa de ser idempotente. A idempotência diz respeito ao efeito no servidor, e não à resposta; o recurso continua removido."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Acrescentar a um esquema um campo opcional com valor padrão é, em regra, mudança compatível, ao passo que renomear um campo usado quebra os consumidores existentes. A renomeação pede nova versão maior; o acréscimo opcional, versão menor."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Segundo a RFC 4180, a aspa dupla que aparece dentro de um campo delimitado por aspas deve ser precedida de barra invertida. Ela é escapada por outra aspa dupla."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Em JSON, os nomes dos membros de um objeto são cadeias de caracteres entre aspas duplas, separadas de seus valores por dois-pontos, e os membros se separam uns dos outros por vírgulas. É a sintaxe do objeto na RFC 8259."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Todo documento XML bem formado é válido, pois a boa formação já garante a conformidade com o esquema. Válido é o bem formado que também segue o DTD ou o XSD."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "No formato Parquet, os metadados com o esquema e as estatísticas das colunas ficam no rodapé do arquivo, o que permite descartar grupos de linhas que não atendem ao filtro da consulta. É o descarte pelo mínimo e máximo de cada grupo (predicate pushdown)."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A interoperabilidade semântica está assegurada sempre que dois sistemas adotam o mesmo formato de arquivo e o mesmo protocolo de comunicação. Formato e protocolo comuns são interoperabilidade técnica; a semântica exige significado comum."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "O Decreto 10.046/2019 classifica o compartilhamento de dados entre órgãos em amplo, restrito e específico, de acordo com a confidencialidade dos dados. É a categorização do art. 4º, feita pelo gestor de dados com base na legislação."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Na garantia de entrega pelo menos uma vez, uma mensagem pode ser processada mais de uma vez, e o efeito de exatamente uma vez depende de processamento idempotente ou transacional no destino. Sem destino idempotente, a releitura duplica. ≡"
+  }
+ ]
+}

@@ -1,0 +1,134 @@
+{
+ "aula": "E4·4",
+ "titulo": "4. Gestão de produtos de dados",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O Product Owner pode delegar a criação e a ordenação dos itens do Product Backlog, mas continua responsável por elas."
+  },
+  {
+   "n": 2,
+   "texto": "Na Sprint Planning, cabe ao Product Owner definir como os itens selecionados serão transformados em incremento."
+  },
+  {
+   "n": 3,
+   "texto": "Quanto maior a incerteza do trabalho, mais longa deve ser a Sprint, para que o time tenha tempo de reduzir as incógnitas."
+  },
+  {
+   "n": 4,
+   "texto": "Durante a Sprint, o escopo pode ser esclarecido e renegociado com o Product Owner, desde que nenhuma mudança ponha em risco a Meta da Sprint."
+  },
+  {
+   "n": 5,
+   "texto": "Story points medem em horas a duração estimada de cada item do backlog."
+  },
+  {
+   "n": 6,
+   "texto": "No método RICE, a nota de confiança rebaixa a prioridade de itens cujas estimativas de alcance e impacto têm pouca evidência."
+  },
+  {
+   "n": 7,
+   "texto": "No Kanban, a vazão corresponde ao número de itens de trabalho iniciados e ainda não terminados."
+  },
+  {
+   "n": 8,
+   "texto": "Pela Lei de Little, mantida a vazão, reduzir o trabalho em andamento reduz o tempo de ciclo médio."
+  },
+  {
+   "n": 9,
+   "texto": "O Guia do Kanban prescreve reunião diária obrigatória e papéis fixos para os membros do sistema Kanban."
+  },
+  {
+   "n": 10,
+   "texto": "O Decreto 12.198/2024 inclui a unificação de canais digitais entre as ações mínimas do Plano de Transformação Digital."
+  },
+  {
+   "n": 11,
+   "texto": "O PDTIC deve ter vigência mínima de dois anos, com revisão anual, e metas compostas por indicador, valor e prazo."
+  },
+  {
+   "n": 12,
+   "texto": "A coordenação da Política de Dados Abertos do Poder Executivo federal cabe à Secretaria de Governo Digital."
+  },
+  {
+   "n": 13,
+   "texto": "A quantidade de painéis publicados por uma equipe de dados é indicador de resultado do produto."
+  },
+  {
+   "n": 14,
+   "texto": "No desenvolvimento iterativo, os requisitos de todos os itens do backlog devem ser levantados antes da primeira entrega."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "O Product Owner pode delegar a criação e a ordenação dos itens do Product Backlog, mas continua responsável por elas. O guia permite a delegação e mantém o Product Owner como responsável."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Na Sprint Planning, cabe ao Product Owner definir como os itens selecionados serão transformados em incremento. O \"como\" é decisão exclusiva dos Developers; o Product Owner propõe por que a Sprint é valiosa e discute os itens."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Quanto maior a incerteza do trabalho, mais longa deve ser a Sprint, para que o time tenha tempo de reduzir as incógnitas. Sprints mais curtas geram mais ciclos de aprendizagem e limitam o risco de custo e esforço."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Durante a Sprint, o escopo pode ser esclarecido e renegociado com o Product Owner, desde que nenhuma mudança ponha em risco a Meta da Sprint. É a regra do Guia do Scrum para o que acontece durante a Sprint."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Story points medem em horas a duração estimada de cada item do backlog. Medem tamanho relativo (esforço, complexidade e incerteza), não tempo."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "No método RICE, a nota de confiança rebaixa a prioridade de itens cujas estimativas de alcance e impacto têm pouca evidência. A confiança multiplica o numerador e reduz a nota de ideias sem evidência."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "No Kanban, a vazão corresponde ao número de itens de trabalho iniciados e ainda não terminados. Isso é o WIP; vazão é o número de itens terminados por unidade de tempo."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Pela Lei de Little, mantida a vazão, reduzir o trabalho em andamento reduz o tempo de ciclo médio. O tempo de ciclo médio é o WIP médio dividido pela vazão média."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O Guia do Kanban prescreve reunião diária obrigatória e papéis fixos para os membros do sistema Kanban. O guia não prescreve papéis nem reuniões obrigatórias."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "O Decreto 12.198/2024 inclui a unificação de canais digitais entre as ações mínimas do Plano de Transformação Digital. Ao lado de serviços digitais e qualidade, governança e gestão de dados e segurança e privacidade."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "O PDTIC deve ter vigência mínima de dois anos, com revisão anual, e metas compostas por indicador, valor e prazo. Portaria SGD/ME 778/2019, art. 6º, IV e VI."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A coordenação da Política de Dados Abertos do Poder Executivo federal cabe à Secretaria de Governo Digital. Cabe à CGU, por meio da INDA, desde a redação do Decreto 9.903/2019."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "A quantidade de painéis publicados por uma equipe de dados é indicador de resultado do produto. É indicador de entrega; resultado é a mudança nas decisões e no problema."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "No desenvolvimento iterativo, os requisitos de todos os itens do backlog devem ser levantados antes da primeira entrega. Os itens são detalhados aos poucos, a cada iteração, conforme a prioridade. ≡"
+  }
+ ]
+}

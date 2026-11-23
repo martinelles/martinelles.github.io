@@ -1,0 +1,134 @@
+{
+ "aula": "E1·5",
+ "titulo": "5. Preparação e transformação",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na fase de preparação dos dados do CRISP-DM, ocorrem a descrição, a exploração e a verificação da qualidade dos dados."
+  },
+  {
+   "n": 2,
+   "texto": "Dados ausentes do tipo MAR são aqueles cuja ausência depende de outras variáveis observadas, e não do próprio valor ausente."
+  },
+  {
+   "n": 3,
+   "texto": "A imputação dos valores ausentes pela média preserva a variância original do atributo."
+  },
+  {
+   "n": 4,
+   "texto": "Pela regra do intervalo interquartil, são outliers os valores abaixo de Q1 menos 1,5 vezes o IQR ou acima de Q3 mais 1,5 vezes o IQR."
+  },
+  {
+   "n": 5,
+   "texto": "Os valores atípicos identificados numa base de pagamentos devem ser descartados antes da análise, para preservar a homogeneidade dos dados."
+  },
+  {
+   "n": 6,
+   "texto": "Por padrão, o método drop_duplicates do pandas mantém a primeira ocorrência de cada registro repetido."
+  },
+  {
+   "n": 7,
+   "texto": "Numa base com 2% de exemplos positivos, um classificador que prevê sempre a classe negativa tem acurácia de 98% e sensibilidade nula."
+  },
+  {
+   "n": 8,
+   "texto": "O SMOTE equilibra as classes replicando exemplos já existentes da classe minoritária."
+  },
+  {
+   "n": 9,
+   "texto": "A sobreamostragem da classe minoritária deve ser aplicada antes da divisão entre treino e teste, para que ambos fiquem balanceados."
+  },
+  {
+   "n": 10,
+   "texto": "A discretização por frequência igual cria faixas com aproximadamente o mesmo número de registros."
+  },
+  {
+   "n": 11,
+   "texto": "A padronização pelo escore z transforma os dados de modo que passem a seguir distribuição normal."
+  },
+  {
+   "n": 12,
+   "texto": "Árvores de decisão são sensíveis à escala dos atributos e, por isso, exigem normalização prévia."
+  },
+  {
+   "n": 13,
+   "texto": "A penalização L1 pode zerar coeficientes do modelo e, assim, funcionar como seleção de atributos embutida."
+  },
+  {
+   "n": 14,
+   "texto": "Ajustar o padronizador com a base inteira, antes da separação entre treino e teste, é uma forma de vazamento de informação."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Na fase de preparação dos dados do CRISP-DM, ocorrem a descrição, a exploração e a verificação da qualidade dos dados. Essas tarefas são do entendimento dos dados; a preparação seleciona, limpa, constrói, integra e formata."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "Dados ausentes do tipo MAR são aqueles cuja ausência depende de outras variáveis observadas, e não do próprio valor ausente. Quando depende do próprio valor, o mecanismo é MNAR."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A imputação dos valores ausentes pela média preserva a variância original do atributo. Ela põe valores iguais ao centro e reduz a variância."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Pela regra do intervalo interquartil, são outliers os valores abaixo de Q1 menos 1,5 vezes o IQR ou acima de Q3 mais 1,5 vezes o IQR. É o critério dos limites do boxplot."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Os valores atípicos identificados numa base de pagamentos devem ser descartados antes da análise, para preservar a homogeneidade dos dados. O outlier pode ser erro ou fato real; em auditoria, pode ser o próprio achado."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Por padrão, o método drop_duplicates do pandas mantém a primeira ocorrência de cada registro repetido. O padrão é keep='first'."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Numa base com 2% de exemplos positivos, um classificador que prevê sempre a classe negativa tem acurácia de 98% e sensibilidade nula. É o paradoxo da acurácia."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O SMOTE equilibra as classes replicando exemplos já existentes da classe minoritária. O SMOTE cria exemplos sintéticos entre um exemplo minoritário e seus vizinhos; quem replica é a sobreamostragem aleatória."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A sobreamostragem da classe minoritária deve ser aplicada antes da divisão entre treino e teste, para que ambos fiquem balanceados. Ela é feita só no treino; antes da divisão, cópias do mesmo registro vão parar no teste."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "A discretização por frequência igual cria faixas com aproximadamente o mesmo número de registros. A largura igual cria faixas de mesmo tamanho de intervalo."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A padronização pelo escore z transforma os dados de modo que passem a seguir distribuição normal. Ela muda a média e o desvio, mas não a forma da distribuição."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Árvores de decisão são sensíveis à escala dos atributos e, por isso, exigem normalização prévia. Os cortes das árvores não dependem da escala."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "A penalização L1 pode zerar coeficientes do modelo e, assim, funcionar como seleção de atributos embutida. A L2 encolhe os coeficientes, mas não os zera."
+  },
+  {
+   "n": 14,
+   "r": "C",
+   "comentario": "Ajustar o padronizador com a base inteira, antes da separação entre treino e teste, é uma forma de vazamento de informação. Os parâmetros aprendidos passam a conter informação do teste. ≡"
+  }
+ ]
+}
