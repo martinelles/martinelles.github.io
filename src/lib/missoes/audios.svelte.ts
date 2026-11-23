@@ -22,16 +22,19 @@ export interface AudiosDaAula {
 
 /** Catálogo: id da aula → audios. `null` enquanto carrega; `{}` sem catálogo. */
 let catalogo = $state<Record<string, AudiosDaAula> | null>(null);
+/** Falha da última carga: vazio quando deu certo (ou ainda não tentou). */
+let erroCatalogo = $state('');
 let carregar: Promise<void> | null = null;
 
-/** Lê o catálogo uma vez por carga do app (idempotente; falha de rede deixa como está). */
+/** Lê o catálogo uma vez por carga do app (idempotente). Falha fica em `erro` e a próxima
+ * chamada tenta de novo (a promessa rejeitada não fica memorizada). */
 export function carregarAudios(buscar: typeof fetch = fetch): Promise<void> {
-	carregar ??= buscar('/conteudo/audios.json', { cache: 'no-cache' })
-		.then(
-			(r) => r.ok ? (r.json() as Promise<Record<string, AudiosDaAula>>) : ({} as Record<string, AudiosDaAula>),
-			() => ({}) as Record<string, AudiosDaAula>
-		)
-		.then((d) => {
+	carregar ??= (async () => {
+		erroCatalogo = '';
+		try {
+			const resposta = await buscar('/conteudo/audios.json', { cache: 'no-cache' });
+			if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+			const d = (await resposta.json()) as Record<string, AudiosDaAula> | null;
 			if (!d || typeof d !== 'object') {
 				catalogo = {};
 				return;
@@ -40,10 +43,14 @@ export function carregarAudios(buscar: typeof fetch = fetch): Promise<void> {
 			const normalizado: Record<string, AudiosDaAula> = {};
 			for (const [id, valor] of Object.entries(d)) {
 				if (Array.isArray(valor)) normalizado[id] = { audios: valor };
-				else if (valor && typeof valor === 'object' && Array.isArray(valor.audios)) normalizado[id] = valor;
+				else if (valor && Array.isArray(valor.audios)) normalizado[id] = valor;
 			}
 			catalogo = normalizado;
-		});
+		} catch (e) {
+			carregar = null;
+			erroCatalogo = `Não foi possível carregar os podcasts (${e instanceof Error ? e.message : String(e)}).`;
+		}
+	})();
 	return carregar;
 }
 
@@ -88,6 +95,14 @@ export const audiosMissoes = {
 	daAula(id: string): AudiosDaAula | null {
 		return catalogo?.[id] ?? null;
 	},
+	/** O catálogo ainda não chegou (e nenhuma carga falhou). */
+	get carregando(): boolean {
+		return catalogo === null && !erroCatalogo;
+	},
+	/** Mensagem da última carga que falhou; vazio quando deu certo. */
+	get erro(): string {
+		return erroCatalogo;
+	},
 	ouvido(arquivo: string): boolean {
 		return !!ouvidos[arquivo];
 	},
@@ -99,3 +114,10 @@ export const audiosMissoes = {
 		gravar(novos);
 	}
 };
+
+/** Esquece o catálogo e a promessa de carga (testes). */
+export function esquecerAudios(): void {
+	catalogo = null;
+	erroCatalogo = '';
+	carregar = null;
+}

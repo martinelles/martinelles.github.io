@@ -30,7 +30,14 @@
 			Voltar ao painel
 		</a>
 	</header>
-	{#if audios.length === 0}
+	{#if audiosMissoes.erro}
+		<div class="erro" role="alert">
+			<p>{audiosMissoes.erro}</p>
+			<button type="button" onclick={() => void carregarAudios()}>Tentar de novo</button>
+		</div>
+	{:else if audiosMissoes.carregando}
+		<p class="nota" role="status">Carregando os podcasts…</p>
+	{:else if audios.length === 0}
 		<p class="nota">Esta aula ainda não tem podcasts no painel.</p>
 	{:else}
 		<p class="sumario">{ouvidos} de {audios.length} ouvidos</p>
@@ -114,6 +121,20 @@
 	.sumario {
 		margin: 0;
 		color: var(--cor-texto-suave);
+	}
+
+	.erro {
+		display: grid;
+		justify-items: center;
+		padding: 12px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: var(--raio);
+		background: var(--cor-erro-fundo);
+		color: var(--cor-erro);
+	}
+
+	.erro p {
+		margin: 0;
 	}
 
 	ol {

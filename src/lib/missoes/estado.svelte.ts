@@ -19,9 +19,12 @@ import type { Cargo, PlanoMissoes } from './tipos';
 export function usarPlanoMissoes() {
 	let bruto = $state.raw<PlanoMissoes | null>(null);
 	let erro = $state('');
+	// "Tentar de novo": a leitura no efeito abaixo o reexecuta para o cargo atual.
+	let versao = $state(0);
 	const cargo = $derived<Cargo | undefined>(foco.especialidade.ancora);
 	$effect(() => {
 		const c = cargo;
+		void versao;
 		bruto = null;
 		erro = '';
 		if (!c) return;
@@ -66,6 +69,10 @@ export function usarPlanoMissoes() {
 		},
 		get cargo() {
 			return cargo;
+		},
+		/** Refaz a busca do plano do cargo atual (a promessa rejeitada não fica em cache). */
+		recarregar(): void {
+			versao++;
 		}
 	};
 }

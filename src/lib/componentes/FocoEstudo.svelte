@@ -9,6 +9,7 @@
 		especialidades,
 		especialidade,
 		materias,
+		falha = false,
 		disciplina,
 		onescolherEspecialidade,
 		onescolherDisciplina
@@ -18,6 +19,8 @@
 		especialidade: Especialidade;
 		/** Matérias do conteúdo; `null` enquanto carregam. */
 		materias: readonly Materia[] | null;
+		/** A carga das matérias falhou (rede): o select diz isso em vez de "Carregando…". */
+		falha?: boolean;
 		/** Id da matéria de foco. */
 		disciplina: string;
 		onescolherEspecialidade: (id: string) => void;
@@ -61,7 +64,7 @@
 			<label for="foco-disciplina">Disciplina</label>
 			<select id="foco-disciplina" value={disciplina} disabled={materias === null} onchange={aoMudarDisciplina}>
 				{#if materias === null}
-					<option value={disciplina}>Carregando matérias…</option>
+					<option value={disciplina}>{falha ? 'Não foi possível carregar as matérias.' : 'Carregando matérias…'}</option>
 				{/if}
 				{#each opcoes as m (m.id)}
 					<option value={m.id}>{m.nome}</option>

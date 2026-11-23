@@ -29,9 +29,14 @@
 
 	let materias = $state.raw<Materia[] | null>(null);
 	let indice = $state.raw<Indice | null>(null);
+	let falhaBase = $state(false);
 	// Sem conteúdo (rede), os totais ainda aparecem; só "por matéria" depende do índice.
-	repo.materias().then((m) => (materias = m), () => {});
-	repo.indice().then((i) => (indice = i), () => {});
+	function carregarBase(): void {
+		falhaBase = false;
+		repo.materias().then((m) => (materias = m), () => (falhaBase = true));
+		repo.indice().then((i) => (indice = i), () => (falhaBase = true));
+	}
+	carregarBase();
 
 	/** Enquanto as matérias carregam (ou sem post na disciplina), o código do edital: `cd-e1` vira `E1`. */
 	function rotuloDoId(id: string): string {
@@ -100,6 +105,12 @@
 		{/if}
 	{/if}
 	<ProgressoEstudo estatisticas={numeros} {materias} />
+	{#if falhaBase}
+		<p class="erro-plano" role="alert">
+			Não foi possível carregar as matérias e o índice do feed; o "por matéria" ficou de fora.
+			<button type="button" onclick={carregarBase}>Tentar de novo</button>
+		</p>
+	{/if}
 	<div>
 		<GradeFerramentas ferramentas={dados.ferramentas} />
 	</div>
@@ -133,6 +144,10 @@
 	}
 
 	.erro-plano {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px 12px;
 		margin: 0;
 		padding: 12px var(--espaco);
 		border: var(--linha-peso) solid var(--cor-borda);

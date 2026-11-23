@@ -12,7 +12,12 @@
 
 	const repo = getContext<Repositorio>('repositorio');
 	let materias = $state.raw<Materia[] | null>(null);
-	repo.materias().then((m) => (materias = m), () => {});
+	let falhaMaterias = $state(false);
+	function carregarMaterias(): void {
+		falhaMaterias = false;
+		repo.materias().then((m) => (materias = m), () => (falhaMaterias = true));
+	}
+	carregarMaterias();
 </script>
 
 <svelte:head>
@@ -25,10 +30,17 @@
 		<h1>Ajustes</h1>
 		<a class="voltar" href="/painel"><Icone nome="voltar" tamanho={20} /> Voltar ao painel</a>
 	</header>
+	{#if falhaMaterias}
+		<p class="erro" role="alert">
+			Não foi possível carregar as matérias.
+			<button type="button" onclick={carregarMaterias}>Tentar de novo</button>
+		</p>
+	{/if}
 	<FocoEstudo
 		especialidades={ESPECIALIDADES}
 		especialidade={foco.especialidade}
 		{materias}
+		falha={falhaMaterias}
 		disciplina={foco.disciplina}
 		onescolherEspecialidade={(id) => foco.escolherEspecialidade(id)}
 		onescolherDisciplina={(id) => foco.escolherDisciplina(id)}
@@ -49,6 +61,19 @@
 		flex-direction: column;
 		align-items: flex-start;
 		gap: var(--espaco);
+	}
+
+	.erro {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px 12px;
+		margin: 0;
+		padding: 12px var(--espaco);
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: var(--raio);
+		background: var(--cor-erro-fundo);
+		color: var(--cor-erro);
 	}
 
 	.topo .voltar {

@@ -50,6 +50,11 @@
 
 	{#if !cargo}
 		<p class="nota">{foco.especialidade.nome} ainda não tem plano nas Missões.</p>
+	{:else if missoes.erro}
+		<div class="erro" role="alert">
+			<p>{missoes.erro}</p>
+			<button type="button" onclick={() => missoes.recarregar()}>Tentar de novo</button>
+		</div>
 	{:else if !plano}
 		<p class="nota" role="status">Carregando as discursivas…</p>
 	{:else if !linhas.length}
@@ -121,6 +126,24 @@
 	.sumario {
 		margin: 0;
 		color: var(--cor-texto-suave);
+	}
+
+	.erro {
+		display: grid;
+		justify-items: center;
+		padding: 12px;
+		border: var(--linha-peso) solid var(--cor-borda);
+		border-radius: var(--raio);
+		background: var(--cor-erro-fundo);
+		color: var(--cor-erro);
+	}
+
+	.erro p {
+		margin: 0;
+	}
+
+	.erro button {
+		color: inherit;
 	}
 
 	.contagem {
