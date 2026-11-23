@@ -26,7 +26,7 @@ let carregar: Promise<void> | null = null;
 
 /** Lê o catálogo uma vez por carga do app (idempotente; falha de rede deixa como está). */
 export function carregarAudios(buscar: typeof fetch = fetch): Promise<void> {
-	carregar ??= buscar('/conteudo/audios.json', { cache: 'force-cache' })
+	carregar ??= buscar('/conteudo/audios.json', { cache: 'no-cache' })
 		.then(
 			(r) => r.ok ? (r.json() as Promise<Record<string, AudiosDaAula>>) : ({} as Record<string, AudiosDaAula>),
 			() => ({}) as Record<string, AudiosDaAula>

@@ -8,7 +8,7 @@ let carregar: Promise<void> | null = null;
 
 /** Lê o índice uma vez por carga do app (idempotente). */
 export function carregarIndiceQuestoes(buscar: typeof fetch = fetch): Promise<void> {
-	carregar ??= buscar('/conteudo/questoes-aula/indice.json', { cache: 'force-cache' })
+	carregar ??= buscar('/conteudo/questoes-aula/indice.json', { cache: 'no-cache' })
 		.then(
 			(r) => (r.ok ? (r.json() as Promise<Record<string, string>>) : ({} as Record<string, string>)),
 			() => ({}) as Record<string, string>
