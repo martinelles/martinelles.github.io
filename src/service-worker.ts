@@ -10,10 +10,16 @@
  * 2. O conteúdo do feed (`/conteudo/*.json`, alguns MB) é gravado depois, arquivo por arquivo,
  *    cada um com seu `catch`: um lote que falha não derruba a instalação nem os outros lotes.
  *    O que faltou é tentado de novo no `activate` e a cada abertura do app (toda navegação que
- *    passa pelo SW). O gatilho escolhido é do próprio SW, e não uma mensagem da página: toda
- *    abertura do app é uma navegação, e o `FetchEvent.waitUntil` da navegação mantém o SW vivo
- *    até a gravação terminar sem atrasar a resposta. Nenhum código de página precisa saber
- *    do pré-cache.
+ *    passa pelo SW). O gatilho é do próprio SW, e não uma mensagem da página: toda abertura do
+ *    app é uma navegação, e o `FetchEvent.waitUntil` da navegação mantém o SW vivo até a
+ *    gravação terminar sem atrasar a resposta. Nenhum código de página precisa saber do
+ *    pré-cache.
+ *
+ * Dois caches: a casca muda a cada build; o conteúdo não tem fingerprint nos nomes de arquivo,
+ * então mora em cache próprio cujo nome deriva do `geradoEm` do `indice.json`. Deploy de código
+ * sem conteúdo novo reutiliza o cache de conteúdo inteiro (nada é re-baixado); quando o
+ * `geradoEm` muda, os arquivos da geração anterior são copiados para a geração nova e cada um é
+ * revalidado (`no-cache` dá 304 para o que não mudou), mantendo o app offline durante a troca.
  *
  * Navegação network-first com fallback à casca do SPA no cache; ativos versionados e conteúdo
  * cache-first. Não intercepta outra origem (edital, WhatsApp) e não faz rastreamento nem sync.
@@ -22,6 +28,10 @@ import { build, files, version } from '$service-worker';
 
 const sw = self as unknown as ServiceWorkerGlobalScope;
 const CACHE = `painel-concurso-${version}`;
+const PREFIXO_CACHE_CONTEUDO = 'painel-concurso-conteudo-';
+// Chave de rede indisponível no preparo (sem índice não há `geradoEm`): o conteúdo desce para
+// este cache e a migração o leva ao cache certo na geração seguinte.
+const CACHE_SEM_INDICE = `${PREFIXO_CACHE_CONTEUDO}sem-indice`;
 // A casca do SPA é guardada sob '/'. '/index.html' não serve de chave: o `vite preview`
 // responde 404 a ela, e um único 404 faz o addAll falhar e o SW inteiro não instalar.
 const CASCA = '/';
@@ -58,13 +68,64 @@ async function guardarCasca(cache: Cache) {
 }
 
 /**
- * Baixa um arquivo de conteúdo para o cache desta versão. Pedidos simultâneos do mesmo arquivo
- * (a fase 2 e a página pedindo o mesmo lote) dividem um único download.
+ * Resolve o nome do cache de conteúdo desta geração. A rede manda: o `geradoEm` do índice no ar
+ * muda só quando o importador gerou conteúdo novo. Sem rede, vale a chave da geração que já está
+ * no aparelho; sem nenhuma das duas, um nome provisório (ver CACHE_SEM_INDICE).
+ */
+async function resolverChaveConteudo(): Promise<string> {
+	try {
+		const resposta = await fetch(`${PREFIXO_CONTEUDO}indice.json`, { cache: 'no-cache' });
+		if (resposta.ok) {
+			const geradoEm = (await resposta.json())?.geradoEm;
+			if (typeof geradoEm === 'string' && geradoEm) return PREFIXO_CACHE_CONTEUDO + geradoEm;
+		}
+	} catch {
+		// Offline no preparo: a chave da geração existente continua valendo.
+	}
+	const existente = (await caches.keys()).find((k) => k.startsWith(PREFIXO_CACHE_CONTEUDO));
+	return existente ?? CACHE_SEM_INDICE;
+}
+
+let chaveConteudo = '';
+let revalidarTudo = false;
+let preparo: Promise<Cache> | null = null;
+
+/**
+ * Abre (criando, se for o caso) o cache de conteúdo da geração atual. Na primeira geração de uma
+ * chave nova, herda os arquivos da geração anterior: o app segue offline enquanto a fase 2
+ * revalida arquivo por arquivo. Chamadas concorrentes dividem a mesma execução.
+ */
+function prepararConteudo(): Promise<Cache> {
+	preparo ??= (async () => {
+		chaveConteudo = await resolverChaveConteudo();
+		const cache = await caches.open(chaveConteudo);
+		const anteriores = (await caches.keys()).filter(
+			(k) => k.startsWith(PREFIXO_CACHE_CONTEUDO) && k !== chaveConteudo
+		);
+		if (anteriores.length) {
+			revalidarTudo = true;
+			for (const nome of anteriores) {
+				const anterior = await caches.open(nome);
+				for (const req of await anterior.keys()) {
+					if (await cache.match(req)) continue;
+					const resposta = await anterior.match(req);
+					if (resposta) await cache.put(req, resposta);
+				}
+			}
+		}
+		return cache;
+	})();
+	return preparo;
+}
+
+/**
+ * Baixa um arquivo de conteúdo para o cache da geração atual. Pedidos simultâneos do mesmo
+ * arquivo (a fase 2 e a página pedindo o mesmo lote) dividem um único download.
  *
  * Todo download para o cache pede `no-cache`: revalida no servidor (um 304 quando nada mudou)
- * em vez de gravar no cache da versão nova uma cópia velha do cache HTTP. Até 2026-10-02 o
- * pedido da página ia com o cache HTTP valendo, e um `plano.json` anterior à emenda D4 ficou
- * gravado como se fosse o novo ("Plano de estudos inválido: minutosLeitura").
+ * em vez de gravar no cache uma cópia velha do cache HTTP. Até 2026-10-02 o pedido da página ia
+ * com o cache HTTP valendo, e um `plano.json` anterior à emenda D4 ficou gravado como se fosse
+ * o novo ("Plano de estudos inválido: minutosLeitura").
  */
 const emVoo = new Map<string, Promise<void>>();
 function baixar(arquivo: string): Promise<void> {
@@ -74,7 +135,7 @@ function baixar(arquivo: string): Promise<void> {
 		p = (async () => {
 			const resposta = await fetch(pedido);
 			if (!resposta.ok) throw new Error(`${arquivo} respondeu ${resposta.status}`);
-			await (await caches.open(CACHE)).put(arquivo, resposta);
+			await (await prepararConteudo()).put(arquivo, resposta);
 		})().finally(() => emVoo.delete(arquivo));
 		emVoo.set(arquivo, p);
 	}
@@ -82,22 +143,27 @@ function baixar(arquivo: string): Promise<void> {
 }
 
 /**
- * Fase 2: grava, um por vez, cada arquivo de conteúdo que ainda não está no cache desta versão.
+ * Fase 2: grava, um por vez, cada arquivo de conteúdo que ainda não está no cache da geração.
  * A falha de um arquivo não interrompe os outros; ele fica para a próxima chamada. Chamadas
- * concorrentes reaproveitam a mesma execução.
+ * concorrentes reaproveitam a mesma execução. Depois de uma migração, a primeira passada
+ * revalida também o que já está no cache (herdado da geração anterior); a bandeira só cai
+ * quando a passada termina sem nenhuma falha, senão a próxima revalida de novo.
  */
 let completando: Promise<void> | null = null;
 function completarConteudo(): Promise<void> {
 	completando ??= (async () => {
 		try {
-			const cache = await caches.open(CACHE);
+			const cache = await prepararConteudo();
+			let falhou = false;
 			for (const arquivo of CONTEUDO) {
 				try {
-					if (!(await cache.match(arquivo))) await baixar(arquivo);
+					if (revalidarTudo || !(await cache.match(arquivo))) await baixar(arquivo);
 				} catch {
+					falhou = true;
 					// Rede fora ou erro HTTP: fica para o próximo activate ou abertura do app.
 				}
 			}
+			if (!falhou) revalidarTudo = false;
 		} finally {
 			completando = null;
 		}
@@ -121,8 +187,15 @@ sw.addEventListener('activate', (e) => {
 	e.waitUntil(
 		(async () => {
 			// Só há activate depois de um install bem-sucedido: a casca nova já está completa,
-			// então as versões antigas podem sair.
-			for (const k of await caches.keys()) if (k !== CACHE) await caches.delete(k);
+			// então as versões antigas podem sair. O cache de conteúdo da geração atual fica;
+			// sem chave resolvida (rede fora no preparo), todo cache de conteúdo fica, senão o
+			// app perde o offline por causa de um índice que não respondeu.
+			await prepararConteudo();
+			for (const k of await caches.keys()) {
+				if (k === CACHE || k === chaveConteudo) continue;
+				if (k.startsWith(PREFIXO_CACHE_CONTEUDO) && chaveConteudo === CACHE_SEM_INDICE) continue;
+				await caches.delete(k);
+			}
 			await sw.clients.claim();
 		})()
 	);
@@ -164,7 +237,7 @@ sw.addEventListener('fetch', (e) => {
 		const recarga = req.cache === 'reload' || req.cache === 'no-cache';
 		e.respondWith(
 			(async () => {
-				const cache = await caches.open(CACHE);
+				const cache = await prepararConteudo();
 				const guardada = recarga ? undefined : await cache.match(url.pathname);
 				if (guardada) return guardada;
 				try {
