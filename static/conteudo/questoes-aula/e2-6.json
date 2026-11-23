@@ -1,0 +1,125 @@
+{
+ "aula": "E2·6",
+ "titulo": "6. Compartilhamento e proteção",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A compatibilidade do tratamento com as finalidades informadas ao titular, consideradas as circunstâncias em que o tratamento ocorre, corresponde, na LGPD, ao princípio da adequação."
+  },
+  {
+   "n": 2,
+   "texto": "O princípio da necessidade autoriza a coleta de dados pessoais além do imediatamente útil, desde que destinados a finalidades que possam surgir no futuro."
+  },
+  {
+   "n": 3,
+   "texto": "Usar cópia da base de produção, com dados pessoais reais, no ambiente de testes de um sistema é prática compatível com a segregação de ambientes, desde que o acesso ao ambiente de testes exija senha."
+  },
+  {
+   "n": 4,
+   "texto": "As medidas de segurança exigidas pela LGPD dos agentes de tratamento são técnicas e administrativas e devem ser observadas desde a fase de concepção do produto ou do serviço até a sua execução."
+  },
+  {
+   "n": 5,
+   "texto": "Pela LGPD, terminado o tratamento, os dados pessoais devem ser eliminados, admitida, entre outras hipóteses, a conservação para uso exclusivo do controlador, vedado o acesso por terceiro, desde que anonimizados."
+  },
+  {
+   "n": 6,
+   "texto": "A eliminação de documentos produzidos por órgãos públicos dispensa a autorização da instituição arquivística quando o órgão adota a sanitização segura das mídias."
+  },
+  {
+   "n": 7,
+   "texto": "Dados anonimizados não são considerados dados pessoais para a LGPD, salvo quando o processo de anonimização for revertido com meios próprios ou puder ser revertido com esforços razoáveis."
+  },
+  {
+   "n": 8,
+   "texto": "O dado pseudonimizado deixa de ser dado pessoal, pois perde a possibilidade de associação direta ou indireta a um indivíduo."
+  },
+  {
+   "n": 9,
+   "texto": "Em um conjunto de dados que atende ao k-anonimato com k igual a 3, cada combinação de quase identificadores aparece em pelo menos três registros, o que, por si só, impede que se descubra o atributo sensível de uma pessoa."
+  },
+  {
+   "n": 10,
+   "texto": "No Decreto 10.046/2019, o compartilhamento de dados protegidos por sigilo com concessão de acesso a todos os órgãos e entidades para a execução de políticas públicas é classificado como compartilhamento específico."
+  },
+  {
+   "n": 11,
+   "texto": "Dados abertos são dados acessíveis ao público, em formato aberto e processáveis por máquina, disponibilizados sob licença aberta que permita sua livre utilização, consumo ou cruzamento, limitando-se a creditar a autoria ou a fonte."
+  },
+  {
+   "n": 12,
+   "texto": "O número de inscrição no CPF e a data de nascimento do titular integram o rol de dados pessoais sensíveis da LGPD, por permitirem a identificação direta da pessoa."
+  },
+  {
+   "n": 13,
+   "texto": "No Poder Executivo federal, a restrição de acesso a informações pessoais não pode ser invocada quando for possível protegê-las por ocultação, anonimização ou pseudonimização."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "A compatibilidade do tratamento com as finalidades informadas ao titular, consideradas as circunstâncias em que o tratamento ocorre, corresponde, na LGPD, ao princípio da adequação. É a adequação; a finalidade é o propósito declarado. LGPD, art. 6º, II “adequação: compatibilidade do tratamento com as finalidades informadas ao titular, de acordo com o contexto do tratamento;”"
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O princípio da necessidade autoriza a coleta de dados pessoais além do imediatamente útil, desde que destinados a finalidades que possam surgir no futuro. A necessidade limita o tratamento ao mínimo necessário para as finalidades informadas."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Usar cópia da base de produção, com dados pessoais reais, no ambiente de testes de um sistema é prática compatível com a segregação de ambientes, desde que o acesso ao ambiente de testes exija senha. O teste usa dado sintético ou mascarado; dado pessoal real fica em produção."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "As medidas de segurança exigidas pela LGPD dos agentes de tratamento são técnicas e administrativas e devem ser observadas desde a fase de concepção do produto ou do serviço até a sua execução. É a privacidade desde a concepção. LGPD, art. 46, caput e § 2º “Os agentes de tratamento devem adotar medidas de segurança, técnicas e administrativas [...] deverão ser observadas desde a fase de concepção do produto ou do serviço até a sua execução.”"
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Pela LGPD, terminado o tratamento, os dados pessoais devem ser eliminados, admitida, entre outras hipóteses, a conservação para uso exclusivo do controlador, vedado o acesso por terceiro, desde que anonimizados. Há ainda a obrigação legal, a pesquisa e a transferência permitida. LGPD, art. 16, IV “uso exclusivo do controlador, vedado seu acesso por terceiro, e desde que anonimizados os dados.”"
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A eliminação de documentos produzidos por órgãos públicos dispensa a autorização da instituição arquivística quando o órgão adota a sanitização segura das mídias. A sanitização é o modo de eliminar; a autorização continua exigida. Lei 8.159/1991, art. 9º “A eliminação de documentos produzidos por instituições públicas e de caráter público será realizada mediante autorização da instituição arquivística pública [...]”"
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Dados anonimizados não são considerados dados pessoais para a LGPD, salvo quando o processo de anonimização for revertido com meios próprios ou puder ser revertido com esforços razoáveis. O razoável considera custo, tempo e tecnologia disponível (art. 12, § 1º). LGPD, art. 12, caput “Os dados anonimizados não serão considerados dados pessoais [...] salvo quando o processo de anonimização [...] for revertido, utilizando exclusivamente meios próprios, ou quando, com esforços razoáveis, puder ser revertido.”"
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O dado pseudonimizado deixa de ser dado pessoal, pois perde a possibilidade de associação direta ou indireta a um indivíduo. A informação adicional guardada à parte reidentifica; o dado continua pessoal. LGPD, art. 13, § 4º “a pseudonimização é o tratamento por meio do qual um dado perde a possibilidade de associação [...] a um indivíduo, senão pelo uso de informação adicional mantida separadamente pelo controlador [...]”"
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Em um conjunto de dados que atende ao k-anonimato com k igual a 3, cada combinação de quase identificadores aparece em pelo menos três registros, o que, por si só, impede que se descubra o atributo sensível de uma pessoa. Se os três registros do grupo têm o mesmo atributo sensível, ele se revela (ataque de homogeneidade)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "No Decreto 10.046/2019, o compartilhamento de dados protegidos por sigilo com concessão de acesso a todos os órgãos e entidades para a execução de políticas públicas é classificado como compartilhamento específico. Esse é o compartilhamento restrito; o específico é para órgãos e entidades determinados. Decreto 10.046/2019, art. 4º, II “compartilhamento restrito, quando se tratar de dados protegidos por sigilo [...] com concessão de acesso a todos os órgãos e entidades de que trata o art. 1º para a execução de políticas públicas”"
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "Dados abertos são dados acessíveis ao público, em formato aberto e processáveis por máquina, disponibilizados sob licença aberta que permita sua livre utilização, consumo ou cruzamento, limitando-se a creditar a autoria ou a fonte. É a definição legal; a licença só pode exigir o crédito. Decreto 8.777/2016, art. 2º, III “dados acessíveis ao público [...] sob licença aberta que permita sua livre utilização, consumo ou cruzamento, limitando-se a creditar a autoria ou a fonte”"
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O número de inscrição no CPF e a data de nascimento do titular integram o rol de dados pessoais sensíveis da LGPD, por permitirem a identificação direta da pessoa. São dados pessoais, mas não estão na lista de sensíveis. LGPD, art. 5º, II “dado pessoal sensível: dado pessoal sobre origem racial ou étnica, convicção religiosa, opinião política [...] dado referente à saúde ou à vida sexual, dado genético ou biométrico [...]”"
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "No Poder Executivo federal, a restrição de acesso a informações pessoais não pode ser invocada quando for possível protegê-las por ocultação, anonimização ou pseudonimização. Inciso incluído pelo Decreto 11.527/2023. Decreto 7.724/2012, art. 58, III “for possível o tratamento e a proteção do dado por meio da ocultação, da anonimização ou da pseudonimização das informações pessoais [...]” ≡"
+  }
+ ]
+}

@@ -119,3 +119,25 @@ test('a missão de 23/11 traz o atalho de questões da E2·5', async ({ page }) 
 	const atalho = page.getByRole('link', { name: 'Questões C/E ↗' }).first();
 	await expect(atalho).toHaveAttribute('href', '/questoes/e2-5');
 });
+
+test('a página da aula E2·6 corrige e comenta o gabarito', async ({ page }) => {
+	await page.addInitScript(() => localStorage.setItem('painel-concurso:usuario:v1', 'marte'));
+	await page.goto('/questoes/e2-6');
+	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 6\. Compartilhamento e proteção/ })).toBeVisible();
+	await expect(page.locator('.ponto')).toHaveCount(13);
+
+	// Questão 1 (gabarito C): acertar por tecla e voltar mostra o comentário.
+	await page.keyboard.press('c');
+	const cartao = page.locator('.cartao');
+	await expect(cartao).toContainText('Questão 2 de 13');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao.locator('.veredito')).toHaveText('Você acertou');
+	await expect(cartao.locator('.gabarito p')).toContainText('compatibilidade');
+});
+
+test('a missão de 30/11 traz o atalho de questões da E2·6', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-11-30T09:00:00-03:00'));
+	await page.goto('/painel');
+	const atalho = page.getByRole('link', { name: 'Questões C/E ↗' }).first();
+	await expect(atalho).toHaveAttribute('href', '/questoes/e2-6');
+});
