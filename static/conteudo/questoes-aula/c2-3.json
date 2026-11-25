@@ -1,1 +1,89 @@
-{"aula": "C2·3", "titulo": "3. Ouvidoria e proteção das pessoas", "questoes": [{"n": 1, "texto": "A identificação do requerente não conterá exigências que inviabilizem sua manifestação."}, {"n": 2, "texto": "A ouvidoria pode exigir do usuário a indicação dos motivos que o levaram a apresentar a manifestação."}, {"n": 3, "texto": "É diretriz do atendimento a utilização de linguagem simples e compreensível, evitando o uso de siglas, jargões e estrangeirismos."}, {"n": 4, "texto": "A identificação do requerente é informação pessoal protegida com restrição de acesso nos termos da LAI."}, {"n": 5, "texto": "A identidade do informante poderá ser revelada por decisão da autoridade, independentemente de comunicação ao informante."}, {"n": 6, "texto": "Considerado razoável o relato e feito o encaminhamento para apuração, o informante terá isenção de responsabilização civil ou penal em relação ao relato, ainda que tenha apresentado, de modo consciente, informações falsas."}, {"n": 7, "texto": "A Política Nacional de Linguagem Simples deve ser observada apenas pelos órgãos da administração direta do Poder Executivo federal."}, {"n": 8, "texto": "Na habilitação, a unidade de ouvidoria verifica requisitos mínimos de autoria, materialidade e relevância para a apuração da denúncia."}, {"n": 9, "texto": "Cabe à unidade de ouvidoria decidir sobre a responsabilidade do agente denunciado."}], "gabarito": [{"n": 1, "r": "C", "comentario": "A identificação do requerente não conterá exigências que inviabilizem sua manifestação. Lei 13.460/2017, art. 10, § 1º “§ 1º A identificação do requerente não conterá exigências que inviabilizem sua manifestação.”"}, {"n": 2, "r": "E", "comentario": "A ouvidoria pode exigir do usuário a indicação dos motivos que o levaram a apresentar a manifestação. São vedadas exigências relativas aos motivos (art. 10, § 2º). Lei 13.460/2017, art. 10, § 2º “§ 2º São vedadas quaisquer exigências relativas aos motivos determinantes da apresentação de manifestações perante a ouvidoria.”"}, {"n": 3, "r": "C", "comentario": "É diretriz do atendimento a utilização de linguagem simples e compreensível, evitando o uso de siglas, jargões e estrangeirismos. Lei 13.460/2017, art. 5º, XIV “Art. 5º O usuário de serviço público tem direito à adequada prestação dos serviços, devendo os agentes públicos e prestadores de serviços públicos observar as seguintes diretrizes: (...) XIV - utilização de linguagem simples e compreensível, evitando o uso de siglas, jargões e estrangeirismos; e”"}, {"n": 4, "r": "C", "comentario": "A identificação do requerente é informação pessoal protegida com restrição de acesso nos termos da LAI. Lei 13.460/2017, art. 10, § 7º “§ 7º A identificação do requerente é informação pessoal protegida com restrição de acesso nos termos da Lei nº 12.527, de 18 de novembro de 2011.”"}, {"n": 5, "r": "E", "comentario": "A identidade do informante poderá ser revelada por decisão da autoridade, independentemente de comunicação ao informante. Lei 13.608/2018, art. 4º-B “Art. 4o-B. O informante terá direito à preservação de sua identidade, a qual apenas será revelada em caso de relevante interesse público ou interesse concreto para a apuração dos fatos. Parágrafo único. A revelação da identidade somente será efetivada mediante comunicação prévia ao informante e com sua concordância formal.”"}, {"n": 6, "r": "E", "comentario": "Considerado razoável o relato e feito o encaminhamento para apuração, o informante terá isenção de responsabilização civil ou penal em relação ao relato, ainda que tenha apresentado, de modo consciente, informações falsas. A isenção não alcança quem apresentou, de modo consciente, informações ou provas falsas (Lei 13.608, art. 4º-A, parágrafo único). Lei 13.608/2018, art. 4º-A, parágrafo único “Parágrafo único. Considerado razoável o relato pela unidade de ouvidoria ou correição e procedido o encaminhamento para apuração, ao informante serão asseguradas proteção integral contra retaliações e isenção de responsabilização civil ou penal em relação ao relato, exceto se o informante tiver apresentado, de modo consciente, informações ou provas falsas.”"}, {"n": 7, "r": "E", "comentario": "A Política Nacional de Linguagem Simples deve ser observada apenas pelos órgãos da administração direta do Poder Executivo federal. Alcança os órgãos e entidades da administração direta e indireta de todos os Poderes da União, dos Estados, do DF e dos Municípios (Lei 15.263/2025, art. 1º). Lei 15.263/2025, art. 1º “Art. 1º Esta Lei institui a Política Nacional de Linguagem Simples, com os objetivos, os princípios e os procedimentos a serem observados pelos órgãos e entidades da administração pública direta e indireta de todos os Poderes da União, dos Estados, do Distrito Federal e dos Municípios, em sua comunicação com a população.”"}, {"n": 8, "r": "C", "comentario": "Na habilitação, a unidade de ouvidoria verifica requisitos mínimos de autoria, materialidade e relevância para a apuração da denúncia. Decreto 10.153/2019, art. 3º, IV “Art. 3º Para fins deste Decreto, considera-se: (...) IV - habilitação - procedimento de análise prévia por meio do qual a unidade de ouvidoria verifica a existência de requisitos mínimos de autoria, materialidade e relevância para a apuração da denúncia e o seu encaminhamento à unidade de apuração; e”"}, {"n": 9, "r": "E", "comentario": "Cabe à unidade de ouvidoria decidir sobre a responsabilidade do agente denunciado. A ouvidoria recebe e encaminha; a decisão cabe à autoridade competente após apuração. Lei 13.460/2017, art. 13, VI “Art. 13. As ouvidorias terão como atribuições precípuas, sem prejuízo de outras estabelecidas em regulamento específico: (...) VI - receber, analisar e encaminhar às autoridades competentes as manifestações, acompanhando o tratamento e a efetiva conclusão das manifestações de usuário perante órgão ou entidade a que se vincula; e”"}]}
+{
+ "aula": "C2·3",
+ "titulo": "3. Ouvidoria e proteção das pessoas",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A identificação do requerente não conterá exigências que inviabilizem sua manifestação."
+  },
+  {
+   "n": 2,
+   "texto": "A ouvidoria pode exigir do usuário a indicação dos motivos que o levaram a apresentar a manifestação."
+  },
+  {
+   "n": 3,
+   "texto": "É diretriz do atendimento a utilização de linguagem simples e compreensível, evitando o uso de siglas, jargões e estrangeirismos."
+  },
+  {
+   "n": 4,
+   "texto": "A identificação do requerente é informação pessoal protegida com restrição de acesso nos termos da LAI."
+  },
+  {
+   "n": 5,
+   "texto": "A identidade do informante poderá ser revelada por decisão da autoridade, independentemente de comunicação ao informante."
+  },
+  {
+   "n": 6,
+   "texto": "Considerado razoável o relato e feito o encaminhamento para apuração, o informante terá isenção de responsabilização civil ou penal em relação ao relato, ainda que tenha apresentado, de modo consciente, informações falsas."
+  },
+  {
+   "n": 7,
+   "texto": "A Política Nacional de Linguagem Simples deve ser observada apenas pelos órgãos da administração direta do Poder Executivo federal."
+  },
+  {
+   "n": 8,
+   "texto": "Na habilitação, a unidade de ouvidoria verifica requisitos mínimos de autoria, materialidade e relevância para a apuração da denúncia."
+  },
+  {
+   "n": 9,
+   "texto": "Cabe à unidade de ouvidoria decidir sobre a responsabilidade do agente denunciado."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "A identificação do requerente não conterá exigências que inviabilizem sua manifestação. Lei 13.460/2017, art. 10, § 1º “§ 1º A identificação do requerente não conterá exigências que inviabilizem sua manifestação.”"
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A ouvidoria pode exigir do usuário a indicação dos motivos que o levaram a apresentar a manifestação. São vedadas exigências relativas aos motivos (art. 10, § 2º). Lei 13.460/2017, art. 10, § 2º “§ 2º São vedadas quaisquer exigências relativas aos motivos determinantes da apresentação de manifestações perante a ouvidoria.”"
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "É diretriz do atendimento a utilização de linguagem simples e compreensível, evitando o uso de siglas, jargões e estrangeirismos. Lei 13.460/2017, art. 5º, XIV “Art. 5º O usuário de serviço público tem direito à adequada prestação dos serviços, devendo os agentes públicos e prestadores de serviços públicos observar as seguintes diretrizes: (...) XIV - utilização de linguagem simples e compreensível, evitando o uso de siglas, jargões e estrangeirismos; e”"
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "A identificação do requerente é informação pessoal protegida com restrição de acesso nos termos da LAI. Lei 13.460/2017, art. 10, § 7º “§ 7º A identificação do requerente é informação pessoal protegida com restrição de acesso nos termos da Lei nº 12.527, de 18 de novembro de 2011.”"
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A identidade do informante poderá ser revelada por decisão da autoridade, independentemente de comunicação ao informante. Lei 13.608/2018, art. 4º-B “Art. 4o-B. O informante terá direito à preservação de sua identidade, a qual apenas será revelada em caso de relevante interesse público ou interesse concreto para a apuração dos fatos. Parágrafo único. A revelação da identidade somente será efetivada mediante comunicação prévia ao informante e com sua concordância formal.”"
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Considerado razoável o relato e feito o encaminhamento para apuração, o informante terá isenção de responsabilização civil ou penal em relação ao relato, ainda que tenha apresentado, de modo consciente, informações falsas. A isenção não alcança quem apresentou, de modo consciente, informações ou provas falsas (Lei 13.608, art. 4º-A, parágrafo único). Lei 13.608/2018, art. 4º-A, parágrafo único “Parágrafo único. Considerado razoável o relato pela unidade de ouvidoria ou correição e procedido o encaminhamento para apuração, ao informante serão asseguradas proteção integral contra retaliações e isenção de responsabilização civil ou penal em relação ao relato, exceto se o informante tiver apresentado, de modo consciente, informações ou provas falsas.”"
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A Política Nacional de Linguagem Simples deve ser observada apenas pelos órgãos da administração direta do Poder Executivo federal. Alcança os órgãos e entidades da administração direta e indireta de todos os Poderes da União, dos Estados, do DF e dos Municípios (Lei 15.263/2025, art. 1º). Lei 15.263/2025, art. 1º “Art. 1º Esta Lei institui a Política Nacional de Linguagem Simples, com os objetivos, os princípios e os procedimentos a serem observados pelos órgãos e entidades da administração pública direta e indireta de todos os Poderes da União, dos Estados, do Distrito Federal e dos Municípios, em sua comunicação com a população.”"
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Na habilitação, a unidade de ouvidoria verifica requisitos mínimos de autoria, materialidade e relevância para a apuração da denúncia. Decreto 10.153/2019, art. 3º, IV “Art. 3º Para fins deste Decreto, considera-se: (...) IV - habilitação - procedimento de análise prévia por meio do qual a unidade de ouvidoria verifica a existência de requisitos mínimos de autoria, materialidade e relevância para a apuração da denúncia e o seu encaminhamento à unidade de apuração; e”"
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Cabe à unidade de ouvidoria decidir sobre a responsabilidade do agente denunciado. A ouvidoria recebe e encaminha; a decisão cabe à autoridade competente após apuração. Lei 13.460/2017, art. 13, VI “Art. 13. As ouvidorias terão como atribuições precípuas, sem prejuízo de outras estabelecidas em regulamento específico: (...) VI - receber, analisar e encaminhar às autoridades competentes as manifestações, acompanhando o tratamento e a efetiva conclusão das manifestações de usuário perante órgão ou entidade a que se vincula; e”"
+  }
+ ]
+}

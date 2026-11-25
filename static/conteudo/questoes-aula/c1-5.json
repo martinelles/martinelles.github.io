@@ -1,1 +1,44 @@
-{"aula": "C1·5", "titulo": "5. Prevenção e melhoria institucional", "questoes": [{"n": 1, "texto": "A gestão da integridade deve ser condizente com a natureza, a complexidade e o porte de cada órgão, e realizada com base em evidências."}, {"n": 2, "texto": "A unidade setorial de integridade deve compilar dados das funções de integridade para identificar riscos à integridade."}, {"n": 3, "texto": "A ausência de denúncias em um órgão de grande porte e alto risco indica, necessariamente, a inexistência de irregularidades."}, {"n": 4, "texto": "O número de servidores capacitados é suficiente para demonstrar a efetividade de um programa de integridade."}], "gabarito": [{"n": 1, "r": "C", "comentario": "A gestão da integridade deve ser condizente com a natureza, a complexidade e o porte de cada órgão, e realizada com base em evidências. PN CGU 234/2025 (Referencial Técnico da Gestão da Integridade), item 24 “São princípios da gestão da integridade pública organizacional: (...) b) Especificidade: a gestão da integridade é específica para cada órgão ou entidade e deve ser condizente com sua natureza, complexidade, porte, contexto, ambiente operacional, planejamento estratégico, atividades e objetivos e deve ser realizada com base em evidências;”"}, {"n": 2, "r": "C", "comentario": "A unidade setorial de integridade deve compilar dados das funções de integridade para identificar riscos à integridade. PN CGU 234/2025 (Referencial Técnico da Gestão da Integridade), item 43 “A USI deve compilar os dados gerados a partir do trabalho das unidades responsáveis por funções de integridade para identificar os riscos à integridade e permitir a adequada gestão desses riscos.”"}, {"n": 3, "r": "E", "comentario": "A ausência de denúncias em um órgão de grande porte e alto risco indica, necessariamente, a inexistência de irregularidades. Pode indicar baixa detecção (subnotificação)."}, {"n": 4, "r": "E", "comentario": "O número de servidores capacitados é suficiente para demonstrar a efetividade de um programa de integridade. Mostra implementação, não efeito."}]}
+{
+ "aula": "C1·5",
+ "titulo": "5. Prevenção e melhoria institucional",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A gestão da integridade deve ser condizente com a natureza, a complexidade e o porte de cada órgão, e realizada com base em evidências."
+  },
+  {
+   "n": 2,
+   "texto": "A unidade setorial de integridade deve compilar dados das funções de integridade para identificar riscos à integridade."
+  },
+  {
+   "n": 3,
+   "texto": "A ausência de denúncias em um órgão de grande porte e alto risco indica, necessariamente, a inexistência de irregularidades."
+  },
+  {
+   "n": 4,
+   "texto": "O número de servidores capacitados é suficiente para demonstrar a efetividade de um programa de integridade."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "A gestão da integridade deve ser condizente com a natureza, a complexidade e o porte de cada órgão, e realizada com base em evidências. PN CGU 234/2025 (Referencial Técnico da Gestão da Integridade), item 24 “São princípios da gestão da integridade pública organizacional: (...) b) Especificidade: a gestão da integridade é específica para cada órgão ou entidade e deve ser condizente com sua natureza, complexidade, porte, contexto, ambiente operacional, planejamento estratégico, atividades e objetivos e deve ser realizada com base em evidências;”"
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A unidade setorial de integridade deve compilar dados das funções de integridade para identificar riscos à integridade. PN CGU 234/2025 (Referencial Técnico da Gestão da Integridade), item 43 “A USI deve compilar os dados gerados a partir do trabalho das unidades responsáveis por funções de integridade para identificar os riscos à integridade e permitir a adequada gestão desses riscos.”"
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A ausência de denúncias em um órgão de grande porte e alto risco indica, necessariamente, a inexistência de irregularidades. Pode indicar baixa detecção (subnotificação)."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O número de servidores capacitados é suficiente para demonstrar a efetividade de um programa de integridade. Mostra implementação, não efeito."
+  }
+ ]
+}

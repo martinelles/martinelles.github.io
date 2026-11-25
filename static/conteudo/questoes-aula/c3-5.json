@@ -1,1 +1,62 @@
-{"aula": "C3·5", "titulo": "5. Proteção e encaminhamento", "questoes": [{"n": 1, "texto": "Medidas acautelatórias em casos de assédio podem ser estabelecidas independentemente da apuração correcional."}, {"n": 2, "texto": "O afastamento preventivo do servidor acusado ocorrerá com prejuízo da remuneração."}, {"n": 3, "texto": "O afastamento preventivo pode durar até 60 dias, prorrogáveis por igual prazo."}, {"n": 4, "texto": "O acolhimento da pessoa que relata assédio compreende a decisão sobre a procedência da denúncia."}, {"n": 5, "texto": "Conforme o Plano Setorial da CGU, importunações e atos impróprios que não configurem assédio sexual são infrações graves, puníveis necessariamente com penalidade expulsiva."}, {"n": 6, "texto": "O Programa Federal de Prevenção e Enfrentamento do Assédio e da Discriminação prevê procedimentos administrativos disciplinares que resguardem a vítima em todas as suas fases, com vistas a evitar a revitimização."}], "gabarito": [{"n": 1, "r": "C", "comentario": "Medidas acautelatórias em casos de assédio podem ser estabelecidas independentemente da apuração correcional. Plano Setorial da CGU. Plano Setorial de Prevenção ao Assédio da CGU (2024), p. 14 “Tendo em vista a preservação da integridade física e mental das partes envolvidas em situações de assédio ou discriminação, medidas acautelatórias poderão ser estabelecidas, independentemente da apuração correcional.”"}, {"n": 2, "r": "E", "comentario": "O afastamento preventivo do servidor acusado ocorrerá com prejuízo da remuneração. Sem prejuízo da remuneração (art. 147). Lei 8.112/1990, art. 147 “Art. 147. Como medida cautelar e a fim de que o servidor não venha a influir na apuração da irregularidade, a autoridade instauradora do processo disciplinar poderá determinar o seu afastamento do exercício do cargo, pelo prazo de até 60 (sessenta) dias, sem prejuízo da remuneração.”"}, {"n": 3, "r": "C", "comentario": "O afastamento preventivo pode durar até 60 dias, prorrogáveis por igual prazo. Lei 8.112/1990, art. 147 e parágrafo único “Art. 147. Como medida cautelar e a fim de que o servidor não venha a influir na apuração da irregularidade, a autoridade instauradora do processo disciplinar poderá determinar o seu afastamento do exercício do cargo, pelo prazo de até 60 (sessenta) dias, sem prejuízo da remuneração. (...) Parágrafo único. O afastamento poderá ser prorrogado por igual prazo, findo o qual cessarão os seus efeitos, ainda que não concluído o processo.”"}, {"n": 4, "r": "E", "comentario": "O acolhimento da pessoa que relata assédio compreende a decisão sobre a procedência da denúncia. Acolher não é julgar."}, {"n": 5, "r": "E", "comentario": "Conforme o Plano Setorial da CGU, importunações e atos impróprios que não configurem assédio sexual são infrações graves, puníveis necessariamente com penalidade expulsiva. O Plano Setorial (p. 16) as enquadra como violação dos deveres do art. 116, III, IX e XI, da Lei 8.112, infrações de natureza leve ou intermediária, que podem resultar em advertência ou suspensão; a pena expulsiva obrigatória, no mesmo Plano, vale para a conduta enquadrada como assédio ou discriminação. Plano Setorial de Prevenção ao Assédio da CGU (2024), p. 16 “Importante ressaltar que importunações e atos impróprios que não configurem assédio sexual podem ser enquadrados em violação aos deveres de \"observar as normas legais e regulamentares\", de \"tratar com urbanidade as pessoas\" e de \"manter conduta compatível com a moralidade administrativa\", previstos no art. 116, incisos III, IX e XI, da Lei nº 8.112, de 11 de dezembro de 1990, infrações de natureza leve ou intermediária, que, a depender das circunstâncias do caso, podem resultar em penalidades de advertência ou de suspensão.”"}, {"n": 6, "r": "C", "comentario": "O Programa Federal de Prevenção e Enfrentamento do Assédio e da Discriminação prevê procedimentos administrativos disciplinares que resguardem a vítima em todas as suas fases, com vistas a evitar a revitimização. Decreto 12.122/2024, art. 2º, VII “VII - procedimentos administrativos disciplinares que resguardem a vítima, em todas as suas fases, com vistas a evitar a revitimização; e”"}]}
+{
+ "aula": "C3·5",
+ "titulo": "5. Proteção e encaminhamento",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Medidas acautelatórias em casos de assédio podem ser estabelecidas independentemente da apuração correcional."
+  },
+  {
+   "n": 2,
+   "texto": "O afastamento preventivo do servidor acusado ocorrerá com prejuízo da remuneração."
+  },
+  {
+   "n": 3,
+   "texto": "O afastamento preventivo pode durar até 60 dias, prorrogáveis por igual prazo."
+  },
+  {
+   "n": 4,
+   "texto": "O acolhimento da pessoa que relata assédio compreende a decisão sobre a procedência da denúncia."
+  },
+  {
+   "n": 5,
+   "texto": "Conforme o Plano Setorial da CGU, importunações e atos impróprios que não configurem assédio sexual são infrações graves, puníveis necessariamente com penalidade expulsiva."
+  },
+  {
+   "n": 6,
+   "texto": "O Programa Federal de Prevenção e Enfrentamento do Assédio e da Discriminação prevê procedimentos administrativos disciplinares que resguardem a vítima em todas as suas fases, com vistas a evitar a revitimização."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "Medidas acautelatórias em casos de assédio podem ser estabelecidas independentemente da apuração correcional. Plano Setorial da CGU. Plano Setorial de Prevenção ao Assédio da CGU (2024), p. 14 “Tendo em vista a preservação da integridade física e mental das partes envolvidas em situações de assédio ou discriminação, medidas acautelatórias poderão ser estabelecidas, independentemente da apuração correcional.”"
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O afastamento preventivo do servidor acusado ocorrerá com prejuízo da remuneração. Sem prejuízo da remuneração (art. 147). Lei 8.112/1990, art. 147 “Art. 147. Como medida cautelar e a fim de que o servidor não venha a influir na apuração da irregularidade, a autoridade instauradora do processo disciplinar poderá determinar o seu afastamento do exercício do cargo, pelo prazo de até 60 (sessenta) dias, sem prejuízo da remuneração.”"
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "O afastamento preventivo pode durar até 60 dias, prorrogáveis por igual prazo. Lei 8.112/1990, art. 147 e parágrafo único “Art. 147. Como medida cautelar e a fim de que o servidor não venha a influir na apuração da irregularidade, a autoridade instauradora do processo disciplinar poderá determinar o seu afastamento do exercício do cargo, pelo prazo de até 60 (sessenta) dias, sem prejuízo da remuneração. (...) Parágrafo único. O afastamento poderá ser prorrogado por igual prazo, findo o qual cessarão os seus efeitos, ainda que não concluído o processo.”"
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O acolhimento da pessoa que relata assédio compreende a decisão sobre a procedência da denúncia. Acolher não é julgar."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Conforme o Plano Setorial da CGU, importunações e atos impróprios que não configurem assédio sexual são infrações graves, puníveis necessariamente com penalidade expulsiva. O Plano Setorial (p. 16) as enquadra como violação dos deveres do art. 116, III, IX e XI, da Lei 8.112, infrações de natureza leve ou intermediária, que podem resultar em advertência ou suspensão; a pena expulsiva obrigatória, no mesmo Plano, vale para a conduta enquadrada como assédio ou discriminação. Plano Setorial de Prevenção ao Assédio da CGU (2024), p. 16 “Importante ressaltar que importunações e atos impróprios que não configurem assédio sexual podem ser enquadrados em violação aos deveres de \"observar as normas legais e regulamentares\", de \"tratar com urbanidade as pessoas\" e de \"manter conduta compatível com a moralidade administrativa\", previstos no art. 116, incisos III, IX e XI, da Lei nº 8.112, de 11 de dezembro de 1990, infrações de natureza leve ou intermediária, que, a depender das circunstâncias do caso, podem resultar em penalidades de advertência ou de suspensão.”"
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "O Programa Federal de Prevenção e Enfrentamento do Assédio e da Discriminação prevê procedimentos administrativos disciplinares que resguardem a vítima em todas as suas fases, com vistas a evitar a revitimização. Decreto 12.122/2024, art. 2º, VII “VII - procedimentos administrativos disciplinares que resguardem a vítima, em todas as suas fases, com vistas a evitar a revitimização; e”"
+  }
+ ]
+}

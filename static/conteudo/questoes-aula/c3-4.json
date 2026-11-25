@@ -1,1 +1,71 @@
-{"aula": "C3·4", "titulo": "4. Responsabilização em nível introdutório", "questoes": [{"n": 1, "texto": "As pessoas jurídicas serão responsabilizadas objetivamente, nos âmbitos administrativo e civil, pelos atos lesivos previstos na Lei 12.846/2013."}, {"n": 2, "texto": "A multa prevista na Lei Anticorrupção varia de 1% a 30% do faturamento bruto."}, {"n": 3, "texto": "São penalidades disciplinares, entre outras, a advertência, a suspensão e a demissão."}, {"n": 4, "texto": "O erro caracteriza-se como ato não intencional, verificando-se apenas culpa."}, {"n": 5, "texto": "No juízo de admissibilidade, o titular da unidade de correição pode decidir pela celebração de Termo de Ajustamento de Conduta."}, {"n": 6, "texto": "O acordo de leniência exige que a colaboração resulte na identificação dos demais envolvidos, quando couber, e na obtenção célere de provas do ilícito."}, {"n": 7, "texto": "A celebração do acordo de leniência exime a pessoa jurídica de reparar integralmente o dano causado."}], "gabarito": [{"n": 1, "r": "C", "comentario": "As pessoas jurídicas serão responsabilizadas objetivamente, nos âmbitos administrativo e civil, pelos atos lesivos previstos na Lei 12.846/2013. Lei 12.846/2013, art. 2º “Art. 2º As pessoas jurídicas serão responsabilizadas objetivamente, nos âmbitos administrativo e civil, pelos atos lesivos previstos nesta Lei praticados em seu interesse ou benefício, exclusivo ou não.”"}, {"n": 2, "r": "E", "comentario": "A multa prevista na Lei Anticorrupção varia de 1% a 30% do faturamento bruto. De 0,1% a 20%. Lei 12.846/2013, art. 6º, I “Art. 6º Na esfera administrativa, serão aplicadas às pessoas jurídicas consideradas responsáveis pelos atos lesivos previstos nesta Lei as seguintes sanções: (...) I - multa, no valor de 0,1% (um décimo por cento) a 20% (vinte por cento) do faturamento bruto do último exercício anterior ao da instauração do processo administrativo, excluídos os tributos, a qual nunca será inferior à vantagem auferida, quando for possível sua estimação; e”"}, {"n": 3, "r": "C", "comentario": "São penalidades disciplinares, entre outras, a advertência, a suspensão e a demissão. Lei 8.112/1990, art. 127 “Art. 127. São penalidades disciplinares: I - advertência; II - suspensão; III - demissão; IV - cassação de aposentadoria ou disponibilidade; V - destituição de cargo em comissão; VI - destituição de função comissionada.”"}, {"n": 4, "r": "C", "comentario": "O erro caracteriza-se como ato não intencional, verificando-se apenas culpa. MOT (IN SFC 8/2017), glossário, p. 135 “Erro: ato não-voluntário, não-intencional, resultante de omissão, desconhecimento, imperícia, imprudência, desatenção ou má interpretação de fatos na elaboração de documentos, registros ou demonstrações.”"}, {"n": 5, "r": "C", "comentario": "No juízo de admissibilidade, o titular da unidade de correição pode decidir pela celebração de Termo de Ajustamento de Conduta. PN CGU 27/2022, art. 37, II “Art. 37. O juízo de admissibilidade é o ato administrativo por meio do qual o titular de unidade setorial de correição decide, de forma fundamentada: (...) II - pela celebração de Termo de Ajustamento de Conduta - TAC;”"}, {"n": 6, "r": "C", "comentario": "O acordo de leniência exige que a colaboração resulte na identificação dos demais envolvidos, quando couber, e na obtenção célere de provas do ilícito. Lei 12.846/2013, art. 16 “Art. 16. A autoridade máxima de cada órgão ou entidade pública poderá celebrar acordo de leniência com as pessoas jurídicas responsáveis pela prática dos atos previstos nesta Lei que colaborem efetivamente com as investigações e o processo administrativo, sendo que dessa colaboração resulte: I - a identificação dos demais envolvidos na infração, quando couber; e II - a obtenção célere de informações e documentos que comprovem o ilícito sob apuração.”"}, {"n": 7, "r": "E", "comentario": "A celebração do acordo de leniência exime a pessoa jurídica de reparar integralmente o dano causado. Não exime da reparação (art. 16, § 3º). Lei 12.846/2013, art. 16, § 3º “§ 3º O acordo de leniência não exime a pessoa jurídica da obrigação de reparar integralmente o dano causado.”"}]}
+{
+ "aula": "C3·4",
+ "titulo": "4. Responsabilização em nível introdutório",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "As pessoas jurídicas serão responsabilizadas objetivamente, nos âmbitos administrativo e civil, pelos atos lesivos previstos na Lei 12.846/2013."
+  },
+  {
+   "n": 2,
+   "texto": "A multa prevista na Lei Anticorrupção varia de 1% a 30% do faturamento bruto."
+  },
+  {
+   "n": 3,
+   "texto": "São penalidades disciplinares, entre outras, a advertência, a suspensão e a demissão."
+  },
+  {
+   "n": 4,
+   "texto": "O erro caracteriza-se como ato não intencional, verificando-se apenas culpa."
+  },
+  {
+   "n": 5,
+   "texto": "No juízo de admissibilidade, o titular da unidade de correição pode decidir pela celebração de Termo de Ajustamento de Conduta."
+  },
+  {
+   "n": 6,
+   "texto": "O acordo de leniência exige que a colaboração resulte na identificação dos demais envolvidos, quando couber, e na obtenção célere de provas do ilícito."
+  },
+  {
+   "n": 7,
+   "texto": "A celebração do acordo de leniência exime a pessoa jurídica de reparar integralmente o dano causado."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "As pessoas jurídicas serão responsabilizadas objetivamente, nos âmbitos administrativo e civil, pelos atos lesivos previstos na Lei 12.846/2013. Lei 12.846/2013, art. 2º “Art. 2º As pessoas jurídicas serão responsabilizadas objetivamente, nos âmbitos administrativo e civil, pelos atos lesivos previstos nesta Lei praticados em seu interesse ou benefício, exclusivo ou não.”"
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A multa prevista na Lei Anticorrupção varia de 1% a 30% do faturamento bruto. De 0,1% a 20%. Lei 12.846/2013, art. 6º, I “Art. 6º Na esfera administrativa, serão aplicadas às pessoas jurídicas consideradas responsáveis pelos atos lesivos previstos nesta Lei as seguintes sanções: (...) I - multa, no valor de 0,1% (um décimo por cento) a 20% (vinte por cento) do faturamento bruto do último exercício anterior ao da instauração do processo administrativo, excluídos os tributos, a qual nunca será inferior à vantagem auferida, quando for possível sua estimação; e”"
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "São penalidades disciplinares, entre outras, a advertência, a suspensão e a demissão. Lei 8.112/1990, art. 127 “Art. 127. São penalidades disciplinares: I - advertência; II - suspensão; III - demissão; IV - cassação de aposentadoria ou disponibilidade; V - destituição de cargo em comissão; VI - destituição de função comissionada.”"
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "O erro caracteriza-se como ato não intencional, verificando-se apenas culpa. MOT (IN SFC 8/2017), glossário, p. 135 “Erro: ato não-voluntário, não-intencional, resultante de omissão, desconhecimento, imperícia, imprudência, desatenção ou má interpretação de fatos na elaboração de documentos, registros ou demonstrações.”"
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "No juízo de admissibilidade, o titular da unidade de correição pode decidir pela celebração de Termo de Ajustamento de Conduta. PN CGU 27/2022, art. 37, II “Art. 37. O juízo de admissibilidade é o ato administrativo por meio do qual o titular de unidade setorial de correição decide, de forma fundamentada: (...) II - pela celebração de Termo de Ajustamento de Conduta - TAC;”"
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "O acordo de leniência exige que a colaboração resulte na identificação dos demais envolvidos, quando couber, e na obtenção célere de provas do ilícito. Lei 12.846/2013, art. 16 “Art. 16. A autoridade máxima de cada órgão ou entidade pública poderá celebrar acordo de leniência com as pessoas jurídicas responsáveis pela prática dos atos previstos nesta Lei que colaborem efetivamente com as investigações e o processo administrativo, sendo que dessa colaboração resulte: I - a identificação dos demais envolvidos na infração, quando couber; e II - a obtenção célere de informações e documentos que comprovem o ilícito sob apuração.”"
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A celebração do acordo de leniência exime a pessoa jurídica de reparar integralmente o dano causado. Não exime da reparação (art. 16, § 3º). Lei 12.846/2013, art. 16, § 3º “§ 3º O acordo de leniência não exime a pessoa jurídica da obrigação de reparar integralmente o dano causado.”"
+  }
+ ]
+}

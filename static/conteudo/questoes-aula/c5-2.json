@@ -1,1 +1,89 @@
-{"aula": "C5·2", "titulo": "2. Ciclo do trabalho", "questoes": [{"n": 1, "texto": "A avaliação é composta pelas etapas de planejamento, execução, comunicação dos resultados e monitoramento, havendo divisão rígida entre elas."}, {"n": 2, "texto": "A efetividade do trabalho de avaliação se alcança por meio da implementação das recomendações, que devem ser previamente acordadas com a alta administração."}, {"n": 3, "texto": "Os objetivos do trabalho de auditoria devem ser concisos, realistas e não conter termos ambíguos ou abstratos."}, {"n": 4, "texto": "O escopo do trabalho de auditoria deve, em regra, abranger todos os aspectos do objeto auditado."}, {"n": 5, "texto": "Os critérios de auditoria constituem referenciais para avaliar se a situação avaliada atende ao esperado e representam um padrão razoável e atingível de desempenho."}, {"n": 6, "texto": "O Plano de Auditoria Interna deve ser baseado em riscos, considerando as estratégias, os objetivos, as prioridades e as metas da Unidade Auditada."}, {"n": 7, "texto": "A identificação, a avaliação e a mitigação dos riscos são responsabilidade da auditoria interna, como primeira linha de defesa."}, {"n": 8, "texto": "Cabe à alta administração zelar pela implementação das recomendações da UAIG, devendo aceitar formalmente o risco caso decida não realizar nenhuma ação."}, {"n": 9, "texto": "Caso o gestor já tenha mapeado os seus processos, os auditores deverão realizar procedimentos para testar os fluxos e verificar se o mapeamento realizado corresponde à realidade."}], "gabarito": [{"n": 1, "r": "E", "comentario": "A avaliação é composta pelas etapas de planejamento, execução, comunicação dos resultados e monitoramento, havendo divisão rígida entre elas. O MOT ressalta que não há divisão rígida. MOT (IN SFC 8/2017), p. 17 “A avaliação é composta basicamente das seguintes etapas: planejamento, execução, comunicação dos resultados e monitoramento, contudo, é importante ressaltar que não há uma divisão rígida entre elas.”"}, {"n": 2, "r": "C", "comentario": "A efetividade do trabalho de avaliação se alcança por meio da implementação das recomendações, que devem ser previamente acordadas com a alta administração. MOT (IN SFC 8/2017), item 1.1.1.4 “Tal atividade deve ser realizada permanentemente para garantir a efetividade do trabalho de avaliação, que se alcança por meio da implementação das recomendações, as quais devem ser previamente acordadas com a alta administração.”"}, {"n": 3, "r": "C", "comentario": "Os objetivos do trabalho de auditoria devem ser concisos, realistas e não conter termos ambíguos ou abstratos. MOT (IN SFC 8/2017), item 4.3.2 “Devem ser descritos de modo que o propósito da auditoria fique claro; além disso, devem ser concisos, realistas e não conter termos ambíguos ou abstratos.”"}, {"n": 4, "r": "E", "comentario": "O escopo do trabalho de auditoria deve, em regra, abranger todos os aspectos do objeto auditado. O trabalho, em geral, não pode abranger tudo; o escopo define o que será e o que não será incluído. MOT (IN SFC 8/2017), item 4.3.2 “Como um trabalho de auditoria, geralmente, não pode abranger tudo, os auditores internos devem determinar os limites da auditoria, o que será e o que não será incluído, ou seja, o escopo.”"}, {"n": 5, "r": "C", "comentario": "Os critérios de auditoria constituem referenciais para avaliar se a situação avaliada atende ao esperado e representam um padrão razoável e atingível de desempenho. MOT (IN SFC 8/2017), item 4.3.3 “b) os critérios de auditoria, que constituem referenciais para avaliar se a situação a ser avaliada atende ao esperado. Representam um padrão razoável e atingível de desempenho”"}, {"n": 6, "r": "C", "comentario": "O Plano de Auditoria Interna deve ser baseado em riscos, considerando as estratégias, os objetivos, as prioridades e as metas da Unidade Auditada. IN SFC 3/2017, item 84 “O planejamento deve considerar as estratégias, os objetivos, as prioridades, as metas da Unidade Auditada e os riscos a que seus processos estão sujeitos.”"}, {"n": 7, "r": "E", "comentario": "A identificação, a avaliação e a mitigação dos riscos são responsabilidade da auditoria interna, como primeira linha de defesa. São da primeira linha (gestores); a auditoria interna é a terceira. IN SFC 3/2017, item 8 “A primeira linha de defesa é responsável por identificar, avaliar, controlar e mitigar os riscos, guiando o desenvolvimento e a implementação de políticas e procedimentos internos destinados a garantir que as atividades sejam realizadas de acordo com as metas e objetivos da organização.”"}, {"n": 8, "r": "C", "comentario": "Cabe à alta administração zelar pela implementação das recomendações da UAIG, devendo aceitar formalmente o risco caso decida não realizar nenhuma ação. IN SFC 3/2017, item 176 “É responsabilidade da alta administração da Unidade Auditada zelar pela adequada implementação das recomendações emitidas pela UAIG, cabendo-lhe aceitar formalmente o risco associado caso decida por não realizar nenhuma ação.”"}, {"n": 9, "r": "C", "comentario": "Caso o gestor já tenha mapeado os seus processos, os auditores deverão realizar procedimentos para testar os fluxos e verificar se o mapeamento realizado corresponde à realidade. MOT, item 4.3.1.1 “Caso o gestor já tenha mapeado os seus processos, os auditores deverão realizar procedimentos (a exemplo de entrevistas com funcionários responsáveis pela gestão e pela execução do processo que será auditado) para testar os fluxos e verificar se o mapeamento realizado corresponde à realidade e se atende às necessidades do trabalho que será desenvolvido.”"}]}
+{
+ "aula": "C5·2",
+ "titulo": "2. Ciclo do trabalho",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A avaliação é composta pelas etapas de planejamento, execução, comunicação dos resultados e monitoramento, havendo divisão rígida entre elas."
+  },
+  {
+   "n": 2,
+   "texto": "A efetividade do trabalho de avaliação se alcança por meio da implementação das recomendações, que devem ser previamente acordadas com a alta administração."
+  },
+  {
+   "n": 3,
+   "texto": "Os objetivos do trabalho de auditoria devem ser concisos, realistas e não conter termos ambíguos ou abstratos."
+  },
+  {
+   "n": 4,
+   "texto": "O escopo do trabalho de auditoria deve, em regra, abranger todos os aspectos do objeto auditado."
+  },
+  {
+   "n": 5,
+   "texto": "Os critérios de auditoria constituem referenciais para avaliar se a situação avaliada atende ao esperado e representam um padrão razoável e atingível de desempenho."
+  },
+  {
+   "n": 6,
+   "texto": "O Plano de Auditoria Interna deve ser baseado em riscos, considerando as estratégias, os objetivos, as prioridades e as metas da Unidade Auditada."
+  },
+  {
+   "n": 7,
+   "texto": "A identificação, a avaliação e a mitigação dos riscos são responsabilidade da auditoria interna, como primeira linha de defesa."
+  },
+  {
+   "n": 8,
+   "texto": "Cabe à alta administração zelar pela implementação das recomendações da UAIG, devendo aceitar formalmente o risco caso decida não realizar nenhuma ação."
+  },
+  {
+   "n": 9,
+   "texto": "Caso o gestor já tenha mapeado os seus processos, os auditores deverão realizar procedimentos para testar os fluxos e verificar se o mapeamento realizado corresponde à realidade."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A avaliação é composta pelas etapas de planejamento, execução, comunicação dos resultados e monitoramento, havendo divisão rígida entre elas. O MOT ressalta que não há divisão rígida. MOT (IN SFC 8/2017), p. 17 “A avaliação é composta basicamente das seguintes etapas: planejamento, execução, comunicação dos resultados e monitoramento, contudo, é importante ressaltar que não há uma divisão rígida entre elas.”"
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A efetividade do trabalho de avaliação se alcança por meio da implementação das recomendações, que devem ser previamente acordadas com a alta administração. MOT (IN SFC 8/2017), item 1.1.1.4 “Tal atividade deve ser realizada permanentemente para garantir a efetividade do trabalho de avaliação, que se alcança por meio da implementação das recomendações, as quais devem ser previamente acordadas com a alta administração.”"
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Os objetivos do trabalho de auditoria devem ser concisos, realistas e não conter termos ambíguos ou abstratos. MOT (IN SFC 8/2017), item 4.3.2 “Devem ser descritos de modo que o propósito da auditoria fique claro; além disso, devem ser concisos, realistas e não conter termos ambíguos ou abstratos.”"
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O escopo do trabalho de auditoria deve, em regra, abranger todos os aspectos do objeto auditado. O trabalho, em geral, não pode abranger tudo; o escopo define o que será e o que não será incluído. MOT (IN SFC 8/2017), item 4.3.2 “Como um trabalho de auditoria, geralmente, não pode abranger tudo, os auditores internos devem determinar os limites da auditoria, o que será e o que não será incluído, ou seja, o escopo.”"
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Os critérios de auditoria constituem referenciais para avaliar se a situação avaliada atende ao esperado e representam um padrão razoável e atingível de desempenho. MOT (IN SFC 8/2017), item 4.3.3 “b) os critérios de auditoria, que constituem referenciais para avaliar se a situação a ser avaliada atende ao esperado. Representam um padrão razoável e atingível de desempenho”"
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "O Plano de Auditoria Interna deve ser baseado em riscos, considerando as estratégias, os objetivos, as prioridades e as metas da Unidade Auditada. IN SFC 3/2017, item 84 “O planejamento deve considerar as estratégias, os objetivos, as prioridades, as metas da Unidade Auditada e os riscos a que seus processos estão sujeitos.”"
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A identificação, a avaliação e a mitigação dos riscos são responsabilidade da auditoria interna, como primeira linha de defesa. São da primeira linha (gestores); a auditoria interna é a terceira. IN SFC 3/2017, item 8 “A primeira linha de defesa é responsável por identificar, avaliar, controlar e mitigar os riscos, guiando o desenvolvimento e a implementação de políticas e procedimentos internos destinados a garantir que as atividades sejam realizadas de acordo com as metas e objetivos da organização.”"
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Cabe à alta administração zelar pela implementação das recomendações da UAIG, devendo aceitar formalmente o risco caso decida não realizar nenhuma ação. IN SFC 3/2017, item 176 “É responsabilidade da alta administração da Unidade Auditada zelar pela adequada implementação das recomendações emitidas pela UAIG, cabendo-lhe aceitar formalmente o risco associado caso decida por não realizar nenhuma ação.”"
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Caso o gestor já tenha mapeado os seus processos, os auditores deverão realizar procedimentos para testar os fluxos e verificar se o mapeamento realizado corresponde à realidade. MOT, item 4.3.1.1 “Caso o gestor já tenha mapeado os seus processos, os auditores deverão realizar procedimentos (a exemplo de entrevistas com funcionários responsáveis pela gestão e pela execução do processo que será auditado) para testar os fluxos e verificar se o mapeamento realizado corresponde à realidade e se atende às necessidades do trabalho que será desenvolvido.”"
+  }
+ ]
+}

@@ -1,1 +1,53 @@
-{"aula": "C5·5", "titulo": "5. Integração entre funções da CGU", "questoes": [{"n": 1, "texto": "As unidades de auditoria interna devem manter canal permanente de comunicação com as áreas responsáveis pelo recebimento de denúncias."}, {"n": 2, "texto": "Identificada irregularidade que requeira apuração, a unidade de auditoria interna deve aplicar diretamente a penalidade cabível."}, {"n": 3, "texto": "O compartilhamento dos elementos de identificação do denunciante com outros órgãos implica a perda de sua natureza restrita."}, {"n": 4, "texto": "O juízo de admissibilidade pode concluir pela instauração de procedimento investigativo quando faltarem informações."}, {"n": 5, "texto": "As unidades do Sistema de Controle Interno e do Sistema de Correição do Poder Executivo federal devem informar às unidades de ouvidoria a conclusão de procedimento apuratório iniciado a partir de denúncia encaminhada."}], "gabarito": [{"n": 1, "r": "C", "comentario": "As unidades de auditoria interna devem manter canal permanente de comunicação com as áreas responsáveis pelo recebimento de denúncias. IN SFC 3/2017, item 90 “As UAIG devem estabelecer canal permanente de comunicação com as áreas responsáveis pelo recebimento de denúncias da Unidade Auditada e de outras instâncias públicas que detenham essa atribuição, de forma a subsidiar a elaboração do planejamento e a realização dos trabalhos de auditoria interna.”"}, {"n": 2, "r": "E", "comentario": "Identificada irregularidade que requeira apuração, a unidade de auditoria interna deve aplicar diretamente a penalidade cabível. Encaminha às instâncias competentes. IN SFC 3/2017, p. 10 “Nos casos em que forem identificadas irregularidades que requeiram procedimentos adicionais com vistas à apuração, à investigação ou à proposição de ações judiciais, as UAIG devem zelar pelo adequado e tempestivo encaminhamento dos resultados das auditorias às instâncias competentes.”"}, {"n": 3, "r": "E", "comentario": "O compartilhamento dos elementos de identificação do denunciante com outros órgãos implica a perda de sua natureza restrita. Decreto 10.153/2019, art. 7º, § 1º “§ 1º O compartilhamento de elementos de identificação do denunciante com outros órgãos não implica a perda de sua natureza restrita.”"}, {"n": 4, "r": "C", "comentario": "O juízo de admissibilidade pode concluir pela instauração de procedimento investigativo quando faltarem informações. PN CGU 27/2022, art. 37, III “Art. 37. O juízo de admissibilidade é o ato administrativo por meio do qual o titular de unidade setorial de correição decide, de forma fundamentada: (...) III - pela instauração de procedimento investigativo, no caso de falta de informações ou impossibilidade de obtê-las; ou”"}, {"n": 5, "r": "C", "comentario": "As unidades do Sistema de Controle Interno e do Sistema de Correição do Poder Executivo federal devem informar às unidades de ouvidoria a conclusão de procedimento apuratório iniciado a partir de denúncia encaminhada. Decreto 10.153/2019, art. 6º-B “Art. 6º-B As unidades que integram o Sistema de Controle Interno do Poder Executivo Federal e o Sistema de Correição do Poder Executivo federal informarão às unidades do Sistema de Ouvidoria do Poder Executivo federal sobre a conclusão de procedimento apuratório a partir de denúncia encaminhada, no âmbito de suas competências.”"}]}
+{
+ "aula": "C5·5",
+ "titulo": "5. Integração entre funções da CGU",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "As unidades de auditoria interna devem manter canal permanente de comunicação com as áreas responsáveis pelo recebimento de denúncias."
+  },
+  {
+   "n": 2,
+   "texto": "Identificada irregularidade que requeira apuração, a unidade de auditoria interna deve aplicar diretamente a penalidade cabível."
+  },
+  {
+   "n": 3,
+   "texto": "O compartilhamento dos elementos de identificação do denunciante com outros órgãos implica a perda de sua natureza restrita."
+  },
+  {
+   "n": 4,
+   "texto": "O juízo de admissibilidade pode concluir pela instauração de procedimento investigativo quando faltarem informações."
+  },
+  {
+   "n": 5,
+   "texto": "As unidades do Sistema de Controle Interno e do Sistema de Correição do Poder Executivo federal devem informar às unidades de ouvidoria a conclusão de procedimento apuratório iniciado a partir de denúncia encaminhada."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "As unidades de auditoria interna devem manter canal permanente de comunicação com as áreas responsáveis pelo recebimento de denúncias. IN SFC 3/2017, item 90 “As UAIG devem estabelecer canal permanente de comunicação com as áreas responsáveis pelo recebimento de denúncias da Unidade Auditada e de outras instâncias públicas que detenham essa atribuição, de forma a subsidiar a elaboração do planejamento e a realização dos trabalhos de auditoria interna.”"
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Identificada irregularidade que requeira apuração, a unidade de auditoria interna deve aplicar diretamente a penalidade cabível. Encaminha às instâncias competentes. IN SFC 3/2017, p. 10 “Nos casos em que forem identificadas irregularidades que requeiram procedimentos adicionais com vistas à apuração, à investigação ou à proposição de ações judiciais, as UAIG devem zelar pelo adequado e tempestivo encaminhamento dos resultados das auditorias às instâncias competentes.”"
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O compartilhamento dos elementos de identificação do denunciante com outros órgãos implica a perda de sua natureza restrita. Decreto 10.153/2019, art. 7º, § 1º “§ 1º O compartilhamento de elementos de identificação do denunciante com outros órgãos não implica a perda de sua natureza restrita.”"
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "O juízo de admissibilidade pode concluir pela instauração de procedimento investigativo quando faltarem informações. PN CGU 27/2022, art. 37, III “Art. 37. O juízo de admissibilidade é o ato administrativo por meio do qual o titular de unidade setorial de correição decide, de forma fundamentada: (...) III - pela instauração de procedimento investigativo, no caso de falta de informações ou impossibilidade de obtê-las; ou”"
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "As unidades do Sistema de Controle Interno e do Sistema de Correição do Poder Executivo federal devem informar às unidades de ouvidoria a conclusão de procedimento apuratório iniciado a partir de denúncia encaminhada. Decreto 10.153/2019, art. 6º-B “Art. 6º-B As unidades que integram o Sistema de Controle Interno do Poder Executivo Federal e o Sistema de Correição do Poder Executivo federal informarão às unidades do Sistema de Ouvidoria do Poder Executivo federal sobre a conclusão de procedimento apuratório a partir de denúncia encaminhada, no âmbito de suas competências.”"
+  }
+ ]
+}

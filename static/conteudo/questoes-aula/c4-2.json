@@ -1,1 +1,89 @@
-{"aula": "C4·2", "titulo": "2. Leitura de dados e indicadores", "questoes": [{"n": 1, "texto": "A mensuração do nível de corrupção de um país é dificultada por sua própria natureza oculta."}, {"n": 2, "texto": "Como apenas os casos descobertos podem ser aferidos, não é possível inferir o montante de corrupção não descoberto."}, {"n": 3, "texto": "Pelo critério da comparabilidade, os indicadores devem ser facilmente comparáveis com as referências internas ou externas, bem como séries históricas."}, {"n": 4, "texto": "Pelo critério da estabilidade, os indicadores devem ser alterados com frequência para refletir as mudanças do ambiente."}, {"n": 5, "texto": "Se a taxa de um indicador passou de 10% para 12%, houve aumento de 2 pontos percentuais, o que corresponde a um aumento relativo de 20%."}, {"n": 6, "texto": "A mediana é mais sensível a valores extremos do que a média aritmética."}, {"n": 7, "texto": "Se 10% dos 100 contratos do órgão A e 30% dos 900 contratos do órgão B têm irregularidade, a proporção de contratos irregulares no conjunto dos dois órgãos é de 20%."}, {"n": 8, "texto": "O aumento do número de denúncias recebidas por uma ouvidoria permite concluir, por si só, que houve aumento da ocorrência de corrupção no órgão."}, {"n": 9, "texto": "Indicadores de percepção da corrupção refletem a opinião de especialistas ou da população, e não a contagem de casos efetivamente ocorridos."}], "gabarito": [{"n": 1, "r": "C", "comentario": "A mensuração do nível de corrupção de um país é dificultada por sua própria natureza oculta. TCU, Referencial de Combate à Fraude e Corrupção, p. 13. Referencial de Combate a Fraude e Corrupção (TCU, 2018), p. 13 “Entretanto, a mensuração do nível de corrupção de um país é dificultada por sua própria natureza oculta.”"}, {"n": 2, "r": "E", "comentario": "Como apenas os casos descobertos podem ser aferidos, não é possível inferir o montante de corrupção não descoberto. O Referencial diz que, a partir dos casos descobertos, pode-se tentar inferir o montante não descoberto. Referencial de Combate a Fraude e Corrupção (TCU, 2018), p. 13 “Apenas os casos que são descobertos podem ser aferidos, e a partir deles pode-se tentar inferir o montante não descoberto.”"}, {"n": 3, "r": "C", "comentario": "Pelo critério da comparabilidade, os indicadores devem ser facilmente comparáveis com as referências internas ou externas, bem como séries históricas. Enap, Guia de indicadores, p. 19. Guia referencial de indicadores (Enap, 2021), p. 19 “comparabilidade: os indicadores devem ser facilmente comparáveis com as referências internas ou externas, bem como séries históricas de acontecimentos;”"}, {"n": 4, "r": "E", "comentario": "Pelo critério da estabilidade, os indicadores devem ser alterados com frequência para refletir as mudanças do ambiente. Estabilidade pede procedimentos sistemáticos e constantes, para manter a série histórica. Guia referencial de indicadores (Enap, 2021), p. 19 “estabilidade: procedimentos gerados de forma sistemática e constante, sem muitas alterações e complexidades, uma vez que é relevante manter o padrão e permitir a série histórica;”"}, {"n": 5, "r": "C", "comentario": "Se a taxa de um indicador passou de 10% para 12%, houve aumento de 2 pontos percentuais, o que corresponde a um aumento relativo de 20%. (12 - 10) ÷ 10 = 20%."}, {"n": 6, "r": "E", "comentario": "A mediana é mais sensível a valores extremos do que a média aritmética. É o contrário: a média é mais sensível."}, {"n": 7, "r": "E", "comentario": "Se 10% dos 100 contratos do órgão A e 30% dos 900 contratos do órgão B têm irregularidade, a proporção de contratos irregulares no conjunto dos dois órgãos é de 20%. São 10 + 270 = 280 irregulares em 1.000 contratos, ou 28%. Percentuais de bases diferentes se combinam por média ponderada, não por média simples."}, {"n": 8, "r": "E", "comentario": "O aumento do número de denúncias recebidas por uma ouvidoria permite concluir, por si só, que houve aumento da ocorrência de corrupção no órgão. As denúncias medem a disposição de denunciar e a confiança no canal, e não a ocorrência."}, {"n": 9, "r": "C", "comentario": "Indicadores de percepção da corrupção refletem a opinião de especialistas ou da população, e não a contagem de casos efetivamente ocorridos. A percepção mede opinião."}]}
+{
+ "aula": "C4·2",
+ "titulo": "2. Leitura de dados e indicadores",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A mensuração do nível de corrupção de um país é dificultada por sua própria natureza oculta."
+  },
+  {
+   "n": 2,
+   "texto": "Como apenas os casos descobertos podem ser aferidos, não é possível inferir o montante de corrupção não descoberto."
+  },
+  {
+   "n": 3,
+   "texto": "Pelo critério da comparabilidade, os indicadores devem ser facilmente comparáveis com as referências internas ou externas, bem como séries históricas."
+  },
+  {
+   "n": 4,
+   "texto": "Pelo critério da estabilidade, os indicadores devem ser alterados com frequência para refletir as mudanças do ambiente."
+  },
+  {
+   "n": 5,
+   "texto": "Se a taxa de um indicador passou de 10% para 12%, houve aumento de 2 pontos percentuais, o que corresponde a um aumento relativo de 20%."
+  },
+  {
+   "n": 6,
+   "texto": "A mediana é mais sensível a valores extremos do que a média aritmética."
+  },
+  {
+   "n": 7,
+   "texto": "Se 10% dos 100 contratos do órgão A e 30% dos 900 contratos do órgão B têm irregularidade, a proporção de contratos irregulares no conjunto dos dois órgãos é de 20%."
+  },
+  {
+   "n": 8,
+   "texto": "O aumento do número de denúncias recebidas por uma ouvidoria permite concluir, por si só, que houve aumento da ocorrência de corrupção no órgão."
+  },
+  {
+   "n": 9,
+   "texto": "Indicadores de percepção da corrupção refletem a opinião de especialistas ou da população, e não a contagem de casos efetivamente ocorridos."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "A mensuração do nível de corrupção de um país é dificultada por sua própria natureza oculta. TCU, Referencial de Combate à Fraude e Corrupção, p. 13. Referencial de Combate a Fraude e Corrupção (TCU, 2018), p. 13 “Entretanto, a mensuração do nível de corrupção de um país é dificultada por sua própria natureza oculta.”"
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Como apenas os casos descobertos podem ser aferidos, não é possível inferir o montante de corrupção não descoberto. O Referencial diz que, a partir dos casos descobertos, pode-se tentar inferir o montante não descoberto. Referencial de Combate a Fraude e Corrupção (TCU, 2018), p. 13 “Apenas os casos que são descobertos podem ser aferidos, e a partir deles pode-se tentar inferir o montante não descoberto.”"
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Pelo critério da comparabilidade, os indicadores devem ser facilmente comparáveis com as referências internas ou externas, bem como séries históricas. Enap, Guia de indicadores, p. 19. Guia referencial de indicadores (Enap, 2021), p. 19 “comparabilidade: os indicadores devem ser facilmente comparáveis com as referências internas ou externas, bem como séries históricas de acontecimentos;”"
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Pelo critério da estabilidade, os indicadores devem ser alterados com frequência para refletir as mudanças do ambiente. Estabilidade pede procedimentos sistemáticos e constantes, para manter a série histórica. Guia referencial de indicadores (Enap, 2021), p. 19 “estabilidade: procedimentos gerados de forma sistemática e constante, sem muitas alterações e complexidades, uma vez que é relevante manter o padrão e permitir a série histórica;”"
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Se a taxa de um indicador passou de 10% para 12%, houve aumento de 2 pontos percentuais, o que corresponde a um aumento relativo de 20%. (12 - 10) ÷ 10 = 20%."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A mediana é mais sensível a valores extremos do que a média aritmética. É o contrário: a média é mais sensível."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Se 10% dos 100 contratos do órgão A e 30% dos 900 contratos do órgão B têm irregularidade, a proporção de contratos irregulares no conjunto dos dois órgãos é de 20%. São 10 + 270 = 280 irregulares em 1.000 contratos, ou 28%. Percentuais de bases diferentes se combinam por média ponderada, não por média simples."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O aumento do número de denúncias recebidas por uma ouvidoria permite concluir, por si só, que houve aumento da ocorrência de corrupção no órgão. As denúncias medem a disposição de denunciar e a confiança no canal, e não a ocorrência."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Indicadores de percepção da corrupção refletem a opinião de especialistas ou da população, e não a contagem de casos efetivamente ocorridos. A percepção mede opinião."
+  }
+ ]
+}

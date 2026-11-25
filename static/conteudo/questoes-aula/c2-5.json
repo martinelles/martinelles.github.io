@@ -1,1 +1,98 @@
-{"aula": "C2·5", "titulo": "5. Integridade da informação e comunicação", "questoes": [{"n": 1, "texto": "A Comunicação Pública deve combater a desinformação, garantindo transparência, dados precisos, rapidez na checagem de fatos e disseminação de correções."}, {"n": 2, "texto": "É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença."}, {"n": 3, "texto": "A crítica contundente à atuação de agentes públicos configura, por si só, desinformação."}, {"n": 4, "texto": "Toda informação falsa compartilhada nas redes caracteriza desinformação, independentemente da intenção."}, {"n": 5, "texto": "A manifestação do pensamento e a informação não sofrerão qualquer restrição, observado o disposto na Constituição."}, {"n": 6, "texto": "A Constituição veda o monopólio dos meios de comunicação social, mas não o oligopólio."}, {"n": 7, "texto": "Esclarecer a necessidade de uma política e dar acesso às informações relevantes na fonte ajuda a mitigar oposições oriundas de desinformação."}, {"n": 8, "texto": "É assegurado o direito de resposta, proporcional ao agravo, além da indenização por dano material, moral ou à imagem."}, {"n": 9, "texto": "A não renovação da concessão de radiodifusão depende de aprovação da maioria absoluta do Congresso Nacional."}, {"n": 10, "texto": "A publicação de veículo impresso de comunicação depende de licença da autoridade competente."}], "gabarito": [{"n": 1, "r": "C", "comentario": "A Comunicação Pública deve combater a desinformação, garantindo transparência, dados precisos, rapidez na checagem de fatos e disseminação de correções. Enap, Comunicação Pública (EVG). EVG, Comunicação Pública e Comunicação de Governo, p. 9 “A Comunicação Pública deve combater a desinformação, garantindo a transparência, a oferta de dados precisos, a rapidez na checagem de fatos e a disseminação de correções e informações verificadas.”"}, {"n": 2, "r": "C", "comentario": "É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença. CF, art. 5º, IX “IX - é livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença;”"}, {"n": 3, "r": "E", "comentario": "A crítica contundente à atuação de agentes públicos configura, por si só, desinformação. A crítica é protegida; a desinformação é falsidade factual deliberada."}, {"n": 4, "r": "E", "comentario": "Toda informação falsa compartilhada nas redes caracteriza desinformação, independentemente da intenção. Sem intenção é informação incorreta."}, {"n": 5, "r": "C", "comentario": "A manifestação do pensamento e a informação não sofrerão qualquer restrição, observado o disposto na Constituição. CF, art. 220 “Art. 220. A manifestação do pensamento, a criação, a expressão e a informação, sob qualquer forma, processo ou veículo não sofrerão qualquer restrição, observado o disposto nesta Constituição.”"}, {"n": 6, "r": "E", "comentario": "A Constituição veda o monopólio dos meios de comunicação social, mas não o oligopólio. CF, art. 220, § 5º: os meios de comunicação social não podem, direta ou indiretamente, ser objeto de monopólio ou oligopólio. CF, art. 220, § 5º “§ 5º Os meios de comunicação social não podem, direta ou indiretamente, ser objeto de monopólio ou oligopólio.”"}, {"n": 7, "r": "C", "comentario": "Esclarecer a necessidade de uma política e dar acesso às informações relevantes na fonte ajuda a mitigar oposições oriundas de desinformação. Guia de análise ex ante (Casa Civil e Ipea, 2018), item 4.2 “A comunicação e os dados abertos também contribuem para o envolvimento dos interessados, pois os esclarecimentos sobre a necessidade da política e a possibilidade de acessar informações relevantes na fonte mitigam as oposições oriundas de desinformação e angariam maior participação e apoio à política.”"}, {"n": 8, "r": "C", "comentario": "É assegurado o direito de resposta, proporcional ao agravo, além da indenização por dano material, moral ou à imagem. CF, art. 5º, V."}, {"n": 9, "r": "E", "comentario": "A não renovação da concessão de radiodifusão depende de aprovação da maioria absoluta do Congresso Nacional. CF, art. 223, § 2º: no mínimo dois quintos do Congresso Nacional, em votação nominal."}, {"n": 10, "r": "E", "comentario": "A publicação de veículo impresso de comunicação depende de licença da autoridade competente. CF, art. 220, § 6º: independe de licença de autoridade."}]}
+{
+ "aula": "C2·5",
+ "titulo": "5. Integridade da informação e comunicação",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A Comunicação Pública deve combater a desinformação, garantindo transparência, dados precisos, rapidez na checagem de fatos e disseminação de correções."
+  },
+  {
+   "n": 2,
+   "texto": "É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença."
+  },
+  {
+   "n": 3,
+   "texto": "A crítica contundente à atuação de agentes públicos configura, por si só, desinformação."
+  },
+  {
+   "n": 4,
+   "texto": "Toda informação falsa compartilhada nas redes caracteriza desinformação, independentemente da intenção."
+  },
+  {
+   "n": 5,
+   "texto": "A manifestação do pensamento e a informação não sofrerão qualquer restrição, observado o disposto na Constituição."
+  },
+  {
+   "n": 6,
+   "texto": "A Constituição veda o monopólio dos meios de comunicação social, mas não o oligopólio."
+  },
+  {
+   "n": 7,
+   "texto": "Esclarecer a necessidade de uma política e dar acesso às informações relevantes na fonte ajuda a mitigar oposições oriundas de desinformação."
+  },
+  {
+   "n": 8,
+   "texto": "É assegurado o direito de resposta, proporcional ao agravo, além da indenização por dano material, moral ou à imagem."
+  },
+  {
+   "n": 9,
+   "texto": "A não renovação da concessão de radiodifusão depende de aprovação da maioria absoluta do Congresso Nacional."
+  },
+  {
+   "n": 10,
+   "texto": "A publicação de veículo impresso de comunicação depende de licença da autoridade competente."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "A Comunicação Pública deve combater a desinformação, garantindo transparência, dados precisos, rapidez na checagem de fatos e disseminação de correções. Enap, Comunicação Pública (EVG). EVG, Comunicação Pública e Comunicação de Governo, p. 9 “A Comunicação Pública deve combater a desinformação, garantindo a transparência, a oferta de dados precisos, a rapidez na checagem de fatos e a disseminação de correções e informações verificadas.”"
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença. CF, art. 5º, IX “IX - é livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença;”"
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A crítica contundente à atuação de agentes públicos configura, por si só, desinformação. A crítica é protegida; a desinformação é falsidade factual deliberada."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Toda informação falsa compartilhada nas redes caracteriza desinformação, independentemente da intenção. Sem intenção é informação incorreta."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A manifestação do pensamento e a informação não sofrerão qualquer restrição, observado o disposto na Constituição. CF, art. 220 “Art. 220. A manifestação do pensamento, a criação, a expressão e a informação, sob qualquer forma, processo ou veículo não sofrerão qualquer restrição, observado o disposto nesta Constituição.”"
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A Constituição veda o monopólio dos meios de comunicação social, mas não o oligopólio. CF, art. 220, § 5º: os meios de comunicação social não podem, direta ou indiretamente, ser objeto de monopólio ou oligopólio. CF, art. 220, § 5º “§ 5º Os meios de comunicação social não podem, direta ou indiretamente, ser objeto de monopólio ou oligopólio.”"
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Esclarecer a necessidade de uma política e dar acesso às informações relevantes na fonte ajuda a mitigar oposições oriundas de desinformação. Guia de análise ex ante (Casa Civil e Ipea, 2018), item 4.2 “A comunicação e os dados abertos também contribuem para o envolvimento dos interessados, pois os esclarecimentos sobre a necessidade da política e a possibilidade de acessar informações relevantes na fonte mitigam as oposições oriundas de desinformação e angariam maior participação e apoio à política.”"
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "É assegurado o direito de resposta, proporcional ao agravo, além da indenização por dano material, moral ou à imagem. CF, art. 5º, V."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A não renovação da concessão de radiodifusão depende de aprovação da maioria absoluta do Congresso Nacional. CF, art. 223, § 2º: no mínimo dois quintos do Congresso Nacional, em votação nominal."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A publicação de veículo impresso de comunicação depende de licença da autoridade competente. CF, art. 220, § 6º: independe de licença de autoridade."
+  }
+ ]
+}
