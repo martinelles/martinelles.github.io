@@ -54,6 +54,22 @@ function montar(local: Storage = new StorageFalso(), srv = servidor()) {
 
 const carimbos = (local: Storage) => JSON.parse(local.getItem(CHAVE_SINC) ?? '{}');
 
+/** `StorageFalso` com a cota cheia para uma chave; `esvaziar()` libera de novo. */
+class StorageCotaCheia extends StorageFalso {
+	private cheia: string | null;
+	constructor(chave: string) {
+		super();
+		this.cheia = chave;
+	}
+	esvaziar(): void {
+		this.cheia = null;
+	}
+	setItem(k: string, v: string): void {
+		if (k === this.cheia) throw new Error('QuotaExceededError');
+		super.setItem(k, v);
+	}
+}
+
 describe('armazenamento sincronizado', () => {
 	it('grava local na hora e sobe no disparo da espera', async () => {
 		const m = montar();
@@ -160,6 +176,24 @@ describe('armazenamento sincronizado', () => {
 			expect(await m.arm.trazer()).toEqual([K1]);
 			expect(m.local.getItem(K1)).toBe('"K1 do servidor"');
 			expect(m.srv.dados[K2].valor).toBe('"meu K2"');
+		});
+
+		it('cota cheia ao trazer: sem carimbo falso, a chave fica para o próximo e as outras seguem', async () => {
+			const local = new StorageCotaCheia(K1);
+			local.setItem(CHAVE_SINC, JSON.stringify({ [K1]: { em: 100, pendente: false } }));
+			local.setItem(K2, '"K2 velho"');
+			const srv = servidor();
+			srv.dados[K1] = { valor: '"K1 do servidor"', atualizadoEm: 5000 };
+			srv.dados[K2] = { valor: '"K2 do servidor"', atualizadoEm: 5000 };
+			const m = montar(local, srv);
+			expect(await m.arm.trazer()).toEqual([K2]);
+			expect(local.getItem(K1)).toBeNull();
+			expect(carimbos(local)[K1]).toEqual({ em: 100, pendente: false });
+			expect(local.getItem(K2)).toBe('"K2 do servidor"');
+			local.esvaziar();
+			expect(await m.arm.trazer()).toEqual([K1]);
+			expect(local.getItem(K1)).toBe('"K1 do servidor"');
+			expect(carimbos(local)[K1]).toEqual({ em: 5000, pendente: false });
 		});
 
 		it('sem rede, lança e não mexe no aparelho', async () => {

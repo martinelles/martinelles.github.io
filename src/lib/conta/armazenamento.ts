@@ -38,7 +38,8 @@ export interface OpcoesSinc {
 export interface StorageSincronizado extends Storage {
 	/** Sobe tudo que está pendente; nunca lança. */
 	enviarPendentes(): Promise<void>;
-	/** Traz do servidor o que lá é mais novo; devolve as chaves que mudaram aqui. Lança se a API não responder. */
+	/** Traz do servidor o que lá é mais novo; devolve as chaves que mudaram aqui. Lança se a API
+	 * não responder; valor que não coube no armazenamento (cota) fica para o próximo `trazer`. */
 	trazer(): Promise<string[]>;
 }
 
@@ -137,8 +138,14 @@ export function armazenamentoSincronizado(op: OpcoesSinc): StorageSincronizado {
 			if (s && (!meu || s.atualizadoEm > meu.em)) {
 				// Servidor mais novo (ou o aparelho nunca sincronizou esta chave): vale o servidor.
 				if (valorLocal !== s.valor) {
-					local.setItem(chave, s.valor);
-					mudaram.push(chave);
+					try {
+						local.setItem(chave, s.valor);
+						mudaram.push(chave);
+					} catch {
+						// Cota cheia: o valor novo não coube. O carimbo fica como está, então o
+						// próximo `trazer` tenta de novo; as outras chaves seguem.
+						continue;
+					}
 				}
 				c[chave] = { em: s.atualizadoEm, pendente: false };
 			} else if (valorLocal !== null && (!s || meu!.em > s.atualizadoEm)) {
