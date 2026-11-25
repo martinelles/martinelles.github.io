@@ -26,7 +26,7 @@
   }
   var soPonteiros = (b) => !!b.itens?.length && b.itens.every((it) => it.movida !== void 0 || it.suspensa === true);
   var itemCumprido = (marcas, cargo, dia, i, it) => it.feitaEm !== void 0 || itemFeito(marcas, cargo, dia, i, it.cid);
-  var blocoCumprido = (marcas, cargo, dia, i, b) => blocoFeito(marcas, cargo, dia, i) || b.tipo === "novo" && !!b.itens?.length && b.itens.every((it) => itemCumprido(marcas, cargo, dia, i, it));
+  var blocoCumprido = (marcas, cargo, dia, i, b) => blocoFeito(marcas, cargo, dia, i) || !!b.itens?.length && b.itens.some((it) => it.movida === void 0 && it.suspensa !== true) && b.itens.every((it) => it.movida !== void 0 || it.suspensa === true || itemCumprido(marcas, cargo, dia, i, it));
   var chaveItem = (cargo, data, indice, cid) => `${chaveBloco(cargo, data, indice)}~${cid}`;
   var itemFeito = (marcas, cargo, dia, i, cid) => blocoFeito(marcas, cargo, dia, i) || !!marcas[chaveItem(cargo, dia.data, i, cid)];
   function mudancasDoBloco(marcas, cargo, dia, i, feito) {
