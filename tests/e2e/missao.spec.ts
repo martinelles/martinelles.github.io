@@ -220,13 +220,13 @@ test('aula nova fora da data: as revisões contam do dia em que ela foi feita', 
 	await missao(page).getByRole('button', { name: 'Adicionar' }).click();
 	await expect(missao(page).getByText('Também estudado neste dia, fora da missão')).toBeVisible();
 
-	// O dia previsto vira ponteiro para o dia novo.
+	// A revisão só aparece na data nova; na antiga, nada.
 	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
 	const itemB1 = () => missao(page).locator('li:not(.bloco)', { hasText: 'B1·1' }).first();
 	await seletor.fill('2026-11-23');
-	await expect(itemB1()).toContainText('revisão movida para 15/10/2026');
+	await expect(missao(page).getByText('movida para')).toHaveCount(0);
 	await seletor.fill('2026-11-29');
-	await expect(itemB1()).toContainText('revisão movida para 21/10/2026');
+	await expect(missao(page).getByText('movida para')).toHaveCount(0);
 
 	// D+1 no dia seguinte ao real, com o atalho da aula da mentoria, marcável como qualquer
 	// subitem, na chave do dia novo (a marcação do estudo previsto em 22/11 veio do registro).
@@ -284,9 +284,12 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	expect(m[`cd~2026-11-19~5~${aulaC15.id}`]).toBe(true);
 	await expect(adiadas().locator('li', { hasText: 'C1·5' })).toContainText('aula feita em 19/11/2026');
 	await expect(page.locator('.prazo small')).toHaveText('9/68 aulas da mentoria · 3 aulas por dia até a prova');
-	// A E1·2 segue atrasada e a D+1 da C1·5 conta do dia de hoje (19/11, previsto era o próprio 19).
+	// A E1·2 segue atrasada; a D+1 da C1·5 foi para 20/11 (não aparece mais aqui, só lá).
 	await expect(adiadas().locator('li', { hasText: 'E1·2' })).toBeVisible();
-	await expect(itemC15()).toContainText('revisão movida para 20/11/2026');
+	await expect(missao(page).getByText('movida para')).toHaveCount(0);
+	const seletor2 = missao(page).getByLabel('Ver a missão de outro dia');
+	await seletor2.fill('2026-11-20');
+	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
 
 	const seletor = missao(page).getByLabel('Ver a missão de outro dia');
 	await seletor.fill('2026-11-20');
@@ -340,8 +343,6 @@ test('conteúdo em aberto cuja aula não está no plano vira tarefa de recupera�
 	await itemE21().getByRole('checkbox', { name: 'Marcar E2·1 como estudado' }).click();
 	const m = await marcas(page);
 	expect(m[`cd~2026-11-19~5~${aulaE21.id}`]).toBe(true);
-	await seletor.fill('2026-10-15');
-	await expect(missao(page).locator('li:not(.bloco)', { hasText: 'E2 1.1' })).toContainText('revisão movida para 20/11/2026');
 	await seletor.fill('2026-11-20');
 	await expect(missao(page).locator('li:not(.bloco)', { hasText: 'E2 1.1' })).toContainText('aula feita em 19/11/2026');
 });
@@ -652,10 +653,10 @@ test('o seletor de dia mostra a missão de qualquer data e volta para hoje', asy
 	await expect(secao).not.toContainText('E2 1.2');
 });
 
-test('o ponteiro de revisão movida marca a revisão lá no dia dela', async ({ page }) => {
+test('a revisão movida só aparece na data nova, sem ponteiro na antiga', async ({ page }) => {
 	await simularApi(page);
 	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
-	// E2·5 feita em 22/11: a D+1 (prevista para 24/11, hoje) vai para 23/11; fica o ponteiro.
+	// E2·5 feita em 22/11: a D+1 (prevista para 24/11, hoje) vai para 23/11 — e some daqui.
 	await page.addInitScript(
 		([k, cid]) =>
 			localStorage.setItem(
@@ -667,20 +668,15 @@ test('o ponteiro de revisão movida marca a revisão lá no dia dela', async ({ 
 	await page.clock.setFixedTime(new Date('2026-11-24T09:00:00-03:00'));
 	await page.goto('/painel');
 
-	// O ponteiro de 24/11 tem caixa; marcar grava na chave do dia de destino (23/11).
-	const ponteiro = missao(page).locator('li.ponteiro', { hasText: 'E2·5' });
-	await expect(ponteiro).toContainText('revisão movida para 23/11/2026');
-	const caixa = ponteiro.getByRole('checkbox', { name: 'Marcar revisão de E2·5 como feita' });
-	await expect(caixa).toHaveCount(1);
-	await caixa.click();
-	await expect(caixa).toBeChecked();
-	const m = await marcas(page);
-	expect(m['cd~2026-11-23~0~5e202dbd-f4b9-4fef-8361-a549e3825c8c']).toBe(true);
+	// Na data antiga (24/11), nada de E2·5 D+1: nem ponteiro, nem "movida para".
+	await expect(missao(page).getByText('movida para')).toHaveCount(0);
+	await expect(missao(page).locator('li').filter({ hasText: 'E2·5' }).filter({ hasText: 'D+1' })).toHaveCount(0);
 
-	// No dia de destino, a revisão marcada aparece riscada, com a nota da data real.
+	// Na data nova (23/11), a revisão está lá com a nota da data real, marcável pela bolha.
 	await missao(page).getByLabel('Ver a missão de outro dia').fill('2026-11-23');
-	// No dia de destino, a revisão marcada risca o bloco e a bolha vem cheia (item único visível).
-	const blocoAlvo = missao(page).locator('li.bloco.t-rev', { hasText: 'aula feita em 22/11/2026' });
-	await expect(blocoAlvo).toHaveClass(/feito/);
-	await expect(blocoAlvo.locator('input[type=checkbox]').first()).toBeChecked();
+	const alvo = missao(page).locator('ul.itens li').filter({ hasText: 'E2·5' }).filter({ hasText: 'D+1' });
+	await expect(alvo).toContainText('aula feita em 22/11/2026');
+	await missao(page).locator('li.bloco.t-rev', { hasText: 'aula feita em 22/11/2026' }).locator('input[type=checkbox]').first().click();
+	const m = await marcas(page);
+	expect(m['cd~2026-11-23~0']).toBe(true);
 });

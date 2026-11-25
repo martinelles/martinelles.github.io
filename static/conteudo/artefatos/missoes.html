@@ -359,14 +359,6 @@ function emAndamentoFeito() {
 }
 const mostrarEmAndamento =() => $('list').querySelector('li.em-andamento')?.scrollIntoView({ block: 'center' });
 const blocoOk = (p, b, j) => DER ? (DER.soPonteiros(b) || DER.blocoCumprido(done, cargo, p, j, b)) : !!done[dayKey(p, j)];
-// Onde a revisão movida deste ponteiro está marcável: dia de destino e bloco que a recebeu.
-function alvoDaMovida(it) {
-  if (it.movida == null) return null;
-  const dia = plan().find(d => d.data === it.movida);
-  if (!dia) return null;
-  const j = dia.blocos.findIndex(b => (b.itens || []).some(x => x.cid === it.cid && x.nota));
-  return j < 0 ? null : { dia, j };
-}
 const dayFull = p => p.blocos.every((b, j) => blocoOk(p, b, j));
 const weekIndex = p => Math.floor((new Date(p.data + 'T12:00:00') - new Date('2026-10-12T12:00:00')) / 864e5 / 7);
 
@@ -432,7 +424,7 @@ function renderRuler() {
 function blockHTML(p, b, j) {
   const k = dayKey(p, j); const ck = blocoOk(p, b, j);
   const ponteiros = !!DER && DER.soPonteiros(b);
-  const visiveis = (b.itens || []).filter(x => !DER || x.suspensa !== true);
+  const visiveis = (b.itens || []).filter(x => !DER || (x.suspensa !== true && (b.tipo !== 'rev' || x.movida === undefined)));
   const porItem = visiveis.length > 1;
   const itens = visiveis.map(x => {
     const extra = b.tipo === 'novo' ? `<em> · ${x.prio === 'media' ? 'média' : x.prio} · ${x.min} min${x.fim ? '' : ', continua'}</em>` : (x.lab ? `<em> · ${x.lab}</em>` : '');
@@ -452,19 +444,12 @@ function blockHTML(p, b, j) {
       : DER && x.nota ? `<em> · ${esc(x.nota)}</em>` : '';
     const aponta = DER && (x.movida !== undefined || x.feitaEm !== undefined);
     // Ponteiro de revisão movida: caixa que marca a revisão lá no dia dela.
-    const alvo = DER && x.movida ? alvoDaMovida(x) : null;
-    const ki = k + '~' + x.cid;
-    const oki = alvo
-      ? !!(done[`${cargo}~${alvo.dia.data}~${alvo.j}~${x.cid}`])
-      : porItem && !aponta && (ck || !!done[ki] || (DER && x.feitaEm !== undefined));
-    const caixaMovida = alvo
-      ? `<input type="checkbox" class="sub" data-i="${esc(`${cargo}~${alvo.dia.data}~${alvo.j}~${x.cid}`)}" data-b="${esc(`${cargo}~${alvo.dia.data}~${alvo.j}`)}" ${oki ? 'checked' : ''} aria-label="Marcar revisão de ${esc(x.cod)} como feita">`
-      : '';
-    const caixa = caixaMovida || (porItem && !aponta ? `<input type="checkbox" class="sub" data-i="${esc(ki)}" data-b="${k}" ${oki ? 'checked' : ''} aria-label="Marcar ${esc(x.cod)} como estudado">` : '');
+    const ki = k + '~' + x.cid; const oki = porItem && !aponta && (ck || !!done[ki] || (DER && x.feitaEm !== undefined));
+    const caixa = porItem && !aponta ? `<input type="checkbox" class="sub" data-i="${esc(ki)}" data-b="${k}" ${oki ? 'checked' : ''} aria-label="Marcar ${esc(x.cod)} como estudado">` : '';
     const aberto = !(ck || oki) && ehEmAndamento(p, j, x.cid);
     const lembrete = aberto ? `<span class="lembrete" role="status"><strong>Você parou aqui:</strong> abriu a aula da mentoria.<span class="acoes"><button type="button" data-lembrete="marcar">Terminei, marcar</button><button type="button" data-lembrete="dispensar">Dispensar</button></span></span>` : '';
     const cls = [oki ? 'feito' : '', aberto ? 'em-andamento' : ''].filter(Boolean).join(' ');
-    return `<li${cls ? ` class="${cls}"` : ''}${aponta && !caixaMovida ? ' style="opacity:.55"' : ''} data-d="${p.data}" data-j="${j}" data-c="${esc(x.cid)}">${caixa}<span class="id">${esc(x.cid)}</span><span class="tx"><span class="mono">${esc(x.cod)}</span> ${esc(x.texto)}${extra}${nota}${refs}${parte}${mp}${atAula}${lembrete}</span></li>`;
+    return `<li${cls ? ` class="${cls}"` : ''}${aponta ? ' style="opacity:.55"' : ''} data-d="${p.data}" data-j="${j}" data-c="${esc(x.cid)}">${caixa}<span class="id">${esc(x.cid)}</span><span class="tx"><span class="mono">${esc(x.cod)}</span> ${esc(x.texto)}${extra}${nota}${refs}${parte}${mp}${atAula}${lembrete}</span></li>`;
   }).join('');
   const id = 'b-' + k.replace(/[^0-9a-z]/gi, '-');
   return `<div class="block t-${b.tipo}${ck ? ' done' : ''}">
@@ -488,7 +473,7 @@ function renderList() {
       <article class="day${i === t ? ' is-today' : ''}${p.data === diaSel ? ' is-sel' : ''}" id="d-${p.data}">
         <div class="dayhead"><h3>${p.dow}, ${fmt(p.data)}${i === t ? '<span class="tag-today">hoje</span>' : ''}</h3>
         <span class="meta">dia ${i + 1} de 61 · ${p.fase} · ${p.blocos.reduce((a, b) => a + b.min, 0)} min</span></div>
-        ${p.blocos.filter(b => !(DER && (b.itens || []).length && b.itens.every(x => x.suspensa === true))).map((b, j) => blockHTML(p, b, j)).join('')}
+        ${p.blocos.filter(b => !(DER && (b.itens || []).length && !b.itens.some(x => x.suspensa !== true && (b.tipo !== 'rev' || x.movida === undefined)))).map((b, j) => blockHTML(p, b, j)).join('')}
       </article>`).join('')}</section>`;
   }).join('');
 }
