@@ -53,7 +53,11 @@ test('Prioridades: a lista agrupa os subitens pela aula da mentoria, marcada qua
 	const e25 = page.locator('tr.aula[data-aula="5e202dbd-f4b9-4fef-8361-a549e3825c8c"]');
 	await expect(e25).toBeVisible();
 	await expect(e25.getByRole('link', { name: 'questões C/E ↗' })).toHaveAttribute('href', '/questoes/e2-5');
-	await expect(c23.getByRole('link', { name: 'questões C/E ↗' })).toHaveCount(0);
+	// As da P2 também têm: a C2·3, cumprida, segue com o atalho; a B1·1 (P1), sem questões, não traz.
+	await expect(c23.getByRole('link', { name: 'questões C/E ↗' })).toHaveAttribute('href', '/questoes/c2-3');
+	const b11 = page.locator('tr.aula[data-aula="cdb30a51-f9d8-4901-8e28-06316c41b35a"]');
+	await expect(b11).toBeVisible();
+	await expect(b11.getByRole('link', { name: 'questões C/E ↗' })).toHaveCount(0);
 });
 
 test('os botões do cabeçalho abrem as páginas dentro do app, com as abas, e uma liga à outra', async ({ page }) => {

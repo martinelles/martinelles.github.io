@@ -162,6 +162,28 @@ test('a missão de 19/11 traz o atalho de questões da E2·4', async ({ page }) 
 	await expect(page.locator('a.topico[href="/questoes/e2-4"]')).toHaveCount(1);
 });
 
+test('a página da aula C3·1 corrige e comenta o gabarito', async ({ page }) => {
+	await page.addInitScript(() => localStorage.setItem('painel-concurso:usuario:v1', 'marte'));
+	await page.goto('/questoes/c3-1');
+	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 1\. Decisão administrativa/ })).toBeVisible();
+	await expect(page.locator('.ponto')).toHaveCount(11);
+
+	// Questão 1 (gabarito C): acertar por tecla e voltar mostra o comentário com o trecho da norma.
+	await page.keyboard.press('c');
+	const cartao = page.locator('.cartao');
+	await expect(cartao).toContainText('Questão 2 de 11');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao.locator('.veredito')).toHaveText('Você acertou');
+	await expect(cartao.locator('.gabarito p')).toContainText('Lei 9.784/1999, art. 2º');
+});
+
+test('a missão de 25/11 traz o atalho de questões da C3·1', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-11-25T09:00:00-03:00'));
+	await page.goto('/painel');
+	// C3·1 é estudo novo em 25/11; o índice liga o cod C3·1 à rota.
+	await expect(page.locator('a.topico[href="/questoes/c3-1"]')).toHaveCount(1);
+});
+
 test('todas as aulas extraídas abrem com a contagem certa', async ({ page }) => {
 	const aulas = [
 	['E1·1', '1. Exploração e descrição', 16],
@@ -185,7 +207,32 @@ test('todas as aulas extraídas abrem com a contagem certa', async ({ page }) =>
 	['E4·2', '2. Sustentação de soluções analíticas', 12],
 	['E4·3', '3. Governança e responsabilidade', 12],
 	['E4·4', '4. Gestão de produtos de dados', 14],
-	['E4·5', '5. Contratação e controle de soluções', 14]
+	['E4·5', '5. Contratação e controle de soluções', 14],
+	['C1·1', '1. Governança e responsabilidades', 10],
+	['C1·2', '2. Riscos e controles essenciais', 16],
+	['C1·3', '3. Integridade pública', 7],
+	['C1·4', '4. Integridade privada', 7],
+	['C1·5', '5. Prevenção e melhoria institucional', 4],
+	['C2·1', '1. Acesso à informação', 13],
+	['C2·2', '2. Transparência e proteção de dados', 10],
+	['C2·3', '3. Ouvidoria e proteção das pessoas', 9],
+	['C2·4', '4. Participação e melhoria de serviços', 10],
+	['C2·5', '5. Integridade da informação e comunicação', 10],
+	['C3·1', '1. Decisão administrativa', 11],
+	['C3·2', '2. Processo e garantias', 9],
+	['C3·3', '3. Funções de controle e melhoria da gestão', 9],
+	['C3·4', '4. Responsabilização em nível introdutório', 7],
+	['C3·5', '5. Proteção e encaminhamento', 6],
+	['C4·1', '1. Perguntas e fontes', 11],
+	['C4·2', '2. Leitura de dados e indicadores', 9],
+	['C4·3', '3. Inferências e erros de raciocínio', 7],
+	['C4·4', '4. Integridade da evidência e proteção', 5],
+	['C4·5', '5. Uso responsável de inteligência artificial', 11],
+	['C5·1', '1. Propósito, serviços e papéis', 10],
+	['C5·2', '2. Ciclo do trabalho', 9],
+	['C5·3', '3. Evidência e conclusão', 11],
+	['C5·4', '4. Comunicação e acompanhamento', 9],
+	['C5·5', '5. Integração entre funções da CGU', 5]
 	] as const;
 	for (const [cod, titulo, n] of aulas) {
 		const slug = cod.replace('·', '-').toLowerCase();
