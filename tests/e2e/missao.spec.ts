@@ -298,6 +298,18 @@ test('aula nova que passou o dia sem ser feita desliza para o dia seguinte', asy
 	await seletor.fill('2026-11-18');
 	await expect(itemC15()).toContainText('aula feita em 19/11/2026');
 	await expect(missao(page).locator('li.bloco', { hasText: 'C1·5' }).getByRole('checkbox')).toBeChecked();
+
+	// De volta a hoje: riscada, a aula marcada na chegada segue com a caixa para poder desmarcar.
+	await missao(page).getByRole('button', { name: 'Hoje' }).click();
+	const caixaC15 = adiadas().getByRole('checkbox', { name: 'Marcar C1·5 como estudado' });
+	await expect(caixaC15).toBeChecked();
+	await caixaC15.click();
+	const depois = await marcas(page);
+	expect(depois[`cd~2026-11-19~5~${aulaC15.id}`]).toBeUndefined();
+	// Sem a marcação, a aula volta a estar atrasada em aberto (nem riscada, nem ponteiro) e o
+	// contador do cabeçalho devolve a conclusão.
+	await expect(adiadas().locator('li', { hasText: 'C1·5' })).not.toContainText('aula feita em');
+	await expect(page.locator('.prazo small')).toHaveText('8/68 aulas da mentoria · 3 aulas por dia até a prova');
 });
 
 test('conteúdo em aberto cuja aula não está no plano vira tarefa de recuperação', async ({ page }) => {

@@ -507,6 +507,24 @@ describe('aula nova que passou o dia sem ser feita', () => {
 		expect(blocoExtra.itens!.map((i) => [i.cid, i.feitaEm])).toContainEqual(['4e7', '2026-10-18']);
 	});
 
+	it('riscada no bloco de atrasadas, a marcação da chegada pode ser desfeita', () => {
+		const marcas: Marcas = { 'cd~2026-10-18~2~4e7': true };
+		const p = planoAjustado(planoAtraso, {}, 'cd', marcas, '2026-10-18');
+		const dia18 = p.plan.find((d) => d.data === '2026-10-18')!;
+		// A caixa que segue no item riscado desmarca pela chave do dia em que chegou.
+		const desmarcou = mudancasDoItem(marcas, 'cd', dia18, 2, '4e7', false);
+		expect(desmarcou).toEqual({ 'cd~2026-10-18~2~4e7': false });
+		const semAMarca = { ...marcas };
+		for (const [chave, feito] of Object.entries(desmarcou)) if (!feito) delete semAMarca[chave];
+		// Sem a marcação, a aula volta a estar atrasada em aberto: nem riscada, nem ponteiro.
+		const volta = planoAjustado(planoAtraso, {}, 'cd', semAMarca, '2026-10-18');
+		const deNovo = volta.plan.find((d) => d.data === '2026-10-18')!.blocos.at(-1)!;
+		const item = deNovo.itens!.find((it) => it.cid === '4e7')!;
+		expect(item.feitaEm).toBeUndefined();
+		expect(item.movida).toBeUndefined();
+		expect(itemDe(volta, '2026-10-16', '4e7').movida).toBe('2026-10-18');
+	});
+
 	it('hoje além do fim do plano: só o ponteiro, sem aula adiada', () => {
 		const p = planoAjustado(planoAtraso, {}, 'cd', {}, '2026-10-20');
 		expect(itemDe(p, '2026-10-16', '4e7').movida).toBeNull();

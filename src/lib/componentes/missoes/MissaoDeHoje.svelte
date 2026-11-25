@@ -298,7 +298,9 @@
 										class:em-andamento={aberto}
 										class:ponteiro={it.movida !== undefined}
 									>
-										{#if porItem && it.movida === undefined && it.feitaEm === undefined}
+										{#if porItem && it.movida === undefined && (it.feitaEm === undefined || (b.atrasado && itemFeito(marcas, cargo, dia, i, it.cid)))}
+											<!-- Riscado no bloco de atrasadas é a marcação feita nesta caixa: ela segue
+											     para poder desmarcar; aula só registrada por fora (sem marcação) não tem. -->
 											<label class="caixa">
 												<input
 													type="checkbox"
