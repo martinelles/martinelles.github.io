@@ -239,7 +239,7 @@
 				aria-label="Ver a missão de outro dia"
 			/>
 			{#if escolhida !== hoje}
-				<button type="button" class="voltar-hoje" onclick={() => (escolhida = hoje)}>Hoje</button>
+				<button type="button" class="voltar-hoje botao" onclick={() => (escolhida = hoje)}>Hoje</button>
 			{/if}
 		</div>
 		<ol class="blocos">
@@ -400,10 +400,10 @@
 												<span class="lembrete" role="status">
 													<strong>Você parou aqui:</strong> abriu a aula da mentoria ou as questões do TEC.
 													<span class="acoes">
-														<button type="button" onclick={() => marcarLembrete(i, it.cid, porItem)}>
+														<button type="button" class="botao" onclick={() => marcarLembrete(i, it.cid, porItem)}>
 															Terminei, marcar
 														</button>
-														<button type="button" class="dispensar" onclick={() => emAndamento.limpar()}>
+														<button type="button" class="botao dispensar" onclick={() => emAndamento.limpar()}>
 															Dispensar
 														</button>
 													</span>
@@ -450,10 +450,10 @@
 				<div class="passo">
 					<p class="rotulo-passo">1. Aula nova ou revisão?</p>
 					<div class="opcoes">
-						<button type="button" class="opcao" aria-pressed={tipoExtra === 'novo'} onclick={() => (tipoExtra = 'novo')}>
+						<button type="button" class="opcao botao" aria-pressed={tipoExtra === 'novo'} onclick={() => (tipoExtra = 'novo')}>
 							Aula nova
 						</button>
-						<button type="button" class="opcao" aria-pressed={tipoExtra === 'rev'} onclick={() => (tipoExtra = 'rev')}>
+						<button type="button" class="opcao botao" aria-pressed={tipoExtra === 'rev'} onclick={() => (tipoExtra = 'rev')}>
 							Revisão
 						</button>
 					</div>
@@ -465,7 +465,7 @@
 							{#each disciplinas as d (d.chave)}
 								<button
 									type="button"
-									class="opcao"
+									class="opcao botao"
 									aria-pressed={discExtra === d.chave}
 									onclick={() => {
 										discExtra = d.chave;
@@ -499,13 +499,13 @@
 							{/if}
 					</div>
 				{/if}
-				<div class="acoes-extra">
-					<button type="submit" disabled={!aulaEscolhida}>Adicionar</button>
-					<button type="button" class="cancelar" onclick={fecharExtra}>Cancelar</button>
-				</div>
+					<div class="acoes-extra">
+						<button type="submit" class="botao" disabled={!aulaEscolhida}>Adicionar</button>
+						<button type="button" class="cancelar botao" onclick={fecharExtra}>Cancelar</button>
+					</div>
 			</form>
 		{:else}
-			<button type="button" class="abrir-extra" onclick={() => (extraAberta = true)}>
+			<button type="button" class="abrir-extra botao" onclick={() => (extraAberta = true)}>
 				Registrar aula feita fora da missão
 			</button>
 		{/if}
@@ -523,7 +523,7 @@
 				Missão cumprida
 			</p>
 		{/if}
-		<a class="secundario" href={linkMissoes}>Abrir nas Missões</a>
+		<a class="secundario botao" href={linkMissoes}>Abrir nas Missões</a>
 	{/if}
 </section>
 
@@ -570,15 +570,8 @@
 	}
 
 	.quando .voltar-hoje {
-		min-height: 44px;
 		padding: 8px 14px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.contagem {
@@ -840,15 +833,8 @@
 	}
 
 	.acoes button {
-		min-height: 44px;
 		padding: 8px 14px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.acoes .dispensar {
@@ -931,16 +917,9 @@
 	}
 
 	.abrir-extra {
-		min-height: 44px;
 		margin-top: 12px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.form-extra {
@@ -973,15 +952,8 @@
 	}
 
 	.opcao {
-		min-height: 44px;
 		padding: 8px 14px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.opcao[aria-pressed='true'] {
@@ -1015,15 +987,9 @@
 	}
 
 	.acoes-extra button {
-		min-height: 44px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-primaria);
 		color: var(--cor-superficie);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.acoes-extra button:disabled {
@@ -1063,15 +1029,7 @@
 	}
 
 	.secundario {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
 		margin-top: 8px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		color: var(--cor-texto);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

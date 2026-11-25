@@ -43,7 +43,7 @@
 	{#if aberto}
 		<FormEntrar destino={page.url.pathname + page.url.search}>
 			{#snippet depois()}
-				<button type="button" class="secundario" onclick={() => pedidoLogin.agoraNao()}>Agora não</button>
+				<button type="button" class="secundario botao" onclick={() => pedidoLogin.agoraNao()}>Agora não</button>
 			{/snippet}
 		</FormEntrar>
 	{/if}
@@ -84,15 +84,7 @@
 	}
 
 	.secundario {
-		min-height: 44px;
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.secundario:focus-visible {

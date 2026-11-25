@@ -216,7 +216,7 @@
 		<div class="modo-fracos">
 			<button
 				type="button"
-				class="fracos"
+				class="fracos botao"
 				aria-pressed={foco.priorizarFracos}
 				onclick={() => foco.definirPriorizarFracos(!foco.priorizarFracos)}
 			>
@@ -280,7 +280,7 @@
 	{#if sessao.erro}
 		<div class="erro" role="alert">
 			<p>{sessao.erro}</p>
-			<button type="button" onclick={tentarDeNovo} disabled={sessao.carregando}>Tentar de novo</button>
+			<button type="button" class="botao-primario" onclick={tentarDeNovo} disabled={sessao.carregando}>Tentar de novo</button>
 		</div>
 	{:else if sessao.fim && filtro.topico !== undefined}
 		<!-- Fim do filtro de tópico: o FimDoFeed só conhece matéria e "Tudo"; aqui sempre há volta a "Tudo". -->
@@ -293,7 +293,7 @@
 				<h2>Nenhuma questão deste tópico</h2>
 				<p>Não há questão do catálogo ligada a {filtro.topico}.</p>
 			{/if}
-			<a class="acao" href="/">Ver tudo</a>
+			<a class="acao botao-primario" href="/">Ver tudo</a>
 		</section>
 	{:else if sessao.fim}
 		<FimDoFeed materia={materiaFiltrada} />
@@ -340,16 +340,9 @@
 	}
 
 	.fracos {
-		display: inline-flex;
-		align-items: center;
 		gap: 6px;
-		min-height: 44px;
 		padding: 0 14px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.fracos[aria-pressed='true'] {
@@ -434,20 +427,8 @@
 		max-width: 32ch;
 	}
 
-	/* Botão primário do sistema (igual em todo o app). */
 	.fim-topico .acao {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
 		margin-top: 8px;
-		padding: 0 20px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		box-shadow: var(--sombra);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		font-weight: 700;
-		text-decoration: none;
 	}
 
 	.stories-esqueleto {
@@ -502,19 +483,6 @@
 	.erro p {
 		margin: 0;
 		color: var(--cor-texto-suave);
-	}
-
-	/* Botão primário do sistema (igual em todo o app). */
-	.erro button {
-		min-height: 44px;
-		padding: 0 20px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.carregando {

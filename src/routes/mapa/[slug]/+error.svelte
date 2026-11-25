@@ -10,7 +10,7 @@
 <article class="erro">
 	<h1>{page.status === 404 ? 'Mapa não encontrado' : 'Algo deu errado'}</h1>
 	<p>{page.status === 404 ? 'Esse endereço não corresponde a nenhum mapa mental.' : page.error?.message}</p>
-	<a class="voltar" href="/painel">
+		<a class="voltar botao" href="/painel">
 		<Icone nome="voltar" tamanho={20} />
 		Voltar ao painel
 	</a>
@@ -39,16 +39,8 @@
 	}
 
 	.voltar {
-		display: inline-flex;
-		align-items: center;
 		gap: 6px;
-		min-height: 44px;
 		margin-top: 8px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		color: var(--cor-texto);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

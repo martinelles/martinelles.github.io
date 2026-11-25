@@ -213,6 +213,31 @@ select {
 	outline-offset: 2px;
 }
 
+/* Botão do sistema (alvo de toque ≥ 44 px, NFR-006): esqueleto comum a botões e links de
+   ação; preenchimento, cor e respiro ficam em cada uso. `a` também usa (por isso cursor e
+   text-decoration). */
+.botao,
+.botao-primario {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 10px 18px;
+	border: var(--linha-peso) solid var(--cor-borda);
+	border-radius: calc(var(--raio) / 2);
+	/* `a` não herda cor (link azul do navegador): o botão usa a cor do texto corrente. */
+	color: inherit;
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Botão primário (igual em todo o app): preenchido com a cor primária e sombra dura. */
+.botao-primario {
+	background: var(--cor-primaria);
+	color: var(--cor-primaria-texto);
+	box-shadow: var(--sombra);
+}
+
 /* Texto só para leitor de tela. */
 .so-leitor {
 	position: absolute;

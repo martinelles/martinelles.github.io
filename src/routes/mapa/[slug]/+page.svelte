@@ -13,7 +13,7 @@
 <article class="pagina-mapa">
 	<header>
 		<h1>Mapa mental · {data.rotulo}</h1>
-		<a class="voltar" href="/painel">
+		<a class="voltar botao" href="/painel">
 			<Icone nome="voltar" tamanho={20} />
 			Voltar ao painel
 		</a>
@@ -51,15 +51,7 @@
 	}
 
 	.voltar {
-		display: inline-flex;
-		align-items: center;
 		gap: 6px;
-		min-height: 44px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		color: var(--cor-texto);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

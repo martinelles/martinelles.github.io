@@ -10,7 +10,7 @@
 <article class="erro">
 	<h1>{page.status === 404 ? 'Ferramenta não encontrada' : 'Algo deu errado'}</h1>
 	<p>{page.status === 404 ? 'Esse endereço não corresponde a nenhuma ferramenta.' : page.error?.message}</p>
-	<a class="voltar" href="/painel">
+	<a class="voltar botao-primario" href="/painel">
 		<Icone nome="voltar" tamanho={20} />
 		Voltar ao painel
 	</a>
@@ -42,20 +42,8 @@
 		color: var(--cor-texto-suave);
 	}
 
-	/* Botão primário do sistema (igual em todo o app). */
 	.voltar {
-		display: inline-flex;
-		align-items: center;
 		gap: 8px;
-		min-height: 44px;
 		margin-top: var(--espaco);
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

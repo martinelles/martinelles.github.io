@@ -25,7 +25,7 @@
 				<strong>Missão de hoje</strong>
 				<span>{p.feitos} de {p.total} blocos feitos{falta ? `, faltam ${duracao(falta)}` : ''}</span>
 			</a>
-			<a class="abrir" href="/painel">Abrir</a>
+			<a class="abrir botao" href="/painel">Abrir</a>
 		{/if}
 	</section>
 {/if}
@@ -64,18 +64,13 @@
 		font-variant-numeric: tabular-nums;
 	}
 
+	/* CTA da chamada: primária, mas sem sombra e em peso 800 (título da peça). */
 	.abrir {
 		flex-shrink: 0;
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
 		padding: 0 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-primaria);
 		color: var(--cor-primaria-texto);
 		font-weight: 800;
-		text-decoration: none;
 	}
 
 	.discreta {

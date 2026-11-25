@@ -52,7 +52,7 @@
 		<div class="vazio">
 			<span class="icone" aria-hidden="true"><Icone nome="marcador" tamanho={40} /></span>
 			<p>Nada salvo ainda — toque no marcador de um post para guardar aqui.</p>
-			<a href="/">Ir para o feed</a>
+			<a class="botao-primario" href="/">Ir para o feed</a>
 		</div>
 	{:else}
 		{#if posts === null && !falhou}
@@ -80,7 +80,7 @@
 		{#if falhou}
 			<div class="erro" role="alert">
 				<p>Não foi possível carregar alguns salvos.</p>
-				<button type="button" onclick={carregar}>Tentar de novo</button>
+				<button type="button" class="botao-primario" onclick={carregar}>Tentar de novo</button>
 			</div>
 		{/if}
 	{/if}
@@ -129,22 +129,9 @@
 		color: var(--cor-texto-suave);
 	}
 
-	/* Botão primário do sistema (igual em todo o app). */
-	.vazio a,
-	.erro button {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
+	.vazio .botao-primario,
+	.erro .botao-primario {
 		margin-top: 8px;
-		padding: 0 20px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font-weight: 700;
-		text-decoration: none;
-		cursor: pointer;
 	}
 
 	.carregando,

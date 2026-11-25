@@ -22,7 +22,7 @@
 	<dl class="numeros">
 		<div><dt>blocos feitos</dt><dd>{r.blocosFeitos} <small>de {r.blocos}</small></dd></div>
 	</dl>
-	<a class="secundario" href="/artefato/missoes#{cargo}">Ver o plano nas Missões</a>
+	<a class="secundario botao" href="/artefato/missoes#{cargo}">Ver o plano nas Missões</a>
 </section>
 
 <style>
@@ -93,15 +93,7 @@
 	}
 
 	.secundario {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
 		margin-top: 12px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		color: var(--cor-texto);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

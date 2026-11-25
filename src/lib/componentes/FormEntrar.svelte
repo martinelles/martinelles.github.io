@@ -62,7 +62,7 @@
 		{/if}
 	</p>
 	<div class="botoes">
-		<button type="submit" disabled={!valido || entrando}>{entrando ? 'Entrando…' : 'Entrar'}</button>
+		<button type="submit" class="botao-primario" disabled={!valido || entrando}>{entrando ? 'Entrando…' : 'Entrar'}</button>
 		{@render depois?.()}
 	</div>
 	{#if erro}<p class="erro" role="alert">{erro}</p>{/if}
@@ -121,22 +121,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
-	}
-
-	button {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		min-height: 44px;
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	button:disabled {

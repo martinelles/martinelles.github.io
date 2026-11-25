@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div class="entrar">
-	<a class="voltar" href="/painel/ajustes"><Icone nome="voltar" tamanho={20} /> Voltar aos ajustes</a>
+	<a class="voltar botao-primario" href="/painel/ajustes"><Icone nome="voltar" tamanho={20} /> Voltar aos ajustes</a>
 	<h1>Entrar</h1>
 
 	{#if conta.usuario}
@@ -43,20 +43,7 @@
 	}
 
 	.voltar {
-		display: inline-flex;
-		align-items: center;
-		align-self: flex-start;
 		gap: 8px;
-		min-height: 44px;
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font: inherit;
-		font-weight: 700;
-		text-decoration: none;
-		cursor: pointer;
+		align-self: flex-start;
 	}
 </style>

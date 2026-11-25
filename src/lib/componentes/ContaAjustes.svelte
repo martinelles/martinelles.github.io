@@ -14,10 +14,10 @@
 	<h2 id="conta-titulo">Conta</h2>
 	{#if conta.usuario}
 		<p>Entrou como <strong>{conta.usuario}</strong>. Seu progresso fica salvo e aparece em qualquer aparelho com este nome.</p>
-		<button type="button" onclick={sair} disabled={saindo}>{saindo ? 'Saindo…' : 'Sair'}</button>
+		<button type="button" class="botao-primario" onclick={sair} disabled={saindo}>{saindo ? 'Saindo…' : 'Sair'}</button>
 	{:else}
 		<p>Seu progresso está só neste aparelho. Entre com um nome para guardá-lo e abrir em outro aparelho.</p>
-		<a class="botao" href="/entrar">Entrar</a>
+		<a class="botao-primario" href="/entrar">Entrar</a>
 	{/if}
 </section>
 
@@ -42,23 +42,6 @@
 
 	p {
 		margin: 0;
-	}
-
-	button,
-	.botao {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font: inherit;
-		font-weight: 700;
-		text-decoration: none;
-		cursor: pointer;
 	}
 
 	button:disabled {

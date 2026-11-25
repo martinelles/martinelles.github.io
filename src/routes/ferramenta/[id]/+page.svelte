@@ -17,7 +17,7 @@
 	<h1>{ferramenta.titulo}</h1>
 	<p class="destaque">Em breve por aqui.</p>
 	<p class="suave">Esta ferramenta ainda está em construção.</p>
-	<a class="voltar" href="/painel">
+	<a class="voltar botao-primario" href="/painel">
 		<Icone nome="voltar" tamanho={20} />
 		Voltar ao painel
 	</a>
@@ -62,20 +62,8 @@
 		color: var(--cor-texto-suave);
 	}
 
-	/* Botão primário do sistema (igual em todo o app). */
 	.voltar {
-		display: inline-flex;
-		align-items: center;
 		gap: 8px;
-		min-height: 44px;
 		margin-top: var(--espaco);
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

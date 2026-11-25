@@ -16,7 +16,7 @@
 	{#if materia}
 		<h2>Você viu tudo desta matéria</h2>
 		<p>Puxe a tela para baixo no topo e os posts de {materia.nome} voltam em outra ordem.</p>
-		<a class="acao" href="/">Ver tudo</a>
+		<a class="acao botao-primario" href="/">Ver tudo</a>
 	{:else}
 		<h2>Você viu tudo por hoje</h2>
 		<p>Puxe a tela para baixo no topo e o feed volta em outra ordem.</p>
@@ -55,18 +55,6 @@
 	}
 
 	.acao {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
 		margin-top: 8px;
-		padding: 0 20px;
-		/* Botão primário do sistema: contorno, raio de peça interna e sombra dura. */
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		box-shadow: var(--sombra);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>

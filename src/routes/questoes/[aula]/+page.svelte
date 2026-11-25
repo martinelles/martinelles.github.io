@@ -93,7 +93,7 @@
 			<div class="acoes">
 				<button
 					type="button"
-					class="c {resposta === 'C' ? (acertou ? 'acertou' : 'errou') : ''} {resposta !== undefined && gab?.r === 'C' ? 'correta' : ''}"
+					class="botao c {resposta === 'C' ? (acertou ? 'acertou' : 'errou') : ''} {resposta !== undefined && gab?.r === 'C' ? 'correta' : ''}"
 					aria-pressed={resposta === 'C'}
 					onclick={() => responder('C')}
 					disabled={resposta !== undefined}
@@ -102,7 +102,7 @@
 				</button>
 				<button
 					type="button"
-					class="e {resposta === 'E' ? (acertou ? 'acertou' : 'errou') : ''} {resposta !== undefined && gab?.r === 'E' ? 'correta' : ''}"
+					class="botao e {resposta === 'E' ? (acertou ? 'acertou' : 'errou') : ''} {resposta !== undefined && gab?.r === 'E' ? 'correta' : ''}"
 					aria-pressed={resposta === 'E'}
 					onclick={() => responder('E')}
 					disabled={resposta !== undefined}
@@ -128,7 +128,7 @@
 		</div>
 
 		<div class="navegacao">
-			<button type="button" onclick={voltar} disabled={atual === 0}>← Anterior</button>
+			<button type="button" class="botao" onclick={voltar} disabled={atual === 0}>← Anterior</button>
 			<div class="pontos" aria-hidden="true">
 				{#each data.questoes as q, i (q.n)}
 					<span
@@ -139,7 +139,7 @@
 					></span>
 				{/each}
 			</div>
-			<button type="button" onclick={avancar} disabled={atual === total - 1}>
+			<button type="button" class="botao" onclick={avancar} disabled={atual === total - 1}>
 				Próxima → <kbd>Enter</kbd>
 			</button>
 		</div>
@@ -221,18 +221,9 @@
 	}
 
 	.acoes button {
-		display: inline-flex;
-		align-items: center;
 		gap: 8px;
-		min-height: 44px;
 		padding: 8px 16px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.acoes button:disabled {
@@ -317,18 +308,9 @@
 	}
 
 	.navegacao button {
-		display: inline-flex;
-		align-items: center;
 		gap: 8px;
-		min-height: 44px;
 		padding: 8px 14px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
 		background: var(--cor-superficie);
-		color: var(--cor-texto);
-		font: inherit;
-		font-weight: 700;
-		cursor: pointer;
 	}
 
 	.navegacao button:disabled {

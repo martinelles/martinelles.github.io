@@ -66,7 +66,7 @@
 		<div class="vazio">
 			<span class="icone" aria-hidden="true"><Icone nome="check" tamanho={40} /></span>
 			<p>Nada errado por aqui — as questões que você errar no feed entram neste caderno.</p>
-			<a href="/">Ir para o feed</a>
+			<a class="botao-primario" href="/">Ir para o feed</a>
 		</div>
 	{:else}
 		{#if posts === null && !falhou}
@@ -94,7 +94,7 @@
 		{#if falhou}
 			<div class="erro" role="alert">
 				<p>Não foi possível carregar algumas questões.</p>
-				<button type="button" onclick={carregar}>Tentar de novo</button>
+				<button type="button" class="botao-primario" onclick={carregar}>Tentar de novo</button>
 			</div>
 		{/if}
 	{/if}
@@ -149,22 +149,9 @@
 		color: var(--cor-texto-suave);
 	}
 
-	/* Botão primário do sistema (igual em todo o app). */
-	.vazio a,
-	.erro button {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
+	.vazio .botao-primario,
+	.erro .botao-primario {
 		margin-top: 8px;
-		padding: 0 20px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font-weight: 700;
-		text-decoration: none;
-		cursor: pointer;
 	}
 
 	.carregando,

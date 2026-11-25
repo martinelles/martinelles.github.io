@@ -28,7 +28,7 @@
 	<!-- No DOM, o título vem antes do "Voltar" (contrato); na tela, o "Voltar" fica acima. -->
 	<header class="topo">
 		<h1>Ajustes</h1>
-		<a class="voltar" href="/painel"><Icone nome="voltar" tamanho={20} /> Voltar ao painel</a>
+		<a class="voltar botao-primario" href="/painel"><Icone nome="voltar" tamanho={20} /> Voltar ao painel</a>
 	</header>
 	{#if falhaMaterias}
 		<p class="erro" role="alert">
@@ -89,17 +89,6 @@
 	}
 
 	.voltar {
-		display: inline-flex;
-		align-items: center;
 		gap: 8px;
-		min-height: 44px;
-		padding: 10px 18px;
-		border: var(--linha-peso) solid var(--cor-borda);
-		border-radius: calc(var(--raio) / 2);
-		background: var(--cor-primaria);
-		color: var(--cor-primaria-texto);
-		box-shadow: var(--sombra);
-		font-weight: 700;
-		text-decoration: none;
 	}
 </style>
