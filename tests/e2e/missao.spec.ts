@@ -651,3 +651,36 @@ test('o seletor de dia mostra a missão de qualquer data e volta para hoje', asy
 	await expect(secao).toContainText('14/10/2026');
 	await expect(secao).not.toContainText('E2 1.2');
 });
+
+test('o ponteiro de revisão movida marca a revisão lá no dia dela', async ({ page }) => {
+	await simularApi(page);
+	await page.addInitScript((k) => localStorage.setItem(k, 'maria'), USUARIO);
+	// E2·5 feita em 22/11: a D+1 (prevista para 24/11, hoje) vai para 23/11; fica o ponteiro.
+	await page.addInitScript(
+		([k, cid]) =>
+			localStorage.setItem(
+				k,
+				JSON.stringify({ 'cd~2026-11-22': [{ tipo: 'novo', cid, cod: 'E2·5', texto: '5. Qualidade e rastreabilidade' }] })
+			),
+		['missoes-extras-cgu-2026', '5e202dbd-f4b9-4fef-8361-a549e3825c8c'] as const
+	);
+	await page.clock.setFixedTime(new Date('2026-11-24T09:00:00-03:00'));
+	await page.goto('/painel');
+
+	// O ponteiro de 24/11 tem caixa; marcar grava na chave do dia de destino (23/11).
+	const ponteiro = missao(page).locator('li.ponteiro', { hasText: 'E2·5' });
+	await expect(ponteiro).toContainText('revisão movida para 23/11/2026');
+	const caixa = ponteiro.getByRole('checkbox', { name: 'Marcar revisão de E2·5 como feita' });
+	await expect(caixa).toHaveCount(1);
+	await caixa.click();
+	await expect(caixa).toBeChecked();
+	const m = await marcas(page);
+	expect(m['cd~2026-11-23~0~5e202dbd-f4b9-4fef-8361-a549e3825c8c']).toBe(true);
+
+	// No dia de destino, a revisão marcada aparece riscada, com a nota da data real.
+	await missao(page).getByLabel('Ver a missão de outro dia').fill('2026-11-23');
+	// No dia de destino, a revisão marcada risca o bloco e a bolha vem cheia (item único visível).
+	const blocoAlvo = missao(page).locator('li.bloco.t-rev', { hasText: 'aula feita em 22/11/2026' });
+	await expect(blocoAlvo).toHaveClass(/feito/);
+	await expect(blocoAlvo.locator('input[type=checkbox]').first()).toBeChecked();
+});

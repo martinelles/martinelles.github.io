@@ -71,10 +71,13 @@ export const soPonteiros = (b: Bloco): boolean =>
 export const itemCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: number, it: ItemBloco): boolean =>
 	it.feitaEm !== undefined || itemFeito(marcas, cargo, dia, i, it.cid);
 
-/** Bloco cumprido para as contas: marcado, ou de estudo novo com todos os subitens cumpridos. */
+/** Bloco cumprido para as contas: marcado, ou com todos os subitens visíveis cumpridos (o
+ *  estudo novo e também a revisão marcada item a item, como a movida vinda de um ponteiro). */
 export const blocoCumprido = (marcas: Marcas, cargo: Cargo, dia: DiaMissao, i: number, b: Bloco): boolean =>
 	blocoFeito(marcas, cargo, dia, i) ||
-	(b.tipo === 'novo' && !!b.itens?.length && b.itens.every((it) => itemCumprido(marcas, cargo, dia, i, it)));
+	(!!b.itens?.length &&
+		b.itens.some((it) => it.movida === undefined && it.suspensa !== true) &&
+		b.itens.every((it) => it.movida !== undefined || it.suspensa === true || itemCumprido(marcas, cargo, dia, i, it)));
 
 /** Discursiva do plano na lista de todas (blocos `disc`), na ordem dos dias. */
 export interface DiscursivaDoPlano {
@@ -215,6 +218,19 @@ export function aulasConcluidas(
 	);
 	for (const id of noPlano) if (!abertas.has(id)) feitas.add(id);
 	return { feitas: feitas.size, total: ids.size };
+}
+
+/** Onde a revisão movida deste ponteiro está marcável: o dia de destino (`it.movida`) e o
+ * índice do bloco de revisação que a recebeu. `null` quando o dia não existe no plano. */
+export function alvoDaMovida(
+	plano: PlanoMissoes,
+	it: ItemBloco
+): { dia: DiaMissao; bloco: number } | null {
+	if (it.movida === undefined || it.movida === null) return null;
+	const dia = plano.plan.find((d) => d.data === it.movida);
+	if (!dia) return null;
+	const bloco = dia.blocos.findIndex((b) => b.itens?.some((x) => x.cid === it.cid && x.nota));
+	return bloco < 0 ? null : { dia, bloco };
 }
 
 /** 'AAAA-MM-DD' + n dias, em data de calendário (meia-noite UTC, sem relógio nem fuso). */

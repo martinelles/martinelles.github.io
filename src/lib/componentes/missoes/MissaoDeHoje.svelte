@@ -17,6 +17,7 @@
 	import { formatarData } from '$lib/datas';
 	import type { ExtraDaMissao } from '$lib/feed/pedidoLogin.svelte';
 	import {
+		alvoDaMovida,
 		blocoCumprido,
 		diaDeHoje,
 		itemCumprido,
@@ -293,12 +294,29 @@
 									{@const questoes = questoesDaAula.slug(it.cod)}
 									{@const itemOk = porItem && itemCumprido(marcas, cargo, dia, i, it)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
+									{@const alvo = it.movida ? alvoDaMovida(plano, it) : null}
+									{@const okPonteiro = !!alvo && itemFeito(marcas, cargo, alvo.dia, alvo.bloco, it.cid)}
 									<li
-										class:feito={itemOk}
+										class:feito={itemOk || okPonteiro}
 										class:em-andamento={aberto}
 										class:ponteiro={it.movida !== undefined}
 									>
-										{#if porItem && it.movida === undefined && it.feitaEm === undefined}
+										{#if alvo}
+											<label class="caixa">
+												<input
+													type="checkbox"
+													checked={okPonteiro}
+													onchange={(e) => {
+														const input = e.currentTarget;
+														const marcar = input.checked;
+														input.checked = okPonteiro; // quem decide é o onmarcar (pode pedir login antes)
+														onmarcar(mudancasDoItem(marcas, cargo, alvo.dia, alvo.bloco, it.cid, marcar));
+													}}
+													aria-label="Marcar revisão de {it.cod} como feita"
+												/>
+												<span class="quadrado" aria-hidden="true"><Icone nome="check" tamanho={14} /></span>
+											</label>
+										{:else if porItem && it.movida === undefined && it.feitaEm === undefined}
 											<label class="caixa">
 												<input
 													type="checkbox"
