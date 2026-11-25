@@ -1,0 +1,125 @@
+{
+ "aula": "C3·4",
+ "titulo": "4. Responsabilização em nível introdutório · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Toda falha de gestão é irregularidade passível de punição."
+  },
+  {
+   "n": 2,
+   "texto": "Erro e fraude se distinguem pelo valor do dano causado."
+  },
+  {
+   "n": 3,
+   "texto": "A existência de indícios basta para atribuir responsabilidade ao agente."
+  },
+  {
+   "n": 4,
+   "texto": "A exigência de dolo ou erro grosseiro da LINDB, art. 28, impede a sanção disciplinar por culpa leve."
+  },
+  {
+   "n": 5,
+   "texto": "A responsabilização da pessoa jurídica na Lei Anticorrupção depende de comprovação de culpa."
+  },
+  {
+   "n": 6,
+   "texto": "A responsabilização da pessoa jurídica exclui a dos seus dirigentes."
+  },
+  {
+   "n": 7,
+   "texto": "A multa da Lei 12.846/2013 incide sobre o lucro líquido da empresa."
+  },
+  {
+   "n": 8,
+   "texto": "O acordo de leniência isenta a empresa da obrigação de reparar integralmente o dano."
+  },
+  {
+   "n": 9,
+   "texto": "O juízo de admissibilidade sempre resulta na instauração de processo administrativo disciplinar."
+  },
+  {
+   "n": 10,
+   "texto": "O procedimento administrativo de responsabilização (PAR) destina-se a punir servidores públicos."
+  },
+  {
+   "n": 11,
+   "texto": "A acumulação ilegal de cargos públicos apura-se pelo rito ordinário do processo disciplinar."
+  },
+  {
+   "n": 12,
+   "texto": "A inassiduidade habitual caracteriza-se por 60 dias de faltas interpoladas em 12 meses, sem exigir intenção de abandonar o cargo."
+  },
+  {
+   "n": 13,
+   "texto": "A absolvição penal, por qualquer fundamento, afasta a responsabilidade administrativa."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Há falha sem ilícito: nem todo erro de gestão atrai sanção."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Distinguem-se pela intenção; o valor do dano não define a natureza da conduta."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Indício orienta a apuração; responsabilidade exige prova formada no processo."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O Decreto 9.830/2019, art. 17, mantém as sanções disciplinares, inclusive por culpa leve."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É objetiva: independe de culpa ou dolo dos dirigentes."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "As esferas são autônomas e podem incidir sobre os mesmos fatos."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Incide sobre o faturamento bruto da pessoa jurídica."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A reparação integral do dano é condição do acordo; a leniência não a afasta."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Pode resultar em arquivamento, diligência ou providência menos gravosa, sempre de forma motivada."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O PAR da Lei 12.846/2013 responsabiliza pessoas jurídicas pelos atos lesivos que praticarem."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Segue o rito sumário, como o abandono de cargo e a inassiduidade habitual (Lei 8.112/1990, arts. 133 e 140)."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "A intenção é elemento do abandono de cargo (mais de 30 dias seguidos); na inassiduidade, contam-se 60 dias interpolados em 12 meses."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Só afasta a responsabilidade administrativa a absolvição que negar a existência do fato ou a autoria (Lei 8.112/1990, art. 126)."
+  }
+ ]
+}

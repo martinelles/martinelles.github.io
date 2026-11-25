@@ -1,0 +1,89 @@
+{
+ "aula": "B4·4",
+ "titulo": "4. Planejamento e recursos · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O orçamento tradicional integra planejamento e orçamento."
+  },
+  {
+   "n": 2,
+   "texto": "Programa de transferência de renda se classifica na função alocativa do governo."
+  },
+  {
+   "n": 3,
+   "texto": "A LOA orienta a elaboração da LDO."
+  },
+  {
+   "n": 4,
+   "texto": "O investimento que ultrapassar um exercício financeiro exige inclusão prévia no PPA, sob pena de crime de responsabilidade."
+  },
+  {
+   "n": 5,
+   "texto": "Medida provisória pode dispor sobre PPA, LDA e orçamento."
+  },
+  {
+   "n": 6,
+   "texto": "A compra de equipamentos é despesa corrente."
+  },
+  {
+   "n": 7,
+   "texto": "O resultado primário inclui o pagamento de juros da dívida pública."
+  },
+  {
+   "n": 8,
+   "texto": "A maior parte do orçamento federal é discricionária."
+  },
+  {
+   "n": 9,
+   "texto": "A responsabilidade fiscal da LRF se limita ao equilíbrio entre receitas e despesas."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Essa integração é a marca do orçamento-programa."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "É função distributiva: transferir renda entre grupos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "É o contrário: a LDO orienta a elaboração da LOA, e ambas seguem o PPA."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "É o art. 167, § 1º, da Constituição; a pegadinha fala em ultrapassar dois exercícios."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É vedado (CF, art. 62, § 1º, I, d), ressalvado o crédito extraordinário."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É despesa de capital, que amplia a capacidade instalada."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O primário exclui os juros; com eles, o resultado é o nominal."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A maior parte é obrigatória, vinculada por lei ou por previdência e pessoal."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ela alcança planejamento, transparência, controle e accountability, além do equilíbrio."
+  }
+ ]
+}

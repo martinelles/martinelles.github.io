@@ -1,0 +1,152 @@
+{
+ "aula": "C2·3",
+ "titulo": "3. Ouvidoria e proteção das pessoas · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A ouvidoria pode exigir do usuário a justificativa da manifestação apresentada."
+  },
+  {
+   "n": 2,
+   "texto": "Manifestações na ouvidoria só podem ser apresentadas por escrito."
+  },
+  {
+   "n": 3,
+   "texto": "O usuário é obrigado a usar o formulário padronizado da ouvidoria para manifestar-se."
+  },
+  {
+   "n": 4,
+   "texto": "A manifestação na ouvidoria pode ser cobrada do usuário."
+  },
+  {
+   "n": 5,
+   "texto": "A decisão administrativa final sobre manifestação de ouvidoria sai em 20 dias."
+  },
+  {
+   "n": 6,
+   "texto": "A unidade de ouvidoria setorial deve ser subordinada à autoridade máxima do órgão."
+  },
+  {
+   "n": 7,
+   "texto": "A linguagem simples é recomendação sem base legal."
+  },
+  {
+   "n": 8,
+   "texto": "A ouvidoria deve presumir a má-fé das denúncias anônimas."
+  },
+  {
+   "n": 9,
+   "texto": "A Política Nacional de Linguagem Simples (Lei 15.263/2025) vale somente para o Poder Executivo federal."
+  },
+  {
+   "n": 10,
+   "texto": "A identidade do denunciante pode ser revelada sempre que a autoridade julgar conveniente."
+  },
+  {
+   "n": 11,
+   "texto": "A revelação da identidade do denunciante depende de sua concordância."
+  },
+  {
+   "n": 12,
+   "texto": "A isenção de responsabilização civil ou penal pelo relato protege também quem apresenta, de modo consciente, informações ou provas falsas."
+  },
+  {
+   "n": 13,
+   "texto": "O servidor que recebe denúncia fora da ouvidoria deve investigá-la por conta própria."
+  },
+  {
+   "n": 14,
+   "texto": "Cabe à ouvidoria apurar os fatos denunciados e aplicar a penalidade cabível."
+  },
+  {
+   "n": 15,
+   "texto": "A habilitação da denúncia equivale à comprovação dos fatos denunciados."
+  },
+  {
+   "n": 16,
+   "texto": "A ouvidoria deve informar ao denunciante a culpa do denunciado antes do julgamento."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É vedado exigir os motivos do usuário; a manifestação é livre."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Podem ser verbais, reduzidas a termo pelo próprio órgão."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Não há obrigação de formulário; qualquer canal serve."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É gratuita, como os serviços de informação ao cidadão."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "São 30 dias, prorrogáveis uma vez por igual período (Lei 13.460, art. 16)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A vinculação direta à autoridade máxima é preferencial, não obrigatória (Decreto 9.492)."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Tem base legal: art. 5º, XIV, da Lei de Acesso à Informação."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A denúncia anônima deve ser examinada como qualquer outra; anonimato não significa má-fé."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Alcança a administração direta e indireta de todos os Poderes da União, dos Estados, do DF e dos Municípios."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A identidade é protegida; a revelação não depende de juízo de conveniência da autoridade."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "Sem a anuência do informante a identidade não sai, ressalvada ordem judicial."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A proteção vale para o relato de boa-fé; a falsidade consciente fica de fora."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Ele deve encaminhá-la à ouvidoria, que faz o registro e a triagem."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A ouvidoria habilita e encaminha; a apuração e a punição cabem aos órgãos competentes."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Habilitar é verificar diligência mínima e admissibilidade, não comprovar os fatos."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Antes do julgamento há indício, não culpa; a responsabilização exige o devido processo."
+  }
+ ]
+}

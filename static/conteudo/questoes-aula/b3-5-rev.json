@@ -1,0 +1,53 @@
+{
+ "aula": "B3·5",
+ "titulo": "5. Integridade como responsabilidade institucional · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A integridade institucional se mede pela quantidade de normas de conduta editadas."
+  },
+  {
+   "n": 2,
+   "texto": "O programa de integridade do Decreto 9.203/2017 se destina apenas à prevenção, à detecção e à punição."
+  },
+  {
+   "n": 3,
+   "texto": "Metas irrealistas não têm relação com a integridade institucional."
+  },
+  {
+   "n": 4,
+   "texto": "O canal de consulta sobre conflito de interesses e o canal de denúncias são a mesma coisa."
+  },
+  {
+   "n": 5,
+   "texto": "Basta a alta administração declarar compromisso com a integridade, sem demonstrá-lo no comportamento."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Mede-se pela prática cotidiana e pelos resultados, não pela pilha de normas."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O decreto inclui também a remediação dos danos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Elas pressionam o gestor a contornar regras para alcançar o número."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A consulta previne, tira a dúvida antes de agir; a denúncia relata irregularidade já ocorrida."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "O que conta é a demonstração cotidiana, o exemplo de cima para baixo."
+  }
+ ]
+}

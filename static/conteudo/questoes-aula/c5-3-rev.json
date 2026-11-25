@@ -1,0 +1,125 @@
+{
+ "aula": "C5·3",
+ "titulo": "3. Evidência e conclusão · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A evidência testemunhal é a mais persuasiva."
+  },
+  {
+   "n": 2,
+   "texto": "Informações enviadas pela própria unidade auditada são mais convincentes que as obtidas de terceiros."
+  },
+  {
+   "n": 3,
+   "texto": "Grande quantidade de evidência de baixa confiabilidade torna o achado adequado."
+  },
+  {
+   "n": 4,
+   "texto": "Mesmo com risco elevado, pouca evidência de alta qualidade sempre basta e dispensa buscar mais."
+  },
+  {
+   "n": 5,
+   "texto": "O achado de auditoria registra apenas não conformidades."
+  },
+  {
+   "n": 6,
+   "texto": "No achado de auditoria, a causa é o porquê da ocorrência, e o efeito é a sua consequência."
+  },
+  {
+   "n": 7,
+   "texto": "Limitação que impediu examinar parte do escopo pode ficar fora do relatório."
+  },
+  {
+   "n": 8,
+   "texto": "A recusa da administração em fornecer informação solicitada não constitui evidência."
+  },
+  {
+   "n": 9,
+   "texto": "O alerta gerado por uma trilha de auditoria já é achado comprovado."
+  },
+  {
+   "n": 10,
+   "texto": "O indício, ou evidência circunstancial, basta para sustentar um achado."
+  },
+  {
+   "n": 11,
+   "texto": "Diante de indício de fraude, o auditor deve iniciar sozinho a apuração."
+  },
+  {
+   "n": 12,
+   "texto": "O percentual apurado em amostra selecionada por critérios de risco pode ser generalizado no relatório para o conjunto."
+  },
+  {
+   "n": 13,
+   "texto": "Em relatório de auditoria, mesmo de apuração de fraude, o auditor pode qualificar como crime a conduta de um agente."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É a menos persuasiva; as evidências física e documental valem mais."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Fonte externa e independente é mais confiável que a autoinformação do auditado."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Quantidade não compensa baixa qualidade: o achado exige evidência apropriada."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Risco maior tende a exigir mais evidência, ainda que de boa qualidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Pode registrar também conformidades e boas práticas."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "A pegadinha troca um pelo outro."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Deve constar do relatório: o leitor precisa saber o que não foi coberto."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Em alguns casos, a própria recusa é evidência registrável."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Alerta é indicativo; vira achado só depois de verificado."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O achado exige evidência suficiente e apropriada; indício orienta a busca, não conclui."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Ele comunica e encaminha aos órgãos competentes; a apuração tem rito próprio."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Amostra por risco não é estatística: o resultado vale para o examinado."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O relatório descreve fatos e aponta indícios; a tipificação da conduta cabe ao juízo competente."
+  }
+ ]
+}

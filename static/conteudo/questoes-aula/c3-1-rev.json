@@ -1,0 +1,98 @@
+{
+ "aula": "C3·1",
+ "titulo": "1. Decisão administrativa · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A decisão de recursos administrativos pode ser objeto de delegação."
+  },
+  {
+   "n": 2,
+   "texto": "A revogação do ato administrativo produz efeitos retroativos."
+  },
+  {
+   "n": 3,
+   "texto": "O Judiciário pode revogar ato do Executivo por motivo de conveniência."
+  },
+  {
+   "n": 4,
+   "texto": "A revisão do processo administrativo sancionador pode agravar a sanção do recorrente."
+  },
+  {
+   "n": 5,
+   "texto": "A LINDB proíbe decidir com base em valores jurídicos abstratos."
+  },
+  {
+   "n": 6,
+   "texto": "Pela LINDB, o agente responde pessoalmente por decisões ou opiniões técnicas proferidas com culpa leve."
+  },
+  {
+   "n": 7,
+   "texto": "O órgão de controle pode substituir a escolha discricionária legítima do gestor pela sua própria."
+  },
+  {
+   "n": 8,
+   "texto": "Somente o Executivo pratica ato administrativo."
+  },
+  {
+   "n": 9,
+   "texto": "O nexo causal entre a conduta do agente e o dano basta para responsabilizá-lo pessoalmente."
+  },
+  {
+   "n": 10,
+   "texto": "O valor expressivo do dano caracteriza, por si só, o erro grosseiro."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É matéria indelegável (Lei 9.784/1999, art. 13)."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A revogação é ex nunc, vale dali em diante; quem produz efeitos retroativos é a anulação do ato ilegal."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O Judiciário só anula por ilegalidade; revogar por conveniência é competência da própria Administração."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É vedado agravar a sanção na revisão pedida pelo interessado (Lei 9.784/1999, art. 65, parágrafo único)."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "O que a LINDB veda é decidir sem considerar as consequências práticas da decisão."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Só há responsabilidade pessoal por dolo ou erro grosseiro (art. 28); atenção à pegadinha inversa: o Decreto 9.830/2019, art. 17, mantém as sanções disciplinares, inclusive por culpa leve."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O Decreto 9.830/2019, art. 13, veda essa substituição."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Legislativo e Judiciário também praticam atos administrativos ao exercer função administrativa; sanção e veto a projeto de lei são atos políticos."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Exige-se dolo ou erro grosseiro (Decreto 9.830/2019, art. 12, § 3º)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O valor do dano não caracteriza o erro grosseiro (Decreto 9.830/2019, art. 12, § 5º)."
+  }
+ ]
+}

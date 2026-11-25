@@ -1,0 +1,170 @@
+{
+ "aula": "E2·6",
+ "titulo": "6. Compartilhamento e proteção · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A compatibilidade do tratamento com as finalidades informadas ao titular é o princípio da finalidade."
+  },
+  {
+   "n": 2,
+   "texto": "O princípio da necessidade permite coletar dados para usos futuros ainda não definidos."
+  },
+  {
+   "n": 3,
+   "texto": "O uso posterior dos dados para finalidade diferente é livre, uma vez que eles já estão na base do controlador."
+  },
+  {
+   "n": 4,
+   "texto": "Copiar a base de produção, com dados reais, para o ambiente de testes é boa prática, por dar realismo aos testes."
+  },
+  {
+   "n": 5,
+   "texto": "O menor privilégio se cumpre dando acesso amplo à equipe de dados, desde que todos assinem termo de sigilo."
+  },
+  {
+   "n": 6,
+   "texto": "As medidas de segurança da LGPD são apenas técnicas, e só se aplicam depois que o sistema entra em operação."
+  },
+  {
+   "n": 7,
+   "texto": "Terminado o tratamento, a eliminação dos dados é obrigatória em todos os casos, sem hipóteses de conservação."
+  },
+  {
+   "n": 8,
+   "texto": "O dado conservado para uso exclusivo do controlador, após o término do tratamento, pode permanecer identificado."
+  },
+  {
+   "n": 9,
+   "texto": "Bloqueio e eliminação são sinônimos na LGPD."
+  },
+  {
+   "n": 10,
+   "texto": "O dado pseudonimizado deixa de ser dado pessoal."
+  },
+  {
+   "n": 11,
+   "texto": "O dado anonimizado nunca volta a ser considerado dado pessoal."
+  },
+  {
+   "n": 12,
+   "texto": "Retirar nome e CPF, ou aplicar hash sem chave ao CPF, basta para anonimizar a base."
+  },
+  {
+   "n": 13,
+   "texto": "A licença de dados abertos pode restringir a reutilização comercial ou exigir autorização prévia."
+  },
+  {
+   "n": 14,
+   "texto": "O acesso por todos os órgãos a dado sigiloso, para políticas públicas, é compartilhamento da categoria específica."
+  },
+  {
+   "n": 15,
+   "texto": "O Poder Público pode transferir livremente a entidades privadas os dados pessoais das suas bases."
+  },
+  {
+   "n": 16,
+   "texto": "CPF e data de nascimento são dados pessoais sensíveis."
+  },
+  {
+   "n": 17,
+   "texto": "O dado sensível só pode ser tratado com consentimento do titular."
+  },
+  {
+   "n": 18,
+   "texto": "O encarregado e o operador são a mesma figura, a LGPD não alcança o tratamento para investigação penal, e admite-se consentimento tácito."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Essa compatibilidade é a adequação; a finalidade é o propósito específico do tratamento."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A necessidade limita a coleta ao mínimo exigido para a finalidade declarada."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Exige nova base legal e avaliação de compatibilidade com a finalidade original."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Dado real em teste amplia a exposição; usa-se dado sintético ou anonimizado."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Menor privilégio é limitar cada acesso ao estritamente necessário para a função."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "São técnicas e administrativas, e valem desde a fase de desenho do tratamento."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A lei prevê hipóteses de conservação, como cumprimento de obrigação legal."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A conservação nessa hipótese é com dado anonimizado, sempre que possível."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Bloqueio é suspensão temporária de operações, com guarda do dado; eliminação é definitiva. Excluir o arquivo também não é o mesmo que sanitizar a mídia."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ele segue sendo pessoal: a reidentificação é possível com informação adicional."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Volta, se a anonimização puder ser revertida com esforços razoáveis."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A combinação de outros atributos ainda reidentifica; hash sem chave é pseudonimização."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Dados abertos permitem o uso comercial e a redistribuição sem autorização prévia."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Essa categoria é a restrita; a pegadinha troca os níveis."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "A transferência depende de hipótese legal de compartilhamento, não é livre."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "São dados pessoais comuns; os sensíveis são os do art. 5º, II."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "O art. 11 traz outras bases legais além do consentimento."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Nenhuma das três: figuras distintas, a lei alcança a investigação penal nas suas hipóteses, e o consentimento é manifestado por declaração expressa."
+  }
+ ]
+}

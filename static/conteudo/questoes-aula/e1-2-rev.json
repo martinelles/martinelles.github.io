@@ -1,0 +1,296 @@
+{
+ "aula": "E1·2",
+ "titulo": "2. Probabilidade e inferência · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Eventos mutuamente exclusivos, com probabilidades positivas, são independentes."
+  },
+  {
+   "n": 2,
+   "texto": "Conhecida P(A|B) diferente de P(A), a interseção P(A∩B) é o produto P(A)·P(B)."
+  },
+  {
+   "n": 3,
+   "texto": "A probabilidade da união é P(A) + P(B) − P(A∩B)."
+  },
+  {
+   "n": 4,
+   "texto": "A sensibilidade de um alerta é a probabilidade de haver irregularidade dado que houve alerta."
+  },
+  {
+   "n": 5,
+   "texto": "Sorteios sem reposição são independentes entre si."
+  },
+  {
+   "n": 6,
+   "texto": "A variância da distribuição de Poisson é o quadrado da sua média."
+  },
+  {
+   "n": 7,
+   "texto": "A distribuição t tem caudas mais leves que a normal, e dela se afasta quando os graus de liberdade crescem."
+  },
+  {
+   "n": 8,
+   "texto": "A distribuição binomial aplica-se a retiradas sem reposição de um lote pequeno."
+  },
+  {
+   "n": 9,
+   "texto": "Na distribuição normal, cerca de 95% dos valores estão a até um desvio padrão da média."
+  },
+  {
+   "n": 10,
+   "texto": "A amostragem por conveniência ou por julgamento permite calcular a margem de erro da estimativa."
+  },
+  {
+   "n": 11,
+   "texto": "A amostragem estratificada sorteia grupos inteiros, e a de conglomerados sorteia dentro de todos os estratos."
+  },
+  {
+   "n": 12,
+   "texto": "Para reduzir o erro amostral pela metade, basta dobrar o tamanho da amostra."
+  },
+  {
+   "n": 13,
+   "texto": "Aumentar o tamanho da amostra elimina os erros não amostrais."
+  },
+  {
+   "n": 14,
+   "texto": "Depois de calculado um intervalo de confiança de 95%, há 95% de probabilidade de a média populacional estar dentro dele."
+  },
+  {
+   "n": 15,
+   "texto": "Com os mesmos dados, o intervalo de confiança de 99% é mais estreito que o de 95%."
+  },
+  {
+   "n": 16,
+   "texto": "Com variância populacional desconhecida e amostra pequena, usa-se a distribuição normal para a média."
+  },
+  {
+   "n": 17,
+   "texto": "A variância amostral calculada com divisor n é estimador não viesado da variância populacional."
+  },
+  {
+   "n": 18,
+   "texto": "O Teorema Central do Limite torna normal a distribuição dos dados da amostra."
+  },
+  {
+   "n": 19,
+   "texto": "O p-valor é a probabilidade de a hipótese nula ser verdadeira."
+  },
+  {
+   "n": 20,
+   "texto": "Não rejeitar a hipótese nula prova que ela é verdadeira."
+  },
+  {
+   "n": 21,
+   "texto": "Rejeita-se a hipótese nula quando o p-valor é maior que o nível de significância."
+  },
+  {
+   "n": 22,
+   "texto": "Se o intervalo de 95% para a diferença de médias contém o zero, a diferença é significativa a 5%."
+  },
+  {
+   "n": 23,
+   "texto": "Para dados pareados, como as mesmas unidades medidas antes e depois, usa-se o teste para amostras independentes."
+  },
+  {
+   "n": 24,
+   "texto": "Aumentar o nível de significância reduz a probabilidade de erro do tipo I."
+  },
+  {
+   "n": 25,
+   "texto": "Fixado o nível de significância, aumentar o tamanho da amostra aumenta a probabilidade de erro do tipo II."
+  },
+  {
+   "n": 26,
+   "texto": "Ao testar 20 indicadores a 5%, a chance de algum falso positivo continua sendo 5%."
+  },
+  {
+   "n": 27,
+   "texto": "Observações agrupadas, como processos de um mesmo órgão, podem ser tratadas como independentes no cálculo do erro padrão."
+  },
+  {
+   "n": 28,
+   "texto": "O intervalo de confiança incorpora os erros de cobertura e de medida da base."
+  },
+  {
+   "n": 29,
+   "texto": "Um efeito com p-valor muito pequeno é, por isso, um efeito relevante."
+  },
+  {
+   "n": 30,
+   "texto": "Teste não significativo em amostra pequena prova que não há efeito."
+  },
+  {
+   "n": 31,
+   "texto": "O p-valor mede o tamanho ou a importância do efeito."
+  },
+  {
+   "n": 32,
+   "texto": "Para o mesmo desvio observado em relação à hipótese nula, o resultado do teste não depende do tamanho da amostra."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Se são exclusivos, a interseção é zero; se são independentes, a interseção é o produto das probabilidades, maior que zero."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O produto vale só para eventos independentes; aqui a interseção é P(A|B)·P(B)."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "A pegadinha esquece de subtrair a interseção."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Sensibilidade é a probabilidade de alerta dado a irregularidade; a outra é o valor preditivo positivo."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Cada retirada muda as probabilidades das seguintes."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Na Poisson, variância e média são iguais."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "As caudas são mais pesadas, e a t se aproxima da normal quando os graus de liberdade crescem."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Sem reposição, a probabilidade muda a cada retirada; o modelo é o hipergeométrico."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A um desvio padrão estão cerca de 68%; 95% é a até dois."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Sem sorteio aleatório, não há base para margem de erro."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É o contrário: a estratificada sorteia dentro de cada estrato; a de conglomerados sorteia grupos inteiros."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O erro cai com a raiz de n: é preciso quadruplicar a amostra."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Erros de cobertura e de medida não dependem do tamanho da amostra."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "O parâmetro é fixo; os 95% dizem respeito ao procedimento em amostras repetidas."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Mais confiança exige intervalo mais largo."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Usa-se a distribuição t de Student."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "O estimador não viesado usa divisor n menos 1."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "O TCL trata da distribuição da média amostral, não dos dados individuais."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "É a probabilidade de se observar resultado tão ou mais extremo que o observado, se a nula for verdadeira."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Só significa que não houve evidência suficiente para rejeitá-la."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Rejeita-se quando o p-valor é menor que o nível de significância."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Contém zero: a diferença não é significativa a 5%."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "O pareamento pede teste para amostras pareadas."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "O nível de significância é justamente a probabilidade de erro do tipo I; aumentá-lo aumenta esse erro."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Amostra maior aumenta o poder do teste: o erro do tipo II diminui."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "Testes múltiplos inflacionam a chance de pelo menos um falso positivo."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "A correlação dentro do grupo viola a independência e subestima o erro padrão."
+  },
+  {
+   "n": 28,
+   "r": "E",
+   "comentario": "O intervalo cobre apenas o erro amostral."
+  },
+  {
+   "n": 29,
+   "r": "E",
+   "comentario": "p pequeno indica evidência contra a nula, não magnitude; relevância mede-se pelo tamanho do efeito."
+  },
+  {
+   "n": 30,
+   "r": "E",
+   "comentario": "Amostra pequena tem pouco poder; ausência de evidência não é evidência de ausência."
+  },
+  {
+   "n": 31,
+   "r": "E",
+   "comentario": "Mede a força da evidência contra a hipótese nula; o tamanho do efeito é outra medida."
+  },
+  {
+   "n": 32,
+   "r": "E",
+   "comentario": "Depende: quanto maior a amostra, menor o desvio necessário para rejeitar a nula."
+  }
+ ]
+}

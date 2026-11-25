@@ -1,0 +1,134 @@
+{
+ "aula": "B2·2",
+ "titulo": "2. Formação social e cidadania no Brasil · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Florestan Fernandes defendia a tese da democracia racial brasileira."
+  },
+  {
+   "n": 2,
+   "texto": "O “homem cordial” brasileiro é alguém polido e gentil."
+  },
+  {
+   "n": 3,
+   "texto": "A abolição de 1888 veio acompanhada de políticas de integração dos libertos."
+  },
+  {
+   "n": 4,
+   "texto": "No Brasil, os direitos seguiram a sequência de Marshall: civis, depois políticos, depois sociais."
+  },
+  {
+   "n": 5,
+   "texto": "O conceito de cidadania regulada pertence a Marshall."
+  },
+  {
+   "n": 6,
+   "texto": "A cidadania regulada excluía os trabalhadores rurais e domésticos."
+  },
+  {
+   "n": 7,
+   "texto": "Cidadania é a participação do cidadão na fiscalização, no monitoramento e no controle da administração."
+  },
+  {
+   "n": 8,
+   "texto": "O Estado oligárquico e patrimonial aplicava critérios impessoais e se preocupava com a eficiência da máquina."
+  },
+  {
+   "n": 9,
+   "texto": "O racismo institucional depende de intenção discriminatória de algum agente."
+  },
+  {
+   "n": 10,
+   "texto": "O racismo é crime afiançável e prescritível."
+  },
+  {
+   "n": 11,
+   "texto": "Ações afirmativas são adotadas apenas pelo poder público."
+  },
+  {
+   "n": 12,
+   "texto": "Ações afirmativas se resumem a cotas em universidades."
+  },
+  {
+   "n": 13,
+   "texto": "Igualdade formal e igualdade material são conceitos equivalentes."
+  },
+  {
+   "n": 14,
+   "texto": "Ao Brasil cabe o preconceito de marca, e aos EUA, o de origem."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Ele a critica: a integração do negro foi competitiva e subordinada."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A cordialidade é a pessoalidade sobrepondo-se às regras impessoais."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Veio sozinha, sem política de terra, trabalho ou educação para os libertos."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A ordem brasileira não seguiu Marshall: direitos sociais vieram antes da plena cidadania civil e política."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É de Wanderley Guilherme dos Santos."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Ficaram de fora do sistema sindical que amarrava direitos à carteira profissional."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Essa é a definição de controle social, uma das formas de exercer a cidadania."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Os critérios eram pessoais, baseados em vínculos e favorecimento."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ele mora nas rotinas e regras, produz desigualdade sem intenção individual."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É inafiançável e imprescritível (CF, art. 5º, XLII)."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O Estatuto inclui a iniciativa privada."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Incluem bolsas, apoio à permanência e incentivos às empresas."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Formal trata todos igualmente perante a lei; material trata desigualmente os desiguais para reduzir a desigualdade."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "É o contrário, segundo Oracy Nogueira: no Brasil pesa a origem, nos EUA a marca."
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "aula": "B1·8",
+ "titulo": "8. Consequências e respostas à corrupção · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Os efeitos da corrupção se limitam ao prejuízo financeiro direto aos cofres públicos."
+  },
+  {
+   "n": 2,
+   "texto": "Por terem melhor relação custo-benefício, os controles preventivos tornam dispensáveis os detectivos."
+  },
+  {
+   "n": 3,
+   "texto": "O combate à corrupção é atribuição exclusiva dos órgãos de controle."
+  },
+  {
+   "n": 4,
+   "texto": "Tribunal de Contas e controle interno exercem controle social."
+  },
+  {
+   "n": 5,
+   "texto": "Qualquer ampliação de controles reduz necessariamente a corrupção, sem efeitos colaterais."
+  },
+  {
+   "n": 6,
+   "texto": "Diante de indícios de corrupção, suspender imediatamente o serviço essencial é sempre a resposta adequada."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Ela corrói confiança, distorce políticas, afasta investimento e desiguala."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Eles se complementam: o que o preventivo não barra, o detectivo acha."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "É dever de toda a organização: gestores, servidores e sociedade."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Exercem controle institucional, a accountability horizontal; o social é do cidadão, da sociedade civil e da imprensa."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Controle demais trava a máquina e desloca o problema; a dosagem importa."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A resposta deve calibrar a sanção sem punir o cidadão que depende do serviço."
+  }
+ ]
+}

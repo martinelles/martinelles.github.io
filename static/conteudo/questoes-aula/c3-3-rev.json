@@ -1,0 +1,152 @@
+{
+ "aula": "C3·3",
+ "titulo": "3. Funções de controle e melhoria da gestão · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A CGU é órgão auxiliar do Congresso Nacional no exercício do controle externo."
+  },
+  {
+   "n": 2,
+   "texto": "Apenas o Poder Executivo deve manter sistema de controle interno."
+  },
+  {
+   "n": 3,
+   "texto": "O controle interno avalia a aplicação de recursos públicos repassados a entidades privadas."
+  },
+  {
+   "n": 4,
+   "texto": "O controle exercido por órgão superior sobre órgão inferior da mesma estrutura é controle externo."
+  },
+  {
+   "n": 5,
+   "texto": "O controle de ofício é uma classificação quanto ao momento do controle."
+  },
+  {
+   "n": 6,
+   "texto": "O sistema de controle interno da União alcança verba federal transferida a estados e municípios."
+  },
+  {
+   "n": 7,
+   "texto": "O controle interno se limita ao exame da legalidade dos atos de gestão."
+  },
+  {
+   "n": 8,
+   "texto": "A função de prevenção é estranha ao controle interno."
+  },
+  {
+   "n": 9,
+   "texto": "O TCU julga as contas do Presidente da República."
+  },
+  {
+   "n": 10,
+   "texto": "A omissão do responsável pelo controle interno em comunicar irregularidade ao TCU não gera consequência."
+  },
+  {
+   "n": 11,
+   "texto": "O sistema de controle interno é subordinado ao TCU."
+  },
+  {
+   "n": 12,
+   "texto": "Cabe ao TCU sustar contratos e atos normativos que exorbitem do poder regulamentar."
+  },
+  {
+   "n": 13,
+   "texto": "A aposentadoria de servidor só produz efeitos depois do registro no TCU."
+  },
+  {
+   "n": 14,
+   "texto": "Recebida informação protegida por sigilo fiscal, a CGU pode divulgá-la livremente em relatório."
+  },
+  {
+   "n": 15,
+   "texto": "Prova emprestada de processo penal não pode ser usada em processo administrativo disciplinar, em nenhuma hipótese."
+  },
+  {
+   "n": 16,
+   "texto": "A auditoria de avaliação pode resultar diretamente em penalidade disciplinar."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A CGU é órgão do Executivo, encarregado do controle interno do Poder."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Os três Poderes devem mantê-lo, de forma integrada (art. 74 da Constituição)."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "É o art. 74, II: o acompanhamento alcança a aplicação de recursos por entidades privadas."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É controle interno: o controle hierárquico fica dentro do mesmo Poder."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É quanto à iniciativa; quanto ao momento, o controle é prévio, concomitante ou posterior."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "O recurso federal é fiscalizado onde quer que seja aplicado, inclusive por outros entes."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Avalia também o cumprimento de programas e o desempenho, com economia e eficiência (art. 74)."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O controle interno também previne desvios e orienta a melhoria da gestão; não só verifica depois."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O TCU as aprecia mediante parecer prévio; quem julga é o Congresso Nacional (art. 71, I)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Gera responsabilidade solidária (art. 74, § 1º)."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A relação é de apoio e cooperação; não há subordinação."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O contrato é sustado pelo Congresso (art. 71, § 1º); o ato normativo exorbitante, idem (art. 49, V); ao TCU cabe sustar o ato ilegal do art. 71, X."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "A aposentadoria é eficaz desde a publicação do ato; o registro do TCU vem depois."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "O sigilo fiscal se mantém; a divulgação não é livre."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Pode ser usada, assegurados o contraditório e a ampla defesa."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "A auditoria recomenda melhorias e aponta o que constatou; penalidade exige processo próprio."
+  }
+ ]
+}

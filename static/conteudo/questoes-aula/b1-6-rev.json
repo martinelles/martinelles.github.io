@@ -1,0 +1,80 @@
+{
+ "aula": "B1·6",
+ "titulo": "6. Corrupção como fenômeno político e social · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A corrupção só ocorre quando há ganho financeiro para o próprio agente público."
+  },
+  {
+   "n": 2,
+   "texto": "A corrupção envolve exclusivamente agentes públicos."
+  },
+  {
+   "n": 3,
+   "texto": "A Transparência Internacional classifica a corrupção em grande, pequena e política."
+  },
+  {
+   "n": 4,
+   "texto": "Toda falha de gestão é indício de corrupção."
+  },
+  {
+   "n": 5,
+   "texto": "O conflito de interesses só se configura quando há efetivo recebimento de vantagem."
+  },
+  {
+   "n": 6,
+   "texto": "Clientelismo e patronagem não têm relação entre si."
+  },
+  {
+   "n": 7,
+   "texto": "A Súmula Vinculante 13 só alcança parentes da autoridade nomeante."
+  },
+  {
+   "n": 8,
+   "texto": "O corporativismo é a troca pessoal e informal de favores."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A vantagem imprópria pode ser de qualquer natureza e beneficiar terceiro."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O particular corruptor também participa; há até corrupção entre privados."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "A terceira categoria é a política; a corrupção sistêmica é conceito à parte, do Referencial do TCU."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Há falha sem intenção e sem vantagem; corrupção exige desvio deliberado."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Basta a situação em que o interesse pessoal pode influenciar a decisão."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A distribuição de cargos públicos para garantir apoio político é chamada de clientelismo ou patronagem."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Alcança também parentes de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Essa troca é o clientelismo; o corporativismo organiza grupos de interesse que pactuam com o Estado."
+  }
+ ]
+}

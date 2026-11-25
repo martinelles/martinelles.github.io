@@ -1,0 +1,206 @@
+{
+ "aula": "C1·2",
+ "titulo": "2. Riscos e controles essenciais · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Os controles internos dão segurança absoluta quanto ao cumprimento dos objetivos da organização."
+  },
+  {
+   "n": 2,
+   "texto": "Na descrição de um risco, a causa pode ser trocada pela consequência, pois ambas se referem ao mesmo evento."
+  },
+  {
+   "n": 3,
+   "texto": "O risco é medido apenas pela probabilidade de ocorrência do evento."
+  },
+  {
+   "n": 4,
+   "texto": "Os controles internos visam somente à eficiência das operações."
+  },
+  {
+   "n": 5,
+   "texto": "A gestão de riscos substitui os controles internos e garante o cumprimento dos objetivos."
+  },
+  {
+   "n": 6,
+   "texto": "Na ISO 31000, controle é a medida que elimina o risco."
+  },
+  {
+   "n": 7,
+   "texto": "Para o COSO, o controle interno é um fim em si mesmo e assegura a governança."
+  },
+  {
+   "n": 8,
+   "texto": "O gerenciamento de riscos corporativos do COSO ERM restringe-se aos níveis tático e operacional e dá garantia absoluta."
+  },
+  {
+   "n": 9,
+   "texto": "A conciliação bancária é um controle detectivo."
+  },
+  {
+   "n": 10,
+   "texto": "Controle detectivo reduz a probabilidade de o evento ocorrer."
+  },
+  {
+   "n": 11,
+   "texto": "Na IN Conjunta MP/CGU 1/2016, a análise de probabilidade e impacto é componente do ambiente de controle, e as revisões de desempenho são da avaliação de riscos."
+  },
+  {
+   "n": 12,
+   "texto": "Na metodologia da CGU, os controles de atenuação e recuperação atuam sobre as causas do risco."
+  },
+  {
+   "n": 13,
+   "texto": "O risco residual é o risco antes da implementação dos controles."
+  },
+  {
+   "n": 14,
+   "texto": "Os controles internos devem eliminar totalmente o risco residual."
+  },
+  {
+   "n": 15,
+   "texto": "O grau de risco que a organização está disposta a aceitar para atingir seus objetivos é o apetite a risco."
+  },
+  {
+   "n": 16,
+   "texto": "Eventos externos, julgamento falho, conluio e descumprimento de requisitos legais são limitações inerentes dos controles internos."
+  },
+  {
+   "n": 17,
+   "texto": "A segregação de funções consiste em concentrar a autorização e a execução no mesmo agente, para agilizar o processo."
+  },
+  {
+   "n": 18,
+   "texto": "A operação dos controles internos é responsabilidade da auditoria interna."
+  },
+  {
+   "n": 19,
+   "texto": "A IN Conjunta MP/CGU 1/2016 não fixa escala de 1 a 5 para probabilidade e impacto."
+  },
+  {
+   "n": 20,
+   "texto": "No método do TCU, o risco residual é o risco inerente multiplicado pelo nível de confiança do controle."
+  },
+  {
+   "n": 21,
+   "texto": "Um controle que não guarda relação com a causa do risco descrita no caso pode ser considerado adequado."
+  },
+  {
+   "n": 22,
+   "texto": "Quanto mais etapas de aprovação, melhor o controle."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Dão segurança razoável, não absoluta; nenhuma estrutura de controle elimina toda a incerteza."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Causa e consequência são elementos distintos: a origem do evento e o seu efeito; a troca muda o risco descrito."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Mede-se pela combinação de probabilidade e impacto."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Os objetivos incluem também a informação íntegra e confiável e a conformidade com leis e regulamentos (IN Conjunta MP/CGU 1/2016, art. 10, III e IV)."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Os controles são o meio de tratar o risco, e o gerenciamento dá razoável certeza, não garantia (IN, art. 2º, V e VII)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Controle é a medida que mantém e/ou modifica o risco; risco não se elimina."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "É meio para um fim e dá segurança razoável, não assegura a governança."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Abrange toda a organização, do estratégico ao operacional, e dá garantia razoável."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Ela identifica o que já aconteceu; a pegadinha a classifica como preventivo."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Quem reduz a probabilidade é o preventivo; o detectivo identifica o evento depois de ocorrido."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A análise de probabilidade e impacto é avaliação de risco (art. 11, II); controles físicos e revisões de desempenho são atividades de controle (art. 11, III)."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Agem depois da ocorrência do evento, sobre as consequências."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Antes dos controles é o risco inerente; o residual é o que permanece depois deles."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "O objetivo é reduzir o risco ao nível aceito, não eliminá-lo por completo."
+  },
+  {
+   "n": 15,
+   "r": "C",
+   "comentario": "A pegadinha chama isso de tolerância; a tolerância é a variação aceitável em relação a um objetivo."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Eventos externos, julgamento falho e conluio são limitações inerentes; o descumprimento de requisitos legais pode ser prevenido e detectado pelos controles."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Consiste em separar funções incompatíveis; a concentração facilita erro e fraude."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "A auditoria avalia; quem opera os controles é a primeira linha, a dos próprios processos."
+  },
+  {
+   "n": 19,
+   "r": "C",
+   "comentario": "A IN não fixa escala; a escala de 1 a 5 é da metodologia da CGU."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Multiplica-se pelo risco de controle, que é 1 menos o nível de confiança (NC)."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Controle adequado ataca a causa do risco; sem essa correspondência, ele não endereça o problema."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Mais etapas podem só engrossar a burocracia; a adequação do controle é que importa, e ela depende da causa do risco."
+  }
+ ]
+}

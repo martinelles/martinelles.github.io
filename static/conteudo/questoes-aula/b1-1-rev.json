@@ -1,0 +1,89 @@
+{
+ "aula": "B1·1",
+ "titulo": "1. Estado e legitimidade · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Para Weber, legitimidade se confunde com legalidade."
+  },
+  {
+   "n": 2,
+   "texto": "A burocracia weberiana se associa à dominação carismática ou à tradicional."
+  },
+  {
+   "n": 3,
+   "texto": "Os três tipos de dominação aparecem puros, na forma exata, na realidade."
+  },
+  {
+   "n": 4,
+   "texto": "Quem fixa as diretrizes políticas do Estado é a Administração Pública."
+  },
+  {
+   "n": 5,
+   "texto": "O Brasil adota o contencioso administrativo, em que a Administração decide com definitividade."
+  },
+  {
+   "n": 6,
+   "texto": "O pluralismo político é objetivo da República brasileira."
+  },
+  {
+   "n": 7,
+   "texto": "O interesse secundário (do Estado) prevalece sobre o interesse primário (do cidadão)."
+  },
+  {
+   "n": 8,
+   "texto": "Pelo pluralismo, um grupo de elite domina permanentemente a decisão política."
+  },
+  {
+   "n": 9,
+   "texto": "O imposto progressivo e a transferência de renda aos mais pobres são políticas redistributivas."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A dominação racional-legal é apenas um dos tipos legítimos, ao lado da tradicional e da carismática."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Associa-se à dominação racional-legal, base em regras impessoais."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "São tipos ideais: a realidade mistura traços dos três."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É o governo, no exercício da direção política; a Administração executa."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Vige a jurisdição una: só o Judiciário decide com definitividade (CF, art. 5º, XXXV)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É fundamento da República (CF, art. 1º, V)."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O secundário só vale quando coincide com o primário."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Essa é a visão elitista, oposta ao pluralismo."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "Pelo critério de Lowi, tiram de um grupo identificável para dar a outro; na política distributiva o custo se dilui e não há perdedor identificável, como nas emendas para obras locais."
+  }
+ ]
+}

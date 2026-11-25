@@ -1,0 +1,62 @@
+{
+ "aula": "C3·5",
+ "titulo": "5. Proteção e encaminhamento · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O acolhimento da vítima só pode ser feito depois do registro formal da denúncia."
+  },
+  {
+   "n": 2,
+   "texto": "O afastamento preventivo do servidor suspende sua remuneração."
+  },
+  {
+   "n": 3,
+   "texto": "As medidas de proteção independem da conclusão do processo disciplinar."
+  },
+  {
+   "n": 4,
+   "texto": "Pelo entendimento da CRG adotado no Plano Setorial da CGU, a conduta enquadrada como assédio ou discriminação admite advertência ou suspensão, conforme a dosimetria."
+  },
+  {
+   "n": 5,
+   "texto": "O acolhimento da vítima equivale à abertura de processo administrativo disciplinar."
+  },
+  {
+   "n": 6,
+   "texto": "A conclusão sancionadora pode basear-se apenas no relato da denúncia, sem instrução."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O acolhimento é imediato e independe do registro; proteger não espera burocracia."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O afastamento preventivo dura até 60 dias, prorrogáveis por mais 60, e mantém a remuneração."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "A medida acautelatória é ato de gestão, tomada com a anuência dos afetados; proteger não é punir nem presumir culpa."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É infração grave, com pena expulsiva obrigatória; advertência ou suspensão cabe às importunações e atos impróprios que não configurem assédio."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "São atos distintos: o acolhimento recebe e protege; o processo apura responsabilidades."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Exige instrução com provas, contraditório e ampla defesa, em decisão motivada."
+  }
+ ]
+}

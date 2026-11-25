@@ -1,0 +1,188 @@
+{
+ "aula": "E3·2",
+ "titulo": "2. Validação e generalização · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O conjunto de teste pode ser usado para ajustar hiperparâmetros sem prejuízo da estimativa de desempenho."
+  },
+  {
+   "n": 2,
+   "texto": "Avaliar o modelo nos próprios dados de treino mede sua capacidade de generalização."
+  },
+  {
+   "n": 3,
+   "texto": "A validação estima o desempenho final, e o teste serve para escolher hiperparâmetros."
+  },
+  {
+   "n": 4,
+   "texto": "No k-fold, k menos 1 partes vão para o teste e uma só para o treino."
+  },
+  {
+   "n": 5,
+   "texto": "No k-fold, um mesmo registro é usado mais de uma vez como teste."
+  },
+  {
+   "n": 6,
+   "texto": "O k-fold aumenta a variabilidade da estimativa, em relação a uma única divisão em treino e teste."
+  },
+  {
+   "n": 7,
+   "texto": "A validação cruzada com dados embaralhados estima bem o desempenho de um modelo que vai prever períodos futuros."
+  },
+  {
+   "n": 8,
+   "texto": "Padronizar ou selecionar atributos com a base inteira, antes da divisão em treino e teste, não afeta a estimativa de desempenho."
+  },
+  {
+   "n": 9,
+   "texto": "Um atributo altamente preditivo deve ser mantido no modelo, mesmo que só seja conhecido depois do desfecho que se quer prever."
+  },
+  {
+   "n": 10,
+   "texto": "O balanceamento de classes deve ser aplicado à base inteira, antes da validação cruzada."
+  },
+  {
+   "n": 11,
+   "texto": "Alto viés se associa ao sobreajuste, e alta variância, ao subajuste."
+  },
+  {
+   "n": 12,
+   "texto": "Aumentar a complexidade do modelo reduz ao mesmo tempo o viés e a variância."
+  },
+  {
+   "n": 13,
+   "texto": "Coletar mais dados de treino resolve um modelo com alto viés."
+  },
+  {
+   "n": 14,
+   "texto": "O bagging reduz principalmente o viés, e o boosting, a variância."
+  },
+  {
+   "n": 15,
+   "texto": "Um único resultado de teste, por ser medido em dados não vistos, dispensa a avaliação da sua variabilidade."
+  },
+  {
+   "n": 16,
+   "texto": "O modelo validado mantém o desempenho mesmo que a relação entre atributos e alvo mude depois da implantação."
+  },
+  {
+   "n": 17,
+   "texto": "Árvores de decisão são estáveis diante de pequenas mudanças nos dados de treino."
+  },
+  {
+   "n": 18,
+   "texto": "Deve-se escolher sempre o modelo de maior métrica média, ainda que a diferença seja menor que a variação entre rodadas."
+  },
+  {
+   "n": 19,
+   "texto": "Modelos avaliados em partições diferentes podem ser comparados diretamente pela média das métricas."
+  },
+  {
+   "n": 20,
+   "texto": "A validação cruzada com divisão aleatória de contratos estima bem o desempenho para fornecedores que nunca apareceram no treino."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Hiperparâmetros ajustam-se na validação; o teste fica intocado até a estimativa final."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Mede memorização; generalização se avalia em dados não vistos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Os papéis estão trocados: a validação escolhe hiperparâmetros, o teste estima o desempenho final."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É o contrário: k menos 1 partes treinam e uma é teste."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Cada registro é teste exatamente uma vez, nas k rodadas."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Ele reduz a variabilidade: a estimativa é a média de k rodadas."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O embaralhamento deixa o futuro vazar para o treino; séries temporais pedem divisão temporal."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Afeta: é vazamento de informação do teste para o treino."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "É vazamento do alvo: no mundo real, o valor não existirá na hora da previsão."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Aplica-se apenas ao treino de cada dobra, senão o dado balanceado vaza para o teste."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Está invertido: viés alto é subajuste; variância alta é sobreajuste."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Reduz o viés e aumenta a variância: é a troca entre os dois."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Mais dados combatem variância; viés alto pede modelo mais expressivo."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Invertidos: bagging reduz variância; boosting ataca viés."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "É um ponto com incerteza; diferenças pequenas podem ser só sorte da partição."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "A degradação por mudança de conceito (drift) é real e pede monitoramento."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "São instáveis: pequenos cambios geram árvores bem diferentes."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Diferença dentro do ruído não decide; ouviu-se a variância, não a qualidade."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Partições distintas embutem sortes diferentes; a comparação justa usa as mesmas dobras."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Contratos do mesmo fornecedor podem cair nos dois lados; para generalizar por fornecedor, agrupa-se a divisão por fornecedor."
+  }
+ ]
+}

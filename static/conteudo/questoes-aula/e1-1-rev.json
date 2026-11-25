@@ -1,0 +1,233 @@
+{
+ "aula": "E1·1",
+ "titulo": "1. Exploração e descrição · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Uma variável registrada em algarismos, como o CEP ou o código do município, é quantitativa."
+  },
+  {
+   "n": 2,
+   "texto": "Na escala de razão, valem todas as estatísticas descritivas."
+  },
+  {
+   "n": 3,
+   "texto": "A variável dicotômica não admite valores numéricos."
+  },
+  {
+   "n": 4,
+   "texto": "A medida calculada na amostra é o parâmetro da população."
+  },
+  {
+   "n": 5,
+   "texto": "Numa tabela de frequências acumuladas, o tamanho da amostra é a soma de todas as frequências acumuladas."
+  },
+  {
+   "n": 6,
+   "texto": "De uma tabela de frequências acumuladas de variável quantitativa, não é possível recuperar a frequência de cada classe."
+  },
+  {
+   "n": 7,
+   "texto": "A média calculada pelos pontos médios das classes é o valor exato da média dos dados originais."
+  },
+  {
+   "n": 8,
+   "texto": "Para concluir que metade da amostra está abaixo de certo valor, é preciso conferir em que classe a frequência acumulada atinge n/2."
+  },
+  {
+   "n": 9,
+   "texto": "A mediana é afetada por um valor extremo tanto quanto a média."
+  },
+  {
+   "n": 10,
+   "texto": "Somar a mesma constante a todos os valores aumenta o desvio padrão, e multiplicar os valores por k multiplica a variância por k."
+  },
+  {
+   "n": 11,
+   "texto": "O coeficiente de variação tem a mesma unidade de medida dos dados."
+  },
+  {
+   "n": 12,
+   "texto": "A caixa do box plot concentra 75% dos valores."
+  },
+  {
+   "n": 13,
+   "texto": "A taxa média de crescimento de vários períodos é a média aritmética das taxas."
+  },
+  {
+   "n": 14,
+   "texto": "Para examinar a relação entre duas variáveis quantitativas, indicam-se o gráfico de setores ou o de linhas."
+  },
+  {
+   "n": 15,
+   "texto": "Dois conjuntos com a mesma média, a mesma variância e a mesma correlação têm, necessariamente, a mesma distribuição."
+  },
+  {
+   "n": 16,
+   "texto": "Em gráfico de barras, o eixo vertical pode começar em qualquer valor sem distorcer a comparação."
+  },
+  {
+   "n": 17,
+   "texto": "O histograma é o gráfico adequado para representar uma variável qualitativa nominal."
+  },
+  {
+   "n": 18,
+   "texto": "Um aumento de 2 pontos percentuais e um aumento de 2% são equivalentes."
+  },
+  {
+   "n": 19,
+   "texto": "Se a taxa geral caiu, o desempenho piorou em todos os grupos."
+  },
+  {
+   "n": 20,
+   "texto": "Comparar despesas de anos diferentes em valores nominais atribui todo o aumento a gasto real."
+  },
+  {
+   "n": 21,
+   "texto": "Retirado um elemento do conjunto, a média dos demais é a soma total menos o valor retirado, dividida por n menos 1."
+  },
+  {
+   "n": 22,
+   "texto": "Todo valor atípico deve ser excluído da base antes da análise."
+  },
+  {
+   "n": 23,
+   "texto": "Numa amostra pequena, o critério do escore z maior que 3 em valor absoluto identifica todos os valores atípicos."
+  },
+  {
+   "n": 24,
+   "texto": "A queda no último mês de uma série indica sempre queda real, ainda que haja atraso de registro."
+  },
+  {
+   "n": 25,
+   "texto": "A ausência de registro na base significa que o fato não ocorreu."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Os algarismos são rótulo: a variável é qualitativa."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A escala de razão tem zero absoluto e admite todas as operações; a pegadinha diz que só algumas valem."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Ela costuma ser codificada com 0 e 1."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Parâmetro é a medida da população; a calculada na amostra é a estatística."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É a última frequência acumulada."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Recupera-se pela diferença entre acumuladas consecutivas."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "É uma aproximação: os dados originais dentro de cada classe não são conhecidos."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Concluir sem conferir a classe é a pegadinha."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A média é puxada pelos extremos; a mediana resiste a eles."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Somar constante não muda a dispersão; multiplicar por k multiplica o desvio padrão por k e a variância por k ao quadrado."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É adimensional: razão entre desvio padrão e média."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A caixa concentra os 50% centrais, entre o primeiro e o terceiro quartil."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "É a média geométrica dos fatores de crescimento."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "O adequado é o diagrama de dispersão."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Momentos iguais não garantem distribuição igual, como mostra o quarteto de Anscombe."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Cortar o eixo exagera diferenças pequenas."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Para variável qualitativa, usa-se o gráfico de barras; histograma é de variável quantitativa."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Pontos percentuais são diferença entre taxas; 2% é variação relativa ao valor de partida."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "A taxa geral pode cair por mudança na composição dos grupos, mesmo com cada grupo melhorando."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Sem deflacionar, parte do aumento pode ser só inflação."
+  },
+  {
+   "n": 21,
+   "r": "C",
+   "comentario": "A pegadinha erra a soma dos demais ou o divisor."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Atípico pode ser fato verdadeiro e relevante; a exclusão exige critério justificado."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Em amostra pequena o escore z é limitado e raramente ultrapassa 3, mesmo havendo atípicos."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "O atraso de registro derruba artificialmente o dado mais recente; a queda pode não ser real."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "O que não está na base pode apenas não ter sido registrado."
+  }
+ ]
+}

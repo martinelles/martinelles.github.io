@@ -1,0 +1,233 @@
+{
+ "aula": "E4·4",
+ "titulo": "4. Gestão de produtos de dados · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O sucesso do produto de dados se demonstra pela quantidade de entregas: painéis publicados, alertas gerados, versões liberadas."
+  },
+  {
+   "n": 2,
+   "texto": "O resultado-chave de um OKR é uma tarefa a cumprir, como “publicar o painel”."
+  },
+  {
+   "n": 3,
+   "texto": "No Scrum, o produto é necessariamente software."
+  },
+  {
+   "n": 4,
+   "texto": "No RICE, atingidas as estimativas de alcance e impacto, a confiança dispensa avaliação."
+  },
+  {
+   "n": 5,
+   "texto": "A história de usuário é o registro do trabalho feito, medido em horas."
+  },
+  {
+   "n": 6,
+   "texto": "Item que não atende à Definição de Pronto pode ser apresentado na Sprint Review ou liberado com ressalvas."
+  },
+  {
+   "n": 7,
+   "texto": "Indicador-chave e métrica são sinônimos, e a meta do PDTIC dispensa indicador ou prazo."
+  },
+  {
+   "n": 8,
+   "texto": "No desenvolvimento iterativo, todos os requisitos do backlog devem ser levantados antes da primeira entrega."
+  },
+  {
+   "n": 9,
+   "texto": "A adoção de métodos ágeis é inviável no setor público, pela rigidez da legislação."
+  },
+  {
+   "n": 10,
+   "texto": "O MVP é a primeira parte de um sistema já especificado por inteiro, sem objetivo de aprendizado."
+  },
+  {
+   "n": 11,
+   "texto": "Na Sprint Planning, o Product Owner planeja como os itens selecionados virarão incremento."
+  },
+  {
+   "n": 12,
+   "texto": "Lean thinking é o conhecimento que vem da experiência."
+  },
+  {
+   "n": 13,
+   "texto": "Trabalho mais complexo e incerto pede Sprint mais longa, e o escopo fica congelado depois da Sprint Planning."
+  },
+  {
+   "n": 14,
+   "texto": "O Product Owner não pode delegar a ordenação do backlog, e o Scrum Master pode cancelar a Sprint."
+  },
+  {
+   "n": 15,
+   "texto": "Story points são medida precisa de tempo, e o planning poker busca a maioria dos votos."
+  },
+  {
+   "n": 16,
+   "texto": "Vazão e trabalho em andamento (WIP) são a mesma medida."
+  },
+  {
+   "n": 17,
+   "texto": "Tempo de ciclo é o tempo decorrido do início até agora de um item ainda em andamento."
+  },
+  {
+   "n": 18,
+   "texto": "O limite de WIP só reduz o prazo de entrega, sem efeito sobre gargalos e melhoria do fluxo."
+  },
+  {
+   "n": 19,
+   "texto": "O Kanban usa sprints e papéis obrigatórios, e não pode ser combinado com o Scrum."
+  },
+  {
+   "n": 20,
+   "texto": "A unificação de canais digitais não integra o conteúdo mínimo do Plano de Transformação Digital."
+  },
+  {
+   "n": 21,
+   "texto": "O PDTIC tem vigência anual e é aprovado pela própria área de TIC."
+  },
+  {
+   "n": 22,
+   "texto": "A coordenação da Política de Dados Abertos cabe ao MGI."
+  },
+  {
+   "n": 23,
+   "texto": "A Sprint Review é uma apresentação do incremento, sem colaboração sobre o que fazer a seguir."
+  },
+  {
+   "n": 24,
+   "texto": "A publicação de dados abertos dispensa informar as ressalvas de qualidade e integridade das bases."
+  },
+  {
+   "n": 25,
+   "texto": "A pontuação de risco de um modelo prova irregularidade, e uma taxa medida em poucos casos é certeza."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Sucesso é efeito no problema; entrega é só meio."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O resultado-chave mede efeito, não tarefa executada."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O guia admite serviço, produto físico ou algo mais abstrato."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A confiança expressa o grau de certeza das estimativas e entra no cálculo; não substitui avaliação."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É a descrição breve de um valor na perspectiva de quem usa."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Só o que cumpre a Definição de Pronto integra o incremento."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O indicador-chave é a métrica escolhida para decidir; meta sem indicador e prazo não se acompanha."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O backlog emerge e se refina a cada ciclo; levantar tudo antes volta ao cascata."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O modelo de contratação de software do SISP prefere metodologias ágeis."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O mínimo produto viável serve para aprender com uso real; não é fatia de um todo congelado."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O como é dos Developers; o Product Owner cuida do quê e do porquê."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Isso é o empirismo do Scrum; o lean pensa em valor e eliminação de desperdício."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Incerteza pede ciclos mais curtos; e o escopo é renegociável com o Product Owner durante a Sprint."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A ordenação é delegável (a responsabilidade não); e a Sprint só o Product Owner cancela."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Pontos são estimativa relativa; o poker busca consenso, não votação majoritária."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Vazão é itens terminados por unidade de tempo; WIP é o que está em curso agora."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Essa é a idade do item; o tempo de ciclo se mede de início a término."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Ele expõe os gargalos e sustenta a melhoria contínua do fluxo."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "O Kanban não exige nem um nem outro, e combina-se bem com o Scrum."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Integra o conteúdo mínimo do plano."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "É plurianual, e a aprovação cabe ao Comitê de Governança Digital."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Cabe à CGU, desde o Decreto 9.903/2019."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "É sessão de trabalho com as partes interessadas sobre o produto e os próximos passos."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "As ressalvas devem acompanhar a publicação."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Pontuação e taxa pequena são indícios; prova exige verificação e amostra suficiente."
+  }
+ ]
+}

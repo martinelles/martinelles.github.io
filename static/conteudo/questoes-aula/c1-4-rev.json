@@ -1,0 +1,80 @@
+{
+ "aula": "C1·4",
+ "titulo": "4. Integridade privada · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A existência de programa de integridade isenta a empresa de responsabilização pela Lei Anticorrupção."
+  },
+  {
+   "n": 2,
+   "texto": "O programa de integridade permite subtrair até 20% da base de cálculo da multa."
+  },
+  {
+   "n": 3,
+   "texto": "O programa de integridade deve se integrar à política de metas e aos objetivos financeiros da empresa."
+  },
+  {
+   "n": 4,
+   "texto": "A diligência de integridade sobre terceiros deve ter a mesma intensidade para todos os fornecedores."
+  },
+  {
+   "n": 5,
+   "texto": "Os parâmetros legais de avaliação do programa se aplicam igualmente a microempresas e a grandes empresas."
+  },
+  {
+   "n": 6,
+   "texto": "Na avaliação do art. 57, § 1º, da Lei 12.846/2013, basta considerar o faturamento da empresa, e a interação relevante é a com o fisco."
+  },
+  {
+   "n": 7,
+   "texto": "A apresentação do código de ética aprovado é suficiente para obter a redução da multa."
+  },
+  {
+   "n": 8,
+   "texto": "A efetividade do programa de integridade é relevante para decidir se houve o ato lesivo."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O programa não isenta: a responsabilização é objetiva e o programa serve para atenuar a sanção."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O teto da redução é 5% da base de cálculo."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Ele não persegue objetivos éticos descolados do negócio: integra-se à política de metas e ao próprio negócio."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A diligência é baseada em risco: a intensidade varia conforme o risco do terceiro."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Considera-se o porte: micro e pequenas empresas recebem tratamento proporcional."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O § 1º manda considerar se a empresa é microempresa ou empresa de pequeno porte, e fala em interação com o setor público, não com o fisco."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A redução exige efetividade do programa; a existência formal de documentos não basta."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Ela só afeta a dosimetria da multa, não a caracterização do ato lesivo."
+  }
+ ]
+}

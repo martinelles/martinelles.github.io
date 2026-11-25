@@ -1,0 +1,116 @@
+{
+ "aula": "B4·2",
+ "titulo": "2. Modelos de administração · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A administração pública gerencial abandonou o modelo burocrático por completo."
+  },
+  {
+   "n": 2,
+   "texto": "As disfunções da burocracia são conceito de Weber."
+  },
+  {
+   "n": 3,
+   "texto": "No modelo burocrático, o controle é exercido a priori, sobre os processos."
+  },
+  {
+   "n": 4,
+   "texto": "Na administração gerencial, a profissionalização deixa de ser princípio."
+  },
+  {
+   "n": 5,
+   "texto": "A administração pública gerencial se confunde com a administração de empresas."
+  },
+  {
+   "n": 6,
+   "texto": "A administração gerencial adota o controle a priori dos processos."
+  },
+  {
+   "n": 7,
+   "texto": "O Novo Serviço Público trata o cidadão como cliente."
+  },
+  {
+   "n": 8,
+   "texto": "Os conselhos de usuários da Lei 13.460/2017 são deliberativos."
+  },
+  {
+   "n": 9,
+   "texto": "A vertente societal da administração pública privilegia a dimensão econômico-financeira."
+  },
+  {
+   "n": 10,
+   "texto": "O DASP inaugurou o modelo gerencial no Brasil."
+  },
+  {
+   "n": 11,
+   "texto": "O Plano Diretor da Reforma do Aparelho do Estado via a Constituição de 1988 como avanço gerencial."
+  },
+  {
+   "n": 12,
+   "texto": "O patrimonialismo foi eliminado com a introdução da burocracia."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Ela conserva e flexibiliza princípios burocráticos, como mérito e carreira."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O conceito é de Merton, sobre o comportamento burocrático desviado."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "A pegadinha o desloca para o a posteriori."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Continua fundamental; o que muda é o foco em resultado."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Ela se inspira na gerencial privada, mas orienta-se pelo interesse público."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Adota o controle a posteriori, sobre resultados."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Essa é a Nova Gestão Pública; o Novo Serviço Público devolve o cidadão à condição de cidadão."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "São consultivos."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ela privilegia a dimensão sociopolítica, de empoderamento do cidadão."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Inaugurou o modelo burocrático."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Via-a como retrocesso burocrático, a flexibilizar."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Foi enfraquecido, mas resquícios seguem em várias dimensões."
+  }
+ ]
+}

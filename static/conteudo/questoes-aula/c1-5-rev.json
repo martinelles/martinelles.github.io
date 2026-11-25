@@ -1,0 +1,53 @@
+{
+ "aula": "C1·5",
+ "titulo": "5. Prevenção e melhoria institucional · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A edição de normas mais rígidas basta, por si só, para mudar a cultura organizacional."
+  },
+  {
+   "n": 2,
+   "texto": "Todas as organizações devem adotar a mesma estrutura de integridade, independentemente do porte."
+  },
+  {
+   "n": 3,
+   "texto": "A análise de denúncias deve ir além do caso isolado e procurar recorrências."
+  },
+  {
+   "n": 4,
+   "texto": "Um órgão sem denúncias registradas não tem problemas de integridade."
+  },
+  {
+   "n": 5,
+   "texto": "O número de servidores treinados prova que o treinamento foi efetivo."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Cultura muda com prática cotidiana, exemplo da liderança e incentivos; a norma sozinha não muda comportamento."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A estrutura acompanha porte, atividade e riscos de cada organização."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Cada denúncia alimenta a visão de conjunto; recorrências revelam causa sistêmica a tratar."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Ausência de denúncia pode ser subnotificação: medo de retaliação, canal desconhecido ou normalização da prática."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Presença não é aprendizado; a efetividade se mede pela mudança de conduta no trabalho."
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "aula": "B2·1",
+ "titulo": "1. Fundamentos sociológicos · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "As três dimensões da estratificação, classe, status e partido, foram propostas por Marx."
+  },
+  {
+   "n": 2,
+   "texto": "A mobilidade intergeracional compara a trajetória de uma mesma pessoa ao longo da vida."
+  },
+  {
+   "n": 3,
+   "texto": "Nos estamentos, a posição social é definida apenas pela renda."
+  },
+  {
+   "n": 4,
+   "texto": "Para Gramsci, a dominação de classe se sustenta apenas pela coerção do Estado."
+  },
+  {
+   "n": 5,
+   "texto": "Nas castas, o status vem do nascimento e a mobilidade social é praticamente nula."
+  },
+  {
+   "n": 6,
+   "texto": "Só há discriminação quando há intenção de discriminar."
+  },
+  {
+   "n": 7,
+   "texto": "Para Putnam, o capital social é um instrumento de distinção de classe."
+  },
+  {
+   "n": 8,
+   "texto": "Para Foucault, o poder é um bem que alguns possuem e que fica concentrado no Estado."
+  },
+  {
+   "n": 9,
+   "texto": "Para Bourdieu, a escola neutraliza as diferenças de origem dos alunos."
+  },
+  {
+   "n": 10,
+   "texto": "Pelo Estatuto da Igualdade Racial, ações afirmativas só podem ser adotadas pelo Estado."
+  },
+  {
+   "n": 11,
+   "texto": "Em Bourdieu, o gosto é preferência natural e individual."
+  },
+  {
+   "n": 12,
+   "texto": "Na dicotomia raça e classe, cada variável deve ser compreendida isoladamente."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "São de Weber; Marx centra na classe em si e para si."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Essa é a intrageracional; a intergeracional compara gerações, pais e filhos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Definem-na a honra, a tradição e a lei."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Depende também da hegemonia, o consenso ativo construído na sociedade civil."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A pegadinha equipara castas a classes, em que a mobilidade existe."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A discriminação indireta e a institucional operam sem intenção, pelo efeito de práticas aparentemente neutras."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Essa é a visão de Bourdieu; Putnam o vê como confiança e redes que viabilizam a ação coletiva."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Para ele, o poder circula e se exerce em rede, em múltiplos pontos."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ela tende a reproduzi-las, convertendo capital cultural em posição escolar."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O Estatuto as prevê também na iniciativa privada."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É marcador de classe ligado ao habitus, definindo estilos de vida."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Elas se articulam: a desigualdade se cruza, não se soma em silos."
+  }
+ ]
+}

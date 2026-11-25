@@ -1,0 +1,89 @@
+{
+ "aula": "C2·1",
+ "titulo": "1. Acesso à informação · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O requerente deve informar o motivo do pedido de acesso à informação."
+  },
+  {
+   "n": 2,
+   "texto": "São prazos máximos de classificação: 25 anos para ultrassecreto, 15 para secreto e 5 para reservado."
+  },
+  {
+   "n": 3,
+   "texto": "Os prazos de classificação contam da data em que a informação foi classificada."
+  },
+  {
+   "n": 4,
+   "texto": "Informação pessoal precisa ser classificada como sigilosa para ter acesso restrito."
+  },
+  {
+   "n": 5,
+   "texto": "O recurso contra negativa de acesso pode ser apresentado direto à CGU, sem passar pela autoridade superior."
+  },
+  {
+   "n": 6,
+   "texto": "Documento preparatório usado na elaboração de ato administrativo nunca será acessível."
+  },
+  {
+   "n": 7,
+   "texto": "Se parte da informação de um documento é sigilosa, todo o documento fica de acesso restrito."
+  },
+  {
+   "n": 8,
+   "texto": "Denúncia, reclamação e consulta jurídica são espécies de pedido de acesso à informação."
+  },
+  {
+   "n": 9,
+   "texto": "A instância recursal é obrigada a apreciar matéria nova trazida somente no recurso."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É vedado exigir os motivos do requerente (LAI, art. 10, § 3º)."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A pegadinha embaralha os prazos entre os graus de sigilo (LAI, art. 24)."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Contam da data de produção da informação, não da classificação."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O acesso restrito à informação pessoal independe de classificação de sigilo."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Primeiro à autoridade superior; só depois à CGU (LAI, art. 15)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Será acessível a partir da edição do ato final."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Vale o acesso parcial, com supressão ou ocultação do trecho protegido."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Não são: denúncia e reclamação vão para a ouvidoria; consulta só é atendida se já existir documento sobre o caso."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Pode não conhecê-la e orientar a parte a apresentar novo pedido."
+  }
+ ]
+}

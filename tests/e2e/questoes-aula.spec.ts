@@ -184,6 +184,30 @@ test('a missão de 25/11 traz o atalho de questões da C3·1', async ({ page }) 
 	await expect(page.locator('a.topico[href="/questoes/c3-1"]')).toHaveCount(1);
 });
 
+test('a página de revisão da C4·2 traz as pegadinhas da banca', async ({ page }) => {
+	await page.addInitScript(() => localStorage.setItem('painel-concurso:usuario:v1', 'marte'));
+	await page.goto('/questoes/c4-2-rev');
+	await expect(page.getByRole('heading', { level: 1, name: /Questões de certo ou errado · 2\. Leitura de dados e indicadores · revisão/ })).toBeVisible();
+	await expect(page.locator('.ponto')).toHaveCount(14);
+
+	// Questão 1 (gabarito C): responder e voltar mostra o comentário com a correção da pegadinha.
+	await page.keyboard.press('c');
+	const cartao = page.locator('.cartao');
+	await expect(cartao).toContainText('Questão 2 de 14');
+	await page.keyboard.press('ArrowLeft');
+	await expect(cartao.locator('.veredito')).toHaveText('Você acertou');
+	await expect(cartao.locator('.gabarito p')).toContainText('pontos percentuais');
+});
+
+test('a missão de 26/11 traz o atalho de revisão C/E da C3·1 no bloco de revisão', async ({ page }) => {
+	await page.clock.setFixedTime(new Date('2026-11-26T09:00:00-03:00'));
+	await page.goto('/painel');
+	// C3·1 é revisão (D+1) em 26/11; o índice-rev liga o cod à página de pegadinhas, ao lado da
+	// página de literais.
+	await expect(page.locator('a.topico[href="/questoes/c3-1-rev"]')).toHaveCount(1);
+	await expect(page.locator('a.topico[href="/questoes/c3-1"]')).toHaveCount(1);
+});
+
 test('todas as aulas extraídas abrem com a contagem certa', async ({ page }) => {
 	const aulas = [
 	['E1·1', '1. Exploração e descrição', 16],

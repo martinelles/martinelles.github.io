@@ -1,0 +1,242 @@
+{
+ "aula": "E3·1",
+ "titulo": "1. Seleção e construção de modelos · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O aprendizado supervisionado trabalha com dados sem respostas predefinidas e dispensa saídas rotuladas no treino."
+  },
+  {
+   "n": 2,
+   "texto": "A regressão linear é técnica de aprendizado não supervisionado."
+  },
+  {
+   "n": 3,
+   "texto": "A análise de agrupamentos prevê uma categoria já definida, como risco baixo, médio ou alto."
+  },
+  {
+   "n": 4,
+   "texto": "Uma matriz de confusão pode resultar de modelo não supervisionado."
+  },
+  {
+   "n": 5,
+   "texto": "O aprendizado semissupervisionado sempre supera o modelo treinado apenas com os exemplos rotulados."
+  },
+  {
+   "n": 6,
+   "texto": "No aprendizado por reforço, o agente aprende a partir de exemplos rotulados com a ação correta."
+  },
+  {
+   "n": 7,
+   "texto": "O agente de aprendizado por reforço busca maximizar a recompensa imediata de cada ação."
+  },
+  {
+   "n": 8,
+   "texto": "A regressão logística é técnica para prever valores contínuos."
+  },
+  {
+   "n": 9,
+   "texto": "O SVM realiza apenas regressão, e Naive Bayes e SVM servem igualmente à classificação e à regressão."
+  },
+  {
+   "n": 10,
+   "texto": "A árvore de decisão é estável e pouco dependente dos dados de treino."
+  },
+  {
+   "n": 11,
+   "texto": "O Naive Bayes é inadequado sempre que os atributos são correlacionados."
+  },
+  {
+   "n": 12,
+   "texto": "A variância explicada pelos componentes da PCA é a razão entre o número de componentes retidos e o número de variáveis."
+  },
+  {
+   "n": 13,
+   "texto": "A redução de dimensionalidade acrescenta variáveis ao modelo, ou reduz o número de observações."
+  },
+  {
+   "n": 14,
+   "texto": "A PCA dispensa padronização quando as variáveis têm escalas diferentes."
+  },
+  {
+   "n": 15,
+   "texto": "Numa PCA com variáveis padronizadas, o último autovalor tem de ser zero."
+  },
+  {
+   "n": 16,
+   "texto": "Subajuste é o modelo que aprende padrões específicos do treino e deixa de generalizar."
+  },
+  {
+   "n": 17,
+   "texto": "O sobreajuste se caracteriza por desempenho alto tanto no treino quanto no teste."
+  },
+  {
+   "n": 18,
+   "texto": "O sobreajuste decorre de um modelo de baixa complexidade que aprendeu o ruído do treino."
+  },
+  {
+   "n": 19,
+   "texto": "A regularização tende a causar sobreajuste, e a parada antecipada não serve para evitá-lo."
+  },
+  {
+   "n": 20,
+   "texto": "O bagging treina os modelos em sequência, usando os erros dos primeiros para ajustar os seguintes, focando a redução do viés."
+  },
+  {
+   "n": 21,
+   "texto": "A random forest combina um pequeno conjunto de árvores, todas treinadas com exatamente as mesmas observações."
+  },
+  {
+   "n": 22,
+   "texto": "A random forest atribui a mesma importância a todas as variáveis."
+  },
+  {
+   "n": 23,
+   "texto": "O boosting serve para selecionar os dados que serão analisados na construção do modelo."
+  },
+  {
+   "n": 24,
+   "texto": "Um classificador com 90% de acurácia é bom, sem necessidade de compará-lo com a proporção da classe majoritária."
+  },
+  {
+   "n": 25,
+   "texto": "O ZeroR classifica usando os atributos mais relevantes do conjunto."
+  },
+  {
+   "n": 26,
+   "texto": "Um modelo mais complexo sempre supera um modelo mais simples."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Essa é a descrição do não supervisionado; o supervisionado aprende com rótulos."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "É supervisionada: aprende a relação entre atributos e resposta contínua."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Isso é classificação; o agrupamento descobre grupos sem categoria prévia."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Ela compara a classe prevista com a real: só existe quando há rótulo."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Não há garantia: depende do dado e da quantidade de rótulos disponíveis."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Ele aprende por tentativa e recompensa, sem a ação correta de antemão."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Ele maximiza o retorno acumulado ao longo do tempo, não o ganho de cada passo."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Apesar do nome, serve para classificação: estima a probabilidade de uma categoria."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O SVM é clássico de classificação; o Naive Bayes, de classificação."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ela é instável: pequenas mudanças no treino geram árvores bem diferentes."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Mesmo violando a independência, costuma ter bom desempenho na prática."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Ela vem dos autovalores: a fração de cada autovalor na soma."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Ela reduz variáveis, mantendo as observações."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Escalas diferentes dominam os componentes; a padronização é necessária."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "O que é fixo é a soma dos autovalores, igual ao número de variáveis."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Essa é a definição de sobreajuste; o subajuste é o modelo simples demais que nem aprende o treino."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "É alto no treino e baixo no teste: a diferença entre os dois é o sinal."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Vem de complexidade alta demais em relação ao dado disponível."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "É o contrário: ambas são técnicas para conter o sobreajuste."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Essa é a ideia do boosting; o bagging treina em paralelo e reduz variância."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "São muitas árvores, cada uma com amostra própria de observações e de atributos."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Ela estima a importância relativa de cada variável."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "É combinação sequencial de modelos fracos; seleção de dados é outro assunto."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "Se a majoritária tem 95%, os 90% são piores que chutar; o baseline decide."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Ele ignora os atributos e prevê sempre a classe mais frequente."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "Depende do dado e da tarefa; simplicidade generaliza melhor em muitos casos."
+  }
+ ]
+}

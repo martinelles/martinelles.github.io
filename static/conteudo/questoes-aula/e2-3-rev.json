@@ -1,0 +1,269 @@
+{
+ "aula": "E2·3",
+ "titulo": "3. Ingestão e integração · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Levar os dados até o sistema de destino é papel da transformação."
+  },
+  {
+   "n": 2,
+   "texto": "No ELT, a transformação acontece antes do carregamento no destino."
+  },
+  {
+   "n": 3,
+   "texto": "Para a mesma base, o ELT ocupa menos armazenamento que o ETL."
+  },
+  {
+   "n": 4,
+   "texto": "A técnica que vincula dados semelhantes vindos de fontes diferentes é a derivação."
+  },
+  {
+   "n": 5,
+   "texto": "A ingestão em fluxo exige carregar todos os dados num armazenamento antes de processá-los."
+  },
+  {
+   "n": 6,
+   "texto": "No Kafka, os tópicos não podem ser divididos em partições, e a ordem das mensagens vale para o tópico inteiro."
+  },
+  {
+   "n": 7,
+   "texto": "A arquitetura Kappa mantém uma camada de processamento em lote."
+  },
+  {
+   "n": 8,
+   "texto": "A carga incremental baseada na data de atualização identifica as exclusões físicas feitas na origem."
+  },
+  {
+   "n": 9,
+   "texto": "A carga incremental dispensa a carga inicial completa."
+  },
+  {
+   "n": 10,
+   "texto": "O change data capture só transporta as mudanças em lotes periódicos."
+  },
+  {
+   "n": 11,
+   "texto": "O DELETE do HTTP não é idempotente, porque na segunda vez o servidor responde com outro código de status."
+  },
+  {
+   "n": 12,
+   "texto": "O REST exige um contrato formal equivalente ao WSDL."
+  },
+  {
+   "n": 13,
+   "texto": "O JWT é um token cifrado com chave pública baseada em biometria."
+  },
+  {
+   "n": 14,
+   "texto": "No CSV, a aspa dupla dentro de um campo escapa-se com barra invertida."
+  },
+  {
+   "n": 15,
+   "texto": "O arquivo CSV preserva os tipos das colunas da tabela de origem."
+  },
+  {
+   "n": 16,
+   "texto": "No CSV, o cabeçalho é obrigatório, e a RFC 4180 é um padrão obrigatório da internet."
+  },
+  {
+   "n": 17,
+   "texto": "No objeto JSON, entre o nome e o valor vai vírgula, e entre os pares, dois-pontos."
+  },
+  {
+   "n": 18,
+   "texto": "O formato JSON admite comentários e strings entre aspas simples."
+  },
+  {
+   "n": 19,
+   "texto": "Todo documento XML bem formado é válido, e a declaração XML é obrigatória."
+  },
+  {
+   "n": 20,
+   "texto": "Ao DTD cabe definir tipos de dados e dar suporte a namespaces."
+  },
+  {
+   "n": 21,
+   "texto": "O Parquet é orientado a linhas e legível em editor de texto."
+  },
+  {
+   "n": 22,
+   "texto": "O Parquet permite acrescentar registros no fim do arquivo sem reescrevê-lo, e garante transações ACID por si só."
+  },
+  {
+   "n": 23,
+   "texto": "Todas as colunas de um arquivo Parquet precisam usar o mesmo algoritmo de compressão."
+  },
+  {
+   "n": 24,
+   "texto": "Dois sistemas que usam o mesmo formato de arquivo e o mesmo protocolo têm interoperabilidade semântica garantida."
+  },
+  {
+   "n": 25,
+   "texto": "A Lei 14.129/2021 manda interoperar sem considerar restrições legais, segurança, limitações tecnológicas e custo-benefício."
+  },
+  {
+   "n": 26,
+   "texto": "O compartilhamento de dados do Decreto 10.046/2019 é classificado pelo volume dos dados."
+  },
+  {
+   "n": 27,
+   "texto": "A entrega “pelo menos uma vez” elimina duplicidades."
+  },
+  {
+   "n": 28,
+   "texto": "Na garantia “no máximo uma vez”, a mensagem é reenviada até ser confirmada."
+  },
+  {
+   "n": 29,
+   "texto": "A garantia “exatamente uma vez” dispensa idempotência ou transação no destino."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Essa é a carga; a transformação prepara o dado no caminho."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "No ELT carrega-se primeiro e transforma-se depois, dentro do destino."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O ELT costuma guardar também o dado bruto no destino, o que aumenta o armazenamento."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Essa é a integração; a derivação cria novos atributos a partir dos existentes."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Isso é o lote; o fluxo processa à medida que os dados chegam."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Tópicos dividem-se em partições, e a ordem é garantida dentro de cada partição."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A Kappa é só fluxo; a camada de lote é o que define a Lambda."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Registro apagado fisicamente não tem data de atualização; exclusão enxerga-se por CDC ou comparação completa."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ela parte da base inicial já carregada e acrescenta as mudanças."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ele captura as mudanças no momento em que ocorrem, com baixa latência."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Idempotência é sobre o estado do recurso, não sobre o código de retorno; o efeito do DELETE repete sem estragar nada."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O WSDL é do SOAP; o REST dispensa contrato formal desse tipo."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Na forma usual é assinado, e não cifrado, com três partes: cabeçalho, carga e assinatura."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A convenção do CSV é dobrar a aspa dupla."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "CSV é texto puro; os tipos são inferidos na leitura."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "O cabeçalho é opcional, e a RFC 4180 é convenção, não obrigação."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Está invertido: nome e valor separam-se por dois-pontos; os pares, por vírgula."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Não admite nem um nem outro; o nome de cada par fica entre aspas duplas (RFC 8259)."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Bem formado é sintático; válido é contra o schema. A declaração é opcional."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Isso é do XSD; o DTD é mais limitado."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "É colunar e binário, com o esquema dentro do próprio arquivo."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "O arquivo é imutável na prática, e o ACID vem da camada por cima, como Delta e Iceberg."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "A compressão é definida por coluna, e cada uma pode usar a sua."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "Isso resolve a sintaxe; a semântica, o significado dos dados, pede padrões de conteúdo."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "A lei manda considerar todos esses pontos ao interoperar."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "A classificação é pela confidencialidade, e não pelo volume."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "Ela admite duplicar em caso de reenvio; quem elimina é a “exatamente uma vez”."
+  },
+  {
+   "n": 28,
+   "r": "E",
+   "comentario": "Não há reenvio: a mensagem pode se perder."
+  },
+  {
+   "n": 29,
+   "r": "E",
+   "comentario": "A implementação real apoia-se em idempotência ou transação do lado de quem consome."
+  }
+ ]
+}

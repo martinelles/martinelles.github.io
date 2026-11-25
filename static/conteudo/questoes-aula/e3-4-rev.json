@@ -1,0 +1,242 @@
+{
+ "aula": "E3·4",
+ "titulo": "4. Redes neurais · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Os nós da camada de entrada processam o vetor de entrada antes de passá-lo adiante."
+  },
+  {
+   "n": 2,
+   "texto": "O perceptron simples é capaz de resolver o OU exclusivo."
+  },
+  {
+   "n": 3,
+   "texto": "A rede de alimentação direta possui ciclos e conexões de retorno da saída para camadas anteriores."
+  },
+  {
+   "n": 4,
+   "texto": "O aprendizado baseado em memória e o competitivo não estão entre os processos de aprendizagem das redes neurais."
+  },
+  {
+   "n": 5,
+   "texto": "Cada neurônio tem sua própria função de perda, que decide se ele é ativado."
+  },
+  {
+   "n": 6,
+   "texto": "A não linearidade da MLP vem dos pesos e do viés."
+  },
+  {
+   "n": 7,
+   "texto": "O salto da visão computacional se explica pela softmax na camada de saída."
+  },
+  {
+   "n": 8,
+   "texto": "O objetivo da retropropagação é acrescentar camadas ocultas até a acurácia chegar a 100%."
+  },
+  {
+   "n": 9,
+   "texto": "A retropropagação é um otimizador, alternativa ao SGD na atualização dos pesos."
+  },
+  {
+   "n": 10,
+   "texto": "O gradiente descendente em lote sorteia amostras a cada iteração."
+  },
+  {
+   "n": 11,
+   "texto": "O Adam usa taxa de aprendizado fixa e igual para todos os pesos."
+  },
+  {
+   "n": 12,
+   "texto": "O dropout desliga neurônios também na inferência, ou os remove de vez da rede."
+  },
+  {
+   "n": 13,
+   "texto": "A parada antecipada se guia pela perda de treino."
+  },
+  {
+   "n": 14,
+   "texto": "A regularização L2 zera pesos e seleciona atributos."
+  },
+  {
+   "n": 15,
+   "texto": "A função principal da convolução é reduzir a dimensão, e o mapa de características não preserva a posição espacial."
+  },
+  {
+   "n": 16,
+   "texto": "A CNN elimina totalmente o pré-processamento das imagens."
+  },
+  {
+   "n": 17,
+   "texto": "A CNN é a arquitetura principal para tarefas sequenciais, como tradução e análise de sentimentos, e o pooling tem pesos a aprender."
+  },
+  {
+   "n": 18,
+   "texto": "A vantagem do transformer sobre RNN e LSTM é o custo computacional menor em sequências longas."
+  },
+  {
+   "n": 19,
+   "texto": "O transformer depende de recorrência ou de convolução para processar a sequência."
+  },
+  {
+   "n": 20,
+   "texto": "A LSTM eliminou o estado oculto e agrava o gradiente que desaparece e o que explode."
+  },
+  {
+   "n": 21,
+   "texto": "Aumentar muito a dimensão da rede eleva de forma insignificante o esforço computacional."
+  },
+  {
+   "n": 22,
+   "texto": "Redes neurais profundas superam qualquer outro modelo em qualquer tipo de dado, e dispensam grande volume de dados para treinar do zero."
+  },
+  {
+   "n": 23,
+   "texto": "O uso da GPU por PyTorch ou TensorFlow não depende de compatibilidade entre driver, CUDA e versão da biblioteca."
+  },
+  {
+   "n": 24,
+   "texto": "Na extração de atributos com rede pré-treinada, todos os pesos da rede são atualizados."
+  },
+  {
+   "n": 25,
+   "texto": "O ajuste fino exige treinar a rede do zero, com tantos dados quanto a tarefa original."
+  },
+  {
+   "n": 26,
+   "texto": "A transferência de aprendizado sempre melhora o desempenho, qualquer que seja a tarefa-alvo."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Eles apenas entregam o vetor aos neurônios da camada seguinte; o processamento vem depois."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O XOR não é linearmente separável: exige camada oculta."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Nela o fluxo segue em um só sentido, sem ciclos."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Ambos estão entre os processos clássicos de aprendizagem."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Quem transforma a soma do neurônio é a função de ativação; a perda é uma só e mede o erro da rede."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Vem da função de ativação não linear; pesos e viés fazem transformação afim."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Vieram das convoluções, das grandes bases rotuladas e das GPUs."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Ela calcula os gradientes para ajustar os pesos e reduzir a perda."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ela calcula gradientes; o otimizador (SGD, Adam) é quem atualiza os pesos."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O lote usa a base inteira; o sorteio por amostra é do estocástico."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Ele adapta a taxa por parâmetro ao longo do treino."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O desligamento é só no treino; na inferência todos participam."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Guia-se pela perda de validação; a de treino continua caindo enquanto a rede superajusta."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Esse efeito é da L1; a L2 apenas encolhe os pesos."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "O mapa mantém o arranjo espacial; quem reduz a dimensão é o pooling."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Ela reduz a necessidade, mas não elimina o preparo dos dados."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Sequências pedem RNN ou transformer; e o pooling não tem parâmetros."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "A atenção custa mais com o comprimento; o ganho está no paralelismo e na captura de dependências distantes."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Ele dispensa as duas: a atenção faz o trabalho."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Ela mantém o estado oculto e foi desenhada justamente para mitigar esses gradientes."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "O custo cresce com o número de parâmetros e conexões."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Em muitos problemas, modelos mais simples ganham; e treinar do zero exige muito dado."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "A compatibilidade entre os três é requisito para a GPU ser usada."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "A base fica congelada; só a nova camada final treina."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Ele parte dos pesos já treinados e usa bem menos dado."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "Depende da afinidade entre a tarefa original e a nova."
+  }
+ ]
+}

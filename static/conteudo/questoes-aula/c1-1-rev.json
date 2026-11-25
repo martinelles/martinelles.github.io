@@ -1,0 +1,53 @@
+{
+ "aula": "C1·1",
+ "titulo": "1. Governança e responsabilidades · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Governança pública consiste em planejar, executar e controlar a gestão."
+  },
+  {
+   "n": 2,
+   "texto": "A eficiência e a legalidade estão entre os princípios da governança pública do art. 3º do Decreto 9.203/2017."
+  },
+  {
+   "n": 3,
+   "texto": "São mecanismos para o exercício da governança pública a liderança, a estratégia e o controle."
+  },
+  {
+   "n": 4,
+   "texto": "O Decreto 9.203/2017 privilegia processos sancionadores antes das ações estratégicas de prevenção."
+  },
+  {
+   "n": 5,
+   "texto": "A responsabilidade primária pelos controles internos de um órgão é da auditoria interna."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Planejar, executar e controlar é gestão; governança é avaliar, direcionar e monitorar (Decreto 9.203/2017, art. 2º)."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Os princípios são capacidade de resposta, integridade, confiabilidade, melhoria regulatória, prestação de contas e responsabilidade, e transparência."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "É o art. 5º do Decreto 9.203/2017; a pegadinha troca o terceiro mecanismo (controle) por accountability."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É o contrário: o art. 4º, VI, privilegia as ações de prevenção."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Cabe à alta administração, sem prejuízo dos gestores dos processos (IN Conjunta MP/CGU 1/2016, art. 12); a auditoria interna avalia os controles."
+  }
+ ]
+}

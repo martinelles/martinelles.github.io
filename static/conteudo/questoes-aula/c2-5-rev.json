@@ -1,0 +1,116 @@
+{
+ "aula": "C2·5",
+ "titulo": "5. Integridade da informação e comunicação · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na comunicação pública, é aceitável apresentar como fato uma alegação ainda não verificada."
+  },
+  {
+   "n": 2,
+   "texto": "Uma informação amplamente compartilhada é, por isso mesmo, confiável."
+  },
+  {
+   "n": 3,
+   "texto": "Toda informação falsa é desinformação."
+  },
+  {
+   "n": 4,
+   "texto": "Admitir incertezas não reduz, necessariamente, a credibilidade da comunicação pública."
+  },
+  {
+   "n": 5,
+   "texto": "Crítica contundente, mas baseada em fatos, à atuação de um órgão público configura desinformação."
+  },
+  {
+   "n": 6,
+   "texto": "A Constituição admite censura prévia de conteúdos considerados inconvenientes."
+  },
+  {
+   "n": 7,
+   "texto": "A liberdade de expressão é direito fundamental de caráter absoluto."
+  },
+  {
+   "n": 8,
+   "texto": "Os direitos fundamentais valem somente nas relações com o Estado."
+  },
+  {
+   "n": 9,
+   "texto": "O direito de resposta afasta a indenização por dano à imagem."
+  },
+  {
+   "n": 10,
+   "texto": "O ordenamento brasileiro reconhece o direito ao esquecimento para impedir a divulgação de fatos verdadeiros."
+  },
+  {
+   "n": 11,
+   "texto": "A publicação de jornal ou revista depende de licença de autoridade."
+  },
+  {
+   "n": 12,
+   "texto": "Na radiodifusão, a não renovação de concessão exige dois quintos do Congresso, o cancelamento antes do prazo exige decisão judicial, e os prazos são de 10 anos para rádio e 15 para TV."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Alegação não verificada deve ser apresentada como tal; fato exige verificação."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Popularidade não é verificação; o alcance não confere confiabilidade."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A desinformação exige a intenção de enganar ou causar dano; sem ela, é apenas informação incorreta."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "Reconhecer os limites do que se sabe constrói confiança; simular certeza inexistente é que mina a credibilidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A desinformação envolve falsidade; crítica factual, ainda que dura, não é."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É vedada toda censura de natureza política, ideológica e artística (art. 5º, IX, e art. 220)."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "É relativo: as colisões com outros direitos se resolvem por ponderação, preservado o núcleo essencial."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Têm eficácia também nas relações entre particulares (eficácia horizontal)."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Os dois se somam: a Constituição assegura resposta proporcional ao agravo, além de indenização (art. 5º, V)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O STF afastou o direito ao esquecimento no Tema 786."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É vedada a lei que exija licença para a publicação (art. 220, § 6º)."
+  },
+  {
+   "n": 12,
+   "r": "C",
+   "comentario": "A pegadinha troca os quóruns, as formas de extinção e os prazos entre rádio e TV."
+  }
+ ]
+}

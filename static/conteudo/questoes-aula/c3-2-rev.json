@@ -1,0 +1,143 @@
+{
+ "aula": "C3·2",
+ "titulo": "2. Processo e garantias · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O contraditório e a ampla defesa valem apenas no processo judicial."
+  },
+  {
+   "n": 2,
+   "texto": "A ausência de defesa técnica por advogado no processo administrativo disciplinar gera nulidade."
+  },
+  {
+   "n": 3,
+   "texto": "A amizade íntima do julgador com uma das partes é motivo de impedimento."
+  },
+  {
+   "n": 4,
+   "texto": "A Lei 9.784/1999 não se aplica aos Poderes Legislativo e Judiciário, nem a estados e municípios."
+  },
+  {
+   "n": 5,
+   "texto": "A Administração pode renunciar a competência que a lei lhe atribui, cobrar despesas processuais sem previsão legal e aplicar retroativamente nova interpretação de norma."
+  },
+  {
+   "n": 6,
+   "texto": "No processo administrativo vigora a verdade formal, limitada ao que as partes provam nos autos."
+  },
+  {
+   "n": 7,
+   "texto": "A Administração pode recusar livremente as provas oferecidas pelo interessado."
+  },
+  {
+   "n": 8,
+   "texto": "O interessado deve juntar aos autos documentos que já estão em poder da própria Administração."
+  },
+  {
+   "n": 9,
+   "texto": "A sindicância investigativa exige contraditório e ampla defesa."
+  },
+  {
+   "n": 10,
+   "texto": "O procedimento investigativo prévio é obrigatório para a instauração de processo administrativo disciplinar."
+  },
+  {
+   "n": 11,
+   "texto": "Da investigação preliminar pode resultar penalidade para o servidor."
+  },
+  {
+   "n": 12,
+   "texto": "À auditoria governamental cabe aplicar sanções disciplinares."
+  },
+  {
+   "n": 13,
+   "texto": "O acusado não pode ter acesso aos pareceres jurídicos dos autos antes do julgamento."
+  },
+  {
+   "n": 14,
+   "texto": "O denunciante tem direito de acompanhar a apuração, com acesso aos autos."
+  },
+  {
+   "n": 15,
+   "texto": "A autoridade julgadora está vinculada às conclusões da comissão processante."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Valem também no processo administrativo e para acusados em geral (art. 5º, LV, da Constituição)."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A Súmula Vinculante 5 diz o contrário: a falta de advogado no PAD não ofende a Constituição."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Amizade íntima é suspeição; impedimento é, por exemplo, ter interesse na matéria."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Aplica-se ao Legislativo e ao Judiciário quando exercem função administrativa (art. 1º, § 1º) e, de forma subsidiária, a estados e municípios sem lei própria (STJ, Súmula 633)."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "O art. 2º, parágrafo único, da Lei 9.784/1999 veda as três condutas."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Vigora a verdade material: a Administração busca os fatos para além do que foi provado pelas partes."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A recusa não é livre: exige motivação compatível com o caso."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Os documentos já existentes na Administração são obtidos de ofício pelo órgão."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A investigativa não exige; quem exige é a sindicância acusatória e o processo disciplinar."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É facultativo: a autoridade pode instaurar o PAD diretamente."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Da investigação resultam arquivamento, instauração de sindicância acusatória ou de PAD; penalidade exige processo com defesa."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A auditoria constata e reporta os fatos; a sanção cabe à autoridade disciplinar competente."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Tem acesso integral aos autos, inclusive quando conclusos para decisão."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "As vistas dos autos são do acusado e de seu advogado; ao denunciante é dado retorno conclusivo."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Pode divergir de forma motivada quando o relatório contrariar as provas dos autos."
+  }
+ ]
+}

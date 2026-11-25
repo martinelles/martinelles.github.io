@@ -1,0 +1,125 @@
+{
+ "aula": "B3·4",
+ "titulo": "4. Relações de trabalho e atendimento · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O art. 4º do Decreto 12.122/2024 traz rol taxativo de grupos protegidos."
+  },
+  {
+   "n": 2,
+   "texto": "Só há assédio moral quando praticado por superior hierárquico."
+  },
+  {
+   "n": 3,
+   "texto": "Piadas discriminatórias recorrentes são meras brincadeiras, sem relevância institucional."
+  },
+  {
+   "n": 4,
+   "texto": "A Lei 14.540/2023 de prevenção ao assédio sexual alcança todos os entes federativos."
+  },
+  {
+   "n": 5,
+   "texto": "Intersetorialidade, equidade e interseccionalidade estão entre as diretrizes do art. 5º do Decreto 12.122/2024."
+  },
+  {
+   "n": 6,
+   "texto": "O Programa do Decreto 12.122/2024 se aplica a estados e municípios, e diretamente às empresas estatais."
+  },
+  {
+   "n": 7,
+   "texto": "Toda conduta de conotação sexual no ambiente de trabalho é assédio sexual, sujeito a pena expulsiva."
+  },
+  {
+   "n": 8,
+   "texto": "O dever de evitar a retaliação cabe apenas à ouvidoria e à corregedoria."
+  },
+  {
+   "n": 9,
+   "texto": "Transferir a vítima de lotação para protegê-la, sem seu consentimento, é medida adequada."
+  },
+  {
+   "n": 10,
+   "texto": "A Lei 14.540/2023 protege contra retaliação também testemunhas e auxiliares de investigações."
+  },
+  {
+   "n": 11,
+   "texto": "Exige-se que a vítima classifique juridicamente a conduta para que o relato seja recebido."
+  },
+  {
+   "n": 12,
+   "texto": "Quem acolhe a vítima deve decidir se a denúncia é procedente."
+  },
+  {
+   "n": 13,
+   "texto": "Acionada a rede de acolhimento, o registro formal da denúncia passa a ser obrigatório."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O texto diz “como”: a lista é exemplificativa."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Pode ser horizontal, ascendente, misto ou organizacional."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A recorrência constrói ambiente hostil: é assédio discriminatório."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "A pegadinha a limita à administração federal."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "As quatro diretrizes são universalidade, transversalidade, confidencialidade e resolutividade."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Vale para a administração federal direta, autárquica e fundacional; as estatais definem ações em ato próprio."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "As de menor reprovabilidade são “outras condutas de natureza sexual”, com advertência ou suspensão."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É de toda a organização e de cada servidor."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A mudança só se fizer desejo da vítima (Guia Lilás)."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "A pegadinha limita a proteção à vítima."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O acolhimento recebe o relato como é; enquadramento é trabalho de quem apura."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Acolher é receber e apoiar; julgar procedência cabe ao processo próprio."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O acolhimento independe do registro: a vítima decide quando formalizar."
+  }
+ ]
+}

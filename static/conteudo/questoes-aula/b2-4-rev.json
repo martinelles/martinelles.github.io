@@ -1,0 +1,134 @@
+{
+ "aula": "B2·4",
+ "titulo": "4. Diversidade e acesso a direitos · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Identidade de gênero e orientação sexual são conceitos equivalentes."
+  },
+  {
+   "n": 2,
+   "texto": "O reconhecimento da união homoafetiva no Brasil decorreu de lei aprovada pelo Congresso."
+  },
+  {
+   "n": 3,
+   "texto": "Na Lei Brasileira de Inclusão, a deficiência é atributo exclusivo da condição física ou mental da pessoa."
+  },
+  {
+   "n": 4,
+   "texto": "O Estatuto da Pessoa Idosa se aplica a partir dos 65 anos."
+  },
+  {
+   "n": 5,
+   "texto": "O cordão de girassóis identifica deficiências ocultas e seu uso é opcional."
+  },
+  {
+   "n": 6,
+   "texto": "O cordão de girassóis dispensa o documento comprobatório quando solicitado, e basta para usar vaga reservada de estacionamento."
+  },
+  {
+   "n": 7,
+   "texto": "O atendente pessoal da LBI equivale a um auxiliar de enfermagem."
+  },
+  {
+   "n": 8,
+   "texto": "A demarcação constitui o direito indígena à terra."
+  },
+  {
+   "n": 9,
+   "texto": "A identidade indígena depende de laudo oficial."
+  },
+  {
+   "n": 10,
+   "texto": "A Constituição determina às comunidades indígenas os mesmos processos de aprendizagem do ensino regular, em português."
+  },
+  {
+   "n": 11,
+   "texto": "A tese do marco temporal é compatível com o direito originário indígena."
+  },
+  {
+   "n": 12,
+   "texto": "Interseccionalidade é somar desvantagens independentes."
+  },
+  {
+   "n": 13,
+   "texto": "A LBI classifica as barreiras apenas em urbanísticas, arquitetônicas e nos transportes."
+  },
+  {
+   "n": 14,
+   "texto": "Digitalizar um serviço garante, por si só, a ampliação do acesso."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Identidade é quem a pessoa se sabe ser; orientação é por quem ela se sente atraída."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Decorreu de decisão do STF (ADI 4.277, 2011)."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Resulta da interação entre a condição e as barreiras do ambiente."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Aplica-se a partir dos 60 anos."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "Ele sinaliza deficiências não visíveis; não é condição para exercer direitos."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Não dispensa a comprovação, e sozinho não assegura a vaga."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A lei exclui as técnicas e procedimentos de profissões legalmente estabelecidas."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O direito é originário, prévio à demarcação; a demarcação apenas o declara."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Vale a autoidentificação, conforme a Convenção 169 da OIT."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ela assegura processos próprios de aprendizagem e as línguas maternas."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Ela exige posse em 5/10/1988 e foi afastada pelo STF."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "É a interação de condições que produz uma experiência específica de discriminação."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "A lista inclui também barreiras nas comunicações e informação, atitudinais e tecnológicas."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Sem desenho inclusivo, a digitalização pode até excluir quem tinha acesso no balcão."
+  }
+ ]
+}

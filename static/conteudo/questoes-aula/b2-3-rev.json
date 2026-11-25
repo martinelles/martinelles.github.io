@@ -1,0 +1,107 @@
+{
+ "aula": "B2·3",
+ "titulo": "3. População, território e trabalho · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na transição demográfica, a fecundidade cai antes da mortalidade."
+  },
+  {
+   "n": 2,
+   "texto": "O bônus demográfico gera crescimento econômico automaticamente."
+  },
+  {
+   "n": 3,
+   "texto": "A Política Nacional de Cuidados tem como público apenas quem recebe cuidado."
+  },
+  {
+   "n": 4,
+   "texto": "O cuidado é atribuição exclusiva das famílias."
+  },
+  {
+   "n": 5,
+   "texto": "A Política Nacional de Desenvolvimento Regional trata apenas das desigualdades entre regiões."
+  },
+  {
+   "n": 6,
+   "texto": "A redução das desigualdades regionais é fundamento da República."
+  },
+  {
+   "n": 7,
+   "texto": "A desigualdade urbana é apenas uma questão de renda."
+  },
+  {
+   "n": 8,
+   "texto": "A desindustrialização brasileira ocorreu depois que o país atingiu renda alta."
+  },
+  {
+   "n": 9,
+   "texto": "Trabalhador informal é apenas o que trabalha sem carteira assinada."
+  },
+  {
+   "n": 10,
+   "texto": "A automação afeta apenas tarefas manuais."
+  },
+  {
+   "n": 11,
+   "texto": "Para Sennett, a flexibilização e a instabilidade do trabalho fortaleceram a identidade e a segurança dos trabalhadores."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É o contrário: a mortalidade cai primeiro, depois a fecundidade."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Ele é janela de oportunidade; sem emprego e políticas, não vira crescimento."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Inclui também quem cuida, remunerado ou não."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É corresponsabilidade: Estado, comunidade e família dividem o dever."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Inclui também as desigualdades dentro de cada região (intrarregionais)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É objetivo fundamental (CF, art. 3º)."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A localização no território (acesso a serviços, mobilidade, risco) também a define."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Foi precoce: veio com renda ainda média."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Inclui conta própria sem CNPJ, empregador sem CNPJ, entre outros."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Alcança também tarefas cognitivas rotineiras."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Para ele, geram insegurança e corroem os compromissos de longo prazo."
+  }
+ ]
+}

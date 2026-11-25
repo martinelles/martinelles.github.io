@@ -1,0 +1,170 @@
+{
+ "aula": "E2·5",
+ "titulo": "5. Qualidade e rastreabilidade · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Metadados e dicionário de dados são a mesma coisa."
+  },
+  {
+   "n": 2,
+   "texto": "Os metadados se limitam à estrutura técnica dos dados."
+  },
+  {
+   "n": 3,
+   "texto": "A busca da origem de um dado é a análise de impacto, e o catálogo corporativo guarda cópia dos dados."
+  },
+  {
+   "n": 4,
+   "texto": "O dado que atende às regras de formato e de domínio é, por isso, necessariamente acurado."
+  },
+  {
+   "n": 5,
+   "texto": "A consistência entre duas bases garante a acurácia do atributo comparado."
+  },
+  {
+   "n": 6,
+   "texto": "A ausência completamente aleatória (MCAR) é aquela que depende de outro atributo observado."
+  },
+  {
+   "n": 7,
+   "texto": "O perfilamento corrige os dados descobrindo seus problemas."
+  },
+  {
+   "n": 8,
+   "texto": "A limpeza de dados remove ou altera dados corretos, completos e relevantes."
+  },
+  {
+   "n": 9,
+   "texto": "O perfilamento depende de regras de negócio definidas antes, e identifica sozinho a causa raiz dos problemas."
+  },
+  {
+   "n": 10,
+   "texto": "Os algoritmos probabilísticos produzem sempre o mesmo resultado, por dependerem de regras fixas."
+  },
+  {
+   "n": 11,
+   "texto": "A blocagem aumenta o número de pares comparados no vinculação de registros."
+  },
+  {
+   "n": 12,
+   "texto": "Uma nota alta de similaridade entre dois nomes prova que os registros são da mesma pessoa."
+  },
+  {
+   "n": 13,
+   "texto": "A igualdade do número de registros e da soma dos valores comprova que duas fontes conferem registro a registro."
+  },
+  {
+   "n": 14,
+   "texto": "Toda diferença entre os totais mensais de duas fontes indica erro de carga."
+  },
+  {
+   "n": 15,
+   "texto": "O INNER JOIN mostra os registros que existem só em uma das fontes."
+  },
+  {
+   "n": 16,
+   "texto": "Falso positivo é o par da mesma pessoa que não foi vinculado."
+  },
+  {
+   "n": 17,
+   "texto": "Elevar o limiar de similaridade reduz os falsos negativos na vinculação."
+  },
+  {
+   "n": 18,
+   "texto": "Um CPF com dígito verificador válido garante que o registro pertence à pessoa cadastrada."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O dicionário é um dos repositórios de metadados, entre outros."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Incluem também origem, significado, responsável e qualidade."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Buscar a origem é a rastreabilidade (lineage); a análise de impacto olha o efeito de mudanças. O catálogo descreve os dados, não os armazena."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Pode estar no formato certo e ainda assim representar valor errado."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "As duas podem estar iguais e erradas ao mesmo tempo."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Essa dependência é o MAR; no MCAR a ausência não depende de nada."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Ele descreve e estatística o dado; a correção é papel da limpeza."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A definição foi invertida: ela trata do que está errado, incompleto ou irrelevante."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ele é exploratório e estatístico; a causa raiz pede investigação com quem entende do negócio."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Eles têm componente aleatório: o resultado varia entre execuções."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Ela faz o contrário: agrupa candidatos para reduzir as comparações."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A nota é indicativo, não prova; nomes parecidos pertencem a pessoas diferentes."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Totais iguais escondem compensações: sobra um de um lado, falta outro do outro."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Pode ser corte temporal: cada fonte fecha o mês em datas diferentes."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Ele mostra a interseção; o que sobrou de um lado só aparece no outer join."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Invertido: o não vinculado é falso negativo; falso positivo é o vínculo criado entre pessoas diferentes."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Limiar mais alto deixa de vincular mais pares verdadeiros: aumenta os falsos negativos."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "O dígito valida a estrutura do número, não a quem ele pertence."
+  }
+ ]
+}

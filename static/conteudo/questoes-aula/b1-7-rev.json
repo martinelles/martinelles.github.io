@@ -1,0 +1,62 @@
+{
+ "aula": "B1·7",
+ "titulo": "7. Mecanismos de reprodução e captura · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "No triângulo da fraude, a pressão é o fator mais diretamente controlado pela organização."
+  },
+  {
+   "n": 2,
+   "texto": "O excesso de legislação e de exigências burocráticas não pode ser determinante estrutural da corrupção."
+  },
+  {
+   "n": 3,
+   "texto": "Em contextos de corrupção sistêmica, o aumento isolado das penas basta para reduzir a corrupção."
+  },
+  {
+   "n": 4,
+   "texto": "Toda audiência de representantes de empresas com autoridades públicas configura favorecimento."
+  },
+  {
+   "n": 5,
+   "texto": "O Brasil possui lei federal específica regulamentando a atividade de lobby."
+  },
+  {
+   "n": 6,
+   "texto": "Corporativismo e pluralismo são a mesma coisa."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Quem a organização controla é a oportunidade; pressão e racionalização vêm da pessoa e do ambiente."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Pode: a dificuldade excessiva cria incentivo ao suborno para contorná-la."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Sem mudar a oportunidade e a estrutura de incentivos, a pena sozinha não resolve."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Audiência é interação legítima; favorecimento é agir com desvio de finalidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Não há lei federal do lobby; há normas de transparência e ética que tocam no tema."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Corporativismo: poucas organizações reconhecidas pelo Estado que agregam interesses e pactuam com ele; pluralismo: muitos grupos voluntários e competitivos."
+  }
+ ]
+}

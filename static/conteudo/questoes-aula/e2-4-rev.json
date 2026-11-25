@@ -1,0 +1,197 @@
+{
+ "aula": "E2·4",
+ "titulo": "4. Processamento distribuído · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Escalabilidade horizontal é a expansão da capacidade de armazenamento de um nó específico."
+  },
+  {
+   "n": 2,
+   "texto": "O HDFS distribui os blocos entre discos de um mesmo servidor, e limita os arquivos a poucos gigabytes."
+  },
+  {
+   "n": 3,
+   "texto": "O Hadoop é pouco eficiente quando se exige escalabilidade horizontal, e big data se define somente pelo volume."
+  },
+  {
+   "n": 4,
+   "texto": "O particionamento por hash favorece consultas por intervalo de valores da chave."
+  },
+  {
+   "n": 5,
+   "texto": "O particionamento horizontal divide colunas, e o vertical divide linhas."
+  },
+  {
+   "n": 6,
+   "texto": "O coalesce aumenta o número de partições e sempre embaralha todos os dados."
+  },
+  {
+   "n": 7,
+   "texto": "As transformações do Spark executam no momento em que são declaradas."
+  },
+  {
+   "n": 8,
+   "texto": "No MapReduce, o map produz o resultado consolidado, mantendo na saída a mesma quantidade de dados da entrada."
+  },
+  {
+   "n": 9,
+   "texto": "groupBy e join são transformações estreitas, que não movem dados entre partições."
+  },
+  {
+   "n": 10,
+   "texto": "A junção por broadcast embaralha as duas tabelas pela chave."
+  },
+  {
+   "n": 11,
+   "texto": "O broadcast sempre compensa, mesmo quando a tabela difundida é grande."
+  },
+  {
+   "n": 12,
+   "texto": "O embaralhamento é uma operação feita só em memória, sem disco nem rede."
+  },
+  {
+   "n": 13,
+   "texto": "Dobrar o número de nós sempre reduz o tempo do job pela metade."
+  },
+  {
+   "n": 14,
+   "texto": "A tolerância a falhas do Spark depende de replicar cada RDD em vários nós."
+  },
+  {
+   "n": 15,
+   "texto": "A replicação síncrona elimina qualquer possibilidade de inconsistência, e um sistema distribuído garante C, A e P ao mesmo tempo durante a partição."
+  },
+  {
+   "n": 16,
+   "texto": "O EXPLAIN do Spark executa a consulta e mostra o tempo gasto em cada operador."
+  },
+  {
+   "n": 17,
+   "texto": "O plano lógico já define o algoritmo de junção que será usado."
+  },
+  {
+   "n": 18,
+   "texto": "O operador Exchange indica a leitura de arquivos."
+  },
+  {
+   "n": 19,
+   "texto": "Aumentar o número de partições resolve a assimetria provocada por uma única chave quente."
+  },
+  {
+   "n": 20,
+   "texto": "Depois de um embaralhamento, a ordem das linhas do resultado é garantida."
+  },
+  {
+   "n": 21,
+   "texto": "A atualização de um acumulador dentro de uma transformação é aplicada exatamente uma vez, mesmo com tarefas reexecutadas."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Essa é a vertical; a horizontal adiciona mais nós ao conjunto."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A distribuição é entre servidores; o HDFS nasceu justamente para arquivos grandes."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O Hadoop escala horizontalmente por natureza; e big data não é só volume: há variedade e velocidade, entre outros."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O hash espalha os dados sem vizinhança; intervalo pede particionamento por faixa."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Invertidos: o horizontal divide linhas entre nós; o vertical divide colunas."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Ele reduz partições e evita o embaralhamento."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "São preguiçosas: só executam quando chega uma ação."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "O map trabalha par a par e pode reduzir o volume; a consolidação é papel do reduce."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Ambas embaralham dados entre partições: são transformações largas."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ela difunde a tabela pequena para todos os nós; a grande nem se move."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Tabela grande difundida custa rede e memória; a escolha depende do tamanho."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Ele trafega dados pela rede e pode despejar em disco."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Há sobrecarga de coordenação e trechos não paralelizáveis."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ela vem do grafo de linhagem: o que se perde é recalculado a partir da origem."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "A replicação reduz, mas não elimina; e no CAP, durante a partição, escolhe-se consistência ou disponibilidade."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Ele só apresenta os planos; não executa nem cronometra."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "O algoritmo é escolhido no planejamento físico."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Ele indica redistribuição de dados entre partições, o embaralhamento."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "A chave quente segue inteira numa partição só; resolver é tratá-la à parte."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Não há garantia de ordem sem ordenação explícita."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Em reexecução por falha, o acumulador pode contar o mesmo incremento mais de uma vez."
+  }
+ ]
+}

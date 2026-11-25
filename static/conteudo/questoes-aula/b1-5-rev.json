@@ -1,0 +1,71 @@
+{
+ "aula": "B1·5",
+ "titulo": "5. Valor público e controle · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Valor público equivale ao lucro ou ao superávit da organização pública."
+  },
+  {
+   "n": 2,
+   "texto": "O volume de atividades realizadas mede, por si só, o valor público gerado."
+  },
+  {
+   "n": 3,
+   "texto": "O princípio da eficiência foi introduzido no governo Collor."
+  },
+  {
+   "n": 4,
+   "texto": "A gestão por resultados elimina a burocracia e o controle."
+  },
+  {
+   "n": 5,
+   "texto": "A legitimidade de um governo depende apenas de sua origem eleitoral."
+  },
+  {
+   "n": 6,
+   "texto": "A eficiência deve prevalecer sempre sobre as garantias processuais."
+  },
+  {
+   "n": 7,
+   "texto": "Controles mais numerosos produzem, sempre, mais valor público."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É o valor criado para a sociedade, percebido e reconhecido por ela."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Mede esforço; o valor público é o efeito na vida das pessoas."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Veio com a EC 19/1998, na reforma gerencial."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Ela combina metas e indicadores com controle a posteriori; burocracia essencial segue existindo."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Desempenho e conduta cotidiana também sustentam (ou corroem) a legitimidade."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Não há prevalência absoluta: pondera-se conforme o caso."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Controle em excesso trava a ação; o que gera valor é a dose certa."
+  }
+ ]
+}

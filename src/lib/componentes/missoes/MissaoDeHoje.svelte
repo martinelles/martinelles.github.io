@@ -291,6 +291,7 @@
 									{@const temAtalhoSub = subs.some((s) => nSub(s) > 0 || plano.mapas?.[s.cid])}
 									{@const podcasts = aulaInfo ? audiosMissoes.daAula(aulaInfo.id) : null}
 									{@const questoes = questoesDaAula.slug(it.cod)}
+									{@const questoesRev = questoesDaAula.slugRevisao(it.cod)}
 									{@const itemOk = porItem && itemCumprido(marcas, cargo, dia, i, it)}
 									{@const aberto = !lembreteFeito && lembrete?.bloco === i && lembrete.cid === it.cid}
 									<li
@@ -335,7 +336,7 @@
 											{#if it.subitens?.length}
 												<em> · aula da mentoria, subitens {it.subitens.map((s) => s.cod).join(' · ')}</em>
 											{/if}
-											{#if aula || tec || extras.length || temAtalhoSub || (!it.subitens && (nSub(it) > 0 || plano.mapas?.[it.cid]))}
+											{#if aula || tec || extras.length || temAtalhoSub || questoes || questoesRev || (!it.subitens && (nSub(it) > 0 || plano.mapas?.[it.cid]))}
 												<span class="atalhos">
 													{#if !it.subitens && nSub(it) > 0}
 														<a class="topico" href="/?topico={encodeURIComponent(it.cid)}&tipo=questao">
@@ -357,6 +358,9 @@
 													{/each}
 													{#if questoes}
 														<a class="topico" href="/questoes/{questoes}">Questões C/E ↗</a>
+													{/if}
+													{#if questoesRev}
+														<a class="topico" href="/questoes/{questoesRev}">Revisão C/E ↗</a>
 													{/if}
 													{#if podcasts?.audios?.length}
 														<a class="topico" href="/podcast/{slugDaAula(aulaInfo!.disciplina, aulaInfo!.titulo)}">

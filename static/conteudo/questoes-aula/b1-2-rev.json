@@ -1,0 +1,134 @@
+{
+ "aula": "B1·2",
+ "titulo": "2. Democracia e representação · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O plebiscito é convocado depois do ato legislativo, para ratificá-lo."
+  },
+  {
+   "n": 2,
+   "texto": "No Brasil, o voto é facultativo para todos os maiores de 18 anos."
+  },
+  {
+   "n": 3,
+   "texto": "A participação social substitui a representação política."
+  },
+  {
+   "n": 4,
+   "texto": "A atuação do TCU e da CGU é accountability vertical."
+  },
+  {
+   "n": 5,
+   "texto": "As eleições são mecanismo de accountability horizontal."
+  },
+  {
+   "n": 6,
+   "texto": "Só partidos políticos podem denunciar irregularidades ao TCU."
+  },
+  {
+   "n": 7,
+   "texto": "A CPI aplica sanções e condena os investigados."
+  },
+  {
+   "n": 8,
+   "texto": "A fiscalização contábil e financeira é função atípica do Legislativo."
+  },
+  {
+   "n": 9,
+   "texto": "A Constituição de 1988 adota separação rígida de Poderes."
+  },
+  {
+   "n": 10,
+   "texto": "Governabilidade é a dimensão técnica e gerencial de conduzir o Estado."
+  },
+  {
+   "n": 11,
+   "texto": "O presidencialismo de coalizão é próprio de sistemas bipartidários."
+  },
+  {
+   "n": 12,
+   "texto": "Os controles recíprocos entre Poderes subordinam um ao outro."
+  },
+  {
+   "n": 13,
+   "texto": "Na democracia de público, o vínculo principal do eleitor é a fidelidade partidária."
+  },
+  {
+   "n": 14,
+   "texto": "Representação descritiva e representação substantiva são conceitos equivalentes."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Está trocado: o plebiscito é prévio; o referendo é posterior."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "É obrigatório; facultativo para analfabetos, maiores de 70 e jovens de 16 e 17 anos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Ela complementa a representação, não a substitui."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É horizontal: instituições estatais controlando umas às outras."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "São verticais: o cidadão controla pelos votos."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Qualquer cidadão, partido, associação ou sindicato pode."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Ela investiga e encaminha conclusões ao Ministério Público."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É típica, exercida com apoio do Tribunal de Contas."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Adota separação flexível: Poderes independentes e harmônicos, com controles recíprocos."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Governabilidade é a dimensão política (coalizões, apoio); a técnica e gerencial é a governança."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É fruto do multipartidarismo: o presidente forma coalizão para governar."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Ninguém se subordina: são independentes e harmônicos."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "É a imagem do candidato; o vínculo programático partidário é da democracia partidária de massa."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Descritiva espelha características da sociedade; substantiva defende interesses, venha de quem vier."
+  }
+ ]
+}

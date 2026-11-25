@@ -1,0 +1,215 @@
+{
+ "aula": "E3·3",
+ "titulo": "3. Métricas e efeitos das decisões · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Na curva ROC, a especificidade é a taxa de verdadeiros positivos, e a sensibilidade, a taxa de falsos positivos."
+  },
+  {
+   "n": 2,
+   "texto": "Com classes desbalanceadas, a acurácia é a métrica mais adequada, por considerar todos os acertos."
+  },
+  {
+   "n": 3,
+   "texto": "A precisão é a proporção de positivos previstos que são de fato positivos; a revocação, a proporção de positivos reais capturada pelo modelo."
+  },
+  {
+   "n": 4,
+   "texto": "AUC abaixo de 0,5 indica um classificador neutro."
+  },
+  {
+   "n": 5,
+   "texto": "Um modelo com AUC alta tem, por isso, probabilidades bem calibradas."
+  },
+  {
+   "n": 6,
+   "texto": "Um escore de Brier maior indica melhor calibração."
+  },
+  {
+   "n": 7,
+   "texto": "Calibrar o modelo por uma função crescente, como a sigmoide de Platt, muda a ordem dos casos e, com ela, a AUC."
+  },
+  {
+   "n": 8,
+   "texto": "O MAE é preferível ao RMSE quando se quer penalizar mais os erros grandes."
+  },
+  {
+   "n": 9,
+   "texto": "O RMSE é a raiz da soma dos erros ao quadrado, sem dividir pelo número de casos."
+  },
+  {
+   "n": 10,
+   "texto": "A acurácia serve para avaliar regressão, e o R², para avaliar classificação."
+  },
+  {
+   "n": 11,
+   "texto": "O R² não pode ser negativo."
+  },
+  {
+   "n": 12,
+   "texto": "O limiar de 0,5 é sempre o que minimiza o custo dos erros."
+  },
+  {
+   "n": 13,
+   "texto": "Quando o falso negativo é muito mais caro, o limiar de decisão deve subir."
+  },
+  {
+   "n": 14,
+   "texto": "Priorizar a revocação reduz os falsos positivos."
+  },
+  {
+   "n": 15,
+   "texto": "Excluir o atributo sensível do treino elimina o risco de discriminação do modelo."
+  },
+  {
+   "n": 16,
+   "texto": "O viés algorítmico só existe quando há intenção de discriminar."
+  },
+  {
+   "n": 17,
+   "texto": "Um modelo com alta acurácia geral tem desempenho equivalente em todos os grupos."
+  },
+  {
+   "n": 18,
+   "texto": "A importância de um atributo no modelo prova que ele causa o desfecho."
+  },
+  {
+   "n": 19,
+   "texto": "A importância por impureza não atribui peso a atributos sem relação com o alvo."
+  },
+  {
+   "n": 20,
+   "texto": "A explicação local, de um caso, e a explicação global, do modelo inteiro, são a mesma coisa."
+  },
+  {
+   "n": 21,
+   "texto": "A taxa de irregularidades encontrada nos contratos auditados por escore estima a taxa de irregularidades da carteira inteira."
+  },
+  {
+   "n": 22,
+   "texto": "O escore de risco, por ser objetivo, dispensa revisão humana e evidência de auditoria."
+  },
+  {
+   "n": 23,
+   "texto": "A LGPD proíbe toda decisão tomada com base em tratamento automatizado."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Está trocado: sensibilidade é a taxa de verdadeiros positivos; o eixo horizontal da ROC é 1 menos a especificidade."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A classe majoritária domina a acurácia; precisão, revocação e AUC dizem mais."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "A pegadinha troca as fórmulas e confunde precisão com acurácia."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Indica ordenação pior que o acaso; neutro é 0,5."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "AUC mede ordenação; calibração é outra propriedade."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É o contrário: quanto menor o Brier, melhor."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Função monótona preserva a ordem: a AUC fica igual, só os valores mudam."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Quem penaliza os erros grandes é o RMSE, por elevar ao quadrado."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Divide-se a soma pelo número de casos antes de tirar a raiz."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Está invertido: R² é de regressão; acurácia, de classificação."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Pode: quando o modelo é pior que prever a média constante."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O limiar ótimo depende do custo relativo dos erros e da prevalência."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Deve baixar: classifica-se mais casos como positivos para não perder os verdadeiros."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Aumenta: ao capturar mais positivos, entra mais ruído junto."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Atributos correlacionados (proxies) carregam o mesmo sinal."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Ele nasce dos dados e do desenho, sem intenção nenhuma; dados que refletem desigualdade geram decisão discriminatória."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "A média esconde disparidades: um grupo pode sair muito mal coberto pelo conjunto."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Importância é associação preditiva, não causalidade."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Atributos irrelevantes podem receber peso, sobretudo os de alta cardinalidade."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "São níveis distintos de explicação; confundi-los é a pegadinha."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "A auditoria guiada por escore superrepresenta os contratos de risco alto; a taxa da carteira é outra."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "O escore prioriza; a conclusão exige evidência e quem a julgue."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Ela não proíbe: garante ao titular o direito de pedir revisão da decisão."
+  }
+ ]
+}

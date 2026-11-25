@@ -1,0 +1,80 @@
+{
+ "aula": "B4·1",
+ "titulo": "1. Organização administrativa · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A lei específica cria a empresa pública."
+  },
+  {
+   "n": 2,
+   "texto": "A sociedade de economia mista pode adotar qualquer forma societária."
+  },
+  {
+   "n": 3,
+   "texto": "Entre ministério e autarquia a ele vinculada há hierarquia."
+  },
+  {
+   "n": 4,
+   "texto": "Criar órgãos dentro da mesma pessoa jurídica é descentralização."
+  },
+  {
+   "n": 5,
+   "texto": "Órgãos públicos só existem na administração direta."
+  },
+  {
+   "n": 6,
+   "texto": "O termo de fomento é proposto pela própria Administração."
+  },
+  {
+   "n": 7,
+   "texto": "Agência executiva é uma nova espécie de entidade da administração indireta."
+  },
+  {
+   "n": 8,
+   "texto": "Concessionários e permissionários de serviço público são agentes credenciados."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Ela autoriza a criação; quem cria é o Executivo. Só a autarquia é criada diretamente por lei."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Reveste sempre a forma de sociedade anônima."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Há supervisão ministerial, ou tutela; hierarquia exige subordinação, que não existe entre pessoas jurídicas distintas."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É desconcentração; descentralizar é transferir a outra pessoa jurídica."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A Lei 9.784/1999, art. 1º, § 2º, I, inclui os órgãos da administração indireta."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Quem propõe o termo de fomento é a OSC; a Administração propõe o de colaboração."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "É qualificação atribuída a autarquia ou fundação que firma contrato de gestão."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "São agentes delegados; jurado e mesário são agentes honoríficos."
+  }
+ ]
+}

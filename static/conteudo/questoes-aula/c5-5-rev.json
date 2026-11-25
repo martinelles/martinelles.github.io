@@ -1,0 +1,80 @@
+{
+ "aula": "C5·5",
+ "titulo": "5. Integração entre funções da CGU · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A denúncia recebida pela ouvidoria já constitui achado de auditoria."
+  },
+  {
+   "n": 2,
+   "texto": "Ao identificar irregularidade, o auditor aplica diretamente a sanção ao servidor ou à empresa."
+  },
+  {
+   "n": 3,
+   "texto": "O achado de auditoria obriga a instauração de processo correcional, sem juízo de admissibilidade."
+  },
+  {
+   "n": 4,
+   "texto": "A avaliação da CGU alcança a gestão dos administradores estaduais e municipais."
+  },
+  {
+   "n": 5,
+   "texto": "A CGU instaura processos judiciais de responsabilização de pessoas jurídicas."
+  },
+  {
+   "n": 6,
+   "texto": "A CGU encaminha ao Ministério Público da União os casos de improbidade e os que pedem indisponibilidade de bens e ressarcimento."
+  },
+  {
+   "n": 7,
+   "texto": "Ao ser compartilhada com outro órgão, a identidade do denunciante perde a natureza restrita."
+  },
+  {
+   "n": 8,
+   "texto": "A unidade de apuração pode requisitar a identidade do denunciante em qualquer caso, mesmo sem necessidade."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A denúncia é insumo; o achado nasce da verificação com evidência."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A auditoria não pune: encaminha aos órgãos competentes."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A instauração passa pelo juízo de admissibilidade da autoridade competente."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A competência fala em administradores públicos federais; o recurso federal transferido é fiscalizado onde for aplicado."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Instaura processos administrativos de responsabilização (PAR) e celebra acordos de leniência."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Esses vão para a AGU; a PF e o MPF são provocados quando há indício de crime."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O compartilhamento preserva a restrição da identidade."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A identidade só se requisita quando necessária à apuração do caso concreto."
+  }
+ ]
+}

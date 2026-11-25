@@ -1,0 +1,116 @@
+{
+ "aula": "C4·3",
+ "titulo": "3. Inferências e erros de raciocínio · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Se o indicador melhorou depois da implementação da política, a política causou a melhora."
+  },
+  {
+   "n": 2,
+   "texto": "Correlação forte entre duas variáveis prova relação causal entre elas."
+  },
+  {
+   "n": 3,
+   "texto": "O contrafactual pode ser observado diretamente."
+  },
+  {
+   "n": 4,
+   "texto": "O resultado de amostra de conveniência pode ser generalizado para a população."
+  },
+  {
+   "n": 5,
+   "texto": "A comparação entre participantes voluntários e não participantes é contaminada por autoseleção."
+  },
+  {
+   "n": 6,
+   "texto": "A melhora de unidades selecionadas por mau desempenho prova o efeito da intervenção."
+  },
+  {
+   "n": 7,
+   "texto": "Diferença menor que a margem de erro entre dois valores é diferença real."
+  },
+  {
+   "n": 8,
+   "texto": "A falácia ecológica consiste em generalizar do indivíduo para o grupo."
+  },
+  {
+   "n": 9,
+   "texto": "O viés de confirmação se resolve aumentando a quantidade de evidências do mesmo tipo."
+  },
+  {
+   "n": 10,
+   "texto": "Um teste com 90% de detecção garante que 90% dos casos marcados são irregulares."
+  },
+  {
+   "n": 11,
+   "texto": "No mesmo filtro, apertar o critério para reduzir falsos positivos não afeta os falsos negativos."
+  },
+  {
+   "n": 12,
+   "texto": "A ausência de alerta na trilha de auditoria permite concluir pela inexistência de irregularidade."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A ordem no tempo não estabelece causalidade; outras explicações concorrentes precisam ser descartadas."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Correlação, mesmo forte, não prova causalidade."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O contrafactual é o que teria acontecido sem a intervenção; não é observável, precisa ser estimado."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Amostra de conveniência não é aleatória; dela não se generalize para o conjunto."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A participação voluntária forma grupos diferentes antes mesmo da política; a diferença observada não é efeito puro dela."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Pode ser regressão à média: unidades escolhidas por estarem ruins tendem a melhorar ainda que nada mude."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Dentro da margem de erro não se afirma diferença; dizer que existe é a pegadinha."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É o contrário: generalizar do grupo para o indivíduo; do indivíduo para o grupo é a falácia atomística."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Mais evidência do mesmo tipo e do mesmo viés reforça o erro; a solução é buscar evidência independente e contrária à hipótese."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Confunde sensibilidade com valor preditivo; a proporção de acertos entre os marcados depende da prevalência de irregulares."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Afeta: critério mais apertado deixa passar mais casos irregulares, aumentando os falsos negativos."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Sem alerta não é prova de ausência; a trilha cobre apenas o que foi desenhada para cobrir."
+  }
+ ]
+}

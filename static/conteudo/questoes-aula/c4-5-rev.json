@@ -1,0 +1,98 @@
+{
+ "aula": "C4·5",
+ "titulo": "5. Uso responsável de inteligência artificial · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Fazer inferências e prever um estado futuro para apoiar a decisão é característica da IA generativa."
+  },
+  {
+   "n": 2,
+   "texto": "Prompt é o algoritmo do modelo ou seu armazenamento."
+  },
+  {
+   "n": 3,
+   "texto": "O uso de IA transfere à ferramenta a responsabilidade pelo conteúdo produzido."
+  },
+  {
+   "n": 4,
+   "texto": "A IA é sempre preferível a soluções simples, por ser mais moderna."
+  },
+  {
+   "n": 5,
+   "texto": "Resultados de IA são neutros por serem produzidos por máquina."
+  },
+  {
+   "n": 6,
+   "texto": "Sistema enviesado é defensável quando maximiza a métrica escolhida ou tem alta precisão média."
+  },
+  {
+   "n": 7,
+   "texto": "É seguro inserir dados pessoais de cidadãos em ferramentas de IA abertas, para agilizar a análise."
+  },
+  {
+   "n": 8,
+   "texto": "A LGPD proíbe qualquer decisão tomada de forma automatizada."
+  },
+  {
+   "n": 9,
+   "texto": "A LGPD não exige que a revisão da decisão automatizada seja feita por pessoa natural."
+  },
+  {
+   "n": 10,
+   "texto": "Apontamento de modelo de IA configura evidência de auditoria sem necessidade de verificação."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Esse é o foco da IA analítica, ou preditiva; a generativa cria conteúdo novo a partir de padrões."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Prompt é o comando de texto que orienta a tarefa a ser executada."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A responsabilidade é de quem usa a ferramenta e decide com base nela."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A escolha acompanha o problema a resolver; solução simples que resolve é melhor que tecnologia pela tecnologia."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A IA herda vieses dos dados de treino e das escolhas de desenho e métrica."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Acerto na média não afasta efeito desproporcional sobre um grupo; o problema pode estar nos dados ou na própria métrica."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Não é seguro: expõe dado pessoal a terceiros, fora do controle do órgão."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Ela não proíbe: garante ao titular a revisão da decisão e a informação sobre critérios (art. 20)."
+  },
+  {
+   "n": 9,
+   "r": "C",
+   "comentario": "O § 3º do art. 20, que previa isso, foi vetado."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É indicativo, não evidência; tudo que o modelo aponta passa por verificação."
+  }
+ ]
+}

@@ -1,0 +1,251 @@
+{
+ "aula": "E1·5",
+ "titulo": "5. Preparação e transformação · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A descrição, a exploração e a verificação da qualidade dos dados fazem parte da fase de preparação."
+  },
+  {
+   "n": 2,
+   "texto": "As fases do CRISP-DM são estritamente sequenciais."
+  },
+  {
+   "n": 3,
+   "texto": "No mecanismo MAR, a probabilidade de a ausência ocorrer depende do próprio valor ausente."
+  },
+  {
+   "n": 4,
+   "texto": "O método MICE não se aplica a dados com ausência do tipo MAR."
+  },
+  {
+   "n": 5,
+   "texto": "Excluir as linhas com valores ausentes nunca introduz viés na análise."
+  },
+  {
+   "n": 6,
+   "texto": "A imputação pela média preserva a variância da variável."
+  },
+  {
+   "n": 7,
+   "texto": "O drop_duplicates remove todas as ocorrências do registro repetido, inclusive a primeira."
+  },
+  {
+   "n": 8,
+   "texto": "Grafias diferentes do mesmo órgão são detectadas como duplicatas sem padronização prévia."
+  },
+  {
+   "n": 9,
+   "texto": "Toda repetição de valores na base é erro, e redundância de atributo é o mesmo que duplicação de registro."
+  },
+  {
+   "n": 10,
+   "texto": "As anomalias devem sempre ser descartadas, para manter a harmonia do conjunto."
+  },
+  {
+   "n": 11,
+   "texto": "No box plot, o limite superior é calculado a partir do primeiro quartil: Q1 + 1,5·IQR."
+  },
+  {
+   "n": 12,
+   "texto": "A normalização min-max elimina os outliers da base."
+  },
+  {
+   "n": 13,
+   "texto": "Um modelo com 98% de acurácia numa base com 2% de positivos é, por isso, bom."
+  },
+  {
+   "n": 14,
+   "texto": "O SMOTE replica exemplos existentes da classe minoritária."
+  },
+  {
+   "n": 15,
+   "texto": "A reamostragem de balanceamento deve ser aplicada à base inteira, antes da separação entre treino e teste."
+  },
+  {
+   "n": 16,
+   "texto": "A discretização transforma atributos categóricos em contínuos."
+  },
+  {
+   "n": 17,
+   "texto": "A codificação ordinal de um atributo nominal não introduz relação de ordem."
+  },
+  {
+   "n": 18,
+   "texto": "A codificação one-hot gera uma única coluna de inteiros."
+  },
+  {
+   "n": 19,
+   "texto": "A padronização pelo escore z transforma a distribuição dos dados em normal."
+  },
+  {
+   "n": 20,
+   "texto": "A normalização min-max é robusta a outliers."
+  },
+  {
+   "n": 21,
+   "texto": "Modelos de árvores de decisão exigem atributos padronizados."
+  },
+  {
+   "n": 22,
+   "texto": "A análise de componentes principais (PCA) é um método de seleção de atributos."
+  },
+  {
+   "n": 23,
+   "texto": "O método de filtro para seleção de atributos depende do algoritmo de aprendizado usado."
+  },
+  {
+   "n": 24,
+   "texto": "A penalização L2 zera coeficientes de atributos irrelevantes."
+  },
+  {
+   "n": 25,
+   "texto": "Padronizar a base inteira antes de dividir treino e teste não afeta a avaliação, porque não usa o rótulo."
+  },
+  {
+   "n": 26,
+   "texto": "A seleção de atributos feita uma vez na base inteira e depois validada por validação cruzada estima corretamente o desempenho."
+  },
+  {
+   "n": 27,
+   "texto": "Em dados temporais, a divisão aleatória entre treino e teste é a mais adequada."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "São da fase de entendimento dos dados; a preparação é outra fase."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O processo é iterativo: fases retroalimentam as anteriores."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Isso é o MNAR; no MAR, a ausência depende de outros valores observados."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Aplica-se justamente bem ao MAR, imputando por modelos condicionais encadeados."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Se a ausência não é aleatória, a exclusão simples enviesa o que sobra."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Ela reduz a variância e comprime a distribuição em torno do centro."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Por padrão, a primeira ocorrência fica; as demais caem."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Sem padronizar, o computador não reconhece que são o mesmo ente."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Repetição pode ser legítima pela regra de negócio; redundância de atributo é um derivável do outro, coisa distinta de registro duplicado."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Anomalia pode ser o fato mais relevante da base; descartar exige critério."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Os limites foram invertidos: superior é Q3 + 1,5·IQR; inferior, Q1 − 1,5·IQR."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Ela apenas reescala: os outliers continuam lá e espremem o resto no intervalo."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Chutar sempre a classe majoritária já dá 98%; é preciso olhar sensibilidade e precisão."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ele sintetiza exemplos novos, interpolando entre vizinhos da minoritária."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Aplica-se só ao treino; fazer na base inteira vaza informação do teste."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "É o inverso: contínuos em categorias (faixas)."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Atribuir 1, 2, 3 a categorias sem ordem cria ordem artificial que o modelo usa."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Gera uma coluna binária por categoria."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Ela muda média e desvio padrão, não a forma da distribuição."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "É sensível: os extremos definem a escala e comprimem o resto."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Árvores são invariantes a transformações monotônicas de escala."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Ela extrai atributos novos (componentes), não seleciona os originais."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Essa dependência é do método empacotador (wrapper); o filtro avalia os dados por si."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "Quem zera é a L1; a L2 apenas encolhe os coeficientes."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Afeta: a média e o desvio do teste vazam para o treino; o fit é no treino, só."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "Há vazamento: a seleção deve ocorrer dentro de cada dobra de validação."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "Pede-se divisão temporal, com o teste depois do treino; o aleatório deixa o futuro vazar."
+  }
+ ]
+}

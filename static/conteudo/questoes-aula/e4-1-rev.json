@@ -1,0 +1,197 @@
+{
+ "aula": "E4·1",
+ "titulo": "1. Ciclo de vida e MLOps · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A automação do MLOps se limita ao treinamento do modelo."
+  },
+  {
+   "n": 2,
+   "texto": "O modelo validado mantém o desempenho enquanto o código não mudar."
+  },
+  {
+   "n": 3,
+   "texto": "O nível 0 de maturidade em MLOps se caracteriza pelo treinamento contínuo automatizado."
+  },
+  {
+   "n": 4,
+   "texto": "Em MLOps, o controle de versão se restringe ao código-fonte."
+  },
+  {
+   "n": 5,
+   "texto": "O Git, sozinho, é a forma recomendada de guardar grandes conjuntos de dados, e o DVC o substitui."
+  },
+  {
+   "n": 6,
+   "texto": "Voltar à versão anterior do modelo exige retreiná-lo."
+  },
+  {
+   "n": 7,
+   "texto": "O MLflow é ferramenta exclusiva de uma única tarefa, como o treinamento."
+  },
+  {
+   "n": 8,
+   "texto": "Basta registrar a execução de melhor desempenho no servidor de experimentos."
+  },
+  {
+   "n": 9,
+   "texto": "Execuções treinadas sobre versões diferentes dos dados podem ser comparadas diretamente, desde que a métrica seja a mesma."
+  },
+  {
+   "n": 10,
+   "texto": "Integração contínua é a liberação automática das mudanças do repositório até a produção."
+  },
+  {
+   "n": 11,
+   "texto": "Numa boa prática de CI, as mudanças são acumuladas e integradas semanalmente."
+  },
+  {
+   "n": 12,
+   "texto": "A infraestrutura como código declarativa descreve os comandos, na ordem, para chegar ao estado desejado."
+  },
+  {
+   "n": 13,
+   "texto": "Fixar a semente aleatória basta para reproduzir o treino, mesmo relendo os dados da origem a cada execução."
+  },
+  {
+   "n": 14,
+   "texto": "A ferramenta de infraestrutura como código trata sozinha da compatibilidade de versões, dispensando fixá-las."
+  },
+  {
+   "n": 15,
+   "texto": "Reprodutibilidade é garantia de que o resultado está correto."
+  },
+  {
+   "n": 16,
+   "texto": "No lançamento canário, a nova versão vai para todos os usuários de uma vez."
+  },
+  {
+   "n": 17,
+   "texto": "Na implantação em sombra, as respostas da versão nova são entregues aos usuários."
+  },
+  {
+   "n": 18,
+   "texto": "Teste A/B e lançamento canário são nomes do mesmo mecanismo."
+  },
+  {
+   "n": 19,
+   "texto": "A mudança de conceito é detectada comparando apenas a distribuição dos atributos de entrada."
+  },
+  {
+   "n": 20,
+   "texto": "PSI acima de 0,25 indica população estável."
+  },
+  {
+   "n": 21,
+   "texto": "Um p-valor muito pequeno no teste de KS, com amostras grandes, prova mudança relevante."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Ela percorre da ingestão dos dados à implantação e ao monitoramento."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Os dados mudam com o tempo; sem monitoramento, o desempenho deriva."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Treinamento contínuo é a marca do nível 1; o nível 0 é manual, ponta a ponta."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Ele abrange dados, modelos e configurações, para reprodutibilidade e auditabilidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "O DVC complementa o Git: versiona os dados e deixa no repositório apenas os ponteiros."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O artefato versionado é restaurado como estava; retreinar é outro caminho."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Ele cobre rastreamento de experimentos, registro e implantação de modelos."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Todas as execuções são registradas; sem histórico, não há comparação nem auditoria."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Comparação válida exige a mesma versão de dados e de configuração."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Essa é a implantação contínua; a integração contínua constrói e testa a cada mudança."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O recomendado são integrações pequenas e frequentes."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A declarativa descreve o estado final; a sequência de comandos é da imperativa."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Se a origem muda, muda o treino: o dado precisa versionado também."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Fixar versões de dependências continua sendo tarefa do time."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Ela garante que o resultado se repete; estar certo é outra discussão."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "O canário começa com uma parcela pequena e cresce com segurança."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "A sombra roda em paralelo sem servir ninguém: só se compara em silêncio."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "O A/B mede o efeito de versões concorrentes; o canário protege a operação na estréia da versão."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Ela é na relação entre entrada e alvo: pede rótulo ou desempenho em produção."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Acima de 0,25 indica mudança relevante na população."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Com amostra grande, diferenças minúsculas ficam significativas; relevância é outro juízo."
+  }
+ ]
+}

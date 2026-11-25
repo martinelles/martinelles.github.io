@@ -1,0 +1,359 @@
+{
+ "aula": "E1·4",
+ "titulo": "4. Programação para análise · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Em Python, os blocos de código são delimitados por chaves."
+  },
+  {
+   "n": 2,
+   "texto": "Com a tipagem dinâmica do Python, somar um texto com um número converte sozinha o texto."
+  },
+  {
+   "n": 3,
+   "texto": "Em Python 3, a expressão 6 / 2 devolve o inteiro 3."
+  },
+  {
+   "n": 4,
+   "texto": "Em Python, −7 // 2 vale −3."
+  },
+  {
+   "n": 5,
+   "texto": "Listas em Python são imutáveis e podem ser chaves de dicionário."
+  },
+  {
+   "n": 6,
+   "texto": "lista.append([2, 20]) acrescenta dois elementos à lista."
+  },
+  {
+   "n": 7,
+   "texto": "A fatia lista[1:4] inclui o elemento de índice 4."
+  },
+  {
+   "n": 8,
+   "texto": "Em Python, b = a cria uma cópia independente da lista a."
+  },
+  {
+   "n": 9,
+   "texto": "O else de um laço é executado quando o laço é interrompido por break."
+  },
+  {
+   "n": 10,
+   "texto": "range(1, 5) inclui o número 5."
+  },
+  {
+   "n": 11,
+   "texto": "A instrução continue encerra o laço."
+  },
+  {
+   "n": 12,
+   "texto": "O Python não possui instrução de seleção múltipla."
+  },
+  {
+   "n": 13,
+   "texto": "O valor padrão de um parâmetro é avaliado a cada chamada da função."
+  },
+  {
+   "n": 14,
+   "texto": "Uma função Python sem return devolve zero."
+  },
+  {
+   "n": 15,
+   "texto": "*args recebe um dicionário e **kwargs recebe uma tupla."
+  },
+  {
+   "n": 16,
+   "texto": "Uma expressão lambda pode conter várias instruções."
+  },
+  {
+   "n": 17,
+   "texto": "Uma recursão sem caso base está correta."
+  },
+  {
+   "n": 18,
+   "texto": "Atribuir a uma variável global dentro da função a altera, mesmo sem declarar global."
+  },
+  {
+   "n": 19,
+   "texto": "O bloco if __name__ == ’__main__’: é executado quando o módulo é importado."
+  },
+  {
+   "n": 20,
+   "texto": "Cada import do mesmo módulo executa de novo todo o código dele."
+  },
+  {
+   "n": 21,
+   "texto": "pandas e scikit-learn fazem parte da biblioteca padrão do Python."
+  },
+  {
+   "n": 22,
+   "texto": "O modo ’w’ de abertura de arquivo acrescenta conteúdo ao fim do arquivo existente."
+  },
+  {
+   "n": 23,
+   "texto": "Dentro de um bloco with aberto com open, é preciso chamar close()."
+  },
+  {
+   "n": 24,
+   "texto": "json.loads lê de arquivo e json.load lê de string."
+  },
+  {
+   "n": 25,
+   "texto": "O formato JSON preserva tuplas de Python."
+  },
+  {
+   "n": 26,
+   "texto": "O bloco finally é executado somente quando ocorre exceção."
+  },
+  {
+   "n": 27,
+   "texto": "A ordem das cláusulas except é indiferente ao resultado."
+  },
+  {
+   "n": 28,
+   "texto": "A instrução raise só pode ser usada dentro de um except."
+  },
+  {
+   "n": 29,
+   "texto": "Um erro de sintaxe do trecho pode ser capturado pelo try do mesmo trecho."
+  },
+  {
+   "n": 30,
+   "texto": "df.loc[1:3] e df.iloc[1:3] devolvem sempre as mesmas linhas."
+  },
+  {
+   "n": 31,
+   "texto": "Condições de Series booleanas combinam-se com and e or."
+  },
+  {
+   "n": 32,
+   "texto": "O método count() conta as linhas com valor ausente."
+  },
+  {
+   "n": 33,
+   "texto": "A junção à esquerda (left join) nunca altera o número de linhas da tabela da esquerda."
+  },
+  {
+   "n": 34,
+   "texto": "A atribuição df[filtro][’col’] = valor altera a tabela df."
+  },
+  {
+   "n": 35,
+   "texto": "No unittest, qualquer método da classe de teste é executado, mesmo sem o prefixo test."
+  },
+  {
+   "n": 36,
+   "texto": "Falha de teste e erro de teste são sinônimos no unittest."
+  },
+  {
+   "n": 37,
+   "texto": "Fixar a semente aleatória garante o mesmo resultado entre versões diferentes das bibliotecas."
+  },
+  {
+   "n": 38,
+   "texto": "A instrução assert é adequada para validar dados de entrada em produção."
+  },
+  {
+   "n": 39,
+   "texto": "pip freeze instala os pacotes listados."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A delimitação é pela indentação."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Não há conversão automática: a soma de str com int dá erro; a conversão é explícita."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A barra simples devolve float (3.0); a divisão inteira é o //."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Vale −4: o // devolve o piso da divisão."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Listas são mutáveis; chave de dicionário pede objeto imutável, como tupla ou string."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Acrescenta um único elemento, que é a própria lista [2, 20]."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "O fim é excluso: a fatia cobre os índices 1, 2 e 3."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Cria outra referência à mesma lista; a cópia é com a[:] ou a.copy()."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O else do laço roda quando ele termina sem break."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O fim é excluso: vai de 1 a 4."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Quem encerra é o break; o continue pula para a próxima volta."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Possui: o match/case, a partir do Python 3.10."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "É avaliado uma vez, na definição; por isso valor padrão mutável compartilha estado entre chamadas."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Devolve None."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "É o contrário: *args é tupla; **kwargs é dicionário."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Lambda é uma única expressão."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Sem o caso base, a recursão não termina e estoura o limite de chamadas."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "A atribuição cria variável local; para alterar a global, declara-se global."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Roda apenas quando o arquivo é executado diretamente."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "O módulo é carregado uma vez e fica em cache."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "São pacotes de terceiros, instalados à parte."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "O modo ’w’ trunca o arquivo; quem acrescenta é o ’a’."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "O with fecha o arquivo sozinho ao sair do bloco."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "É o contrário: loads é string; load é arquivo."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Tupla vira lista ao serializar em JSON."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "Finally roda sempre, com ou sem exceção."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "A primeira cláusula que casa com a exceção é a que captura; a ordem importa."
+  },
+  {
+   "n": 28,
+   "r": "E",
+   "comentario": "Pode ser usada em qualquer ponto do código."
+  },
+  {
+   "n": 29,
+   "r": "E",
+   "comentario": "O erro de sintaxe ocorre na compilação do trecho, antes de o try executar."
+  },
+  {
+   "n": 30,
+   "r": "E",
+   "comentario": "O loc inclui o rótulo final; o iloc exclui a posição final."
+  },
+  {
+   "n": 31,
+   "r": "E",
+   "comentario": "Com Series usam-se & e |, com parênteses; and/or avaliam o todo e dão erro."
+  },
+  {
+   "n": 32,
+   "r": "E",
+   "comentario": "Count devolve as não ausentes por coluna."
+  },
+  {
+   "n": 33,
+   "r": "E",
+   "comentario": "Pode duplicar linhas quando a tabela da direita tem mais de um casamento."
+  },
+  {
+   "n": 34,
+   "r": "E",
+   "comentario": "Ela escreve numa cópia do recorte; para alterar, usa-se df.loc[filtro, ’col’]."
+  },
+  {
+   "n": 35,
+   "r": "E",
+   "comentario": "Só os métodos com prefixo test rodam como testes."
+  },
+  {
+   "n": 36,
+   "r": "E",
+   "comentario": "Falha é assert quebrado; erro é exceção durante a execução."
+  },
+  {
+   "n": 37,
+   "r": "E",
+   "comentario": "A reprodutibilidade da semente vale dentro da mesma versão das bibliotecas."
+  },
+  {
+   "n": 38,
+   "r": "E",
+   "comentario": "Assert pode ser desativado com o flag de otimização; validação de entrada pede erro explícito."
+  },
+  {
+   "n": 39,
+   "r": "E",
+   "comentario": "Pip freeze lista os instalados; quem instala a partir da lista é o pip install −r."
+  }
+ ]
+}

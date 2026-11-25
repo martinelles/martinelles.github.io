@@ -1,0 +1,224 @@
+{
+ "aula": "E3·5",
+ "titulo": "5. Linguagem natural e modelos generativos · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A lematização deve necessariamente preceder a tokenização."
+  },
+  {
+   "n": 2,
+   "texto": "O reconhecimento de entidades nomeadas é feito por agrupamento com k-means."
+  },
+  {
+   "n": 3,
+   "texto": "A stemização sempre devolve uma palavra válida do idioma, e equivale à lematização."
+  },
+  {
+   "n": 4,
+   "texto": "O TF-IDF atribui maior peso ao termo que aparece em todos os documentos do conjunto."
+  },
+  {
+   "n": 5,
+   "texto": "O saco de palavras preserva a ordem das palavras e capta relações de sinonímia."
+  },
+  {
+   "n": 6,
+   "texto": "A modelagem de tópicos, como o LDA, é aprendizado supervisionado."
+  },
+  {
+   "n": 7,
+   "texto": "A codificação one-hot e o saco de palavras captam sinônimos."
+  },
+  {
+   "n": 8,
+   "texto": "O embedding é um vetor esparso, com uma posição para cada palavra do vocabulário."
+  },
+  {
+   "n": 9,
+   "texto": "O word2vec gera vetores diferentes para a mesma palavra conforme a frase."
+  },
+  {
+   "n": 10,
+   "texto": "A similaridade de cosseno depende do comprimento dos vetores, e não do ângulo entre eles."
+  },
+  {
+   "n": 11,
+   "texto": "O índice de Jaccard leva em conta quantas vezes cada palavra se repete."
+  },
+  {
+   "n": 12,
+   "texto": "A busca vetorial aproximada devolve sempre os mesmos vizinhos da busca exata."
+  },
+  {
+   "n": 13,
+   "texto": "A vantagem dos transformers sobre RNN e LSTM está no custo computacional menor em sequências longas."
+  },
+  {
+   "n": 14,
+   "texto": "A IA generativa se baseia prioritariamente em aprendizado supervisionado."
+  },
+  {
+   "n": 15,
+   "texto": "A quantização aumenta a memória e a latência e impede a execução local de LLMs, e na GAN o gerador julga o discriminador."
+  },
+  {
+   "n": 16,
+   "texto": "O RAG exige retreinar o modelo-base para incorporar documentos novos."
+  },
+  {
+   "n": 17,
+   "texto": "A engenharia de prompts altera os parâmetros do modelo, e o few-shot treina a rede."
+  },
+  {
+   "n": 18,
+   "texto": "O RAG elimina as alucinações do modelo."
+  },
+  {
+   "n": 19,
+   "texto": "O ajuste fino é o meio indicado para manter o modelo atualizado com normas que mudam com frequência."
+  },
+  {
+   "n": 20,
+   "texto": "O modelo ajustado por fine-tuning tem menos parâmetros que o modelo de base."
+  },
+  {
+   "n": 21,
+   "texto": "O LoRA retreina todos os pesos do modelo original."
+  },
+  {
+   "n": 22,
+   "texto": "Modelos treinados com grandes volumes de dados não reproduzem vieses discriminatórios, como o racismo."
+  },
+  {
+   "n": 23,
+   "texto": "A sub-representação de um grupo nos dados de treino não gera viés de exclusão nos resultados."
+  },
+  {
+   "n": 24,
+   "texto": "Resposta com citação de fonte dispensa conferência, e métrica de sobreposição de palavras comprova a veracidade."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A ordem é inversa: tokeniza-se primeiro, para depois lematizar cada token."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "É tarefa de etiquetar pessoas, lugares e organizações, com modelos próprios; nada de clusters."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O radical pode não ser palavra existente; a lematização é que devolve o lema válido."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O componente IDF derruba o peso dos termos ubíquos."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Ele ignora a ordem e trata sinônimos como palavras distintas."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É não supervisionada: descobre os tópicos sem rótulos."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "São representações esparsas sem noção de similaridade semântica."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É denso e de dimensão baixa e fixa; o vetor com posição por palavra é o one-hot."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Uma palavra, um vetor fixo; mudar com o contexto é marca dos embeddings contextuais."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Depende do ângulo; é invariante ao comprimento."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Ele compara conjuntos: presença ou ausência, sem multiplicidade."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "É aproximada por natureza: pode faltar um vizinho, em troca de rapidez."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O ganho é o paralelismo e o alcance de dependências distantes; a atenção custa mais com o comprimento."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ela se apoia no auto-supervisionado em larga escala, prevendo o próximo token."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Invertido: quantizar reduz memória e latência e viabiliza o local; na GAN o discriminador é quem julga."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Ele recupera os documentos na hora da consulta; o modelo fica como está."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Nada de parâmetros: são formas de conduzir o modelo; o few-shot é dar exemplos no prompt."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Ele as reduz, ancorando as respostas nas fontes; não elimina."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Conteúdo volátil pede RAG; o ajuste fino serve para comportamento estável."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Mesma arquitetura e mesmo número de parâmetros; mudam os valores."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Ele congela o modelo e treina apenas adaptadores de baixo posto."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Reproduzem o que os dados carregam; volume não lava o viés."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Gera: o modelo aprende menos sobre quem aparece menos."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "A citação precisa ser conferida; sobreposição léxica não mede verdade."
+  }
+ ]
+}

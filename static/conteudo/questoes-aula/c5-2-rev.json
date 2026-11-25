@@ -1,0 +1,161 @@
+{
+ "aula": "C5·2",
+ "titulo": "2. Ciclo do trabalho · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "As etapas do trabalho de auditoria são estanques, e o planejamento não pode ser revisto durante a execução."
+  },
+  {
+   "n": 2,
+   "texto": "O trabalho de auditoria se encerra com a emissão do relatório."
+  },
+  {
+   "n": 3,
+   "texto": "O relatório de auditoria é, em regra, sigiloso."
+  },
+  {
+   "n": 4,
+   "texto": "O escopo do trabalho deve abranger todo o objeto auditado."
+  },
+  {
+   "n": 5,
+   "texto": "Os critérios de auditoria são as conclusões constantes do relatório."
+  },
+  {
+   "n": 6,
+   "texto": "Objetivo e escopo do trabalho são definidos de forma independente."
+  },
+  {
+   "n": 7,
+   "texto": "Na matriz de planejamento, é prescindível o campo de informações requeridas e respectivas fontes."
+  },
+  {
+   "n": 8,
+   "texto": "A equipe pode adotar diretamente o mapa de processo elaborado pelo gestor."
+  },
+  {
+   "n": 9,
+   "texto": "A seleção dos trabalhos de auditoria deve considerar apenas a materialidade."
+  },
+  {
+   "n": 10,
+   "texto": "Materialidade e relevância são conceitos equivalentes."
+  },
+  {
+   "n": 11,
+   "texto": "Pela IN SFC 5/2021, a proposta de PAINT é apresentada até o último dia útil de novembro do ano anterior, o PAINT é aprovado até o último dia útil de fevereiro, e o RAINT é apresentado até o último dia útil de março do ano seguinte."
+  },
+  {
+   "n": 12,
+   "texto": "O RAINT é semestral, e o plano é refeito depois do primeiro semestre."
+  },
+  {
+   "n": 13,
+   "texto": "A auditoria interna singular de entidade da administração indireta não emite parecer sobre a prestação de contas anual."
+  },
+  {
+   "n": 14,
+   "texto": "Sem gestão de riscos formalizada na unidade auditada, a UAIG não faz plano baseado em riscos e repete os trabalhos do ano anterior."
+  },
+  {
+   "n": 15,
+   "texto": "Cabe à UAIG implementar as recomendações que emitiu."
+  },
+  {
+   "n": 16,
+   "texto": "O gestor é obrigado a implementar toda recomendação de auditoria, sem alternativa."
+  },
+  {
+   "n": 17,
+   "texto": "Em trabalho de consultoria, o auditor pode assumir a gestão dos riscos da unidade."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O planejamento é dinâmico: a execução pode exigir sua revisão."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O monitoramento das recomendações é etapa do trabalho."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A regra é a publicidade; o sigilo é exceção prevista em lei."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Em geral o trabalho não abrange tudo: o escopo se delimita por risco e materialidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Critério é o padrão de comparação, definido antes; a conclusão vem do confronto entre critério e condição encontrada."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Devem ser compatibilizados: o escopo viabiliza o objetivo."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Esse campo é uma das colunas da matriz; sem ele, o planejamento não se sustenta."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Antes deve testar os fluxos e verificar se o mapa corresponde à realidade da unidade."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Considera também a relevância e os riscos da área examinada."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Materialidade é o valor envolvido; relevância é a importância social ou estratégica."
+  },
+  {
+   "n": 11,
+   "r": "C",
+   "comentario": "A pegadinha troca o mês e troca “último” por “primeiro” dia útil."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O RAINT é anual; não há refeitura semestral do plano."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Emite, com opinião geral sobre governança, riscos e controles, a partir dos trabalhos do PAINT."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A UAIG usa o próprio conhecimento de riscos; a falta de processo formal na unidade não a impede de planear por riscos."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Quem implementa é o gestor responsável; a UAIG acompanha e monitora."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Pode, de forma formal e motivada, aceitar o risco em vez de implementar."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "O auditor aconselha; assumir a gestão tiraria sua independência."
+  }
+ ]
+}

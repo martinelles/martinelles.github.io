@@ -1,0 +1,134 @@
+{
+ "aula": "C4·2",
+ "titulo": "2. Leitura de dados e indicadores · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Passar de 10% para 15% representa um aumento de 5 pontos percentuais, o que equivale a 50% de variação relativa."
+  },
+  {
+   "n": 2,
+   "texto": "Em uma distribuição com valores extremos, a média é a medida que melhor representa o valor típico."
+  },
+  {
+   "n": 3,
+   "texto": "Para comparar a quantidade de irregularidades entre unidades de tamanhos diferentes, basta comparar os números absolutos."
+  },
+  {
+   "n": 4,
+   "texto": "O percentual do conjunto pode ser calculado pela média simples dos percentuais de grupos de tamanhos diferentes."
+  },
+  {
+   "n": 5,
+   "texto": "Duas variáveis fortemente correlacionadas permitem concluir que uma causa a outra."
+  },
+  {
+   "n": 6,
+   "texto": "Indicadores que tratam do mesmo tema podem ser comparados diretamente, ainda que tenham fórmulas diferentes."
+  },
+  {
+   "n": 7,
+   "texto": "O número de fiscalizações realizadas por um órgão é um indicador de processo."
+  },
+  {
+   "n": 8,
+   "texto": "Eficácia é o atingimento da meta proposta; efetividade é o efeito da ação sobre o problema."
+  },
+  {
+   "n": 9,
+   "texto": "O Índice de Percepção da Corrupção mede a quantidade de casos de corrupção de um país."
+  },
+  {
+   "n": 10,
+   "texto": "O aumento do número de sanções aplicadas demonstra aumento da corrupção."
+  },
+  {
+   "n": 11,
+   "texto": "Pesquisas de experiência captam bem a grande corrupção em contratações públicas."
+  },
+  {
+   "n": 12,
+   "texto": "O número de denúncias recebidas é medida direta da incidência de corrupção."
+  },
+  {
+   "n": 13,
+   "texto": "Os resultados de uma amostra escolhida por critérios de risco podem ser generalizados para todo o universo auditado."
+  },
+  {
+   "n": 14,
+   "texto": "A subnotificação afeta igualmente todos os tipos de corrupção."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "C",
+   "comentario": "A diferença entre duas taxas percentuais é em pontos percentuais (15 − 10 = 5 pp); a variação relativa é 5 sobre os 10 iniciais, ou seja, 50%. A pegadinha clássica é chamar esse aumento de “5%”."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Valores extremos puxam a média para o lado deles; nessas distribuições, a mediana é que representa o valor típico."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Base de comparação diferente pede taxa (por contrato auditado, por habitante); o número absoluto esconde o tamanho da unidade."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Grupos de tamanhos diferentes têm pesos diferentes: o percentual do conjunto é a média ponderada pelos tamanhos, e a média simples distorce o resultado."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Correlação não prova causalidade: pode haver uma terceira variável explicando as duas, ou pura coincidência."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Fórmula diferente mede coisa diferente; a comparação direta só é válida entre indicadores com a mesma definição e método de cálculo."
+  },
+  {
+   "n": 7,
+   "r": "C",
+   "comentario": "Mede a atividade executada, e não a mudança alcançada; indicador de resultado é o que expressa o efeito perseguido. A banca costuma classificá-lo como resultado."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "A troca dos conceitos é a pegadinha: eficácia olha a meta, efetividade olha o problema de fundo (o impacto real)."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "O índice mede a percepção de especialistas e empresários, não a quantidade de casos; pela natureza oculta da corrupção, nenhum indicador a mede diretamente."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Pode refletir apenas mais detecção e mais punição; indicadores de resposta não medem a incidência do fenômeno."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "As pesquisas de experiência alcançam a corrupção cotidiana sofrida pelo cidadão; a grande corrupção em contratações não passa por esse tipo de fonte."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A denúncia é indicador indireto, afetado por medo de retaliação, desconfiança no resultado, desconhecimento do canal e normalização da prática."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Amostra por critérios de risco não é aleatória: ela vale para o que foi efetivamente examinado; generalizar para o universo exige amostra representativa."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ela varia por tipo: no conluio, nenhuma das partes tem incentivo para denunciar; a corrupção cotidiana sofre mais com medo, desconhecimento do canal e normalização."
+  }
+ ]
+}

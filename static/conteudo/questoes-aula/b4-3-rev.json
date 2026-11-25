@@ -1,0 +1,143 @@
+{
+ "aula": "B4·3",
+ "titulo": "3. Políticas públicas · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Só atores estatais fazem política pública, em qualquer abordagem."
+  },
+  {
+   "n": 2,
+   "texto": "Para Dye, a omissão do governo não configura política pública."
+  },
+  {
+   "n": 3,
+   "texto": "O ciclo de política pública é sequência rígida, em que cada fase só começa quando a anterior termina."
+  },
+  {
+   "n": 4,
+   "texto": "Para Luhmann, a legitimação da política vem dos seus resultados."
+  },
+  {
+   "n": 5,
+   "texto": "O modelo de múltiplos fluxos é de Lindblom."
+  },
+  {
+   "n": 6,
+   "texto": "No incrementalismo, as decisões partem do que já existe, com ajustes às margens."
+  },
+  {
+   "n": 7,
+   "texto": "A agenda sistêmica é a lista de temas que o governo decidiu tratar."
+  },
+  {
+   "n": 8,
+   "texto": "Campanha educativa do governo é instrumento de autoridade."
+  },
+  {
+   "n": 9,
+   "texto": "Incentivo fiscal é instrumento regulatório."
+  },
+  {
+   "n": 10,
+   "texto": "A reforma agrária é política distributiva."
+  },
+  {
+   "n": 11,
+   "texto": "Monitoramento e avaliação de política pública são a mesma coisa."
+  },
+  {
+   "n": 12,
+   "texto": "A avaliação ex ante ocorre somente depois da implementação."
+  },
+  {
+   "n": 13,
+   "texto": "A intersetorialidade dispensa instâncias de coordenação."
+  },
+  {
+   "n": 14,
+   "texto": "A mídia não é ator relevante nas políticas públicas."
+  },
+  {
+   "n": 15,
+   "texto": "O modelo de coalizões de defesa é de Kingdon."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A abordagem multicêntrica admite atores não estatais."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Para Dye, não fazer também é escolha; quem exclui a omissão é Secchi."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "As fases se retroalimentam e se sobrepõem."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Vem do procedimento: quem decidiu foi legitimado pelo processo."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É de Kingdon; Lindblom é o incrementalismo."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Partir do zero a cada ciclo é a pegadinha."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Essa é a agenda governamental; a sistêmica reúne os temas em debate na sociedade."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É instrumento de informação, da nodalidade."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "É instrumento econômico, do tesouro."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É redistributiva: tira de um grupo para dar a outro; e a regra de segurança alimentar é regulatória."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O monitoramento é contínuo; a avaliação é pontual, com juízo de valor."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Ex ante é antes da implementação; depois é ex post."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Sem coordenação articulada, a intersetorialidade não sai do papel."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ela molda a agenda e a opinião pública sobre as políticas."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "É de Sabatier e Jenkins-Smith."
+  }
+ ]
+}

@@ -1,0 +1,125 @@
+{
+ "aula": "B1·9",
+ "titulo": "9. Estado e modelos de desenvolvimento econômico · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O modelo regulador implica ausência de intervenção do Estado na economia."
+  },
+  {
+   "n": 2,
+   "texto": "Política industrial eficaz dispensa contrapartidas das empresas beneficiadas."
+  },
+  {
+   "n": 3,
+   "texto": "A política horizontal, que corrige falhas sem escolher setores, é a mais difícil de implantar e a que mais exige capacidade estatal."
+  },
+  {
+   "n": 4,
+   "texto": "A inovação não está entre as atividades que a Constituição manda o Estado promover e incentivar."
+  },
+  {
+   "n": 5,
+   "texto": "A lei que autoriza a criação de empresa estatal pode deixar de indicar relevante interesse coletivo ou imperativo de segurança nacional."
+  },
+  {
+   "n": 6,
+   "texto": "A estatal pode assumir obrigações de política pública sem que seus custos sejam discriminados e divulgados."
+  },
+  {
+   "n": 7,
+   "texto": "Basta a previsão em contrato para a estatal assumir obrigação em condições distintas das do setor privado."
+  },
+  {
+   "n": 8,
+   "texto": "O planejamento estatal é determinante para o setor privado."
+  },
+  {
+   "n": 9,
+   "texto": "A exploração direta de atividade econômica pelo Estado é livre, sem exigência de segurança nacional ou relevante interesse coletivo."
+  },
+  {
+   "n": 10,
+   "texto": "O tratamento favorecido do art. 170, IX, vale para empresa de pequeno porte de qualquer origem."
+  },
+  {
+   "n": 11,
+   "texto": "A refinação do petróleo não é monopólio da União."
+  },
+  {
+   "n": 12,
+   "texto": "A jazida pertence ao dono do solo onde ela se encontra."
+  },
+  {
+   "n": 13,
+   "texto": "Lei municipal pode impedir a instalação de estabelecimento do mesmo ramo em determinada área."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O Estado intervém pela regulação, sem produzir diretamente."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "As contrapartidas (metas, conteúdo local, investimento) condicionam o benefício."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Essas marcas são da política seletiva, que escolhe setores e vencedores."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Está (art. 218, na redação da EC 85/2015)."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A indicação é exigência constitucional (art. 173, § 1º)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Os custos dessas obrigações devem ser contabilizados e divulgados."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Contrato não basta: exige também lei ou regulamento."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É indicativo: orienta, não vincula o privado."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Só é admitida nesses casos (CF, art. 173)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Só para a constituída sob as leis brasileiras, com sede e administração no país."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É monopólio da União (CF, art. 177, II)."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "As jazidas são propriedade distinta da do solo, da União; o concessionário fica com o produto da lavra (art. 176)."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Ofende a livre concorrência (Súmula Vinculante 49)."
+  }
+ ]
+}

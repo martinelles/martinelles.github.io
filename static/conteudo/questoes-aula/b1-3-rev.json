@@ -1,0 +1,134 @@
+{
+ "aula": "B1·3",
+ "titulo": "3. Federalismo e capacidades estatais · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Os Estados-membros são soberanos."
+  },
+  {
+   "n": 2,
+   "texto": "Os Municípios integram a competência legislativa concorrente do art. 24 da Constituição."
+  },
+  {
+   "n": 3,
+   "texto": "Sem lei federal de normas gerais, o Estado-membro não pode legislar sobre matéria de competência concorrente."
+  },
+  {
+   "n": 4,
+   "texto": "Os territórios federais são entes federativos autônomos."
+  },
+  {
+   "n": 5,
+   "texto": "A criação de um novo Estado-membro exige plebiscito da população diretamente interessada e lei complementar federal."
+  },
+  {
+   "n": 6,
+   "texto": "O federalismo brasileiro é dual, com esferas separadas e independentes."
+  },
+  {
+   "n": 7,
+   "texto": "O federalismo cooperativo elimina os conflitos de competência."
+  },
+  {
+   "n": 8,
+   "texto": "Consórcios públicos só podem ter personalidade de direito público."
+  },
+  {
+   "n": 9,
+   "texto": "Capacidade estatal se resume à disponibilidade de recursos financeiros."
+  },
+  {
+   "n": 10,
+   "texto": "Capacidade política do Estado se refere à qualificação técnica dos servidores."
+  },
+  {
+   "n": 11,
+   "texto": "A discricionariedade dos implementadores sempre prejudica a política pública."
+  },
+  {
+   "n": 12,
+   "texto": "No modelo weberiano, o servidor da ponta deve adaptar livremente as regras a cada caso."
+  },
+  {
+   "n": 13,
+   "texto": "O ethos burocrático exige neutralidade absoluta, inclusive diante de ataques aos valores constitucionais."
+  },
+  {
+   "n": 14,
+   "texto": "Representação burocrática passiva e ativa são a mesma coisa."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "São autônomos; a soberania é da República Federativa."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Eles suplementam a legislação federal e estadual pelo art. 30, II."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Nesse caso o Estado exerce competência legislativa plena."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Os entes são União, estados, DF e municípios; o território integra a União (CF, art. 18, § 2º)."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "É o art. 18, § 3º; para município, a pegadinha troca: lei estadual, estudos de viabilidade e plebiscito (§ 4º)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É cooperativo, com participação, cooperação e transferências entre entes."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Ele busca reduzir e administrar os conflitos; não os elimina."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Podem ser associação pública (direito público) ou pessoa jurídica de direito privado."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Envolve capacidade administrativa, técnica, legal e política, além da financeira."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É a capacidade de negociar, formar coalizões e sustentar decisões; a qualificação é da capacidade administrativa."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Na ponta, ela adapta a política ao caso concreto e pode melhorar o resultado."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O modelo manda aplicar a regra; a adaptação livre é exatamente o que ele combate."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O servidor guarda a Constituição: neutralidade não chega a assistir calado ao seu ataque."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Passiva é o corpo do servidor espelhar a sociedade; ativa é agir em defesa de interesses de grupos."
+  }
+ ]
+}

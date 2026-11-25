@@ -1,0 +1,206 @@
+{
+ "aula": "E3·6",
+ "titulo": "6. Agentes e uso seguro de ferramentas · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O modelo de linguagem executa diretamente as ferramentas, sem passar pela aplicação que o cerca."
+  },
+  {
+   "n": 2,
+   "texto": "Fluxo de trabalho com etapas definidas em código e agente autônomo são a mesma coisa."
+  },
+  {
+   "n": 3,
+   "texto": "As descrições de ferramentas oferecidas por qualquer servidor podem ser tratadas como confiáveis."
+  },
+  {
+   "n": 4,
+   "texto": "Instruir o modelo no prompt basta para que ele respeite as permissões dos usuários."
+  },
+  {
+   "n": 5,
+   "texto": "O agente pode acessar os sistemas com uma conta genérica de privilégio amplo."
+  },
+  {
+   "n": 6,
+   "texto": "O uso de ferramentas de IA pela empresa contratada dispensa autorização expressa no termo de referência."
+  },
+  {
+   "n": 7,
+   "texto": "O servidor de ferramentas pode repassar adiante, sem validação, o token recebido do cliente."
+  },
+  {
+   "n": 8,
+   "texto": "Para fins de auditoria, basta registrar a resposta final do agente."
+  },
+  {
+   "n": 9,
+   "texto": "Humano no circuito e humano sobre o circuito são expressões equivalentes."
+  },
+  {
+   "n": 10,
+   "texto": "A supervisão humana deve ter a mesma intensidade em qualquer aplicação, independentemente do risco."
+  },
+  {
+   "n": 11,
+   "texto": "Rastreabilidade e explicabilidade são sinônimos."
+  },
+  {
+   "n": 12,
+   "texto": "A injeção indireta de instruções exige que o atacante tenha acesso à aplicação ou credenciais privilegiadas."
+  },
+  {
+   "n": 13,
+   "texto": "Filtros de palavras-chave e instruções no prompt de sistema bastam para impedir a injeção de instruções."
+  },
+  {
+   "n": 14,
+   "texto": "O RAG ou o ajuste fino eliminam a vulnerabilidade à injeção de instruções."
+  },
+  {
+   "n": 15,
+   "texto": "A instrução maliciosa precisa estar visível ao usuário para ter efeito."
+  },
+  {
+   "n": 16,
+   "texto": "A saída do modelo pode ser usada diretamente em consulta SQL ou em comando do sistema."
+  },
+  {
+   "n": 17,
+   "texto": "O OWASP Top 10 para aplicações de LLM é padrão obrigatório ou certificação de segurança."
+  },
+  {
+   "n": 18,
+   "texto": "O RAG pode recuperar qualquer documento da base, independentemente das permissões de quem pergunta."
+  },
+  {
+   "n": 19,
+   "texto": "Dados pessoais podem ir para plataformas públicas de IA generativa quando o uso é interno."
+  },
+  {
+   "n": 20,
+   "texto": "Um agente que acerta 95% de cada passo acerta 95% das tarefas de vários passos."
+  },
+  {
+   "n": 21,
+   "texto": "Basta testar cada cenário uma vez, pois o agente repete o mesmo comportamento."
+  },
+  {
+   "n": 22,
+   "texto": "Com taxa de acerto alta, ações irreversíveis podem dispensar aprovação humana."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Quem executa as ações é a aplicação; o modelo apenas decide o que pedir."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O fluxo fixo segue etapas pré-programadas; o agente decide as etapas durante a execução."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Servidor arbitrário pode descrever funções maliciosas; a origem importa."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Permissão se garante na camada da aplicação, que nega o acesso; pedido no prompt não é controle."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Ele age com o escopo de quem fez o pedido, nada mais."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Precisa de autorização expressa no instrumento contratual."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Cada serviço valida o que recebe antes de confiar; repasse cego amplia o alcance do token."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Registraram-se os passos, os argumentos, a versão e a aprovação de cada ação."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "No circuito, aprova antes da ação; sobre o circuito, monitora e pode interromper."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A intensidade acompanha o risco e a irreversibilidade das ações."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Rastrear é registrar o caminho e as versões; explicar é dar as razões da decisão."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Basta semear instrução maliciosa num conteúdo que o sistema vai consultar."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "São mitigações; nenhum filtro elimina a vulnerabilidade."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Reduzem a superfície, mas o conteúdo recuperado segue sendo vetor de ataque."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Pode vir oculta em documento, página ou comentário que o modelo lê."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Ela é entrada não confiável: valida-se, restringe-se e parametriza-se."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "É guia de referência de riscos, não norma obrigatória nem certificação."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "A recuperação respeita as permissões do usuário que perguntou."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Uso interno não autoriza: é transferência a terceiro, e precisa de base legal e avaliação."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Os acertos se multiplicam: em 20 passos, 0,95 elevado a 20 dá pouco mais de um terço."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "O comportamento varia entre execuções; testes repetidos e avaliação contínua são necessários."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Irreversibilidade pede humano no circuito, qualquer queja que faça a taxa."
+  }
+ ]
+}

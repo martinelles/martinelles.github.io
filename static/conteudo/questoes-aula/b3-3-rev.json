@@ -1,0 +1,116 @@
+{
+ "aula": "B3·3",
+ "titulo": "3. Conflitos de interesses e imparcialidade · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O conflito de interesses só se configura se houver lesão ao erário ou vantagem ao agente."
+  },
+  {
+   "n": 2,
+   "texto": "A quarentena de 6 meses da Lei 12.813/2013 vale para o uso de informação privilegiada."
+  },
+  {
+   "n": 3,
+   "texto": "Para os ocupantes dos cargos do art. 2º, as vedações do art. 5º deixam de valer durante licença ou afastamento."
+  },
+  {
+   "n": 4,
+   "texto": "Só há conflito de interesses quando o agente atua formalmente como procurador ou intermediário, e apenas perante órgãos federais."
+  },
+  {
+   "n": 5,
+   "texto": "A consulta sobre conflito de interesses de qualquer servidor deve ser dirigida à Comissão de Ética Pública."
+  },
+  {
+   "n": 6,
+   "texto": "A Lei 12.813/2013 se aplica apenas aos ocupantes de cargos em comissão."
+  },
+  {
+   "n": 7,
+   "texto": "A CGU não pode autorizar o exercício de atividade privada em potencial conflito."
+  },
+  {
+   "n": 8,
+   "texto": "O recurso contra o indeferimento da suspeição tem efeito suspensivo."
+  },
+  {
+   "n": 9,
+   "texto": "Amizade íntima com uma das partes é hipótese de impedimento."
+  },
+  {
+   "n": 10,
+   "texto": "O parentesco relevante para o impedimento vai até o terceiro grau."
+  },
+  {
+   "n": 11,
+   "texto": "Basta ao servidor impedido atuar com imparcialidade, dispensada a comunicação do impedimento."
+  },
+  {
+   "n": 12,
+   "texto": "Depois da exoneração, o ex-ocupante de cargo do art. 2º está imediatamente livre para prestar consultoria a quem fiscalizava."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Basta a possibilidade de influência indevida, ainda sem dano ou proveito."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Essa vedação é a qualquer tempo; os 6 meses valem para representar ou consultar."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "O parágrafo único do art. 5º diz que continuam valendo."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O art. 5º, IV vale ainda que informalmente, e perante qualquer Poder da União, dos estados, do DF e dos municípios."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Só a das altas autoridades; a dos demais servidores vai à CGU."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Alcança também efetivos nomeados para os cargos do art. 2º."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Pode autorizar, quando o conflito for inexistente ou irrelevante."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Não tem: a autoridade julgadora segue atuando."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "É suspeição; impedimento é interesse e vínculo objetivo, como parentesco."
+  },
+  {
+   "n": 10,
+   "r": "C",
+   "comentario": "A pegadinha limita ao segundo grau."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A comunicação é essencial: quem decide a substituição é a autoridade."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Há quarentena de 6 meses, salvo autorização."
+  }
+ ]
+}

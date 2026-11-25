@@ -1,0 +1,377 @@
+{
+ "aula": "E2·2",
+ "titulo": "2. SQL e consultas analíticas · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "MODIFY é o comando SQL para alterar dados de uma tabela."
+  },
+  {
+   "n": 2,
+   "texto": "DELETE TABLE apaga a tabela do banco."
+  },
+  {
+   "n": 3,
+   "texto": "O TRUNCATE aceita cláusula WHERE, para remover só parte das linhas."
+  },
+  {
+   "n": 4,
+   "texto": "O comando UPDATE muda o tipo de uma coluna."
+  },
+  {
+   "n": 5,
+   "texto": "O CREATE VIEW é comando DDL."
+  },
+  {
+   "n": 6,
+   "texto": "Uma coluna NOT NULL junto de PRIMARY KEY (a) torna a chave primária composta."
+  },
+  {
+   "n": 7,
+   "texto": "GRANT é comando DDL e COMMIT é comando DML."
+  },
+  {
+   "n": 8,
+   "texto": "O usuário que recebeu um privilégio sem WITH GRANT OPTION pode concedê-lo a outro usuário."
+  },
+  {
+   "n": 9,
+   "texto": "A visão comum armazena fisicamente uma cópia dos dados da tabela de origem."
+  },
+  {
+   "n": 10,
+   "texto": "O REVOKE com CASCADE exclui a tabela e os objetos que dependem dela."
+  },
+  {
+   "n": 11,
+   "texto": "O tudo ou nada de uma transação é garantido pela consistência."
+  },
+  {
+   "n": 12,
+   "texto": "A atomicidade garante que as operações da transação terminem com sucesso."
+  },
+  {
+   "n": 13,
+   "texto": "O acesso concorrente aos dados é garantido por índices ou visões."
+  },
+  {
+   "n": 14,
+   "texto": "O nível de isolamento READ COMMITTED impede a leitura não repetível."
+  },
+  {
+   "n": 15,
+   "texto": "O ROLLBACK TO SAVEPOINT encerra a transação e desfaz todos os comandos dela."
+  },
+  {
+   "n": 16,
+   "texto": "O LEFT JOIN descarta as linhas da tabela da esquerda que não têm correspondência."
+  },
+  {
+   "n": 17,
+   "texto": "O CROSS JOIN entre duas tabelas de 4 linhas cada devolve 8 linhas."
+  },
+  {
+   "n": 18,
+   "texto": "A cláusula WHERE pode usar o apelido de coluna criado na lista do SELECT."
+  },
+  {
+   "n": 19,
+   "texto": "A expressão A OR B AND C lê-se como (A OR B) AND C."
+  },
+  {
+   "n": 20,
+   "texto": "Sem ORDER BY, o resultado da consulta vem ordenado pela chave primária ou por coluna do filtro."
+  },
+  {
+   "n": 21,
+   "texto": "A cláusula WHERE pode conter SUM ou COUNT, para filtrar os grupos."
+  },
+  {
+   "n": 22,
+   "texto": "COUNT(coluna) e COUNT(*) sempre devolvem o mesmo número."
+  },
+  {
+   "n": 23,
+   "texto": "SUM sobre um conjunto vazio devolve zero."
+  },
+  {
+   "n": 24,
+   "texto": "O GROUP BY só pode ser usado junto de função de agregação ou de ORDER BY."
+  },
+  {
+   "n": 25,
+   "texto": "Para contar somente as linhas de um determinado valor, basta COUNT(coluna)."
+  },
+  {
+   "n": 26,
+   "texto": "A CTE cria uma tabela permanente, disponível para as consultas seguintes da sessão."
+  },
+  {
+   "n": 27,
+   "texto": "NOT IN e NOT EXISTS sempre devolvem o mesmo resultado."
+  },
+  {
+   "n": 28,
+   "texto": "A condição x > ALL (subconsulta) é verdadeira quando x supera pelo menos um valor da lista."
+  },
+  {
+   "n": 29,
+   "texto": "A função de janela reduz o resultado a uma linha por partição, como o GROUP BY."
+  },
+  {
+   "n": 30,
+   "texto": "O ROW_NUMBER atribui o mesmo número às linhas empatadas."
+  },
+  {
+   "n": 31,
+   "texto": "O RANK não deixa lacunas na numeração depois de um empate."
+  },
+  {
+   "n": 32,
+   "texto": "WHERE ROW_NUMBER() OVER (...) = 1 é forma válida de filtrar a primeira linha de cada grupo."
+  },
+  {
+   "n": 33,
+   "texto": "Criar índices não afeta o desempenho de inserções e atualizações."
+  },
+  {
+   "n": 34,
+   "texto": "O EXPLAIN ANALYZE apenas estima o plano de execução, sem executar o comando."
+  },
+  {
+   "n": 35,
+   "texto": "O otimizador sempre usa o índice disponível, mesmo quando o filtro devolve a maior parte da tabela."
+  },
+  {
+   "n": 36,
+   "texto": "O índice hash atende bem a consultas por intervalo de valores."
+  },
+  {
+   "n": 37,
+   "texto": "O índice é guardado como uma coluna da própria tabela, e a árvore B é desbalanceada."
+  },
+  {
+   "n": 38,
+   "texto": "WHERE coluna = NULL devolve as linhas em que a coluna não tem valor."
+  },
+  {
+   "n": 39,
+   "texto": "A função AVG(coluna) considera os valores nulos como zero."
+  },
+  {
+   "n": 40,
+   "texto": "O UNION mantém as linhas repetidas das duas consultas."
+  },
+  {
+   "n": 41,
+   "texto": "No GROUP BY, cada linha com valor nulo forma um grupo separado."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Alterar dados é UPDATE; MODIFY não existe no SQL."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Apagar a tabela é DROP TABLE."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Ele remove todas as linhas de uma vez, sem WHERE."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Mudar o tipo é ALTER TABLE, comando DDL."
+  },
+  {
+   "n": 5,
+   "r": "C",
+   "comentario": "A pegadinha o classifica como DML."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A chave é composta quando a declaração traz mais de uma coluna; NOT NULL não entra na chave."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "GRANT é DCL; COMMIT é TCL (controle de transação)."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Só concede quem recebeu o privilégio com a opção de repassar."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A visão comum é uma consulta armazenada; quem copia os dados é a visão materializada."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ele revoga privilégios em cascata, concedidos a partir do revogado; não apaga objetos."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É a atomicidade; a consistência cuida das regras de um estado válido."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Ela garante que valham todas ou nenhuma; podem todas ser desfeitas."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Quem controla a concorrência são os bloqueios ou o versionamento de linhas."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ele impede a leitura de dados sujos; a não repetível só some em níveis mais altos."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Ele volta apenas ao ponto de salvamento; a transação continua aberta."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Essas linhas são justamente as que ficam, com nulos nas colunas da direita."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Devolve o produto cartesiano: 16 linhas."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "O alias do SELECT ainda não existe quando o WHERE é avaliado."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "O AND tem precedência: A OR (B AND C)."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Sem ORDER BY não há ordem garantida nenhuma."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Filtro sobre agregado é papel do HAVING."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "COUNT(coluna) ignora os nulos; COUNT(*) conta as linhas."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Devolve nulo."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "Pode agrupar sem agregar e sem ordenar."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "COUNT(coluna) conta qualquer valor não nulo; a contagem condicional usa CASE dentro do COUNT."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "A CTE vale só para a consulta em que foi declarada."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "Com nulos na subconsulta, o NOT IN não devolve linha nenhuma; o NOT EXISTS sim."
+  },
+  {
+   "n": 28,
+   "r": "E",
+   "comentario": "ALL exige superar todos; superar pelo menos um é o ANY."
+  },
+  {
+   "n": 29,
+   "r": "E",
+   "comentario": "A janela detálha linha a linha, sem reduzir o resultado."
+  },
+  {
+   "n": 30,
+   "r": "E",
+   "comentario": "Empatadas recebem números diferentes e sucessivos; iguais é o RANK."
+  },
+  {
+   "n": 31,
+   "r": "E",
+   "comentario": "O RANK deixa lacunas; quem não deixa é o DENSE_RANK."
+  },
+  {
+   "n": 32,
+   "r": "E",
+   "comentario": "Função de janela não entra no WHERE; filtra-se numa subconsulta ou CTE por cima do resultado."
+  },
+  {
+   "n": 33,
+   "r": "E",
+   "comentario": "Cada índice é mais uma estrutura para manter a cada escrita."
+  },
+  {
+   "n": 34,
+   "r": "E",
+   "comentario": "Ele executa o comando de fato, para reportar tempos reais."
+  },
+  {
+   "n": 35,
+   "r": "E",
+   "comentario": "Quando o filtro cobre quase tudo, varrer a tabela direta custa menos que seguir o índice."
+  },
+  {
+   "n": 36,
+   "r": "E",
+   "comentario": "O hash serve para igualdade; intervalo pede árvore B."
+  },
+  {
+   "n": 37,
+   "r": "E",
+   "comentario": "O índice é estrutura à parte; a árvore B é balanceada por construção."
+  },
+  {
+   "n": 38,
+   "r": "E",
+   "comentario": "Comparação com NULL nunca é verdadeira; o correto é IS NULL."
+  },
+  {
+   "n": 39,
+   "r": "E",
+   "comentario": "Ela ignora os nulos no cálculo da média."
+  },
+  {
+   "n": 40,
+   "r": "E",
+   "comentario": "O UNION remove as repetições; quem mantém é o UNION ALL."
+  },
+  {
+   "n": 41,
+   "r": "E",
+   "comentario": "Os nulos se agrupam juntos, num grupo único."
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "aula": "C1·3",
+ "titulo": "3. Integridade pública · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A gestão da integridade é responsabilidade exclusiva da Unidade Setorial de Integridade."
+  },
+  {
+   "n": 2,
+   "texto": "O programa de integridade se limita a prevenir a corrupção."
+  },
+  {
+   "n": 3,
+   "texto": "As competências da unidade setorial de integridade podem ser atribuídas a um colegiado."
+  },
+  {
+   "n": 4,
+   "texto": "Para demonstrar comprometimento com a integridade, basta a alta administração assinar declaração formal, ainda que o comportamento cotidiano não a acompanhe."
+  },
+  {
+   "n": 5,
+   "texto": "A gestão de pessoas está fora das funções de integridade."
+  },
+  {
+   "n": 6,
+   "texto": "O programa de integridade deve ser padronizado, igual para todos os órgãos."
+  },
+  {
+   "n": 7,
+   "texto": "Na esfera administrativa, só há assédio sexual se o assediador for superior hierárquico da vítima."
+  },
+  {
+   "n": 8,
+   "texto": "O Programa Federal de enfrentamento ao assédio não alcança, de nenhuma forma, trabalhadores terceirizados."
+  },
+  {
+   "n": 9,
+   "texto": "Nepotismo é apenas a nomeação direta de parente para cargo em comissão."
+  },
+  {
+   "n": 10,
+   "texto": "O sigilo sobre os dados dos envolvidos em apuração de irregularidade termina com a instauração do processo."
+  },
+  {
+   "n": 11,
+   "texto": "A retaliação ao informante de boa-fé é punida apenas com advertência."
+  },
+  {
+   "n": 12,
+   "texto": "Retaliação se resume à demissão do informante."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É responsabilidade de toda a organização; a USI coordena e apoia."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Alcança também desvios éticos e violação de direitos."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Devem ser atribuídas a unidade singular, não a colegiado."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O compromisso precisa ser demonstrado no comportamento (tone at the top); a assinatura sozinha não basta."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Integra as funções do programa: recrutamento, seleção, aperfeiçoamento e movimentação fazem parte da integridade."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O princípio é a especificidade: o programa se desenha segundo o tamanho, a atividade e os riscos do órgão."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Não exige relação de hierarquia; alcança qualquer conduta de natureza sexual no ambiente de trabalho."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Alcança os terceirizados que atuam nas dependências do órgão; o “de nenhuma forma” é a pegadinha."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A nomeação cruzada (cada gestor nomeia parente do outro) também é vedada, como a direta (Súmula Vinculante 13)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O sigilo vai até a decisão final, inclusive perante terceiros."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "A punição vai além da advertência, conforme a gravidade da conduta."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Inclui também alteração de funções, negativa de referências e outras formas de retaliação no ambiente de trabalho."
+  }
+ ]
+}

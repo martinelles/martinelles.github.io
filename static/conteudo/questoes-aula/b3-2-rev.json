@@ -1,0 +1,161 @@
+{
+ "aula": "B3·2",
+ "titulo": "2. Deveres profissionais · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A pena aplicável pela comissão de ética, no Decreto 1.171/1994, é a advertência ou a suspensão."
+  },
+  {
+   "n": 2,
+   "texto": "O Código de Ética alcança apenas quem presta serviço remunerado."
+  },
+  {
+   "n": 3,
+   "texto": "Com base no Decreto 1.171/1994, a comissão de ética pode aplicar demissão ao servidor."
+  },
+  {
+   "n": 4,
+   "texto": "A imparcialidade alcança também o trato com colegas superiores e inferiores, além do público."
+  },
+  {
+   "n": 5,
+   "texto": "A autonomia técnica é atributo individual do auditor."
+  },
+  {
+   "n": 6,
+   "texto": "Basta a objetividade de fato, sendo irrelevante a aparência."
+  },
+  {
+   "n": 7,
+   "texto": "A autonomia técnica dispensa fundamentação em evidências."
+  },
+  {
+   "n": 8,
+   "texto": "O servidor deve cumprir qualquer ordem de superior hierárquico, ainda que manifestamente ilegal."
+  },
+  {
+   "n": 9,
+   "texto": "A irregularidade deve ser comunicada sempre à chefia imediata, mesmo quando ela está envolvida."
+  },
+  {
+   "n": 10,
+   "texto": "A representação é apreciada pela própria autoridade contra a qual foi formulada."
+  },
+  {
+   "n": 11,
+   "texto": "O Código de Ética da CGU se aplica apenas aos servidores efetivos lotados na CGU."
+  },
+  {
+   "n": 12,
+   "texto": "Condutas da vida privada sem qualquer relação com o cargo são sempre infração ética."
+  },
+  {
+   "n": 13,
+   "texto": "A Comissão de Ética da CGU apura condutas de altas autoridades."
+  },
+  {
+   "n": 14,
+   "texto": "O Código de Ética da CGU proíbe o uso de redes sociais pelos servidores."
+  },
+  {
+   "n": 15,
+   "texto": "A Comissão de Ética da CGU aplica diretamente a exoneração de cargo ou função comissionada."
+  },
+  {
+   "n": 16,
+   "texto": "A Comissão de Ética Pública tem 5 membros, com mandato de 2 anos."
+  },
+  {
+   "n": 17,
+   "texto": "No processo ético, o investigado tem 10 dias para se manifestar, e o processo tramita como reservado até a conclusão."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É a censura, por parecer assinado por todos os integrantes (inciso XXII)."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Alcança o serviço permanente, temporário ou excepcional, ainda que sem retribuição financeira."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Demissão é sanção disciplinar da Lei 8.112/1990, fora do alcance da comissão de ética."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "A pegadinha a limita ao trato com o público."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É atributo da unidade de auditoria; a do auditor, individual, é a objetividade."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A aparência de falta de objetividade também compromete a confiança no trabalho."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Ela se sustenta em evidência suficiente e apropriada."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Ordem manifestamente ilegal não se cumpre: cabe representar."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Envolvida a chefia imediata, a comunicação escala à autoridade superior."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ela sobe para a autoridade superior à representada."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Alcança a carreira cedida, terceirizados e estagiários, no que couber."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O que repercute no cargo e no conceito funcional é o que importa."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Essas condutas cabem à Comissão de Ética Pública da Presidência."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Ele exige responsabilidade no uso e preserva a liberdade de expressão."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Ela apenas recomenda; quem decide é o setor competente (art. 14)."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "São 7 brasileiros designados pelo Presidente, mandato de 3 anos não coincidentes, uma recondução, sem remuneração (Decreto 6.029/2007)."
+  },
+  {
+   "n": 17,
+   "r": "C",
+   "comentario": "Os 5 dias e o sigilo absoluto são a pegadinha."
+  }
+ ]
+}

@@ -1,0 +1,260 @@
+{
+ "aula": "E2·1",
+ "titulo": "1. Modelagem e arquiteturas · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O esquema do banco de dados é o conjunto dos registros armazenados."
+  },
+  {
+   "n": 2,
+   "texto": "Uma tabela pode ter várias chaves primárias."
+  },
+  {
+   "n": 3,
+   "texto": "O modelo relacional organiza os dados em árvore, com um pai para cada registro."
+  },
+  {
+   "n": 4,
+   "texto": "No modelo de documentos, o documento equivale à tabela e a coleção equivale à linha."
+  },
+  {
+   "n": 5,
+   "texto": "O modelo chave-valor oferece consultas pelo conteúdo do valor e junções nativas."
+  },
+  {
+   "n": 6,
+   "texto": "O NoSQL garante propriedades ACID em toda operação distribuída e é imune a ataques de injeção."
+  },
+  {
+   "n": 7,
+   "texto": "No modelo dimensional, a tabela de dimensão guarda os fatos e as medidas."
+  },
+  {
+   "n": 8,
+   "texto": "No esquema floco de neve, as dimensões são desnormalizadas."
+  },
+  {
+   "n": 9,
+   "texto": "Na dimensão de alteração lenta tipo 2, o valor antigo é sobrescrito pelo novo."
+  },
+  {
+   "n": 10,
+   "texto": "Os modelos estrela e floco de neve são modelos relacionais de sistemas transacionais, com medidas e dimensões."
+  },
+  {
+   "n": 11,
+   "texto": "A busca vetorial procura a correspondência exata de palavras."
+  },
+  {
+   "n": 12,
+   "texto": "A similaridade de cosseno entre dois vetores depende do comprimento deles."
+  },
+  {
+   "n": 13,
+   "texto": "O índice vetorial aproximado devolve sempre os mesmos vizinhos da busca exata."
+  },
+  {
+   "n": 14,
+   "texto": "Uma tabela sem atributo multivalorado já está na 2FN, mesmo havendo dependência parcial da chave."
+  },
+  {
+   "n": 15,
+   "texto": "A 2FN trata da dependência transitiva, e a 3FN, da dependência parcial."
+  },
+  {
+   "n": 16,
+   "texto": "Valor nulo em chave estrangeira viola a integridade referencial."
+  },
+  {
+   "n": 17,
+   "texto": "A desnormalização deve ser sempre evitada em qualquer banco."
+  },
+  {
+   "n": 18,
+   "texto": "A consistência do ACID e a do CAP são o mesmo conceito."
+  },
+  {
+   "n": 19,
+   "texto": "No protocolo de bloqueio em duas fases, a transação ainda obtém novos bloqueios na fase de encolhimento."
+  },
+  {
+   "n": 20,
+   "texto": "Durante a partição de rede, o teorema CAP garante as três propriedades ao mesmo tempo."
+  },
+  {
+   "n": 21,
+   "texto": "O bloqueio em duas fases (2PL) e a confirmação em duas fases (2PC) são nomes do mesmo mecanismo."
+  },
+  {
+   "n": 22,
+   "texto": "O data lake armazena somente dados estruturados e limpos."
+  },
+  {
+   "n": 23,
+   "texto": "O data lake elimina a necessidade de um data warehouse."
+  },
+  {
+   "n": 24,
+   "texto": "O data warehouse recebe atualização frequente linha a linha, como um sistema transacional."
+  },
+  {
+   "n": 25,
+   "texto": "Inmon propõe o data warehouse por áreas de negócio, e Kimball, o DW corporativo único de onde saem os dimensionais."
+  },
+  {
+   "n": 26,
+   "texto": "O data mesh adota governança centralizada, priorizando a consistência sobre a escalabilidade."
+  },
+  {
+   "n": 27,
+   "texto": "No data mesh, cada domínio define todas as regras, sem qualquer padrão global."
+  },
+  {
+   "n": 28,
+   "texto": "O data mesh é uma tecnologia que substitui obrigatoriamente o data warehouse e o data lake."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Esquema é a estrutura, a definição; os registros são as instâncias guardadas."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Uma só, que identifica cada tupla de forma única."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Árvore com um pai é o modelo hierárquico; o relacional são tabelas relacionadas por chaves."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "É o contrário: documento é o registro; coleção, a tabela."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "O acesso é pela chave; não há consulta pelo conteúdo nem junção."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Muitas vezes abre mão da consistência forte em prol de disponibilidade; injeção depende da aplicação."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Estão invertidos: a fato guarda as medidas; a dimensão guarda os contextos."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "No floco, as dimensões são normalizadas em tabelas menores; a desnormalização é da estrela."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Sobrescrever é o tipo 1; o tipo 2 cria nova linha e preserva o histórico."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "São modelos dimensionais para análise; medidas e dimensões são conceitos do dimensional, não do relacional de transação."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Ela procura os vizinhos mais próximos por similaridade de vetores."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Depende do ângulo; é invariante ao comprimento dos vetores."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "É aproximado: pode deixar de trazer algum vizinho da busca exata, em troca de velocidade."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A 2FN exige, além da 1FN, a ausência de dependência parcial em relação à chave."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "As bases foram trocadas: parcial é 2FN; transitiva é 3FN."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "O nulo é admitido quando o vínculo é opcional; violação é referenciar valor inexistente."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Em ambientes analíticos pode ser proposital, para desempenho e simplicidade de consulta."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "A do ACID são as regras do banco nas transações; a do CAP é ter cópias iguais nos nós distribuídos."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Novos bloqueios só na fase de crescimento; na de encolhimento apenas libera."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Durante a partição, o sistema escolhe consistência ou disponibilidade."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "O 2PL controla concorrência por bloqueios; o 2PC coordena o commit distribuído."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Isso é o esquema na escrita, do DW; o lake guarda o bruto de todo tipo, com esquema na leitura."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Eles se complementam: o lake guarda o bruto; o DW serve a análise consolidada."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "O DW recebe cargas periódicas em lote, não escrita transacional constante."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Estão invertidos: Inmon é o corporativo top-down; Kimball são os dimensionais por área."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "A governança é descentralizada por domínios, com dados como produto."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "Existem padrões globais de interoperabilidade e governança federada."
+  },
+  {
+   "n": 28,
+   "r": "E",
+   "comentario": "É uma abordagem organizacional; convive com DW e lake."
+  }
+ ]
+}

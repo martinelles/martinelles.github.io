@@ -1,0 +1,80 @@
+{
+ "aula": "C5·1",
+ "titulo": "1. Propósito, serviços e papéis · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A auditoria interna é atividade exclusivamente de avaliação."
+  },
+  {
+   "n": 2,
+   "texto": "A apuração faz parte do conceito clássico de auditoria interna do IIA."
+  },
+  {
+   "n": 3,
+   "texto": "As auditorias internas das entidades do controle interno (AECI) integram a terceira linha de defesa."
+  },
+  {
+   "n": 4,
+   "texto": "A segunda linha de defesa é responsável pelos controles primários da organização."
+  },
+  {
+   "n": 5,
+   "texto": "A autonomia técnica é atributo do auditor, e a objetividade, da unidade de auditoria."
+  },
+  {
+   "n": 6,
+   "texto": "A sociedade está fora do rol de destinatários dos serviços da auditoria interna."
+  },
+  {
+   "n": 7,
+   "texto": "As linhas de atuação da Secretaria Federal de Controle Interno são avaliação, consultoria e apuração."
+  },
+  {
+   "n": 8,
+   "texto": "As três linhas de defesa atuam de forma sobreposta, para reforçar os controles."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É de avaliação e de consultoria."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A apuração veio da Lei 10.180/2001, não do conceito do IIA."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Estão na segunda linha; a terceira é a auditoria interna."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Os controles primários são da primeira linha, a dos gestores dos processos."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A pegadinha troca: autonomia técnica é da unidade; objetividade é do auditor."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O rol de destinatários inclui a sociedade, além da organização e de suas partes interessadas."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Esses são os serviços de auditoria; as linhas de atuação são auditoria interna governamental, supervisão técnica e atividades de controladoria."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A atuação é coordenada, sem sobreposições ou lacunas."
+  }
+ ]
+}

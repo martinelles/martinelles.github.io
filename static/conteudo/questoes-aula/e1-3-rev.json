@@ -1,0 +1,260 @@
+{
+ "aula": "E1·3",
+ "titulo": "3. Relações entre variáveis · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Um coeficiente de correlação pode ser maior que 1."
+  },
+  {
+   "n": 2,
+   "texto": "A correlação é a inclinação da reta de regressão."
+  },
+  {
+   "n": 3,
+   "texto": "Na variância da soma de duas variáveis correlacionadas, entra o termo 2·Cov(X, Y)."
+  },
+  {
+   "n": 4,
+   "texto": "A matriz de covariâncias pode apresentar valores diferentes em posições simétricas."
+  },
+  {
+   "n": 5,
+   "texto": "Variáveis com correlação nula são independentes."
+  },
+  {
+   "n": 6,
+   "texto": "Para mostrar a relação entre duas variáveis quantitativas, serve o gráfico de barras."
+  },
+  {
+   "n": 7,
+   "texto": "A variância do erro do modelo é a mesma variância da variável resposta."
+  },
+  {
+   "n": 8,
+   "texto": "O sinal do coeficiente de correlação é sempre o mesmo da inclinação da reta de regressão."
+  },
+  {
+   "n": 9,
+   "texto": "O resíduo é o valor previsto menos o valor observado."
+  },
+  {
+   "n": 10,
+   "texto": "O método de mínimos quadrados exige erros normais para minimizar a soma dos quadrados."
+  },
+  {
+   "n": 11,
+   "texto": "Na regressão linear simples, o divisor da soma dos quadrados dos resíduos é n menos 1."
+  },
+  {
+   "n": 12,
+   "texto": "A hipótese nula da ANOVA é a de que as médias dos grupos são diferentes."
+  },
+  {
+   "n": 13,
+   "texto": "Rejeitada a hipótese nula na ANOVA, todas as médias são diferentes entre si."
+  },
+  {
+   "n": 14,
+   "texto": "Delineamento em que cada grupo tem unidades diferentes é de medidas repetidas."
+  },
+  {
+   "n": 15,
+   "texto": "O erro padrão da regressão é o quadrado médio do resíduo."
+  },
+  {
+   "n": 16,
+   "texto": "Rejeitada a normalidade dos resíduos, não há alternativa à ANOVA."
+  },
+  {
+   "n": 17,
+   "texto": "Um R² alto garante que a relação é causal ou que o modelo está bem especificado."
+  },
+  {
+   "n": 18,
+   "texto": "A homocedasticidade refere-se à variância constante da variável resposta."
+  },
+  {
+   "n": 19,
+   "texto": "Um coeficiente estatisticamente significativo já é importante na prática."
+  },
+  {
+   "n": 20,
+   "texto": "É válido estender a reta ajustada para valores de X muito fora da faixa observada."
+  },
+  {
+   "n": 21,
+   "texto": "Uma correlação forte entre duas variáveis demonstra relação de causa e efeito."
+  },
+  {
+   "n": 22,
+   "texto": "A comparação antes e depois isola o efeito do programa."
+  },
+  {
+   "n": 23,
+   "texto": "Amostragem aleatória e alocação aleatória do tratamento são a mesma coisa."
+  },
+  {
+   "n": 24,
+   "texto": "Regressão com variáveis de controle elimina o viés de variáveis não observadas."
+  },
+  {
+   "n": 25,
+   "texto": "A taxa de irregularidade dos municípios selecionados pela matriz de risco vale para todos os municípios."
+  },
+  {
+   "n": 26,
+   "texto": "A melhora de unidades escolhidas por terem tido o pior resultado prova o efeito da intervenção."
+  },
+  {
+   "n": 27,
+   "texto": "O aumento do número de denúncias indica aumento das irregularidades."
+  },
+  {
+   "n": 28,
+   "texto": "A fiscalização aumenta as irregularidades, pois os municípios mais fiscalizados têm mais achados."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A correlação linear vive entre −1 e 1."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "São medidas distintas; o sinal coincide, os valores não, e a inclinação depende das unidades das variáveis."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "A pegadinha esquece o termo de covariância e soma as variâncias direto."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Ela é simétrica: a covariância de X com Y é a mesma de Y com X."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Correlação linear nula não garante independência; pode haver relação não linear."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O gráfico adequado é o de dispersão."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "São conceitos distintos: o erro é o desvio entre observado e previsto."
+  },
+  {
+   "n": 8,
+   "r": "C",
+   "comentario": "Sobe junto, desce junto; errar o sinal é a pegadinha."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "É o observado menos o previsto."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A minimização dispensa normalidade; ela entra na inferência, nos testes e intervalos."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É n menos 2; na regressão múltipla, n menos k menos 1."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "A nula é a igualdade das médias."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "A rejeição indica pelo menos uma diferença; identificar quais pares pede teste posterior."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Medidas repetidas é quando as mesmas unidades aparecem em todos os grupos."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "O erro padrão é a raiz do quadrado médio."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Há alternativas não paramétricas, como o teste de Kruskal-Wallis."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Não garante nem uma coisa nem outra."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Refere-se à variância constante dos erros, ao longo dos valores previstos."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Significância estatística não é relevância prática; o tamanho do efeito decide."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Extrapolar é arriscado: o modelo não foi estimado lá."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Correlação não estabelece causalidade."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Tendências e eventos do período contaminam a comparação sem grupo de controle."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "A amostragem decide quem entra no estudo; a alocação decide quem recebe o tratamento."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "O que não foi observado segue causando viés."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "Seleção por risco não é amostra representativa; o achado vale para os examinados."
+  },
+  {
+   "n": 26,
+   "r": "E",
+   "comentario": "Pode ser regressão à média: escolhidas por estarem ruins, tendem a melhorar sozinhas."
+  },
+  {
+   "n": 27,
+   "r": "E",
+   "comentario": "Pode refletir mudanças no canal, na divulgação ou no registro."
+  },
+  {
+   "n": 28,
+   "r": "E",
+   "comentario": "Quem é mais examinado tem mais chance de achado; a causalidade está invertida."
+  }
+ ]
+}

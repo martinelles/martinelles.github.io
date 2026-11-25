@@ -1,0 +1,53 @@
+{
+ "aula": "B3·1",
+ "titulo": "1. Fundamentos da ética pública · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Pelo Código de Ética do servidor, a escolha diária se dá apenas entre o legal e o ilegal."
+  },
+  {
+   "n": 2,
+   "texto": "A conduta na vida privada do servidor não repercute na vida funcional."
+  },
+  {
+   "n": 3,
+   "texto": "Kant avalia a ação moral pelas suas consequências."
+  },
+  {
+   "n": 4,
+   "texto": "A publicidade dos atos é requisito de validade previsto no Código de Ética."
+  },
+  {
+   "n": 5,
+   "texto": "Chama-se ética deontológica a que mede o maior bem para o maior número."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Ela se dá, sobretudo, entre o honesto e o desonesto."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "O inciso VI do Código diz que pode acrescer ou diminuir o bom conceito funcional."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Isso é o utilitarismo; Kant olha o dever e a intenção."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O texto fala em eficácia e moralidade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Essa é a ética consequencialista, ou utilitarista; a deontológica olha o dever."
+  }
+ ]
+}

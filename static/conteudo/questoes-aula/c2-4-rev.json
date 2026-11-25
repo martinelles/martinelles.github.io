@@ -1,0 +1,116 @@
+{
+ "aula": "C2·4",
+ "titulo": "4. Participação e melhoria de serviços · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Os conselhos de usuários previstos na Lei 13.460 têm caráter deliberativo."
+  },
+  {
+   "n": 2,
+   "texto": "A função social que estimula a participação da sociedade nos programas e ações é a mobilizadora."
+  },
+  {
+   "n": 3,
+   "texto": "Conselho cuja única atribuição é apreciar determinado assunto tem caráter consultivo."
+  },
+  {
+   "n": 4,
+   "texto": "A escolha do ouvidor cabe ao conselho de usuários."
+  },
+  {
+   "n": 5,
+   "texto": "O sistema de participação social foi instituído por lei ordinária."
+  },
+  {
+   "n": 6,
+   "texto": "As conferências reúnem governo e sociedade para debater e decidir prioridades."
+  },
+  {
+   "n": 7,
+   "texto": "A participação no conselho de usuários é remunerada."
+  },
+  {
+   "n": 8,
+   "texto": "A existência formal de um conselho de usuários garante participação representativa."
+  },
+  {
+   "n": 9,
+   "texto": "Um serviço público com poucas reclamações tem boa qualidade."
+  },
+  {
+   "n": 10,
+   "texto": "A transparência ativa depende de requerimento do interessado."
+  },
+  {
+   "n": 11,
+   "texto": "O Portal da Transparência apresenta a execução física das obras públicas."
+  },
+  {
+   "n": 12,
+   "texto": "Cabe à CGU publicar a transparência ativa de todos os órgãos federais."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "São consultivos: opinam, acompanham e avaliam, sem decidir."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "A pegadinha chama de mobilizadora a função de acompanhar e controlar os atos dos governantes; essa é a fiscalizadora."
+  },
+  {
+   "n": 3,
+   "r": "C",
+   "comentario": "Apreciar sem decidir é consultar; deliberar é decidir com força vinculante."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O conselho acompanha e avalia a atuação do ouvidor e contribui na definição de diretrizes de atendimento."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Foi instituído por decreto, hoje o Decreto 11.407/2023."
+  },
+  {
+   "n": 6,
+   "r": "C",
+   "comentario": "Elas deliberam sobre prioridades; negar seu caráter deliberativo é a pegadinha."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "É voluntária e não remunerada."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Representatividade depende de funcionamento real: diversidade de membros, reuniões ativas e escuta efetiva."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Poucas reclamações podem significar dificuldade de reclamar ou descrença no retorno; ausência de voz não é satisfação comprovada."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "A ativa é divulgada por iniciativa do próprio órgão; a que depende de requerimento é a passiva."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O Portal mostra a execução financeira; a execução física fica em sistema próprio de acompanhamento de obras."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Cada órgão é responsável pela sua transparência; a CGU orienta e monitora."
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "aula": "C4·4",
+ "titulo": "4. Integridade da evidência e proteção · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Explicações verbais do auditor bastam para fundamentar as conclusões do trabalho."
+  },
+  {
+   "n": 2,
+   "texto": "Papéis de trabalho são apenas cópias dos documentos da unidade auditada."
+  },
+  {
+   "n": 3,
+   "texto": "Omitir o nome do entrevistado é suficiente para garantir sua confidencialidade."
+  },
+  {
+   "n": 4,
+   "texto": "O entrevistador deve expressar sua opinião sobre o assunto, para estimular respostas."
+  },
+  {
+   "n": 5,
+   "texto": "A entrevista em auditoria interna governamental exige aprovação prévia de comitê de ética em pesquisa."
+  },
+  {
+   "n": 6,
+   "texto": "O participante de pesquisa não pode retirar o consentimento depois de iniciada a pesquisa."
+  },
+  {
+   "n": 7,
+   "texto": "O regime de proteção do denunciante é o mesmo do participante de pesquisa."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A conclusão se apoia em evidência registrada e verificável nos papéis de trabalho."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Incluem também análises, memórias de cálculo, registros de entrevistas e as conclusões do próprio auditor."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A confidencialidade exige tratar também o conteúdo e o contexto que permitem identificar a fonte."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "O entrevistador mantém neutralidade; opinar induz a resposta e contamina a evidência."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Auditoria não é pesquisa científica sujeita ao sistema CEP/Conep."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "O consentimento pode ser retirado a qualquer momento."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "São regimes distintos, com fundamentos e proteções próprios."
+  }
+ ]
+}

@@ -1,0 +1,134 @@
+{
+ "aula": "C5·4",
+ "titulo": "4. Comunicação e acompanhamento · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A concisão autoriza omitir do relatório informação relevante para a conclusão."
+  },
+  {
+   "n": 2,
+   "texto": "A comunicação dos resultados ocorre somente ao final do trabalho."
+  },
+  {
+   "n": 3,
+   "texto": "Uma opinião geral favorável pode se apoiar na concordância da alta administração com os achados."
+  },
+  {
+   "n": 4,
+   "texto": "A comunicação construtiva é a que elimina detalhes supérfluos e redundâncias."
+  },
+  {
+   "n": 5,
+   "texto": "O relatório de auditoria interna é, em regra, de acesso restrito."
+  },
+  {
+   "n": 6,
+   "texto": "A UAIG publica o relatório sem consultar antes a unidade auditada sobre informação sigilosa ou pessoal."
+  },
+  {
+   "n": 7,
+   "texto": "Basta uma das três condições legais para identificar pessoa física no relatório."
+  },
+  {
+   "n": 8,
+   "texto": "A recomendação de auditoria deve sempre detalhar como o gestor implementará a solução."
+  },
+  {
+   "n": 9,
+   "texto": "Corrigir a situação encontrada elimina a causa do problema."
+  },
+  {
+   "n": 10,
+   "texto": "Quanto maior a maturidade da gestão de riscos da unidade, mais intenso deve ser o monitoramento das recomendações."
+  },
+  {
+   "n": 11,
+   "texto": "O plano de ação de atendimento das recomendações é elaborado pela auditoria."
+  },
+  {
+   "n": 12,
+   "texto": "A simples publicação de normativo já configura atendimento da recomendação."
+  },
+  {
+   "n": 13,
+   "texto": "O benefício financeiro de recomendação é a economia líquida, com os custos de implementação descontados."
+  },
+  {
+   "n": 14,
+   "texto": "A economia esperada de recomendação cujo atendimento ainda não foi comprovado é benefício realizado."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Concisão elimina o supérfluo, nunca o relevante."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Comunicações parciais durante o trabalho são possíveis e úteis."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Exige conjunto suficiente de trabalhos individuais e evidência suficiente e apropriada; quando desfavorável, as razões são expostas (IN SFC 3/2017, item 173)."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Isso é a concisão; a construtiva conduz a melhorias e favorece a solução colaborativa."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A regra é o acesso aberto; a restrição é exceção."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A consulta prévia sobre o que deve ser restringido é devida antes da publicação."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "As condições são cumulativas."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A recomendação aponta o que atender; o como fica no plano de ação do gestor."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Sem tratar a causa, o problema tende a voltar."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É o inverso: mais maturidade, monitoramento menos intenso."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "É elaborado pelo gestor responsável pela implementação."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O atendimento se verifica pelo resultado alcançado, não pelo ato formal."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "A economia bruta, sem desconto dos custos, é a pegadinha."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "É benefício potencial; realizado é o de atendimento comprovado."
+  }
+ ]
+}

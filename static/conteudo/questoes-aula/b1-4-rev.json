@@ -1,0 +1,143 @@
+{
+ "aula": "B1·4",
+ "titulo": "4. Ordem constitucional e direitos · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O pluralismo político é objetivo fundamental da República."
+  },
+  {
+   "n": 2,
+   "texto": "Garantir o desenvolvimento nacional é fundamento da República."
+  },
+  {
+   "n": 3,
+   "texto": "A concessão de asilo político é objetivo fundamental da República."
+  },
+  {
+   "n": 4,
+   "texto": "República é a forma de governo, e presidencialismo é o sistema de governo."
+  },
+  {
+   "n": 5,
+   "texto": "Os direitos fundamentais dependem sempre de lei para produzir efeitos."
+  },
+  {
+   "n": 6,
+   "texto": "Todo tratado de direitos humanos tem status de emenda constitucional."
+  },
+  {
+   "n": 7,
+   "texto": "O transporte não é direito social na Constituição."
+  },
+  {
+   "n": 8,
+   "texto": "A Constituição admite cassação de direitos políticos."
+  },
+  {
+   "n": 9,
+   "texto": "A aplicação imediata das normas de direitos restringe-se aos direitos individuais."
+  },
+  {
+   "n": 10,
+   "texto": "Tratado de direitos humanos aprovado pelo rito do § 3º dispensa o decreto de promulgação."
+  },
+  {
+   "n": 11,
+   "texto": "O voto obrigatório é cláusula pétrea."
+  },
+  {
+   "n": 12,
+   "texto": "Pela legalidade administrativa, a Administração pode fazer tudo o que a lei não proíbe."
+  },
+  {
+   "n": 13,
+   "texto": "As ações afirmativas violam o princípio da igualdade."
+  },
+  {
+   "n": 14,
+   "texto": "Os princípios do art. 37 da Constituição vinculam apenas a Administração do Executivo."
+  },
+  {
+   "n": 15,
+   "texto": "A eficiência é princípio original do texto de 1988."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É fundamento (CF, art. 1º, V)."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "É objetivo fundamental (CF, art. 3º, II)."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "É princípio das relações internacionais (CF, art. 4º)."
+  },
+  {
+   "n": 4,
+   "r": "C",
+   "comentario": "A forma trata da origem e titularidade do poder; o sistema, da relação entre Executivo e Legislativo."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "As normas definidoras têm aplicação imediata (CF, art. 5º, § 1º)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Só os aprovados pelo rito do § 3º do art. 5º."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Está no art. 6º desde a EC 90/2015."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Cassação é vedada; admite-se perda ou suspensão, nos casos da lei."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Vale para todas as normas definidoras de direitos e garantias fundamentais."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Ele continua dependendo do decreto para vigorar internamente."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O que é pétreo é o voto direto, secreto, universal e periódico."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Essa é a legalidade do particular; a Administração só faz o que a lei autoriza."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Elas realizam a igualdade material, compensando desigualdades reais."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Vinculam a Administração direta e indireta dos três Poderes."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Foi incluído pela EC 19/1998."
+  }
+ ]
+}

@@ -1,0 +1,161 @@
+{
+ "aula": "C2·2",
+ "titulo": "2. Transparência e proteção de dados · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A informação pessoal, na LAI, depende de classificação de sigilo para ter acesso restrito."
+  },
+  {
+   "n": 2,
+   "texto": "O prazo de restrição do acesso à informação pessoal é de 25 anos."
+  },
+  {
+   "n": 3,
+   "texto": "A proteção da vida privada impede a apuração de irregularidades em que o titular dos dados esteja envolvido."
+  },
+  {
+   "n": 4,
+   "texto": "A LGPD revogou a LAI na parte que trata de informações pessoais."
+  },
+  {
+   "n": 5,
+   "texto": "Na LGPD, os princípios da finalidade e da adequação são a mesma coisa."
+  },
+  {
+   "n": 6,
+   "texto": "O princípio da necessidade autoriza coletar o máximo de dados possível para usos futuros."
+  },
+  {
+   "n": 7,
+   "texto": "A segurança dos dados pessoais exige apenas medidas técnicas."
+  },
+  {
+   "n": 8,
+   "texto": "O consentimento é exigido em todo tratamento de dados pessoais."
+  },
+  {
+   "n": 9,
+   "texto": "A revogação do consentimento invalida o tratamento já realizado."
+  },
+  {
+   "n": 10,
+   "texto": "Autorização genérica vale como consentimento para o tratamento de dados."
+  },
+  {
+   "n": 11,
+   "texto": "Dado financeiro ou patrimonial integra o rol de dados sensíveis da LGPD."
+  },
+  {
+   "n": 12,
+   "texto": "Dado de pessoa jurídica é dado pessoal."
+  },
+  {
+   "n": 13,
+   "texto": "Dado pessoal abrange também o dado relativo a pessoa identificável, não só à já identificada."
+  },
+  {
+   "n": 14,
+   "texto": "Dado pseudonimizado equivale a dado anonimizado."
+  },
+  {
+   "n": 15,
+   "texto": "Dado anonimizado nunca volta a ser dado pessoal."
+  },
+  {
+   "n": 16,
+   "texto": "Retirar o nome de um registro garante, por si só, a anonimização do dado."
+  },
+  {
+   "n": 17,
+   "texto": "Havendo trecho protegido em um documento, o órgão deve negar o acesso ao documento inteiro."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A restrição de informação pessoal independe de classificação."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "É de até 100 anos, contado da sua produção."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A restrição não se aplica à apuração de irregularidades: a fiscalização segue."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "As duas convivem: a LAI segue disciplinando o acesso a informações pessoais em poder dos órgãos públicos."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A finalidade é o propósito do tratamento; a adequação é a compatibilidade com a finalidade já informada."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A necessidade manda limitar a coleta ao mínimo necessário para a finalidade."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Exige medidas técnicas e administrativas de proteção."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É uma das bases legais; há outras, como cumprimento de obrigação legal, execução de políticas públicas e proteção do crédito (LGPD, art. 7º)."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "A revogação vale dali em diante; ficam ratificados os tratamentos anteriores (LGPD, art. 8º, § 5º)."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "É nula a autorização que não se refira a hipóteses específicas (LGPD, art. 8º, § 4º)."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "Não está no art. 5º, II; os sensíveis são os de origem racial, convicção religiosa, opinião política, saúde, sexualidade e biométricos."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Dado pessoal é o relacionado a pessoa natural identificada ou identificável."
+  },
+  {
+   "n": 13,
+   "r": "C",
+   "comentario": "É a definição do art. 5º, I, da LGPD; a pegadinha restringe às pessoas identificadas."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "O pseudonimizado ainda é dado pessoal; o anonimizado é o que não pode ser revertido."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Volta a ser pessoal se a anonimização puder ser revertida com esforços razoáveis."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Anonimizar exige que a reidentificação seja inviável com esforços razoáveis; tirar o nome não basta."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Deve dar acesso parcial com ocultação do trecho (LAI, art. 7º, § 2º, e Decreto 7.724/2012, art. 58, III)."
+  }
+ ]
+}

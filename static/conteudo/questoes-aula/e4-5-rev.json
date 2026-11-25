@@ -1,0 +1,233 @@
+{
+ "aula": "E4·5",
+ "titulo": "5. Contratação e controle de soluções · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O planejamento é obrigatório em qualquer contratação de TIC, sem exceção."
+  },
+  {
+   "n": 2,
+   "texto": "O Documento de Formalização de Demandas é o que caracteriza o interesse público e a melhor solução."
+  },
+  {
+   "n": 3,
+   "texto": "A gestão de processos de TIC e a gestão de segurança da informação podem ser contratadas de terceiros."
+  },
+  {
+   "n": 4,
+   "texto": "Na gestão do contrato, o mapa de riscos é atualizado pela equipe de planejamento."
+  },
+  {
+   "n": 5,
+   "texto": "O TCO considera apenas o preço de aquisição da solução."
+  },
+  {
+   "n": 6,
+   "texto": "Custo total de propriedade e pesquisa de preços são a mesma coisa."
+  },
+  {
+   "n": 7,
+   "texto": "A declaração de viabilidade dispensa a identificação dos benefícios em eficácia, eficiência, efetividade e economicidade."
+  },
+  {
+   "n": 8,
+   "texto": "A renovação do centro de dados pode ser feita com infraestrutura própria, sem que o ETP demonstre a inviabilidade da nuvem."
+  },
+  {
+   "n": 9,
+   "texto": "Informação classificada em grau de sigilo pode ir para nuvem pública, desde que criptografada."
+  },
+  {
+   "n": 10,
+   "texto": "O contrato de desenvolvimento de software pode ser usado livremente para sistemas de área-meio."
+  },
+  {
+   "n": 11,
+   "texto": "Admite-se estimativa baseada só em propostas de fornecedores, com prioridade sobre o Painel de Preços e as contratações similares."
+  },
+  {
+   "n": 12,
+   "texto": "O preço estimado deve ser sempre a média, e basta um ou dois preços sem justificativa."
+  },
+  {
+   "n": 13,
+   "texto": "O valor do PMC-TIC prevalece mesmo quando a pesquisa encontra valor menor."
+  },
+  {
+   "n": 14,
+   "texto": "É vedado fixar no edital patamar de presunção de inexequibilidade nos serviços de desenvolvimento de software."
+  },
+  {
+   "n": 15,
+   "texto": "A contratação de soluções de TIC dispensa critérios de sustentabilidade ambiental e social."
+  },
+  {
+   "n": 16,
+   "texto": "Os requisitos de segurança e privacidade competem exclusivamente ao integrante técnico da equipe."
+  },
+  {
+   "n": 17,
+   "texto": "Os níveis de serviço podem ser aferidos apenas com os relatórios apresentados pela contratada."
+  },
+  {
+   "n": 18,
+   "texto": "Gestor do contrato e fiscal administrativo são o mesmo papel, e o preposto representa o órgão."
+  },
+  {
+   "n": 19,
+   "texto": "O servidor pode recusar a designação para gestor ou fiscal de contrato por falta de capacitação."
+  },
+  {
+   "n": 20,
+   "texto": "Cobrança por homem-hora e postos de trabalho é vedada de forma absoluta, ou, ao contrário, é a regra."
+  },
+  {
+   "n": 21,
+   "texto": "A glosa pode ser aplicada pelo juízo discricionário do fiscal, sem descumprimento dos critérios de aceitação ou dos níveis de serviço."
+  },
+  {
+   "n": 22,
+   "texto": "A contratada pode alocar um profissional seu para atuar como Product Owner do órgão."
+  },
+  {
+   "n": 23,
+   "texto": "Os direitos sobre o software desenvolvido no contrato pertencem à contratada, salvo cláusula expressa em favor da Administração."
+  },
+  {
+   "n": 24,
+   "texto": "A portabilidade dos dados na saída de um contrato de nuvem pode ser cobrada à parte do órgão."
+  },
+  {
+   "n": 25,
+   "texto": "O software desenvolvido exclusivamente por um órgão só pode ser usado por esse órgão."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Abaixo do limite de dispensa por valor, dispensa-se o planejamento formal."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Isso é o Estudo Técnico Preliminar; o DFD detalha as demandas e aprovA-as."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "São vedadas; admite-se apenas o apoio técnico, sob supervisão exclusiva de servidores."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Quem atualiza é o gestor do contrato, com o fiscal e a área responsável por riscos."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Considera o custo do ciclo inteiro: implantar, operar e sair."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A pesquisa apura valores de mercado; o TCO projeta o custo ao longo da vida da solução."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Esses benefícios são justamente o que ela declara."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "A preferência é a nuvem; infraestrutura própria exige demonstração de inviabilidade no ETP."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Sigilo não vai para nuvem pública; exige solução dedicada ou privada."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Destina-se à área-fim; o de área-meio segue regras de solução corporativa padronizada."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O Painel e as similares prevalecem; proposta de fornecedor é fonte subsidiária e justificada."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Média ou mediana, justificada; e a estimativa exige conjunto suficiente de preços."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O menor valor encontrado na pesquisa passa a ser o teto da estimativa."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "A norma permite fixar o patamar nesse caso."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Os critérios de sustentabilidade integram a contratação."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Ele os define junto com o requisitante da área de negócio."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "A Administração fiscaliza por conta própria também; relatório da contratada é só uma fonte."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "São papéis distintos; o preposto representa a contratada."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "A designação é dever do cargo; a capacitação é que se providencia."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Nem vedação absoluta nem regra: admissíveis quando o objeto não se mede por resultado."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "A glosa decorre de descumprimento objetivo; sem ele, não há o que glosar."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "O Product Owner representa o contratante; é servidor do órgão."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "A regra é invertida: pertencem à Administração, salvo cláusula expressa em favor da contratada."
+  },
+  {
+   "n": 24,
+   "r": "E",
+   "comentario": "A saída e a migração dos dados integram o contrato; cobrança à parte não se admite."
+  },
+  {
+   "n": 25,
+   "r": "E",
+   "comentario": "A norma o sujeita a licença de código aberto, permitindo reuso por outros."
+  }
+ ]
+}

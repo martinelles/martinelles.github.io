@@ -1,0 +1,53 @@
+{
+ "aula": "C4·1",
+ "titulo": "1. Perguntas e fontes · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "Um dado pode ser tratado como evidência sem que se relacione a uma pergunta e a um critério."
+  },
+  {
+   "n": 2,
+   "texto": "A suficiência é atributo de qualidade da evidência."
+  },
+  {
+   "n": 3,
+   "texto": "A evidência corroborativa deve vir da mesma fonte da evidência original."
+  },
+  {
+   "n": 4,
+   "texto": "As manifestações registradas pela ouvidoria formam amostra representativa da população."
+  },
+  {
+   "n": 5,
+   "texto": "Na conclusão, o auditor emite juízo sobre a culpa do gestor."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "Evidência é dado ligado a uma pergunta e avaliado por critério; sem isso, é apenas dado."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A suficiência é atributo de quantidade (a evidência basta para a conclusão?); qualidade se julga pela relevância e pela confiabilidade."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Corroborar é reforçar por fonte independente; repetir a mesma fonte não agrega confiabilidade."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Quem se manifesta é autoselecionado; a ouvidoria ouve os que chegaram, não uma amostra da população."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A conclusão é técnica: relaciona critério, condição e causa; não tipifica conduta nem imputa culpa."
+  }
+ ]
+}

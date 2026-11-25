@@ -1,0 +1,143 @@
+{
+ "aula": "B2·5",
+ "titulo": "5. Desenvolvimento e realidade brasileira · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A assistência social exige contribuição prévia do beneficiário."
+  },
+  {
+   "n": 2,
+   "texto": "O Bolsa Família é programa de transferência de renda condicionada."
+  },
+  {
+   "n": 3,
+   "texto": "O marco do saneamento fixa meta de 100% de coleta de esgoto até 2033."
+  },
+  {
+   "n": 4,
+   "texto": "Mitigação é reduzir os danos dos efeitos climáticos já inevitáveis."
+  },
+  {
+   "n": 5,
+   "texto": "A principal fonte de emissões brasileiras é a indústria."
+  },
+  {
+   "n": 6,
+   "texto": "No conceito atual do IPCC adotado pelo Plano Clima, a exposição integra a vulnerabilidade."
+  },
+  {
+   "n": 7,
+   "texto": "Desenvolvimento sustentável se resume à proteção ambiental."
+  },
+  {
+   "n": 8,
+   "texto": "A igualdade étnico-racial é um dos 17 ODS da ONU."
+  },
+  {
+   "n": 9,
+   "texto": "Os ODS podem ser cumpridos isoladamente, e ignoram as realidades nacionais."
+  },
+  {
+   "n": 10,
+   "texto": "A meta 12.1 dos ODS se cumpre com um plano quinquenal de produção e consumo sustentáveis."
+  },
+  {
+   "n": 11,
+   "texto": "O Brasil aplica as metas globais dos ODS sem adaptação, e a CNODS é instância deliberativa."
+  },
+  {
+   "n": 12,
+   "texto": "Índice de Gini igual a 1 indica igualdade perfeita."
+  },
+  {
+   "n": 13,
+   "texto": "O índice de Gini só se aplica à renda."
+  },
+  {
+   "n": 14,
+   "texto": "O crescimento do PIB per capita implica, necessariamente, redução da desigualdade."
+  },
+  {
+   "n": 15,
+   "texto": "As desigualdades são temporárias e destinadas a desaparecer com o desenvolvimento econômico."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "É direito não contributivo, do sistema de seguridade."
+  },
+  {
+   "n": 2,
+   "r": "C",
+   "comentario": "As condicionalidades de saúde e escola acompanham a transferência."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "A meta é de 90%."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Isso é adaptação; mitigar é reduzir as emissões."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "É o uso da terra e a agropecuária."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "É componente à parte do risco climático."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Concilia as dimensões econômica, social e ambiental."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "É o ODS 18, iniciativa voluntária do Brasil."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "São integrados e indivisíveis, e consideram as capacidades e os níveis de desenvolvimento de cada país."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "O plano previsto é decenal."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O Ipea propôs 175 metas nacionais, com 128 alteradas e 8 novas; e a CNODS é consultiva."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Indica desigualdade máxima; zero é a igualdade."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "O IBGE também o usa para medir a concentração de terras."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Depende de como o crescimento se distribui."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Elas se reproduzem ao longo do desenvolvimento, como a formação social brasileira mostra."
+  }
+ ]
+}

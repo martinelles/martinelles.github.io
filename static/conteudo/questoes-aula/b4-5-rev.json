@@ -1,0 +1,62 @@
+{
+ "aula": "B4·5",
+ "titulo": "5. Serviços e transformação digital · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "A transformação digital autoriza extinguir o atendimento presencial de qualquer serviço público."
+  },
+  {
+   "n": 2,
+   "texto": "O órgão pode exigir reconhecimento de firma do cidadão como regra geral."
+  },
+  {
+   "n": 3,
+   "texto": "Governo eletrônico se resume a colocar serviços na internet."
+  },
+  {
+   "n": 4,
+   "texto": "A interoperabilidade entre sistemas dispensa a observância da LGPD."
+  },
+  {
+   "n": 5,
+   "texto": "Decisões automatizadas sobre benefícios dispensam revisão, por serem objetivas."
+  },
+  {
+   "n": 6,
+   "texto": "O uso de IA transfere a responsabilidade da decisão para o fornecedor da ferramenta."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A digitalização não elimina o canal presencial: o cidadão tem o direito de escolher como atender."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Só quando previsto em lei e em caráter excepcional."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Exige mudança organizacional; sem ela, a tecnologia só digitaliza a burocracia."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Os dois andam juntos: interoperar sem proteger o dado pessoal é infração à espera."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "A revisão é direito do titular, ainda que o cálculo pareça objetivo (LGPD, art. 20)."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "A responsabilidade é de quem decide com o auxílio da ferramenta."
+  }
+ ]
+}

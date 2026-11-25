@@ -1,0 +1,206 @@
+{
+ "aula": "E4·3",
+ "titulo": "3. Governança e responsabilidade · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "O encarregado responde perante a ANPD pela conformidade do tratamento realizado pelo controlador."
+  },
+  {
+   "n": 2,
+   "texto": "O encarregado de órgão federal deve, de preferência, estar lotado na unidade de tecnologia da informação."
+  },
+  {
+   "n": 3,
+   "texto": "A responsabilidade civil do agente de tratamento só surge quando há vazamento de dados."
+  },
+  {
+   "n": 4,
+   "texto": "A ANPD não pode enviar a órgão público informe com medidas para fazer cessar violação."
+  },
+  {
+   "n": 5,
+   "texto": "O risco residual é aquele a que a organização está exposta sem considerar os controles implantados."
+  },
+  {
+   "n": 6,
+   "texto": "O programa de governança em privacidade abrange somente os dados coletados diretamente do titular."
+  },
+  {
+   "n": 7,
+   "texto": "O programa de governança em privacidade é obrigatório para todo controlador."
+  },
+  {
+   "n": 8,
+   "texto": "Basta um critério específico, como o uso de tecnologia emergente, para caracterizar o tratamento como de alto risco."
+  },
+  {
+   "n": 9,
+   "texto": "O relatório de impacto dispensa a análise das medidas, salvaguardas e mecanismos de mitigação de risco."
+  },
+  {
+   "n": 10,
+   "texto": "O registro das operações de tratamento é o instrumento de avaliação dos riscos aos titulares."
+  },
+  {
+   "n": 11,
+   "texto": "O art. 20 da LGPD garante revisão de qualquer decisão que use dados pessoais, ainda que tomada por pessoa."
+  },
+  {
+   "n": 12,
+   "texto": "A LGPD exige expressamente que a revisão da decisão automatizada seja feita por pessoa natural."
+  },
+  {
+   "n": 13,
+   "texto": "A supervisão humana deve ter a mesma intensidade em qualquer aplicação de IA, independentemente do risco."
+  },
+  {
+   "n": 14,
+   "texto": "O prazo para comunicar incidente de segurança à ANPD é de 72 horas corridas, como no regulamento europeu."
+  },
+  {
+   "n": 15,
+   "texto": "O dado pseudonimizado deixa de ser considerado dado pessoal."
+  },
+  {
+   "n": 16,
+   "texto": "Dados pessoais podem ser enviados a plataformas abertas de IA generativa quando o usuário assume a responsabilidade."
+  },
+  {
+   "n": 17,
+   "texto": "Excluir do modelo o atributo sensível, como raça ou sexo, impede resultados discriminatórios."
+  },
+  {
+   "n": 18,
+   "texto": "É possível atender a todas as métricas de equidade ao mesmo tempo quando as taxas reais diferem entre os grupos."
+  },
+  {
+   "n": 19,
+   "texto": "Admite-se tratamento posterior incompatível com a finalidade informada, desde que o titular seja avisado depois."
+  },
+  {
+   "n": 20,
+   "texto": "A precisão medida apenas nos casos que o modelo indicou estima o desempenho dele na população."
+  },
+  {
+   "n": 21,
+   "texto": "O desempenho técnico do modelo basta para avaliar o resultado da solução."
+  },
+  {
+   "n": 22,
+   "texto": "O guia da CGU recomenda IA generativa para inteligência decisória, e no CGU-Insight a decisão final é do sistema."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "A conformidade é responsabilidade do agente de tratamento; o encarregado é o canal de comunicação com os titulares e a autoridade."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "A norma orienta o contrário: preferência por lotação fora da TI."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Surge do dano ao titular por atividade de tratamento que viole a lei, vaze ou não."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "Pode: o informe fiscalizatório com providências é instrumento próprio da autoridade."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Sem controles é o risco inerente; o residual é o que sobra depois deles."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Abruca todo dado pessoal sob controle do controlador, de qualquer origem."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "A lei diz que o controlador poderá implementá-lo: é faculdade, embora recomendado."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "Um critério listado não decide sozinho; avalia-se o conjunto de fatores."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Essa análise é justamente o conteúdo do relatório."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Quem avalia os riscos é o relatório de impacto; o registro inventaria as operações."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "O direito de revisão vale para decisões tomadas unicamente de forma automatizada."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "O § 3º do art. 20, que previa isso, foi vetado."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "A intensidade acompanha o risco e os direitos em jogo."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "Na regra brasileira são 3 dias úteis."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "Segue pessoal: a reidentificação é possível com a informação adicional."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "Assunção de responsabilidade não cria base legal nem protege o titular."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Atributos correlacionados reproduzem o mesmo sinal."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "As métricas de equidade são mutuamente excludentes nesse caso: escolher é trade-off."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "Incompatibilidade exige nova base legal; o aviso posterior não cura o vício."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Só se confere o que se olhou: a amostra fica enviesada para os apontados."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "O resultado olha adoção, efeito real e equidade; métrica técnica é só uma parte."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "O guia é comedido quanto a decisão; a decisão final é do agente humano."
+  }
+ ]
+}

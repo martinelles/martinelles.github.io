@@ -1,0 +1,215 @@
+{
+ "aula": "E4·2",
+ "titulo": "2. Sustentação de soluções analíticas · revisão",
+ "questoes": [
+  {
+   "n": 1,
+   "texto": "No autoatendimento sob demanda, o cliente precisa de interação humana com o provedor para obter recursos."
+  },
+  {
+   "n": 2,
+   "texto": "Na IaaS, o sistema operacional fica sob controle do provedor, e no PaaS o provedor gerencia as aplicações e os dados do cliente."
+  },
+  {
+   "n": 3,
+   "texto": "Nuvem privada é aquela de recursos de um provedor oferecidos ao público em geral."
+  },
+  {
+   "n": 4,
+   "texto": "A elasticidade sempre encarece a nuvem, porque o provedor mantém recursos parados para o cliente."
+  },
+  {
+   "n": 5,
+   "texto": "A gestão de CPU e memória deixa de ser crítica em pipelines de ML porque a nuvem aloca recursos dinamicamente."
+  },
+  {
+   "n": 6,
+   "texto": "Qualquer modelo de aprendizado de máquina roda mais rápido em GPU."
+  },
+  {
+   "n": 7,
+   "texto": "A quantização reduz a memória do modelo sem nenhum efeito sobre a exatidão."
+  },
+  {
+   "n": 8,
+   "texto": "A latência média é o melhor indicador da experiência do usuário e o mais adequado para o objetivo de nível de serviço."
+  },
+  {
+   "n": 9,
+   "texto": "Instâncias preemptíveis são adequadas para a API que atende o usuário em tempo real."
+  },
+  {
+   "n": 10,
+   "texto": "A nuvem oferece recursos de fato ilimitados, sem cotas."
+  },
+  {
+   "n": 11,
+   "texto": "99,9% de disponibilidade admite cerca de 4 minutos fora do ar por mês."
+  },
+  {
+   "n": 12,
+   "texto": "A disponibilidade de componentes em série é igual à do componente mais confiável."
+  },
+  {
+   "n": 13,
+   "texto": "O SLA é a meta interna de serviço, e o SLO, o compromisso contratual."
+  },
+  {
+   "n": 14,
+   "texto": "O gauge do Prometheus é um contador que só cresce, próprio para o total de chamadas de um endpoint."
+  },
+  {
+   "n": 15,
+   "texto": "A função principal do Grafana é coletar métricas diretamente dos alvos monitorados."
+  },
+  {
+   "n": 16,
+   "texto": "O Elasticsearch é um banco de dados relacional baseado em SQL."
+  },
+  {
+   "n": 17,
+   "texto": "Monitoramento e observabilidade são sinônimos."
+  },
+  {
+   "n": 18,
+   "texto": "Guardar credenciais de produção em arquivo de texto nos scripts do pipeline é aceitável quando o repositório é privado."
+  },
+  {
+   "n": 19,
+   "texto": "Apagar o commit que expôs a senha resolve o vazamento."
+  },
+  {
+   "n": 20,
+   "texto": "O Secret do Kubernetes é cifrado por padrão."
+  },
+  {
+   "n": 21,
+   "texto": "O RPO é o tempo máximo para restabelecer o serviço após a parada."
+  },
+  {
+   "n": 22,
+   "texto": "A replicação síncrona entre zonas de disponibilidade dispensa cópias de segurança."
+  },
+  {
+   "n": 23,
+   "texto": "O plano de continuidade, uma vez aprovado, dispensa testes periódicos."
+  }
+ ],
+ "gabarito": [
+  {
+   "n": 1,
+   "r": "E",
+   "comentario": "O provisionamento é automático, sem intermediário humano."
+  },
+  {
+   "n": 2,
+   "r": "E",
+   "comentario": "Na IaaS o cliente cuida do sistema operacional para cima; no PaaS o cliente mantém aplicações e dados."
+  },
+  {
+   "n": 3,
+   "r": "E",
+   "comentario": "Essa é a definição da nuvem pública; a privada serve uma única organização."
+  },
+  {
+   "n": 4,
+   "r": "E",
+   "comentario": "A cobrança é pelo uso medido; recursos parados não são cobrados."
+  },
+  {
+   "n": 5,
+   "r": "E",
+   "comentario": "Segue crítica: alocação mal dimensionada vira custo e gargalo."
+  },
+  {
+   "n": 6,
+   "r": "E",
+   "comentario": "Depende da carga: modelo pequeno ou pouco paralelo não ganha nada de GPU."
+  },
+  {
+   "n": 7,
+   "r": "E",
+   "comentario": "Há troca: a precisão numérica cai um pouco; mede-se o quanto."
+  },
+  {
+   "n": 8,
+   "r": "E",
+   "comentario": "As caudas é que incomodam: percentis 95 e 99 contam a história real."
+  },
+  {
+   "n": 9,
+   "r": "E",
+   "comentario": "Elas podem ser retomadas pelo provedor a qualquer momento; servem a cargas tolerantes a interrupção."
+  },
+  {
+   "n": 10,
+   "r": "E",
+   "comentario": "Existem cotas e limites por serviço e região; aumentá-los é processo."
+  },
+  {
+   "n": 11,
+   "r": "E",
+   "comentario": "São cerca de 43 minutos por mês; 4 minutos correspondem a 99,99%."
+  },
+  {
+   "n": 12,
+   "r": "E",
+   "comentario": "Em série multiplicam-se as disponibilidades: o conjunto fica pior que o pior dos componentes."
+  },
+  {
+   "n": 13,
+   "r": "E",
+   "comentario": "Está invertido: o SLO é a meta interna; o SLA, o compromisso formal com o cliente."
+  },
+  {
+   "n": 14,
+   "r": "E",
+   "comentario": "O gauge sobe e desce (fila em andamento, temperatura); quem só cresce é o counter."
+  },
+  {
+   "n": 15,
+   "r": "E",
+   "comentario": "O Grafana visualiza e monta painéis; a coleta é papel do Prometheus."
+  },
+  {
+   "n": 16,
+   "r": "E",
+   "comentario": "É um motor de busca e análise distribuído, indexando documentos."
+  },
+  {
+   "n": 17,
+   "r": "E",
+   "comentario": "Monitorar vigia métricas conhecidas; observar permite perguntar o que não se sabia que ia acontecer, pelos sinais externos."
+  },
+  {
+   "n": 18,
+   "r": "E",
+   "comentario": "Credencial vive em cofre de segredos; repositório privado não é controle de acesso a segredo."
+  },
+  {
+   "n": 19,
+   "r": "E",
+   "comentario": "O histórico já foi clonado ou cacheado; a senha exposta se troca."
+  },
+  {
+   "n": 20,
+   "r": "E",
+   "comentario": "Por padrão é apenas base64; a cifrança em repouso é configuração do cluster."
+  },
+  {
+   "n": 21,
+   "r": "E",
+   "comentario": "Esse é o RTO; o RPO é a perda máxima de dados aceitável."
+  },
+  {
+   "n": 22,
+   "r": "E",
+   "comentario": "Réplica não protege de exclusão acidental nem de corrupção lógica: backup segue necessário."
+  },
+  {
+   "n": 23,
+   "r": "E",
+   "comentario": "Plano sem ensaio é papel; os testes periódicos revelam o que deixou de funcionar."
+  }
+ ]
+}
