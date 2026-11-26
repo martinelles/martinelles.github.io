@@ -425,10 +425,24 @@
 				<p class="titulo-extras">Também estudado neste dia, fora da missão</p>
 				<ul>
 					{#each extrasDoDia as t (`${t.tipo}~${t.cid}`)}
+						{@const questoesExtra = questoesDaAula.slug(t.cod)}
+						{@const revisaoExtra = questoesDaAula.slugRevisao(t.cod)}
 						<li class="t-{t.tipo}">
 							<span class="selo" aria-hidden="true">{LETRA[t.tipo]}</span>
 							<span class="cod">{t.cod}</span>
-							<span class="texto-extra">{t.texto}</span>
+							<span class="texto-extra">
+								{t.texto}
+								{#if questoesExtra || revisaoExtra}
+									<span class="atalhos-extra">
+										{#if questoesExtra}
+											<a class="topico" href="/questoes/{questoesExtra}">Questões C/E ↗</a>
+										{/if}
+										{#if revisaoExtra}
+											<a class="topico" href="/questoes/{revisaoExtra}">Revisão C/E ↗</a>
+										{/if}
+									</span>
+								{/if}
+							</span>
 							<button
 								type="button"
 								class="remover"
@@ -877,6 +891,14 @@
 		grid-template-columns: 28px auto minmax(0, 1fr) auto;
 		gap: 8px;
 		align-items: center;
+	}
+
+	/* Atalhos de questões da aula registrada (mesmos do item de missão), abaixo do texto. */
+	.atalhos-extra {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 12px;
+		margin-top: 4px;
 	}
 
 	.extras li.t-novo {

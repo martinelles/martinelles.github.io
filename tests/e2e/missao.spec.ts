@@ -179,6 +179,11 @@ test('aula feita fora da missão: a nova conclui o dia do plano em que ela estav
 	const extras = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), 'missoes-extras-cgu-2026');
 	expect(extras).toEqual({ [`cd~${HOJE}`]: [{ tipo: 'novo', cid: aula.id, cod: 'B1·1', texto: aula.titulo }] });
 
+	// A aula registrada fora da missão abre as mesmas questões do item de missão dela (a P1 só
+	// tem página de revisão: questões principais existem a partir da P2).
+	const blocoExtras = missao(page).locator('.extras');
+	await expect(blocoExtras.getByRole('link', { name: 'Revisão C/E ↗' })).toHaveAttribute('href', '/questoes/b1-1-rev');
+
 	// Aula nova concluída em 22/11; a revisão de 23/11 segue por conta própria.
 	const m = await marcas(page);
 	expect(m['cd~2026-11-22~2']).toBe(true);
